@@ -4,7 +4,7 @@ import Header from "./Header/header";
 export default class App extends Component {
   render() {
   console.log("GO, IT Monsters!");
-  console.log("TEST FOR DIRECT PUSH INTO DEV BRANCH");
+  console.log("TEST BY VLAD");
     return (
       <React.Fragment>
         <Header/>
