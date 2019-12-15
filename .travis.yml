@@ -1,0 +1,11 @@
+dist: trusty
+
+cache:
+  directories:
+    - ./online-shop/node_modules
+
+before_script:
+  - npm install --prefix ./online-shop
+
+script:
+  - npm run test --prefix ./online-shop
