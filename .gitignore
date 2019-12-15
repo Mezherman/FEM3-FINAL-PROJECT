@@ -24,3 +24,7 @@ yarn-error.log*
 
 /.idea
 *.txt
+
+### Workflow & Editor ###
+.eslintcache
+.stylelintcache
