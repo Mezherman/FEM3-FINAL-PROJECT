@@ -5,6 +5,7 @@
     "mocha": true
   },
   "extends": [
+    "airbnb",
     "standard",
     "react-app"
   ],
@@ -15,7 +16,14 @@
     "semi": 0,
     "camelcase": 0,
     "object-curly-spacing": 0,
-    "comma-dangle": 0
+    "comma-dangle": 0,
+    "linebreak-style": ["error", "windows"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "space-before-function-paren": ["error", {
+      "anonymous": "ignore",
+      "named": "ignore",
+      "asyncArrow": "ignore"
+    }]
   },
   "settings": {
     "react": {
