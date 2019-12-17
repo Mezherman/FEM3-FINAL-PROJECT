@@ -1,0 +1,37 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "mocha": true
+  },
+  "extends": [
+    "airbnb",
+    "standard",
+    "react-app"
+  ],
+  "rules": {
+    "no-trailing-spaces": ["error", { "skipBlankLines": true } ],
+    "no-return-assign": 0,
+    "eol-last": 0,
+    "semi": 0,
+    "camelcase": 0,
+    "object-curly-spacing": 0,
+    "comma-dangle": 0,
+    "linebreak-style": ["error", "windows"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "space-before-function-paren": ["error", {
+      "anonymous": "ignore",
+      "named": "ignore",
+      "asyncArrow": "ignore"
+    }]
+  },
+  "settings": {
+    "react": {
+      "createClass": "createReactClass",
+      "pragma": "React",
+      "version": "16.12.0",
+      "flowVersion": "0.86"
+    },
+    "propWrapperFunctions": [ "forbidExtraProps" ]
+  }
+}
