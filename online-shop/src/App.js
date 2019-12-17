@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
+import ProductList from './components/Product-list/product-list';
 
 export default class App extends Component {
   render () {
-    console.log('GO, IT Monsters!');
-
-    console.log('TEST FOR DIRECT PUSH INTO DEV BRANCH');
-    return <h1>Hello, World</h1>
-  }
+    return (
+      <ProductList />
+  )
+ }
 }
