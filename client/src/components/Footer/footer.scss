@@ -1,0 +1,45 @@
+.footer{
+  display: grid;
+  grid-auto-rows: minmax(50px, auto);
+  grid-template-areas:
+          "foot-about foot-about"
+          "foot-info foot-info"
+          " copyright .";
+  grid-template-columns: repeat(2, 1fr);
+  color: white;
+  background: black;
+}
+.copyright{
+  display: flex;
+  grid-area: copyright;
+  align-items: flex-end;
+  justify-content: space-around;
+  color: rgba(255, 255, 255, .26);;
+}
+
+.footer-horizontal-line{
+  width: 95%;
+  background: rgba(22,42,225,.51);
+}
+@media (min-width: 768px){
+
+  .footer{
+    position: absolute;
+    bottom: 0;
+    grid-auto-rows: minmax(100px, auto);
+    grid-template-areas:
+            "foot-about  foot-info foot-info "
+            ". . copyright";
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .copyright-icon{
+    width: 12px;
+    height: 12px;
+  }
+  .copyright-text{
+
+  }
+}
+
+

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import 'typeface-roboto';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import 'typeface-roboto';
 
+import Footer from './components/Footer/footer'
 import ProductList from './components/Product-list/product-list';
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -28,6 +29,7 @@ FILTER
             <ProductList />
           </Grid>
         </Grid>
+      <Footer/>
       </>
     )
   }
