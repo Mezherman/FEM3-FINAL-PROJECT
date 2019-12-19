@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ProductCard from '../Product-card/product-card';
 import getAllCards from '../../services/dataBase';
 import './product-list.scss'
-import './media.scss'
 
 class ProductList extends Component {
     state = {

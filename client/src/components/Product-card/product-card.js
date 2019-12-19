@@ -9,7 +9,6 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
-import './media.scss'
 
 const ProductCard = ({url, title, price}) => (
   <div className="product-card">
