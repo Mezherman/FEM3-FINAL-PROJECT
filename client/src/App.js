@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import Footer from './components/Footer'
 
 export default class App extends Component {
   render() {
-    console.log('GO, IT Monsters!');
-    return <h1>Hello, World</h1>
+    return <Footer/>
   }
 }
