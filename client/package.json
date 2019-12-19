@@ -25,7 +25,7 @@
     "travis": "^0.1.1"
   },
   "scripts": {
-    "start": "npm-run-all -p watch-sass-js start-js",
+    "start": "react-scripts start",
     "build": "npm run stylelint-build && npm run eslint && react-scripts build",
     "test": "react-scripts test",
     "start-js": "react-scripts start",

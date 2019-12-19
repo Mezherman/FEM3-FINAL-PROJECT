@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import HeaderNavbar from './components/Header-navbar/header-navbar';
 
 export default class App extends Component {
   state = {};
 
   render() {
-    console.log('GO, IT Monsters!');
-    return <h1>Hello, World</h1>
+    return (
+      <>
+        <HeaderNavbar />
+      </>
+    )
   }
 }
