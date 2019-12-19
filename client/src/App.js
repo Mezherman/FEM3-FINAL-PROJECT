@@ -10,7 +10,7 @@ export default class App extends Component {
       <div>
         <h1>Hello, World</h1>
         <Carousel autoPlay={true} stopOnHover={true} interval={3000} showStatus={false}
-          showIndicators={false} infiniteLoop={false} verticalSwipe='natural' width="1000px"
+          showIndicators={false} infiniteLoop={false} verticalSwipe='natural' width="500px"
           useKeyboardArrows={true} transitionTime={1000} emulateTouch={false} centerMode={false}
           centerSlidePercentage={20} showThumbs={false}>
           <div>
