@@ -1,10 +1,34 @@
 import React, { Component } from 'react';
+import 'typeface-roboto';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 
+import ProductList from './components/Product-list/product-list';
+
+// eslint-disable-next-line react/prefer-stateless-function
 export default class App extends Component {
-  state = {};
-
-  render() {
-    console.log('GO, IT Monsters!');
-    return <h1>Hello, World</h1>
+  render () {
+    return (
+      <>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={3}>
+            <div
+              style={
+                {
+                  height: '100%',
+                  backgroundColor: 'tomato',
+                  fontSize: '54px'
+                }
+              }
+            >
+FILTER
+            </div>
+          </Grid>
+          <Grid item xs={12} sm={9}>
+            <ProductList />
+          </Grid>
+        </Grid>
+      </>
+    )
   }
 }
