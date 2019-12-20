@@ -2,7 +2,7 @@
 
 .product-card {
   padding-bottom: 20px;
-    font-family: 'Roboto', sans-serif;
+    //font-family: 'Roboto', sans-serif;
   &-image {
     width: 96%;
     max-width: 720px;
@@ -44,8 +44,6 @@
 
 @media screen and (min-width: 641px) and (max-width: 980px) {
   .product-card {
-    //border-top: 1px solid #212121;
-    //  width: 50%;
     &-image {
     }
   }

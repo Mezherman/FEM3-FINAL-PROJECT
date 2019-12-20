@@ -3,14 +3,11 @@ import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import 'typeface-roboto';
 import './product-card.scss'
-import Typography from '@material-ui/core/Typography';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
-// import Icon from '@material-ui/core/Icon';
-import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
 
-const ProductCard = ({url, title, price}) => (
+const ProductCard = ({ url, title, price }) => (
   <div className="product-card">
     <Divider />
     <Container maxWidth="sm">
@@ -22,7 +19,7 @@ const ProductCard = ({url, title, price}) => (
       <span className="product-card-price">{price}</span>
       <Button
         size="large"
-        fullWidth="true"
+        fullWidth={true}
         variant="contained"
         color="primary"
         disableElevation
