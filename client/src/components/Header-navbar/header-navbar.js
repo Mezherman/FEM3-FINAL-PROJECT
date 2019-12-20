@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
-import Container from '@material-ui/core/Container';
+import { Container, Grid } from '@material-ui/core';
 
 export default class HeaderNavbar extends Component {
   render() {
     return (
-      <Container>test</Container>
+      <>
+        <Grid container spacing={1}>
+          <Grid item xs align="center">aaaaaaaaaa</Grid>
+          <Grid item xs>bbbbbbbbbb</Grid>
+          <Grid item xs>cccccccccc</Grid>
+        </Grid>
+        {/*<Container>test</Container>*/}
+      </>
     )
   }
 }

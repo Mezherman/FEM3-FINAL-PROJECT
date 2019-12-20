@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
 
-const ProductCard = ({url, title, price}) => (
+const ProductCard = ({ url, title, price }) => (
   <div className="product-card">
     <Divider />
     <Container maxWidth="sm">

@@ -6,13 +6,15 @@ import 'typeface-roboto';
 import HeaderNavbar from './components/Header-navbar/header-navbar';
 import Footer from './components/Footer/footer'
 import ProductList from './components/Product-list/product-list';
+import MenuListComposition from './components/Header-navbar-test/header-navbar-test';
 
 // eslint-disable-next-line react/prefer-stateless-function
 export default class App extends Component {
-  render () {
+  render() {
     return (
       <>
         <HeaderNavbar />
+        <MenuListComposition />
         <Grid container spacing={3}>
           <Grid item xs={12} sm={3}>
             <div
@@ -24,14 +26,14 @@ export default class App extends Component {
                 }
               }
             >
-FILTER
+              FILTER
             </div>
           </Grid>
           <Grid item xs={12} sm={9}>
             <ProductList />
           </Grid>
         </Grid>
-      <Footer/>
+        {/*<Footer/>*/}
       </>
     )
   }
