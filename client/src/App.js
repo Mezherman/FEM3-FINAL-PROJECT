@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import 'typeface-roboto';
 
 import HeaderNavbar from './components/Header-navbar/header-navbar';
 import Footer from './components/Footer/footer'
 import ProductList from './components/Product-list/product-list';
+import Footer from './components/Footer/footer'
 import MenuListComposition from './components/Header-navbar-test/header-navbar-test';
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -20,7 +20,7 @@ export default class App extends Component {
             <div
               style={
                 {
-                  height: '100%',
+                  height: '50%',
                   backgroundColor: 'tomato',
                   fontSize: '54px'
                 }
@@ -33,7 +33,7 @@ export default class App extends Component {
             <ProductList />
           </Grid>
         </Grid>
-        {/*<Footer/>*/}
+        <Footer />
       </>
     )
   }
