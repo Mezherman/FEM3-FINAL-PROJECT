@@ -1,8 +1,8 @@
-@import 'src/components/variables/variables.scss';
+@import '../Variables/variables.scss';
 
 .header {
   &-login {
-    background: $gray;
+    background: $gray--dark;
   }
 
   &-icon {
