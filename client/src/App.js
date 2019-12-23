@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import 'typeface-roboto';
 
+
 import HeaderNavbar from './components/Header-navbar/header-navbar';
 import Footer from './components/Footer/footer'
 import ProductList from './components/Product-list/product-list';
 import ContainerFilter from './components/Filter/filter';
+import Catalog from './components/Catalog/catalog';
 
 export default class App extends Component {
   render() {
@@ -32,6 +34,7 @@ export default class App extends Component {
           </Grid>
         </Grid>
         <Footer />
+        <Catalog />
       </>
     )
   }

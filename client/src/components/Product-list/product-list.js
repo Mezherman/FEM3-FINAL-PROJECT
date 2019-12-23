@@ -24,6 +24,7 @@ class ProductList extends Component {
               key={product.art}
               url={product.url}
               price={product.price}
+              specialPrice={product.specialPrice}
               title={product.title}
             />
           ))}
