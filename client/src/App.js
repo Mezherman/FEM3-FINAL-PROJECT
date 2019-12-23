@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import 'typeface-roboto';
-// import 'react-responsive-carousel/lib/styles/carousel.min.css';
-// import { Carousel } from 'react-responsive-carousel';
-import Carousels from './components/Nuka-carousel/nukaCarousel';
 
-import HeaderNavbar from './components/Header-navbar/header-navbar';
 import Header from './components/Header/header'
-import Footer from './components/Footer/footer'
+import HeaderNavbar from './components/Header-navbar/header-navbar';
+import Carousels from './components/Nuka-carousel/nukaCarousel';
 import Catalog from './components/Catalog/catalog';
+import Footer from './components/Footer/footer'
+import ExampleColor from './components/Example-color/example-color';
 
 export default class App extends Component {
   render() {
@@ -15,23 +14,23 @@ export default class App extends Component {
       <>
         <Header />
         <HeaderNavbar />
-        <Catalog />
-        <Footer />
         <Carousels
           isProductSlider={false}
-          autoPlay={true}
+          autoPlay
           autoplayInterval={2000}
-          wrapAround={true}
+          wrapAround
           slideIndex={0}
           slidesToShow={1}
         />
         <Carousels
-          autoPlay={true}
+          autoPlay
           autoplayInterval={2000}
-          wrapAround={true}
+          wrapAround
           slideIndex={0}
           slidesToShow={1}
         />
+        <Catalog />
+        <Footer />
       </>
     )
   }

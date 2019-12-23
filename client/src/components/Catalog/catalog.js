@@ -6,7 +6,7 @@ import ContainerFilter from '../Filter/filter';
 const Catalog = () => (
   <>
     <Grid container spacing={3}>
-      <Grid item xs={12} sm={3}>
+      <Grid item md={12} lg={3}>
         <div
           style={
             {
@@ -20,7 +20,7 @@ const Catalog = () => (
           <ContainerFilter />
         </div>
       </Grid>
-      <Grid item xs={12} sm={9}>
+      <Grid item md={12} lg={9}>
         <ProductList />
       </Grid>
     </Grid>
