@@ -9,7 +9,6 @@ class ProductList extends Component {
     }
 
     componentDidMount() {
-      console.log(getAllCards);
       getAllCards()
         .then((data) => this.setState({
           products: data.products
@@ -18,12 +17,16 @@ class ProductList extends Component {
 
     render () {
       const { products } = this.state;
-      console.log(products);
       return (
         <div className="product-list">
           { products.map((product, index) => (
-            <ProductCard url={product.url} price={product.price} title={product.title} />
-
+            <ProductCard
+              key={product.art}
+              url={product.url}
+              price={product.price}
+              specialPrice={product.specialPrice}
+              title={product.title}
+            />
           ))}
         </div>
       )

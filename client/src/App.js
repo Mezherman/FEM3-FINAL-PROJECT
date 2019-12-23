@@ -1,35 +1,36 @@
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import 'typeface-roboto';
 
+import Header from './components/Header/header'
+import HeaderNavbar from './components/Header-navbar/header-navbar';
+import Carousels from './components/Nuka-carousel/nukaCarousel';
+import Catalog from './components/Catalog/catalog';
 import Footer from './components/Footer/footer'
-import ProductList from './components/Product-list/product-list';
+import ExampleColor from './components/Example-color/example-color';
 
-// eslint-disable-next-line react/prefer-stateless-function
 export default class App extends Component {
-  render () {
+  render() {
     return (
       <>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={3}>
-            <div
-              style={
-                {
-                  height: '100%',
-                  backgroundColor: 'tomato',
-                  fontSize: '54px'
-                }
-              }
-            >
-FILTER
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={9}>
-            <ProductList />
-          </Grid>
-        </Grid>
-      <Footer/>
+        <Header />
+        <HeaderNavbar />
+        <Carousels
+          isProductSlider={false}
+          autoPlay
+          autoplayInterval={2000}
+          wrapAround
+          slideIndex={0}
+          slidesToShow={1}
+        />
+        <Carousels
+          autoPlay
+          autoplayInterval={2000}
+          wrapAround
+          slideIndex={0}
+          slidesToShow={1}
+        />
+        <Catalog />
+        <Footer />
       </>
     )
   }
