@@ -19,7 +19,7 @@ const ProductCard = ({ url, title, price }) => (
       <span className="product-card-price">{price}</span>
       <Button
         size="large"
-        fullWidth={true}
+        fullWidth
         variant="contained"
         color="primary"
         disableElevation

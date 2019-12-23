@@ -7,8 +7,9 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
@@ -23,10 +24,10 @@ export default function MenuListComposition() {
   const anchorRef = React.useRef(null);
 
   const handleToggle = () => {
-    setOpen(prevOpen => !prevOpen);
+    setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = event => {
+  const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
@@ -85,6 +86,11 @@ export default function MenuListComposition() {
           )}
         </Popper>
       </div>
+      <Grid container spacing={1}>
+        <Grid item xs align="center">aaaaaaaaaa</Grid>
+        <Grid item xs>bbbbbbbbbb</Grid>
+        <Grid item xs>cccccccccc</Grid>
+      </Grid>
     </div>
   );
 }
