@@ -8,10 +8,13 @@ export default class FooterInfo extends Component {
     const { column, columnLinks } = this.props;
     return (
       <div>
-        <h3 >{column}</h3>
+        <h3>{column}</h3>
         <List>
           {columnLinks.map((el) => (
-            <ListItem className="info-list-item">
+            <ListItem
+              key={el.text}
+              className="info-list-item"
+            >
               <Link style={{ color: 'white' }} href={el.url} onClick={(e) => (e.preventDefault())}>
                 {el.text}
               </Link>
