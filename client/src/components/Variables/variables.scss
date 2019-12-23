@@ -3,14 +3,14 @@
 
 //$gray--Lighten:        #####
 $gray--light:          #f1f2f3; //Background
-//$gray:               #f1f2f3; //Background
+$gray:               #e2e2e2; //Background
 $gray--dark:           #666; //Burger button bcg, navbar hover
 $gray--darken:         #1a1a1a; //Fonts
 
 //// Theme color
 
 $color-secondary:      #F9B700;
-$color-danger:         #e00000;
+$color-danger:         #e20100;
 $color-dark:           #000;
 
 //// Button color
@@ -21,3 +21,5 @@ $btn-main-color:       #fff;
 $btn-secondary-bg:     #333;
 $btn-main-bg--hover:   #666;
 $btn-main-bg--active:  #666;
+
+

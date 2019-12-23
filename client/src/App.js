@@ -3,6 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import 'typeface-roboto';
 
+import Header from './components/Header/header'
 import Footer from './components/Footer/footer'
 import ProductList from './components/Product-list/product-list';
 
@@ -11,6 +12,8 @@ export default class App extends Component {
   render () {
     return (
       <>
+        <Header />
+
         <Grid container spacing={3}>
           <Grid item xs={12} sm={3}>
             <div
@@ -29,7 +32,7 @@ FILTER
             <ProductList />
           </Grid>
         </Grid>
-      <Footer/>
+        <Footer />
       </>
     )
   }

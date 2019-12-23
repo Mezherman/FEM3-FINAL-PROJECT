@@ -1,0 +1,23 @@
+@import 'src/components/variables/variables.scss';
+
+.header {
+  &-login {
+    background: $gray;
+  }
+
+  &-icon {
+    box-sizing: border-box;
+    height: 20px;
+    cursor: pointer;
+    opacity: .7;
+
+    &-logo {
+      height: 25px;
+    }
+
+    &-badge {
+      //color: $color-secondary;
+    }
+  }
+}
+
