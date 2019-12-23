@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const path = require("path");
+const cors = require("cors");
 require("dotenv").config();
 
 const globalConfigs = require("./routes/globalConfigs");
@@ -24,8 +25,11 @@ const shippingMethods = require("./routes/shippingMethods");
 const paymentMethods = require("./routes/paymentMethods");
 const partners = require("./routes/partners");
 const mainRoute = require("./routes/index");
+const sendLetter = require('./routes/subscribersLeters');
 
 const app = express();
+app.use(cors());
+
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -33,6 +37,7 @@ app.use(bodyParser.json());
 
 // DB Config
 const db = require("./config/keys").mongoURI;
+
 
 // Connect to MongoDB
 mongoose
@@ -76,6 +81,8 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
+
+sendLetter(app);
 
 const port = process.env.PORT || 5000;
 
