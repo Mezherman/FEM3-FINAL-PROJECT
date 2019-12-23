@@ -19,7 +19,7 @@
     "comma-dangle": 0,
     "react/prefer-stateless-function": [0, { "ignorePureComponents": true }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "linebreak-style": ["error", "windows"],
+    "linebreak-style": 0,
     "space-before-function-paren": ["error", {
       "anonymous": "ignore",
       "named": "ignore",
