@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import 'typeface-roboto';
 
-
 import HeaderNavbar from './components/Header-navbar/header-navbar';
 import Footer from './components/Footer/footer'
 import ProductList from './components/Product-list/product-list';
