@@ -20,6 +20,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import './header.scss';
 import { Box } from '@material-ui/core'
 import PersonIcon from '@material-ui/icons/Person';
+import Search from '../Search/search'
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -226,6 +227,7 @@ export default function Header() {
       {renderMobileMenu}
       {renderMenu}
       {renderSearchInput}
+      <Search />
     </div>
   );
 }
