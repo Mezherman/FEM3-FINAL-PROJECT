@@ -36,7 +36,6 @@ const ProductCard = ({ url, title, price, specialPrice = false }) => {
           onClick={() => console.log('Add to Cart')}
         >
           <ShoppingCartOutlinedIcon />
-
         </Button>
       </Container>
     </div>

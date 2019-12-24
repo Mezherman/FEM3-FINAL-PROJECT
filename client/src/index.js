@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core';
+
+import './index.css';
 
 import App from './App';
 
@@ -10,9 +11,9 @@ const theme = createMuiTheme({
   breakpoints: {
     values: {
       xs: 0,
-      sm: 600,
-      md: 960,
-      lg: 1280,
+      sm: 320,
+      md: 768,
+      lg: 1200,
       xl: 1920,
     },
   },

@@ -1,0 +1,14 @@
+{
+  "Pots": {
+    "subCategories": ["555666", "777", "888", "999", "1010"]
+  },
+  "Frying pans": {
+    "subCategories": []
+  },
+  "Tableware": {
+    "subCategories": ["aaa", "bbb"]
+  },
+  "Bakeware": {
+    "subCategories": []
+  }
+}

@@ -1,12 +1,12 @@
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import ProductList from '../Product-list/product-list';
-import Footer from '../Footer/footer';
+import ContainerFilter from '../Filter/filter';
 
 const Catalog = () => (
   <>
     <Grid container spacing={3}>
-      <Grid item xs={12} sm={3}>
+      <Grid item md={12} lg={3}>
         <div
           style={
             {
@@ -16,14 +16,14 @@ const Catalog = () => (
             }
           }
         >
-         FILTER
+          FILTER
+          <ContainerFilter />
         </div>
       </Grid>
-      <Grid item xs={12} sm={9}>
+      <Grid item md={12} lg={9}>
         <ProductList />
       </Grid>
     </Grid>
-    <Footer />
   </>
 );
 

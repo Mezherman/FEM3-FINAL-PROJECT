@@ -12,15 +12,14 @@ export default class Carousels extends Component {
     products: []
   };
 
-  componentDidMount () {
+  componentDidMount() {
     getAllCards()
       .then((data) => this.setState({
         products: data.products
       }))
   }
 
-  render () {
-
+  render() {
     const { products } = this.state;
     const { autoPlay, autoplayInterval, wrapAround, slideIndex, slidesToShow, text = false, isProductSlider = true } = this.props;
 
@@ -80,7 +79,7 @@ export default class Carousels extends Component {
             <div className="product-card">
               <Container maxWidth="sm">
                 <div className="product-card-image">
-                  <img src={product.url} alt="Product"/>
+                  <img src={product.url} alt="Product" />
                   <p>{text ? <h1>Hello</h1> : null}</p>
                 </div>
                 <h1 className="product-card-title">{product.title}</h1>
