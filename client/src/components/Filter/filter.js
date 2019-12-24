@@ -1,16 +1,8 @@
-import React, { Component } from 'react';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import RangeSlider from './range';
+import Button from '@material-ui/core/Button';
+import React from 'react';
+import FilterPanel from './filter-panel'
 
-export default function ContainerFilter() {
+export default function Filter() {
   const filterText = [
     {
       name: 'Brand',
@@ -36,77 +28,36 @@ export default function ContainerFilter() {
     { name: 'Production', checkbox: true, text: ['Z', 'Y', 'X'], id: 7 },
     { name: 'Stove type', checkbox: true, text: ['Z', 'Y', 'X'], id: 8 },
     { name: 'Diameter (cm)', max: 60, range: true, id: 9 },
-    { name: 'Capacity', checkbox: false, text: ['Z', 'Y', 'X'], id: 10 },
+    { name: 'Capacity', checkbox: true, text: ['Z', 'Y', 'X'], id: 10 },
     { name: 'Color', checkbox: true, text: ['red', 'orange'], id: 11 },
   ];
-  const filterCheckbox = filterText.map((item) => (
-    <SimpleExpansionPanel
+
+  const filter = filterText.map((item) => (
+    <FilterPanel
+      className="filter"
       key={item.id}
-      name={item.name}
-      text={item.text}
-      checkbox={item.checkbox}
-      range={item.range}
-      max={item.max}
+      // name={item.name}
+      // text={item.text}
+      // checkbox={item.checkbox}
+      // range={item.range}
+      // max={item.max}
+      {...item}
     />
   ));
+
   return (
     <>
-      {filterCheckbox}
+      {filter}
+      <Button
+        size="large"
+        fullWidth
+        variant="contained"
+        color="primary"
+        disableElevation
+        onClick={() => console.log('Filtered')}
+      >
+        Apply
+      </Button>
     </>
   );
 }
-
-class SimpleExpansionPanel extends Component {
-  render() {
-    // eslint-disable-next-line react/prop-types
-    const { name, text, checkbox, range, max } = this.props;
-    const useStyles = {
-      root: {
-        width: '100%'
-      }
-    };
-    return (
-      <div>
-        <ExpansionPanel>
-          <ExpansionPanelSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="value"
-            id="value-header"
-          >
-            <Typography className={useStyles.heading}>{name}</Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            {checkbox ? (
-              <FormControl component="fieldset">
-                <FormGroup aria-label="position" row>
-                  {/* eslint-disable-next-line react/prop-types */}
-                  {text.map((el) => (
-                    <FormControlLabel
-                      key={el}
-                      value="end"
-                      control={<Checkbox color="primary" />}
-                      label={el}
-                      labelPlacement="end"
-                    />
-                  ))}
-                </FormGroup>
-              </FormControl>
-            ) : null}
-            {range ? (
-              <RangeSlider max={max} />
-            ) : null}
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-      </div>
-    );
-  }
-}
-
-// SimpleExpansionPanel.propTypes = {
-//   name: PropTypes.string,
-// }
-SimpleExpansionPanel.defaultProps = {
-  range: false,
-  checkbox: false,
-  text: ['']
-};
