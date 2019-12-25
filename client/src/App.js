@@ -13,7 +13,6 @@ export default class App extends Component {
     return (
       <>
         <Header />
-        <HeaderNavbar />
         <Carousels
           isProductSlider={false}
           autoPlay
