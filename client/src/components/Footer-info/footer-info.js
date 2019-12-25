@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ListItem, List, Link } from '@material-ui/core';
-import './footerInfo.scss'
+import './footer-info.scss'
 
 export default class FooterInfo extends Component {
   render() {

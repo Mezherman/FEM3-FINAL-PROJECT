@@ -6,15 +6,15 @@
           "foot-info foot-info"
           " copyright .";
   grid-template-columns: repeat(2, 1fr);
-  color: white;
-  background: black;
+  color: black;
+  background: white;
 }
 .copyright{
   display: flex;
   grid-area: copyright;
   align-items: flex-end;
   justify-content: space-around;
-  color: rgba(255, 255, 255, .26);;
+  color: rgba(54, 54, 54, 0.49);;
 }
 
 .footer-horizontal-line{

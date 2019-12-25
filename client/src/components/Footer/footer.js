@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import FooterInfo from '../FooterInfo/footerInfo'
-import FooterAbout from '../FooterAbout/footerAbout'
+import FooterInfo from '../Footer-info/footer-info'
+import FooterAbout from '../Footer-about/footer-about'
 import './footer.scss'
 
 export default class Footer extends Component {
