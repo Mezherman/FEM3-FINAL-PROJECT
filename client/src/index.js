@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core';
+import Variables from './components/Variables/variables';
 
 import './index.css';
 
@@ -10,11 +11,11 @@ import App from './App';
 const theme = createMuiTheme({
   breakpoints: {
     values: {
-      xs: 0,
-      sm: 600,
-      md: 960,
-      lg: 1280,
-      xl: 1920,
+      xs: Variables.xs,
+      sm: Variables.sm,
+      md: Variables.md,
+      lg: Variables.lg,
+      xl: Variables.xl,
     },
   },
   palette: {
@@ -45,7 +46,8 @@ const theme = createMuiTheme({
   background: {
     // paper: "#fff",
     default: '#f1f2f',
-  }
+  },
+
 });
 
 ReactDOM.render(

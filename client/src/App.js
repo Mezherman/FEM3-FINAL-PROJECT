@@ -7,6 +7,7 @@ import Carousels from './components/Nuka-carousel/nukaCarousel';
 
 import HeaderNavbar from './components/Header-navbar/header-navbar';
 import Header from './components/Header/header'
+import CategoryList from './components/Category-list/category-list'
 import Footer from './components/Footer/footer'
 import ProductList from './components/Product-list/product-list';
 import ContainerFilter from './components/Filter/filter';
@@ -19,6 +20,7 @@ export default class App extends Component {
         <Header />
 
         <HeaderNavbar />
+        <CategoryList/>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={3}>
             <div
