@@ -24,8 +24,6 @@
 @media (min-width: 768px){
 
   .footer{
-    //position: absolute;
-    //bottom: 0;
     grid-auto-rows: minmax(100px, auto);
     grid-template-areas:
             "foot-about  foot-info foot-info "
@@ -36,9 +34,6 @@
   .copyright-icon{
     width: 12px;
     height: 12px;
-  }
-  .copyright-text{
-
   }
 }
 

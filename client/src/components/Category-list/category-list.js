@@ -1,19 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Typography, Button } from '@material-ui/core';
-import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
+import withWidth from '@material-ui/core/withWidth';
 import getCategories from '../../services/getCategories';
 import Carousels from '../../components/Nuka-carousel/nukaCarousel';
-import Variables from '../Variables/variables';
 import './category-list.scss';
 
 const useStyles = makeStyles( theme => ({
 
   categories_list: {
     fontSize: '1.3rem',
-    wordSpacing: '2px'
+    wordSpacing: '2px',
+    marginTop: theme.spacing(6),
+    marginBottom: theme.spacing(6)
   },
   categories_img: {
     height: '300px',

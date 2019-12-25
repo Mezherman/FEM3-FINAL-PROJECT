@@ -1,5 +1,5 @@
 import React from 'react';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { fade, makeStyles, styled } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -14,14 +14,15 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import { styled } from '@material-ui/core/styles';
+
 import MoreIcon from '@material-ui/icons/MoreVert';
 
 import './header.scss';
 import { Box } from '@material-ui/core'
 import PersonIcon from '@material-ui/icons/Person';
+import Search from '../Search/search'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
@@ -91,7 +92,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Header () {
+export default function Header() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -100,7 +101,7 @@ export default function Header () {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = event => {
+  const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -113,7 +114,7 @@ export default function Header () {
     handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = event => {
+  const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
@@ -144,7 +145,7 @@ export default function Header () {
         <SearchIcon />
       </div>
       <InputBase
-        placeholder='Search'
+        placeholder="Search"
         classes={{
           root: classes.inputRoot,
           input: classes.inputInput
@@ -168,47 +169,56 @@ export default function Header () {
     >
       <MenuItem>
         Categories
-        <ArrowForwardIosIcon fontSize='small' />
+        <ArrowForwardIosIcon fontSize="small" />
       </MenuItem>
-      <MenuItem className='header-login' onClick={handleProfileMenuOpen} aria-haspopup='true'>
-        <img src='./img/header/my_wmf.png' />
+      <MenuItem className="header-login" onClick={handleProfileMenuOpen} aria-haspopup="true">
+        <img src="./img/header/my_wmf.png" />
         Login
-        <ArrowForwardIosIcon fontSize='small' />
+        <ArrowForwardIosIcon fontSize="small" />
       </MenuItem>
     </Menu>
   )
 
   return (
     <div className={classes.grow}>
-      <AppBar position='static' color='inherit' elevation='0'>
+      <AppBar position="static" color="inherit" elevation="0">
         <Toolbar className={classes.justify}>
           <Box>
             <IconButton
-              edge='start'
+              edge="start"
               className={classes.menuButton}
-              aria-label='show more'
+              aria-label="show more"
               aria-controls={mobileMenuId}
-              aria-haspopup='true'
+              aria-haspopup="true"
               onClick={handleMobileMenuOpen}
             >
-              <MenuIcon fontSize='large' />
+              <MenuIcon fontSize="large" />
             </IconButton>
-            <IconButton edge='start' href='#'><img src='./img/header/wmf-logo-30x35.svg' className='header-icon header-icon-logo' /></IconButton>
+            <IconButton edge="start" href="#">
+              <img
+                src="./img/header/wmf-logo-30x35.svg"
+                className="header-icon header-icon-logo"
+              />
+            </IconButton>
           </Box>
 
           <Box>
             <IconButton
-              aria-label='show more'
+              aria-label="show more"
               aria-controls={mobileSearchId}
-              aria-haspopup='true'
+              aria-haspopup="true"
               onClick={handlerSearchMobile}
             >
-              <img src='./img/header/search_black.svg' className='header-icon' alt='search-icon' />
+              <img src="./img/header/search_black.svg" className="header-icon" alt="search-icon" />
             </IconButton>
-            <IconButton><PersonIcon fontSize='large' /></IconButton>
-            <IconButton edge='end' aria-label='card'>
-              <Badge badgeContent='0' color='error'>
-                <img src='./img/header/basket_black.svg' className='header-icon' alt='basket-icon' />
+            <IconButton><PersonIcon fontSize="large" /></IconButton>
+            <IconButton edge="end" aria-label="card">
+              <Badge badgeContent="0" color="error">
+                <img
+                  src="./img/header/basket_black.svg"
+                  className="header-icon"
+                  alt="basket-icon"
+                />
               </Badge>
             </IconButton>
           </Box>
@@ -217,6 +227,7 @@ export default function Header () {
       {renderMobileMenu}
       {renderMenu}
       {renderSearchInput}
+      <Search />
     </div>
   );
 }

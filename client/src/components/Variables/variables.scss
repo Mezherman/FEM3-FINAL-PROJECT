@@ -1,17 +1,13 @@
 
-// General colors
-
-//$gray--Lighten:        #####
-$gray--light:          #f1f2f3; //Background
-$gray:               #e2e2e2; //Background
-$gray--dark:           #666; //Burger button bcg, navbar hover
-$gray--darken:         #1a1a1a; //Fonts
-
 //// Theme color
+$color-secondary:      #F9B700; //
+$color-dark:           #000; // Black for everywhere
+$gray--light:          #f1f2f3; // Background for sections/components
 
-$color-secondary:      #F9B700;
-$color-danger:         #e20100;
-$color-dark:           #000;
+// Fonts:
+$gray--darken:         #1a1a1a; // Basic Font
+$gray--dark:           #666; // Hover Font (+ burger button)
+$color-danger:         #e00000; // Danger Font
 
 //// Button color
 $btn-main-bg:          #71b430;
@@ -21,13 +17,3 @@ $btn-main-color:       #fff;
 $btn-secondary-bg:     #333;
 $btn-main-bg--hover:   #666;
 $btn-main-bg--active:  #666;
-
-
-
-//breackpoints
-
-$sm: 320;
-$md: 768;
-$lg: 1200;
-$xl: 1920;
-
