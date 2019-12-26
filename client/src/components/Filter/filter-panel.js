@@ -27,7 +27,7 @@ export default function FilterPanel({ name, text, checkbox, range, max }) {
 
   return (
     <div className={classes.root}>
-      <ExpansionPanel>
+      <ExpansionPanel square>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="value"
@@ -35,10 +35,10 @@ export default function FilterPanel({ name, text, checkbox, range, max }) {
         >
           <Typography className={classes.heading}>{name}</Typography>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails >
+        <ExpansionPanelDetails>
           {checkbox ? (
             <FormControl component="fieldset">
-              <FormGroup aria-label="position" column>
+              <FormGroup aria-label="position" column="true">
                 {text.map((el) => (
                   <FormControlLabel
                     key={el}
