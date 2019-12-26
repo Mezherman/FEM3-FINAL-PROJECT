@@ -17,7 +17,7 @@ export default class App extends Component {
     return (
       <>
         <Header />
-        <ScrollToAnchor/>
+        <ScrollToAnchor />
         <Carousels
           isProductSlider={false}
           autoPlay
@@ -26,7 +26,7 @@ export default class App extends Component {
           slideIndex={0}
           slidesToShow={1}
         />
-        <CategoryList/>
+        <CategoryList />
         <Carousels
           autoPlay
           autoplayInterval={2000}
@@ -36,7 +36,7 @@ export default class App extends Component {
         />
         <Footer />
         <Catalog />
-        <ScrollTop {...this.props}/>
+        <ScrollTop {...this.props} />
       </>
     )
   }

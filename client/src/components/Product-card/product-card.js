@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import 'typeface-roboto';
@@ -6,6 +6,7 @@ import './product-card.scss'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
+import AddToBasket from '../Add-to-basket/add-to-basket';
 
 const ProductCard = ({ url, title, price, specialPrice = false }) => {
   const priceClassName = {
@@ -14,8 +15,33 @@ const ProductCard = ({ url, title, price, specialPrice = false }) => {
   // const style = {
   //   color: specialPrice ? '#e00000' : '#000'
   // };
+
+  const [modal, setModal] = useState({
+    modalHeader: 'test',
+    modalIsVisible: false,
+    card: {
+      label: 'Football',
+      article: '11111111',
+      price: '$199.99',
+      src: '#',
+      modalTitle: 'modalConfirmPurchase'
+    },
+  });
+
+  const { modalTitle, modalIsVisible, card } = modal;
+
   return (
     <div className="product-card">
+      {modalIsVisible &&
+      (
+        <AddToBasket
+          label={card.label}
+          article={card.article}
+          price={card.price}
+          src={card.src}
+          modalHeaedr={card.modalHeader}
+        />
+      )}
       <Divider />
       <Container maxWidth="sm">
         <div className="product-card-image">
@@ -33,7 +59,13 @@ const ProductCard = ({ url, title, price, specialPrice = false }) => {
           variant="contained"
           color="primary"
           disableElevation
-          onClick={() => console.log('Add to Cart')}
+          onClick={() => {
+            console.log('Add to Cart');
+            setModal({
+              ...modal,
+              modalIsVisible: true
+            })
+          }}
         >
           <ShoppingCartOutlinedIcon />
         </Button>
