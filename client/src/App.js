@@ -7,6 +7,7 @@ import Carousels from './components/Nuka-carousel/nukaCarousel';
 import Catalog from './components/Catalog/catalog';
 import Footer from './components/Footer/footer'
 import ExampleColor from './components/Example-color/example-color';
+import ProductPage from './components/Product-page/product-page';
 
 export default class App extends Component {
   render() {
@@ -14,6 +15,7 @@ export default class App extends Component {
       <>
         <Header />
         <HeaderNavbar />
+        <ProductPage />
         <Carousels
           isProductSlider={false}
           autoPlay

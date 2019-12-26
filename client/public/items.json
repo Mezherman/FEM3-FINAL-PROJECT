@@ -5,7 +5,8 @@
     "specialPrice": "€149.99",
     "url": "https://www.wmf.com/media/catalog/product/cache/2/small_image/265x/9df78eab33525d08d6e5fb8d27136e95/1/1/11_4800_6041_100.jpg",
     "art": "592.213.49",
-    "color": "light grey"
+    "color": "light grey",
+    "ID": "12345"
   },
   {"title": "Set 60 SINFONIA",
     "price": "199.99",

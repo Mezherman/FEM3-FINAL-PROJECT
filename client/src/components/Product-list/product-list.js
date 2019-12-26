@@ -6,7 +6,7 @@ import './product-list.scss'
 class ProductList extends Component {
     state = {
       products: []
-    }
+    };
 
     componentDidMount() {
       getAllCards()

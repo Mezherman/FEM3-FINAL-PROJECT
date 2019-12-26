@@ -3,14 +3,15 @@
   flex-wrap: wrap;
 }
 
-@media screen and (max-width: 640px) {
-  .product-card {
-    //background-color: green;
-  }
-}
-
-@media screen and (min-width: 641px) and (max-width: 980px) {
-  .product-card {
-    //background-color: yellow;
-  }
-}
+//@media screen and (max-width: 767px) {
+//  .product-list {
+//   max-width: 100% ;
+//  }
+//}
+//
+//@media screen and (min-width: 768px) and (max-width: 1199px) {
+//  .product-list {
+//    max-width: 940px;
+//    //background-color: yellow;
+//  }
+//}

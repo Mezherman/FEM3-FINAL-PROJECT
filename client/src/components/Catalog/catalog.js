@@ -2,10 +2,11 @@ import Grid from '@material-ui/core/Grid';
 import React from 'react';
 import ProductList from '../Product-list/product-list';
 import ContainerFilter from '../Filter/filter';
+import {Container} from "@material-ui/core";
 
 const Catalog = () => (
-  <>
-    <Grid container spacing={3}>
+  <Container>
+    <Grid container spacing={2}>
       <Grid item md={12} lg={3}>
         <div
           style={
@@ -24,7 +25,7 @@ const Catalog = () => (
         <ProductList />
       </Grid>
     </Grid>
-  </>
+  </Container>
 );
 
 export default Catalog;
