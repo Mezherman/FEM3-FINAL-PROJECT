@@ -3,7 +3,7 @@ import 'typeface-roboto';
 
 import Header from './components/Header/header'
 import HeaderNavbar from './components/Header-navbar/header-navbar';
-import Carousels from './components/Nuka-carousel/nukaCarousel';
+import Carousels from './components/Сarousel/сarousel';
 import Catalog from './components/Catalog/catalog';
 import Footer from './components/Footer/footer'
 import ExampleColor from './components/Example-color/example-color';
@@ -23,7 +23,7 @@ export default class App extends Component {
           slidesToShow={1}
         />
         <Carousels
-          autoPlay
+          autoPlay={false}
           autoplayInterval={2000}
           wrapAround
           slideIndex={0}

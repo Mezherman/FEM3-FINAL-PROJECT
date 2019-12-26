@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import Carousel from 'nuka-carousel';
 import getAllCards from '../../services/dataBase';
 import Container from '@material-ui/core/Container';
-// import 'client/src/components/Nuka-carousel/nukaCarousel.scss';
 
-import './mainCarousel.scss';
+import './сarousel.scss';
 
 export default class Carousels extends Component {
 
@@ -76,7 +75,6 @@ export default class Carousels extends Component {
           slidesToShow={slidesToShow}
         >
           {products.map((product) => (
-            <div className="product-card">
               <Container maxWidth="sm">
                 <div className="product-card-image">
                   <img src={product.url} alt="Product" />
@@ -84,7 +82,6 @@ export default class Carousels extends Component {
                 </div>
                 <h1 className="product-card-title">{product.title}</h1>
               </Container>
-            </div>
           ))}
         </Carousel>
       );
