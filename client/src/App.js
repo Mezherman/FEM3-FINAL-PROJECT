@@ -17,7 +17,6 @@ export default class App extends Component {
     return (
       <>
         <Header />
-        <HeaderNavbar />
         <ScrollToAnchor/>
         <Carousels
           isProductSlider={false}

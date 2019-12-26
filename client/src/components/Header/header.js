@@ -21,6 +21,7 @@ import './header.scss';
 import { Box } from '@material-ui/core'
 import PersonIcon from '@material-ui/icons/Person';
 import Search from '../Search/search'
+import HeaderNavbar from '../Header-navbar/header-navbar';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -228,6 +229,7 @@ export default function Header() {
       {renderMenu}
       {renderSearchInput}
       <Search />
+      <HeaderNavbar />
     </div>
   );
 }
