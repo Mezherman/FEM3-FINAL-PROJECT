@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'typeface-roboto';
 
-import Header from './components/Header/header'
+import Header from './components/Header/header.js'
 import HeaderNavbar from './components/Header-navbar/header-navbar';
 import Carousels from './components/Nuka-carousel/nukaCarousel';
 import Catalog from './components/Catalog/catalog';
