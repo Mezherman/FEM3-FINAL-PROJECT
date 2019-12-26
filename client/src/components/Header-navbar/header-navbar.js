@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Paper, Box, ClickAwayListener } from '@material-ui/core';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 import getCategories from '../../services/getCategories';
 
@@ -26,9 +25,9 @@ export default function HeaderNavbar() {
       })
   }, []);
 
-  const toggleCatalog = (e) => {
-    if (!e.relatedTarget.classList ||
-      e.relatedTarget.classList.contains('catalog-list-item')) {
+  const toggleCatalog = (event) => {
+    if (!event.relatedTarget.classList ||
+      event.relatedTarget.classList.contains('catalog-list-item')) {
       return;
     }
 
@@ -42,8 +41,8 @@ export default function HeaderNavbar() {
     )
   };
 
-  const toggleSubCategories = (e) => {
-    const chosenCategory = e.currentTarget.textContent;
+  const toggleSubCategories = (event) => {
+    const chosenCategory = event.currentTarget.textContent;
     setFeatures({
       ...features,
       subCategoriesVisible: !!categories[chosenCategory].subCategories.length,
@@ -51,12 +50,12 @@ export default function HeaderNavbar() {
     })
   };
 
-  const onCategoryLeave = (e) => {
+  const onCategoryLeave = (event) => {
     // console.log('target = ', e.target);
     // console.log('relatedTarget = ', e.relatedTarget);
-    if (!e.relatedTarget.classList ||
-      e.relatedTarget.classList.contains('catalog-list-item') ||
-      e.relatedTarget.classList.contains('catalog-list')) {
+    if (!event.relatedTarget.classList ||
+      event.relatedTarget.classList.contains('catalog-list-item') ||
+      event.relatedTarget.classList.contains('catalog-list')) {
       return;
     }
 
@@ -68,9 +67,9 @@ export default function HeaderNavbar() {
     });
   };
 
-  const onSubCategoryLeave = (e) => {
-    if (!e.relatedTarget.classList ||
-      e.relatedTarget.classList.contains('catalog-list-item')) {
+  const onSubCategoryLeave = (event) => {
+    if (!event.relatedTarget.classList ||
+      event.relatedTarget.classList.contains('catalog-list-item')) {
       return;
     }
 
@@ -82,8 +81,8 @@ export default function HeaderNavbar() {
     })
   };
 
-  const handleClickAwayCatalog = (e) => {
-    if (e.target.textContent.toLowerCase() === 'catalog') return;
+  const handleClickAwayCatalog = (event) => {
+    if (event.target.textContent.toLowerCase() === 'catalog') return;
 
     setFeatures({
       ...features,
@@ -102,8 +101,8 @@ export default function HeaderNavbar() {
         <li
           key={category}
           className={classNames}
-          onMouseEnter={(e) => toggleSubCategories(e)}
-          onMouseLeave={(e) => onCategoryLeave(e)}
+          onMouseEnter={(event) => toggleSubCategories(event)}
+          onMouseLeave={(event) => onCategoryLeave(event)}
         >
           {category}
         </li>
@@ -175,8 +174,8 @@ export default function HeaderNavbar() {
       <ClickAwayListener onClickAway={handleClickAwayCatalog}>
         <Box
           className="catalog-wrapper"
-          onMouseEnter={(e) => {
-            const height = e.currentTarget.offsetHeight;
+          onMouseEnter={(event) => {
+            const height = event.currentTarget.offsetHeight;
             setFeatures({
               ...features,
               categoryListHeight: height
