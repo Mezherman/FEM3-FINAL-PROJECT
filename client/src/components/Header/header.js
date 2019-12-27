@@ -2,7 +2,7 @@ import React from 'react'
 import { AppBar, Toolbar, IconButton, InputBase, Badge, Menu, MenuItem, Box, Container, Divider } from '@material-ui/core'
 
 import MenuIcon from '@material-ui/icons/Menu'
-import SearchIcon from '@material-ui/icons/Search'
+// import SearchIcon from '@material-ui/icons/Search'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import StarsIcon from '@material-ui/icons/Stars'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
@@ -52,21 +52,21 @@ export default function Header () {
     />
   )
 
-  const renderSearchInput = (
-    <div className={classes.search}>
-      <div className={classes.searchIcon}>
-        <SearchIcon />
-      </div>
-      <InputBase
-        placeholder='Search'
-        classes={{
-          root: classes.inputRoot,
-          input: classes.inputInput
-        }}
-        inputProps={{ 'aria-label': 'search' }}
-      />
-    </div>
-  )
+  // const renderSearchInput = (
+  //   <div className={classes.search}>
+  //     <div className={classes.searchIcon}>
+  //       <SearchIcon />
+  //     </div>
+  //     <InputBase
+  //       placeholder='Search'
+  //       classes={{
+  //         root: classes.inputRoot,
+  //         input: classes.inputInput
+  //       }}
+  //       inputProps={{ 'aria-label': 'search' }}
+  //     />
+  //   </div>
+  // )
 
   const mobileMenuId = 'primary-search-account-menu-mobile'
   const renderMobileMenu = (
@@ -145,8 +145,8 @@ export default function Header () {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      {renderSearchInput}
-      {/*<Search />*/}
+      {/*{renderSearchInput}*/}
+      <Search />
       <HeaderNavbar />
     </Container>
   );

@@ -1,19 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import SearchIcon from '@material-ui/icons/Search';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import { makeStyles } from '@material-ui/core/styles';
-import getAllCards from '../../services/dataBase'
-
-const useStyles = makeStyles((theme) => ({
-  container: {
-    position: 'relative'
-  },
-  typography: {
-    padding: theme.spacing(2),
-  },
-}));
+import SearchIcon from '@material-ui/icons/Search'
+import getAllCards from '../../services/dataBase';
+import useStyles from './search-style';
 
 export default function Search() {
   const classes = useStyles();
@@ -28,14 +18,17 @@ export default function Search() {
 
   return (
     <div className={classes.container}>
+      <SearchIcon
+        className={classes.searchIcon}
+      />
       <Autocomplete
+        size="small"
         freeSolo
         options={data.products.map((option) => option.title)}
         renderInput={(params) => (
           <TextField
-            InputProps={{
-              startAdornment: <InputAdornment position="start"><SearchIcon /></InputAdornment>,
-            }}
+            className={classes.root}
+            fullWidth
             {...params}
             variant="outlined"
             margin="none"
