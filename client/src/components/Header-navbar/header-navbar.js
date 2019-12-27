@@ -14,7 +14,7 @@ export default function HeaderNavbar() {
     categoryListHeight: null
   });
 
-  const { categoriesVisible, subCategoriesVisible, categories } = features;
+  const { categoriesVisible, subCategoriesVisible, categories, chosenCategory } = features;
 
   useEffect(() => {
     getCategories()
@@ -93,29 +93,6 @@ export default function HeaderNavbar() {
     })
   };
 
-  const Categories = () => {
-    const { chosenCategory } = features;
-    const categoryList = Object.keys(categories).map((category) => {
-      const classNames = `catalog-list-item ${category === chosenCategory ? ' _hover' : ''}`;
-      return (
-        <li
-          key={category}
-          className={classNames}
-          onMouseEnter={(event) => toggleSubCategories(event)}
-          onMouseLeave={(event) => onCategoryLeave(event)}
-        >
-          {category}
-        </li>
-      )
-    });
-
-    return (
-      <ul className="catalog-list">
-        {categoryList}
-      </ul>
-    )
-  };
-
   const SubCategories = () => {
     const { chosenCategory, categoryListHeight } = features;
     const { subCategories } = categories[chosenCategory];
@@ -184,7 +161,13 @@ export default function HeaderNavbar() {
           onMouseLeave={toggleCatalog}
         >
           <Paper className="header-menu-catalog">
-            {categoriesVisible && Categories()}
+            {categoriesVisible &&
+            <Categories
+              categories={categories}
+              chosenCategory={chosenCategory}
+              toggleSubCategories={toggleSubCategories}
+              onCategoryLeave={onCategoryLeave}
+            />}
             {subCategoriesVisible && SubCategories()}
           </Paper>
         </Box>
@@ -192,3 +175,26 @@ export default function HeaderNavbar() {
     </div>
   )
 }
+
+const Categories = (props) => {
+  const { chosenCategory, toggleSubCategories, onCategoryLeave, categories } = props;
+  const categoryList = Object.keys(categories).map((category) => {
+    const classNames = `catalog-list-item ${category === chosenCategory ? ' _hover' : ''}`;
+    return (
+      <li
+        key={category}
+        className={classNames}
+        onMouseEnter={(event) => toggleSubCategories(event)}
+        onMouseLeave={(event) => onCategoryLeave(event)}
+      >
+        {category}
+      </li>
+    )
+  });
+
+  return (
+    <ul className="catalog-list">
+      {categoryList}
+    </ul>
+  )
+};
