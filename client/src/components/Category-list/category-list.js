@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Typography, Button } from '@material-ui/core';
 import withWidth from '@material-ui/core/withWidth';
 import getCategories from '../../services/getCategories';
-import Carousels from '../../components/Nuka-carousel/nukaCarousel';
+import Carousels from '../Сarousel/сarousel';
 import './category-list.scss';
 
 const useStyles = makeStyles( theme => ({
@@ -129,7 +129,7 @@ function CategoryList(props) {
                   wrapAround={true}
                   slideIndex={0}
                   slidesToShow={1}
-                  prducts={categories[k]['products']}
+                    productsList={categories[k]['products']}
                 />
                   : ''}
               </div>

@@ -25,6 +25,7 @@ export default class App extends Component {
           wrapAround
           slideIndex={0}
           slidesToShow={1}
+          pauseOnHover={true}
         />
         <CategoryList/>
         <Carousels
@@ -33,6 +34,8 @@ export default class App extends Component {
           wrapAround
           slideIndex={0}
           slidesToShow={1}
+          transitionMode='fade'
+          pauseOnHover={true}
         />
         <Footer />
         <Catalog />

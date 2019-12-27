@@ -4,6 +4,7 @@ import getAllCards from '../../services/dataBase';
 import Container from '@material-ui/core/Container';
 
 import './сarousel.scss';
+import Button from '@material-ui/core/Button';
 
 export default class Carousels extends Component {
 
@@ -20,8 +21,7 @@ export default class Carousels extends Component {
 
   render() {
     const { products } = this.state;
-    const { autoPlay, autoplayInterval, wrapAround, slideIndex, slidesToShow, text = false, isProductSlider = true } = this.props;
-
+    const { autoPlay, autoplayInterval, wrapAround, slideIndex, slidesToShow, text = false, isProductSlider = true, productsList = [], transitionMode, pauseOnHover } = this.props;
     // console.log(document.documentElement.clientWidth);
     if (document.documentElement.clientWidth < 400 && isProductSlider) {
       return null
@@ -73,6 +73,14 @@ export default class Carousels extends Component {
           wrapAround={wrapAround}
           slideIndex={slideIndex}
           slidesToShow={slidesToShow}
+          transitionMode={transitionMode}
+          pauseOnHover={pauseOnHover}
+          renderCenterLeftControls={({ previousSlide }) => (
+            <button className='carousel-controlers' onClick={previousSlide}>&lt;</button>
+          )}
+          renderCenterRightControls={({ nextSlide }) => (
+            <button className='carousel-controlers' onClick={nextSlide}>&gt;</button>
+          )}
         >
           {products.map((product) => (
               <Container maxWidth="sm">
