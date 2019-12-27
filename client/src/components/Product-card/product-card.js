@@ -6,8 +6,9 @@ import './product-card.scss'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 
-const ProductCard = ({ url, title, price, specialPrice = false }) => {
+const ProductCard = ({ url, title, price, id, specialPrice = false }) => {
   const priceClassName = {
     className: specialPrice ? 'product-card-old-price' : 'product-card-regular-price'
   };
