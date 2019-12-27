@@ -35,7 +35,7 @@ export default function FilterPanel({ name, text, checkbox, range, max }) {
         >
           <Typography className={classes.heading}>{name}</Typography>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
+        <ExpansionPanelDetails >
           {checkbox ? (
             <FormControl component="fieldset">
               <FormGroup aria-label="position" column="true">
@@ -61,16 +61,15 @@ export default function FilterPanel({ name, text, checkbox, range, max }) {
 
 FilterPanel.propTypes = {
   name: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  text: PropTypes.array,
+  text: PropTypes.arrayOf(PropTypes.string),
   checkbox: PropTypes.bool,
   range: PropTypes.bool,
-  // eslint-disable-next-line react/require-default-props
   max: PropTypes.number
-}
+};
 
 FilterPanel.defaultProps = {
   range: false,
   checkbox: false,
-  text: ['']
+  text: [''],
+  max: null
 };
