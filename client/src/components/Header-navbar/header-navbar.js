@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Paper, Box, ClickAwayListener } from '@material-ui/core';
 
 import getCategories from '../../services/getCategories';
@@ -93,31 +94,8 @@ export default function HeaderNavbar() {
     })
   };
 
-  const Categories = () => {
-    const { chosenCategory } = features;
-    const categoryList = Object.keys(categories).map((category) => {
-      const classNames = `catalog-list-item ${category === chosenCategory ? ' _hover' : ''}`;
-      return (
-        <li
-          key={category}
-          className={classNames}
-          onMouseEnter={(event) => toggleSubCategories(event)}
-          onMouseLeave={(event) => onCategoryLeave(event)}
-        >
-          {category}
-        </li>
-      )
-    });
-
-    return (
-      <ul className="catalog-list">
-        {categoryList}
-      </ul>
-    )
-  };
-
   const SubCategories = () => {
-    const { chosenCategory, categoryListHeight } = features;
+    const { chosenCategory } = features;
     const { subCategories } = categories[chosenCategory];
     const subCategoriesList = subCategories.map((subCategory) => (
       <span
@@ -168,6 +146,8 @@ export default function HeaderNavbar() {
     )
   );
 
+  const { chosenCategory } = features;
+
   return (
     <div className="header-menu-wrapper">
       {NavBar()}
@@ -184,7 +164,15 @@ export default function HeaderNavbar() {
           onMouseLeave={toggleCatalog}
         >
           <Paper className="header-menu-catalog">
-            {categoriesVisible && Categories()}
+            {categoriesVisible &&
+            (
+              <Categories
+                categories={categories}
+                chosenCategory={chosenCategory}
+                toggleSubCategories={toggleSubCategories}
+                onCategoryLeave={onCategoryLeave}
+              />
+            )}
             {subCategoriesVisible && SubCategories()}
           </Paper>
         </Box>
@@ -192,3 +180,40 @@ export default function HeaderNavbar() {
     </div>
   )
 }
+
+const Categories = (props) => {
+  const { chosenCategory, toggleSubCategories, onCategoryLeave, categories } = props;
+  const categoryList = Object.keys(categories).map((category) => {
+    const classNames = `catalog-list-item ${category === chosenCategory ? ' _hover' : ''}`;
+    return (
+      <li
+        key={category}
+        className={classNames}
+        onMouseEnter={(event) => toggleSubCategories(event)}
+        onMouseLeave={(event) => onCategoryLeave(event)}
+      >
+        {category}
+      </li>
+    )
+  });
+
+  return (
+    <ul className="catalog-list">
+      {categoryList}
+    </ul>
+  )
+};
+
+Categories.propTypes = {
+  chosenCategory: PropTypes.string,
+  toggleSubCategories: PropTypes.func,
+  onCategoryLeave: PropTypes.func,
+  categories: PropTypes.arrayOf(PropTypes.string)
+};
+
+Categories.defaultProps = {
+  chosenCategory: '',
+  toggleSubCategories: () => {},
+  onCategoryLeave: () => {},
+  categories: []
+};

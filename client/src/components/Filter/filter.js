@@ -1,8 +1,18 @@
-import Button from '@material-ui/core/Button';
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core';
 import FilterPanel from './filter-panel'
 
+const useStyles = makeStyles({
+  root: {
+    width: '100px',
+    margin: '20px auto'
+  },
+});
+
 export default function Filter() {
+  const classes = useStyles();
+
   const filterText = [
     {
       name: 'Brand',
@@ -34,7 +44,6 @@ export default function Filter() {
 
   const filter = filterText.map((item) => (
     <FilterPanel
-      className="filter"
       key={item.id}
       // name={item.name}
       // text={item.text}
@@ -50,7 +59,7 @@ export default function Filter() {
       {filter}
       <Button
         size="large"
-        fullWidth
+        className={classes.root}
         variant="contained"
         color="primary"
         disableElevation
