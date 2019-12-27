@@ -1,22 +1,22 @@
 @import '../Variables/variables.scss';
 
 .header {
-  &-login {
-    background: $gray--dark;
-  }
-
-  &-icon {
+  &-logo {
     box-sizing: border-box;
-    height: 20px;
+    height: 25px;
     cursor: pointer;
     opacity: .7;
 
-    &-logo {
-      height: 25px;
-    }
+  }
+}
+@media screen and (min-width: 767px) and (max-width: 1199px) {
 
-    &-badge {
-      //color: $color-secondary;
+}
+
+@media screen and (min-width: 1200px) {
+  .header {
+    &-logo {
+      height: 45px;
     }
   }
 }
