@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import 'typeface-roboto';
@@ -36,7 +36,9 @@ const ProductCard = ({ url, title, price, id, specialPrice = false }) => {
             modalIsVisible: false
           })
         }}
-      />
+      >
+        <h1>test</h1>
+      </TransitionsModal>
       <div className="product-card">
         <Divider />
         <Container maxWidth="sm">

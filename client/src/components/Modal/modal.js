@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
+import { Modal, Paper, Fade, Backdrop } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
     alignItems: 'center',
@@ -15,11 +14,14 @@ const useStyles = makeStyles(theme => ({
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    outline: 'none'
   },
 }));
 
-export default function TransitionsModal({ open, onClick }) {
+export default function TransitionsModal(props) {
   const classes = useStyles();
+  const { open, onClick, children } = props;
+  console.log(children);
 
   const handleClose = () => {
     onClick();
@@ -39,11 +41,22 @@ export default function TransitionsModal({ open, onClick }) {
       }}
     >
       <Fade in={open}>
-        <div className={classes.paper}>
-          <h2 id="transition-modal-title">Transition modal</h2>
-          <p id="transition-modal-description">react-transition-group animates me.</p>
-        </div>
+        <Paper className={classes.paper}>
+          {children}
+        </Paper>
       </Fade>
     </Modal>
   );
 }
+
+TransitionsModal.propTypes = {
+  open: PropTypes.bool,
+  onClick: PropTypes.func,
+  children: PropTypes.arrayOf(PropTypes.object),
+};
+
+TransitionsModal.defaultProps = {
+  open: null,
+  onClick: () => {},
+  children: {},
+};
