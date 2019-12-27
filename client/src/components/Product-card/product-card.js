@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import 'typeface-roboto';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 
 import TransitionsModal from '../Modal/modal';
 
 import './product-card.scss'
 
-const ProductCard = ({ url, title, price, specialPrice = false }) => {
+const ProductCard = ({ url, title, price, id, specialPrice = false }) => {
   const priceClassName = {
     className: specialPrice ? 'product-card-old-price' : 'product-card-regular-price'
   };
@@ -19,18 +20,10 @@ const ProductCard = ({ url, title, price, specialPrice = false }) => {
   // };
 
   const [modal, setModal] = useState({
-    modalHeader: 'test',
     modalIsVisible: false,
-    card: {
-      label: 'Football',
-      article: '11111111',
-      price: '$199.99',
-      src: '#',
-      modalTitle: 'modalConfirmPurchase'
-    },
   });
 
-  const { modalTitle, modalIsVisible, card } = modal;
+  const { modalIsVisible } = modal;
 
   return (
     <>

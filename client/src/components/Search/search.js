@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import getAllCards from '../../services/dataBase'
 
 export default class Search extends Component {
@@ -23,19 +24,31 @@ export default class Search extends Component {
         position: 'relative'
       }}
       >
-        <SearchIcon style={{
-          height: '100%',
-          position: 'absolute',
-          pointerEvents: 'none',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-        />
         <Autocomplete
           freeSolo
           options={products.map((option) => option.title)}
           renderInput={(params) => (
             <TextField
+              {...params}
+              InputProps={{
+                startAdornment: <InputAdornment position="start"><SearchIcon /></InputAdornment>,
+              }}
+
+              variant="outlined"
+              margin="normal"
+              placeholder="Search..."
+            />
+          )}
+        />
+
+        <Autocomplete
+          freeSolo
+          options={products.map((option) => option.title)}
+          renderInput={(params) => (
+            <TextField
+              InputProps={{
+                startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
+              }}
               fullWidth
               {...params}
               variant="outlined"
