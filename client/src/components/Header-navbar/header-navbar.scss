@@ -1,16 +1,14 @@
 @import '../Variables/variables';
 
-.temp-wrapper {
-  //padding: 1px;
-}
-
 .header {
 
   &-menu {
 
     &-wrapper {
-      padding: 25px 0px;
-      margin-left: 10px;
+      position: relative;
+      width: 35%;
+      margin: 0 auto;
+      padding: 10px 0;
     }
 
     &-catalog {
@@ -19,6 +17,7 @@
 
     &-list {
       display: flex;
+      justify-content: space-between;
       list-style-type: none;
       margin: 0;
       padding: 0;
@@ -35,6 +34,10 @@
         padding: 10px;
         color: $gray--darken;
         text-decoration: none;
+
+        &:hover {
+          color: $gray--dark;
+        }
       }
     }
   }
@@ -43,9 +46,10 @@
 .catalog {
 
   &-wrapper {
-    display: inline-block;
     box-shadow: -1.5px 0 7px 0 #d4d4d4;
     position: absolute;
+    left: 0;
+    top: 25px;
     margin-top: 10px;
     z-index: 100;
   }
@@ -54,6 +58,7 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
+    height: 157px;
 
     &-item {
       display: block;
@@ -65,7 +70,7 @@
 }
 
 .sub-category.catalog-list {
-  //width: 300px;
+  width: 300px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
