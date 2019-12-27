@@ -12,6 +12,7 @@ import './header.scss';
 import useStyles from './header-style.js'
 
 import Search from '../Search/search'
+import HeaderNavbar from '../Header-navbar/header-navbar';
 
 export default function Header () {
   const classes = useStyles()
@@ -146,6 +147,7 @@ export default function Header () {
       {renderMenu}
       {renderSearchInput}
       {/*<Search />*/}
+      <HeaderNavbar />
     </Container>
   );
 }
