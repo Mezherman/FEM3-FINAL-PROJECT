@@ -11,29 +11,20 @@ import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import RangeSlider from './range'
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  }
-}));
+// import useStyles from './filter-panel-style';
 
 export default function FilterPanel({ name, text, checkbox, range, max }) {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div>
       <ExpansionPanel square>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="value"
           id="value-header"
         >
-          <Typography className={classes.heading}>{name}</Typography>
+          <Typography>{name}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails >
           {checkbox ? (
