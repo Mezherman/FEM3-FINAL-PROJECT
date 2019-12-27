@@ -11,6 +11,7 @@ import Carousels from './components/Nuka-carousel/nukaCarousel';
 import Catalog from './components/Catalog/catalog';
 import ProductPage from './components/Product-page/product-page';
 import ProductList from './components/Product-list/product-list';
+import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
 
 export default class App extends Component {
   render() {
@@ -18,6 +19,7 @@ export default class App extends Component {
       <Container>
         <Router>
           <Header />
+          <ScrollToAnchor/>
           <HeaderNavbar />
           <Link to="/products" className="header-menu-list-hyperlink">
             CATALOG
@@ -71,6 +73,7 @@ export default class App extends Component {
           />
         </Router>
         <Footer />
+        <ScrollTop {...this.props}/>
       </Container>
     )
   }

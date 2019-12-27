@@ -22,4 +22,8 @@ export default function RangeSlider({ max }) {
 
 RangeSlider.propTypes = {
   max: PropTypes.number
-}
+};
+
+RangeSlider.defaultProps = {
+  max: null
+};

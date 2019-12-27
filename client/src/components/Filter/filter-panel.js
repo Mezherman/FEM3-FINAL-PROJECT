@@ -27,7 +27,7 @@ export default function FilterPanel({ name, text, checkbox, range, max }) {
 
   return (
     <div className={classes.root}>
-      <ExpansionPanel>
+      <ExpansionPanel square>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="value"
@@ -38,7 +38,7 @@ export default function FilterPanel({ name, text, checkbox, range, max }) {
         <ExpansionPanelDetails >
           {checkbox ? (
             <FormControl component="fieldset">
-              <FormGroup aria-label="position" column>
+              <FormGroup aria-label="position" column="true">
                 {text.map((el) => (
                   <FormControlLabel
                     key={el}
@@ -61,16 +61,15 @@ export default function FilterPanel({ name, text, checkbox, range, max }) {
 
 FilterPanel.propTypes = {
   name: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  text: PropTypes.array,
+  text: PropTypes.arrayOf(PropTypes.string),
   checkbox: PropTypes.bool,
   range: PropTypes.bool,
-  // eslint-disable-next-line react/require-default-props
   max: PropTypes.number
-}
+};
 
 FilterPanel.defaultProps = {
   range: false,
   checkbox: false,
-  text: ['']
+  text: [''],
+  max: null
 };

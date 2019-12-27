@@ -8,7 +8,7 @@ import getAllCards from '../../services/dataBase'
 export default class Search extends Component {
   state = {
     products: []
-  }
+  };
 
   componentDidMount() {
     getAllCards()
@@ -20,9 +20,7 @@ export default class Search extends Component {
   render () {
     const { products } = this.state;
     return (
-
       <div style={{
-        width: '500px',
         position: 'relative'
       }}
       >
@@ -54,12 +52,11 @@ export default class Search extends Component {
               fullWidth
               {...params}
               variant="outlined"
-              margin="normal"
+              margin="none"
               placeholder="Search..."
             />
           )}
         />
-
       </div>
     )
   }
