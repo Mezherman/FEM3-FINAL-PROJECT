@@ -21,7 +21,7 @@ export default class Carousels extends Component {
 
   render() {
     const { products } = this.state;
-    const { autoPlay, autoplayInterval, wrapAround, slideIndex, slidesToShow, text = false, isProductSlider = true } = this.props;
+    const { autoPlay, autoplayInterval, wrapAround, slideIndex, slidesToShow, text = false, isProductSlider = true, productsList = [], onProductSlide } = this.props;
 
     // console.log(document.documentElement.clientWidth);
     if (document.documentElement.clientWidth < 400 && isProductSlider) {
@@ -75,10 +75,10 @@ export default class Carousels extends Component {
           slideIndex={slideIndex}
           slidesToShow={slidesToShow}
         >
-          {products.map((product) => (
+          {productsList.map((product, index) => (
             <div className="product-card">
               <Container maxWidth="sm">
-                <div className="product-card-image">
+                <div onClick={(e) => onProductSlide(e, index)} className="product-card-image">
                   <img src={product.url} alt="Product" />
                   <p>{text ? <h1>Hello</h1> : null}</p>
                 </div>
