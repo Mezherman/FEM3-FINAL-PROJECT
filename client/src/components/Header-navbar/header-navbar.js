@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Paper, Box, ClickAwayListener } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 import getCategories from '../../services/getCategories';
 
@@ -10,7 +11,7 @@ export default function HeaderNavbar() {
   const [features, setFeatures] = useState({
     categoriesVisible: false,
     subCategoriesVisible: false,
-    categories: null,
+    categories: {},
     chosenCategory: null,
     categoryListHeight: null
   });
@@ -131,7 +132,7 @@ export default function HeaderNavbar() {
           }}
           onMouseLeave={toggleCatalog}
         >
-          <a href="#" className="header-menu-list-hyperlink">CATALOG</a>
+          <Link to="/products" className="header-menu-list-hyperlink">CATALOG</Link>
         </li>
         <li className="header-menu-list-item">
           <a href="#" className="header-menu-list-hyperlink">About us</a>
