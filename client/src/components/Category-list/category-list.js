@@ -108,33 +108,33 @@ function CategoryList(props) {
   return(
     <section className={classes.categories_list}>
       {
-        Object.keys(categories).map((key, index) => (
+        Object.keys(categories).map((k, index) => (
         <Grid container spacing={0} className={[classes.categories_item, 'categories_item']} >
-          {ifBreakpointSmall || index % 2 !== 0 ? <ImgGrid src={categories[key]['img']}  classes={classes}/> : ''}
+          {ifBreakpointSmall || index % 2 !== 0 ? <ImgGrid src={categories[k]['img']}  classes={classes}/> : ''}
           <Grid item  sm={12} md={6} lg={3} container direction={'column'} className={[classes.categories_description, setPaddingClass(index)]}>
               <Typography variant={'h3'} className={classes.categories_title}>
-                {categories[key]['title']}
+                {categories[k]['title']}
               </Typography>
               <Typography variant={'body1'}  className={classes.categories_desc}>
-                {categories[key]['desc']}
+                {categories[k]['desc']}
               </Typography>
               <Button variant={'contained'} color={"secondary"} className={classes.categories_btn}>
                 Learn more
               </Button>
 
               <div className={classes.categories_item_slider}>
-                {categories[key]['products'] && categories[key]['products'].length > 0 ? <Carousels
+                {categories[k]['products'] && categories[k]['products'].length > 0 ? <Carousels
                   isProductSlider={true}
                   autoPlay={false}
                   wrapAround={true}
                   slideIndex={0}
                   slidesToShow={1}
-                  prducts={categories[key]['products']}
+                  prducts={categories[k]['products']}
                 />
                   : ''}
               </div>
           </Grid>
-          {['xs', 'sm'].includes(props.width) || index % 2 !== 0  ? '' : <ImgGrid src={categories[key]['img']}  classes={classes}/>}
+          {['xs', 'sm'].includes(props.width) || index % 2 !== 0  ? '' : <ImgGrid src={categories[k]['img']}  classes={classes}/>}
         </Grid>
 
         ))

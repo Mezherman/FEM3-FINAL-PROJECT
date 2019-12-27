@@ -10,12 +10,14 @@ import HeaderNavbar from './components/Header-navbar/header-navbar';
 import Carousels from './components/Nuka-carousel/nukaCarousel';
 import Catalog from './components/Catalog/catalog';
 import ExampleColor from './components/Example-color/example-color';
+import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
 
 export default class App extends Component {
   render() {
     return (
       <>
         <Header />
+        <ScrollToAnchor/>
         <Carousels
           isProductSlider={false}
           autoPlay
@@ -34,6 +36,7 @@ export default class App extends Component {
         />
         <Footer />
         <Catalog />
+        <ScrollTop {...this.props}/>
       </>
     )
   }
