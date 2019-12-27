@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Paper, Box, ClickAwayListener } from '@material-ui/core';
 
 import getCategories from '../../services/getCategories';
@@ -14,7 +15,7 @@ export default function HeaderNavbar() {
     categoryListHeight: null
   });
 
-  const { categoriesVisible, subCategoriesVisible, categories, chosenCategory } = features;
+  const { categoriesVisible, subCategoriesVisible, categories } = features;
 
   useEffect(() => {
     getCategories()
@@ -94,7 +95,7 @@ export default function HeaderNavbar() {
   };
 
   const SubCategories = () => {
-    const { chosenCategory, categoryListHeight } = features;
+    const { chosenCategory } = features;
     const { subCategories } = categories[chosenCategory];
     const subCategoriesList = subCategories.map((subCategory) => (
       <span
@@ -145,6 +146,8 @@ export default function HeaderNavbar() {
     )
   );
 
+  const { chosenCategory } = features;
+
   return (
     <div className="header-menu-wrapper">
       {NavBar()}
@@ -162,12 +165,14 @@ export default function HeaderNavbar() {
         >
           <Paper className="header-menu-catalog">
             {categoriesVisible &&
-            <Categories
-              categories={categories}
-              chosenCategory={chosenCategory}
-              toggleSubCategories={toggleSubCategories}
-              onCategoryLeave={onCategoryLeave}
-            />}
+            (
+              <Categories
+                categories={categories}
+                chosenCategory={chosenCategory}
+                toggleSubCategories={toggleSubCategories}
+                onCategoryLeave={onCategoryLeave}
+              />
+            )}
             {subCategoriesVisible && SubCategories()}
           </Paper>
         </Box>
@@ -197,4 +202,18 @@ const Categories = (props) => {
       {categoryList}
     </ul>
   )
+};
+
+Categories.propTypes = {
+  chosenCategory: PropTypes.string,
+  toggleSubCategories: PropTypes.func,
+  onCategoryLeave: PropTypes.func,
+  categories: PropTypes.arrayOf(PropTypes.string)
+};
+
+Categories.defaultProps = {
+  chosenCategory: '',
+  toggleSubCategories: () => {},
+  onCategoryLeave: () => {},
+  categories: []
 };
