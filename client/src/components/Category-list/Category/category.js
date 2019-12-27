@@ -11,7 +11,7 @@ function Category (props) {
   const classes = useStyles();
 
   const ifBreakpointSmall = ['xs', 'sm'].includes(props.width);
-  const setPaddingClass = (i) => {
+  const getPaddingClassByIndex = (i) => {
     if (!ifBreakpointSmall) {
       return i % 2 === 0 ? classes.p_r_4 : classes.p_l_4;
     }
@@ -19,7 +19,7 @@ function Category (props) {
   };
 
   const description = (
-    <Grid item sm={12} md={6} lg={3} container direction="column" className={`${classes.categories_description} ${setPaddingClass(index)}`}>
+    <Grid item sm={12} md={6} lg={3} container direction="column" className={`${classes.categories_description} ${getPaddingClassByIndex(index)}`}>
       <Typography variant="h3" className={classes.categories_title}>
         {data.title ?? '' }
       </Typography>
