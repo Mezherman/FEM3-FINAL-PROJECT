@@ -1,63 +1,48 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import { makeStyles } from '@material-ui/core/styles';
 import getAllCards from '../../services/dataBase'
 
-export default class Search extends Component {
-  state = {
-    products: []
-  };
+const useStyles = makeStyles((theme) => ({
+  container: {
+    position: 'relative'
+  },
+  typography: {
+    padding: theme.spacing(2),
+  },
+}));
 
-  componentDidMount() {
+export default function Search() {
+  const classes = useStyles();
+  const [data, setData] = useState({ products: [] });
+
+  useEffect(() => {
     getAllCards()
-      .then((data) => this.setState({
-        products: data.products
-      }))
-  }
+      .then((response) => {
+        setData({ products: response.products })
+      })
+  }, []);
 
-  render () {
-    const { products } = this.state;
-    return (
-      <div style={{
-        position: 'relative'
-      }}
-      >
-        <Autocomplete
-          freeSolo
-          options={products.map((option) => option.title)}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              InputProps={{
-                startAdornment: <InputAdornment position="start"><SearchIcon /></InputAdornment>,
-              }}
-
-              variant="outlined"
-              margin="normal"
-              placeholder="Search..."
-            />
-          )}
-        />
-
-        <Autocomplete
-          freeSolo
-          options={products.map((option) => option.title)}
-          renderInput={(params) => (
-            <TextField
-              InputProps={{
-                startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
-              }}
-              fullWidth
-              {...params}
-              variant="outlined"
-              margin="none"
-              placeholder="Search..."
-            />
-          )}
-        />
-      </div>
-    )
-  }
+  return (
+    <div className={classes.container}>
+      <Autocomplete
+        freeSolo
+        options={data.products.map((option) => option.title)}
+        renderInput={(params) => (
+          <TextField
+            InputProps={{
+              startAdornment: <InputAdornment position="start"><SearchIcon /></InputAdornment>,
+            }}
+            {...params}
+            variant="outlined"
+            margin="none"
+            placeholder="Search..."
+          />
+        )}
+      />
+    </div>
+  )
 }
