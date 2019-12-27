@@ -17,9 +17,12 @@
 
   &-title {
     padding-bottom: 60px;
+    overflow: hidden;
     color: $gray--darken;
     font-weight: 300;
     font-size: 18px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .product-card-price-box {
     text-align: right;
