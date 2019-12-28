@@ -6,7 +6,7 @@ import 'typeface-roboto';
 import Header from './components/Header/header'
 import CategoryList from './components/Category-list/category-list'
 import Footer from './components/Footer/footer'
-import Carousels from './components/Nuka-carousel/nukaCarousel';
+import Carousels from './components/Сarousel/сarousel';
 import Catalog from './components/Catalog/catalog';
 import ProductPage from './components/Product-page/product-page';
 import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
@@ -32,13 +32,6 @@ export default class App extends Component {
             <CategoryList />
           </Route>
           <Route path to="/" exact>
-            <Carousels
-              autoPlay
-              autoplayInterval={2000}
-              wrapAround
-              slideIndex={0}
-              slidesToShow={1}
-            />
           </Route>
           <Route path="/products" exact component={Catalog} />
           <Route
