@@ -11,7 +11,7 @@
 
 .main-carousel>.slider-control-bottomcenter>ul {
   position: relative;
-  top: 10px;
+  top: 45px;
   display: flex;
   justify-content: center;
   margin: 0;
@@ -20,37 +20,74 @@
 }
 
 .main-carousel>.slider-control-bottomcenter>ul>li>button{
-  cursor: pointer;
-  opacity: 1 !important;
+  display: inline-block;
+  padding: 9px 11px;
   background: transparent;
   border: none;
-  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  opacity: 1 !important;
 }
 
-.main-carousel>.slider-control-bottomcenter>ul>li {
-  display: inline-block;
-  padding: 5px 12px;
-  margin: 0 5px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.41);
-  font-size: 17px;
-  line-height: 1.5;
-  color: #1a1a1a;
+.main-carousel>.slider-control-centerright>.arrow-next{
+  position: relative;
+  padding: 22px 18px;
+  background: #ffffff96;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
   cursor: pointer;
-  border-radius: 8px;
+  &>.arrow-next-top, .arrow-next-bottom {
+    background-color: #333;
+  }
+}
+
+.main-carousel>.slider-control-centerleft>.arrow-prev{
+  position: relative;
+  padding: 22px 18px;
+  background: #ffffff96;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  cursor: pointer;
+  &>.arrow-prev-top {
+    top: 19px
+  }
+  &>.arrow-prev-top, .arrow-prev-bottom {
+    right: 32px;
+    background-color: #333;
+  }
+}
+
+.main-carousel>.slider-control-bottomcenter>ul>li.active {
+  background-color: #333;
+}
+
+.main-carousel>.slider-control-bottomcenter>ul>li.active>button {
+  color: white;
+}
+
+
+.main-carousel>.slider-control-bottomcenter>ul>li {
   position: relative;
   bottom: 30px;
+  display: inline-block;
+  margin: 0 5px;
+  color: #1a1a1a;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .41);
+  cursor: pointer;
 }
+
 .main-carousel>.slider-control-bottomcenter>ul>.paging-item:after {
   display: none;
 }
 
 .main-pagin-items {
-  width: inherit;
+  position: absolute;
+  top: 10px;
   display: flex;
   justify-content: center;
-  top: 10px;
-  position: absolute;
+  width: inherit;
 }
 
 .product-card-title {
@@ -83,8 +120,9 @@
 
 .paging-item:after {
   position: absolute;
-  top: 15px;
+  top: 13px;
   right: 0;
+  z-index: -1;
   width: 45px;
   border-bottom: 2px solid #4b4747;
   content: " ";

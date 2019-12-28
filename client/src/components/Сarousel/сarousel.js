@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 export default class Carousels extends Component {
 
   state = {
-    products: [],
+    // products: [],
     slideIndex: 0
   };
 
@@ -21,8 +21,8 @@ export default class Carousels extends Component {
   }
 
   render () {
-    const { products } = this.state;
-    const { autoPlay, autoplayInterval, wrapAround, slideIndex, slidesToShow, text = false, isProductSlider = true, productsList = [], transitionMode, pauseOnHover, renderBottomCenterControls = true } = this.props;
+    // const { products } = this.state;
+    const { autoPlay, autoplayInterval, wrapAround, slidesToShow, text = false, isProductSlider = true, productsList = [], transitionMode, pauseOnHover } = this.props;
 
     if (isProductSlider === false) {
       return (
@@ -34,48 +34,54 @@ export default class Carousels extends Component {
           className='main-carousel'
           slideIndex={this.state.slideIndex}
           afterSlide={slideIndex => this.setState({ slideIndex })}
-      renderBottomCenterControls={() =>
-        <ul>
-          <li className="paging-item active">
-            <button type="button" aria-label="slide 1 bullet">
-              1
-            </button>
-          </li>
-          <li className="paging-item">
-            <button type="button" aria-label="slide 2 bullet">
-              2
-            </button>
-          </li>
-          <li className="paging-item">
-            <button type="button" aria-label="slide 3 bullet">
-              3
-            </button>
-          </li>
-        </ul>
+          renderCenterLeftControls={({ previousSlide }) => (
+            <div className="arrow-prev" onClick={previousSlide}>
+              <div className="arrow-prev-top"/>
+              <div className="arrow-prev-bottom"/>
+            </div>
+          )}
+          renderCenterRightControls={({ nextSlide }) => (
+            <div className="arrow-next" onClick={nextSlide}>
+              <div className="arrow-next-top"/>
+              <div className="arrow-next-bottom"/>
+            </div>
+          )}
+          renderBottomCenterControls={({ currentSlide, goToSlide, slideCount, slidesToScroll, cellAlign }) => {
+            function getDotIndexes (slideCount, slidesToScroll, slidesToShow, cellAlign) {
+              let dotIndexes = [];
+              let lastDotIndex = slideCount - slidesToShow;
 
+              switch (cellAlign) {
+                case 'center':
+                case 'right':
+                  lastDotIndex += slidesToShow - 1;
+                  break;
+              }
 
+              if (lastDotIndex < 0) {
+                return [0];
+              }
 
+              for (let i = 0; i < lastDotIndex; i += slidesToScroll) {
+                dotIndexes.push(i);
+              }
 
-     // <div class="slider-control-bottomcenter" style="position: absolute; bottom: 0px; left: 50%; transform: translateX(-50%);"><ul style="position: relative; top: -10px; display: flex; margin: 0px; padding: 0px; list-style-type: none;"><li class="paging-item active"><button type="button" aria-label="slide 1 bullet" style="cursor: pointer; opacity: 1; background: transparent; border: none;"><svg class="paging-dot" width="6" height="6"><circle cx="3" cy="3" r="3" style="fill: black;"></circle></svg></button></li><li class="paging-item"><button type="button" aria-label="slide 2 bullet" style="cursor: pointer; opacity: 0.5; background: transparent; border: none;"><svg class="paging-dot" width="6" height="6"><circle cx="3" cy="3" r="3" style="fill: black;"></circle></svg></button></li><li class="paging-item"><button type="button" aria-label="slide 3 bullet" style="cursor: pointer; opacity: 0.5; background: transparent; border: none;"><svg class="paging-dot" width="6" height="6"><circle cx="3" cy="3" r="3" style="fill: black;"></circle></svg></button></li><li class="paging-item"><button type="button" aria-label="slide 4 bullet" style="cursor: pointer; opacity: 0.5; background: transparent; border: none;"><svg class="paging-dot" width="6" height="6"><circle cx="3" cy="3" r="3" style="fill: black;"></circle></svg></button></li><li class="paging-item"><button type="button" aria-label="slide 5 bullet" style="cursor: pointer; opacity: 0.5; background: transparent; border: none;"><svg class="paging-dot" width="6" height="6"><circle cx="3" cy="3" r="3" style="fill: black;"></circle></svg></button></li><li class="paging-item"><button type="button" aria-label="slide 6 bullet" style="cursor: pointer; opacity: 0.5; background: transparent; border: none;"><svg class="paging-dot" width="6" height="6"><circle cx="3" cy="3" r="3" style="fill: black;"></circle></svg></button></li></ul></div>
-     //
-     //
-     //
-     //
-     //
-     //
-     //
-     // <div className='main-pagin-items slider-control-bottomcenter'>
-     //    <ul>
-     //      <li className="paging-item" aria-label="slide 1 bullet">
-     //        <button aria-label="slide 1 bullet">1</button>
-     //      </li>
-     //      <li className="paging-item" aria-label="slide 2 bullet">
-     //        <button aria-label="slide 2 bullet">2</button>
-     //      </li>
-     //      <li className="paging-item" aria-label="slide 3 bullet">
-     //        <button aria-label="slide 3 bullet">3</button>
-     //      </li></ul>
-     //  </div>
+              dotIndexes.push(lastDotIndex);
+              return dotIndexes;
+            }
+
+            let indexes = getDotIndexes(slideCount, slidesToScroll, slidesToShow, cellAlign);
+            return React.createElement('ul', '', indexes.map(function (index) {
+              return React.createElement('li', {
+                key: index,
+                className: currentSlide === index ? 'paging-item active' : 'paging-item'
+              }, React.createElement('button', {
+                type: 'button',
+                onClick: goToSlide.bind(null, index),
+                'aria-label': 'slide '.concat(index + 1, ' bullet')
+              }, index + 1));
+            }));
+          }
           }
         >
           <div>
@@ -119,27 +125,21 @@ export default class Carousels extends Component {
           pauseOnHover={pauseOnHover}
           slideIndex={this.state.slideIndex}
           afterSlide={slideIndex => this.setState({ slideIndex })}
-          // renderBottomCenterControls={}
-          renderTopCenterControls={({ currentSlide }) => (
-            console.log(products[currentSlide])
-          )}
           renderCenterLeftControls={({ previousSlide }) => (
-            < div className="arrow-prev" onClick={previousSlide}>
+            <div className="arrow-prev" onClick={previousSlide}>
               <div className="arrow-prev-top"/>
               <div className="arrow-prev-bottom"/>
             </div>
           )}
           renderCenterRightControls={({ nextSlide }) => (
-            < div className="arrow-next" onClick={nextSlide}>
+            <div className="arrow-next" onClick={nextSlide}>
               <div className="arrow-next-top"/>
               <div className="arrow-next-bottom"/>
             </div>
           )}
         >
-          {products.map(
-            function (product, index) {
-              const li = document.documentElement.getElementsByClassName('paging-item');
-              console.log(li);
+          {productsList.map(
+            function (product) {
               return (
                 <Container maxWidth="sm" key={product.art}>
                   <div className="product-card-image">
@@ -150,15 +150,6 @@ export default class Carousels extends Component {
                 </Container>
               )
             }
-            //   (product) => (
-            //   <Container maxWidth="sm" key={product.art}>
-            //     <div className="product-card-image">
-            //       <img  src={product.url} alt="Product"/>
-            //       <p>{text ? <h1>Hello</h1> : null}</p>
-            //     </div>
-            //     <h1 className="product-card-title">{product.title}</h1>
-            //   </Container>
-            // )
           )}
         </Carousel>
       );
