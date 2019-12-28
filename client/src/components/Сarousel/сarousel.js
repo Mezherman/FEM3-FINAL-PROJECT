@@ -4,7 +4,6 @@ import getAllCards from '../../services/dataBase';
 import Container from '@material-ui/core/Container';
 
 import './сarousel.scss';
-import Button from '@material-ui/core/Button';
 
 export default class Carousels extends Component {
 

@@ -1,46 +1,24 @@
 import React, { Component } from 'react';
+import { Container } from '@material-ui/core';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import 'typeface-roboto';
-
+import Routes from './routes';
 import Header from './components/Header/header'
-import CategoryList from './components/Category-list/category-list'
 import Footer from './components/Footer/footer'
-import ProductList from './components/Product-list/product-list';
-import ContainerFilter from './components/Filter/filter';
-import HeaderNavbar from './components/Header-navbar/header-navbar';
-import Carousels from './components/Сarousel/сarousel';
-import Catalog from './components/Catalog/catalog';
-import ExampleColor from './components/Example-color/example-color';
 import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
 
 export default class App extends Component {
   render() {
     return (
-      <>
-        <Header />
-        <ScrollToAnchor/>
-        <Carousels
-          isProductSlider={false}
-          autoPlay
-          autoplayInterval={2000}
-          wrapAround
-          slideIndex={0}
-          slidesToShow={1}
-          pauseOnHover={true}
-        />
-        <CategoryList/>
-        <Carousels
-          autoPlay={false}
-          autoplayInterval={2000}
-          wrapAround
-          slideIndex={0}
-          slidesToShow={1}
-          transitionMode='fade'
-          pauseOnHover={true}
-        />
+      <Container>
+        <Router>
+          <Header />
+          <ScrollToAnchor />
+          <Routes />
+        </Router>
         <Footer />
-        <Catalog />
-        <ScrollTop {...this.props}/>
-      </>
+        <ScrollTop {...this.props} />
+      </Container>
     )
   }
 }

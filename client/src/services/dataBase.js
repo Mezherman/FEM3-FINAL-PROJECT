@@ -1,6 +1,6 @@
-function getAllCards () {
-  return fetch('./items.json')
-    .then((response) => response.json())
-}
+const axios = require('axios');
 
-export default getAllCards;
+export default function getAllCards () {
+  return axios.get(`${window.location.origin}/items.json`)
+    .then((response) => response.data)
+}
