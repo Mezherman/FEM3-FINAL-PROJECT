@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   container: {
     position: 'relative'
   },
@@ -15,6 +15,6 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     paddingLeft: '7px'
   }
-}));
+});
 
 export default useStyles
