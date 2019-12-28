@@ -1,13 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
-  container: {
-    position: 'relative'
-  },
   root: {
     '& .MuiOutlinedInput-root[class*="MuiOutlinedInput-root"]': {
       paddingLeft: '30px'
     }
+  },
+  container: {
+    position: 'relative'
   },
   searchIcon: {
     height: '100%',
