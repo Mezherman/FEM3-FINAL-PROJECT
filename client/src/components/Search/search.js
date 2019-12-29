@@ -1,53 +1,41 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import SearchIcon from '@material-ui/icons/Search';
-import getAllCards from '../../services/dataBase'
+import SearchIcon from '@material-ui/icons/Search'
+import getAllCards from '../../services/dataBase';
+import useStyles from './search-style';
 
-export default class Search extends Component {
-  state = {
-    products: []
-  }
+export default function Search() {
+  const classes = useStyles();
+  const [data, setData] = useState({ products: [] });
 
-  componentDidMount() {
+  useEffect(() => {
     getAllCards()
-      .then((data) => this.setState({
-        products: data.products
-      }))
-  }
+      .then((response) => {
+        setData({ products: response.products })
+      })
+  }, []);
 
-  render () {
-    const { products } = this.state;
-    return (
-
-      <div style={{
-        width: '500px',
-        position: 'relative'
-      }}
-      >
-        <SearchIcon style={{
-          height: '100%',
-          position: 'absolute',
-          pointerEvents: 'none',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-        />
-        <Autocomplete
-          freeSolo
-          options={products.map((option) => option.title)}
-          renderInput={(params) => (
-            <TextField
-              fullWidth
-              {...params}
-              variant="outlined"
-              margin="normal"
-              placeholder="Search..."
-            />
-          )}
-        />
-
-      </div>
-    )
-  }
+  return (
+    <div className={classes.container}>
+      <SearchIcon
+        className={classes.searchIcon}
+      />
+      <Autocomplete
+        size="small"
+        freeSolo
+        options={data.products.map((option) => option.title)}
+        renderInput={(params) => (
+          <TextField
+            className={classes.root}
+            fullWidth
+            {...params}
+            variant="outlined"
+            margin="none"
+            placeholder="Search..."
+          />
+        )}
+      />
+    </div>
+  )
 }

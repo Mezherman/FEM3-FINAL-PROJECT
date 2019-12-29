@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from '@material-ui/core/Slider';
+import useStyles from './range-style';
 
 export default function RangeSlider({ max }) {
+  const classes = useStyles();
   const [value, setValue] = React.useState([0, max]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -10,6 +12,7 @@ export default function RangeSlider({ max }) {
   return (
     <>
       <Slider
+        className={classes.root}
         max={max}
         valueLabelDisplay="on"
         value={value}
@@ -22,4 +25,8 @@ export default function RangeSlider({ max }) {
 
 RangeSlider.propTypes = {
   max: PropTypes.number
-}
+};
+
+RangeSlider.defaultProps = {
+  max: null
+};

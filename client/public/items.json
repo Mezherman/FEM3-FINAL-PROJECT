@@ -5,38 +5,45 @@
     "specialPrice": "€149.99",
     "url": "https://www.wmf.com/media/catalog/product/cache/2/small_image/265x/9df78eab33525d08d6e5fb8d27136e95/1/1/11_4800_6041_100.jpg",
     "art": "592.213.49",
-    "color": "light grey"
+    "color": "light grey",
+    "id": "12345"
   },
   {"title": "Set 60 SINFONIA",
     "price": "199.99",
     "url": "https://www.wmf.com/media/catalog/product/cache/2/small_image/265x/9df78eab33525d08d6e5fb8d27136e95/1/1/11_2100_9999_100.jpg",
     "art": "990.143.76",
-    "color": "white"
+    "color": "white",
+    "id": "12346"
+
   },
   {"title": "Set 30 CORVO Cromargan Protect",
     "price": "39.99",
     "url": "https://www.wmf.com/media/catalog/product/cache/2/small_image/265x/9df78eab33525d08d6e5fb8d27136e95/1/1/11_6196_6340_100.jpg",
     "art": "192.461.44",
-    "color": "black"
+    "color": "black",
+    "id": "12347"
   },
   {"title": "Set 30 CORVO Cromargan Protect",
     "price": "279.00",
     "specialPrice": "€129.99",
     "url": "https://www.wmf.com/media/catalog/product/cache/2/small_image/265x/9df78eab33525d08d6e5fb8d27136e95/1/1/11_5891_6330_100.jpg",
     "art": "298.855.99",
-    "color": "natural"
+    "color": "natural",
+    "id": "12348"
   },
   {"title": "24-pcs cutlery set MIAMI",
     "price": "99.99",
     "url": "https://www.wmf.com/media/catalog/product/cache/2/small_image/265x/9df78eab33525d08d6e5fb8d27136e95/1/2/12_8144_6043_004.jpg",
     "art": "001.167.79",
-    "color": "oak veneer"
+    "color": "oak veneer",
+    "id": "12349"
   },
   {"title": "Set 30 ATRIA",
     "price": "99.99",
     "url": "https://www.wmf.com/media/catalog/product/cache/2/small_image/265x/9df78eab33525d08d6e5fb8d27136e95/1/2/12_7691_6040_100.jpg",
     "art": "503.687.17",
-    "color": "white"
+    "color": "white",
+    "id": "12350"
   }
 ]
 }

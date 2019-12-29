@@ -1,8 +1,8 @@
 import React from 'react'
-import { AppBar, Toolbar, IconButton, InputBase, Badge, Menu, MenuItem, Box, Container, Divider } from '@material-ui/core'
+import { AppBar, Toolbar, IconButton, Badge, Menu, MenuItem, Box, Container, Divider } from '@material-ui/core'
 
 import MenuIcon from '@material-ui/icons/Menu'
-import SearchIcon from '@material-ui/icons/Search'
+// import SearchIcon from '@material-ui/icons/Search'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import StarsIcon from '@material-ui/icons/Stars'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
@@ -13,6 +13,7 @@ import './header.scss';
 import useStyles from './header-style.js'
 
 import Search from '../Search/search'
+import HeaderNavbar from '../Header-navbar/header-navbar';
 
 export default function Header () {
   const classes = useStyles()
@@ -52,21 +53,21 @@ export default function Header () {
     />
   )
 
-  const renderSearchInput = (
-    <div className={classes.search}>
-      <div className={classes.searchIcon}>
-        <SearchIcon />
-      </div>
-      <InputBase
-        placeholder="Search"
-        classes={{
-          root: classes.inputRoot,
-          input: classes.inputInput
-        }}
-        inputProps={{ 'aria-label': 'search' }}
-      />
-    </div>
-  )
+  // const renderSearchInput = (
+  //   <div className={classes.search}>
+  //     <div className={classes.searchIcon}>
+  //       <SearchIcon />
+  //     </div>
+  //     <InputBase
+  //       placeholder='Search'
+  //       classes={{
+  //         root: classes.inputRoot,
+  //         input: classes.inputInput
+  //       }}
+  //       inputProps={{ 'aria-label': 'search' }}
+  //     />
+  //   </div>
+  // )
 
   const mobileMenuId = 'primary-search-account-menu-mobile'
   const renderMobileMenu = (
@@ -88,8 +89,8 @@ export default function Header () {
   )
 
   return (
-    <Container disableGutters="true" className={classes.grow}>
-      <AppBar position="static" color="inherit" elevation="0">
+    <Container disableGutters className={classes.grow}>
+      <AppBar position="static" color="inherit" elevation={0}>
         <Toolbar className={classes.justify}>
           <Box className={classes.boxLogo}>
             <IconButton
@@ -146,8 +147,9 @@ export default function Header () {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      {renderSearchInput}
-      {/* <Search /> */}
+      {/* {renderSearchInput} */}
+      <Search />
+      <HeaderNavbar />
     </Container>
   );
 }
