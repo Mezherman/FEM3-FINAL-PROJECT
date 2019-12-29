@@ -47,6 +47,9 @@
     font-size: 26px;
     text-align: right;
     vertical-align: bottom;
+    &::before {
+      content:' \20AC';
+    }
   }
   &-old-price {
     position: relative;

@@ -11,7 +11,7 @@ import AddToBasket from '../Add-to-basket/add-to-basket';
 import './product-card.scss'
 
 const ProductCard = (props) => {
-  const { url, title, price, id, specialPrice = false } = props;
+  const { url, title, price, specialPrice = false } = props;
   const priceClassName = {
     className: specialPrice ? 'product-card-old-price' : 'product-card-regular-price'
   };
@@ -42,7 +42,8 @@ const ProductCard = (props) => {
           <h1 className="product-card-title">{title}</h1>
           <div className="product-card-price-box">
             <span className={priceClassName.className}>{price}</span>
-            <span className="product-card-special-price">{specialPrice}</span>
+            {specialPrice &&
+            <span className="product-card-special-price">{specialPrice}</span>}
           </div>
           <Button
             size="large"

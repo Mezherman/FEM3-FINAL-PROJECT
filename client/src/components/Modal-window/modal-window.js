@@ -6,7 +6,7 @@ import useStyles from './_modal-window';
 
 export default function ModalWindow(props) {
   const classes = useStyles();
-  const { open, onModalClose, children, actions } = props;
+  const { open, onModalClose, children } = props;
 
   const handleClose = () => {
     onModalClose();
@@ -38,10 +38,8 @@ ModalWindow.propTypes = {
   open: PropTypes.bool.isRequired,
   onModalClose: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.symbol]),
-  actions: PropTypes.arrayOf(PropTypes.string)
 };
 
 ModalWindow.defaultProps = {
   children: {},
-  actions: []
 };
