@@ -65,7 +65,7 @@ export default class PreviewBlock extends React.Component {
 //     <h3 style={{position: 'relative', borderBottom: '1px solid grey'}}>
 //       Quickview Cart
 //       <CloseIcon
-//         onClick={handleClick}
+//         closeModal={handleClick}
 //         fontSize="large"
 //         style={{position: 'absolute', right: '10px', top: '10px', cursor: 'pointer'}}
 //       />
