@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import Variables from '../../Variables/variables';
 
 const useStyles = makeStyles({
   root: {
@@ -9,7 +10,7 @@ const useStyles = makeStyles({
       paddingRight: '17px'
     },
     '& .MuiCheckbox-root': {
-      color: '#71b430'
+      color: Variables.colors.btnMainBg
     }
   }
 });

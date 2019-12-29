@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import '../../Variables/variables.scss'
+import Variables from '../../Variables/variables';
 
 const useStyles = makeStyles({
   root: {
@@ -9,7 +9,7 @@ const useStyles = makeStyles({
       backgroundColor: 'inherit'
     },
     '& .PrivateValueLabel-label-398': {
-      color: '#71b430',
+      color: Variables.colors.btnMainBg,
       transform: 'none'
     },
     '& .PrivateValueLabel-offset-396': {
