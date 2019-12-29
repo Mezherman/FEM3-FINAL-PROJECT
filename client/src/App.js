@@ -17,7 +17,7 @@ export default function App(props) {
       <Router>
         <Header />
         <ScrollToAnchor />
-        <Route path to="/" exact>
+        <Route path="/" exact>
           <Carousels
             isProductSlider={false}
             autoPlay
@@ -27,10 +27,10 @@ export default function App(props) {
             slidesToShow={1}
           />
         </Route>
-        <Route path to="/" exact>
+        <Route path="/" exact>
           <CategoryList />
         </Route>
-        <Route path to="/" exact>
+        <Route path="/" exact>
           <Carousels
             autoPlay
             autoplayInterval={2000}

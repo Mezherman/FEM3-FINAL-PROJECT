@@ -19,9 +19,9 @@ class Preview extends Component {
   deleteItem(art) {
     this.setState((prevState) => {
       prevState.prototype.remove = function (value) {
-        let idx = this.indexOf(value);
+        const idx = this.indexOf(value);
         if (idx !== -1) {
-          return this.splice(idx,1)
+          return this.splice(idx, 1)
         }
         return false
       }
@@ -38,7 +38,10 @@ class Preview extends Component {
             <div className="product-mini" key={product.art}>
               <img src={product.url} className="product-image" />
               <p className="product-title">{product.title}</p>
-              <p>€ {product.price}</p>
+              <p>
+€
+                {product.price}
+              </p>
               {/* eslint-disable-next-line react/jsx-no-undef */}
               <Button
                 size="medium"

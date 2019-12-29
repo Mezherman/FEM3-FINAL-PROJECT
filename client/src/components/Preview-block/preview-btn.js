@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Preview from './preview'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   typography: {
     padding: theme.spacing(2),
   },
@@ -15,7 +15,7 @@ export default function PreviewBtn() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -51,7 +51,7 @@ export default function PreviewBtn() {
         <Typography className={classes.typography}>
           <Preview />
           <button onClick={handleClose}>Click me</button>
-          </Typography>
+        </Typography>
       </Popover>
     </div>
   );

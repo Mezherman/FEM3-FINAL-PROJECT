@@ -3,7 +3,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import Preview from './preview';
 
 export default class PreviewBlock extends React.Component {
-
   state = {
     close: false,
     // eslint-disable-next-line react/no-unused-state

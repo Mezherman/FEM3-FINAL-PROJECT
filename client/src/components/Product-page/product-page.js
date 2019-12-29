@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Container } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import getAllCards from '../../services/dataBase';
 import ProductCard from '../Product-card/product-card';
