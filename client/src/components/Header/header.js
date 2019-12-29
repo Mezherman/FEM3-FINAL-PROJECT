@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppBar, Toolbar, IconButton, InputBase, Badge, Menu, MenuItem, Box, Container, Divider } from '@material-ui/core'
+import { AppBar, Toolbar, IconButton, Badge, Menu, MenuItem, Box, Container, Divider } from '@material-ui/core'
 
 import MenuIcon from '@material-ui/icons/Menu'
 // import SearchIcon from '@material-ui/icons/Search'
@@ -80,62 +80,63 @@ export default function Header () {
       onClose={handleMobileMenuClose}
       elevation={0}
     >
-      <MenuItem className='header-login' onClick={handleProfileMenuOpen}>
-        <img src='./img/header/my_wmf.png' />
-        <ArrowForwardIosIcon fontSize='small' />
+      <MenuItem className="header-login" onClick={handleProfileMenuOpen}>
+        <img src="./img/header/my_wmf.png" alt="" />
+        <ArrowForwardIosIcon fontSize="small" alt="" />
       </MenuItem>
     </Menu>
   )
 
   return (
-    <Container disableGutters='true' className={classes.grow}>
-      <AppBar position='static' color='inherit' elevation='0'>
+    <Container disableGutters className={classes.grow}>
+      <AppBar position="static" color="inherit" elevation={0}>
         <Toolbar className={classes.justify}>
           <Box className={classes.boxLogo}>
             <IconButton
-              edge='start'
+              edge="start"
               className={classes.menuButton}
-              aria-label='show more'
+              aria-label="show more"
               aria-controls={mobileMenuId}
-              aria-haspopup='true'
+              aria-haspopup="true"
               onClick={handleMobileMenuOpen}
             >
-              <MenuIcon fontSize='large' />
+              <MenuIcon fontSize="large" />
             </IconButton>
-            <IconButton edge='start' href='#' className={classes.logoIcon}>
+            <IconButton edge="start" href="#" className={classes.logoIcon}>
               <img
-                src='./img/header/wmf-logo-30x35.svg'
-                className='header-logo'
+                src="./img/header/wmf-logo-30x35.svg"
+                alt=""
+                className="header-logo"
               />
             </IconButton>
           </Box>
 
           <Box className={classes.mainBoxLogo}>
-            <img src='./img/header/wmf-group-logo.png' alt='headerMainLogo' className={classes.mainHeaderLogo} />
-            <img src='./img/header/03_wmf-kompass_essen_167x167px.jpg' alt='headerMainLogo' className={classes.mainHeaderLogoImg} />
+            <img src="./img/header/wmf-group-logo.png" alt="headerMainLogo" className={classes.mainHeaderLogo} />
+            <img src="./img/header/03_wmf-kompass_essen_167x167px.jpg" alt="headerMainLogo" className={classes.mainHeaderLogoImg} />
           </Box>
 
           <Box className={classes.iconButtonBox}>
             <MenuItem className={classes.headerMenuItem}>
-              <IconButton edge='end' className={classes.iconButton}>
-                <StarsIcon fontSize='large' className={classes.iconsStyle} />
+              <IconButton edge="end" className={classes.iconButton}>
+                <StarsIcon fontSize="large" className={classes.iconsStyle} />
               </IconButton>
               <span className={classes.menuTitle}>Favorites</span>
             </MenuItem>
 
-            <Divider orientation='vertical' className={classes.dividerStyle} />
+            <Divider orientation="vertical" className={classes.dividerStyle} />
             <MenuItem className={classes.headerMenuItem}>
-              <IconButton edge='end' className={classes.iconButton}>
-                <PersonIcon fontSize='large' className={classes.iconsStyle} />
+              <IconButton edge="end" className={classes.iconButton}>
+                <PersonIcon fontSize="large" className={classes.iconsStyle} />
               </IconButton>
               <span className={classes.menuTitle}>Login</span>
             </MenuItem>
 
-            <Divider orientation='vertical' className={classes.dividerStyle} />
+            <Divider orientation="vertical" className={classes.dividerStyle} />
             <MenuItem className={classes.headerMenuItem}>
-              <IconButton edge='end' aria-label='card' className={classes.iconButton}>
-                <Badge badgeContent='0' color='error'>
-                  <ShoppingCartOutlinedIcon fontSize='large' className={classes.iconsStyle} />
+              <IconButton edge="end" aria-label="card" className={classes.iconButton}>
+                <Badge badgeContent="0" color="error">
+                  <ShoppingCartOutlinedIcon fontSize="large" className={classes.iconsStyle} />
                 </Badge>
               </IconButton>
               <span className={classes.menuTitle}>Cart</span>
@@ -145,7 +146,7 @@ export default function Header () {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      {/*{renderSearchInput}*/}
+      {/* {renderSearchInput} */}
       <Search />
       <HeaderNavbar />
     </Container>

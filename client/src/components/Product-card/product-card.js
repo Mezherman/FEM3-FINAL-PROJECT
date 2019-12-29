@@ -5,9 +5,8 @@ import 'typeface-roboto';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
 
-import TransitionsModal from '../Modal/modal';
+import ModalWindow from '../Modal/modal';
 
 import './product-card.scss'
 
@@ -27,7 +26,7 @@ const ProductCard = ({ url, title, price, id, specialPrice = false }) => {
 
   return (
     <>
-      <TransitionsModal
+      <ModalWindow
         open={modalIsVisible}
         onClick={() => {
           console.log('in product card');
@@ -38,12 +37,12 @@ const ProductCard = ({ url, title, price, id, specialPrice = false }) => {
         }}
       >
         <h1>test</h1>
-      </TransitionsModal>
+      </ModalWindow>
       <div className="product-card">
         <Divider />
         <Container maxWidth="sm">
           <div className="product-card-image">
-            <img src={url} />
+            <img src={url} alt="" />
           </div>
           <Divider variant="middle" />
           <h1 className="product-card-title">{title}</h1>
