@@ -1,9 +1,11 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
+
 import ProductCard from '../Product-card/product-card';
 import getAllCards from '../../services/dataBase';
+
 import './product-list.scss'
-import Grid from '@material-ui/core/Grid';
 
 export default function ProductList() {
   const [data, setData] = useState({ products: [] });
@@ -13,13 +15,13 @@ export default function ProductList() {
       .then((response) => {
         setData({ products: response.products })
       })
-  }, [])
+  }, []);
 
   return (
     <div className="product-list">
 
       {data.products.map((product, index) => (
-        <Grid item md={6} lg={4}>
+        <Grid item md={6} lg={4} key={product.id}>
           <Link to={`products/${product.id}`}>
             <ProductCard
               id={product.id}

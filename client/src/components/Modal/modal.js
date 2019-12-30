@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal, Paper, Fade, Backdrop } from '@material-ui/core';
 import PropTypes from 'prop-types';
@@ -18,10 +18,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TransitionsModal(props) {
+export default function ModalWindow(props) {
   const classes = useStyles();
   const { open, onClick, children } = props;
-  console.log(children);
+  // console.log('children = ', children);
+  // console.log('children type = ', children.type);
 
   const handleClose = () => {
     onClick();
@@ -49,14 +50,14 @@ export default function TransitionsModal(props) {
   );
 }
 
-TransitionsModal.propTypes = {
+ModalWindow.propTypes = {
   open: PropTypes.bool,
   onClick: PropTypes.func,
-  children: PropTypes.arrayOf(PropTypes.object),
+  children: PropTypes.oneOfType([PropTypes.object, PropTypes.string, PropTypes.symbol])
 };
 
-TransitionsModal.defaultProps = {
-  open: null,
+ModalWindow.defaultProps = {
+  open: false,
   onClick: () => {},
   children: {},
 };
