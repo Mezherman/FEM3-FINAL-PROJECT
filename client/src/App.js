@@ -6,8 +6,7 @@ import 'typeface-roboto';
 import Header from './components/Header/header'
 import CategoryList from './components/Category-list/category-list'
 import Footer from './components/Footer/footer'
-// import Carousels from './components/Сarousel/сarousel';
-import Carousels from './components/Сarousel/сarouselHook';
+import Carousels from './components/Сarousel/сarousel';
 import Catalog from './components/Catalog/catalog';
 import ProductPage from './components/Product-page/product-page';
 import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
