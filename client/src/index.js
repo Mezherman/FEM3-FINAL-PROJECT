@@ -11,11 +11,11 @@ import App from './App';
 const theme = createMuiTheme({
   breakpoints: {
     values: {
-      xs: Variables.xs,
-      sm: Variables.sm,
-      md: Variables.md,
-      lg: Variables.lg,
-      xl: Variables.xl,
+      xs: Variables.breakpoints.xs,
+      sm: Variables.breakpoints.sm,
+      md: Variables.breakpoints.md,
+      lg: Variables.breakpoints.lg,
+      xl: Variables.breakpoints.xl,
     },
   },
   palette: {

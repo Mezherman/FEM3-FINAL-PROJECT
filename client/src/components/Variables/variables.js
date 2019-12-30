@@ -21,8 +21,8 @@ const Variables = {
     btnMainBgActive: '#333',
     btnMainColor: '#fff',
     btnSecondaryBg: '#333',
-    // btnMainBgHover: '#666',
-    // btnMainBgActive: '#666'
+    btnSecondaryBgHover: '#666',
+    btnSecondaryBgActive: '#666'
   },
   breakpoints: {
     xs: 0,
