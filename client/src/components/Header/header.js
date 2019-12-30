@@ -1,5 +1,15 @@
 import React from 'react'
-import { AppBar, Toolbar, IconButton, Badge, Menu, MenuItem, Box, Container, Divider } from '@material-ui/core'
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Badge,
+  Menu,
+  MenuItem,
+  Box,
+  Container,
+  Divider
+} from '@material-ui/core'
 
 import MenuIcon from '@material-ui/icons/Menu'
 // import SearchIcon from '@material-ui/icons/Search'
@@ -9,12 +19,13 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import PersonIcon from '@material-ui/icons/Person'
 
 import './header.scss';
-import useStyles from './header-style.js'
+import { Link } from 'react-router-dom';
+import useStyles from './header-style'
 
 import Search from '../Search/search'
 import HeaderNavbar from '../Header-navbar/header-navbar';
 
-export default function Header () {
+export default function Header() {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
@@ -68,7 +79,7 @@ export default function Header () {
   //   </div>
   // )
 
-  const mobileMenuId = 'primary-search-account-menu-mobile'
+  const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
@@ -81,7 +92,7 @@ export default function Header () {
       elevation={0}
     >
       <MenuItem className="header-login" onClick={handleProfileMenuOpen}>
-        <img src="./img/header/my_wmf.png" alt="" />
+        <img src={`${process.env.PUBLIC_URL}/img/header/my_wmf.png`} alt="" />
         <ArrowForwardIosIcon fontSize="small" alt="" />
       </MenuItem>
     </Menu>
@@ -102,18 +113,28 @@ export default function Header () {
             >
               <MenuIcon fontSize="large" />
             </IconButton>
-            <IconButton edge="start" href="#" className={classes.logoIcon}>
-              <img
-                src="./img/header/wmf-logo-30x35.svg"
-                alt=""
-                className="header-logo"
-              />
-            </IconButton>
+            <Link to="/">
+              <IconButton edge="start" className={classes.logoIcon}>
+                <img
+                  src={`${process.env.PUBLIC_URL}/img/header/wmf-logo-30x35.svg`}
+                  alt=""
+                  className="header-logo"
+                />
+              </IconButton>
+            </Link>
           </Box>
 
           <Box className={classes.mainBoxLogo}>
-            <img src="./img/header/wmf-group-logo.png" alt="headerMainLogo" className={classes.mainHeaderLogo} />
-            <img src="./img/header/03_wmf-kompass_essen_167x167px.jpg" alt="headerMainLogo" className={classes.mainHeaderLogoImg} />
+            <img
+              src={`${process.env.PUBLIC_URL}/img/header/wmf-group-logo.png`}
+              alt="headerMainLogo"
+              className={classes.mainHeaderLogo}
+            />
+            <img
+              src={`${process.env.PUBLIC_URL}/img/header/03_wmf-kompass_essen_167x167px.jpg`}
+              alt="headerMainLogo"
+              className={classes.mainHeaderLogoImg}
+            />
           </Box>
 
           <Box className={classes.iconButtonBox}>
