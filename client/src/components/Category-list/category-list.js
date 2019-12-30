@@ -5,7 +5,7 @@ import { Typography, Button } from '@material-ui/core';
 import withWidth from '@material-ui/core/withWidth';
 import getCategories from '../../services/getCategories';
 import Carousels from '../Nuka-carousel/nukaCarousel';
-import './category-list.scss';
+// import './category-list.scss';
 
 const useStyles = makeStyles((theme) => ({
 

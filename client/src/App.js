@@ -6,7 +6,8 @@ import 'typeface-roboto';
 import Header from './components/Header/header'
 import CategoryList from './components/Category-list/category-list'
 import Footer from './components/Footer/footer'
-import Carousels from './components/Сarousel/сarousel';
+// import Carousels from './components/Сarousel/сarousel';
+import Carousels from './components/Сarousel/сarouselHook';
 import Catalog from './components/Catalog/catalog';
 import ProductPage from './components/Product-page/product-page';
 import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
@@ -23,21 +24,11 @@ export default function App(props) {
             autoPlay
             autoplayInterval={2000}
             wrapAround
-            slideIndex={0}
             slidesToShow={1}
           />
         </Route>
         <Route path="/" exact>
           <CategoryList />
-        </Route>
-        <Route path="/" exact>
-          <Carousels
-            autoPlay
-            autoplayInterval={2000}
-            wrapAround
-            slideIndex={0}
-            slidesToShow={1}
-          />
         </Route>
         <Route path="/products" exact component={Catalog} />
         <Route

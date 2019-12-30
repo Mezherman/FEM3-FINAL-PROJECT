@@ -4,7 +4,7 @@ import Container from '@material-ui/core/Container';
 import getAllCards from '../../services/dataBase';
 // import 'client/src/components/Nuka-carousel/nukaCarousel.scss';
 
-import './mainCarousel.scss';
+// import './mainCarousel.scss';
 
 export default class Carousels extends Component {
   state = {
