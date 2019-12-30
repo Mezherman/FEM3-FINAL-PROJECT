@@ -1,14 +1,11 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
-  filter: {
-    textAlign: 'center',
+  productDetailTitle: {
+    fontSize: '28px',
+    fontWeight: '400',
   },
-  root: {
-    '& .MuiGrid-item': {
-      // padding: 0
-    }
-  }
+
 });
 
 export default useStyles;

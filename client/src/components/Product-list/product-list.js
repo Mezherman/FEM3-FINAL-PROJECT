@@ -19,7 +19,6 @@ export default function ProductList() {
 
   return (
     <div className="product-list">
-
       {data.products.map((product, index) => (
         <Grid item md={6} lg={4} key={product.id}>
           <Link to={`products/${product.id}`}>

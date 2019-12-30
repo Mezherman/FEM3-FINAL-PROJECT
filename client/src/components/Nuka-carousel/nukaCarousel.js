@@ -20,7 +20,7 @@ export default class Carousels extends Component {
 
   render() {
     const { products } = this.state;
-    const { autoPlay, autoplayInterval, wrapAround, slideIndex, slidesToShow, text = false, isProductSlider = true } = this.props;
+    const { autoPlay, autoplayInterval, wrapAround, slideIndex, slidesToShow, text = false, isProductSlider = true, ...img } = this.props;
 
     // console.log(document.documentElement.clientWidth);
     if (document.documentElement.clientWidth < 400 && isProductSlider) {
