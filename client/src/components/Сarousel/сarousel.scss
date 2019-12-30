@@ -102,6 +102,17 @@
   background-repeat: no-repeat;
   background-position-y: -120px;
   background-size: cover;
+
+  &-2 {
+    position: relative;
+    bottom: 147px;
+  }
+
+  &-3 {
+    position: relative;
+    bottom: 35px;
+  }
+
 }
 
 .carousel-controlers {

@@ -87,25 +87,25 @@ export default class Carousels extends Component {
             <img
               src='https://www.wmf.com/media/flexslider/Teaser_1170x570px_WMF_Dish_ohneText-b_hne.jpg'
               alt="Product"
-              className='image-carousel'
+              className='image-carousel image-carousel-1'
             />
             <p> {text ? <h1>Hello</h1> : null} </p>
             <h1 className="product-card-title">Hello</h1>
           </div>
           <div>
             <img
-              src='https://www.wmf.com/media/flexslider/Teaser_1170x570px_WMF_Dish_ohneText-b_hne.jpg'
+              src='https://www.wmf.com/media/flexslider/impulse-buehne.jpg'
               alt="Product"
-              className='image-carousel'
+              className='image-carousel image-carousel-2'
             />
             <p> {text ? <h1>Hello</h1> : null} </p>
             <h1 className="product-card-title">Hi</h1>
           </div>
           <div>
             <img
-              src='https://www.wmf.com/media/flexslider/Teaser_1170x570px_WMF_Dish_ohneText-b_hne.jpg'
+              src='https://www.wmf.com/media/flexslider/ProfessionalCoffeeMachines_Slider_1170x500_1.jpg'
               alt="Product"
-              className='image-carousel'
+              className='image-carousel image-carousel-3'
             />
             <p> {text ? <h1>Hello</h1> : null} </p>
             <h1 className="product-card-title">Hey</h1>
