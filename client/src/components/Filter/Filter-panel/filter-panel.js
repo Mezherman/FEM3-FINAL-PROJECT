@@ -10,7 +10,7 @@ import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import RangeSlider from '../Range/range'
-import useStyles from './filter-panel-style';
+import useStyles from './_filter-panel';
 
 export default function FilterPanel({ name, text, checkbox, range, max }) {
   const classes = useStyles();

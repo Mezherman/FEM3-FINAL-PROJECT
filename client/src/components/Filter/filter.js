@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import FilterPanel from './Filter-panel/filter-panel'
-import useStyles from './filter-style';
+import useStyles from './_filter';
 
 export default function Filter() {
   const classes = useStyles();
