@@ -8,16 +8,15 @@ import Grid from '@material-ui/core/Grid';
 
 import MyGallery from './carousel-react'
 import './carousel-react.scss';
-import useStyles from './style';
+import useStyles from './_product-detail';
 import AddToBasket from '../Add-to-basket/add-to-basket';
 
-const ProductDetail = ({ url, title, price, id, specialPrice = false }) => {
+export default function ProductDetail({ url, title, price, id, specialPrice = false }) {
   const classes = useStyles();
   const [modalIsVisible, setModalVisibility] = useState(false);
   const closeModal = () => {
     setModalVisibility(false)
   };
-
   const images = [
     {
       original: url,
@@ -42,12 +41,9 @@ const ProductDetail = ({ url, title, price, id, specialPrice = false }) => {
 
       <Grid item sm={12}>
         <Container>
-          <h1 className={classes.productDetailTitle}>{title}</h1>
+          <h1 className={classes.title}>{title}</h1>
           <MyGallery images={images} />
 
-          {/* <div className="product-card-image"> */}
-          {/*  <img src={url} alt="" /> */}
-          {/* </div> */}
           <Divider variant="middle" />
           <div className="product-card-price-box">
             <span>{price}</span>
@@ -69,12 +65,11 @@ const ProductDetail = ({ url, title, price, id, specialPrice = false }) => {
       </Grid>
     </>
   );
-  ProductDetail.propTypes = {
-    title: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    specialPrice: PropTypes.string,
-  };
+}
+ProductDetail.propTypes = {
+  title: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  specialPrice: PropTypes.string.isRequired,
 };
-export default ProductDetail
