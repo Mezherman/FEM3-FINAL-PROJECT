@@ -1,34 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button'
 import { Divider } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
-import getAllCards from '../../services/dataBase';
 import useStyles from './_preview';
-import PreviewList from './Preview-list/preview-list';
+import PreviewList from '../Preview-list/preview-list';
 
-export default function Preview() {
+export default function Preview({ products }) {
   const classes = useStyles();
-  const [data, setData] = useState({ products: [] });
-
-  useEffect(() => {
-    getAllCards()
-      .then((response) => {
-        setData({ products: response.products })
-      })
-  }, []);
 
   return (
     <div className={classes.allProducts}>
       <div className={classes.products}>
-        <PreviewList products={data.products} />
+        <PreviewList products={products} />
       </div>
       <div className={classes.miniCart}>
         <p>
             There
-          {data.products.length > 1 ? ' are' : ' is'}
+          {products.length > 1 ? ' are' : ' is'}
           <span className={classes.items}>
-            {data.products.length}
-            {data.products.length > 1 ? ' items' : ' item'}
+            {products.length}
+            {products.length > 1 ? ' items' : ' item'}
           </span>
             in your cart.
         </p>
@@ -62,3 +54,11 @@ export default function Preview() {
     </div>
   )
 }
+
+Preview.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.object)
+};
+
+Preview.defaultProps = {
+  products: []
+};

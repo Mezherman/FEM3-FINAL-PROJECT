@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Fade from '@material-ui/core/Fade';
 import CloseIcon from '@material-ui/icons/Close';
 import { Divider, IconButton } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import useStyles from './_preview-block';
-import Preview from './preview';
+import Preview from './Preview/preview';
+import getAllCards from '../../services/dataBase';
 
-// eslint-disable-next-line react/prop-types
 export default function PreviewBlock(props) {
   const classes = useStyles();
   const { checked, onClose } = props;
+
+  const [data, setData] = useState({ products: [] });
+
+  useEffect(() => {
+    getAllCards()
+      .then((response) => {
+        setData({ products: response.products })
+      })
+  }, []);
 
   return (
     <>
@@ -25,10 +35,10 @@ export default function PreviewBlock(props) {
               </p>
               <Divider />
               <div>
-                {true
-                  ? (<><Preview /></>)
+                {data.products.length > 0
+                  ? (<Preview products={data.products} />)
                   : (
-                    <div style={{ padding: '20px 0' }}>
+                    <div className={classes.empty}>
                       You have no items in your shopping cart.
                     </div>
                   )}
@@ -40,3 +50,8 @@ export default function PreviewBlock(props) {
     </>
   );
 }
+
+PreviewBlock.propTypes = {
+  checked: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired
+};
