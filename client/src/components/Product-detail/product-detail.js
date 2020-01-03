@@ -9,9 +9,14 @@ import Grid from '@material-ui/core/Grid';
 import MyGallery from './carousel-react'
 import './carousel-react.scss';
 import useStyles from './style';
+import AddToBasket from '../Add-to-basket/add-to-basket';
 
 const ProductDetail = ({ url, title, price, id, specialPrice = false }) => {
   const classes = useStyles();
+  const [modalIsVisible, setModalVisibility] = useState(false);
+  const closeModal = () => {
+    setModalVisibility(false)
+  };
 
   const images = [
     {
@@ -29,6 +34,12 @@ const ProductDetail = ({ url, title, price, id, specialPrice = false }) => {
   ];
   return (
     <>
+      <AddToBasket
+        open={modalIsVisible}
+        onModalClose={closeModal}
+        product={{ url, title, price, specialPrice }}
+      />
+
       <Grid item sm={12}>
         <Container>
           <h1 className={classes.productDetailTitle}>{title}</h1>
@@ -49,7 +60,7 @@ const ProductDetail = ({ url, title, price, id, specialPrice = false }) => {
             color="primary"
             disableElevation
             onClick={() => {
-              console.log('Add to Cart');
+              setModalVisibility(true)
             }}
           >
             <ShoppingCartOutlinedIcon />

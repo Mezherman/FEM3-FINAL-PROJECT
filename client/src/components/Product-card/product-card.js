@@ -10,8 +10,7 @@ import AddToBasket from '../Add-to-basket/add-to-basket';
 
 import './product-card.scss'
 
-const ProductCard = (props) => {
-  const { url, title, price, specialPrice = false } = props;
+export default function ProductCard({ url, title, price, specialPrice = false }) {
   const priceClassName = {
     className: specialPrice ? 'product-card-old-price' : 'product-card-regular-price'
   };
@@ -30,7 +29,7 @@ const ProductCard = (props) => {
       <AddToBasket
         open={modalIsVisible}
         onModalClose={closeModal}
-        product={props}
+        product={{ url, title, price, specialPrice }}
       />
       <div className="product-card">
         <Divider />
@@ -62,13 +61,11 @@ const ProductCard = (props) => {
       </div>
     </>
   )
-};
+}
 
 ProductCard.propTypes = {
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
-  specialPrice: PropTypes.string,
-};
-
-export default ProductCard;
+  specialPrice: PropTypes.string.isRequired,
+}
