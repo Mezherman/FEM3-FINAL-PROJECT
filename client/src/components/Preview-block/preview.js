@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button'
-import ProductCard from '../Product-card/product-card';
+import { Divider } from '@material-ui/core';
+
 import getAllCards from '../../services/dataBase';
 import './preview.scss'
 
@@ -37,11 +38,13 @@ class Preview extends Component {
           { products.map((product, index) => (
             <div className="product-mini" key={product.art}>
               <img src={product.url} className="product-image" />
+              <Divider />
               <p className="product-title">{product.title}</p>
               <p>
 €
                 {product.price}
               </p>
+              <Divider />
               {/* eslint-disable-next-line react/jsx-no-undef */}
               <Button
                 size="medium"
@@ -65,6 +68,7 @@ class Preview extends Component {
             </span>
             in your cart.
           </p>
+          <Divider />
           <div className="show-product-price">
             <span>Cart Subtotal</span>
             <span>300</span>

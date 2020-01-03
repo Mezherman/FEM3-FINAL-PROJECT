@@ -1,78 +1,52 @@
-import React from 'react'
+import React, { useState } from 'react';
+import Paper from '@material-ui/core/Paper';
+import Fade from '@material-ui/core/Fade';
 import CloseIcon from '@material-ui/icons/Close';
+import { Divider } from '@material-ui/core';
+import useStyles from './_preview-block';
 import Preview from './preview';
 
-export default class PreviewBlock extends React.Component {
-  state = {
-    close: false,
-    // eslint-disable-next-line react/no-unused-state
-    item: true,
+export default function PreviewBlock() {
+  const classes = useStyles();
+  const [checked, setChecked] = useState(false);
+
+  const handleChange = () => {
+    setChecked((prev) => !prev);
   };
 
-  handleClick = () => {
-    this.setState({
-      // eslint-disable-next-line react/destructuring-assignment,react/no-access-state-in-setstate
-      close: !this.state.close
-    })
-  };
-
-  deleteItem = () => {
-    this.setState({
-      item: false
-    })
-  }
-
-  render() {
-    console.log('Props of PREVIEW BLOCK = ', this.props)
-    const { item, close } = this.state
-
-    return (
-      <div style={{ position: 'absolute', zIndex: 5, backgroundColor: 'white', border: '1px solid black', top: '5%' }}>
-        {close ? null
-          : (
-            <>
-              <h3 style={{ display: 'flex', fontSize: '2rem', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid grey', margin: 0, padding: '1rem' }}>
+  return (
+    <div>
+      <button onClick={handleChange}>Open basket</button>
+      <div className={classes.container}>
+        <Fade in={checked} timeout={0}>
+          <Paper elevation={4} className={classes.paper}>
+            <div style={{ margin: '0 auto', maxWidth: '1200px' }}>
+              <h3 className={classes.header}>
                 Quickview Cart
                 <CloseIcon
-                  onClick={this.handleClick}
                   fontSize="large"
-                  // style={{ position: 'absolute', right: '10px', top: '10px', cursor: 'pointer' }}
+                  onClick={handleChange}
                 />
               </h3>
-              {item ? (<><Preview /></>)
-                : (
-                  <div style={{ padding: '20px 0' }}>
-                    You have no items in your shopping cart.
-                  </div>
-                )}
-            </>
-          )}
+              <Divider />
+              <div >
+                {false ? null
+                  : (
+                    <div>
+                      {true
+                        ? (<><Preview /></>)
+                        : (
+                          <div style={{ padding: '20px 0' }}>
+                            You have no items in your shopping cart.
+                          </div>
+                        )}
+                    </div>
+                  )}
+              </div>
+            </div>
+          </Paper>
+        </Fade>
       </div>
-    )
-  }
+    </div>
+  );
 }
-// export default function PreviewBlock () {
-//   // const [item, setItem] = useState(false);
-//   const [close, setClose] = useState(false);
-//
-//   const handleClick = () => {
-//     setClose(true)
-//   };
-//
-//   return (
-//     {close ? 'text' :
-//   <div>
-//     <h3 style={{position: 'relative', borderBottom: '1px solid grey'}}>
-//       Quickview Cart
-//       <CloseIcon
-//         closeModal={handleClick}
-//         fontSize="large"
-//         style={{position: 'absolute', right: '10px', top: '10px', cursor: 'pointer'}}
-//       />
-//     </h3>
-//
-//     {item ? <p>List item </p> : <p>You have no items in your shopping cart.</p>}
-//   </div>
-// }
-//   )
-// }
