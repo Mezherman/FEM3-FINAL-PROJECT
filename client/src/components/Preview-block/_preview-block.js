@@ -8,7 +8,6 @@ const useStyles = makeStyles((theme) => ({
     left: 0,
     right: 0,
     top: '5%',
-    height: '550px'
   },
   paper: {
     width: '100%'
@@ -17,13 +16,23 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    padding: theme.spacing(0, 1),
+    [theme.breakpoints.up('lg')]: {
+      padding: theme.spacing(0),
+    }
+  },
+  text: {
+    paddingLeft: theme.spacing(2)
   },
   wrapper: {
     margin: '0 auto',
     maxWidth: '1200px'
   },
   empty: {
-    padding: theme.spacing(2, 0)
+    padding: theme.spacing(2, 1),
+    [theme.breakpoints.up('lg')]: {
+      padding: theme.spacing(2, 0)
+    }
   }
 }));
 

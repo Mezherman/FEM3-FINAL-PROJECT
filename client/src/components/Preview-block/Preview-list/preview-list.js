@@ -3,11 +3,13 @@ import { Divider } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import useStyles from './_preview-list';
 
-export default function PreviewList({ products }) {
+export default function PreviewList(props) {
   const classes = useStyles();
+  const { products } = props;
+
 
   return (
-    <>
+    <div className={classes.products}>
       {products.map((product) => (
         <div className={classes.product} key={product.art}>
           <img src={product.url} className={classes.image} alt="products" />
@@ -21,7 +23,7 @@ export default function PreviewList({ products }) {
           <span className={classes.button}>Remove</span>
         </div>
       ))}
-    </>
+    </div>
   )
 }
 

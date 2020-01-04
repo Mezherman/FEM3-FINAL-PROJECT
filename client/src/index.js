@@ -15,6 +15,7 @@ const theme = createMuiTheme({
     values: {
       xs: Variables.breakpoints.xs,
       sm: Variables.breakpoints.sm,
+      smd: Variables.breakpoints.smd,
       md: Variables.breakpoints.md,
       lg: Variables.breakpoints.lg,
       xl: Variables.breakpoints.xl,

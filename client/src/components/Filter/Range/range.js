@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import Slider from '@material-ui/core/Slider';
 import useStyles from './_range';
 
-export default function RangeSlider({ max }) {
+export default function RangeSlider(props) {
+  const { max } = props;
   const classes = useStyles();
   const [value, setValue] = React.useState([0, max]);
   const handleChange = (event, newValue) => {

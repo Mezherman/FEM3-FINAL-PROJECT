@@ -28,13 +28,13 @@ export default function PreviewBlock(props) {
           <Paper elevation={4} className={classes.paper}>
             <div className={classes.wrapper}>
               <p className={classes.header}>
-                Quickview Cart
+                <span className={classes.text}>Quickview Cart</span>
                 <IconButton onClick={onClose}>
                   <CloseIcon />
                 </IconButton>
               </p>
               <Divider />
-              <div>
+              <>
                 {data.products.length > 0
                   ? (<Preview products={data.products} />)
                   : (
@@ -42,7 +42,7 @@ export default function PreviewBlock(props) {
                       You have no items in your shopping cart.
                     </div>
                   )}
-              </div>
+              </>
             </div>
           </Paper>
         </Fade>

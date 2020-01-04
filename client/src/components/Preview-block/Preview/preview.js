@@ -2,16 +2,28 @@ import React from 'react';
 import Button from '@material-ui/core/Button'
 import { Divider } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import useStyles from './_preview';
-import PreviewList from '../Preview-list/preview-list';
 
-export default function Preview({ products }) {
+import useStyles from './_preview';
+import MyCarousel from '../Carousel/pilushch-carousel';
+// import PreviewList from '../Preview-list/preview-list';
+
+export default function Preview(props) {
   const classes = useStyles();
+  const { products } = props;
+
+  const test = 600;
 
   return (
-    <div className={classes.allProducts}>
+    <div className={classes.wrapper}>
       <div className={classes.products}>
-        <PreviewList products={products} />
+        {/*<PreviewList products={products} />*/}
+        <MyCarousel
+          wrapAround
+          transitionMode="scroll"
+          slidesToScroll={1}
+          slidesToShow={(test < 500) ? 3 : 1}
+          products={products}
+        />
       </div>
       <div className={classes.miniCart}>
         <p>

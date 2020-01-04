@@ -12,8 +12,9 @@ import Checkbox from '@material-ui/core/Checkbox'
 import RangeSlider from '../Range/range'
 import useStyles from './_filter-panel';
 
-export default function FilterPanel({ name, text, checkbox, range, max }) {
+export default function FilterPanel(props) {
   const classes = useStyles();
+  const { name, text, checkbox, range, max } = props;
 
   return (
     <div>

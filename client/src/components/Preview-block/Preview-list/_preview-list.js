@@ -1,14 +1,33 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  product: {
-    width: '20%',
+  products: {
     display: 'flex',
+    flexWrap: 'wrap',
     flexDirection: 'column',
-    padding: theme.spacing(0, 1)
+    justifyContent: 'space-between',
+    [theme.breakpoints.up('md')]: {
+      flexDirection: 'row',
+    }
+  },
+  product: {
+    width: '50%',
+    display: 'flex',
+    margin: '0 auto',
+    flexDirection: 'column',
+    padding: theme.spacing(0, 1),
+    [theme.breakpoints.up('md')]: {
+      width: '100%',
+    }
+  },
+  text: {
+    textAlign: 'center',
+    [theme.breakpoints.up('md')]: {
+      textAlign: 'left'
+    }
   },
   title: {
-    height: '50px'
+    textAlign: 'center'
   },
   price: {
     fontWeight: 'bold'
@@ -17,10 +36,13 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1, 0)
   },
   button: {
-    textAlign: 'right',
+    // textAlign: 'right',
     cursor: 'pointer',
     fontWeight: 'bold',
-    padding: theme.spacing(1, 0)
+    padding: theme.spacing(1, 0),
+    [theme.breakpoints.up('md')]: {
+      textAlign: 'right'
+    }
   }
 }));
 
