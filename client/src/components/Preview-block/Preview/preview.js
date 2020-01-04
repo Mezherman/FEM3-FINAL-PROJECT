@@ -2,7 +2,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button'
 import { Divider } from '@material-ui/core';
 import PropTypes from 'prop-types';
-
 import useStyles from './_preview';
 import PreviewList from '../Preview-list/preview-list';
 

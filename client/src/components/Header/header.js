@@ -171,10 +171,12 @@ export default function Header() {
           </Box>
         </Toolbar>
       </AppBar>
-      <PreviewBlock
-        checked={prevBlockIsVisible}
-        onClose={handleChange}
-      />
+      {prevBlockIsVisible ? (
+        <PreviewBlock
+          checked={prevBlockIsVisible}
+          onClose={handleChange}
+        />
+      ) : null}
       {renderMobileMenu}
       {renderMenu}
       {/* {renderSearchInput} */}
