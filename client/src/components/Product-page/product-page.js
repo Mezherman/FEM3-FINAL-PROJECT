@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import getAllCards from '../../services/dataBase';
 import ProductCard from '../Product-card/product-card';
 import ProductDetail from '../Product-detail/product-detail';
+import Grid from "@material-ui/core/Grid";
 
 export default function ProductPage({ itemUrl }) {
   const [data, setData] = useState({ products: [] });
@@ -18,16 +19,18 @@ export default function ProductPage({ itemUrl }) {
   return (
     <div className="product-essential">
       { filteredProduct.map((product) => (
-        <>
+        <Grid key={product.id}>
           <ProductDetail
             id={product.id}
-            key={product.art}
+            key={product.url}
             url={product.url}
+            url1={product.url1}
+            url2={product.url2}
             price={product.price}
             specialPrice={product.specialPrice}
             title={product.title}
           />
-        </>
+        </Grid>
       ))}
     </div>
   )

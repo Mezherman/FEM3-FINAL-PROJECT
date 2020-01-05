@@ -35,7 +35,7 @@ export default function App(props) {
           render={({ match, location }) => {
             const { id } = match.params;
             const { pathname: url } = location;
-            return <ProductPage itemId={id} itemUrl={url} />
+            return <ProductPage itemId={id} itemUrl={url} key={id} />
           }}
         />
       </Router>

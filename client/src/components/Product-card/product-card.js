@@ -6,17 +6,15 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
 
+import useStyles from './_product-card';
+import './product-card.scss';
 import AddToBasket from '../Add-to-basket/add-to-basket';
 
-import './product-card.scss'
-
 export default function ProductCard({ url, title, price, specialPrice = false }) {
+  const classes = useStyles();
   const priceClassName = {
     className: specialPrice ? 'product-card-old-price' : 'product-card-regular-price'
   };
-  // const style = {
-  //   color: specialPrice ? '#e00000' : '#000'
-  // };
 
   const [modalIsVisible, setModalVisibility] = useState(false);
 
@@ -31,15 +29,15 @@ export default function ProductCard({ url, title, price, specialPrice = false })
         onModalClose={closeModal}
         product={{ url, title, price, specialPrice }}
       />
-      <div className="product-card">
+      <div className={classes.card}>
         <Divider />
         <Container maxWidth="sm">
-          <div className="product-card-image">
-            <img src={url} alt="" />
+          <div className={classes.imgWrapper}>
+            <img src={url} className={classes.img} alt="" />
           </div>
           <Divider variant="middle" />
-          <h1 className="product-card-title">{title}</h1>
-          <div className="product-card-price-box">
+          <h1 className={classes.title}>{title}</h1>
+          <div className={classes.priceBox}>
             <span className={priceClassName.className}>{price}</span>
             {specialPrice &&
             <span className="product-card-special-price">{specialPrice}</span>}
@@ -67,5 +65,5 @@ ProductCard.propTypes = {
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
-  specialPrice: PropTypes.string.isRequired,
+  specialPrice: PropTypes.string,
 }

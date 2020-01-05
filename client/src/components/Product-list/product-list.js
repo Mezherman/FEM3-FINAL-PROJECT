@@ -16,7 +16,6 @@ export default function ProductList() {
         setData({ products: response.products })
       })
   }, []);
-  console.log('RESPONSE list', data);
 
   return (
     <div className="product-list">
