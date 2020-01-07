@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Paper, Box, ClickAwayListener } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
@@ -15,42 +14,7 @@ export default function HeaderNavbar() {
     chosenCategory: null,
     categoryListHeight: null
   });
-
-  const { categoriesVisible, subCategoriesVisible, categories } = features;
-
-  useEffect(() => {
-    getCategories()
-      .then((categoriesData) => {
-        setFeatures({
-          categories: categoriesData
-        })
-      })
-  }, []);
-
-  const toggleCatalog = (event) => {
-    if (!event.relatedTarget.classList ||
-      event.relatedTarget.classList.contains('catalog-list-item')) {
-      return;
-    }
-
-    setFeatures(
-      {
-        ...features,
-        categoriesVisible: !categoriesVisible,
-        subCategoriesVisible: !categoriesVisible,
-        chosenCategory: null
-      }
-    )
-  };
-
-  const toggleSubCategories = (event) => {
-    const chosenCategory = event.currentTarget.textContent;
-    setFeatures({
-      ...features,
-      subCategoriesVisible: !!categories[chosenCategory].subCategories.length,
-      chosenCategory
-    })
-  };
+  
 
   const onCategoryLeave = (event) => {
     // console.log('target = ', e.target);
@@ -64,24 +28,10 @@ export default function HeaderNavbar() {
     setFeatures({
       ...features,
       categoriesVisible: false,
-      subCategoriesVisible: false,
-      chosenCategory: null
     });
   };
 
-  const onSubCategoryLeave = (event) => {
-    if (!event.relatedTarget.classList ||
-      event.relatedTarget.classList.contains('catalog-list-item')) {
-      return;
-    }
 
-    setFeatures({
-      ...features,
-      categoriesVisible: false,
-      subCategoriesVisible: false,
-      chosenCategory: null,
-    })
-  };
 
   const handleClickAwayCatalog = (event) => {
     if (event.target.textContent.toLowerCase() === 'catalog') return;
@@ -93,32 +43,6 @@ export default function HeaderNavbar() {
       chosenCategory: null,
       categoryListHeight: null
     })
-  };
-
-  const SubCategories = () => {
-    const { chosenCategory } = features;
-    const { subCategories } = categories[chosenCategory];
-    const subCategoriesList = subCategories.map((subCategory) => (
-      <span
-        key={subCategory}
-        className="catalog-list-item sub-category"
-      >
-        <div className="square">img</div>
-        {subCategory}
-      </span>
-    ));
-
-    return (
-      <div
-        className="catalog-list sub-category"
-        // style={{
-        //   height: categoryListHeight
-        // }}
-        onMouseLeave={onSubCategoryLeave}
-      >
-        {subCategoriesList}
-      </div>
-    )
   };
 
   const NavBar = () => (
@@ -170,11 +94,9 @@ export default function HeaderNavbar() {
               <Categories
                 categories={categories}
                 chosenCategory={chosenCategory}
-                toggleSubCategories={toggleSubCategories}
                 onCategoryLeave={onCategoryLeave}
               />
             )}
-            {subCategoriesVisible && SubCategories()}
           </Paper>
         </Box>
       </ClickAwayListener>
@@ -205,16 +127,3 @@ const Categories = (props) => {
   )
 };
 
-Categories.propTypes = {
-  chosenCategory: PropTypes.string,
-  toggleSubCategories: PropTypes.func,
-  onCategoryLeave: PropTypes.func,
-  categories: PropTypes.objectOf(PropTypes.object)
-};
-
-Categories.defaultProps = {
-  chosenCategory: '',
-  toggleSubCategories: () => {},
-  onCategoryLeave: () => {},
-  categories: []
-};

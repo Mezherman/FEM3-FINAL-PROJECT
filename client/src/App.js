@@ -11,10 +11,16 @@ import Catalog from './components/Catalog/catalog';
 import ProductPage from './components/Product-page/product-page';
 import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
 
+import CustomizedMenus3 from './components/Autorization-block/blockOnHover3';
+
+
 export default function App(props) {
   return (
     <Container>
       <Router>
+
+        <CustomizedMenus3 />
+
         <Header />
         <ScrollToAnchor />
         <Route path="/" exact>

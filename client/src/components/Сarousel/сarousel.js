@@ -3,6 +3,7 @@ import Carousel from 'nuka-carousel';
 import Container from '@material-ui/core/Container';
 
 import './сarousel.scss';
+import { Carouselka } from './_carousel';
 
 /**
  * @return {null}
@@ -36,7 +37,7 @@ export default function Carousels (props) {
         )}
       >
         {products.map((product) => (
-          <Container maxWidth="sm">
+          <Container maxWidth="sm" key={product.art}>
             <div className="product-card-image">
               <img src={product.url} alt="Product"/>
             </div>
