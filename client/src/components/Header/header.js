@@ -19,13 +19,13 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import PersonIcon from '@material-ui/icons/Person'
 
 import './header.scss';
-import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import useStyles from './header-style'
 
 import Search from '../Search/search'
 import Button from '@material-ui/core/Button';
 import SignIn from '../Autorization-block/autorization';
-// import CustomizedMenus3 from '../Autorization-block/blockOnHover3';
+import CustomizedMenus3 from '../Autorization-block/blockOnHover3';
 // import HeaderNavbar from '../Header-navbar/header-navbar';
 
 
@@ -52,56 +52,56 @@ const StyledMenu = withStyles({
 ));
 
 
-function CustomizedMenus3() {
+// function CustomizedMenus3() {
+//
+//   const [anchorEl, setAnchorEl] = useState(null);
+//
+//   const handleClick = event => {
+//     setAnchorEl(event.currentTarget);
+//   };
+//
+//   const handleClose = () => {
+//     setAnchorEl(null);
+//   };
+//
+//   return (
+//     <div>
+//       <Button
+//         aria-controls="customized-menu"
+//         aria-haspopup="true"
+//         variant="contained"
+//         color="primary"
+//         onClick={handleClick}
+//       >
+//         Open Menu
+//       </Button>
+//       <StyledMenu
+//         id="customized-menu"
+//         anchorEl={anchorEl}
+//         keepMounted
+//         open={Boolean(anchorEl)}
+//         onClose={handleClose}
+//       >
+//         <SignIn />
+//       </StyledMenu>
+//     </div>
+//   );
+// }
 
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  return (
-    <div>
-      <Button
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="contained"
-        color="primary"
-        onClick={handleClick}
-      >
-        Open Menu
-      </Button>
-      <StyledMenu
-        id="customized-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-        <SignIn />
-      </StyledMenu>
-    </div>
-  );
-}
 
 
-
-const useStylesLogin = makeStyles({
-  login: {
-    position: 'relative',
-  },
-}
-);
+// const useStylesLogin = makeStyles({
+//   login: {
+//     position: 'relative',
+//   },
+// }
+// );
 
 
 
 
 export  default function Header() {
-  const loginClass = useStylesLogin();
+  // const loginClass = useStylesLogin();
 
   const [anchorElLogin, setAnchorElLogin] = useState(null);
 
@@ -163,7 +163,7 @@ export  default function Header() {
   //         input: classes.inputInput
   //       }}
   //       inputProps={{ 'aria-label': 'search' }}
-  //     />
+  //     />StyledMenu
   //   </div>
   // )
 
@@ -235,18 +235,18 @@ export  default function Header() {
 
             <Divider orientation="vertical" className={classes.dividerStyle} />
 
-            <div className={loginClass.login}>
+            {/*<CustomizedMenus3 />*/}
+
             <MenuItem
               className={classes.headerMenuItem}
-              onMouseEnter={() => console.log("enter")}
+              // onMouseEnter={() => console.log("enter")}
               aria-controls="customized-menu"
               aria-haspopup="true"
               variant="contained"
-              color="primary"
               onClick={handleClick}
-            >
-
-              <IconButton edge="end" className={classes.iconButton}>
+              button={IconButton}
+              component=''>
+              <IconButton edge="end" className={classes.iconButton} href="#">
                 <PersonIcon fontSize="large" className={classes.iconsStyle} />
               </IconButton>
               <span className={classes.menuTitle}>Login</span>
@@ -254,16 +254,15 @@ export  default function Header() {
             </MenuItem>
             <StyledMenu
               id="customized-menu"
-              anchorElLogin={anchorElLogin}
+              anchorEl={anchorElLogin}
               keepMounted
               open={Boolean(anchorElLogin)}
               onClose={handleClose}
             >
               <SignIn />
             </StyledMenu>
-            </div>
-
             <Divider orientation="vertical" className={classes.dividerStyle} />
+
             <MenuItem className={classes.headerMenuItem}>
               <IconButton edge="end" aria-label="card" className={classes.iconButton}>
                 <Badge badgeContent="0" color="error">

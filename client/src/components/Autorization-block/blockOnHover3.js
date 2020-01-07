@@ -1,10 +1,13 @@
-import React from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import React, {useState} from 'react';
+import { withStyles, makeStyles, fade } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
 import SignIn from './autorization';
+import { Box, IconButton, Toolbar } from '@material-ui/core';
+import PersonIcon from '@material-ui/core/SvgIcon/SvgIcon';
+import useStyles from '../Header/header-style';
 
 const StyledMenu = withStyles({
   paper: {
@@ -27,39 +30,52 @@ const StyledMenu = withStyles({
 ));
 
 
+
 export default function CustomizedMenus3() {
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const classes = useStyles();
+
+
+
+
+  const [anchorElLogin, setAnchorElLogin] = useState(null);
 
   const handleClick = event => {
-    setAnchorEl(event.currentTarget);
+    setAnchorElLogin(event.currentTarget);
   };
 
   const handleClose = () => {
-    setAnchorEl(null);
+    setAnchorElLogin(null);
   };
 
   return (
     <div>
-      <Button
+      <MenuItem
+        className={classes.headerMenuItem}
+        // onMouseEnter={() => console.log("enter")}
         aria-controls="customized-menu"
         aria-haspopup="true"
         variant="contained"
-        color="primary"
         onClick={handleClick}
-      >
-        Open Menu
-      </Button>
+        button={IconButton}
+       component=''>
+        <IconButton edge="end" className={classes.iconButton} href="#">
+          <PersonIcon fontSize="large" className={classes.iconsStyle} />
+        </IconButton>
+        <span className={classes.menuTitle}>Login</span>
+
+      </MenuItem>
       <StyledMenu
         id="customized-menu"
-        anchorEl={anchorEl}
+        anchorEl={anchorElLogin}
         keepMounted
-        open={Boolean(anchorEl)}
+        open={Boolean(anchorElLogin)}
         onClose={handleClose}
       >
         <SignIn />
       </StyledMenu>
     </div>
+
   );
 }
 
