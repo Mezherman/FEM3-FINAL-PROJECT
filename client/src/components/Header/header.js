@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   AppBar,
   Toolbar,
@@ -25,11 +25,17 @@ import useStyles from './header-style'
 
 import Search from '../Search/search'
 import HeaderNavbar from '../Header-navbar/header-navbar';
+import PreviewBlock from '../Preview-block/preview-block';
 
 export default function Header() {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
+  const [prevBlockIsVisible, setPrevBlockIsVisible] = useState(false);
+
+  const handleChange = () => {
+    setPrevBlockIsVisible((prev) => !prev);
+  };
 
   const isMenuOpen = Boolean(anchorEl)
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
@@ -168,11 +174,18 @@ export default function Header() {
           </Box>
         </Toolbar>
       </AppBar>
+      {prevBlockIsVisible ? (
+        <PreviewBlock
+          checked={prevBlockIsVisible}
+          onClose={handleChange}
+        />
+      ) : null}
       {renderMobileMenu}
       {renderMenu}
       {/* {renderSearchInput} */}
       <Search />
       <HeaderNavbar />
+
     </Container>
   );
 }
