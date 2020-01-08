@@ -128,6 +128,14 @@ const useStyles = makeStyles((theme) => ({
       height: '55px',
     }
   },
+  menuLink: {
+    textDecoration: 'none',
+    textAlign: 'center',
+    color: '#000000',
+    '&:hover': {
+      textDecoration: 'underline'
+    }
+  },
   menuTitle: {
     display: 'none',
     [theme.breakpoints.up('lg')]: {
