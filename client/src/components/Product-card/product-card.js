@@ -10,7 +10,7 @@ import useStyles from './_product-card';
 import './product-card.scss';
 import AddToBasket from '../Add-to-basket/add-to-basket';
 
-export default function ProductCard({ url, title, price, specialPrice = false }) {
+export default function ProductCard({ url, title, price, specialPrice }) {
   const classes = useStyles();
   const priceClassName = {
     className: specialPrice ? 'product-card-old-price' : 'product-card-regular-price'
@@ -66,4 +66,8 @@ ProductCard.propTypes = {
   url: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   specialPrice: PropTypes.string,
-}
+};
+
+ProductCard.defaultProps = {
+  specialPrice: 'false'
+};

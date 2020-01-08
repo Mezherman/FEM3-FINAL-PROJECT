@@ -89,24 +89,24 @@ export default function ProductDetail({ url, url1, url2, title, price, id, speci
                 fontSize={{ sm: '12px', md: '24px', lg: '36px' }}
               >
                 <Container>
-                <div className={classes.priceBox}>
-                  <span className={priceClassName.className}>{price}</span>
-                  {specialPrice &&
-                  <span className="special-price">{specialPrice}</span>}
-                </div>
-                <Button
-                  size="large"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  disableElevation
-                  onClick={() => {
-                    setModalVisibility(true)
-                  }}
-                >
+                  <div className={classes.priceBox}>
+                    <span className={priceClassName.className}>{price}</span>
+                    {specialPrice &&
+                    <span className="special-price">{specialPrice}</span>}
+                  </div>
+                  <Button
+                    size="large"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    disableElevation
+                    onClick={() => {
+                      setModalVisibility(true)
+                    }}
+                  >
 
-                  <ShoppingCartOutlinedIcon />
-                </Button>
+                    <ShoppingCartOutlinedIcon />
+                  </Button>
                 </Container>
               </Box>
             </Grid>
