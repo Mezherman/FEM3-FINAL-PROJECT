@@ -6,7 +6,7 @@ const useStyles = makeStyles({
   },
   root: {
     '& .MuiGrid-item': {
-      padding: 0
+      // padding: 0
     }
   }
 });
