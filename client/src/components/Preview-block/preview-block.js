@@ -1,78 +1,57 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import Paper from '@material-ui/core/Paper';
+import Fade from '@material-ui/core/Fade';
 import CloseIcon from '@material-ui/icons/Close';
-import Preview from './preview';
+import { Divider, IconButton, Container } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import useStyles from './_preview-block';
+import Preview from './Preview/preview';
+import getAllCards from '../../services/dataBase';
 
-export default class PreviewBlock extends React.Component {
-  state = {
-    close: false,
-    // eslint-disable-next-line react/no-unused-state
-    item: true,
-  };
+export default function PreviewBlock(props) {
+  const classes = useStyles();
+  const { checked, onClose } = props;
 
-  handleClick = () => {
-    this.setState({
-      // eslint-disable-next-line react/destructuring-assignment,react/no-access-state-in-setstate
-      close: !this.state.close
-    })
-  };
+  const [data, setData] = useState({ products: [] });
 
-  deleteItem = () => {
-    this.setState({
-      item: false
-    })
-  }
+  useEffect(() => {
+    getAllCards()
+      .then((response) => {
+        setData({ products: response.products })
+      })
+  }, []);
 
-  render() {
-    console.log('Props of PREVIEW BLOCK = ', this.props)
-    const { item, close } = this.state
-
-    return (
-      <div style={{ position: 'absolute', zIndex: 5, backgroundColor: 'white', border: '1px solid black', top: '5%' }}>
-        {close ? null
-          : (
-            <>
-              <h3 style={{ display: 'flex', fontSize: '2rem', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid grey', margin: 0, padding: '1rem' }}>
-                Quickview Cart
-                <CloseIcon
-                  onClick={this.handleClick}
-                  fontSize="large"
-                  // style={{ position: 'absolute', right: '10px', top: '10px', cursor: 'pointer' }}
-                />
-              </h3>
-              {item ? (<><Preview /></>)
-                : (
-                  <div style={{ padding: '20px 0' }}>
-                    You have no items in your shopping cart.
-                  </div>
-                )}
-            </>
-          )}
+  return (
+    <>
+      <div className={classes.container}>
+        <Fade in={checked} timeout={0}>
+          <Paper elevation={4} className={classes.paper}>
+            <Container>
+              <p className={classes.header}>
+                <span className={classes.text}>Quickview Cart</span>
+                <IconButton onClick={onClose}>
+                  <CloseIcon />
+                </IconButton>
+              </p>
+              <Divider />
+              <>
+                {data.products.length > 0
+                  ? (<Preview products={data.products} />)
+                  : (
+                    <div className={classes.empty}>
+                      You have no items in your shopping cart.
+                    </div>
+                  )}
+              </>
+            </Container>
+          </Paper>
+        </Fade>
       </div>
-    )
-  }
+    </>
+  );
 }
-// export default function PreviewBlock () {
-//   // const [item, setItem] = useState(false);
-//   const [close, setClose] = useState(false);
-//
-//   const handleClick = () => {
-//     setClose(true)
-//   };
-//
-//   return (
-//     {close ? 'text' :
-//   <div>
-//     <h3 style={{position: 'relative', borderBottom: '1px solid grey'}}>
-//       Quickview Cart
-//       <CloseIcon
-//         closeModal={handleClick}
-//         fontSize="large"
-//         style={{position: 'absolute', right: '10px', top: '10px', cursor: 'pointer'}}
-//       />
-//     </h3>
-//
-//     {item ? <p>List item </p> : <p>You have no items in your shopping cart.</p>}
-//   </div>
-// }
-//   )
-// }
+
+PreviewBlock.propTypes = {
+  checked: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired
+};

@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiFormGroup-root': {
       textAlign: 'left'
@@ -9,9 +9,9 @@ const useStyles = makeStyles({
       paddingRight: '17px'
     },
     '& .MuiCheckbox-root': {
-      color: '#71b430'
+      color: theme.palette.primary.main
     }
   }
-});
+}));
 
 export default useStyles;
