@@ -10,21 +10,33 @@ export default function Preview(props) {
   const classes = useStyles();
   const { products } = props;
 
-  const test = 600;
-
   return (
     <div className={classes.wrapper}>
       <div className={classes.products}>
-        <MyCarousel
-          wrapAround
-          renderBottomCenterControls={null}
-          transitionMode="scroll"
-          cellSpacing={5}
-          slidesToScroll={1}
-          slidesToShow={(test > 800) ? 4 : 1}
-          products={products}
-        />
+        <div className={classes.first}>
+          <MyCarousel
+            wrapAround
+            renderBottomCenterControls={null}
+            transitionMode="scroll"
+            cellSpacing={5}
+            slidesToScroll={1}
+            slidesToShow={1}
+            products={products}
+          />
+        </div>
+        <div className={classes.second}>
+          <MyCarousel
+            wrapAround
+            renderBottomCenterControls={null}
+            transitionMode="scroll"
+            cellSpacing={5}
+            slidesToScroll={1}
+            slidesToShow={4}
+            products={products}
+          />
+        </div>
       </div>
+
       <div className={classes.miniCart}>
         <p>
             There

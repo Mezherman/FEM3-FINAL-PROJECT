@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       width: '70%'
     },
-    [theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.up('xl')]: {
       width: '80%'
     },
   },
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       width: '75%'
     },
-    [theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.up('xl')]: {
       width: '50%'
     },
   },
@@ -49,6 +49,18 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: theme.spacing(2, 0),
+  },
+  first: {
+    display: 'block',
+    [theme.breakpoints.up('md')]: {
+      display: 'none'
+    },
+  },
+  second: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'block'
+    },
   }
 }));
 

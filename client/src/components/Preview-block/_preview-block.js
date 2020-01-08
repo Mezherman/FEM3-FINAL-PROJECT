@@ -24,10 +24,6 @@ const useStyles = makeStyles((theme) => ({
   text: {
     paddingLeft: theme.spacing(2)
   },
-  wrapper: {
-    margin: '0 auto',
-    maxWidth: '1200px'
-  },
   empty: {
     padding: theme.spacing(2, 1),
     textAlign: 'center',
