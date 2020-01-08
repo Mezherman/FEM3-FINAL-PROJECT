@@ -9,8 +9,9 @@ const MyGallery = ({ images }) => {
   return (
     <ImageGallery
       items={images}
-      showThumbnails={false}
+      showThumbnails={true}
       showPlayButton={false}
+      disableThumbnailScroll={true}
     />
   )
 }

@@ -1,9 +1,9 @@
 import React, { Component, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
 import getAllCards from '../../services/dataBase';
 import ProductCard from '../Product-card/product-card';
 import ProductDetail from '../Product-detail/product-detail';
-import Grid from "@material-ui/core/Grid";
 
 export default function ProductPage({ itemUrl }) {
   const [data, setData] = useState({ products: [] });

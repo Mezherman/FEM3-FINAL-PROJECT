@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   title: {
     fontSize: '28px',
     fontWeight: '400',
@@ -12,6 +12,14 @@ const useStyles = makeStyles({
   MuiListRoot: {
     listStyleType: 'disc',
   },
-});
+  productShopArea: {
+
+    backgroundColor: theme.palette.background.default
+  },
+  priceBox: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  }
+}));
 
 export default useStyles;

@@ -6,13 +6,15 @@ import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
-import { Box } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import MyGallery from './carousel-react'
 import './carousel-react.scss';
+import './product-detail.scss'
 import useStyles from './_product-detail';
+
 import AddToBasket from '../Add-to-basket/add-to-basket';
+import MyGallery from './carousel-react'
 
 export default function ProductDetail({ url, url1, url2, title, price, id, specialPrice = false }) {
   const classes = useStyles();
@@ -21,7 +23,7 @@ export default function ProductDetail({ url, url1, url2, title, price, id, speci
     setModalVisibility(false)
   };
   const priceClassName = {
-    className: specialPrice ? 'product-card-old-price' : 'product-card-regular-price'
+    className: specialPrice ? 'old-price' : 'regular-price'
   };
 
   const images = [
@@ -45,60 +47,71 @@ export default function ProductDetail({ url, url1, url2, title, price, id, speci
         onModalClose={closeModal}
         product={{ url, title, price, specialPrice }}
       />
-
-      <Grid item sm={12}>
-        <Container>
-          <h1 className={classes.title}>{title}</h1>
+      <h1 className={classes.title}>{title}</h1>
+      <Grid container spacing={4} justify="center">
+        <Grid item xs={12} sm={12} md={7} xl={6}>
           <MyGallery
             images={images}
             key={url}
           />
 
           <Divider />
-          <a>Submit a review</a>
-          <Box
-            border={1}
-            borderColor="text.primary"
-            className={classes.MuiBoxRoot}
-          >
-            <List className={classes.MuiListRoot}>
-              <ListItem>
+        </Grid>
+        <Grid item xs={12} sm={12} md={5} xl={6} >
+          <Grid container spacing={1} >
+            <Grid item xs={12} sm={12} md={12} >
+              <Typography align="right">
+                <a>Submit a review</a>
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={6} md={12} xl={6}>
+              <Box
+                border={1}
+                borderColor="text.primary"
+                className={classes.MuiBoxRoot}
+              >
+                <List className={classes.MuiListRoot}>
+                  <ListItem>
                 WMF
-              </ListItem>
-              <ListItem>
+                  </ListItem>
+                  <ListItem>
                 Cutlery set
-              </ListItem>
-              <ListItem>
+                  </ListItem>
+                  <ListItem>
                 60-pcs.
-              </ListItem>
-            </List>
-          </Box>
+                  </ListItem>
+                </List>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={6} md={12} xl={6}>
+              <Box
+                className={classes.productShopArea}
+                fontSize={{ sm: '12px', md: '24px', lg: '36px' }}
+              >
+                <Container>
+                <div className={classes.priceBox}>
+                  <span className={priceClassName.className}>{price}</span>
+                  {specialPrice &&
+                  <span className="special-price">{specialPrice}</span>}
+                </div>
+                <Button
+                  size="large"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  disableElevation
+                  onClick={() => {
+                    setModalVisibility(true)
+                  }}
+                >
 
-
-          <Box
-            bgcolor="background.default"
-            fontSize={{ sm: '12px', md: '24px', lg: '36px' }}
-          >
-            <div className="product-card-price-box">
-              <span className={priceClassName.className}>{price}</span>
-              {specialPrice &&
-              <span className="product-card-special-price">{specialPrice}</span>}
-            </div>
-            <Button
-              size="large"
-              fullWidth
-              variant="contained"
-              color="primary"
-              disableElevation
-              onClick={() => {
-                setModalVisibility(true)
-              }}
-            >
-
-              <ShoppingCartOutlinedIcon />
-            </Button>
-          </Box>
-        </Container>
+                  <ShoppingCartOutlinedIcon />
+                </Button>
+                </Container>
+              </Box>
+            </Grid>
+          </Grid>
+        </Grid>
       </Grid>
     </>
   );
