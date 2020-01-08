@@ -10,7 +10,7 @@ import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
 export default class App extends Component {
   render() {
     return (
-      <Container>
+      <Container maxWidth="xl">
         <Router>
           <Header />
           <ScrollToAnchor />
