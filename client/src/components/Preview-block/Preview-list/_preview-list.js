@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     margin: '0 auto',
     flexDirection: 'column',
-    padding: theme.spacing(0, 1),
     [theme.breakpoints.up('md')]: {
       width: '100%',
     }
@@ -27,16 +26,22 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   title: {
-    textAlign: 'center'
+    textAlign: 'center',
+    [theme.breakpoints.up('md')]: {
+      height: '3rem'
+    }
   },
   price: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    paddingLeft: theme.spacing(1)
   },
   image: {
-    padding: theme.spacing(1, 0)
+    padding: theme.spacing(1, 0),
+    [theme.breakpoints.only('md')]: {
+      height: 200
+    },
   },
   button: {
-    // textAlign: 'right',
     cursor: 'pointer',
     fontWeight: 'bold',
     padding: theme.spacing(1, 0),

@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
-import Variables from '../../Variables/variables';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiFormGroup-root': {
       textAlign: 'left'
@@ -10,9 +9,9 @@ const useStyles = makeStyles({
       paddingRight: '17px'
     },
     '& .MuiCheckbox-root': {
-      color: Variables.colors.btnMainBg
+      color: theme.palette.primary.main
     }
   }
-});
+}));
 
 export default useStyles;

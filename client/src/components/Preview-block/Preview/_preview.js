@@ -1,10 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
-import Variables from '../../Variables/variables';
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
     display: 'flex',
-    flexDirection: 'column-reverse',
+    flexDirection: 'column',
     alignItems: 'center',
     [theme.breakpoints.up('md')]: {
       flexDirection: 'row',
@@ -13,20 +12,24 @@ const useStyles = makeStyles((theme) => ({
   },
   products: {
     width: '100%',
-    [theme.breakpoints.up('smd')]: {
+    [theme.breakpoints.up('sm')]: {
       width: '50%'
-    }
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '70%'
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '80%'
+    },
   },
   container: {
     display: 'flex',
     position: 'absolute',
-    // zIndex: 2,
     left: 0,
     right: 0
   },
   miniCart: {
-    // width: '50%',
-    padding: theme.spacing(0, 1),
+    padding: theme.spacing(0, 1, 2),
     [theme.breakpoints.up('md')]: {
       width: '75%'
     },
@@ -35,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   items: {
-    color: Variables.colors.btnMainBg,
+    color: theme.palette.primary.main,
     padding: theme.spacing(0, 1)
   },
   price: {

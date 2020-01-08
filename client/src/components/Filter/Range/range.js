@@ -4,8 +4,8 @@ import Slider from '@material-ui/core/Slider';
 import useStyles from './_range';
 
 export default function RangeSlider(props) {
-  const { max } = props;
   const classes = useStyles();
+  const { max } = props;
   const [value, setValue] = React.useState([0, max]);
   const handleChange = (event, newValue) => {
     setValue(newValue);

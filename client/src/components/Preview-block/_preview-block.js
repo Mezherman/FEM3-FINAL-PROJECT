@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   empty: {
     padding: theme.spacing(2, 1),
+    textAlign: 'center',
     [theme.breakpoints.up('lg')]: {
       padding: theme.spacing(2, 0)
     }

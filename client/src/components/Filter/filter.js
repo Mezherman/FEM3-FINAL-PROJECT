@@ -50,7 +50,6 @@ export default function Filter() {
         size="large"
         variant="contained"
         color="primary"
-        onClick={() => console.log('Filtered')}
       >
         Apply
       </Button>

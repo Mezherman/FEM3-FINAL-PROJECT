@@ -1,27 +1,26 @@
 import { makeStyles } from '@material-ui/core/styles';
-import Variables from '../../Variables/variables';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    '& .PrivateValueLabel-circle-457': {
+    '&.PrivateValueLabel-circle-457': {
       transform: 'none',
       borderRadius: 0,
       backgroundColor: 'inherit'
     },
-    '& .PrivateValueLabel-label-458': {
-      color: Variables.colors.btnMainBg,
+    '&.PrivateValueLabel-label-458': {
+      color: theme.palette.primary.main,
       transform: 'none'
     },
-    '& .PrivateValueLabel-circle-397': {
+    '&.PrivateValueLabel-circle-397': {
       transform: 'none',
       borderRadius: 0,
       backgroundColor: 'inherit'
     },
-    '& .PrivateValueLabel-label-398': {
-      color: Variables.colors.btnMainBg,
+    '&.PrivateValueLabel-label-398': {
+      color: theme.palette.primary.main,
       transform: 'none'
     },
-    '& .MuiSlider-valueLabel': {
+    '&.MuiSlider-valueLabel': {
       fontSize: '1rem',
       top: '25px',
       fontWeight: 'bold'
@@ -30,6 +29,6 @@ const useStyles = makeStyles({
       marginLeft: 0
     },
   },
-});
+}));
 
 export default useStyles;

@@ -7,7 +7,6 @@ export default function PreviewList(props) {
   const classes = useStyles();
   const { products } = props;
 
-
   return (
     <div className={classes.products}>
       {products.map((product) => (

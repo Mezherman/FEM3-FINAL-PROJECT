@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 import useStyles from './_preview';
 import MyCarousel from '../Carousel/pilushch-carousel';
-// import PreviewList from '../Preview-list/preview-list';
 
 export default function Preview(props) {
   const classes = useStyles();
@@ -16,12 +15,13 @@ export default function Preview(props) {
   return (
     <div className={classes.wrapper}>
       <div className={classes.products}>
-        {/*<PreviewList products={products} />*/}
         <MyCarousel
           wrapAround
+          renderBottomCenterControls={null}
           transitionMode="scroll"
+          cellSpacing={5}
           slidesToScroll={1}
-          slidesToShow={(test < 500) ? 3 : 1}
+          slidesToShow={(test > 800) ? 4 : 1}
           products={products}
         />
       </div>
@@ -47,7 +47,6 @@ export default function Preview(props) {
           color="secondary"
           disableElevation
           className={classes.button}
-          onClick={() => console.log('View shopping cart')}
         >
             View Shopping Cart
         </Button>
@@ -57,7 +56,6 @@ export default function Preview(props) {
           variant="contained"
           color="primary"
           disableElevation
-          onClick={() => console.log('Chechout')}
         >
             Checkout
         </Button>

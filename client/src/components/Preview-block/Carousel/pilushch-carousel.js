@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Carousel from 'nuka-carousel';
 import { Divider } from '@material-ui/core';
 import useStyles from '../Preview-list/_preview-list';
@@ -6,29 +6,34 @@ import useStyles from '../Preview-list/_preview-list';
 export default function MyCarousel (props) {
   const classes = useStyles();
 
-  const [slideIndex, setSlideIndex] = useState(0);
-
-  const { wrapAround, slidesToScroll, slidesToShow, autoPlay,  transitionMode="fade", text = false, isProductSlider = true, products = [] } = props;
+  const {
+    wrapAround,
+    transitionMode,
+    slidesToScroll,
+    cellSpacing,
+    slidesToShow,
+    renderBottomCenterControls,
+    products
+  } = props;
 
   return (
     <Carousel
-      slidesToScroll={slidesToScroll}
-      autoplay={autoPlay}
       wrapAround={wrapAround}
-      afterSlide={slideIndex => setSlideIndex({ slideIndex })}
       transitionMode={transitionMode}
+      cellSpacing={cellSpacing}
+      slidesToScroll={slidesToScroll}
       slidesToShow={slidesToShow}
-      renderBottomCenterControls={null}
+      renderBottomCenterControls={renderBottomCenterControls}
       renderCenterLeftControls={({ previousSlide }) => (
         <div className="arrow-prev" onClick={previousSlide}>
-          <div className="arrow-prev-top"/>
-          <div className="arrow-prev-bottom"/>
+          <div className="arrow-prev-top" />
+          <div className="arrow-prev-bottom" />
         </div>
       )}
       renderCenterRightControls={({ nextSlide }) => (
         <div className="arrow-next" onClick={nextSlide}>
-          <div className="arrow-next-top"/>
-          <div className="arrow-next-bottom"/>
+          <div className="arrow-next-top" />
+          <div className="arrow-next-bottom" />
         </div>
       )}
     >
