@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Paper, Box, ClickAwayListener } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-
 import getCategories from '../../services/getCategories';
+import { RoutesName } from '../../routes';
 
 import './header-navbar.scss';
 
@@ -132,7 +132,7 @@ export default function HeaderNavbar() {
           }}
           onMouseLeave={toggleCatalog}
         >
-          <Link to="/products" className="header-menu-list-hyperlink">CATALOG</Link>
+          <Link to={RoutesName.products} className="header-menu-list-hyperlink">CATALOG</Link>
         </li>
         <li className="header-menu-list-item">
           <a href={process.env.PUBLIC_URL} className="header-menu-list-hyperlink">About us</a>

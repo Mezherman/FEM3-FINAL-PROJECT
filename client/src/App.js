@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Container } from '@material-ui/core';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import 'typeface-roboto';
@@ -7,18 +7,16 @@ import Header from './components/Header/header'
 import Footer from './components/Footer/footer'
 import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
 
-export default class App extends Component {
-  render() {
-    return (
-      <Container maxWidth="xl">
-        <Router>
-          <Header />
-          <ScrollToAnchor />
-          <Routes />
-        </Router>
-        <Footer />
-        <ScrollTop {...this.props} />
-      </Container>
-    )
-  }
+export default function App(props) {
+  return (
+    <Container maxWidth="xl">
+      <Router>
+        <Header />
+        <ScrollToAnchor />
+        <Routes />
+      </Router>
+      <Footer />
+      <ScrollTop {...props} />
+    </Container>
+  )
 }
