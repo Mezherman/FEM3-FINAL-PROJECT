@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Fade from '@material-ui/core/Fade';
 import CloseIcon from '@material-ui/icons/Close';
-import { Divider, IconButton, Grid, Container } from '@material-ui/core';
+import { Divider, IconButton, Container } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import useStyles from './_preview-block';
 import Preview from './Preview/preview';
