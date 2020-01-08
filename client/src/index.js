@@ -13,11 +13,11 @@ import App from './App';
 const theme = createMuiTheme({
   breakpoints: {
     values: {
-      xs: Variables.xs,
-      sm: Variables.sm,
-      md: Variables.md,
-      lg: Variables.lg,
-      xl: Variables.xl,
+      xs: 320,
+      sm: 480,
+      md: 768,
+      lg: 996,
+      xl: 1200,
     },
   },
   palette: {
@@ -42,14 +42,12 @@ const theme = createMuiTheme({
     text: {
       primary: '#1a1a1a',
       secondary: '#e00000',
-
+    },
+    background: {
+    // paper: '#000',
+      default: '#e2e2e2',
     },
   },
-  background: {
-    // paper: "#fff",
-    default: '#f1f2f',
-  },
-
 });
 
 const store = configureStore();

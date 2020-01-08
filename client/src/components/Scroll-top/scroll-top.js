@@ -37,7 +37,6 @@ function ScrollTop(props) {
   });
 
   const handleClick = (event) => {
-    console.log('click')
     const anchor = (event.target.ownerDocument || document).querySelector('#back-to-top-anchor');
 
     if (anchor) {
@@ -61,6 +60,11 @@ export function ScrollToAnchor() {
     <div id="back-to-top-anchor" />
   )
 }
+
+ScrollTop.defaultProps = {
+  window: () => {}
+};
+
 ScrollTop.propTypes = {
   window: PropTypes.func,
 };

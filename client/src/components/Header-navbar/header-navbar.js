@@ -135,13 +135,13 @@ export default function HeaderNavbar() {
           <Link to="/products" className="header-menu-list-hyperlink">CATALOG</Link>
         </li>
         <li className="header-menu-list-item">
-          <a href="#" className="header-menu-list-hyperlink">About us</a>
+          <a href={process.env.PUBLIC_URL} className="header-menu-list-hyperlink">About us</a>
         </li>
         <li className="header-menu-list-item">
-          <a href="#" className="header-menu-list-hyperlink">Delivery & Payment terms</a>
+          <a href={process.env.PUBLIC_URL} className="header-menu-list-hyperlink">Delivery & Payment terms</a>
         </li>
         <li className="header-menu-list-item">
-          <a href="#" className="header-menu-list-hyperlink">Contacts</a>
+          <a href={process.env.PUBLIC_URL} className="header-menu-list-hyperlink">Contacts</a>
         </li>
       </ul>
     )
@@ -209,7 +209,7 @@ Categories.propTypes = {
   chosenCategory: PropTypes.string,
   toggleSubCategories: PropTypes.func,
   onCategoryLeave: PropTypes.func,
-  categories: PropTypes.arrayOf(PropTypes.string)
+  categories: PropTypes.objectOf(PropTypes.object)
 };
 
 Categories.defaultProps = {

@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -10,30 +9,21 @@ import FormControl from '@material-ui/core/FormControl'
 import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
-import RangeSlider from './range'
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  }
-}));
+import RangeSlider from '../Range/range'
+import useStyles from './filter-panel-style';
 
 export default function FilterPanel({ name, text, checkbox, range, max }) {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <ExpansionPanel square>
+    <div>
+      <ExpansionPanel square className={classes.root}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="value"
           id="value-header"
         >
-          <Typography className={classes.heading}>{name}</Typography>
+          <Typography>{name}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails >
           {checkbox ? (
@@ -43,7 +33,7 @@ export default function FilterPanel({ name, text, checkbox, range, max }) {
                   <FormControlLabel
                     key={el}
                     value={el}
-                    control={<Checkbox color="primary" />}
+                    control={<Checkbox />}
                     label={el}
                   />
                 ))}

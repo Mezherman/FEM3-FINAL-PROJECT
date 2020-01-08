@@ -5,51 +5,42 @@ import 'typeface-roboto';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
 
-import TransitionsModal from '../Modal/modal';
+import useStyles from './_product-card';
+import './product-card.scss';
+import AddToBasket from '../Add-to-basket/add-to-basket';
 
-import './product-card.scss'
-
-const ProductCard = ({ url, title, price, id, specialPrice = false }) => {
+export default function ProductCard({ url, title, price, specialPrice = false }) {
+  const classes = useStyles();
   const priceClassName = {
     className: specialPrice ? 'product-card-old-price' : 'product-card-regular-price'
   };
-  // const style = {
-  //   color: specialPrice ? '#e00000' : '#000'
-  // };
 
-  const [modal, setModal] = useState({
-    modalIsVisible: false,
-  });
+  const [modalIsVisible, setModalVisibility] = useState(false);
 
-  const { modalIsVisible } = modal;
+  const closeModal = () => {
+    setModalVisibility(false)
+  };
 
   return (
     <>
-      <TransitionsModal
+      <AddToBasket
         open={modalIsVisible}
-        onClick={() => {
-          console.log('in product card');
-          setModal({
-            ...modal,
-            modalIsVisible: false
-          })
-        }}
-      >
-        <h1>test</h1>
-      </TransitionsModal>
-      <div className="product-card">
+        onModalClose={closeModal}
+        product={{ url, title, price, specialPrice }}
+      />
+      <div className={classes.card}>
         <Divider />
         <Container maxWidth="sm">
-          <div className="product-card-image">
-            <img src={url} />
+          <div className={classes.imgWrapper}>
+            <img src={url} className={classes.img} alt="" />
           </div>
           <Divider variant="middle" />
-          <h1 className="product-card-title">{title}</h1>
-          <div className="product-card-price-box">
+          <h1 className={classes.title}>{title}</h1>
+          <div className={classes.priceBox}>
             <span className={priceClassName.className}>{price}</span>
-            <span className="product-card-special-price">{specialPrice}</span>
+            {specialPrice &&
+            <span className="product-card-special-price">{specialPrice}</span>}
           </div>
           <Button
             size="large"
@@ -59,10 +50,7 @@ const ProductCard = ({ url, title, price, id, specialPrice = false }) => {
             disableElevation
             onClick={() => {
               console.log('Add to Cart');
-              setModal({
-                ...modal,
-                modalIsVisible: true
-              })
+              setModalVisibility(true)
             }}
           >
             <ShoppingCartOutlinedIcon />
@@ -71,13 +59,11 @@ const ProductCard = ({ url, title, price, id, specialPrice = false }) => {
       </div>
     </>
   )
-};
+}
 
 ProductCard.propTypes = {
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   specialPrice: PropTypes.string,
-};
-
-export default ProductCard;
+}

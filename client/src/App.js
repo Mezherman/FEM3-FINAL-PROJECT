@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import { Container } from '@material-ui/core';
-import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import 'typeface-roboto';
 import Routes from './routes';
 import Header from './components/Header/header'
