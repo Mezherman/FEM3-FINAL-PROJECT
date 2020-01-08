@@ -24,7 +24,7 @@ import useStyles from './header-style'
 
 import Search from '../Search/search'
 import Button from '@material-ui/core/Button';
-import SignIn from '../Autorization-block/autorization';
+import SignIn from '../Autorization-block/authorization';
 import CustomizedMenus3 from '../Autorization-block/blockOnHover3';
 // import HeaderNavbar from '../Header-navbar/header-navbar';
 
@@ -245,7 +245,8 @@ export  default function Header() {
               variant="contained"
               onClick={handleClick}
               button={IconButton}
-              component=''>
+              component=''
+            >
               <IconButton edge="end" className={classes.iconButton} href="#">
                 <PersonIcon fontSize="large" className={classes.iconsStyle} />
               </IconButton>
@@ -261,6 +262,7 @@ export  default function Header() {
             >
               <SignIn />
             </StyledMenu>
+
             <Divider orientation="vertical" className={classes.dividerStyle} />
 
             <MenuItem className={classes.headerMenuItem}>

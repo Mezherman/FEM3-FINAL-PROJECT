@@ -1,46 +1,21 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { withStyles, makeStyles, fade } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import SignIn from './autorization';
 import { Box, IconButton, Toolbar } from '@material-ui/core';
-import PersonIcon from '@material-ui/core/SvgIcon/SvgIcon';
+import PersonIcon from '@material-ui/icons/Person'
+import SignIn from './authorization';
 import useStyles from '../Header/header-style';
-
-const StyledMenu = withStyles({
-  paper: {
-    border: '1px solid #d3d4d5',
-  },
-})(props => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'center',
-    }}
-    transformOrigin={{
-      vertical: 'top',
-      horizontal: 'center',
-    }}
-    {...props}
-  />
-));
-
-
+import { StyledMenu } from './_authorization';
 
 export default function CustomizedMenus3() {
-
   const classes = useStyles();
-
-
-
 
   const [anchorElLogin, setAnchorElLogin] = useState(null);
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorElLogin(event.currentTarget);
   };
 
@@ -58,7 +33,8 @@ export default function CustomizedMenus3() {
         variant="contained"
         onClick={handleClick}
         button={IconButton}
-       component=''>
+        component=""
+      >
         <IconButton edge="end" className={classes.iconButton} href="#">
           <PersonIcon fontSize="large" className={classes.iconsStyle} />
         </IconButton>
@@ -78,7 +54,3 @@ export default function CustomizedMenus3() {
 
   );
 }
-
-
-
-

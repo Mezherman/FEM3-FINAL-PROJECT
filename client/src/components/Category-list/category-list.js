@@ -5,6 +5,8 @@ import { Typography, Button } from '@material-ui/core';
 import withWidth from '@material-ui/core/withWidth';
 import getCategories from '../../services/getCategories';
 import Carousels from '../Сarousel/сarousel';
+import Container from '@material-ui/core/Container';
+import Carousel from 'nuka-carousel';
 // import './category-list.scss';
 
 const useStyles = makeStyles((theme) => ({
@@ -139,8 +141,30 @@ function CategoryList(props) {
                     wrapAround
                     slideIndex={0}
                     slidesToShow={1}
-                    products={categories[k].products}
-                  />
+                    renderCenterLeftControls={({ previousSlide }) => (
+                      <div className="arrow-prev" onClick={previousSlide}>
+                        <div className="arrow-prev-top"/>
+                        <div className="arrow-prev-bottom"/>
+                      </div>
+                    )}
+                    renderCenterRightControls={({ nextSlide }) => (
+                      <div className="arrow-next" onClick={nextSlide}>
+                        <div className="arrow-next-top"/>
+                        <div className="arrow-next-bottom"/>
+                      </div>
+                    )}
+
+                  >
+                    {categories[k].products.map((product) => (
+                      <Container maxWidth="sm" key={product.art}>
+                        <div className="product-card-image">
+                          <img src={product.url} alt="Product"/>
+                        </div>
+                        <h1 className="product-card-title">{product.title}</h1>
+                      </Container>
+                    ))}
+                  </Carousels>
+
                 )
                   : ''}
               </div>

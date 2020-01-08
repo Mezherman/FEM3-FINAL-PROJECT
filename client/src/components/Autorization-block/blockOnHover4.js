@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import SignIn from './autorization';
+import SignIn from './authorization';
 
 const StyledMenu = withStyles({
   paper: {
