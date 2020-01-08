@@ -37,7 +37,6 @@ function ScrollTop(props) {
   });
 
   const handleClick = (event) => {
-    console.log('click');
     const anchor = (event.target.ownerDocument || document).querySelector('#back-to-top-anchor');
 
     if (anchor) {
@@ -50,7 +49,6 @@ function ScrollTop(props) {
       <div onClick={handleClick} role="presentation" className={classes.root}>
         <Button variant="contained" color="secondary" size="medium" aria-label="scroll back to top" className={classes.scroll_btn}>
           <KeyboardArrowUpIcon className={classes.scroll_icon} />
-          {/* {children} */}
         </Button>
       </div>
     </Zoom>
@@ -68,11 +66,6 @@ ScrollTop.defaultProps = {
 };
 
 ScrollTop.propTypes = {
-  // children: PropTypes.element.isRequired,
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window: PropTypes.func,
 };
 
