@@ -181,7 +181,7 @@ export default function Header() {
       {renderMenu}
       {/* {renderSearchInput} */}
       <Search />
-      {/*<HeaderNavbar />*/}
+      <HeaderNavbar />
 
     </Container>
   );
