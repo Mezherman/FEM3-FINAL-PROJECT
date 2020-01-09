@@ -9,6 +9,9 @@ const useStyles = makeStyles((theme) => ({
       cursor: 'pointer',
     }
   },
+  link: {
+    textDecoration: 'none'
+  },
   imgWrapper: {
     width: '96%',
     maxWidth: '720px',
@@ -20,13 +23,14 @@ const useStyles = makeStyles((theme) => ({
     height: 'auto',
   },
   title: {
-    paddingBottom: '60px',
-    overflow: 'hidden',
+    height: '60px',
+    paddingBottom: '20px',
+    // overflow: 'hidden',
     color: theme.palette.text.primary,
     fontWeight: '300',
     fontSize: '18px',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
+    // textOverflow: 'ellipsis',
+    // whiteSpace: 'nowrap',
     textDecoration: 'none',
   },
   priceBox: {

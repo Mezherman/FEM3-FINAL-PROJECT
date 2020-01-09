@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
@@ -16,7 +16,8 @@ import useStyles from './_product-detail';
 import AddToBasket from '../Add-to-basket/add-to-basket';
 import MyGallery from './carousel-react'
 
-export default function ProductDetail({ url, url1, url2, title, price, id, specialPrice = false }) {
+export default function ProductDetail({ product }) {
+  const { imageUrls, name, currentPrice, specialPrice } = product;
   const classes = useStyles();
   const [modalIsVisible, setModalVisibility] = useState(false);
   const closeModal = () => {
@@ -25,34 +26,26 @@ export default function ProductDetail({ url, url1, url2, title, price, id, speci
   const priceClassName = {
     className: specialPrice ? 'old-price' : 'regular-price'
   };
-
-  const images = [
+  const images = imageUrls.map((url) => (
     {
       original: url,
-      thumbnail: url,
-    },
-    {
-      original: url1,
-      thumbnail: url1,
-    },
-    {
-      original: url2,
-      thumbnail: url2,
-    },
-  ];
+      thumbnail: url
+    }
+  ));
+
   return (
     <>
       <AddToBasket
         open={modalIsVisible}
         onModalClose={closeModal}
-        product={{ url, title, price, specialPrice }}
+        product={{ imageUrls, name, currentPrice, specialPrice }}
       />
-      <h1 className={classes.title}>{title}</h1>
+      <h2 className={classes.title}>{name}</h2>
       <Grid container spacing={4} justify="center">
         <Grid item xs={12} sm={12} md={7} xl={6}>
           <MyGallery
             images={images}
-            key={url}
+            // key={imageUrls: [0]}
           />
 
           <Divider />
@@ -61,7 +54,7 @@ export default function ProductDetail({ url, url1, url2, title, price, id, speci
           <Grid container spacing={1} >
             <Grid item xs={12} sm={12} md={12} >
               <Typography align="right">
-                <a>Submit a review</a>
+                <a href="#">Submit a review</a>
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6} md={12} xl={6}>
@@ -89,24 +82,24 @@ export default function ProductDetail({ url, url1, url2, title, price, id, speci
                 fontSize={{ sm: '12px', md: '24px', lg: '36px' }}
               >
                 <Container>
-                <div className={classes.priceBox}>
-                  <span className={priceClassName.className}>{price}</span>
-                  {specialPrice &&
-                  <span className="special-price">{specialPrice}</span>}
-                </div>
-                <Button
-                  size="large"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  disableElevation
-                  onClick={() => {
-                    setModalVisibility(true)
-                  }}
-                >
+                  <div className={classes.priceBox}>
+                    <span className={priceClassName.className}>{currentPrice}</span>
+                    {specialPrice &&
+                    <span className="special-price">{specialPrice}</span>}
+                  </div>
+                  <Button
+                    size="large"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    disableElevation
+                    onClick={() => {
+                      setModalVisibility(true)
+                    }}
+                  >
 
-                  <ShoppingCartOutlinedIcon />
-                </Button>
+                    <ShoppingCartOutlinedIcon />
+                  </Button>
                 </Container>
               </Box>
             </Grid>
@@ -116,12 +109,18 @@ export default function ProductDetail({ url, url1, url2, title, price, id, speci
     </>
   );
 }
+
 ProductDetail.propTypes = {
-  title: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
-  url1: PropTypes.string,
-  url2: PropTypes.string,
-  price: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  specialPrice: PropTypes.string,
+  // product: PropTypes.objectOf(PropTypes.string).isRequired,
+
+  product: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.string])).isRequired,
+  // name: PropTypes.string.isRequired,
+  // imageUrls: PropTypes.array.isRequired,
+  // currentPrice: PropTypes.string.isRequired,
+  // specialPrice: PropTypes.string,
 };
+
+// ProductDetail.defaultProps = {
+//   specialPrice: false,
+//   enabled: 'true'
+// };
