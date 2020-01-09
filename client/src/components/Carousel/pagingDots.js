@@ -11,7 +11,7 @@ export default function PagingDots (props) {
     cellAlign,
     classItems,
     classItemsActive,
-    containerID
+    containerID,
   } = props;
   // eslint-disable-next-line no-shadow
   function getDotIndexes (slideCount, slidesToScroll, slidesToShow, cellAlign) {

@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import { Typography, Button } from '@material-ui/core';
 import withWidth from '@material-ui/core/withWidth';
 import getCategories from '../../services/getCategories';
-import Carousels from '../Сarousel/сarousel';
+import Carousels from '../Carousel/сarousel';
 import Container from '@material-ui/core/Container';
 import Carousel from 'nuka-carousel';
 // import './category-list.scss';

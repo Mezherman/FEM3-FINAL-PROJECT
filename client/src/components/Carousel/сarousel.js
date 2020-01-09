@@ -5,19 +5,35 @@ import PropTypes from 'prop-types';
 import './сarousel.scss';
 
 export default function Carousels (props) {
-  const [slideIndexNumber, setSlideIndex] = useState(1);
+  const [slideIndexNumber, setSlideIndex] = useState(0);
 
-  const { autoPlay, autoplayInterval, wrapAround, slidesToShow, transitionMode = 'fade', dragging = true, children, renderCenterLeftControls, renderCenterRightControls, renderBottomCenterControls, className } = props;
+  const {
+    autoPlay,
+    autoplayInterval,
+    wrapAround,
+    slidesToShow,
+    slidesToScroll,
+    cellSpacing,
+    transitionMode,
+    dragging,
+    children,
+    renderCenterLeftControls,
+    renderCenterRightControls,
+    renderBottomCenterControls,
+    className
+  } = props;
 
   return (
     <Carousel
       autoplay={autoPlay}
       autoplayInterval={autoplayInterval}
       wrapAround={wrapAround}
+      cellSpacing={cellSpacing}
+      slidesToScroll={slidesToScroll}
+      slidesToShow={slidesToShow}
       // slideIndex={console.log(slideIndexNumber)}
       afterSlide={(slideIndex) => setSlideIndex({ slideIndex })}
       transitionMode={transitionMode}
-      slidesToShow={slidesToShow}
       dragging={dragging}
       className={className}
       renderCenterLeftControls={renderCenterLeftControls}
@@ -40,7 +56,9 @@ Carousels.propTypes = {
   renderCenterLeftControls: PropTypes.func,
   renderCenterRightControls: PropTypes.func,
   renderBottomCenterControls: PropTypes.func.isRequired,
-  className: PropTypes.objectOf(PropTypes.string)
+  className: PropTypes.objectOf(PropTypes.string),
+  slidesToScroll: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf(['auto'])]),
+  cellSpacing: PropTypes.number
 };
 
 Carousels.defaultProps = {
@@ -50,6 +68,8 @@ Carousels.defaultProps = {
   autoplayInterval: 2000,
   wrapAround: true,
   className: '',
+  slidesToScroll: 'auto',
+  cellSpacing: 2,
   // eslint-disable-next-line react/prop-types
   renderCenterLeftControls ({ previousSlide }) {
     return (

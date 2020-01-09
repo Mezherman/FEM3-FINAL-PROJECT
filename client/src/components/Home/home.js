@@ -1,5 +1,5 @@
 import React from 'react';
-import Carousels from '../Сarousel/сarousel';
+import Carousels from '../Carousel/сarousel';
 import CategoryList from '../Category-list/category-list'
 
 export default function Home() {

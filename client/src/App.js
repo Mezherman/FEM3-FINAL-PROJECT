@@ -1,26 +1,20 @@
 import React from 'react';
-import { Container, makeStyles } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import 'typeface-roboto';
 
 import Header from './components/Header/header'
 import CategoryList from './components/Category-list/category-list'
 import Footer from './components/Footer/footer'
-import Carousels from './components/Сarousel/сarousel';
+import Carousels from './components/Carousel/сarousel';
 import Catalog from './components/Catalog/catalog';
 import ProductPage from './components/Product-page/product-page';
 import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
-import PagingDots from './components/Сarousel/pagingDots';
-// import CustomizedMenus3 from './components/Autorization-block/blockOnHover3';
-
-const useStylesCarousel = makeStyles({
-  mainCarousel: {
-    height: 'calc(100vh - 300px) !important',
-  },
-
-});
+import PagingDots from './components/Carousel/pagingDots';
+import { useStylesCarousel } from './components/Carousel/_carousel';
 
 export default function App (props) {
+  const classes = useStylesCarousel();
   return (
     <Container>
       <Router>
@@ -29,9 +23,9 @@ export default function App (props) {
         <Route path="/" exact>
           <Carousels
             isProductSlider={false}
-            autoPlay
-            // className={useStylesCarousel.mainCarousel}
-            className="main-carousel"
+            autoPlay={false}
+            className={classes.mainCarousel}
+            // className="main-carousel"
             autoplayInterval={2000}
             wrapAround
             slidesToShow={1}
@@ -56,83 +50,27 @@ export default function App (props) {
               ({
                 currentSlide, goToSlide, slideCount, slidesToScroll, slidesToShow, cellAlign
                 // eslint-disable-next-line max-len
-              }) => <PagingDots currentSlide={currentSlide} goToSlide={goToSlide} slideCount={slideCount} slidesToScroll={slidesToScroll} slidesToShow={slidesToShow} cellAlign={cellAlign} classItemsActive="paging-item active" classItems="paging-item" />
+              }) => (
+                // eslint-disable-next-line no-console
+                <PagingDots currentSlide={currentSlide} goToSlide={goToSlide} slideCount={slideCount} slidesToScroll={slidesToScroll} slidesToShow={slidesToShow} cellAlign={cellAlign} classItemsActive="paging-item active" classItems="paging-item" containerID="" />
+              )
             }
-
-            // renderBottomCenterControls={
-            //   ({
-            //     currentSlide, goToSlide, slideCount, slidesToScroll, slidesToShow, cellAlign
-            //   }) => {
-            //     // eslint-disable-next-line no-shadow
-            //     function getDotIndexes (slideCount, slidesToScroll, slidesToShow, cellAlign) {
-            //       const dotIndexes = [];
-            //       let lastDotIndex = slideCount - slidesToShow;
-            //
-            //       switch (cellAlign) {
-            //         case 'center':
-            //         case 'right':
-            //           lastDotIndex += slidesToShow - 1;
-            //           break;
-            //         default:
-            //       }
-            //
-            //       if (lastDotIndex < 0) {
-            //         return [0];
-            //       }
-            //
-            //       for (let i = 0; i < lastDotIndex; i += slidesToScroll) {
-            //         dotIndexes.push(i);
-            //       }
-            //
-            //       dotIndexes.push(lastDotIndex);
-            //       return dotIndexes;
-            //     }
-            //
-            //     // eslint-disable-next-line no-undef
-            /* eslint-disable-next-line max-len */
-            //     const indexes = getDotIndexes(slideCount, slidesToScroll, slidesToShow, cellAlign);
-            //     return (
-            //       <ul>
-            //         {indexes.map((index) => (
-            //           <li
-            //             key={index}
-            //             className={currentSlide === index ? 'paging-item active' : 'paging-item'}
-            //           >
-            //             <button
-            //               type="button"
-            //               onClick={goToSlide.bind(null, index)}
-            //               aria-label={'slide '.concat(index + 1, ' bullet')}
-            //             >
-            //               {index + 1}
-            //             </button>
-            //           </li>
-            //         ))}
-            //       </ul>
-            //     )
-            //   }
-            // }
           >
-            <div>
-              <img
-                src="https://www.wmf.com/media/flexslider/Teaser_1170x570px_WMF_Dish_ohneText-b_hne.jpg"
-                alt="Product"
-                className="image-carousel image-carousel-1"
-              />
-            </div>
-            <div>
-              <img
-                src="https://www.wmf.com/media/flexslider/impulse-buehne.jpg"
-                alt="Product"
-                className="image-carousel image-carousel-2"
-              />
-            </div>
-            <div>
-              <img
-                src="https://www.wmf.com/media/flexslider/ProfessionalCoffeeMachines_Slider_1170x500_1.jpg"
-                alt="Product"
-                className="image-carousel image-carousel-3"
-              />
-            </div>
+            <img
+              src="https://www.wmf.com/media/flexslider/Teaser_1170x570px_WMF_Dish_ohneText-b_hne.jpg"
+              alt="Product"
+              className="image-carousel image-carousel-1"
+            />
+            <img
+              src="https://www.wmf.com/media/flexslider/impulse-buehne.jpg"
+              alt="Product"
+              className="image-carousel image-carousel-2"
+            />
+            <img
+              src="https://www.wmf.com/media/flexslider/ProfessionalCoffeeMachines_Slider_1170x500_1.jpg"
+              alt="Product"
+              className="image-carousel image-carousel-3"
+            />
           </Carousels>
         </Route>
         <Route path="/" exact>
