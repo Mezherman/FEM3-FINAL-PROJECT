@@ -10,7 +10,6 @@ import {
   Container,
   Divider,
   withStyles,
-  makeStyles
 } from '@material-ui/core'
 
 import MenuIcon from '@material-ui/icons/Menu'
@@ -20,6 +19,7 @@ import StarsIcon from '@material-ui/icons/Stars'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import PersonIcon from '@material-ui/icons/Person'
 import { Link } from 'react-router-dom';
+// import Button from '@material-ui/core/Button';
 import { RoutesName } from '../../routes';
 
 import './header.scss';
@@ -28,19 +28,13 @@ import useStyles from './header-style'
 import Search from '../Search/search'
 import HeaderNavbar from '../Header-navbar/header-navbar';
 import PreviewBlock from '../Preview-block/preview-block';
-import Button from '@material-ui/core/Button';
 import SignIn from '../Autorization-block/authorization';
-import CustomizedMenus3 from '../Autorization-block/blockOnHover3';
-// import HeaderNavbar from '../Header-navbar/header-navbar';
-
-
-
 
 const StyledMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
   },
-})(props => (
+})((props) => (
   <Menu
     elevation={0}
     getContentAnchorEl={null}
@@ -52,72 +46,21 @@ const StyledMenu = withStyles({
       vertical: 'top',
       horizontal: 'center',
     }}
+    /* eslint-disable-next-line react/jsx-props-no-spreading */
     {...props}
   />
 ));
 
-
-// function CustomizedMenus3() {
-//
-//   const [anchorEl, setAnchorEl] = useState(null);
-//
-//   const handleClick = event => {
-//     setAnchorEl(event.currentTarget);
-//   };
-//
-//   const handleClose = () => {
-//     setAnchorEl(null);
-//   };
-//
-//   return (
-//     <div>
-//       <Button
-//         aria-controls="customized-menu"
-//         aria-haspopup="true"
-//         variant="contained"
-//         color="primary"
-//         onClick={handleClick}
-//       >
-//         Open Menu
-//       </Button>
-//       <StyledMenu
-//         id="customized-menu"
-//         anchorEl={anchorEl}
-//         keepMounted
-//         open={Boolean(anchorEl)}
-//         onClose={handleClose}
-//       >
-//         <SignIn />
-//       </StyledMenu>
-//     </div>
-//   );
-// }
-
-
-
-// const useStylesLogin = makeStyles({
-//   login: {
-//     position: 'relative',
-//   },
-// }
-// );
-
-
-
-
-export  default function Header() {
-  // const loginClass = useStylesLogin();
-
+export default function Header() {
   const [anchorElLogin, setAnchorElLogin] = useState(null);
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setAnchorElLogin(event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorElLogin(null);
   };
-
 
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null)
@@ -197,7 +140,7 @@ export  default function Header() {
   )
 
   return (
-    <Container maxWidth={'xl'} disableGutters className={classes.grow}>
+    <Container maxWidth="xl" disableGutters className={classes.grow}>
       <AppBar position="static" color="inherit" elevation={0}>
         <Toolbar className={classes.justify}>
           <Box className={classes.boxLogo}>
@@ -242,22 +185,16 @@ export  default function Header() {
               </IconButton>
               <span className={classes.menuTitle}>Favorites</span>
             </MenuItem>
-
             <Divider orientation="vertical" className={classes.dividerStyle} />
-
-            {/*<CustomizedMenus3 />*/}
-
             <MenuItem
               className={classes.headerMenuItem}
-              // onMouseEnter={() => console.log("enter")}
               aria-controls="customized-menu"
               aria-haspopup="true"
               variant="contained"
               onClick={handleClick}
-              button={IconButton}
-              component=''
+              component=""
             >
-              <IconButton edge="end" className={classes.iconButton} href="#">
+              <IconButton edge="end" className={classes.iconButton}>
                 <PersonIcon fontSize="large" className={classes.iconsStyle} />
               </IconButton>
               <span className={classes.menuTitle}>Login</span>
@@ -269,9 +206,9 @@ export  default function Header() {
               open={Boolean(anchorElLogin)}
               onClose={handleClose}
             >
+              <MenuItem />
               <SignIn />
             </StyledMenu>
-
             <Divider orientation="vertical" className={classes.dividerStyle} />
             <MenuItem className={classes.headerMenuItem}>
               <Link to={RoutesName.cart} className={classes.menuLink}>
@@ -286,6 +223,7 @@ export  default function Header() {
           </Box>
         </Toolbar>
       </AppBar>
+
       {prevBlockIsVisible ? (
         <PreviewBlock
           checked={prevBlockIsVisible}
@@ -297,7 +235,6 @@ export  default function Header() {
       {/* {renderSearchInput} */}
       <Search />
       <HeaderNavbar />
-
     </Container>
   );
 }

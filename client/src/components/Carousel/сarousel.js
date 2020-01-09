@@ -52,16 +52,18 @@ Carousels.propTypes = {
   slidesToShow: PropTypes.number.isRequired,
   transitionMode: PropTypes.string,
   dragging: PropTypes.bool,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   renderCenterLeftControls: PropTypes.func,
   renderCenterRightControls: PropTypes.func,
-  renderBottomCenterControls: PropTypes.func.isRequired,
-  className: PropTypes.objectOf(PropTypes.string),
+  renderBottomCenterControls: PropTypes.func,
+  className: PropTypes.string,
   slidesToScroll: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf(['auto'])]),
   cellSpacing: PropTypes.number
 };
 
 Carousels.defaultProps = {
+  renderBottomCenterControls: () => {},
+  children: <div />,
   autoPlay: false,
   transitionMode: 'fade',
   dragging: true,

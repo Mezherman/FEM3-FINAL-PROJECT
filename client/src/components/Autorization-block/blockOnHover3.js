@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import { withStyles, makeStyles, fade } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
-import { Box, IconButton, Toolbar } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person'
 import SignIn from './authorization';
 import useStyles from '../Header/header-style';

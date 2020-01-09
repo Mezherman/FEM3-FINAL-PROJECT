@@ -59,11 +59,11 @@ export default function PagingDots (props) {
 }
 
 PagingDots.propTypes = {
-  slideCount: PropTypes.func.isRequired,
-  slidesToScroll: PropTypes.func.isRequired,
-  slidesToShow: PropTypes.func.isRequired,
-  cellAlign: PropTypes.func.isRequired,
-  currentSlide: PropTypes.func.isRequired,
+  slideCount: PropTypes.number.isRequired,
+  slidesToScroll: PropTypes.number.isRequired,
+  slidesToShow: PropTypes.number.isRequired,
+  cellAlign: PropTypes.string.isRequired,
+  currentSlide: PropTypes.number.isRequired,
   goToSlide: PropTypes.func.isRequired,
   classItems: PropTypes.string.isRequired,
   classItemsActive: PropTypes.string.isRequired,

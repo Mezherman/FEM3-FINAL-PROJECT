@@ -13,6 +13,7 @@ export const useStylesSingIn = makeStyles((theme) => ({
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
+    color: 'white',
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -43,6 +44,7 @@ export const StyledMenu = withStyles({
       vertical: 'top',
       horizontal: 'center',
     }}
+    /* eslint-disable-next-line react/jsx-props-no-spreading */
     {...props}
   />
 ));

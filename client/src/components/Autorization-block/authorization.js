@@ -20,7 +20,7 @@ export default function SignIn() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
+        <Avatar className={classes.avatar} >
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -64,12 +64,12 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link variant="body2">
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2" className={classes.text}>
+              <Link variant="body2" className={classes.text}>
                 {/* eslint-disable-next-line react/no-unescaped-entities */}
                 Don't have an account?
                 {' '}
