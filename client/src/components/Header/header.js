@@ -8,7 +8,9 @@ import {
   MenuItem,
   Box,
   Container,
-  Divider, withStyles, makeStyles
+  Divider,
+  withStyles,
+  makeStyles
 } from '@material-ui/core'
 
 import MenuIcon from '@material-ui/icons/Menu'
@@ -17,12 +19,15 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import StarsIcon from '@material-ui/icons/Stars'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import PersonIcon from '@material-ui/icons/Person'
+import { Link } from 'react-router-dom';
+import { RoutesName } from '../../routes';
 
 import './header.scss';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
 import useStyles from './header-style'
 
 import Search from '../Search/search'
+import HeaderNavbar from '../Header-navbar/header-navbar';
+import PreviewBlock from '../Preview-block/preview-block';
 import Button from '@material-ui/core/Button';
 import SignIn from '../Autorization-block/authorization';
 import CustomizedMenus3 from '../Autorization-block/blockOnHover3';
@@ -117,6 +122,11 @@ export  default function Header() {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
+  const [prevBlockIsVisible, setPrevBlockIsVisible] = useState(false);
+
+  const handleChange = () => {
+    setPrevBlockIsVisible((prev) => !prev);
+  };
 
   const isMenuOpen = Boolean(anchorEl)
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
@@ -163,7 +173,7 @@ export  default function Header() {
   //         input: classes.inputInput
   //       }}
   //       inputProps={{ 'aria-label': 'search' }}
-  //     />StyledMenu
+  //     />
   //   </div>
   // )
 
@@ -187,7 +197,7 @@ export  default function Header() {
   )
 
   return (
-    <Container disableGutters className={classes.grow}>
+    <Container maxWidth={'xl'} disableGutters className={classes.grow}>
       <AppBar position="static" color="inherit" elevation={0}>
         <Toolbar className={classes.justify}>
           <Box className={classes.boxLogo}>
@@ -201,7 +211,7 @@ export  default function Header() {
             >
               <MenuIcon fontSize="large" />
             </IconButton>
-            <Link to="/">
+            <Link to={RoutesName.home}>
               <IconButton edge="start" className={classes.logoIcon}>
                 <img
                   src={`${process.env.PUBLIC_URL}/img/header/wmf-logo-30x35.svg`}
@@ -251,7 +261,6 @@ export  default function Header() {
                 <PersonIcon fontSize="large" className={classes.iconsStyle} />
               </IconButton>
               <span className={classes.menuTitle}>Login</span>
-
             </MenuItem>
             <StyledMenu
               id="customized-menu"
@@ -264,27 +273,31 @@ export  default function Header() {
             </StyledMenu>
 
             <Divider orientation="vertical" className={classes.dividerStyle} />
-
             <MenuItem className={classes.headerMenuItem}>
-              <IconButton edge="end" aria-label="card" className={classes.iconButton}>
-                <Badge badgeContent="0" color="error">
-                  <ShoppingCartOutlinedIcon fontSize="large" className={classes.iconsStyle} />
-                </Badge>
-              </IconButton>
-              <span className={classes.menuTitle}>Cart</span>
+              <Link to={RoutesName.cart} className={classes.menuLink}>
+                <IconButton edge="end" aria-label="card" className={classes.iconButton}>
+                  <Badge badgeContent="0" color="error">
+                    <ShoppingCartOutlinedIcon fontSize="large" className={classes.iconsStyle} />
+                  </Badge>
+                </IconButton>
+                <span className={classes.menuTitle}>Cart</span>
+              </Link>
             </MenuItem>
           </Box>
         </Toolbar>
       </AppBar>
+      {prevBlockIsVisible ? (
+        <PreviewBlock
+          checked={prevBlockIsVisible}
+          onClose={handleChange}
+        />
+      ) : null}
       {renderMobileMenu}
       {renderMenu}
       {/* {renderSearchInput} */}
       <Search />
-      {/*<HeaderNavbar />*/}
+      <HeaderNavbar />
+
     </Container>
   );
 }
-
-
-
-

@@ -1,9 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiOutlinedInput-root[class*="MuiOutlinedInput-root"]': {
-      paddingLeft: '30px'
+      paddingLeft: theme.spacing(4),
     }
   },
   container: {
@@ -13,8 +13,8 @@ const useStyles = makeStyles({
     height: '100%',
     opacity: 0.5,
     position: 'absolute',
-    paddingLeft: '7px'
+    paddingLeft: theme.spacing(1)
   }
-});
+}));
 
 export default useStyles

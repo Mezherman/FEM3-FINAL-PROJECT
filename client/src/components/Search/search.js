@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search'
 import getAllCards from '../../services/dataBase';
-import useStyles from './search-style';
+import useStyles from './_search';
 
 export default function Search() {
   const classes = useStyles();
