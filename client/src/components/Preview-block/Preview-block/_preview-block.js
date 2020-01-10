@@ -10,6 +10,44 @@ const useStyles = makeStyles((theme) => ({
       alignItems: 'start'
     }
   },
+  mobile: {
+    display: 'block',
+    [theme.breakpoints.up('md')]: {
+      display: 'none'
+    },
+  },
+  desktop: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex'
+    },
+  },
+  product: {
+    width: '50%',
+    display: 'flex',
+    margin: '0 auto',
+    flexDirection: 'column',
+    [theme.breakpoints.up('md')]: {
+      width: '100%',
+    }
+  },
+  text: {
+    textAlign: 'center'
+  },
+  title: {
+    textAlign: 'center',
+    [theme.breakpoints.up('md')]: {
+      height: '3rem'
+    }
+  },
+  priceList: {
+    fontWeight: 'bold',
+    paddingLeft: theme.spacing(1)
+  },
+  image: {
+    padding: theme.spacing(1, 0),
+    height: '200px',
+  },
   container: {
     display: 'flex',
     position: 'absolute',
@@ -32,18 +70,6 @@ const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(2, 0),
   },
-  mobile: {
-    display: 'block',
-    [theme.breakpoints.up('md')]: {
-      display: 'none'
-    },
-  },
-  desktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex'
-    },
-  }
 }));
 
 export default useStyles;

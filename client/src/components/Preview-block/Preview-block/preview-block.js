@@ -5,12 +5,10 @@ import PropTypes from 'prop-types';
 
 import useStyles from './_preview-block';
 import Carousels from '../../Carousel/carousel';
-import useStyles2 from '../Preview-list/_preview-list';
 import PreviewList from '../Preview-list/preview-list';
 
 export default function PreviewBlock(props) {
   const classes = useStyles();
-  const classes2 = useStyles2();
   const { products } = props;
 
   return (
@@ -27,12 +25,12 @@ export default function PreviewBlock(props) {
               slidesToShow={1}
             >
               {products.map((product) => (
-                <div className={classes2.product} key={product.art}>
-                  <img src={product.imageUrls[0]} className={classes2.image} alt="products" />
+                <div className={classes.product} key={product.art}>
+                  <img src={product.imageUrls[0]} className={classes.image} alt="products" />
                   <Divider />
-                  <div className={classes2.text}>
-                    <p className={classes2.title}>{product.name}</p>
-                    <p className={classes2.price}>
+                  <div className={classes.text}>
+                    <p className={classes.title}>{product.name}</p>
+                    <p className={classes.priceList}>
                       €
                       {product.specialPrice ? product.specialPrice : product.currentPrice}
                     </p>
@@ -57,12 +55,12 @@ export default function PreviewBlock(props) {
                   slidesToShow={4}
                 >
                   {products.map((product) => (
-                    <div className={classes2.product} key={product.art}>
-                      <img src={product.imageUrls[0]} className={classes2.image} alt="products" />
+                    <div className={classes.product} key={product.art}>
+                      <img src={product.imageUrls[0]} className={classes.image} alt="products" />
                       <Divider />
-                      <div className={classes2.text}>
-                        <p className={classes2.title}>{product.name}</p>
-                        <p className={classes2.price}>
+                      <div className={classes.text}>
+                        <p className={classes.title}>{product.name}</p>
+                        <p className={classes.priceList}>
                       €
                           {product.specialPrice ? product.specialPrice : product.currentPrice}
                         </p>

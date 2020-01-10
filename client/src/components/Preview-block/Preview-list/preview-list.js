@@ -1,10 +1,10 @@
 import React from 'react';
-import { Divider } from '@material-ui/core';
+import { Divider, Button } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import useStyles2 from './_preview-list';
+import useStyles from './_preview-list';
 
 export default function PreviewList(props) {
-  const classes = useStyles2();
+  const classes = useStyles();
   const { products } = props;
 
   return (
@@ -20,7 +20,7 @@ export default function PreviewList(props) {
               {product.specialPrice ? product.specialPrice : product.currentPrice}
             </p>
             <Divider />
-            <p className={classes.button}>Remove</p>
+            <Button onClick={() => console.log('work!')}>Remove</Button>
           </div>
         </div>
       ))}
