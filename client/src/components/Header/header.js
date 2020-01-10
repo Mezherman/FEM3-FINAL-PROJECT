@@ -8,7 +8,8 @@ import {
   MenuItem,
   Box,
   Container,
-  Divider
+  Divider,
+  withStyles,
 } from '@material-ui/core'
 
 import MenuIcon from '@material-ui/icons/Menu'
@@ -18,6 +19,7 @@ import StarsIcon from '@material-ui/icons/Stars'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import PersonIcon from '@material-ui/icons/Person'
 import { Link } from 'react-router-dom';
+// import Button from '@material-ui/core/Button';
 import { RoutesName } from '../../routes';
 
 import './header.scss';
@@ -26,10 +28,42 @@ import useStyles from './header-style'
 import Search from '../Search/search'
 import HeaderNavbar from '../Header-navbar/header-navbar';
 import PreviewBlock from '../Preview-block/preview-block';
+import SignIn from '../Autorization-block/authorization';
+
+const StyledMenu = withStyles({
+  paper: {
+    border: '1px solid #d3d4d5',
+  },
+})((props) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'center',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'center',
+    }}
+    /* eslint-disable-next-line react/jsx-props-no-spreading */
+    {...props}
+  />
+));
 
 export default function Header() {
+  const [anchorElLogin, setAnchorElLogin] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorElLogin(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorElLogin(null);
+  };
+
   const classes = useStyles()
-  const [anchorEl, setAnchorEl] = React.useState(null)
+  const [anchorEl, setAnchorEl] = useState(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
   const [prevBlockIsVisible, setPrevBlockIsVisible] = useState(false);
 
@@ -106,7 +140,7 @@ export default function Header() {
   )
 
   return (
-    <Container maxWidth={'xl'} disableGutters className={classes.grow}>
+    <Container maxWidth="xl" disableGutters className={classes.grow}>
       <AppBar position="static" color="inherit" elevation={0}>
         <Toolbar className={classes.justify}>
           <Box className={classes.boxLogo}>
@@ -151,15 +185,30 @@ export default function Header() {
               </IconButton>
               <span className={classes.menuTitle}>Favorites</span>
             </MenuItem>
-
             <Divider orientation="vertical" className={classes.dividerStyle} />
-            <MenuItem className={classes.headerMenuItem}>
+            <MenuItem
+              className={classes.headerMenuItem}
+              aria-controls="customized-menu"
+              aria-haspopup="true"
+              variant="contained"
+              onClick={handleClick}
+              component=""
+            >
               <IconButton edge="end" className={classes.iconButton}>
                 <PersonIcon fontSize="large" className={classes.iconsStyle} />
               </IconButton>
               <span className={classes.menuTitle}>Login</span>
             </MenuItem>
-
+            <StyledMenu
+              id="customized-menu"
+              anchorEl={anchorElLogin}
+              keepMounted
+              open={Boolean(anchorElLogin)}
+              onClose={handleClose}
+            >
+              <MenuItem />
+              <SignIn />
+            </StyledMenu>
             <Divider orientation="vertical" className={classes.dividerStyle} />
             <MenuItem className={classes.headerMenuItem}>
               <Link to={RoutesName.cart} className={classes.menuLink}>
@@ -174,6 +223,7 @@ export default function Header() {
           </Box>
         </Toolbar>
       </AppBar>
+
       {prevBlockIsVisible ? (
         <PreviewBlock
           checked={prevBlockIsVisible}
@@ -185,7 +235,6 @@ export default function Header() {
       {/* {renderSearchInput} */}
       <Search />
       <HeaderNavbar />
-
     </Container>
   );
 }

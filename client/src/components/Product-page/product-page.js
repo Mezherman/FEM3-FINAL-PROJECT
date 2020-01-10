@@ -1,8 +1,7 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import getAllCards from '../../services/dataBase';
-import ProductCard from '../Product-card/product-card';
 import ProductDetail from '../Product-detail/product-detail';
 
 export default function ProductPage({ itemUrl }) {
@@ -21,14 +20,7 @@ export default function ProductPage({ itemUrl }) {
       { filteredProduct.map((product) => (
         <Grid key={product.id}>
           <ProductDetail
-            id={product.id}
-            key={product.url}
-            url={product.url}
-            url1={product.url1}
-            url2={product.url2}
-            price={product.price}
-            specialPrice={product.specialPrice}
-            title={product.title}
+            product={product}
           />
         </Grid>
       ))}
