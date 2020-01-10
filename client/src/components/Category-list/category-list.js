@@ -21,7 +21,7 @@ function CategoryList(props) {
     <section className={classes.categories_list}>
       {
         Object.keys(categories).map((categoryName, index) => (
-          <Category data={categories[categoryName]} name={categoryName} index={index} />
+          <Category data={categories[categoryName]} name={categoryName} index={index} key={categoryName} />
         ))
       }
     </section>

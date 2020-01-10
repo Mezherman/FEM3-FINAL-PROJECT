@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useStylesCarousel = makeStyles({
+const useStylesCarousel = makeStyles({
   mainCarousel: {
     height: 'calc(100vh - 300px) !important',
     '& .slider-control-bottomcenter': {
@@ -77,3 +77,5 @@ export const useStylesCarousel = makeStyles({
     }
   }
 });
+
+export default useStylesCarousel;
