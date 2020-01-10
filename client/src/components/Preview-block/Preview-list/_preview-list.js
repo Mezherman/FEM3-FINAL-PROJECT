@@ -1,9 +1,15 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles2 = makeStyles((theme) => ({
+  test: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '33%',
+    padding: theme.spacing(0, 2)
+  },
   products: {
     display: 'flex',
-    flexWrap: 'wrap',
+    flexWrap: 'nowrap',
     flexDirection: 'column',
     justifyContent: 'space-between',
     [theme.breakpoints.up('md')]: {
@@ -37,9 +43,10 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     padding: theme.spacing(1, 0),
-    [theme.breakpoints.only('md')]: {
-      height: 200
-    },
+    height: '200px',
+    // [theme.breakpoints.only('md')]: {
+    //   height: 200
+    // },
   },
   button: {
     cursor: 'pointer',
@@ -51,4 +58,4 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default useStyles;
+export default useStyles2;
