@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid/Grid'
-import Carousels from '../../Carousel/сarousel';
+import Carousels from '../../Carousel/carousel';
 import useStyles from './styles'
 
 export default function ProductCarusel (props) {
