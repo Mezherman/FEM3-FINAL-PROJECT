@@ -7,11 +7,10 @@ import './сarousel.scss';
 /**
  * @return {null}
  */
-export default function Carousels (props) {
-
+export default function Carousels(props) {
   const [slideIndex, setSlideIndex] = useState(0);
 
-  const { autoPlay, autoplayInterval, wrapAround, slidesToShow, transitionMode="fade", text = false, isProductSlider = true, products = [] } = props;
+  const { autoPlay, autoplayInterval, wrapAround, slidesToShow, transitionMode = 'fade', text = false, isProductSlider = true, products = [] } = props;
 
   if (isProductSlider) {
     return (
@@ -24,21 +23,21 @@ export default function Carousels (props) {
         slidesToShow={slidesToShow}
         renderCenterLeftControls={({ previousSlide }) => (
           <div className="arrow-prev" onClick={previousSlide}>
-            <div className="arrow-prev-top"/>
-            <div className="arrow-prev-bottom"/>
+            <div className="arrow-prev-top" />
+            <div className="arrow-prev-bottom" />
           </div>
         )}
         renderCenterRightControls={({ nextSlide }) => (
           <div className="arrow-next" onClick={nextSlide}>
-            <div className="arrow-next-top"/>
-            <div className="arrow-next-bottom"/>
+            <div className="arrow-next-top" />
+            <div className="arrow-next-bottom" />
           </div>
         )}
       >
         {products.map((product) => (
           <Container maxWidth="sm">
             <div className="product-card-image">
-              <img src={product.url} alt="Product"/>
+              <img src={product.url} alt="Product" />
             </div>
             <h1 className="product-card-title">{product.title}</h1>
           </Container>
@@ -57,18 +56,18 @@ export default function Carousels (props) {
         afterSlide={slideIndex => setSlideIndex({ slideIndex })}
         renderCenterLeftControls={({ previousSlide }) => (
           <div className="arrow-prev" onClick={previousSlide}>
-            <div className="arrow-prev-top"/>
-            <div className="arrow-prev-bottom"/>
+            <div className="arrow-prev-top" />
+            <div className="arrow-prev-bottom" />
           </div>
         )}
         renderCenterRightControls={({ nextSlide }) => (
           <div className="arrow-next" onClick={nextSlide}>
-            <div className="arrow-next-top"/>
-            <div className="arrow-next-bottom"/>
+            <div className="arrow-next-top" />
+            <div className="arrow-next-bottom" />
           </div>
         )}
         renderBottomCenterControls={({ currentSlide, goToSlide, slideCount, slidesToScroll, cellAlign }) => {
-          function getDotIndexes (slideCount, slidesToScroll, slidesToShow, cellAlign) {
+          function getDotIndexes(slideCount, slidesToScroll, slidesToShow, cellAlign) {
             let dotIndexes = [];
             let lastDotIndex = slideCount - slidesToShow;
 
@@ -98,9 +97,9 @@ export default function Carousels (props) {
               {indexes.map(function (index) {
                 return (
                   <li key={index}
-                    className={currentSlide === index ? 'paging-item active' : 'paging-item'}>
+                      className={currentSlide === index ? 'paging-item active' : 'paging-item'}>
                     <button type='button' onClick={goToSlide.bind(null, index)}
-                      aria-label={'slide '.concat(index + 1, ' bullet')}>{index + 1}</button>
+                            aria-label={'slide '.concat(index + 1, ' bullet')}>{index + 1}</button>
                   </li>
                 )
               })}
