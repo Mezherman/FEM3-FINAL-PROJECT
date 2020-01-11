@@ -15,7 +15,9 @@ export default function App(props) {
   return (
     <Container>
       <Router>
-        <Header />
+        <Route path="/">
+          <Header />
+        </Route>
         <ScrollToAnchor />
         <Route path="/" exact>
           <Carousels
