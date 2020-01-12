@@ -1,78 +1,28 @@
 import React from 'react';
-import Button from '@material-ui/core/Button'
-import { Divider, Grid } from '@material-ui/core';
+import { Divider, Grid, Button } from '@material-ui/core';
 import PropTypes from 'prop-types';
-
+import { Link } from 'react-router-dom';
+import { RoutesName } from '../../../routes';
 import useStyles from './_preview-block';
-import Carousels from '../../Carousel/carousel';
+
 import PreviewList from '../Preview-list/preview-list';
+import PreviewListCarousel from '../Preview-list-carousel/preview-list-carousel';
 
 export default function PreviewBlock(props) {
   const classes = useStyles();
-  const { products } = props;
+  const { products, onClose } = props;
 
   return (
     <div className={classes.wrapper}>
       <Grid container justify="center">
         <Grid item xs={12} sm={8} md={8}>
           <div className={classes.mobile}>
-            <Carousels
-              wrapAround
-              renderBottomCenterControls={null}
-              transitionMode="scroll"
-              cellSpacing={5}
-              slidesToScroll={1}
-              slidesToShow={1}
-            >
-              {products.map((product) => (
-                <div className={classes.product} key={product.art}>
-                  <img src={product.imageUrls[0]} className={classes.image} alt="products" />
-                  <Divider />
-                  <div className={classes.text}>
-                    <p className={classes.title}>{product.name}</p>
-                    <p className={classes.priceList}>
-                      €
-                      {product.specialPrice ? product.specialPrice : product.currentPrice}
-                    </p>
-                    <Divider />
-                    <Button onClick={() => console.log('work!')}>
-                      Remove
-                    </Button>
-                  </div>
-                </div>
-              ))}
-            </Carousels>
+            <PreviewListCarousel products={products} slidesToShow={1} />
           </div>
           <div className={classes.desktop}>
             {products.length > 3
-              ? (
-                <Carousels
-                  wrapAround
-                  renderBottomCenterControls={null}
-                  transitionMode="scroll"
-                  cellSpacing={5}
-                  slidesToScroll={1}
-                  slidesToShow={4}
-                >
-                  {products.map((product) => (
-                    <div className={classes.product} key={product.art}>
-                      <img src={product.imageUrls[0]} className={classes.image} alt="products" />
-                      <Divider />
-                      <div className={classes.text}>
-                        <p className={classes.title}>{product.name}</p>
-                        <p className={classes.priceList}>
-                      €
-                          {product.specialPrice ? product.specialPrice : product.currentPrice}
-                        </p>
-                        <Divider />
-                        <Button onClick={() => console.log('work!')}>
-                      Remove
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </Carousels>
-              ) : <PreviewList products={products} />}
+              ? <PreviewListCarousel products={products} slidesToShow={4} />
+              : <PreviewList products={products} />}
           </div>
         </Grid>
         <Grid item xs={12} md={4}>
@@ -93,6 +43,7 @@ export default function PreviewBlock(props) {
                 <span>€300</span>
               </div>
               <Button
+                onClick={onClose}
                 size="medium"
                 fullWidth
                 variant="contained"
@@ -103,6 +54,7 @@ export default function PreviewBlock(props) {
               View Shopping Cart
               </Button>
               <Button
+                onClick={onClose}
                 size="medium"
                 fullWidth
                 variant="contained"
@@ -120,7 +72,8 @@ export default function PreviewBlock(props) {
 }
 
 PreviewBlock.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.object)
+  products: PropTypes.arrayOf(PropTypes.object),
+  onClose: PropTypes.func.isRequired
 };
 
 PreviewBlock.defaultProps = {

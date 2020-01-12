@@ -36,7 +36,7 @@ export default function PreviewCart(props) {
               <Divider />
               <>
                 {data.products.length > 0
-                  ? (<PreviewBlock products={data.products} />)
+                  ? (<PreviewBlock products={data.products} onClose={onClose} />)
                   : (
                     <div className={classes.empty}>
                       You have no items in your shopping cart.

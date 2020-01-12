@@ -11,7 +11,11 @@ export default function PreviewList(props) {
     <>
       {products.map((product) => (
         <div className={classes.test} key={product.art}>
-          <img src={product.imageUrls[0]} className={classes.image} alt="products" />
+          <img
+            src={product.imageUrls[0]}
+            className={classes.image}
+            alt={product.name}
+          />
           <Divider />
           <div className={classes.text}>
             <p className={classes.title}>{product.name}</p>
