@@ -10,21 +10,21 @@ import { Box, Typography } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import './carousel-react.scss';
-import './product-detail.scss'
+import EuroIcon from '@material-ui/icons/Euro';
+import StopIcon from '@material-ui/icons/Stop';
+import Icon from '@material-ui/core/Icon';
 import useStyles from './_product-detail';
 
 import AddToBasket from '../Add-to-basket/add-to-basket';
 import MyGallery from './carousel-react'
 
 export default function ProductDetail({ product }) {
-  const { imageUrls, name, currentPrice, specialPrice } = product;
+  const { imageUrls, name, currentPrice, previousPrice, specialPrice } = product;
   const classes = useStyles();
+
   const [modalIsVisible, setModalVisibility] = useState(false);
   const closeModal = () => {
     setModalVisibility(false)
-  };
-  const priceClassName = {
-    className: specialPrice ? 'old-price' : 'regular-price'
   };
   const images = imageUrls.map((url) => (
     {
@@ -63,17 +63,17 @@ export default function ProductDetail({ product }) {
                 borderColor="text.primary"
                 className={classes.MuiBoxRoot}
               >
-                <List className={classes.MuiListRoot}>
-                  <ListItem>
+                <ul className={classes.MuiListRoot}>
+                  <li>
                 WMF
-                  </ListItem>
-                  <ListItem>
+                  </li>
+                  <li>
                 Cutlery set
-                  </ListItem>
-                  <ListItem>
+                  </li>
+                  <li>
                 60-pcs.
-                  </ListItem>
-                </List>
+                  </li>
+                </ul>
               </Box>
             </Grid>
             <Grid item xs={12} sm={6} md={12} xl={6}>
@@ -83,10 +83,28 @@ export default function ProductDetail({ product }) {
               >
                 <Container>
                   <div className={classes.priceBox}>
-                    <span className={priceClassName.className}>{currentPrice}</span>
-                    {specialPrice &&
-                    <span className="special-price">{specialPrice}</span>}
+                    {previousPrice && (
+                      <span className={classes.oldPrice}>
+                        <Icon style={{ fontSize: 16 }}>euro_sign</Icon>
+                        {previousPrice}
+                      </span>
+                    )}
+                    <span
+                      className={previousPrice ? classes.specialPrice : classes.regularPrice}
+                    >
+                      <EuroIcon />
+                      {currentPrice}
+                    </span>
                   </div>
+                  <div className={classes.disableBlock}>
+                    <span>Disable:</span>
+                    <span>
+                      <StopIcon />
+                      In stock
+                    </span>
+
+                  </div>
+                  <Divider />
                   <Button
                     size="large"
                     fullWidth
