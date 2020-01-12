@@ -17,7 +17,7 @@ import AddToBasket from '../Add-to-basket/add-to-basket';
 import MyGallery from './carousel-react'
 
 export default function ProductDetail({ product }) {
-  const { imageUrls, name, currentPrice, specialPrice } = product;
+  const { imageUrls, name, currentPrice, specialPrice, highlights, productDescription, specifications } = product;
   const classes = useStyles();
   const [modalIsVisible, setModalVisibility] = useState(false);
   const closeModal = () => {
@@ -104,6 +104,25 @@ export default function ProductDetail({ product }) {
               </Box>
             </Grid>
           </Grid>
+        </Grid>
+      </Grid>
+      <Grid container>
+        <Grid item xs={12} md={6} className={classes.highlights}>
+          Highlights:
+          <ul>
+            {highlights.map((text) => (<li>{text}</li>))}
+          </ul>
+          Product description:
+          {productDescription.map((text) => (<p>{text}</p>))}
+        </Grid>
+        <Grid item xs={12} md={6}>
+          Specifications:
+          {specifications.map((item) => (
+            <p className={classes.specifications} key={item.id} >
+              <span className={classes.property}>{item.property}</span>
+              <span>{item.value}</span>
+            </p>
+          ))}
         </Grid>
       </Grid>
     </>

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import getAllCards from '../../services/dataBase';
 import ProductDetail from '../Product-detail/product-detail';
+import ProductCardSlider from '../Product-detail/product-card-slider';
 
 export default function ProductPage({ itemUrl }) {
   const [data, setData] = useState({ products: [] });
@@ -24,6 +25,7 @@ export default function ProductPage({ itemUrl }) {
           />
         </Grid>
       ))}
+      <ProductCardSlider />
     </div>
   )
 }

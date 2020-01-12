@@ -13,6 +13,27 @@
     "quantity": "0",
     "art": "592.213.49",
     "color": "stainless steel",
+    "highlights": [
+      "As a German brand WMF is known for its versatile stylish range of products and reliability in quality and finish. For over 160 years WMF has been making cooking, dining and drinking a real experience whilst maintaining professional standards and progressing manufacturing technologies.",
+      "Material: Cromargan® 18/1 stainless steel"
+    ],
+    "productDescription": ["Beim Fondue essen alle aus einem Topf, und das Gericht kann mit Käse, Brühe, Fett oder Schokolade zubereitet werden. Alles, was Sie dafür brauchen, ist ein Fondue-Set mit Kasserolle, Tischkocher, Brenner und Fonduegabeln. Das Prinzip ist immer gleich: Im Topf werden die Zutaten zunächst auf dem Herd erhitzt und anschließend auf dem Tischkocher, dem Rechaud, heiß gehalten. An langen Gabeln tauchen Brot- und Obststücke in den Topf ein und mit einem Überzug – herzhaft oder süß – wieder auf. Für Fleisch- und Fischfondue bietet WMF Kochgeschirr aus Cromargan® Edelstahl an, wobei den Topf zusätzlich ein Spritzschutz krönt. Alle Fonduetöpfe haben hitzebeständige Griffe und passen mit dem TransTherm® Allherdboden auf jeden Herd inklusive Induktion. Sie sind pflegeleicht in der Spülmaschine zu reinigen."],
+    "specifications": [
+      {
+      "property": "SKU",
+      "value": "01.01.01",
+      "id": 1
+      },
+      {
+        "property": "EAN",
+        "value": "1237411",
+        "id": 2
+      },
+      {
+        "property": "Brand",
+        "value": "WMF",
+        "id": 3
+      }],
     "id": "12345"
   },
   {"enabled": "true",

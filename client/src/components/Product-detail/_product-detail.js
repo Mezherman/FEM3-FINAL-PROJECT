@@ -19,6 +19,22 @@ const useStyles = makeStyles((theme) => ({
   priceBox: {
     display: 'flex',
     justifyContent: 'space-between',
+  },
+  highlights: {
+    textAlign: 'justify'
+  },
+  specifications: {
+    // cursor: 'pointer',
+    // backgroundColor:,
+    display: 'flex',
+    justifyContent: 'space-between',
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.dark,
+    }
+  },
+  property: {
+    fontWeight: 'bold',
+
   }
 }));
 
