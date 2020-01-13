@@ -110,19 +110,13 @@ export default function ProductDetail({ product }) {
         <Grid item xs={12} md={6} className={classes.highlights}>
           Highlights:
           <ul>
-            {highlights.map((text) => (<li>{text}</li>))}
+            {highlights.map((text) => (<li key={text}>{text}</li>))}
           </ul>
           Product description:
-          {productDescription.map((text) => (<p>{text}</p>))}
+          {productDescription.map((text) => (<p key={text}>{text}</p>))}
         </Grid>
         <Grid item xs={12} md={6}>
           Specifications:
-          {specifications.map((item) => (
-            <p className={classes.specifications} key={item.id} >
-              <span className={classes.property}>{item.property}</span>
-              <span>{item.value}</span>
-            </p>
-          ))}
         </Grid>
       </Grid>
     </>

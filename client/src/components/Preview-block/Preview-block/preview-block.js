@@ -5,24 +5,52 @@ import { Link } from 'react-router-dom';
 import { RoutesName } from '../../../routes';
 import useStyles from './_preview-block';
 
-import PreviewList from '../Preview-list/preview-list';
-import PreviewListCarousel from '../Preview-list-carousel/preview-list-carousel';
+import Carousels from '../../Carousel/carousel';
+import PreviewItem from '../Preview-item/preview-item';
 
 export default function PreviewBlock(props) {
   const classes = useStyles();
   const { products, onClose } = props;
+
+  const previewList = (product) => (
+    product.map((item) => (
+      <div className={classes.item} key={item.id}>
+        <PreviewItem item={item} />
+      </div>
+    ))
+  );
 
   return (
     <div className={classes.wrapper}>
       <Grid container justify="center">
         <Grid item xs={12} sm={8} md={8}>
           <div className={classes.mobile}>
-            <PreviewListCarousel products={products} slidesToShow={1} />
+            <Carousels
+              wrapAround
+              renderBottomCenterControls={null}
+              transitionMode="scroll"
+              cellSpacing={5}
+              slidesToScroll={1}
+              slidesToShow={1}
+            >
+              {previewList(products)}
+            </Carousels>
           </div>
           <div className={classes.desktop}>
             {products.length > 3
-              ? <PreviewListCarousel products={products} slidesToShow={4} />
-              : <PreviewList products={products} />}
+              ? (
+                <Carousels
+                  wrapAround
+                  renderBottomCenterControls={null}
+                  transitionMode="scroll"
+                  cellSpacing={5}
+                  slidesToScroll={1}
+                  slidesToShow={4}
+                >
+                  {previewList(products)}
+                </Carousels>
+              )
+              : <>{previewList(products)}</>}
           </div>
         </Grid>
         <Grid item xs={12} md={4}>
@@ -42,17 +70,19 @@ export default function PreviewBlock(props) {
                 <span>Cart Subtotal</span>
                 <span>€300</span>
               </div>
-              <Button
-                onClick={onClose}
-                size="medium"
-                fullWidth
-                variant="contained"
-                color="secondary"
-                disableElevation
-                className={classes.button}
-              >
-              View Shopping Cart
-              </Button>
+              <Link to={RoutesName.cart}>
+                <Button
+                  onClick={onClose}
+                  size="medium"
+                  fullWidth
+                  variant="contained"
+                  color="secondary"
+                  disableElevation
+                  className={classes.button}
+                >
+                View Shopping Cart
+                </Button>
+              </Link>
               <Button
                 onClick={onClose}
                 size="medium"

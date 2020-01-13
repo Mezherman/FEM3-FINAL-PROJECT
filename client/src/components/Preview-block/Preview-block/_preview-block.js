@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex'
     },
   },
+  item: {
+    textAlign: 'center'
+  },
   container: {
     display: 'flex',
     position: 'absolute',

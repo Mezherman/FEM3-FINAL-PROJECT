@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
     listStyleType: 'disc',
   },
   productShopArea: {
-
     backgroundColor: theme.palette.background.default
   },
   priceBox: {
@@ -23,18 +22,8 @@ const useStyles = makeStyles((theme) => ({
   highlights: {
     textAlign: 'justify'
   },
-  specifications: {
-    // cursor: 'pointer',
-    // backgroundColor:,
-    display: 'flex',
-    justifyContent: 'space-between',
-    '&:hover': {
-      backgroundColor: theme.palette.secondary.dark,
-    }
-  },
   property: {
     fontWeight: 'bold',
-
   }
 }));
 

@@ -12,13 +12,9 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     padding: theme.spacing(1, 0),
-    height: '200px',
-  },
-  text: {
-    textAlign: 'center'
+    width: '100%',
   },
   title: {
-    textAlign: 'center',
     [theme.breakpoints.up('md')]: {
       height: '3rem'
     }
