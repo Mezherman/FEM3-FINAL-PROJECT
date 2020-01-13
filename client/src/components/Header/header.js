@@ -27,7 +27,7 @@ import useStyles from './header-style'
 
 import Search from '../Search/search'
 import HeaderNavbar from '../Header-navbar/header-navbar';
-import PreviewBlock from '../Preview-block/preview-block';
+import PreviewBlock from '../Preview-block/preview-cart';
 import SignIn from '../Autorization-block/authorization';
 
 const StyledMenu = withStyles({
@@ -210,15 +210,13 @@ export default function Header() {
               <SignIn />
             </StyledMenu>
             <Divider orientation="vertical" className={classes.dividerStyle} />
-            <MenuItem className={classes.headerMenuItem}>
-              <Link to={RoutesName.cart} className={classes.menuLink}>
-                <IconButton edge="end" aria-label="card" className={classes.iconButton}>
-                  <Badge badgeContent="0" color="error">
-                    <ShoppingCartOutlinedIcon fontSize="large" className={classes.iconsStyle} />
-                  </Badge>
-                </IconButton>
-                <span className={classes.menuTitle}>Cart</span>
-              </Link>
+            <MenuItem className={classes.headerMenuItem} onClick={handleChange}>
+              <IconButton edge="end" aria-label="card" className={classes.iconButton}>
+                <Badge badgeContent="0" color="error">
+                  <ShoppingCartOutlinedIcon fontSize="large" className={classes.iconsStyle} />
+                </Badge>
+              </IconButton>
+              <span className={classes.menuTitle}>Cart</span>
             </MenuItem>
           </Box>
         </Toolbar>

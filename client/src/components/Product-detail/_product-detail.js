@@ -13,12 +13,17 @@ const useStyles = makeStyles((theme) => ({
     listStyleType: 'disc',
   },
   productShopArea: {
-
     backgroundColor: theme.palette.background.default
   },
   priceBox: {
     display: 'flex',
     justifyContent: 'space-between',
+  },
+  highlights: {
+    textAlign: 'justify'
+  },
+  property: {
+    fontWeight: 'bold',
   }
 }));
 
