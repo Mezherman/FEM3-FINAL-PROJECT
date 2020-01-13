@@ -14,7 +14,7 @@ export default function ProductPage({ itemUrl }) {
       })
   }, []);
 
-  const filteredProduct = data.products.filter((product) => itemUrl.indexOf(product.id) !== -1)
+  const filteredProduct = data.products.filter((product) => itemUrl.indexOf(product.id) !== -1);
   return (
     <div className="product-essential">
       { filteredProduct.map((product) => (
