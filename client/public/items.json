@@ -2,8 +2,8 @@
 [
   {"enabled": "true",
     "name": "Set 66 DENVER",
-    "currentPrice": "304",
-    "specialPrice": "149",
+    "currentPrice": "149",
+    "previousPrice": "304",
     "categories": "Cutleries",
     "imageUrls": [
       "https://www.wmf.com/media/catalog/product/cache/2/image/445x/040ec09b1e35df139433887a97daa66f/1/1/11_7391_9990_100.jpg",
@@ -61,7 +61,7 @@
   {"enabled": "true",
     "name": "Set 30 STAMP",
     "currentPrice": "129",
-    "specialPrice": "109",
+    "previousPrice": "109",
     "categories": "Cutleries",
     "imageUrls": [
       "https://www.wmf.com/media/catalog/product/cache/2/image/445x/040ec09b1e35df139433887a97daa66f/1/1/11_7391_9990_100.jpg",
