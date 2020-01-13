@@ -17,7 +17,7 @@ import AddToBasket from '../Add-to-basket/add-to-basket';
 import MyGallery from './carousel-react'
 
 export default function ProductDetail({ product }) {
-  const { imageUrls, name, currentPrice, specialPrice, highlights, productDescription, specifications } = product;
+  const { imageUrls, name, currentPrice, specialPrice, highlights, productDescription } = product;
   const classes = useStyles();
   const [modalIsVisible, setModalVisibility] = useState(false);
   const closeModal = () => {
@@ -131,9 +131,13 @@ ProductDetail.propTypes = {
   // imageUrls: PropTypes.array.isRequired,
   // currentPrice: PropTypes.string.isRequired,
   // specialPrice: PropTypes.string,
+  // highlights: PropTypes.arrayOf(PropTypes.string),
+  // productDescription: PropTypes.arrayOf(PropTypes.string)
 };
 
-// ProductDetail.defaultProps = {
-//   specialPrice: false,
-//   enabled: 'true'
-// };
+ProductDetail.defaultProps = {
+  // specialPrice: false,
+  // enabled: 'true',
+  // highlights: [],
+  // productDescription: []
+};

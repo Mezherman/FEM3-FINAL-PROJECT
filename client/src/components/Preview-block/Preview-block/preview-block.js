@@ -2,7 +2,7 @@ import React from 'react';
 import { Divider, Grid, Button } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { RoutesName } from '../../../routes';
+import RoutesName from '../../../routes-list';
 import useStyles from './_preview-block';
 
 import Carousels from '../../Carousel/carousel';
