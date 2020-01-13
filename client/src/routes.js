@@ -1,16 +1,11 @@
 import React from 'react'
-import {Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import Home from './components/Home/home';
 import Catalog from './components/Catalog/catalog'
 import ProductPage from './components/Product-page/product-page'
 import NoMatch from './components/No-match/no-match'
 import SummaryCart from './components/Summary-cart/summary-cart'
-
-const RoutesName = {
-  home: '/',
-  products: '/products',
-  cart: '/shopping-cart'
-};
+import RoutesName from './routes-list';
 
 function Routes() {
   return (
@@ -37,4 +32,3 @@ function Routes() {
   );
 }
 export default Routes;
-export { RoutesName };

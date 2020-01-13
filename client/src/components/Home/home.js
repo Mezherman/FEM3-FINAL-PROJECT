@@ -1,7 +1,7 @@
 import React from 'react';
 import CategoryList from '../Category-list/category-list';
 
-import Carousels from '../Carousel/сarousel';
+import Carousels from '../Carousel/carousel';
 import PagingDots from '../Carousel/pagingDots';
 import useStylesCarousel from '../Carousel/_carousel';
 
