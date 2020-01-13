@@ -6,12 +6,17 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: '400',
   },
   MuiBoxRoot: {
+    height: '100%',
     padding: theme.spacing(1, 0),
     marginBottom: theme.spacing(1),
-    borderStyle: 'dotted'
+    border: '1px dashed',
+    borderColor: theme.palette.background.primary,
   },
   MuiListRoot: {
     listStyleType: 'disc',
+  },
+  disableBlock: {
+    marginBottom: theme.spacing(1),
   },
   productShopArea: {
     padding: theme.spacing(2, 0),
