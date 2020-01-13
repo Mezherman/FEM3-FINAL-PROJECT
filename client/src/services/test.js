@@ -14,4 +14,12 @@ const testRequest = () => {
     });
 };
 
+export function testJson() {
+  const a = '{ "num": "5" }';
+  const b = '{ "num": 5 }';
+  const parsedA = JSON.parse(a);
+  const parsedB = JSON.parse(b);
+  console.log(parsedA.num === parsedB.num);
+}
+
 export default testRequest;
