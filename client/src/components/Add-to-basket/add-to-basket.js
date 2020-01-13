@@ -51,7 +51,7 @@ export default function AddToBasket({ open, onModalClose, product }) {
               <Box className={classes.pricingBlock}>
                 <Box className={classes.price}>
                   <span>{finalPrice}</span>
-                  <span className={classes.currency}>UAH</span>
+                  <span className={classes.currency}>EUR</span>
                 </Box>
                 <Paper className={classes.qtyPicker}>
                   <Box
@@ -73,7 +73,7 @@ export default function AddToBasket({ open, onModalClose, product }) {
                 </Paper>
                 <Box className={classes.total}>
                   <span>{totalPrice}</span>
-                  <span className={classes.currency}>UAH</span>
+                  <span className={classes.currency}>EUR</span>
                 </Box>
               </Box>
             </Grid>

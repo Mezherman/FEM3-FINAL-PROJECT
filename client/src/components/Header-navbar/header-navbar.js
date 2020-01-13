@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Paper, Box, ClickAwayListener } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import getCategories from '../../services/getCategories';
-import { RoutesName } from '../../routes';
+import RoutesName from '../../routes-list';
 
 import './header-navbar.scss';
 
