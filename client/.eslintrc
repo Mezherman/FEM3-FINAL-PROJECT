@@ -31,7 +31,8 @@
       "afterOpening": "never",
       "beforeClosing": "allow"
     }],
-    "react/state-in-constructor": [2, "never"]
+    "react/state-in-constructor": [2, "never"],
+    "react/jsx-props-no-spreading": 0
   },
   "settings": {
     "react": {

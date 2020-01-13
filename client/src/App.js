@@ -8,8 +8,10 @@ import Footer from './components/Footer/footer'
 import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
 
 import login from './services/backend';
+import { testJson } from './services/test';
 
 export default function App(props) {
+  testJson();
   return (
     <Container maxWidth="xl">
       <Router>

@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import useStyles from './_product-card';
 import './product-card.scss';
 import AddToBasket from '../Add-to-basket/add-to-basket';
-import { RoutesName } from '../../routes';
+import RoutesName from '../../routes-list';
 
 export default function ProductCard({ product }) {
   const { imageUrls, name, currentPrice, specialPrice, id } = product;
