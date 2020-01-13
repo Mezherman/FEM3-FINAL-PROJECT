@@ -20,7 +20,7 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import PersonIcon from '@material-ui/icons/Person'
 import { Link } from 'react-router-dom';
 // import Button from '@material-ui/core/Button';
-import { RoutesName } from '../../routes';
+import RoutesName from '../../routes-list';
 
 import './header.scss';
 import useStyles from './header-style'
