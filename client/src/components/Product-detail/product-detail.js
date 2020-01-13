@@ -10,21 +10,30 @@ import { Box, Typography } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import './carousel-react.scss';
-import './product-detail.scss'
+import EuroIcon from '@material-ui/icons/Euro';
+import StopIcon from '@material-ui/icons/Stop';
+import Icon from '@material-ui/core/Icon';
+
+import NativeSelect from '@material-ui/core/NativeSelect';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import { createStyles, makeStyles, withStyles, Theme } from '@material-ui/core/styles';
+import InputBase from '@material-ui/core/InputBase';
+import MyGallery from './carousel-react'
+import AddToBasket from '../Add-to-basket/add-to-basket';
 import useStyles from './_product-detail';
 
-import AddToBasket from '../Add-to-basket/add-to-basket';
-import MyGallery from './carousel-react'
-
 export default function ProductDetail({ product }) {
-  const { imageUrls, name, currentPrice, specialPrice } = product;
+  const { imageUrls, name, currentPrice, previousPrice, specialPrice, highlights, productDescription } = product;
   const classes = useStyles();
   const [modalIsVisible, setModalVisibility] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const handleChange = (event) => {
+    setQuantity(event.target.value);
+    console.log(event.target.value);
+  };
   const closeModal = () => {
     setModalVisibility(false)
-  };
-  const priceClassName = {
-    className: specialPrice ? 'old-price' : 'regular-price'
   };
   const images = imageUrls.map((url) => (
     {
@@ -33,8 +42,43 @@ export default function ProductDetail({ product }) {
     }
   ));
 
+  const BootstrapInput = withStyles((theme) => createStyles({
+    root: {
+      'label + &': {
+        marginTop: theme.spacing(3),
+      },
+    },
+    input: {
+      borderRadius: 4,
+      position: 'relative',
+      backgroundColor: theme.palette.background.paper,
+      border: '1px solid #ced4da',
+      fontSize: 16,
+      padding: '10px 26px 10px 12px',
+      transition: theme.transitions.create(['border-color', 'box-shadow']),
+      // Use the system font instead of the default Roboto font.
+      fontFamily: [
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(','),
+      '&:focus': {
+        borderRadius: 4,
+        borderColor: '#80bdff',
+        boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+      },
+    },
+  }),)(InputBase);
+
   return (
-    <>
+    <Container maxWidth="xl">
       <AddToBasket
         open={modalIsVisible}
         onModalClose={closeModal}
@@ -63,17 +107,17 @@ export default function ProductDetail({ product }) {
                 borderColor="text.primary"
                 className={classes.MuiBoxRoot}
               >
-                <List className={classes.MuiListRoot}>
-                  <ListItem>
+                <ul className={classes.MuiListRoot}>
+                  <li>
                 WMF
-                  </ListItem>
-                  <ListItem>
+                  </li>
+                  <li>
                 Cutlery set
-                  </ListItem>
-                  <ListItem>
+                  </li>
+                  <li>
                 60-pcs.
-                  </ListItem>
-                </List>
+                  </li>
+                </ul>
               </Box>
             </Grid>
             <Grid item xs={12} sm={6} md={12} xl={6}>
@@ -83,10 +127,42 @@ export default function ProductDetail({ product }) {
               >
                 <Container>
                   <div className={classes.priceBox}>
-                    <span className={priceClassName.className}>{currentPrice}</span>
-                    {specialPrice &&
-                    <span className="special-price">{specialPrice}</span>}
+                    {previousPrice && (
+                      <span className={classes.oldPrice}>
+                        &#8364;
+                        {previousPrice}
+                      </span>
+                    )}
+                    <span
+                      className={previousPrice ? classes.specialPrice : classes.regularPrice}
+                    >
+                      &#8364;
+                      {currentPrice}
+                    </span>
                   </div>
+                  <FormControl className={classes.margin}>
+                    <InputLabel htmlFor="quantity">Quantity</InputLabel>
+                    <NativeSelect
+                      id="quantity"
+                      value={quantity}
+                      onChange={handleChange}
+                      input={<BootstrapInput />}
+
+                    >
+                      <option value={1}>1</option>
+                      <option value={2}>2</option>
+                      <option value={3}>3</option>
+                    </NativeSelect>
+                  </FormControl>
+                  <div className={classes.disableBlock}>
+                    <span>Disable:</span>
+                    <span>
+                      <StopIcon />
+                      In stock
+                    </span>
+
+                  </div>
+                  <Divider />
                   <Button
                     size="large"
                     fullWidth
@@ -106,7 +182,20 @@ export default function ProductDetail({ product }) {
           </Grid>
         </Grid>
       </Grid>
-    </>
+      <Grid container>
+        <Grid item xs={12} md={6} className={classes.highlights}>
+          Highlights:
+          <ul>
+            {highlights.map((text) => (<li key={text}>{text}</li>))}
+          </ul>
+          Product description:
+          {productDescription.map((text) => (<p key={text}>{text}</p>))}
+        </Grid>
+        <Grid item xs={12} md={6}>
+          Specifications:
+        </Grid>
+      </Grid>
+    </Container>
   );
 }
 
@@ -118,9 +207,13 @@ ProductDetail.propTypes = {
   // imageUrls: PropTypes.array.isRequired,
   // currentPrice: PropTypes.string.isRequired,
   // specialPrice: PropTypes.string,
+  // highlights: PropTypes.arrayOf(PropTypes.string),
+  // productDescription: PropTypes.arrayOf(PropTypes.string)
 };
 
-// ProductDetail.defaultProps = {
-//   specialPrice: false,
-//   enabled: 'true'
-// };
+ProductDetail.defaultProps = {
+  // specialPrice: false,
+  // enabled: 'true',
+  // highlights: [],
+  // productDescription: []
+};
