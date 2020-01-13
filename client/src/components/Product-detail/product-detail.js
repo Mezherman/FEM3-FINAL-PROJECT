@@ -24,9 +24,8 @@ import AddToBasket from '../Add-to-basket/add-to-basket';
 import useStyles from './_product-detail';
 
 export default function ProductDetail({ product }) {
-  const { imageUrls, name, currentPrice, previousPrice, specialPrice } = product;
+  const { imageUrls, name, currentPrice, previousPrice, specialPrice, highlights, productDescription } = product;
   const classes = useStyles();
-
   const [modalIsVisible, setModalVisibility] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const handleChange = (event) => {
@@ -183,6 +182,19 @@ export default function ProductDetail({ product }) {
           </Grid>
         </Grid>
       </Grid>
+      <Grid container>
+        <Grid item xs={12} md={6} className={classes.highlights}>
+          Highlights:
+          <ul>
+            {highlights.map((text) => (<li key={text}>{text}</li>))}
+          </ul>
+          Product description:
+          {productDescription.map((text) => (<p key={text}>{text}</p>))}
+        </Grid>
+        <Grid item xs={12} md={6}>
+          Specifications:
+        </Grid>
+      </Grid>
     </Container>
   );
 }
@@ -195,9 +207,13 @@ ProductDetail.propTypes = {
   // imageUrls: PropTypes.array.isRequired,
   // currentPrice: PropTypes.string.isRequired,
   // specialPrice: PropTypes.string,
+  // highlights: PropTypes.arrayOf(PropTypes.string),
+  // productDescription: PropTypes.arrayOf(PropTypes.string)
 };
 
-// ProductDetail.defaultProps = {
-//   specialPrice: false,
-//   enabled: 'true'
-// };
+ProductDetail.defaultProps = {
+  // specialPrice: false,
+  // enabled: 'true',
+  // highlights: [],
+  // productDescription: []
+};

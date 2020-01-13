@@ -52,6 +52,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '26px',
     textAlign: 'right',
     verticalAlign: 'bottom',
+  },
+  highlights: {
+    textAlign: 'justify'
+  },
+  property: {
+    fontWeight: 'bold',
   }
 }));
 
