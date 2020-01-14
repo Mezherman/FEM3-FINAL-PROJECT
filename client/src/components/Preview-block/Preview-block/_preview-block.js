@@ -10,18 +10,21 @@ const useStyles = makeStyles((theme) => ({
       alignItems: 'start'
     }
   },
-  // products: {
-  //   width: '100%',
-  //   [theme.breakpoints.up('sm')]: {
-  //     width: '50%'
-  //   },
-  //   [theme.breakpoints.up('md')]: {
-  //     width: '70%'
-  //   },
-  //   [theme.breakpoints.up('xl')]: {
-  //     width: '80%'
-  //   },
-  // },
+  mobile: {
+    display: 'block',
+    [theme.breakpoints.up('md')]: {
+      display: 'none'
+    },
+  },
+  desktop: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex'
+    },
+  },
+  item: {
+    textAlign: 'center'
+  },
   container: {
     display: 'flex',
     position: 'absolute',
@@ -44,18 +47,6 @@ const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(2, 0),
   },
-  mobile: {
-    display: 'block',
-    [theme.breakpoints.up('md')]: {
-      display: 'none'
-    },
-  },
-  desktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'block'
-    },
-  }
 }));
 
 export default useStyles;

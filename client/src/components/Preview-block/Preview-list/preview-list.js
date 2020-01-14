@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider } from '@material-ui/core';
+import { Divider, Button } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import useStyles from './_preview-list';
 
@@ -8,21 +8,27 @@ export default function PreviewList(props) {
   const { products } = props;
 
   return (
-    <div className={classes.products}>
+    <>
       {products.map((product) => (
-        <div className={classes.product} key={product.art}>
-          <img src={product.url} className={classes.image} alt="products" />
+        <div className={classes.test} key={product.art}>
+          <img
+            src={product.imageUrls[0]}
+            className={classes.image}
+            alt={product.name}
+          />
           <Divider />
-          <p className={classes.title}>{product.title}</p>
-          <p className={classes.price}>
-            €
-            {product.price}
-          </p>
-          <Divider />
-          <span className={classes.button}>Remove</span>
+          <div className={classes.text}>
+            <p className={classes.title}>{product.name}</p>
+            <p className={classes.price}>
+              €
+              {product.specialPrice ? product.specialPrice : product.currentPrice}
+            </p>
+            <Divider />
+            <Button onClick={() => console.log('work!')}>Remove</Button>
+          </div>
         </div>
       ))}
-    </div>
+    </>
   )
 }
 

@@ -4,11 +4,11 @@ import Fade from '@material-ui/core/Fade';
 import CloseIcon from '@material-ui/icons/Close';
 import { Divider, IconButton, Container } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import useStyles from './_preview-block';
-import Preview from './Preview/preview';
+import useStyles from './_preview-cart';
+import PreviewBlock from './Preview-block/preview-block';
 import getAllCards from '../../services/dataBase';
 
-export default function PreviewBlock(props) {
+export default function PreviewCart(props) {
   const classes = useStyles();
   const { checked, onClose } = props;
 
@@ -26,7 +26,7 @@ export default function PreviewBlock(props) {
       <div className={classes.container}>
         <Fade in={checked} timeout={0}>
           <Paper elevation={4} className={classes.paper}>
-            <Container>
+            <Container maxWidth="xl">
               <p className={classes.header}>
                 <span className={classes.text}>Quickview Cart</span>
                 <IconButton onClick={onClose}>
@@ -36,7 +36,7 @@ export default function PreviewBlock(props) {
               <Divider />
               <>
                 {data.products.length > 0
-                  ? (<Preview products={data.products} />)
+                  ? (<PreviewBlock products={data.products} onClose={onClose} />)
                   : (
                     <div className={classes.empty}>
                       You have no items in your shopping cart.
@@ -51,7 +51,7 @@ export default function PreviewBlock(props) {
   );
 }
 
-PreviewBlock.propTypes = {
+PreviewCart.propTypes = {
   checked: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired
 };
