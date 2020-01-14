@@ -53,9 +53,9 @@ const StyledMenu = withStyles({
 
 export default function Header() {
   const [anchorElLogin, setAnchorElLogin] = useState(null);
-
   const handleClick = (event) => {
     setAnchorElLogin(event.currentTarget);
+
   };
 
   const handleClose = () => {
@@ -193,6 +193,7 @@ export default function Header() {
               variant="contained"
               onClick={handleClick}
               component=""
+              href={RoutesName.signIn}
             >
               <IconButton edge="end" className={classes.iconButton}>
                 <PersonIcon fontSize="large" className={classes.iconsStyle} />

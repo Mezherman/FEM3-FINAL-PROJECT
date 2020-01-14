@@ -14,6 +14,7 @@ import { useStylesSingIn } from './_authorization';
 
 export default function SignIn() {
   const classes = useStylesSingIn();
+  // const preventDefault = (event) => event.preventDefault();
 
   return (
     <Container component="main" maxWidth="xs">
@@ -58,10 +59,16 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            // onClick={preventDefault}
           >
             Sign In
           </Button>
-          <Link variant="body2" className={classes.text} href={RoutesName.signUp}>
+          <Link
+            variant="body2"
+            className={classes.text}
+            // onClick={preventDefault}
+            href={RoutesName.signUp}
+          >
             {/* eslint-disable-next-line react/no-unescaped-entities */}
             Don't have an account?
             {' '}
