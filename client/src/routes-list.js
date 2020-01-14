@@ -2,7 +2,7 @@ const RoutesName = {
   home: '/',
   products: '/products',
   cart: '/shopping-cart',
-  signUp: '/registrations',
+  signUp: '/sign-up',
   signIn: '/login',
 };
 
