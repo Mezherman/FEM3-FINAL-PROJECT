@@ -18,6 +18,12 @@ export const useStylesSingIn = makeStyles((theme) => ({
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
+    '& div>label': {
+      color: theme.palette.secondary.dark,
+    },
+    '& label>span>span': {
+      color: theme.palette.primary.main,
+    },
   },
   submit: {
     margin: theme.spacing(2, 0, 2),
