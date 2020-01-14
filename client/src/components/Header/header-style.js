@@ -111,6 +111,9 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.up('lg')]: {
       minWidth: '15%'
+    },
+    '& #customized-menu': {
+      display: 'none'
     }
   },
   iconButton: {

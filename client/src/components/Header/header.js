@@ -200,13 +200,14 @@ export default function Header() {
               <span className={classes.menuTitle}>Login</span>
             </MenuItem>
             <StyledMenu
+              className="customized-menu"
               id="customized-menu"
               anchorEl={anchorElLogin}
               keepMounted
               open={Boolean(anchorElLogin)}
               onClose={handleClose}
             >
-              <MenuItem />
+              <MenuItem style={{ display: 'none' }} />
               <SignIn />
             </StyledMenu>
             <Divider orientation="vertical" className={classes.dividerStyle} />
