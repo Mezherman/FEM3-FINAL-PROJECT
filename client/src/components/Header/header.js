@@ -13,17 +13,15 @@ import {
 } from '@material-ui/core'
 
 import MenuIcon from '@material-ui/icons/Menu'
-// import SearchIcon from '@material-ui/icons/Search'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import StarsIcon from '@material-ui/icons/Stars'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import PersonIcon from '@material-ui/icons/Person'
 import { Link } from 'react-router-dom';
-// import Button from '@material-ui/core/Button';
 import { RoutesName } from '../../routes';
 
 import './header.scss';
-import useStyles from './header-style'
+import useStyles from './_header.js';
 
 import Search from '../Search/search'
 import HeaderNavbar from '../Header-navbar/header-navbar';
@@ -37,6 +35,7 @@ const StyledMenu = withStyles({
 })((props) => (
   <Menu
     elevation={0}
+    backgroundcolor="transparent"
     getContentAnchorEl={null}
     anchorOrigin={{
       vertical: 'bottom',
@@ -64,7 +63,7 @@ export default function Header() {
 
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null)
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
   const [prevBlockIsVisible, setPrevBlockIsVisible] = useState(false);
 
   const handleChange = () => {
@@ -104,22 +103,6 @@ export default function Header() {
     />
   )
 
-  // const renderSearchInput = (
-  //   <div className={classes.search}>
-  //     <div className={classes.searchIcon}>
-  //       <SearchIcon />
-  //     </div>
-  //     <InputBase
-  //       placeholder='Search'
-  //       classes={{
-  //         root: classes.inputRoot,
-  //         input: classes.inputInput
-  //       }}
-  //       inputProps={{ 'aria-label': 'search' }}
-  //     />
-  //   </div>
-  // )
-
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
@@ -134,7 +117,7 @@ export default function Header() {
     >
       <MenuItem className="header-login" onClick={handleProfileMenuOpen}>
         <img src={`${process.env.PUBLIC_URL}/img/header/my_wmf.png`} alt="" />
-        <ArrowForwardIosIcon fontSize="small" alt="" />
+        <ArrowForwardIosIcon fontSize="small" alt="arrow_icon" />
       </MenuItem>
     </Menu>
   )
@@ -158,7 +141,7 @@ export default function Header() {
               <IconButton edge="start" className={classes.logoIcon}>
                 <img
                   src={`${process.env.PUBLIC_URL}/img/header/wmf-logo-30x35.svg`}
-                  alt=""
+                  alt="logo"
                   className="header-logo"
                 />
               </IconButton>
@@ -232,7 +215,6 @@ export default function Header() {
       ) : null}
       {renderMobileMenu}
       {renderMenu}
-      {/* {renderSearchInput} */}
       <Search />
       <HeaderNavbar />
     </Container>

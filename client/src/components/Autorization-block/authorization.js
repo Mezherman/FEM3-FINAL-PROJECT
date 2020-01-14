@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import { RoutesName } from '../../routes'
 
 import { useStylesSingIn } from './_authorization';
 
@@ -69,7 +70,7 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-              <Link variant="body2" className={classes.text}>
+              <Link variant="body2" className={classes.text} href={RoutesName.signUp}>
                 {/* eslint-disable-next-line react/no-unescaped-entities */}
                 Don't have an account?
                 {' '}
