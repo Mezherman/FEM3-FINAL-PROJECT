@@ -6,10 +6,12 @@ import ProductPage from './components/Product-page/product-page'
 import NoMatch from './components/No-match/no-match'
 import SummaryCart from './components/Summary-cart/summary-cart'
 import RoutesName from './routes-list';
+import SignUp from './components/SignUp/sign-up'
 
 function Routes() {
   return (
     <Switch>
+      <Route path={RoutesName.signUp} component={SignUp} />
       <Route path={RoutesName.products} exact component={Catalog} />
       <Route
         path={`${RoutesName.products}/:id`}
