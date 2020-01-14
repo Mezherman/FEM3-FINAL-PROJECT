@@ -20,7 +20,7 @@ import AddToBasket from '../Add-to-basket/add-to-basket';
 import useStyles from './_product-detail';
 
 export default function ProductDetail({ product }) {
-  const { imageUrls, name, currentPrice, previousPrice, specialPrice, highlights, productDescription } = product;
+  const { imageUrls, name, currentPrice, previousPrice, highlights, productDescription } = product;
   const classes = useStyles();
   const [modalIsVisible, setModalVisibility] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -78,7 +78,7 @@ export default function ProductDetail({ product }) {
       <AddToBasket
         open={modalIsVisible}
         onModalClose={closeModal}
-        product={{ imageUrls, name, currentPrice, specialPrice }}
+        product={{ imageUrls, name, currentPrice }}
       />
       <h2 className={classes.title}>{name}</h2>
       <Grid container spacing={4} justify="center">
