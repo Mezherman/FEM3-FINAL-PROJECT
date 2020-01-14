@@ -26,7 +26,6 @@ export default function ProductDetail({ product }) {
   const [quantity, setQuantity] = useState(1);
   const handleChange = (event) => {
     setQuantity(event.target.value);
-    console.log(event.target.value);
   };
   const closeModal = () => {
     setModalVisibility(false)

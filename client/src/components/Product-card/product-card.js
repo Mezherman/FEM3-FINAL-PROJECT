@@ -13,7 +13,7 @@ import AddToBasket from '../Add-to-basket/add-to-basket';
 import RoutesName from '../../routes-list';
 
 export default function ProductCard({ product }) {
-  const { imageUrls, name, currentPrice, previousPrice, id } = product;
+  const { enabled, imageUrls, name, currentPrice, previousPrice, _id } = product;
   const classes = useStyles();
   // const priceClassName = {
   //   className: previousPrice ? 'product-card-old-price' : 'product-card-regular-price'
@@ -34,7 +34,7 @@ export default function ProductCard({ product }) {
 
       <div className={classes.card}>
         <Link
-          to={`${RoutesName.products}/${id}`}
+          to={`${RoutesName.products}/${_id}`}
           className={classes.link}
         >
           <Divider />
@@ -53,14 +53,14 @@ export default function ProductCard({ product }) {
                 <span className={classes.oldPrice}>
                         &#8364;
                   {previousPrice}
-                      </span>
+                </span>
               )}
               <span
                 className={previousPrice ? classes.specialPrice : classes.regularPrice}
               >
                       &#8364;
                 {currentPrice}
-                    </span>
+              </span>
             </div>
           </Container>
         </Link>
@@ -84,7 +84,13 @@ export default function ProductCard({ product }) {
 }
 
 ProductCard.propTypes = {
-  product: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.string])).isRequired,
+  product:
+  PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.string,
+      PropTypes.boolean])
+  ).isRequired,
   // name: PropTypes.string.isRequired,
   // imageUrls: PropTypes.array.isRequired,
   // currentPrice: PropTypes.string.isRequired,
