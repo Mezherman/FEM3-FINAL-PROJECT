@@ -9,6 +9,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import ModalWindow from '../Modal-window/modal-window';
 
 import useStyles from './_add-to-basket';
+import ProductCard from '../Product-card/product-card';
 
 export default function AddToBasket({ open, onModalClose, product }) {
   const classes = useStyles();
@@ -117,8 +118,12 @@ export default function AddToBasket({ open, onModalClose, product }) {
 }
 
 AddToBasket.propTypes = {
-  open: PropTypes.bool.isRequired,
-  onModalClose: PropTypes.func.isRequired,
-  product: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.string])).isRequired,
+  product:
+  PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.string,
+      PropTypes.boolean])
+  ).isRequired,
   // product: PropTypes.objectOf(PropTypes.string).isRequired,
 };

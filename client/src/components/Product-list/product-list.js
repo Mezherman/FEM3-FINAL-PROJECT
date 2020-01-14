@@ -14,8 +14,8 @@ export default function ProductList() {
 
   useEffect(() => {
     getDataTest()
-      .then((response) => {
-        setData({ products: response })
+      .then((products) => {
+        setData({ products })
       })
   }, []);
   // useEffect(() => {
@@ -24,14 +24,15 @@ export default function ProductList() {
   //       setData({ products: response.products })
   //     })
   // }, []);
-
-  console.log(data)
+  console.log(data);
   return (
     <div className={classes.productList}>
       {data.products.map((product, index) => (
-        <Grid item md={6} lg={4} key={product.id}>
+        <Grid item md={6} lg={4} key={product._id}>
           <ProductCard
+
             product={product}
+
           />
         </Grid>
       ))}
