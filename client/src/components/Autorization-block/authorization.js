@@ -63,11 +63,11 @@ export default function SignIn() {
             Sign In
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
+            {/* <Grid item xs> */}
+            {/* <Link variant="body2"> */}
+            {/*  Forgot password? */}
+            {/* </Link> */}
+            {/* </Grid> */}
             <Grid item>
               <Link variant="body2" className={classes.text}>
                 {/* eslint-disable-next-line react/no-unescaped-entities */}
