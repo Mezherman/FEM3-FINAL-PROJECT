@@ -13,19 +13,21 @@ import {
 } from '@material-ui/core'
 
 import MenuIcon from '@material-ui/icons/Menu'
+// import SearchIcon from '@material-ui/icons/Search'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import StarsIcon from '@material-ui/icons/Stars'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import PersonIcon from '@material-ui/icons/Person'
 import { Link } from 'react-router-dom';
-import { RoutesName } from '../../routes';
+// import Button from '@material-ui/core/Button';
+import RoutesName from '../../routes-list';
 
 import './header.scss';
 import useStyles from './_header.js';
 
 import Search from '../Search/search'
 import HeaderNavbar from '../Header-navbar/header-navbar';
-import PreviewBlock from '../Preview-block/preview-block';
+import PreviewBlock from '../Preview-block/preview-cart';
 import SignIn from '../Autorization-block/authorization';
 
 const StyledMenu = withStyles({
@@ -193,15 +195,13 @@ export default function Header() {
               <SignIn />
             </StyledMenu>
             <Divider orientation="vertical" className={classes.dividerStyle} />
-            <MenuItem className={classes.headerMenuItem}>
-              <Link to={RoutesName.cart} className={classes.menuLink}>
-                <IconButton edge="end" aria-label="card" className={classes.iconButton}>
-                  <Badge badgeContent="0" color="error">
-                    <ShoppingCartOutlinedIcon fontSize="large" className={classes.iconsStyle} />
-                  </Badge>
-                </IconButton>
-                <span className={classes.menuTitle}>Cart</span>
-              </Link>
+            <MenuItem className={classes.headerMenuItem} onClick={handleChange}>
+              <IconButton edge="end" aria-label="card" className={classes.iconButton}>
+                <Badge badgeContent="0" color="error">
+                  <ShoppingCartOutlinedIcon fontSize="large" className={classes.iconsStyle} />
+                </Badge>
+              </IconButton>
+              <span className={classes.menuTitle}>Cart</span>
             </MenuItem>
           </Box>
         </Toolbar>
@@ -215,6 +215,7 @@ export default function Header() {
       ) : null}
       {renderMobileMenu}
       {renderMenu}
+      {/* {renderSearchInput} */}
       <Search />
       <HeaderNavbar />
     </Container>

@@ -72,32 +72,30 @@ Carousels.defaultProps = {
   className: '',
   slidesToScroll: 'auto',
   cellSpacing: 2,
-  // eslint-disable-next-line react/prop-types
-  renderCenterLeftControls ({ previousSlide }) {
-    return (
-      // eslint-disable-next-line max-len
-      // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-      <div
-        className="arrow-prev"
-        onClick={previousSlide}
-      >
-        <div className="arrow-prev-top" />
-        <div className="arrow-prev-bottom" />
-      </div>
-    )
-  },
-  // eslint-disable-next-line react/prop-types
-  renderCenterRightControls ({ nextSlide }) {
-    return (
-      // eslint-disable-next-line max-len
-      // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-      <div
-        className="arrow-next"
-        onClick={nextSlide}
-      >
-        <div className="arrow-next-top" />
-        <div className="arrow-next-bottom" />
-      </div>
-    )
-  }
+  // renderCenterLeftControls ({ previousSlide }) {
+  //   return (
+  //     <div
+  //       className="arrow-prev"
+  //       onClick={previousSlide}
+  //     >
+  //       <div className="arrow-prev-top" />
+  //       <div className="arrow-prev-bottom" />
+  //     </div>
+  //   )
+  // },
+
+  renderCenterLeftControls: () => {},
+
+  // renderCenterRightControls ({ nextSlide }) {
+  //   return (
+  //     <div
+  //       className="arrow-next"
+  //       onClick={nextSlide}
+  //     >
+  //       <div className="arrow-next-top" />
+  //       <div className="arrow-next-bottom" />
+  //     </div>
+  //   )
+  // }
+  renderCenterRightControls: () => {}
 };
