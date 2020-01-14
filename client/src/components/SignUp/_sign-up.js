@@ -1,4 +1,5 @@
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles';
+import Variables from '../Variables/variables';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -13,6 +14,9 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     fontSize: '32px'
+  },
+  labelText: {
+    color: Variables.colors.grayDark
   },
   accountContentLeft: {
     marginBottom: '30px',

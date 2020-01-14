@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Avatar,
   Button,
   CssBaseline,
   TextField,
@@ -10,35 +9,16 @@ import {
   Container,
   List,
   ListItem,
-  Radio,
   FormControl,
-  InputLabel,
-  OutlinedInput,
-  Input,
-  FormHelperText,
   InputAdornment,
   MenuItem,
   FormLabel
 } from '@material-ui/core';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import LanguageIcon from '@material-ui/icons/Language';
-import { RoutesName } from '../../routes'
+import RoutesName from '../../routes-list';
 
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStyles from './_sign-up';
-
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
 
 const selectCountryList = [
   {
@@ -115,20 +95,32 @@ export default function SignUp() {
                   autoComplete="fname"
                   name="firstName"
                   variant="outlined"
-                  required
                   fullWidth
                   id="firstName"
-                  label="First Name"
+                  label={(
+                    <FormLabel
+                      className={classes.labelText}
+                      required
+                    >
+                    First Name
+                    </FormLabel>
+                  )}
                   autoFocus
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   variant="outlined"
-                  required
                   fullWidth
                   id="lastName"
-                  label="Last Name"
+                  label={(
+                    <FormLabel
+                      className={classes.labelText}
+                      required
+                    >
+                      Last Name
+                    </FormLabel>
+                  )}
                   name="lastName"
                   autoComplete="lname"
                 />
@@ -166,10 +158,16 @@ export default function SignUp() {
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
-                  required
                   fullWidth
                   id="emailSignUp"
-                  label="Email Address"
+                  label={(
+                    <FormLabel
+                      className={classes.labelText}
+                      required
+                    >
+                      Email Address
+                    </FormLabel>
+                  )}
                   name="email"
                   autoComplete="email"
                 />
@@ -177,10 +175,16 @@ export default function SignUp() {
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
-                  required
                   fullWidth
                   name="password"
-                  label="Password"
+                  label={(
+                    <FormLabel
+                      className={classes.labelText}
+                      required
+                    >
+                      Password
+                    </FormLabel>
+                  )}
                   type="password"
                   id="passwordSignUp"
                   autoComplete="current-password"
