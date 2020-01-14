@@ -4,3 +4,8 @@ export default function getAllCards () {
   return axios.get(`${window.location.origin}/items.json`)
     .then((response) => response.data)
 }
+
+// export default function getAllCards () {
+//   return axios.get(`${window.location.origin}/items.json`)
+//     .then((response) => response.data)
+// }

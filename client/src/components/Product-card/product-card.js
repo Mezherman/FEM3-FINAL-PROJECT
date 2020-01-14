@@ -13,11 +13,11 @@ import AddToBasket from '../Add-to-basket/add-to-basket';
 import RoutesName from '../../routes-list';
 
 export default function ProductCard({ product }) {
-  const { imageUrls, name, currentPrice, specialPrice, id } = product;
+  const { imageUrls, name, currentPrice, previousPrice, id } = product;
   const classes = useStyles();
-  const priceClassName = {
-    className: specialPrice ? 'product-card-old-price' : 'product-card-regular-price'
-  };
+  // const priceClassName = {
+  //   className: previousPrice ? 'product-card-old-price' : 'product-card-regular-price'
+  // };
 
   const [modalIsVisible, setModalVisibility] = useState(false);
 
@@ -29,7 +29,7 @@ export default function ProductCard({ product }) {
       <AddToBasket
         open={modalIsVisible}
         onModalClose={closeModal}
-        product={{ imageUrls, name, currentPrice, specialPrice }}
+        product={{ imageUrls, name, currentPrice, specialPrice: previousPrice }}
       />
 
       <div className={classes.card}>
@@ -49,9 +49,18 @@ export default function ProductCard({ product }) {
             <Divider variant="middle" />
             <h3 className={classes.title}>{name}</h3>
             <div className={classes.priceBox}>
-              <span className={priceClassName.className}>{currentPrice}</span>
-              {specialPrice &&
-              <span className="product-card-special-price">{specialPrice}</span>}
+              {previousPrice && (
+                <span className={classes.oldPrice}>
+                        &#8364;
+                  {previousPrice}
+                      </span>
+              )}
+              <span
+                className={previousPrice ? classes.specialPrice : classes.regularPrice}
+              >
+                      &#8364;
+                {currentPrice}
+                    </span>
             </div>
           </Container>
         </Link>
