@@ -9,6 +9,14 @@ export default function AboutUs() {
       <div className={classes.text}>
         <h2>About us</h2>
         <Divider />
+        <div className={classes.wrapper}>
+          <div className={classes.container}>
+          <Grid container item md={6} className={classes.textImage}>
+          <h3 className={classes.imageTitle}>WMF brings pleasure into your life</h3>
+          <p className={classes.imageParagraph}>WMF offers gourmets high-quality, functional and beautifully crafted products that satisfy even the most stringent design standards.</p>
+          </Grid>
+          </div>
+        </div>
         <p className={classes.text}>
           Every day, more than 100 million people around the world use products from WMF, Silit and
           Kaiser to prepare, cook, bake, eat and drink in their homes. And when they are not doing
@@ -39,7 +47,7 @@ export default function AboutUs() {
             Sorry, your browser doesn&#8242;t support embedded videos.
           </video>
         </div>
-        <h2>Brands and companies</h2>
+        <h3>Brands and companies</h3>
         <Divider />
         <p>
           Some WMF stainless products produced in Germany after World War II are
@@ -60,7 +68,7 @@ export default function AboutUs() {
           by
           the acquisition of Kaiser Backformen.
         </p>
-        <h2>WMF Design – Winner of multiple awards</h2>
+        <h3>WMF Design – Winner of multiple awards</h3>
         <Divider />
         <Grid container spacing={5}>
           <Grid item md={6}>
