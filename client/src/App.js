@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import 'typeface-roboto';
 import Routes from './routes';
 import Header from './components/Header/header'
-import Footer from './components/Footer/footer'
+// import Footer from './components/Footer/footer'
+import Footer2 from './components/Footer2/footer'
 import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
 
 export default function App(props) {
@@ -16,8 +17,9 @@ export default function App(props) {
         </Route>
         <ScrollToAnchor />
         <Routes />
+        <Footer2 />
       </Router>
-      <Footer />
+      {/*<Footer />*/}
       <ScrollTop {...props} />
     </Container>
   )

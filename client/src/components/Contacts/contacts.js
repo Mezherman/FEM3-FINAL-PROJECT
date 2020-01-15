@@ -10,23 +10,14 @@ import useStyles from './_contacts';
 export default function Contacts() {
   const classes = useStyles();
   const telephone = '+38 (050) 123-456-789';
-  const mail = 'wmf@gmail.com';
+  const mail = 'wmf-about@mail.com';
   const address = 'Kyiv, Hetmana 1, office 115';
 
   return (
     <>
-      <h3>Consultations and order by phone:</h3>
+      <h2>Consultations and order by phone:</h2>
       <Divider />
       <div className={classes.container}>
-      {/*<Grid container spacing={1} className={classes.container}>*/}
-      {/*  <Grid item><PhoneIcon /></Grid>*/}
-      {/*  <Grid item>*/}
-      {/*    <span className={classes.block}>+38 (050) 123-456-789</span>*/}
-      {/*    <span className={classes.block}>+38 (063) 123-456-789</span>*/}
-      {/*    <span className={classes.block}>+38 (067) 123-456-789</span>*/}
-      {/*    <span className={classes.block}>(044) 123-456-789</span>*/}
-      {/*  </Grid>*/}
-      {/*</Grid>*/}
         <Contact icon={<PhoneIcon />}>
           <span className={classes.block}>+38 (050) 123-456-789</span>
           <span className={classes.block}>+38 (063) 123-456-789</span>
