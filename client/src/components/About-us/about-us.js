@@ -11,10 +11,14 @@ export default function AboutUs() {
         <Divider />
         <div className={classes.wrapper}>
           <div className={classes.container}>
-          <Grid container item md={6} className={classes.textImage}>
-          <h3 className={classes.imageTitle}>WMF brings pleasure into your life</h3>
-          <p className={classes.imageParagraph}>WMF offers gourmets high-quality, functional and beautifully crafted products that satisfy even the most stringent design standards.</p>
-          </Grid>
+            <Grid container item md={6} className={classes.textImage}>
+              <h3 className={classes.imageTitle}>WMF brings pleasure into your life</h3>
+              <p className={classes.imageParagraph}>
+                WMF offers gourmets high-quality, functional and
+                beautifully crafted products that satisfy even the most stringent design
+                standards.
+              </p>
+            </Grid>
           </div>
         </div>
         <p className={classes.text}>
