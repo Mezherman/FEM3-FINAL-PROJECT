@@ -3,19 +3,26 @@ import Grid from '@material-ui/core/Grid';
 import useStyles from './_product-list';
 import ProductCard from '../Product-card/product-card';
 import getAllCards from '../../services/dataBase';
-import getDataTest from '../../services/getDataTest';
+import getAllProducts, { getProductsByCategory } from '../../services/getProducts';
 
 // import './product-list.scss'
 
 export default function ProductList() {
   const classes = useStyles();
 
-  const [data, setData] = useState({ products: [] });
+  const [data, setData] = useState([]);
 
+  // useEffect(() => {
+  //   getAllProducts()
+  //     .then((products) => {
+  //       setData({ products })
+  //     })
+  // }, [])
   useEffect(() => {
-    getDataTest()
+    getProductsByCategory('pots')
       .then((products) => {
-        setData({ products })
+        console.log('useEffect = ', products)
+        setData(products.products)
       })
   }, []);
   // useEffect(() => {
@@ -24,10 +31,10 @@ export default function ProductList() {
   //       setData({ products: response.products })
   //     })
   // }, []);
-  console.log(data);
+  console.log('data = ', data);
   return (
     <div className={classes.productList}>
-      {data.products.map((product, index) => (
+      {data.map((product, index) => (
         <Grid item md={6} lg={4} key={product._id}>
           <ProductCard
 
