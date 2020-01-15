@@ -4,6 +4,8 @@ const RoutesName = {
   cart: '/shopping-cart',
   signUp: '/sign-up',
   signIn: '/login',
+  aboutUs: '/about-us',
+  contacts: '/contacts'
 };
 
 export default RoutesName;
