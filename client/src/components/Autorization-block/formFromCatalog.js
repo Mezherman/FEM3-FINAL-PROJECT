@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Paper, Box, ClickAwayListener } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-import getCategories from '../../services/getCategories';
-
 import './header-navbar.scss';
 // import SignIn from './autorization';
 import Container from '@material-ui/core/Container';
@@ -17,9 +15,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
-
 import { makeStyles } from '@material-ui/core/styles';
-
+import getCategories from '../../services/getCategories';
 
 export default function FormFromCatalog() {
   const [features, setFeatures] = useState({
@@ -28,8 +25,6 @@ export default function FormFromCatalog() {
   });
 
   const { categoriesVisible } = features;
-
-
 
   const toggleCatalog = (event) => {
     if (!event.relatedTarget.classList ||
@@ -46,8 +41,6 @@ export default function FormFromCatalog() {
       }
     )
   };
-
-
 
   const onCategoryLeave = (event) => {
     // console.log('target = ', e.target);
@@ -92,19 +85,17 @@ export default function FormFromCatalog() {
     })
   };
 
-
-
-
-
   return (
     <div className="header-menu-wrapper">
-      <div onMouseEnter={() => {
-        const height = document.querySelector('.catalog-wrapper').offsetHeight;
-        setFeatures({ ...features, categoriesVisible: true, categoryListHeight: height })
-      }}
-        onMouseLeave={toggleCatalog}>
-      <Link to="/products" className="header-menu-list-hyperlink">CATALOG</Link>
-    </div>
+      <div
+        onMouseEnter={() => {
+          const height = document.querySelector('.catalog-wrapper').offsetHeight;
+          setFeatures({ ...features, categoriesVisible: true, categoryListHeight: height })
+        }}
+        onMouseLeave={toggleCatalog}
+      >
+        <Link to="/products" className="header-menu-list-hyperlink">CATALOG</Link>
+      </div>
       <ClickAwayListener onClickAway={handleClickAwayCatalog}>
         <Box
           className="catalog-wrapper"
@@ -120,7 +111,7 @@ export default function FormFromCatalog() {
           <Paper className="header-menu-catalog">
             {categoriesVisible &&
             (
-              <SignIn onCategoryLeave={onCategoryLeave}/>
+              <SignIn onCategoryLeave={onCategoryLeave} />
             )}
           </Paper>
         </Box>
@@ -129,12 +120,7 @@ export default function FormFromCatalog() {
   )
 }
 
-
-
-
-
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     display: 'flex',
     flexDirection: 'column',
@@ -153,17 +139,16 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
 function SignIn (props) {
-  const {onCategoryLeave} = props;
+  const { onCategoryLeave } = props;
   const classes = useStyles();
 
   return (
     <Container component="main" maxWidth="xs" >
-      <CssBaseline/>
+      <CssBaseline />
       <div className={classes.paper} onMouseLeave={(event) => onCategoryLeave(event)}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon/>
+          <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign in
@@ -192,7 +177,7 @@ function SignIn (props) {
             autoComplete="current-password"
           />
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary"/>}
+            control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
           <Button
@@ -221,4 +206,3 @@ function SignIn (props) {
     </Container>
   );
 }
-
