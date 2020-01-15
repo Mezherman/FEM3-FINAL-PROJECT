@@ -5,6 +5,9 @@ import 'typeface-roboto';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux';
+import * as cartActions from '../../redux/actions/CartActions';
 
 import { Link } from 'react-router-dom';
 import useStyles from './_product-card';
@@ -12,7 +15,7 @@ import './product-card.scss';
 import AddToBasket from '../Add-to-basket/add-to-basket';
 import RoutesName from '../../routes-list';
 
-export default function ProductCard({ product }) {
+function ProductCard({ product, cartActionsList }) {
   const { enabled, imageUrls, name, currentPrice, previousPrice, _id } = product;
   const classes = useStyles();
   // const priceClassName = {
@@ -72,6 +75,8 @@ export default function ProductCard({ product }) {
             color="primary"
             disableElevation
             onClick={() => {
+              console.log('add product', product);
+              cartActionsList.addProductToCart(product);
               setModalVisibility(true)
             }}
           >
@@ -82,6 +87,16 @@ export default function ProductCard({ product }) {
     </>
   )
 }
+
+function mapStateToProps () {
+  return {};
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    cartActionsList: bindActionCreators(cartActions, dispatch)
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard)
 
 ProductCard.propTypes = {
   product:
