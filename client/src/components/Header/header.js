@@ -18,12 +18,13 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import StarsIcon from '@material-ui/icons/Stars'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import PersonIcon from '@material-ui/icons/Person'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 // import Button from '@material-ui/core/Button';
 import RoutesName from '../../routes-list';
 
 import './header.scss';
-import useStyles from './header-style'
+import useStyles from './_header.js';
 
 import Search from '../Search/search'
 import HeaderNavbar from '../Header-navbar/header-navbar';
@@ -37,6 +38,7 @@ const StyledMenu = withStyles({
 })((props) => (
   <Menu
     elevation={0}
+    backgroundcolor="transparent"
     getContentAnchorEl={null}
     anchorOrigin={{
       vertical: 'bottom',
@@ -51,11 +53,12 @@ const StyledMenu = withStyles({
   />
 ));
 
-export default function Header() {
+function Header(props) {
+  const { cartQuantity } = props.cart;
   const [anchorElLogin, setAnchorElLogin] = useState(null);
-
   const handleClick = (event) => {
     setAnchorElLogin(event.currentTarget);
+
   };
 
   const handleClose = () => {
@@ -64,7 +67,7 @@ export default function Header() {
 
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null)
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
   const [prevBlockIsVisible, setPrevBlockIsVisible] = useState(false);
 
   const handleChange = () => {
@@ -104,22 +107,6 @@ export default function Header() {
     />
   )
 
-  // const renderSearchInput = (
-  //   <div className={classes.search}>
-  //     <div className={classes.searchIcon}>
-  //       <SearchIcon />
-  //     </div>
-  //     <InputBase
-  //       placeholder='Search'
-  //       classes={{
-  //         root: classes.inputRoot,
-  //         input: classes.inputInput
-  //       }}
-  //       inputProps={{ 'aria-label': 'search' }}
-  //     />
-  //   </div>
-  // )
-
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
@@ -134,7 +121,7 @@ export default function Header() {
     >
       <MenuItem className="header-login" onClick={handleProfileMenuOpen}>
         <img src={`${process.env.PUBLIC_URL}/img/header/my_wmf.png`} alt="" />
-        <ArrowForwardIosIcon fontSize="small" alt="" />
+        <ArrowForwardIosIcon fontSize="small" alt="arrow_icon" />
       </MenuItem>
     </Menu>
   )
@@ -158,7 +145,7 @@ export default function Header() {
               <IconButton edge="start" className={classes.logoIcon}>
                 <img
                   src={`${process.env.PUBLIC_URL}/img/header/wmf-logo-30x35.svg`}
-                  alt=""
+                  alt="logo"
                   className="header-logo"
                 />
               </IconButton>
@@ -193,6 +180,7 @@ export default function Header() {
               variant="contained"
               onClick={handleClick}
               component=""
+              href={RoutesName.signIn}
             >
               <IconButton edge="end" className={classes.iconButton}>
                 <PersonIcon fontSize="large" className={classes.iconsStyle} />
@@ -200,19 +188,20 @@ export default function Header() {
               <span className={classes.menuTitle}>Login</span>
             </MenuItem>
             <StyledMenu
+              className="customized-menu"
               id="customized-menu"
               anchorEl={anchorElLogin}
               keepMounted
               open={Boolean(anchorElLogin)}
               onClose={handleClose}
             >
-              <MenuItem />
+              <MenuItem style={{ display: 'none' }} />
               <SignIn />
             </StyledMenu>
             <Divider orientation="vertical" className={classes.dividerStyle} />
             <MenuItem className={classes.headerMenuItem} onClick={handleChange}>
               <IconButton edge="end" aria-label="card" className={classes.iconButton}>
-                <Badge badgeContent="0" color="error">
+                <Badge badgeContent={cartQuantity.toString()} color="error">
                   <ShoppingCartOutlinedIcon fontSize="large" className={classes.iconsStyle} />
                 </Badge>
               </IconButton>
@@ -236,3 +225,11 @@ export default function Header() {
     </Container>
   );
 }
+
+function mapStateToProps (state) {
+  return {
+    cart: state.cart,
+  }
+}
+
+export default connect(mapStateToProps)(Header);

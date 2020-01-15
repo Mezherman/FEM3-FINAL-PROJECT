@@ -23,40 +23,40 @@ const useStyles = makeStyles((theme) => ({
       display: 'block'
     }
   },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: theme.spacing(2),
-    marginBottom: theme.spacing(2),
-    width: '90%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
-      width: 'auto'
-    },
-    [theme.breakpoints.up('md')]: {
-      marginTop: theme.spacing(2),
-      marginLeft: theme.spacing(3),
-      width: 'auto'
-    },
-    border: '1px solid #666666',
-    opacity: '0.4'
-  },
-  searchIcon: {
-    width: theme.spacing(5),
-    height: '100%',
-    position: 'absolute',
-    right: '0',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    opacity: '.7'
-  },
+  // search: {
+  //   position: 'relative',
+  //   borderRadius: theme.shape.borderRadius,
+  //   backgroundColor: fade(theme.palette.common.white, 0.15),
+  //   '&:hover': {
+  //     backgroundColor: fade(theme.palette.common.white, 0.25),
+  //   },
+  //   marginRight: theme.spacing(2),
+  //   marginLeft: theme.spacing(2),
+  //   marginBottom: theme.spacing(2),
+  //   width: '90%',
+  //   [theme.breakpoints.up('sm')]: {
+  //     marginLeft: theme.spacing(3),
+  //     width: 'auto'
+  //   },
+  //   [theme.breakpoints.up('md')]: {
+  //     marginTop: theme.spacing(2),
+  //     marginLeft: theme.spacing(3),
+  //     width: 'auto'
+  //   },
+  //   border: '1px solid #666666',
+  //   opacity: '0.4'
+  // },
+  // searchIcon: {
+  //   width: theme.spacing(5),
+  //   height: '100%',
+  //   position: 'absolute',
+  //   right: '0',
+  //   pointerEvents: 'none',
+  //   display: 'flex',
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   opacity: '.7'
+  // },
   sectionDesktop: {
     display: 'none',
     [theme.breakpoints.up('md')]: {
@@ -111,6 +111,9 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.up('lg')]: {
       minWidth: '15%'
+    },
+    '& #customized-menu': {
+      display: 'none'
     }
   },
   iconButton: {

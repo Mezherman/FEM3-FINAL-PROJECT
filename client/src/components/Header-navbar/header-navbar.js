@@ -135,13 +135,17 @@ export default function HeaderNavbar() {
           <Link to={RoutesName.products} className="header-menu-list-hyperlink">CATALOG</Link>
         </li>
         <li className="header-menu-list-item">
-          <a href={process.env.PUBLIC_URL} className="header-menu-list-hyperlink">About us</a>
+          <Link to={RoutesName.aboutUs}>
+            <span className="header-menu-list-hyperlink">About us</span>
+          </Link>
         </li>
         <li className="header-menu-list-item">
           <a href={process.env.PUBLIC_URL} className="header-menu-list-hyperlink">Delivery & Payment terms</a>
         </li>
         <li className="header-menu-list-item">
-          <a href={process.env.PUBLIC_URL} className="header-menu-list-hyperlink">Contacts</a>
+          <Link to={RoutesName.contacts}>
+            <span className="header-menu-list-hyperlink">Contacts</span>
+          </Link>
         </li>
       </ul>
     )
