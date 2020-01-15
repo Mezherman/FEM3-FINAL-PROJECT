@@ -17,6 +17,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import StarsIcon from '@material-ui/icons/Stars'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import PersonIcon from '@material-ui/icons/Person'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { RoutesName } from '../../routes';
 
@@ -27,7 +28,8 @@ import Search from '../Search/search'
 import HeaderNavbar from '../Header-navbar/header-navbar';
 import PreviewBlock from '../Preview-block/preview-block';
 
-export default function Header() {
+function Header(props) {
+  const { cartQuantity } = props.cart;
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
@@ -164,7 +166,7 @@ export default function Header() {
             <MenuItem className={classes.headerMenuItem}>
               <Link to={RoutesName.cart} className={classes.menuLink}>
                 <IconButton edge="end" aria-label="card" className={classes.iconButton}>
-                  <Badge badgeContent="0" color="error">
+                  <Badge badgeContent={cartQuantity.toString()} color="error">
                     <ShoppingCartOutlinedIcon fontSize="large" className={classes.iconsStyle} />
                   </Badge>
                 </IconButton>
@@ -189,3 +191,11 @@ export default function Header() {
     </Container>
   );
 }
+
+function mapStateToProps (state) {
+  return {
+    cart: state.cart,
+  }
+}
+
+export default connect(mapStateToProps)(Header);

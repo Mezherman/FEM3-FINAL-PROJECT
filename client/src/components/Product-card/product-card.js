@@ -5,12 +5,15 @@ import 'typeface-roboto';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux';
+import * as cartActions from '../../redux/actions/CartActions';
 
 import useStyles from './_product-card';
 import './product-card.scss';
 import AddToBasket from '../Add-to-basket/add-to-basket';
 
-export default function ProductCard({ url, title, price, specialPrice = false }) {
+function ProductCard({ product, url, title, price, cartActionsList, specialPrice = false }) {
   const classes = useStyles();
   const priceClassName = {
     className: specialPrice ? 'product-card-old-price' : 'product-card-regular-price'
@@ -50,6 +53,7 @@ export default function ProductCard({ url, title, price, specialPrice = false })
             disableElevation
             onClick={() => {
               console.log('Add to Cart');
+              cartActionsList.addProductToCart(product);
               setModalVisibility(true)
             }}
           >
@@ -60,6 +64,16 @@ export default function ProductCard({ url, title, price, specialPrice = false })
     </>
   )
 }
+
+function mapStateToProps () {
+  return {};
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    cartActionsList: bindActionCreators(cartActions, dispatch)
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard)
 
 ProductCard.propTypes = {
   title: PropTypes.string.isRequired,
