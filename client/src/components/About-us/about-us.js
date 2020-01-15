@@ -1,7 +1,9 @@
 import React from 'react';
 import { Grid, Divider } from '@material-ui/core';
+import useStyles from './_about-us';
 
 export default function AboutUs() {
+  const classes = useStyles();
   return (
     <>
       <h2>History</h2>
@@ -82,7 +84,7 @@ export default function AboutUs() {
           <img
             src={`${process.env.PUBLIC_URL}/img/about/awards.jpg`}
             alt="Our rewards"
-            style={{ width: '100%' }}
+            className={classes.img}
           />
           {/* <div  style={{width: '100%',height: '100%', backgroundAttachment: 'fixed', backgroundImage: `url(${process.env.PUBLIC_URL}/img/about/awards.jpg)`}}> </div> */}
         </Grid>
