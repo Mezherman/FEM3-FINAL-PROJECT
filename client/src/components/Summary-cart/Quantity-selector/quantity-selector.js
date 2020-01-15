@@ -5,6 +5,7 @@ import useStyles from './_quantity-selector';
 
 export default function QuantitySelector ({ productQuantity, productId, onSetProductQuantity }) {
   console.log('productId', productId);
+  const classes = useStyles();
   const [quantity, updateQuantity] = useState(productQuantity);
   const createListItems = () => {
     const items = [];
@@ -30,6 +31,7 @@ export default function QuantitySelector ({ productQuantity, productId, onSetPro
         name: 'quantity',
         id: 'name-native-disabled',
       }}
+      className={classes.root}
     >
       {createListItems()}
     </NativeSelect>
