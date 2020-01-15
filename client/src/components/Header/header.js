@@ -196,7 +196,7 @@ function Header(props) {
               onClose={handleClose}
             >
               <MenuItem style={{ display: 'none' }} />
-              <SignIn />
+              <SignIn onClose={handleClose} />
             </StyledMenu>
             <Divider orientation="vertical" className={classes.dividerStyle} />
             <MenuItem className={classes.headerMenuItem} onClick={handleChange}>
