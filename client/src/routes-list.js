@@ -2,7 +2,8 @@ const RoutesName = {
   home: '/',
   products: '/products',
   cart: '/shopping-cart',
-  signUp: '/sign-up'
+  signUp: '/sign-up',
+  signIn: '/login',
 };
 
 export default RoutesName;

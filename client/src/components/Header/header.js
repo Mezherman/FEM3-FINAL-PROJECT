@@ -54,9 +54,9 @@ const StyledMenu = withStyles({
 
 export default function Header() {
   const [anchorElLogin, setAnchorElLogin] = useState(null);
-
   const handleClick = (event) => {
     setAnchorElLogin(event.currentTarget);
+
   };
 
   const handleClose = () => {
@@ -178,6 +178,7 @@ export default function Header() {
               variant="contained"
               onClick={handleClick}
               component=""
+              href={RoutesName.signIn}
             >
               <IconButton edge="end" className={classes.iconButton}>
                 <PersonIcon fontSize="large" className={classes.iconsStyle} />
@@ -185,13 +186,14 @@ export default function Header() {
               <span className={classes.menuTitle}>Login</span>
             </MenuItem>
             <StyledMenu
+              className="customized-menu"
               id="customized-menu"
               anchorEl={anchorElLogin}
               keepMounted
               open={Boolean(anchorElLogin)}
               onClose={handleClose}
             >
-              <MenuItem />
+              <MenuItem style={{ display: 'none' }} />
               <SignIn />
             </StyledMenu>
             <Divider orientation="vertical" className={classes.dividerStyle} />
