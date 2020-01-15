@@ -11,7 +11,9 @@ export default function App(props) {
   return (
     <Container maxWidth="xl">
       <Router>
-        <Header />
+        <Route path="/">
+          <Header />
+        </Route>
         <ScrollToAnchor />
         <Routes />
       </Router>

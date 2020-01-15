@@ -1,20 +1,19 @@
 import React from 'react'
-import {Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import Home from './components/Home/home';
 import Catalog from './components/Catalog/catalog'
 import ProductPage from './components/Product-page/product-page'
 import NoMatch from './components/No-match/no-match'
 import SummaryCart from './components/Summary-cart/summary-cart'
+import RoutesName from './routes-list';
+import AboutUs from './components/About-us/about-us';
+import Contacts from './components/Contacts/contacts';
+import SignUp from './components/SignUp/sign-up'
 
-const RoutesName = {
-  home: '/',
-  products: '/products',
-  cart: '/shopping-cart'
-};
-
-function Routes() {
+export default function Routes() {
   return (
     <Switch>
+      <Route path={RoutesName.signUp} component={SignUp} />
       <Route path={RoutesName.products} exact component={Catalog} />
       <Route
         path={`${RoutesName.products}/:id`}
@@ -25,6 +24,8 @@ function Routes() {
         }}
       />
       <Route path={RoutesName.cart} component={SummaryCart} />
+      <Route path={RoutesName.aboutUs} component={AboutUs} />
+      <Route path={RoutesName.contacts} component={Contacts} />
 
       /*in the end*/
       <Route path={RoutesName.home} exact>
@@ -36,5 +37,3 @@ function Routes() {
     </Switch>
   );
 }
-export default Routes;
-export { RoutesName };

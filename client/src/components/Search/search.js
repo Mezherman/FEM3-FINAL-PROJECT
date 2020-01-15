@@ -24,7 +24,7 @@ export default function Search() {
       <Autocomplete
         size="small"
         freeSolo
-        options={data.products.map((option) => option.title)}
+        options={data.products.map((option) => option.name)}
         renderInput={(params) => (
           <TextField
             className={classes.root}

@@ -9,14 +9,15 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import ModalWindow from '../Modal-window/modal-window';
 
 import useStyles from './_add-to-basket';
+import ProductCard from '../Product-card/product-card';
 
 export default function AddToBasket({ open, onModalClose, product }) {
   const classes = useStyles();
-  const { url, title, price, specialPrice } = product;
-  const [totalPrice, setTotalPrice] = useState(price);
+  const { imageUrls, name, currentPrice, specialPrice } = product;
+  const [totalPrice, setTotalPrice] = useState(currentPrice);
   const [qty, setQty] = useState(1);
 
-  const finalPrice = !specialPrice ? price : specialPrice;
+  const finalPrice = !specialPrice ? currentPrice : specialPrice;
 
   useEffect(() => {
     setTotalPrice(qty * finalPrice)
@@ -38,12 +39,12 @@ export default function AddToBasket({ open, onModalClose, product }) {
         <div className={classes.body}>
           <Grid container spacing={4} justify="center">
             <Grid item sm={6} md={4}>
-              <img className={classes.img} src={url} alt="" />
+              <img className={classes.img} src={imageUrls[0]} alt={name} />
             </Grid>
             <Grid item sm={12} md={8}>
               <div className={classes.title}>
                 <span>
-                  {title}
+                  {name}
                 </span>
                 <span className={classes.total}>TOTAL:</span>
               </div>
@@ -51,7 +52,7 @@ export default function AddToBasket({ open, onModalClose, product }) {
               <Box className={classes.pricingBlock}>
                 <Box className={classes.price}>
                   <span>{finalPrice}</span>
-                  <span className={classes.currency}>UAH</span>
+                  <span className={classes.currency}>EUR</span>
                 </Box>
                 <Paper className={classes.qtyPicker}>
                   <Box
@@ -73,7 +74,7 @@ export default function AddToBasket({ open, onModalClose, product }) {
                 </Paper>
                 <Box className={classes.total}>
                   <span>{totalPrice}</span>
-                  <span className={classes.currency}>UAH</span>
+                  <span className={classes.currency}>EUR</span>
                 </Box>
               </Box>
             </Grid>
@@ -117,7 +118,12 @@ export default function AddToBasket({ open, onModalClose, product }) {
 }
 
 AddToBasket.propTypes = {
-  open: PropTypes.bool.isRequired,
-  onModalClose: PropTypes.func.isRequired,
-  product: PropTypes.objectOf(PropTypes.string).isRequired,
+  product:
+  PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.string,
+      PropTypes.boolean])
+  ).isRequired,
+  // product: PropTypes.objectOf(PropTypes.string).isRequired,
 };

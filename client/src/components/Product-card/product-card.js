@@ -9,42 +9,65 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
 import * as cartActions from '../../redux/actions/CartActions';
 
+import { Link } from 'react-router-dom';
 import useStyles from './_product-card';
 import './product-card.scss';
 import AddToBasket from '../Add-to-basket/add-to-basket';
+import RoutesName from '../../routes-list';
 
-function ProductCard({ product, url, title, price, cartActionsList, specialPrice = false }) {
+function ProductCard({ product, cartActionsList }) {
+  const { enabled, imageUrls, name, currentPrice, previousPrice, _id } = product;
   const classes = useStyles();
-  const priceClassName = {
-    className: specialPrice ? 'product-card-old-price' : 'product-card-regular-price'
-  };
+  // const priceClassName = {
+  //   className: previousPrice ? 'product-card-old-price' : 'product-card-regular-price'
+  // };
 
   const [modalIsVisible, setModalVisibility] = useState(false);
 
   const closeModal = () => {
     setModalVisibility(false)
   };
-
   return (
     <>
       <AddToBasket
         open={modalIsVisible}
         onModalClose={closeModal}
-        product={{ url, title, price, specialPrice }}
+        product={{ imageUrls, name, currentPrice, specialPrice: previousPrice }}
       />
+
       <div className={classes.card}>
-        <Divider />
+        <Link
+          to={`${RoutesName.products}/${_id}`}
+          className={classes.link}
+        >
+          <Divider />
+          <Container maxWidth="sm">
+            <div className={classes.imgWrapper}>
+              <img
+                src={imageUrls[0]}
+                className={classes.img}
+                alt={name}
+              />
+            </div>
+            <Divider variant="middle" />
+            <h3 className={classes.title}>{name}</h3>
+            <div className={classes.priceBox}>
+              {previousPrice && (
+                <span className={classes.oldPrice}>
+                        &#8364;
+                  {previousPrice}
+                </span>
+              )}
+              <span
+                className={previousPrice ? classes.specialPrice : classes.regularPrice}
+              >
+                      &#8364;
+                {currentPrice}
+              </span>
+            </div>
+          </Container>
+        </Link>
         <Container maxWidth="sm">
-          <div className={classes.imgWrapper}>
-            <img src={url} className={classes.img} alt="" />
-          </div>
-          <Divider variant="middle" />
-          <h1 className={classes.title}>{title}</h1>
-          <div className={classes.priceBox}>
-            <span className={priceClassName.className}>{price}</span>
-            {specialPrice &&
-            <span className="product-card-special-price">{specialPrice}</span>}
-          </div>
           <Button
             size="large"
             fullWidth
@@ -52,7 +75,7 @@ function ProductCard({ product, url, title, price, cartActionsList, specialPrice
             color="primary"
             disableElevation
             onClick={() => {
-              console.log('Add to Cart');
+              console.log('add product', product);
               cartActionsList.addProductToCart(product);
               setModalVisibility(true)
             }}
@@ -76,8 +99,20 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCard)
 
 ProductCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
-  specialPrice: PropTypes.string,
-}
+  product:
+  PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.string,
+      PropTypes.boolean])
+  ).isRequired,
+  // name: PropTypes.string.isRequired,
+  // imageUrls: PropTypes.array.isRequired,
+  // currentPrice: PropTypes.string.isRequired,
+  // specialPrice: PropTypes.string,
+};
+
+// ProductCard.defaultProps = {
+//   specialPrice: false,
+//   enabled: true
+// };
