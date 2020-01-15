@@ -31,8 +31,6 @@ export default function AboutUs() {
           <p>Design has always been an integral part of WMF's corporate philosophy. The products are designed to be distinctive. Today, WMF's internal creative team works in close cooperation with renowned international designers from many different disciplines. The company takes a holistic approach to design, combining aesthetics, function and usability, while always focusing on the customer. WMF products are intended to make preparing, cooking, eating and drinking an emotional experience for customers. WMF’s success in this is shown in the numerous design awards that the company receives year after year.</p>
         </Grid>
       </Grid>
-
-
     </>
   )
 }
