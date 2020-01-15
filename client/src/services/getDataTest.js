@@ -7,12 +7,7 @@ axios.defaults.headers.common.Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cC
 export default function getDataTest() {
   return axios
     .get('/products')
-    .then((products) => {
-      console.log('localhost 5000');
-      return products.data
-
-    })
-
+    .then((products) => products.data)
     .catch((err) => {
       console.log('ERROR = ', err);
     });

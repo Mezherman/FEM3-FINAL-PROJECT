@@ -5,13 +5,15 @@ import Catalog from './components/Catalog/catalog'
 import ProductPage from './components/Product-page/product-page'
 import NoMatch from './components/No-match/no-match'
 import SummaryCart from './components/Summary-cart/summary-cart'
+import RoutesName from './routes-list';
 import AboutUs from './components/About-us/about-us';
 import Contacts from './components/Contacts/contacts';
-import RoutesName from './routes-list';
+import SignUp from './components/SignUp/sign-up'
 
 export default function Routes() {
   return (
     <Switch>
+      <Route path={RoutesName.signUp} component={SignUp} />
       <Route path={RoutesName.products} exact component={Catalog} />
       <Route
         path={`${RoutesName.products}/:id`}

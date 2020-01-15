@@ -4,7 +4,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { IconButton } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person'
 import SignIn from './authorization';
-import useStyles from '../Header/header-style';
+import useStyles from '../Header/_header';
 import { StyledMenu } from './_authorization';
 
 export default function CustomizedMenus3() {
