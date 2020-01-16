@@ -13,12 +13,13 @@ export default function Footer() {
         alt="headerMainLogo"
         className={classes.mainHeaderLogoImg}
         useMap="#products"
+        style={{width: '80px', height: '80px'}}
       />
       <map name="products">
         <Link to={RoutesName.aboutUs}>
           <area
             shape="poly"
-            coords="28,23,52,7,79,1,112,6,139,23,83,80"
+            coords="13,10,33,2,52,3,64,11,40,37"
             href="#raz2"
             label="Coocking"
             title="Coocking"
@@ -27,7 +28,7 @@ export default function Footer() {
         <Link to={RoutesName.delivery}>
           <area
             shape="poly"
-            coords="25,139,4,101,5,63,25,27,79,83"
+            coords="9,13,37,39,12,65,2,49,2,30"
             href="#raz2"
             label="Drinking"
             title="Drinking"
@@ -35,14 +36,14 @@ export default function Footer() {
         </Link>
         <area
           shape="poly"
-          coords="139,143,81,84,26,138,66,162,99,161"
+          coords="14,69,38,41,64,66,45,76,32,76"
           href="#raz3"
           alt="Dining"
           title="Dining"
         />
         <area
           shape="poly"
-          coords="143,140,85,83,142,26,162,63,161,106"
+          coords="67,66,41,41,66,13,76,31,76,48"
           href="#raz4"
           alt="Preparing"
           title="Preparing"
