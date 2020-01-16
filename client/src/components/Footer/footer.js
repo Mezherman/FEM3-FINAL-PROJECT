@@ -10,11 +10,13 @@ export default function Footer() {
     <>
       <Grid container justify="space-between" spacing={2} className={classes.container}>
         <Grid xs={12} md={5} item container wrap="nowrap" alignItems="flex-start">
-          <img
-            src={`${process.env.PUBLIC_URL}/img/header/wmf-logo-50x60.svg`}
-            alt="WMF"
-            className={classes.img}
-          />
+          <Link to={RoutesName.home}>
+            <img
+              src={`${process.env.PUBLIC_URL}/img/header/wmf-logo-50x60.svg`}
+              alt="WMF"
+              className={classes.img}
+            />
+          </Link>
           <div>
             <h2 className={classes.title}>The culinary experts</h2>
             <p>
@@ -29,25 +31,25 @@ export default function Footer() {
               <Grid container item direction="column">
                 <h2 className={classes.title}>Company</h2>
                 <Divider />
-                <Link to={RoutesName.home}>Home</Link>
-                <Link to={RoutesName.aboutUs}>About us</Link>
-                <Link to={RoutesName.products}>Products</Link>
+                <Link to={RoutesName.home} className={classes.links}>Home</Link>
+                <Link to={RoutesName.aboutUs} className={classes.links}>About us</Link>
+                <Link to={RoutesName.products} className={classes.links}>Products</Link>
               </Grid>
             </Grid>
             <Grid item xs={12} sm={4}>
               <Grid container item direction="column">
                 <h2 className={classes.title}>Account</h2>
                 <Divider />
-                <Link to={RoutesName.signUp}>Sign up</Link>
-                <Link to={RoutesName.signIn}>Sign in</Link>
-                <Link to={RoutesName.cart}>Shopping cart</Link>
+                <Link to={RoutesName.signUp} className={classes.links}>Sign up</Link>
+                <Link to={RoutesName.signIn} className={classes.links}>Sign in</Link>
+                <Link to={RoutesName.cart} className={classes.links}>Shopping cart</Link>
               </Grid>
             </Grid>
             <Grid item xs={12} sm={5}>
               <Grid container item direction="column">
                 <h2 className={classes.title}>Contacts</h2>
                 <Divider />
-                <Link to={RoutesName.contacts}> Contact list </Link>
+                <Link to={RoutesName.contacts} className={classes.links}> Contact list </Link>
                 <span>Professional Contacts</span>
                 <span>WMF Coffeemachines</span>
                 <span>WMF Professional Hotel Equipment</span>

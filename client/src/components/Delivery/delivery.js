@@ -18,12 +18,14 @@ export default function Delivery() {
             From &#8364;49.00 there is no charge for delivering your goods. Up to this amount you
             pay &#8364;4.95 per order.
           </p>
+          <Divider />
           <h2>What countries does WMF deliver to?</h2>
           We currently deliver to the following countries:
           <ul>
             <li>Germany</li>
             <li>Austria</li>
           </ul>
+          <Divider />
         </Grid>
       </Grid>
     </>

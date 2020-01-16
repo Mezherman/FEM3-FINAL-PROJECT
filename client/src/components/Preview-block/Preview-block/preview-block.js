@@ -68,7 +68,7 @@ export default function PreviewBlock(props) {
               <Divider />
               <div className={classes.price}>
                 <span>Cart Subtotal</span>
-                <span>€300</span>
+                <span>&#8364;300</span>
               </div>
               <Link to={RoutesName.cart}>
                 <Button
