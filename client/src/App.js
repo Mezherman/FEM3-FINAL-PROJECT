@@ -16,8 +16,8 @@ export default function App(props) {
         </Route>
         <ScrollToAnchor />
         <Routes />
+        <Footer />
       </Router>
-      <Footer />
       <ScrollTop {...props} />
     </Container>
   )
