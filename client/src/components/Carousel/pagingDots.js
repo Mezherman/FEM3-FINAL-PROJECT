@@ -11,7 +11,9 @@ export default function PagingDots (props) {
     cellAlign,
     classItems,
     classItemsActive,
-    containerID,
+    ulPagingItem,
+    ulMainPagingItem,
+    mainCarousel,
   } = props;
   // eslint-disable-next-line no-shadow
   function getDotIndexes (slideCount, slidesToScroll, slidesToShow, cellAlign) {
@@ -39,19 +41,25 @@ export default function PagingDots (props) {
   }
   const indexes = getDotIndexes(slideCount, slidesToScroll, slidesToShow, cellAlign);
   return (
-    <ul id={containerID}>
+    <ul className={mainCarousel ? ulMainPagingItem : ulPagingItem}>
       {indexes.map((index) => (
         <li
           key={index}
           className={currentSlide === index ? classItemsActive : classItems}
         >
-          <button
-            type="button"
-            onClick={goToSlide.bind(null, index)}
-            aria-label={'slide '.concat(index + 1, ' bullet')}
-          >
-            {index + 1}
-          </button>
+          {
+            mainCarousel
+              ? (
+                <button
+                  type="button"
+                  onClick={goToSlide.bind(null, index)}
+                  aria-label={'slide '.concat(index + 1, ' bullet')}
+                >
+                  {index + 1}
+                </button>
+              )
+              : null
+          }
         </li>
       ))}
     </ul>
@@ -67,7 +75,11 @@ PagingDots.propTypes = {
   goToSlide: PropTypes.func.isRequired,
   classItems: PropTypes.string.isRequired,
   classItemsActive: PropTypes.string.isRequired,
-  containerID: PropTypes.string.isRequired
+  ulPagingItem: PropTypes.string.isRequired,
+  ulMainPagingItem: PropTypes.string.isRequired,
+  mainCarousel: PropTypes.bool,
 };
 
-// PagingDots.defaultProps = {}
+PagingDots.defaultProps = {
+  mainCarousel: false
+};

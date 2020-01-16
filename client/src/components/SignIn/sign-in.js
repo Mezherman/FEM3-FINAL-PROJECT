@@ -10,15 +10,22 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types';
-import RoutesName from '../../routes-list';
 import axios from 'axios';
 
+import FilledInput from '@material-ui/core/FilledInput';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 
-import { useStylesSingIn } from './_sign-in';
+import { FormLabel } from '@material-ui/core';
+import useStylesSingIn from './_sign-in';
+import RoutesName from '../../routes-list';
 
 export default function SignIn(props) {
   const [login, setLogin] = useState(null);
   const [password, setPassword] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [length, setLenght] = useState(1);
 
   const { onClose } = props;
   const classes = useStylesSingIn();
@@ -29,6 +36,25 @@ export default function SignIn(props) {
   // };
   // console.log(handleOnChangeLogin);
 
+  // const [labelWidth, setLabelWidth] = React.useState(0);
+  // const [name, setName] = React.useState('Composed TextField');
+  // const labelRef = React.useRef(null);
+  //
+  // React.useEffect(() => {
+  //   setLabelWidth(labelRef.current.offsetWidth);
+  // }, []);
+  //
+  // const handleChange = (event) => {
+  //   setName(event.target.value);
+  // };
+  //
+
+  const colorChanger = (event) => {
+    if (event.target.value.length > 0) {
+      setLenght(event.target.length)
+    }
+  };
+
   const handleOnChangeLogin = (event) => {
     setLogin(event.target.value)
   };
@@ -37,23 +63,28 @@ export default function SignIn(props) {
     setPassword(event.target.value)
   };
 
-
   function handleClick(event) {
     event.preventDefault();
     // const password = handleOnChangePassword;
     const userData = {
       loginOrEmail: login,
-      password: password
+      password
     };
     axios
       .post('/customers/login', userData)
       .then((loginResult) => {
         onClose();
-        console.log('SUCCESS ', loginResult.data.token)
+        localStorage.setItem('token', `${loginResult.data.token}`);
+        const token = localStorage.getItem('token');
+        setErrorMessage(null);
+        console.log(token)
+
         /* Do something with jwt-token if login successed */
       })
       .catch((err) => {
-        console.log(err);
+        setErrorMessage('Incorrect password or login');
+        // console.log(err);
+        Promise.reject(err)
         /* Show error to customer, may be incorrect password or something else */
       });
   }
@@ -68,34 +99,65 @@ export default function SignIn(props) {
         <Typography component="h1" variant="h5">
             Sign In
         </Typography>
+        <Typography className={classes.errorText} component="h3" variant="inherit">
+          {errorMessage}
+        </Typography>
         <form className={classes.form} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
+            // color={length ? 'secondary' : 'primary'}
             id="email"
-            label="Email Address"
+            label={(
+              <FormLabel
+                className={classes.labelText}
+                required
+              >
+                Email Address
+              </FormLabel>
+            )}
             name="email"
             autoComplete="email"
             autoFocus
             onBlur={handleOnChangeLogin}
-            // onChange={handleOnChangeLogin}
+            onChange={colorChanger}
           />
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             name="password"
-            label="Password"
+            label={(
+              <FormLabel
+                className={classes.labelText}
+                required
+              >
+                Password
+              </FormLabel>
+            )}
             type="password"
             id="password"
             autoComplete="current-password"
             onChange={handleOnChangePassword}
           />
+          {/* <FormControl variant="outlined"> */}
+          {/*  <InputLabel ref={labelRef} htmlFor="component-outlined"> */}
+          {/*    Name */}
+          {/*  </InputLabel> */}
+          {/*  <OutlinedInput */}
+          {/*    id="component-outlined" */}
+          {/*    value={name} */}
+          {/*    onChange={handleChange} */}
+          {/*    labelWidth={labelWidth} */}
+          {/*  /> */}
+          {/* </FormControl> */}
+          {/* <FormControl variant="filled"> */}
+          {/*  <InputLabel htmlFor="component-filled">Name</InputLabel> */}
+          {/*  <FilledInput id="component-filled" value={name} onChange={handleChange} /> */}
+          {/* </FormControl> */}
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={<Checkbox value="remember" color="primary" className={classes.checkBox}/>}
             label="Remember me"
           />
           <Button
