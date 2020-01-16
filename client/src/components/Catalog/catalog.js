@@ -4,7 +4,8 @@ import ProductList from '../Product-list/product-list';
 import ContainerFilter from '../Filter/filter';
 import useStyles from './catalog-style';
 
-export default function Catalog() {
+export default function Catalog({ category }) {
+  console.log('category =', category);
   const classes = useStyles();
 
   return (
@@ -16,7 +17,7 @@ export default function Catalog() {
           </div>
         </Grid>
         <Grid item sm={12} md={8}>
-          <ProductList />
+          <ProductList category={category} />
         </Grid>
       </Grid>
     </>

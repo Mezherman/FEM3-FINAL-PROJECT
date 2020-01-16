@@ -2,7 +2,7 @@
 // import { Paper, Box, ClickAwayListener } from '@material-ui/core';
 // import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 //
-// import getCategories from '../../services/getCategories';
+// import getCatalog from '../../services/getCatalog';
 //
 // import './header-navbar.scss';
 //
@@ -16,7 +16,7 @@
 //   };
 //
 //   componentDidMount() {
-//     getCategories()
+//     getCatalog()
 //       .then((categories) => {
 //         this.setState(() => (
 //           { categories }

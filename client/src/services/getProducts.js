@@ -1,4 +1,5 @@
 import axios from 'axios';
+import getCategories from './getCategories';
 
 axios.defaults.baseURL = 'http://localhost:5000';
 
@@ -13,14 +14,30 @@ export default function getAllProducts() {
     });
 }
 
-export function getProductsByCategory(categoryName) {
-  return axios
-    .get(`/products/filter?categories=${categoryName}`)
-    .then((products) => {
-      console.log('getProductsByCategory = ', products.data);
-      return products.data
-    })
-    .catch((err) => {
-      console.log('ERROR = ', err);
+export async function getProductsByCategory(categoryName) {
+  if (['cooking', 'dining', 'drinking', 'preparing'].includes(categoryName)) {
+    const subCategoriesList = await getCategories().then((catalog) => {
+      const subCategories = catalog.filter((category) => category.parentId === categoryName);
+      return subCategories.map((category) => category.id).join(',');
     });
+    return axios
+      .get(`/products/filter?categories=${subCategoriesList}`)
+      .then((products) => {
+        console.log('getProductsByCategory = ', products.data);
+        return products.data
+      })
+      .catch((err) => {
+        console.log('ERROR = ', err);
+      });
+  } else {
+    return axios
+      .get(`/products/filter?categories=${categoryName}`)
+      .then((products) => {
+        console.log('getProductsByCategory = ', products.data);
+        return products.data
+      })
+      .catch((err) => {
+        console.log('ERROR = ', err);
+      });
+  }
 }

@@ -9,7 +9,7 @@ import getAllProducts, { getProductsByCategory } from '../../services/getProduct
 import { RoutesName } from '../../routes';
 // import './product-list.scss'
 
-export default function ProductList() {
+export default function ProductList({ category }) {
   const classes = useStyles();
 
   const [data, setData] = useState([]);
@@ -21,12 +21,12 @@ export default function ProductList() {
   //     })
   // }, [])
   useEffect(() => {
-    getProductsByCategory('pots')
+    getProductsByCategory(category)
       .then((products) => {
-        console.log('useEffect = ', products)
+        console.log('useEffect = ', products);
         setData(products.products)
       })
-  }, []);
+  }, [category]);
   // useEffect(() => {
   //   getAllCards()
   //     .then((response) => {
