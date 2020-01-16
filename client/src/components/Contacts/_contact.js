@@ -4,7 +4,7 @@ const useStyles = makeStyles((theme) => ({
   contact: {
     cursor: 'pointer',
     '&:hover': {
-      color: 'green'
+      color: theme.palette.primary.main
     }
   }
 }));
