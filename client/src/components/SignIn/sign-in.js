@@ -10,38 +10,53 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import RoutesName from '../../routes-list';
+import axios from 'axios';
 
-import { useStylesSingIn } from './_authorization';
+
+import { useStylesSingIn } from './_sign-in';
 
 export default function SignIn(props) {
+  const [login, setLogin] = useState(null);
+  const [password, setPassword] = useState(null);
+
   const { onClose } = props;
   const classes = useStylesSingIn();
 
-  const userData = {
-    loginOrEmail: 'ivanr',
-    password: '123456789'
+  // const userData = {
+  //   loginOrEmail: 'ivanr',
+  //   password: '123456789'
+  // };
+  // console.log(handleOnChangeLogin);
+
+  const handleOnChangeLogin = (event) => {
+    setLogin(event.target.value)
   };
+
+  const handleOnChangePassword = (event) => {
+    setPassword(event.target.value)
+  };
+
 
   function handleClick(event) {
     event.preventDefault();
+    // const password = handleOnChangePassword;
+    const userData = {
+      loginOrEmail: login,
+      password: password
+    };
     axios
       .post('/customers/login', userData)
       .then((loginResult) => {
-        console.log('SUCCESS ', loginResult)
+        onClose();
+        console.log('SUCCESS ', loginResult.data.token)
         /* Do something with jwt-token if login successed */
       })
       .catch((err) => {
-        console.log('ERROR', err);
+        console.log(err);
         /* Show error to customer, may be incorrect password or something else */
       });
   }
-
-  const handleOnChange = (event) => {
-    console.log('Click');
-    console.log(event.target.value);
-  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -64,7 +79,8 @@ export default function SignIn(props) {
             name="email"
             autoComplete="email"
             autoFocus
-            onChange={handleOnChange}
+            onBlur={handleOnChangeLogin}
+            // onChange={handleOnChangeLogin}
           />
           <TextField
             variant="outlined"
@@ -76,6 +92,7 @@ export default function SignIn(props) {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handleOnChangePassword}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -95,7 +112,6 @@ export default function SignIn(props) {
             variant="body2"
             className={classes.text}
             to={RoutesName.signUp}
-
             onClick={onClose}
           >
               Don&#8242;t have an account?
