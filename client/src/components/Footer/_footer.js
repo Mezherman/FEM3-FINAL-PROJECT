@@ -9,6 +9,11 @@ const useStyles = makeStyles((theme) => ({
   },
   img: {
     paddingRight: theme.spacing(2)
+  },
+  links: {
+    color: theme.palette.text.primary,
+    '&:hover': { color: theme.palette.secondary.dark },
+    textDecoration: 'none'
   }
 }));
 
