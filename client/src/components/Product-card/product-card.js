@@ -11,16 +11,12 @@ import * as cartActions from '../../redux/actions/CartActions';
 
 import { Link } from 'react-router-dom';
 import useStyles from './_product-card';
-import './product-card.scss';
 import AddToBasket from '../Add-to-basket/add-to-basket';
 import RoutesName from '../../routes-list';
 
 function ProductCard({ product, cartActionsList }) {
-  const { enabled, imageUrls, name, currentPrice, previousPrice, _id } = product;
+  const { enabled, imageUrls, name, currentPrice, previousPrice, _id, itemNo } = product;
   const classes = useStyles();
-  // const priceClassName = {
-  //   className: previousPrice ? 'product-card-old-price' : 'product-card-regular-price'
-  // };
 
   const [modalIsVisible, setModalVisibility] = useState(false);
 
@@ -32,13 +28,14 @@ function ProductCard({ product, cartActionsList }) {
       <AddToBasket
         open={modalIsVisible}
         onModalClose={closeModal}
-        product={{ imageUrls, name, currentPrice, specialPrice: previousPrice }}
+        product={{ imageUrls, name, currentPrice, previousPrice }}
       />
 
       <div className={classes.card}>
         <Link
-          to={`${RoutesName.products}/${_id}`}
+          to={`${RoutesName.products}/${itemNo}`}
           className={classes.link}
+          product={product}
         >
           <Divider />
           <Container maxWidth="sm">
@@ -50,7 +47,7 @@ function ProductCard({ product, cartActionsList }) {
               />
             </div>
             <Divider variant="middle" />
-            <h3 className={classes.title}>{name}</h3>
+            <h3 className={classes.title}>{name.toUpperCase()[0] + name.slice(1)}</h3>
             <div className={classes.priceBox}>
               {previousPrice && (
                 <span className={classes.oldPrice}>

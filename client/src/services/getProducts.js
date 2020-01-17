@@ -17,8 +17,18 @@ export function getProductsByCategory(categoryName) {
   return axios
     .get(`/products/filter?categories=${categoryName}`)
     .then((products) => {
-      console.log('getProductsByCategory = ', products.data);
       return products.data
+    })
+    .catch((err) => {
+      console.log('ERROR = ', err);
+    });
+}
+
+export function getProductsByItemNo(itemNo) {
+  return axios
+    .get(`/products/${itemNo}`)
+    .then((product) => {
+      return product
     })
     .catch((err) => {
       console.log('ERROR = ', err);

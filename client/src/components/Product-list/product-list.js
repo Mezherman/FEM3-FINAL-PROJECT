@@ -6,8 +6,7 @@ import ProductCard from '../Product-card/product-card';
 import getAllCards from '../../services/dataBase';
 import getAllProducts, { getProductsByCategory } from '../../services/getProducts';
 
-import { RoutesName } from '../../routes';
-// import './product-list.scss'
+// import { RoutesName } from '../../routes';
 
 export default function ProductList() {
   const classes = useStyles();
@@ -33,7 +32,6 @@ export default function ProductList() {
   //       setData({ products: response.products })
   //     })
   // }, []);
-  console.log('data = ', data);
   return (
     <div className={classes.productList}>
       {data.map((product, index) => (
