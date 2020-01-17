@@ -43,7 +43,7 @@ export default function AddToBasket({ open, onModalClose, product }) {
             <Grid item sm={12} md={8}>
               <div className={classes.title}>
                 <span>
-                  {name}
+                  {name.toUpperCase()[0] + name.slice(1)}
                 </span>
                 <span className={classes.total}>TOTAL:</span>
               </div>

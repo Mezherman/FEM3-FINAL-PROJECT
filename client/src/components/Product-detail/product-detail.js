@@ -10,6 +10,7 @@ import { Box, Typography } from '@material-ui/core';
 import './carousel-react.scss';
 import StopIcon from '@material-ui/icons/Stop';
 
+import ReactImageZoom from 'react-image-zoom';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -31,12 +32,17 @@ export default function ProductDetail({ product }) {
   const closeModal = () => {
     setModalVisibility(false)
   };
+
+  const srcSet = imageUrls.map((url) => (
+    url
+  ));
   const images = imageUrls.map((url) => (
     {
       original: url,
       thumbnail: url
     }
   ));
+  const zoom = { width: 400, zoomWidth: 400, offset: { vertical: 0, horizontal: -60, zoomStyle: {} }, img: '/img/products/cooking/pots/4000530707901/2.jpg' };
 
   const BootstrapInput = withStyles((theme) => createStyles({
     root: {
@@ -83,8 +89,10 @@ export default function ProductDetail({ product }) {
       <h2 className={classes.title}>{name}</h2>
       <Grid container spacing={4} justify="center">
         <Grid item xs={12} sm={12} md={7} xl={6}>
+          <ReactImageZoom {...zoom} />
           <MyGallery
             images={images}
+            srcSet={srcSet}
             // key={imageUrls: [0]}
           />
 
@@ -156,7 +164,6 @@ export default function ProductDetail({ product }) {
                       <StopIcon />
                       In stock
                     </span>
-
                   </div>
                   <Divider />
                   <Button
@@ -169,7 +176,6 @@ export default function ProductDetail({ product }) {
                       setModalVisibility(true)
                     }}
                   >
-
                     <ShoppingCartOutlinedIcon />
                   </Button>
                 </Container>
