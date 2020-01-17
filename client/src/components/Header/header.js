@@ -220,7 +220,7 @@ function Header(props) {
       {renderMobileMenu}
       {renderMenu}
       <Search />
-      {/*<HeaderNavbar />*/}
+      <HeaderNavbar />
     </Container>
   );
 }

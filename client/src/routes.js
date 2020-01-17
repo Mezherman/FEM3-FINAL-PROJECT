@@ -15,15 +15,56 @@ export default function Routes() {
   return (
     <Switch>
       <Route path={RoutesName.signUp} component={SignUp} />
-      <Route path={RoutesName.products} exact component={Catalog} />
       <Route
-        path={`${RoutesName.products}/:id`}
+        path={RoutesName.products}
+        exact
+        render={() => {
+          return <Catalog category='all' />
+        }}
+      />
+      <Route
+        path={`${RoutesName.products}/cooking/:subCategory`}
+        exact
         render={({ match, location }) => {
-          const { id } = match.params;
+          const { subCategory } = match.params;
+          return <Catalog category={subCategory} />
+        }}
+      />
+      <Route
+        path={`${RoutesName.products}/preparing/:subCategory`}
+        exact
+        render={({ match, location }) => {
+          const { subCategory } = match.params;
+          return <Catalog category={subCategory} />
+        }}
+      />
+      <Route
+        path={`${RoutesName.products}/dining/:subCategory`}
+        exact
+        render={({ match, location }) => {
+          const { subCategory } = match.params;
+          return <Catalog category={subCategory} />
+        }}
+      />
+      <Route
+        path={`${RoutesName.products}/drinking/:subCategory`}
+        exact
+        render={({ match, location }) => {
+          const { subCategory } = match.params;
+          return <Catalog category={subCategory} />
+        }}
+      />
+      <Route
+        path={`${RoutesName.products}/:categoryOrID`}
+        render={({ match, location }) => {
+          const { categoryOrID } = match.params;
+          if (isNaN(categoryOrID)) {
+            return <Catalog category={categoryOrID} />
+          }
           const { pathname: url } = location;
-          console.log(id);
-          console.log(url);
-          return <ProductPage itemId={id} itemUrl={url} />
+          // console.log(id);
+          // console.log(url);
+          return <ProductPage itemNo={categoryOrID} itemUrl={url} />
         }}
       />
       <Route path={RoutesName.cart} component={SummaryCart} />

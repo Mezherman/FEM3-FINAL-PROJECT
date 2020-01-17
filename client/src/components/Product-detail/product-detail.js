@@ -14,15 +14,15 @@ import ReactImageZoom from 'react-image-zoom';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import { createStyles, makeStyles, withStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, withStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import MyGallery from './carousel-react'
 import AddToBasket from '../Add-to-basket/add-to-basket';
 import useStyles from './_product-detail';
 
-export default function ProductDetail(props) {
-  const { product } = props;
+export default function ProductDetail({ product }) {
   const { imageUrls, name, currentPrice, previousPrice, myCustomParams } = product;
+  const { productHighlights, productDescription } = myCustomParams;
   const classes = useStyles();
   const [modalIsVisible, setModalVisibility] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -185,17 +185,17 @@ export default function ProductDetail(props) {
         </Grid>
       </Grid>
       <Grid container>
-        {/*  <Grid item xs={12} md={6} className={classes.highlights}> */}
-        {/*    Highlights: */}
-        {/*    <ul> */}
-        {/*      {myCustomParams.productHightlight.map((text) => (<li key={text}>{text}</li>))} */}
-        {/*    </ul> */}
-        {/* /!*    Product description:*!/ */}
-        {/* /!*    {productDescription.map((text) => (<p key={text}>{text}</p>))}*!/ */}
-        {/* /!*  </Grid>*!/ */}
-        {/* /!*  <Grid item xs={12} md={6}>*!/ */}
-        {/* /!*    Specifications:*!/ */}
-        {/*  </Grid> */}
+        <Grid item xs={12} md={6} className={classes.highlights}>
+          Highlights:
+          <ul>
+            {productHighlights.map((text) => (<li key={text}>{text}</li>))}
+          </ul>
+          Product description:
+          {productDescription.map((text) => (<p key={text}>{text}</p>))}
+        </Grid>
+        <Grid item xs={12} md={6}>
+          Specifications:
+        </Grid>
       </Grid>
     </Container>
   );
@@ -215,7 +215,6 @@ ProductDetail.propTypes = {
 
 ProductDetail.defaultProps = {
   // specialPrice: false,
-  // enabled: 'true',
-  // highlights: [],
+  // productHighlights: [],
   // productDescription: []
 };

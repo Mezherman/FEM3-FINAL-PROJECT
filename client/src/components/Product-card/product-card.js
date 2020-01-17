@@ -15,7 +15,7 @@ import AddToBasket from '../Add-to-basket/add-to-basket';
 import RoutesName from '../../routes-list';
 
 function ProductCard({ product, cartActionsList }) {
-  const { enabled, imageUrls, name, currentPrice, previousPrice, _id, itemNo } = product;
+  const { imageUrls, name, currentPrice, previousPrice, itemNo } = product;
   const classes = useStyles();
 
   const [modalIsVisible, setModalVisibility] = useState(false);
@@ -35,7 +35,6 @@ function ProductCard({ product, cartActionsList }) {
         <Link
           to={`${RoutesName.products}/${itemNo}`}
           className={classes.link}
-          product={product}
         >
           <Divider />
           <Container maxWidth="sm">
