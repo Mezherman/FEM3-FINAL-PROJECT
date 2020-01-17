@@ -219,9 +219,8 @@ function Header(props) {
       ) : null}
       {renderMobileMenu}
       {renderMenu}
-      {/* {renderSearchInput} */}
       <Search />
-      <HeaderNavbar />
+      {/*<HeaderNavbar />*/}
     </Container>
   );
 }

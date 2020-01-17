@@ -20,7 +20,7 @@ export default function PreviewList(props) {
           <div className={classes.text}>
             <p className={classes.title}>{product.name}</p>
             <p className={classes.price}>
-              €
+              &#8364;
               {product.specialPrice ? product.specialPrice : product.currentPrice}
             </p>
             <Divider />

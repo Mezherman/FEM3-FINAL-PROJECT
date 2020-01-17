@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+import { Link } from 'react-router-dom';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -65,11 +65,9 @@ export default function SignIn() {
           <Link
             variant="body2"
             className={classes.text}
-            href={RoutesName.signUp}
+            to={RoutesName.signUp}
           >
-            {/* eslint-disable-next-line react/no-unescaped-entities */}
-            Don't have an account?
-            {' '}
+            Don&#8242;t have an account?
             <b> Sign Up </b>
           </Link>
         </form>
