@@ -3,7 +3,7 @@ import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ImageGallery from 'react-image-gallery';
 
-const MyGallery = ({ images }) => {
+const MyGallery = ({ images, srcSet }) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   return (
@@ -12,6 +12,7 @@ const MyGallery = ({ images }) => {
       showThumbnails
       showPlayButton={false}
       disableThumbnailScroll
+      srcSet={srcSet}
     />
   )
 }

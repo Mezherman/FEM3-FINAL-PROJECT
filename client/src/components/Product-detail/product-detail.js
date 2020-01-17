@@ -10,6 +10,7 @@ import { Box, Typography } from '@material-ui/core';
 import './carousel-react.scss';
 import StopIcon from '@material-ui/icons/Stop';
 
+import ReactImageZoom from 'react-image-zoom';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -19,8 +20,9 @@ import MyGallery from './carousel-react'
 import AddToBasket from '../Add-to-basket/add-to-basket';
 import useStyles from './_product-detail';
 
-export default function ProductDetail({ product }) {
-  const { imageUrls, name, currentPrice, previousPrice, highlights, productDescription } = product;
+export default function ProductDetail(props) {
+  const { product } = props;
+  const { imageUrls, name, currentPrice, previousPrice, myCustomParams } = product;
   const classes = useStyles();
   const [modalIsVisible, setModalVisibility] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -30,12 +32,17 @@ export default function ProductDetail({ product }) {
   const closeModal = () => {
     setModalVisibility(false)
   };
+
+  const srcSet = imageUrls.map((url) => (
+    url
+  ));
   const images = imageUrls.map((url) => (
     {
       original: url,
       thumbnail: url
     }
   ));
+  const zoom = { width: 400, zoomWidth: 400, offset: { vertical: 0, horizontal: -60, zoomStyle: {} }, img: '/img/products/cooking/pots/4000530707901/2.jpg' };
 
   const BootstrapInput = withStyles((theme) => createStyles({
     root: {
@@ -82,16 +89,18 @@ export default function ProductDetail({ product }) {
       <h2 className={classes.title}>{name}</h2>
       <Grid container spacing={4} justify="center">
         <Grid item xs={12} sm={12} md={7} xl={6}>
+          <ReactImageZoom {...zoom} />
           <MyGallery
             images={images}
+            srcSet={srcSet}
             // key={imageUrls: [0]}
           />
 
           <Divider />
         </Grid>
-        <Grid item xs={12} sm={12} md={5} xl={6} >
-          <Grid container spacing={1} >
-            <Grid item xs={12} sm={12} md={12} >
+        <Grid item xs={12} sm={12} md={5} xl={6}>
+          <Grid container spacing={1}>
+            <Grid item xs={12} sm={12} md={12}>
               <Typography align="right">
                 <a href="#">Submit a review</a>
               </Typography>
@@ -104,13 +113,13 @@ export default function ProductDetail({ product }) {
               >
                 <ul className={classes.MuiListRoot}>
                   <li>
-                WMF
+                    WMF
                   </li>
                   <li>
-                Cutlery set
+                    Cutlery set
                   </li>
                   <li>
-                60-pcs.
+                    60-pcs.
                   </li>
                 </ul>
               </Box>
@@ -155,7 +164,6 @@ export default function ProductDetail({ product }) {
                       <StopIcon />
                       In stock
                     </span>
-
                   </div>
                   <Divider />
                   <Button
@@ -168,7 +176,6 @@ export default function ProductDetail({ product }) {
                       setModalVisibility(true)
                     }}
                   >
-
                     <ShoppingCartOutlinedIcon />
                   </Button>
                 </Container>
@@ -178,17 +185,17 @@ export default function ProductDetail({ product }) {
         </Grid>
       </Grid>
       <Grid container>
-        <Grid item xs={12} md={6} className={classes.highlights}>
-          Highlights:
-          <ul>
-            {highlights.map((text) => (<li key={text}>{text}</li>))}
-          </ul>
-          Product description:
-          {productDescription.map((text) => (<p key={text}>{text}</p>))}
-        </Grid>
-        <Grid item xs={12} md={6}>
-          Specifications:
-        </Grid>
+        {/*  <Grid item xs={12} md={6} className={classes.highlights}> */}
+        {/*    Highlights: */}
+        {/*    <ul> */}
+        {/*      {myCustomParams.productHightlight.map((text) => (<li key={text}>{text}</li>))} */}
+        {/*    </ul> */}
+        {/* /!*    Product description:*!/ */}
+        {/* /!*    {productDescription.map((text) => (<p key={text}>{text}</p>))}*!/ */}
+        {/* /!*  </Grid>*!/ */}
+        {/* /!*  <Grid item xs={12} md={6}>*!/ */}
+        {/* /!*    Specifications:*!/ */}
+        {/*  </Grid> */}
       </Grid>
     </Container>
   );

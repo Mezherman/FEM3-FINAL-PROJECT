@@ -21,6 +21,8 @@ export default function Routes() {
         render={({ match, location }) => {
           const { id } = match.params;
           const { pathname: url } = location;
+          console.log(id);
+          console.log(url);
           return <ProductPage itemId={id} itemUrl={url} />
         }}
       />
