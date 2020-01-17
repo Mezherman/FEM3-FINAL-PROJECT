@@ -13,14 +13,15 @@ import StopIcon from '@material-ui/icons/Stop';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import { createStyles, makeStyles, withStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, withStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import MyGallery from './carousel-react'
 import AddToBasket from '../Add-to-basket/add-to-basket';
 import useStyles from './_product-detail';
 
 export default function ProductDetail({ product }) {
-  const { imageUrls, name, currentPrice, previousPrice, highlights, productDescription } = product;
+  const { imageUrls, name, currentPrice, previousPrice, myCustomParams } = product;
+  const { productHighlights, productDescription } = myCustomParams;
   const classes = useStyles();
   const [modalIsVisible, setModalVisibility] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -89,9 +90,9 @@ export default function ProductDetail({ product }) {
 
           <Divider />
         </Grid>
-        <Grid item xs={12} sm={12} md={5} xl={6} >
-          <Grid container spacing={1} >
-            <Grid item xs={12} sm={12} md={12} >
+        <Grid item xs={12} sm={12} md={5} xl={6}>
+          <Grid container spacing={1}>
+            <Grid item xs={12} sm={12} md={12}>
               <Typography align="right">
                 <a href="#">Submit a review</a>
               </Typography>
@@ -104,13 +105,13 @@ export default function ProductDetail({ product }) {
               >
                 <ul className={classes.MuiListRoot}>
                   <li>
-                WMF
+                    WMF
                   </li>
                   <li>
-                Cutlery set
+                    Cutlery set
                   </li>
                   <li>
-                60-pcs.
+                    60-pcs.
                   </li>
                 </ul>
               </Box>
@@ -181,7 +182,7 @@ export default function ProductDetail({ product }) {
         <Grid item xs={12} md={6} className={classes.highlights}>
           Highlights:
           <ul>
-            {highlights.map((text) => (<li key={text}>{text}</li>))}
+            {productHighlights.map((text) => (<li key={text}>{text}</li>))}
           </ul>
           Product description:
           {productDescription.map((text) => (<p key={text}>{text}</p>))}
@@ -208,7 +209,6 @@ ProductDetail.propTypes = {
 
 ProductDetail.defaultProps = {
   // specialPrice: false,
-  // enabled: 'true',
-  // highlights: [],
+  // productHighlights: [],
   // productDescription: []
 };

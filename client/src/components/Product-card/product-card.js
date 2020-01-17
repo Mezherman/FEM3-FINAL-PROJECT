@@ -16,7 +16,7 @@ import AddToBasket from '../Add-to-basket/add-to-basket';
 import RoutesName from '../../routes-list';
 
 function ProductCard({ product, cartActionsList }) {
-  const { enabled, imageUrls, name, currentPrice, previousPrice, _id } = product;
+  const { imageUrls, name, currentPrice, previousPrice, itemNo } = product;
   const classes = useStyles();
   // const priceClassName = {
   //   className: previousPrice ? 'product-card-old-price' : 'product-card-regular-price'
@@ -37,7 +37,7 @@ function ProductCard({ product, cartActionsList }) {
 
       <div className={classes.card}>
         <Link
-          to={`${RoutesName.products}/${_id}`}
+          to={`${RoutesName.products}/${itemNo}`}
           className={classes.link}
         >
           <Divider />

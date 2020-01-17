@@ -9,7 +9,6 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import ModalWindow from '../Modal-window/modal-window';
 
 import useStyles from './_add-to-basket';
-import ProductCard from '../Product-card/product-card';
 
 export default function AddToBasket({ open, onModalClose, product }) {
   const classes = useStyles();

@@ -8,7 +8,7 @@ axios.defaults.headers.common.Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cC
 export default function getAllProducts() {
   return axios
     .get('/products')
-    .then((products) => products.data)
+    .then((response) => response.data)
     .catch((err) => {
       console.log('ERROR = ', err);
     });
@@ -22,9 +22,9 @@ export async function getProductsByCategory(categoryName) {
     });
     return axios
       .get(`/products/filter?categories=${subCategoriesList}`)
-      .then((products) => {
-        console.log('getProductsByCategory = ', products.data);
-        return products.data
+      .then((response) => {
+        // console.log('getProductsByCategory = ', response.data);
+        return response.data.products
       })
       .catch((err) => {
         console.log('ERROR = ', err);
@@ -32,12 +32,24 @@ export async function getProductsByCategory(categoryName) {
   } else {
     return axios
       .get(`/products/filter?categories=${categoryName}`)
-      .then((products) => {
-        console.log('getProductsByCategory = ', products.data);
-        return products.data
+      .then((response) => {
+        // console.log('getProductsByCategory = ', response.data);
+        return response.data.products
       })
       .catch((err) => {
         console.log('ERROR = ', err);
       });
   }
+}
+
+export function getProductsByItemNo(itemNo) {
+  return axios
+    .get(`/products/${itemNo}`)
+    .then((product) => {
+      console.log('getProductsByitemNo = ', product);
+      return product
+    })
+    .catch((err) => {
+      console.log('ERROR = ', err);
+    });
 }

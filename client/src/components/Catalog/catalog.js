@@ -5,7 +5,7 @@ import ContainerFilter from '../Filter/filter';
 import useStyles from './catalog-style';
 
 export default function Catalog({ category }) {
-  console.log('category =', category);
+  // console.log('category =', category);
   const classes = useStyles();
 
   return (

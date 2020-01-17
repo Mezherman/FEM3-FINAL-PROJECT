@@ -20,7 +20,7 @@ function HeaderNavbar(props) {
   const { categoriesVisible, subCategoriesVisible } = features;
   const { catalog, setCatalog } = props;
   const { mainCategories, allCategories } = catalog;
-  console.log('props =', props);
+  // console.log('props =', props);
 
   useEffect(() => {
     getCategories()
@@ -28,7 +28,7 @@ function HeaderNavbar(props) {
         // console.log('topLevelCat =', topLevelCategories);
         setCatalog(catalog);
       })
-  }, []);
+  }, [setCatalog]);
 
   const toggleCatalog = (event) => {
     if (!event.relatedTarget.classList ||
@@ -110,6 +110,12 @@ function HeaderNavbar(props) {
         <span
           key={subCategory.id}
           className="catalog-list-item sub-category"
+          onClick={() => setFeatures(
+            {
+              categoriesVisible: false,
+              subCategoriesVisible: false,
+            }
+          )}
         >
           <div className="square">img</div>
           {subCategory.name}
@@ -189,6 +195,7 @@ function HeaderNavbar(props) {
                 chosenCategory={chosenCategory}
                 toggleSubCategories={toggleSubCategories}
                 onCategoryLeave={onCategoryLeave}
+                setFeatures={setFeatures}
               />
             )}
             {subCategoriesVisible && SubCategories()}
@@ -200,7 +207,7 @@ function HeaderNavbar(props) {
 }
 
 const Categories = (props) => {
-  const { chosenCategory, toggleSubCategories, onCategoryLeave, categories } = props;
+  const { chosenCategory, toggleSubCategories, onCategoryLeave, categories, setFeatures } = props;
   const categoryList = categories.map((category) => {
     const classNames = `catalog-list-item ${category.name === chosenCategory ? ' _hover' : ''}`;
     return (
@@ -211,6 +218,12 @@ const Categories = (props) => {
           className={classNames}
           onMouseEnter={(event) => toggleSubCategories(event)}
           onMouseLeave={(event) => onCategoryLeave(event)}
+          onClick={() => setFeatures(
+            {
+              categoriesVisible: false,
+              subCategoriesVisible: false,
+            }
+          )}
         >
           {category.name}
         </li>
@@ -227,7 +240,7 @@ const Categories = (props) => {
 
 function mapStateToProps(state) {
   return {
-    catalog: state.Categories
+    catalog: state.categoriesReducer
   }
 }
 

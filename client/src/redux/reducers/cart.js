@@ -17,7 +17,7 @@ const initialState = {
 };
 
 export default function cart(state = initialState, action) {
-  console.log(action.type);
+  // console.log(action.type);
   switch (action.type) {
     case 'ADD_PRODUCT': {
       const product = action.payload;
