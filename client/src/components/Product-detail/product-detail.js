@@ -19,9 +19,15 @@ import InputBase from '@material-ui/core/InputBase';
 import MyGallery from './carousel-react'
 import AddToBasket from '../Add-to-basket/add-to-basket';
 import useStyles from './_product-detail';
+import CheckIcon from '@material-ui/icons/Check';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import SimpleTable from './table';
 
 export default function ProductDetail({ product }) {
-  const { imageUrls, name, currentPrice, previousPrice, myCustomParams } = product;
+  const { imageUrls, name, currentPrice, previousPrice, myCustomParams, brand } = product;
   const { productHighlights, productDescription } = myCustomParams;
   const classes = useStyles();
   const [modalIsVisible, setModalVisibility] = useState(false);
@@ -33,16 +39,20 @@ export default function ProductDetail({ product }) {
     setModalVisibility(false)
   };
 
-  const srcSet = imageUrls.map((url) => (
-    url
-  ));
-  const images = imageUrls.map((url) => (
-    {
+  //   const zoom = { width: 400, zoomWidth: 400, offset: { vertical: 0, "horizontal": -100, zoomStyle: {} }};
+  //
+  //   const zoomImage = imageUrls.map((url) => (
+  //
+  //   <ReactImageZoom {img: url, ...zoom} />
+  // ));
+
+
+    const images = imageUrls.map((url) => (
+  {
       original: url,
       thumbnail: url
     }
   ));
-  const zoom = { width: 400, zoomWidth: 400, offset: { vertical: 0, horizontal: -60, zoomStyle: {} }, img: '/img/products/cooking/pots/4000530707901/2.jpg' };
 
   const BootstrapInput = withStyles((theme) => createStyles({
     root: {
@@ -86,40 +96,37 @@ export default function ProductDetail({ product }) {
         onModalClose={closeModal}
         product={{ imageUrls, name, currentPrice }}
       />
-      <h2 className={classes.title}>{name}</h2>
+      <h1 className={classes.title}>{name.toUpperCase()[0] + name.slice(1)}</h1>
       <Grid container spacing={4} justify="center">
         <Grid item xs={12} sm={12} md={7} xl={6}>
-          <ReactImageZoom {...zoom} />
           <MyGallery
             images={images}
-            srcSet={srcSet}
             // key={imageUrls: [0]}
           />
-
           <Divider />
         </Grid>
         <Grid item xs={12} sm={12} md={5} xl={6}>
           <Grid container spacing={1}>
-            <Grid item xs={12} sm={12} md={12}>
-              <Typography align="right">
-                <a href="#">Submit a review</a>
-              </Typography>
-            </Grid>
+            {/*<Grid item xs={12} sm={12} md={12}>*/}
+            {/*  <Typography align="right">*/}
+            {/*    <a href="#">Submit a review</a>*/}
+            {/*  </Typography>*/}
+            {/*</Grid>*/}
             <Grid item xs={12} sm={6} md={12} xl={6}>
               <Box
                 border={1}
                 borderColor="text.primary"
-                className={classes.MuiBoxRoot}
+                className={classes.productFeatures}
               >
                 <ul className={classes.MuiListRoot}>
                   <li>
-                    WMF
+                    {brand}
                   </li>
                   <li>
-                    Cutlery set
+                    Collection: {myCustomParams.collection}
                   </li>
                   <li>
-                    60-pcs.
+                    {myCustomParams.setSize > 1 ? `${myCustomParams.setSize}-pcs.` : `${myCustomParams.setSize}-pc.`}
                   </li>
                 </ul>
               </Box>
@@ -127,7 +134,6 @@ export default function ProductDetail({ product }) {
             <Grid item xs={12} sm={6} md={12} xl={6}>
               <Box
                 className={classes.productShopArea}
-                fontSize={{ sm: '12px', md: '24px', lg: '36px' }}
               >
                 <Container>
                   <div className={classes.priceBox}>
@@ -165,21 +171,44 @@ export default function ProductDetail({ product }) {
                       In stock
                     </span>
                   </div>
+
                   <Divider />
-                  <Button
-                    size="large"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    disableElevation
-                    onClick={() => {
-                      setModalVisibility(true)
-                    }}
-                  >
-                    <ShoppingCartOutlinedIcon />
-                  </Button>
+                  <div className={classes.addToCart}>
+                    <Button
+                      size="large"
+                      fullWidth
+                      variant="contained"
+                      color="primary"
+                      disableElevation
+                      onClick={() => {
+                        setModalVisibility(true)
+                      }}
+                    >
+                      <ShoppingCartOutlinedIcon />
+                    </Button>
+                  </div>
                 </Container>
               </Box>
+            </Grid>
+            <Grid item xs={12} sm={6} md={12} xl={12}>
+              <List>
+              <ListItem button>
+                <ListItemIcon color="primary">
+                  <CheckIcon />
+                </ListItemIcon>
+                <ListItemText primary="Free delivery over 49€" />
+              </ListItem>
+              </List>
+                <li>
+                  Free delivery over 49€
+                </li>
+                <li>Free returns</li>
+            </Grid>
+            <Grid item xs={12} sm={6} md={12} xl={6}>
+                <li>
+                  Secure payment
+                </li>
+                <li>Certified online shop</li>
             </Grid>
           </Grid>
         </Grid>
@@ -195,6 +224,7 @@ export default function ProductDetail({ product }) {
         </Grid>
         <Grid item xs={12} md={6}>
           Specifications:
+          <SimpleTable data={product} />
         </Grid>
       </Grid>
     </Container>

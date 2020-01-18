@@ -5,18 +5,39 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '28px',
     fontWeight: '400',
   },
-  MuiBoxRoot: {
+  productFeatures: {
     height: '100%',
     padding: theme.spacing(1, 0),
     marginBottom: theme.spacing(1),
     border: '1px dashed',
     borderColor: theme.palette.background.primary,
+  [theme.breakpoints.up('md')]: {
+
+      display: 'none',
+  },
   },
   MuiListRoot: {
     listStyleType: 'disc',
   },
   disableBlock: {
     marginBottom: theme.spacing(1),
+  },
+  addToCart: {
+    position: 'fixed',
+    left: '0',
+    bottom: '0',
+    width: '100%',
+    padding: theme.spacing(2, 2, 1),
+    zIndex: '1000',
+    backgroundColor: theme.palette.background.primary,
+  [theme.breakpoints.up('md')]: {
+      position: 'static',
+      zIndex: '0',
+      padding: theme.spacing(0),
+    },
+    // productFeatures: {
+    //       display: 'none',
+    //     }
   },
   productShopArea: {
     padding: theme.spacing(2, 0),
