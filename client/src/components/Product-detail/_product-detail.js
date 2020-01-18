@@ -74,7 +74,10 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'right',
     verticalAlign: 'bottom',
   },
-
+  sectionitle: {
+fontSize: '18px',
+    fontWeight: '400'
+  },
   property: {
     fontWeight: 'bold',
   }

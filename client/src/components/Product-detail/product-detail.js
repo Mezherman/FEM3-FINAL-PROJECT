@@ -169,7 +169,6 @@ export default function ProductDetail({ product }) {
                     </span>
                   </div>
 
-                  <Divider />
                   <div className={classes.addToCart}>
                     <Button
                       size="large"
@@ -194,12 +193,14 @@ export default function ProductDetail({ product }) {
                 <FeatureItem label="Secure payment" />
                 <FeatureItem label="Certified online shop" />
               </List>
+              <Divider />
             </Grid>
           </Grid>
         </Grid>
       </Grid>
       <Grid container>
         <Grid item xs={12} >
+          <h3 className={classes.sectionitle}>Product details</h3>
           <ProductDetailCollapse data={product} />
           {/* Highlights: */}
           {/* <ul> */}
