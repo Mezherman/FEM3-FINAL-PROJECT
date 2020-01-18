@@ -4,9 +4,9 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles({
   table: {
@@ -14,15 +14,24 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(name: string, data) {
+function createData(name, data) {
   return { name, data };
 }
 
-export default function SimpleTable({ data }) {
+export default function TableSpecifications({ data }) {
   // console.log('TAble', data);
   const classes = useStyles();
   const { brand, color, manufacturerCountry, myCustomParams } = data;
-  const { EAN, collection, setSize, material, care, sizes, buildingMaterial, capacity } = myCustomParams;
+  const {
+    EAN,
+    collection,
+    setSize,
+    material,
+    care,
+    sizes,
+    buildingMaterial,
+    capacity
+  } = myCustomParams;
   const rows = [
     createData('EAN', EAN),
     createData('Brand', brand),
@@ -42,7 +51,7 @@ export default function SimpleTable({ data }) {
   ];
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
+      <Table className={classes.tableSpecifications} aria-label="simple table">
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.name}>
@@ -59,3 +68,7 @@ export default function SimpleTable({ data }) {
     </TableContainer>
   );
 }
+
+TableSpecifications.propTypes = {
+  data: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.string])).isRequired,
+};

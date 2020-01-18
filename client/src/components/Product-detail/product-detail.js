@@ -16,20 +16,15 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { createStyles, withStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
-import MyGallery from './carousel-react'
-import AddToBasket from '../Add-to-basket/add-to-basket';
-import useStyles from './_product-detail';
-import CheckIcon from '@material-ui/icons/Check';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import SimpleTable from './table';
-import ProductDetailCollapse from './collapse';
+import ProductDetailCollapse from './Product-detail-collapse/product-detail-collapse';
+import useStyles from './_product-detail';
+import AddToBasket from '../Add-to-basket/add-to-basket';
+import MyGallery from './carousel-react'
+import FeatureItem from './feature-item';
 
 export default function ProductDetail({ product }) {
   const { imageUrls, name, currentPrice, previousPrice, myCustomParams, brand } = product;
-  const { productHighlights, productDescription } = myCustomParams;
   const classes = useStyles();
   const [modalIsVisible, setModalVisibility] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -47,9 +42,8 @@ export default function ProductDetail({ product }) {
   //   <ReactImageZoom {img: url, ...zoom} />
   // ));
 
-
-    const images = imageUrls.map((url) => (
-  {
+  const images = imageUrls.map((url) => (
+    {
       original: url,
       thumbnail: url
     }
@@ -108,11 +102,11 @@ export default function ProductDetail({ product }) {
         </Grid>
         <Grid item xs={12} sm={12} md={5} xl={6}>
           <Grid container spacing={1}>
-            {/*<Grid item xs={12} sm={12} md={12}>*/}
-            {/*  <Typography align="right">*/}
-            {/*    <a href="#">Submit a review</a>*/}
-            {/*  </Typography>*/}
-            {/*</Grid>*/}
+            {/* <Grid item xs={12} sm={12} md={12}> */}
+            {/*  <Typography align="right"> */}
+            {/*    <a href="#">Submit a review</a> */}
+            {/*  </Typography> */}
+            {/* </Grid> */}
             <Grid item xs={12} sm={6} md={12} xl={6}>
               <Box
                 border={1}
@@ -124,7 +118,9 @@ export default function ProductDetail({ product }) {
                     {brand}
                   </li>
                   <li>
-                    Collection: {myCustomParams.collection}
+                    Collection:
+                    {' '}
+                    {myCustomParams.collection}
                   </li>
                   <li>
                     {myCustomParams.setSize > 1 ? `${myCustomParams.setSize}-pcs.` : `${myCustomParams.setSize}-pc.`}
@@ -193,40 +189,28 @@ export default function ProductDetail({ product }) {
             </Grid>
             <Grid item xs={12} sm={6} md={12} xl={12}>
               <List>
-              <ListItem button>
-                <ListItemIcon color="primary">
-                  <CheckIcon />
-                </ListItemIcon>
-                <ListItemText primary="Free delivery over 49€" />
-              </ListItem>
+                <FeatureItem label="Free delivery over 49€" />
+                <FeatureItem label="Free returns" />
+                <FeatureItem label="Secure payment" />
+                <FeatureItem label="Certified online shop" />
               </List>
-                <li>
-                  Free delivery over 49€
-                </li>
-                <li>Free returns</li>
-            </Grid>
-            <Grid item xs={12} sm={6} md={12} xl={6}>
-                <li>
-                  Secure payment
-                </li>
-                <li>Certified online shop</li>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
       <Grid container>
-        <Grid item xs={12} md={6} >
+        <Grid item xs={12} >
           <ProductDetailCollapse data={product} />
-          {/*Highlights:*/}
-          {/*<ul>*/}
-          {/*  {productHighlights.map((text) => (<li key={text}>{text}</li>))}*/}
-          {/*</ul>*/}
-          {/*Product description:*/}
-          {/*{productDescription.map((text) => (<p key={text}>{text}</p>))}*/}
-        </Grid>
-        <Grid item xs={12} md={6}>
-          Specifications:
-          <SimpleTable data={product} />
+          {/* Highlights: */}
+          {/* <ul> */}
+          {/*  {productHighlights.map((text) => (<li key={text}>{text}</li>))} */}
+          {/* </ul> */}
+          {/* Product description: */}
+          {/* {productDescription.map((text) => (<p key={text}>{text}</p>))} */}
+          {/* </Grid> */}
+          {/* <Grid item xs={12} md={6}> */}
+          {/*  Specifications: */}
+          {/*  <SimpleTable data={product} /> */}
         </Grid>
       </Grid>
     </Container>
