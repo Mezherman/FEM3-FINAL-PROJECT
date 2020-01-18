@@ -74,9 +74,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'right',
     verticalAlign: 'bottom',
   },
-  highlights: {
-    textAlign: 'justify'
-  },
+
   property: {
     fontWeight: 'bold',
   }

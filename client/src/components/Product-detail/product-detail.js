@@ -25,6 +25,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import SimpleTable from './table';
+import ProductDetailCollapse from './collapse';
 
 export default function ProductDetail({ product }) {
   const { imageUrls, name, currentPrice, previousPrice, myCustomParams, brand } = product;
@@ -214,13 +215,14 @@ export default function ProductDetail({ product }) {
         </Grid>
       </Grid>
       <Grid container>
-        <Grid item xs={12} md={6} className={classes.highlights}>
-          Highlights:
-          <ul>
-            {productHighlights.map((text) => (<li key={text}>{text}</li>))}
-          </ul>
-          Product description:
-          {productDescription.map((text) => (<p key={text}>{text}</p>))}
+        <Grid item xs={12} md={6} >
+          <ProductDetailCollapse data={product} />
+          {/*Highlights:*/}
+          {/*<ul>*/}
+          {/*  {productHighlights.map((text) => (<li key={text}>{text}</li>))}*/}
+          {/*</ul>*/}
+          {/*Product description:*/}
+          {/*{productDescription.map((text) => (<p key={text}>{text}</p>))}*/}
         </Grid>
         <Grid item xs={12} md={6}>
           Specifications:
