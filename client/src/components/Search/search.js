@@ -4,6 +4,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search'
 import getAllCards from '../../services/dataBase';
 import useStyles from './_search';
+import search from '../../services/search';
 
 export default function Search() {
   const classes = useStyles();
@@ -15,6 +16,21 @@ export default function Search() {
         setData({ products: response.products })
       })
   }, []);
+
+  // const [value, setValue] = useState('');
+  //
+  // const handleChange = (event) => {
+  //   setValue(event.target.value.toLowerCase());
+  //   console.log('value => ', value)
+  // };
+  //
+  // let searchItem = {
+  //   "query": value
+  // };
+  //
+  // useEffect(() => {
+  //   search(searchItem)
+  // })
 
   return (
     <div className={classes.container}>
@@ -33,6 +49,7 @@ export default function Search() {
             variant="outlined"
             margin="none"
             placeholder="Search..."
+            // onChange={handleChange}
           />
         )}
       />

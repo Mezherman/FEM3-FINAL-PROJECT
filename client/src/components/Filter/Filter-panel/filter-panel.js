@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
@@ -14,7 +14,17 @@ import useStyles from './_filter-panel';
 
 export default function FilterPanel(props) {
   const classes = useStyles();
-  const { name, text, checkbox, range, max } = props;
+  const { name, text, checkbox, range, max, onChange } = props;
+
+  const [value, setValue] = useState({});
+
+  const handleChanged = (item) => (event) => {
+    // setValue(event.target.value);
+    setValue({...value, [item]: event.target.value})
+    console.log('event ->', value)
+  };
+
+  console.log('this is state value ->', value);
 
   return (
     <div>
@@ -27,22 +37,25 @@ export default function FilterPanel(props) {
           <Typography>{name}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails >
-          {checkbox ? (
-            <FormControl component="fieldset">
-              <FormGroup aria-label="position" column="true">
-                {text.map((el) => (
-                  <FormControlLabel
-                    key={el}
-                    value={el}
-                    control={<Checkbox />}
-                    label={el}
-                  />
-                ))}
-              </FormGroup>
-            </FormControl>
-          ) : null}
+          {checkbox
+            ? (
+              <FormControl component="fieldset">
+                <FormGroup aria-label="position" column="true">
+                  {text.map((el) => (
+                    <FormControlLabel
+                      key={el}
+                      value={el}
+                      control={<Checkbox name={el} value={el} onChange={handleChanged(el)} />}
+                      label={el}
+                      name={el}
+                    />
+                  ))}
+                </FormGroup>
+              </FormControl>
+            )
+            : null}
           {range ? (
-            <RangeSlider max={max} />
+            <RangeSlider max={max} onChange={onChange} />
           ) : null}
         </ExpansionPanelDetails>
       </ExpansionPanel>

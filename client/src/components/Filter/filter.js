@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import FilterPanel from './Filter-panel/filter-panel'
 import useStyles from './_filter';
+// import getFilter from '../../services/filter';
 
 export default function Filter() {
   const classes = useStyles();
@@ -35,12 +36,21 @@ export default function Filter() {
     { name: 'Color', checkbox: true, text: ['red', 'orange'], id: 11 },
   ];
 
+  const [range, setRange] = useState([])
+
+  const handleRange = () => {
+    setRange
+  }
+
   const filter = filterText.map((item) => (
     <FilterPanel
       key={item.id}
       {...item}
+      onChange={handleRange}
     />
-  ));
+  ))
+
+  // getFilter()
 
   return (
     <>
