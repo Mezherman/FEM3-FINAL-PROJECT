@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { createStyles, makeStyles } from '@material-ui/core';
-import CollapsingItem from '../Product-detail-collapse/collapsing-item';
 import TableSpecification from '../Table-specification/table-specifications';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => createStyles({
   root: {
@@ -24,7 +24,6 @@ export default function ProductDetailTab({ data }) {
   const { myCustomParams } = data;
   const { productDescription, productHighlights } = myCustomParams;
   const classes = useStyles();
-
   return (
     <>
       <Tabs>
@@ -51,3 +50,7 @@ export default function ProductDetailTab({ data }) {
     </>
   )
 }
+
+ProductDetailTab.propTypes = {
+  data: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.boolean, PropTypes.symbol])).isRequired,
+};

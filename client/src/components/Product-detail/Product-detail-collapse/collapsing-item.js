@@ -49,5 +49,5 @@ export default function CollapsingItem(props) {
 
 CollapsingItem.propTypes = {
   label: PropTypes.string.isRequired,
-  children: PropTypes.objectOf(PropTypes.array).isRequired,
+  children: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.symbol])).isRequired,
 };

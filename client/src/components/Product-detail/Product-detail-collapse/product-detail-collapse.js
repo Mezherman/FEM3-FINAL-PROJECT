@@ -38,7 +38,6 @@ export default function ProductDetailCollapse({ data }) {
       </CollapsingItem>
       <CollapsingItem data={myCustomParams} label="Highlights" >
         <ul className={classes.highlights}>
-
           {productHighlights.map((text) => (<li key={text}>{text}</li>))}
         </ul>
       </CollapsingItem>

@@ -5,7 +5,8 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Box, Typography } from '@material-ui/core';
 import './carousel-react.scss';
 import StopIcon from '@material-ui/icons/Stop';
@@ -27,6 +28,13 @@ import ProductDetailTab from './Product-detail-tab/product-detail-tab';
 export default function ProductDetail({ product }) {
   const { imageUrls, name, currentPrice, previousPrice, myCustomParams, brand } = product;
   const classes = useStyles();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.up('md'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+  console.log('Mobile', isMobile);
+  console.log('Tablet', isTablet);
+  console.log('Desctop', isDesktop);
   const [modalIsVisible, setModalVisibility] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const handleChange = (event) => {
@@ -98,7 +106,7 @@ export default function ProductDetail({ product }) {
           <MyGallery
             images={images}
           />
-          <Divider />
+          {!isTablet&&<Divider />}
         </Grid>
         <Grid item xs={12} sm={12} md={5} xl={6}>
           <Grid container spacing={1}>
@@ -195,15 +203,14 @@ export default function ProductDetail({ product }) {
               </List>
             </Grid>
           </Grid>
-          <Divider />
+          {!isTablet && <Divider />}
         </Grid>
       </Grid>
       <Grid container>
         <Grid item xs={12} >
           <h3 className={classes.sectionTitle}>Product details</h3>
-          <ProductDetailTab data={product} />
-          <ProductDetailCollapse data={product} />
-          <Divider />
+          {isDesktop && <ProductDetailTab data={product} />}
+          {!isDesktop && <ProductDetailCollapse data={product} />}
         </Grid>
 
       </Grid>
