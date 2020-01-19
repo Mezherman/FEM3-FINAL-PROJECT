@@ -3,7 +3,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
 import CollapsingItem from './collapsing-item';
-import SimpleTable from '../Table-specification/table-specifications';
+import TableSpecification from '../Table-specification/table-specifications';
 
 const useStyles = makeStyles((theme) => createStyles({
   root: {
@@ -11,10 +11,12 @@ const useStyles = makeStyles((theme) => createStyles({
     backgroundColor: theme.palette.background.paper,
   },
   highlights: {
-    textAlign: 'justify'
+    textAlign: 'justify',
+    lineHeight: '1.5',
   },
   description: {
-    textAlign: 'justify'
+    textAlign: 'justify',
+    lineHeight: '1.5',
   },
 }),);
 
@@ -41,15 +43,15 @@ export default function ProductDetailCollapse({ data }) {
         </ul>
       </CollapsingItem>
       <CollapsingItem data={myCustomParams} label="Specifications" >
-        <SimpleTable data={data} />
+        <TableSpecification data={data} />
       </CollapsingItem>
     </List>
   );
 }
 
 ProductDetailCollapse.propTypes = {
-  data: PropTypes.objectOf(PropTypes.string).isRequired,
-  myCustomParams: PropTypes.objectOf(PropTypes.string).isRequired,
-  productDescription: PropTypes.arrayOf(PropTypes.string).isRequired,
-  productHighlights: PropTypes.arrayOf(PropTypes.string).isRequired,
+  data: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.boolean])).isRequired,
+  // myCustomParams: PropTypes.objectOf(PropTypes.string).isRequired,
+  // productDescription: PropTypes.arrayOf(PropTypes.string).isRequired,
+  // productHighlights: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

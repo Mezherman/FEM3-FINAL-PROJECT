@@ -7,11 +7,7 @@ import ProductDetail from '../Product-detail/product-detail';
 import setProducts from '../../redux/actions/products';
 
 function ProductPage(props) {
-  // console.log('PROPS IN PrPage =', props);
-  const { itemUrl, itemNo, chosenProduct, setProducts } = props;
-  // console.log('itemNo =', itemNo);
-  console.log('chosenProduct =', chosenProduct);
-  // console.log('!chosenProduct =', !chosenProduct);
+  const { itemNo, chosenProduct, setProducts } = props;
   useEffect(() => {
     if (!chosenProduct) {
       getProductsByItemNo(itemNo)
@@ -38,11 +34,9 @@ function ProductPage(props) {
 }
 
 function mapStateToProps(state, { itemNo }) {
-  // console.log('STATE in STORE=', state);
   const chosenProduct = state.productsReducer.products.filter((product) => (
     product.itemNo === itemNo
   ));
-  // console.log('PRODUCT =', chosenProduct[0]);
   return {
     chosenProduct: chosenProduct[0]
   }

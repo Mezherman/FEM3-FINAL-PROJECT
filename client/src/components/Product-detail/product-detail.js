@@ -22,6 +22,7 @@ import useStyles from './_product-detail';
 import AddToBasket from '../Add-to-basket/add-to-basket';
 import MyGallery from './carousel-react'
 import FeatureItem from './feature-item';
+import ProductDetailTab from './Product-detail-tab/product-detail-tab';
 
 export default function ProductDetail({ product }) {
   const { imageUrls, name, currentPrice, previousPrice, myCustomParams, brand } = product;
@@ -96,7 +97,6 @@ export default function ProductDetail({ product }) {
         <Grid item xs={12} sm={12} md={7} xl={6}>
           <MyGallery
             images={images}
-            // key={imageUrls: [0]}
           />
           <Divider />
         </Grid>
@@ -193,45 +193,31 @@ export default function ProductDetail({ product }) {
                 <FeatureItem label="Secure payment" />
                 <FeatureItem label="Certified online shop" />
               </List>
-              <Divider />
             </Grid>
           </Grid>
+          <Divider />
         </Grid>
       </Grid>
       <Grid container>
         <Grid item xs={12} >
-          <h3 className={classes.sectionitle}>Product details</h3>
+          <h3 className={classes.sectionTitle}>Product details</h3>
+          <ProductDetailTab data={product} />
           <ProductDetailCollapse data={product} />
-          {/* Highlights: */}
-          {/* <ul> */}
-          {/*  {productHighlights.map((text) => (<li key={text}>{text}</li>))} */}
-          {/* </ul> */}
-          {/* Product description: */}
-          {/* {productDescription.map((text) => (<p key={text}>{text}</p>))} */}
-          {/* </Grid> */}
-          {/* <Grid item xs={12} md={6}> */}
-          {/*  Specifications: */}
-          {/*  <SimpleTable data={product} /> */}
+          <Divider />
         </Grid>
+
       </Grid>
     </Container>
   );
 }
 
 ProductDetail.propTypes = {
-  // product: PropTypes.objectOf(PropTypes.string).isRequired,
-
-  product: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.string])).isRequired,
-  // name: PropTypes.string.isRequired,
-  // imageUrls: PropTypes.array.isRequired,
-  // currentPrice: PropTypes.string.isRequired,
-  // specialPrice: PropTypes.string,
-  // highlights: PropTypes.arrayOf(PropTypes.string),
-  // productDescription: PropTypes.arrayOf(PropTypes.string)
-};
-
-ProductDetail.defaultProps = {
-  // specialPrice: false,
-  // productHighlights: [],
-  // productDescription: []
+  product:
+  PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.string,
+      PropTypes.boolean])
+  )
+    .isRequired,
 };

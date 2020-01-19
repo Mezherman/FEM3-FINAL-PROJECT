@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
+    maxWidth: 1000
   },
 });
 
@@ -51,7 +52,7 @@ export default function TableSpecifications({ data }) {
   ];
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.tableSpecifications} aria-label="simple table">
+      <Table className={classes.table} aria-label="simple table">
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.name}>
@@ -70,5 +71,5 @@ export default function TableSpecifications({ data }) {
 }
 
 TableSpecifications.propTypes = {
-  data: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.string])).isRequired,
+  data: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.boolean])).isRequired,
 };
