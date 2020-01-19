@@ -9,7 +9,6 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import ModalWindow from '../Modal-window/modal-window';
 
 import useStyles from './_add-to-basket';
-import ProductCard from '../Product-card/product-card';
 
 export default function AddToBasket({ open, onModalClose, product }) {
   const classes = useStyles();
@@ -44,7 +43,7 @@ export default function AddToBasket({ open, onModalClose, product }) {
             <Grid item sm={12} md={8}>
               <div className={classes.title}>
                 <span>
-                  {name}
+                  {name.toUpperCase()[0] + name.slice(1)}
                 </span>
                 <span className={classes.total}>TOTAL:</span>
               </div>

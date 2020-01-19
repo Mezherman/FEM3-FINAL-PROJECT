@@ -1,31 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Paper, Box, ClickAwayListener } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import getCategories from '../../services/getCategories';
 import RoutesName from '../../routes-list';
+import getCatalog from '../../redux/actions/categories';
 
 import './header-navbar.scss';
 
-export default function HeaderNavbar() {
+function HeaderNavbar(props) {
   const [features, setFeatures] = useState({
     categoriesVisible: false,
     subCategoriesVisible: false,
-    categories: {},
     chosenCategory: null,
     categoryListHeight: null
   });
 
-  const { categoriesVisible, subCategoriesVisible, categories } = features;
+  const { categoriesVisible, subCategoriesVisible } = features;
+  const { catalog, setCatalog } = props;
+  const { mainCategories, allCategories } = catalog;
+  // console.log('props =', props);
 
   useEffect(() => {
     getCategories()
-      .then((categoriesData) => {
-        setFeatures({
-          categories: categoriesData
-        })
+      .then((catalog) => {
+        // console.log('topLevelCat =', topLevelCategories);
+        setCatalog(catalog);
       })
-  }, []);
+  }, [setCatalog]);
 
   const toggleCatalog = (event) => {
     if (!event.relatedTarget.classList ||
@@ -44,10 +47,14 @@ export default function HeaderNavbar() {
   };
 
   const toggleSubCategories = (event) => {
-    const chosenCategory = event.currentTarget.textContent;
+    const chosenCategory = event.currentTarget.id;
+    const haveSubCategories = !!allCategories.find((category) => (
+      category.parentId === chosenCategory
+    ));
+    // console.log('check subCat = ', haveSubCategories);
     setFeatures({
       ...features,
-      subCategoriesVisible: !!categories[chosenCategory].subCategories.length,
+      subCategoriesVisible: haveSubCategories,
       chosenCategory
     })
   };
@@ -97,15 +104,23 @@ export default function HeaderNavbar() {
 
   const SubCategories = () => {
     const { chosenCategory } = features;
-    const { subCategories } = categories[chosenCategory];
+    const subCategories = allCategories.filter((category) => category.parentId === chosenCategory);
     const subCategoriesList = subCategories.map((subCategory) => (
-      <span
-        key={subCategory}
-        className="catalog-list-item sub-category"
-      >
-        <div className="square">img</div>
-        {subCategory}
-      </span>
+      <Link to={`${RoutesName.products}/${chosenCategory}/${subCategory.id}`} key={subCategory.id}>
+        <span
+          key={subCategory.id}
+          className="catalog-list-item sub-category"
+          onClick={() => setFeatures(
+            {
+              categoriesVisible: false,
+              subCategoriesVisible: false,
+            }
+          )}
+        >
+          <div className="square">img</div>
+          {subCategory.name}
+        </span>
+      </Link>
     ));
 
     return (
@@ -135,16 +150,18 @@ export default function HeaderNavbar() {
           <Link to={RoutesName.products} className="header-menu-list-hyperlink">CATALOG</Link>
         </li>
         <li className="header-menu-list-item">
-          <Link to={RoutesName.aboutUs}>
-            <span className="header-menu-list-hyperlink">About us</span>
+          <Link to={RoutesName.aboutUs} className="header-menu-list-hyperlink">
+            About us
           </Link>
         </li>
         <li className="header-menu-list-item">
-          <a href={process.env.PUBLIC_URL} className="header-menu-list-hyperlink">Delivery & Payment terms</a>
+          <Link to={RoutesName.delivery} className="header-menu-list-hyperlink">
+            Delivery & Payment terms
+          </Link>
         </li>
         <li className="header-menu-list-item">
-          <Link to={RoutesName.contacts}>
-            <span className="header-menu-list-hyperlink">Contacts</span>
+          <Link to={RoutesName.contacts} className="header-menu-list-hyperlink">
+            Contacts
           </Link>
         </li>
       </ul>
@@ -172,10 +189,11 @@ export default function HeaderNavbar() {
             {categoriesVisible &&
             (
               <Categories
-                categories={categories}
+                categories={mainCategories}
                 chosenCategory={chosenCategory}
                 toggleSubCategories={toggleSubCategories}
                 onCategoryLeave={onCategoryLeave}
+                setFeatures={setFeatures}
               />
             )}
             {subCategoriesVisible && SubCategories()}
@@ -187,18 +205,27 @@ export default function HeaderNavbar() {
 }
 
 const Categories = (props) => {
-  const { chosenCategory, toggleSubCategories, onCategoryLeave, categories } = props;
-  const categoryList = Object.keys(categories).map((category) => {
-    const classNames = `catalog-list-item ${category === chosenCategory ? ' _hover' : ''}`;
+  const { chosenCategory, toggleSubCategories, onCategoryLeave, categories, setFeatures } = props;
+  const categoryList = categories.map((category) => {
+    const classNames = `catalog-list-item ${category.name === chosenCategory ? ' _hover' : ''}`;
     return (
-      <li
-        key={category}
-        className={classNames}
-        onMouseEnter={(event) => toggleSubCategories(event)}
-        onMouseLeave={(event) => onCategoryLeave(event)}
-      >
-        {category}
-      </li>
+      <Link to={`${RoutesName.products}/${category.id}`} key={category.id}>
+        <li
+          key={category.id}
+          id={category.id}
+          className={classNames}
+          onMouseEnter={(event) => toggleSubCategories(event)}
+          onMouseLeave={(event) => onCategoryLeave(event)}
+          onClick={() => setFeatures(
+            {
+              categoriesVisible: false,
+              subCategoriesVisible: false,
+            }
+          )}
+        >
+          {category.name}
+        </li>
+      </Link>
     )
   });
 
@@ -209,16 +236,35 @@ const Categories = (props) => {
   )
 };
 
+function mapStateToProps(state) {
+  return {
+    catalog: state.categoriesReducer
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setCatalog: (allCategories) => {
+      const mainCategories = allCategories.filter((category) => category.parentId === 'null');
+      dispatch(getCatalog(allCategories, mainCategories))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderNavbar);
+
 Categories.propTypes = {
   chosenCategory: PropTypes.string,
   toggleSubCategories: PropTypes.func,
   onCategoryLeave: PropTypes.func,
-  categories: PropTypes.objectOf(PropTypes.object)
+  categories: PropTypes.arrayOf(PropTypes.object)
 };
 
 Categories.defaultProps = {
   chosenCategory: '',
-  toggleSubCategories: () => {},
-  onCategoryLeave: () => {},
+  toggleSubCategories: () => {
+  },
+  onCategoryLeave: () => {
+  },
   categories: []
 };

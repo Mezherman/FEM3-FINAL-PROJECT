@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     height: 'auto',
   },
   title: {
-    height: '60px',
+    height: '100px',
     paddingBottom: '20px',
     // overflow: 'hidden',
     color: theme.palette.text.primary,
@@ -36,63 +36,36 @@ const useStyles = makeStyles((theme) => ({
   priceBox: {
     textAlign: 'right',
   },
-  regularPrice: {
+  oldPrice: {
+    position: 'relative',
+    right: theme.spacing(3),
     display: 'inline-block',
-    paddingBottom: '30px',
-    color: theme.palette.primary,
+    paddingBottom: theme.spacing(3),
+    color: theme.palette.text.primary,
+    fontWeight: '300',
+    fontSize: '20px',
+    // text-align: right;
+    textDecoration: 'line-through',
+    verticalAlign: 'bottom',
+  },
+  specialPrice: {
+    display: 'inline-block',
+    paddingBottom: theme.spacing(3),
+    color: theme.palette.text.secondary,
     fontWeight: '700',
     fontSize: '26px',
     textAlign: 'right',
     verticalAlign: 'bottom',
-    '&::before': {
-      content: 'foo'
-    }
+  },
+  regularPrice: {
+    display: 'inline-block',
+    paddingBottom: theme.spacing(3),
+    color: theme.palette.text.primary,
+    fontWeight: '700',
+    fontSize: '26px',
+    textAlign: 'right',
+    verticalAlign: 'bottom',
   }
 }));
 
 export default useStyles;
-
-// &-special-price {
-//     display: inline-block;
-//     padding-bottom: 30px;
-//     color: $color-danger;
-//     font-weight: 700;
-//     font-size: 26px;
-//     text-align: right;
-//     vertical-align: bottom;
-//   &::before {
-//       content:' \20AC';
-//     }
-//   }
-// &-old-price {
-//     position: relative;
-//     right: 20px;
-//     display: inline-block;
-//     padding-bottom: 30px;
-//     color: $color-dark;
-//     font-weight: 300;
-//     font-size: 20px;
-//     //text-align: right;
-//     text-decoration:line-through;
-//     vertical-align: bottom;
-//   &::before {
-//       content:' \20AC';
-//     }
-//   }
-// &:hover {
-//     z-index: 1;
-//     box-shadow: 0px 0 1px 0px #aaa, 0px 5px 11px #909090;
-//     cursor: pointer;
-//   }
-// }
-//
-// @media screen and (max-width: 640px) {
-//
-// }
-//
-// @media screen and (min-width: 641px) and (max-width: 980px) {
-// .product-card {
-//   &-image {
-//     }
-//   }
-// }
