@@ -5,7 +5,7 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme, createStyles, withStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Box, Typography } from '@material-ui/core';
 import './carousel-react.scss';
@@ -15,7 +15,7 @@ import ReactImageZoom from 'react-image-zoom';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import { createStyles, withStyles } from '@material-ui/core/styles';
+
 import InputBase from '@material-ui/core/InputBase';
 import List from '@material-ui/core/List';
 import ProductDetailCollapse from './Product-detail-collapse/product-detail-collapse';
@@ -24,6 +24,8 @@ import AddToBasket from '../Add-to-basket/add-to-basket';
 import MyGallery from './carousel-react'
 import FeatureItem from './feature-item';
 import ProductDetailTab from './Product-detail-tab/product-detail-tab';
+import ProductDetailCarousel from './Product-detail-carousel/product-detail-carousel';
+import ProductCardCarousel from '../Product-page/Product-card-carousel/product-card-carousel';
 
 export default function ProductDetail({ product }) {
   const { imageUrls, name, currentPrice, previousPrice, myCustomParams, brand } = product;
@@ -43,13 +45,17 @@ export default function ProductDetail({ product }) {
   const closeModal = () => {
     setModalVisibility(false)
   };
+  console.log(imageUrls[0]);
 
-  //   const zoom = { width: 400, zoomWidth: 400, offset: { vertical: 0, "horizontal": -100, zoomStyle: {} }};
-  //
-  //   const zoomImage = imageUrls.map((url) => (
-  //
-  //   <ReactImageZoom {img: url, ...zoom} />
-  // ));
+  const zoom = {
+    width: 400,
+    zoomWidth: 400,
+    offset: {
+      vertical: 0,
+      horizontal: -100,
+    },
+    img: `${imageUrls[0]}`
+  };
 
   const images = imageUrls.map((url) => (
     {
@@ -57,7 +63,7 @@ export default function ProductDetail({ product }) {
       thumbnail: url
     }
   ));
-
+  const cardsToShow = ['740039', '354326', '679386', '281039'];
   const BootstrapInput = withStyles((theme) => createStyles({
     root: {
       'label + &': {
@@ -103,6 +109,9 @@ export default function ProductDetail({ product }) {
       <h1 className={classes.title}>{name.toUpperCase()[0] + name.slice(1)}</h1>
       <Grid container spacing={4} justify="center">
         <Grid item xs={12} sm={12} md={7} xl={6}>
+          <ProductDetailCarousel images={product} />
+          {/* <ReactImageZoom {...zoom} /> */}
+
           <MyGallery
             images={images}
           />
@@ -212,8 +221,8 @@ export default function ProductDetail({ product }) {
           {isDesktop && <ProductDetailTab data={product} />}
           {!isDesktop && <ProductDetailCollapse data={product} />}
         </Grid>
-
       </Grid>
+
     </Container>
   );
 }

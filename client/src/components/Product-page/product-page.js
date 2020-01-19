@@ -5,9 +5,12 @@ import Grid from '@material-ui/core/Grid';
 import { getProductsByItemNo } from '../../services/getProducts';
 import ProductDetail from '../Product-detail/product-detail';
 import setProducts from '../../redux/actions/products';
+import ProductCardCarousel from './Product-card-carousel/product-card-carousel';
 
 function ProductPage(props) {
   const { itemNo, chosenProduct, setProducts } = props;
+  const cardsToShow = ['740039', '354326', '679386', '281039'];
+
   useEffect(() => {
     if (!chosenProduct) {
       getProductsByItemNo(itemNo)
@@ -29,6 +32,7 @@ function ProductPage(props) {
           </Grid>
         </div>
       )}
+        <ProductCardCarousel cardsToShow={chosenProduct} />
     </>
   )
 }
