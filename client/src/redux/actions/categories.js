@@ -1,9 +1,10 @@
-export default function getCatalog(allCategories, mainCategories) {
+export default function setCatalog(allCategories, mainCategories) {
   return {
     type: 'GET_CATEGORIES',
     payload: {
       allCategories,
-      mainCategories
+      mainCategories,
+      catalogLoaded: true
     }
   }
 }

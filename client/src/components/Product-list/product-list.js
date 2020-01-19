@@ -8,25 +8,25 @@ import getAllProducts, { getProductsByCategory } from '../../services/getProduct
 import setProducts from '../../redux/actions/products';
 
 function ProductList(props) {
-  const { category, setProducts, products } = props;
+  const { assortment, setProducts, products } = props;
   // console.log('products =', products);
   // console.log('PROPS =', props);
   const classes = useStyles();
 
   useEffect(() => {
-    if (category === 'all') {
+    if (assortment === 'all') {
       // console.log('show all');
       getAllProducts().then((products) => {
         // console.log('All products = ', products);
         setProducts(products);
       })
     }
-    getProductsByCategory(category)
+    getProductsByCategory(assortment)
       .then((products) => {
         // console.log('PRODUCTS in useEffect = ', products);
         setProducts(products);
       })
-  }, [category, setProducts]);
+  }, [assortment, setProducts]);
 
   // console.log('data = ', products);
   return (

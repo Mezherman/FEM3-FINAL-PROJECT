@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import RoutesName from '../../routes-list';
 import { Grid, IconButton, Divider, Button, Box, Paper } from '@material-ui/core';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import CloseIcon from '@material-ui/icons/Close';
@@ -50,30 +52,24 @@ export default function AddToBasket({ open, onModalClose, product }) {
               <Divider />
               <Box className={classes.pricingBlock}>
                 <Box className={classes.price}>
-                  <span>{finalPrice}</span>
-                  <span className={classes.currency}>EUR</span>
+                  <span>&#8364;{finalPrice}</span>
                 </Box>
                 <Paper className={classes.qtyPicker}>
-                  <Box
+                  <RemoveIcon
                     className={classes.sign}
                     onClick={() => {
                       if (qty === 1) return;
                       setQty((prevQty) => prevQty - 1)
                     }}
-                  >
-                    <RemoveIcon />
-                  </Box>
+                  />
                   <Box className={classes.qty}>{qty}</Box>
-                  <Box
+                  <AddIcon
                     className={classes.sign}
                     onClick={() => setQty((prevQty) => prevQty + 1)}
-                  >
-                    <AddIcon />
-                  </Box>
+                  />
                 </Paper>
                 <Box className={classes.total}>
-                  <span>{totalPrice}</span>
-                  <span className={classes.currency}>EUR</span>
+                  <span>&#8364;{totalPrice}</span>
                 </Box>
               </Box>
             </Grid>
@@ -86,21 +82,24 @@ export default function AddToBasket({ open, onModalClose, product }) {
                 variant="contained"
                 color="primary"
                 disableElevation
+                onClick={onModalClose}
               >
                 Continue shopping
               </Button>
             </Grid>
             <Grid item xs={6}>
-              <Button
-                className={classes.btn}
-                size="large"
-                variant="contained"
-                color="secondary"
-                disableElevation
-              >
-                <ShoppingCartOutlinedIcon />
-                <Box ml={2}>View basket</Box>
-              </Button>
+              <Link to={RoutesName.cart}>
+                <Button
+                  className={classes.btn}
+                  size="large"
+                  variant="contained"
+                  color="secondary"
+                  disableElevation
+                >
+                  <ShoppingCartOutlinedIcon />
+                  <Box ml={2}>View basket</Box>
+                </Button>
+              </Link>
             </Grid>
           </Grid>
         </div>

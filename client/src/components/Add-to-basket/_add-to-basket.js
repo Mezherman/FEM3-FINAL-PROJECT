@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   sign: {
+    fontSize: '36px',
     textAlign: 'center',
     padding: '5px',
     backgroundColor: 'gray',
@@ -63,9 +64,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: theme.spacing(2, 0),
-  },
-  currency: {
-    marginLeft: '5px'
   }
 }));
 
