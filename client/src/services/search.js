@@ -10,15 +10,3 @@ export default function search(value) {
     .then((response) => console.log(response.data))
     .catch((error) => console.log(error))
 }
-
-// export function getProductsByItemNo(itemNo) {
-//   return axios
-//     .get(`/products/${itemNo}`)
-//     .then((product) => {
-//       console.log('getProductsByitemNo = ', product);
-//       return product
-//     })
-//     .catch((err) => {
-//       console.log('ERROR = ', err);
-//     });
-// }

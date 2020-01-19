@@ -2,57 +2,57 @@ import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search'
-import getAllCards from '../../services/dataBase';
+import { Link } from 'react-router-dom';
 import useStyles from './_search';
 import search from '../../services/search';
+import getAllProducts from '../../services/getProducts'
+import RoutesName from '../../routes-list'
 
 export default function Search() {
   const classes = useStyles();
-  const [data, setData] = useState({ products: [] });
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    getAllCards()
-      .then((response) => {
-        setData({ products: response.products })
-      })
+    getAllProducts().then((products) => {
+      setData(products);
+    })
   }, []);
 
-  // const [value, setValue] = useState('');
-  //
-  // const handleChange = (event) => {
-  //   setValue(event.target.value.toLowerCase());
-  //   console.log('value => ', value)
-  // };
-  //
-  // let searchItem = {
-  //   "query": value
-  // };
-  //
-  // useEffect(() => {
-  //   search(searchItem)
-  // })
+  const [value, setValue] = useState('');
+
+  const handleChange = (event) => {
+    setValue(event.target.value.toLowerCase());
+    // console.log('value => ', value)
+  };
+
+  const searchItem = {
+    query: value
+  };
+
+  // search(searchItem)
 
   return (
     <div className={classes.container}>
       <SearchIcon
         className={classes.searchIcon}
       />
-      <Autocomplete
-        size="small"
-        freeSolo
-        options={data.products.map((option) => option.name)}
-        renderInput={(params) => (
-          <TextField
-            className={classes.root}
-            fullWidth
-            {...params}
-            variant="outlined"
-            margin="none"
-            placeholder="Search..."
-            // onChange={handleChange}
-          />
-        )}
-      />
+      <input type="search" placeholder="search" />
+      {/*<Autocomplete*/}
+      {/*  size="small"*/}
+      {/*  freeSolo*/}
+      {/*  options={data.map((option) => option.name)}*/}
+      {/*  renderInput={(params) => (*/}
+      {/*    <TextField*/}
+      {/*      className={classes.root}*/}
+      {/*      fullWidth*/}
+      {/*      {...params}*/}
+      {/*      variant="outlined"*/}
+      {/*      margin="none"*/}
+      {/*      placeholder="Search..."*/}
+      {/*      onChange={handleChange}*/}
+      {/*    />*/}
+      {/*  )}*/}
+      {/*/>*/}
     </div>
   )
 }

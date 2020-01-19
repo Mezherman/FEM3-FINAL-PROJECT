@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types';
 import Slider from '@material-ui/core/Slider';
+import { connect } from 'react-redux'
 import useStyles from './_range';
+import { getPriceProducts } from '../../../redux/actions/filter'
 
-export default function RangeSlider(props) {
+function RangeSlider(props) {
   const classes = useStyles();
-  const { max, onChange } = props;
-  const [value, setValue] = React.useState([0, max]);
+  const { max } = props;
+  const [value, setValue] = useState([0, max]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  // useEffect()
+
+  props.getPriceProducts(value)
 
   return (
     <>
@@ -25,6 +31,17 @@ export default function RangeSlider(props) {
   );
 }
 
+function mapStateToProps(state) {
+  // console.log('MAP STATE TO PROPS =>', state.filterReducer.price) // return all state
+  return state.filterReducer.price
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getPriceProducts: (price) => dispatch(getPriceProducts(price))
+  }
+}
+
 RangeSlider.propTypes = {
   max: PropTypes.number
 };
@@ -32,3 +49,5 @@ RangeSlider.propTypes = {
 RangeSlider.defaultProps = {
   max: null
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(RangeSlider)

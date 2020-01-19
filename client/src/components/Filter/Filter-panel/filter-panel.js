@@ -9,22 +9,36 @@ import FormControl from '@material-ui/core/FormControl'
 import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
+import { connect } from 'react-redux'
 import RangeSlider from '../Range/range'
 import useStyles from './_filter-panel';
+import { getBrandProducts } from '../../../redux/actions/filter'
 
-export default function FilterPanel(props) {
+function FilterPanel(props) {
   const classes = useStyles();
-  const { name, text, checkbox, range, max, onChange } = props;
+  const { name, text, checkbox, max } = props;
 
-  const [value, setValue] = useState({});
+  const [value, setValue] = useState([]);
 
-  const handleChanged = (item) => (event) => {
-    // setValue(event.target.value);
-    setValue({...value, [item]: event.target.value})
-    console.log('event ->', value)
+  const handleChange = (event) => {
+    const newArr = value.concat(event.target.value)
+
+    // const idx = newArr.findIndex((el) => el === event.target.value)
+    // console.log('index', idx)
+    //
+    // const before = newArr.slice(0, idx)
+    // const after = newArr.slice(idx + 1)
+    //
+    // const Arr = [...before, ...after]
+
+    setValue(newArr);
   };
 
-  console.log('this is state value ->', value);
+  console.log('value', value)
+
+  // console.log(props.getBrandProducts)
+
+  // console.log('props', props.getBrandProducts(value))
 
   return (
     <div>
@@ -45,35 +59,46 @@ export default function FilterPanel(props) {
                     <FormControlLabel
                       key={el}
                       value={el}
-                      control={<Checkbox name={el} value={el} onChange={handleChanged(el)} />}
+                      control={<Checkbox />}
                       label={el}
                       name={el}
+                      onChange={handleChange}
                     />
                   ))}
                 </FormGroup>
               </FormControl>
             )
-            : null}
-          {range ? (
-            <RangeSlider max={max} onChange={onChange} />
-          ) : null}
+            : <RangeSlider max={max} />}
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </div>
   );
 }
 
+const mapStateToProps = (state) => {
+  console.log('state in filter-panel', state.filterReducer.brand)
+  return state.filterReducer.brand
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getBrandProducts: (value) => dispatch(getBrandProducts(value))
+  }
+}
+
 FilterPanel.propTypes = {
   name: PropTypes.string.isRequired,
   text: PropTypes.arrayOf(PropTypes.string),
   checkbox: PropTypes.bool,
-  range: PropTypes.bool,
+  // range: PropTypes.bool,
   max: PropTypes.number
 };
 
 FilterPanel.defaultProps = {
-  range: false,
+  // range: false,
   checkbox: false,
   text: [''],
   max: null
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterPanel)
