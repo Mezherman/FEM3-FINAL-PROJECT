@@ -106,7 +106,7 @@ export default function ProductDetail({ product }) {
           <MyGallery
             images={images}
           />
-          {!isTablet&&<Divider />}
+          {!isTablet && <Divider />}
         </Grid>
         <Grid item xs={12} sm={12} md={5} xl={6}>
           <Grid container spacing={1}>
