@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import useStyles from './_product-list';
 
 import ProductCard from '../Product-card/product-card';
+
 import getAllProducts, { getProductsByCategory } from '../../services/getProducts';
 import setProducts from '../../redux/actions/products';
 

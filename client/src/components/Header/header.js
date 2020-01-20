@@ -18,7 +18,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import StarsIcon from '@material-ui/icons/Stars'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import PersonIcon from '@material-ui/icons/Person'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 // import Button from '@material-ui/core/Button';
 import RoutesName from '../../routes-list';
@@ -53,8 +53,8 @@ const StyledMenu = withStyles({
   />
 ));
 
-function Header(props) {
-  const { cartQuantity } = props.cart;
+function Header() {
+  const totalCartQuantity = useSelector((state) => state.cart.totalCartQuantity);
   const [anchorElLogin, setAnchorElLogin] = useState(null);
   const handleClick = (event) => {
     setAnchorElLogin(event.currentTarget);
@@ -201,7 +201,7 @@ function Header(props) {
             <Divider orientation="vertical" className={classes.dividerStyle} />
             <MenuItem className={classes.headerMenuItem} onClick={handleChange}>
               <IconButton edge="end" aria-label="card" className={classes.iconButton}>
-                <Badge badgeContent={cartQuantity.toString()} color="error">
+                <Badge badgeContent={totalCartQuantity.toString()} color="error">
                   <ShoppingCartOutlinedIcon fontSize="large" className={classes.iconsStyle} />
                 </Badge>
               </IconButton>
@@ -225,10 +225,5 @@ function Header(props) {
   );
 }
 
-function mapStateToProps (state) {
-  return {
-    cart: state.cart,
-  }
-}
 
-export default connect(mapStateToProps)(Header);
+export default Header;
