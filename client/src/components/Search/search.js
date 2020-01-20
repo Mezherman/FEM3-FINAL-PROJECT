@@ -36,23 +36,23 @@ export default function Search() {
       <SearchIcon
         className={classes.searchIcon}
       />
-      <input type="search" placeholder="search" />
-      {/*<Autocomplete*/}
-      {/*  size="small"*/}
-      {/*  freeSolo*/}
-      {/*  options={data.map((option) => option.name)}*/}
-      {/*  renderInput={(params) => (*/}
-      {/*    <TextField*/}
-      {/*      className={classes.root}*/}
-      {/*      fullWidth*/}
-      {/*      {...params}*/}
-      {/*      variant="outlined"*/}
-      {/*      margin="none"*/}
-      {/*      placeholder="Search..."*/}
-      {/*      onChange={handleChange}*/}
-      {/*    />*/}
-      {/*  )}*/}
-      {/*/>*/}
+      {/*<input type="search" placeholder="search" />*/}
+      <Autocomplete
+        size="small"
+        freeSolo
+        options={data.map((option) => option.name)}
+        renderInput={(params) => (
+          <TextField
+            className={classes.root}
+            fullWidth
+            {...params}
+            variant="outlined"
+            margin="none"
+            placeholder="Search..."
+            onChange={handleChange}
+          />
+        )}
+      />
     </div>
   )
 }

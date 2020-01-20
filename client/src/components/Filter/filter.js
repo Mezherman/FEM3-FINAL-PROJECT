@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux'
 import FilterPanel from './Filter-panel/filter-panel'
 import useStyles from './_filter';
-import getAllFilterProducts from '../../services/filter';
 
 function Filter(props) {
-  console.log('FILTER PROPS',props)
+  // console.log('FILTER PROPS',props)
   const classes = useStyles();
 
   const filterText = [

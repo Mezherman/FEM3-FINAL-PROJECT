@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types';
 import Slider from '@material-ui/core/Slider';
 import { connect } from 'react-redux'
@@ -15,7 +15,8 @@ function RangeSlider(props) {
 
   // useEffect()
 
-  props.getPriceProducts(value)
+  // console.log('get price RANGE = ',props.getPriceProducts(value));
+
 
   return (
     <>
@@ -32,8 +33,10 @@ function RangeSlider(props) {
 }
 
 function mapStateToProps(state) {
-  // console.log('MAP STATE TO PROPS =>', state.filterReducer.price) // return all state
-  return state.filterReducer.price
+  // console.log('MAP STATE TO PROPS =>', state.filterReducer.price)
+  return {
+    state: state.filterReducer.price
+  }
 }
 
 function mapDispatchToProps(dispatch) {

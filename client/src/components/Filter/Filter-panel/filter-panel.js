@@ -16,29 +16,36 @@ import { getBrandProducts } from '../../../redux/actions/filter'
 
 function FilterPanel(props) {
   const classes = useStyles();
-  const { name, text, checkbox, max } = props;
+  const { name, text, checkbox, max, brand } = props;
+  // console.log('BRAND =', brand);
 
   const [value, setValue] = useState([]);
 
   const handleChange = (event) => {
-    const newArr = value.concat(event.target.value)
+    brand.push(event.target.value)
 
-    // const idx = newArr.findIndex((el) => el === event.target.value)
-    // console.log('index', idx)
-    //
-    // const before = newArr.slice(0, idx)
-    // const after = newArr.slice(idx + 1)
-    //
-    // const Arr = [...before, ...after]
+    const idx = brand.findIndex((el) => {
+      console.log(el === event.target.value);
+      return  el === event.target.value
+    })
+    console.log('index', idx)
 
-    setValue(newArr);
+    const before = brand.slice(0, idx)
+    const after = brand.slice(idx + 1)
+
+    const Arr = [...before, ...after];
+
+    console.log('arr ->', Arr)
+
+    // console.log('TEST =', brand);
+    props.getBrandProducts(Arr);
   };
 
-  console.log('value', value)
+  // console.log('value', value)
 
   // console.log(props.getBrandProducts)
 
-  // console.log('props', props.getBrandProducts(value))
+  // console.log('props', props.getBrandProducts('silit'))
 
   return (
     <div>
@@ -76,8 +83,10 @@ function FilterPanel(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log('state in filter-panel', state.filterReducer.brand)
-  return state.filterReducer.brand
+  // console.log('state in filter-panel', state)
+  return {
+    brand: state.filterReducer.brand
+  }
 }
 
 function mapDispatchToProps(dispatch) {
