@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Box } from '@material-ui/core';
 
 import RoutesName from '../../../routes-list';
 
@@ -15,15 +14,12 @@ export default function SubCategories({ allCategories, chosenCategory, toggleCat
       to={`${RoutesName.products}/${chosenCategory}/${subCategory.id}`}
       key={subCategory.id}
       className={`js_catalog-list-item ${classes.subCategoryListItem}`}
+      onClick={toggleCatalog}
     >
-      <Box
-        key={subCategory.id}
-        className={classes.subCategoryItemContent}
-        onClick={toggleCatalog}
-      >
+      <div className={classes.subCategoryItemContent}>
         <img className={classes.subCategoryItemImg} src={`/img/products/${chosenCategory}/${subCategory.id}/${subCategory.id}.png`} alt={`img: ${subCategory.name}`} />
         {subCategory.name}
-      </Box>
+      </div>
     </Link>
   ));
 

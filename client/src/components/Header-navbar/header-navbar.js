@@ -6,8 +6,6 @@ import { Paper, Box, ClickAwayListener, Divider } from '@material-ui/core';
 import NavBar from './Navbar/navbar';
 import Categories from './Categories/categories';
 import SubCategories from './SubCategories/subcategories';
-import getCategories from '../../services/getCategories';
-import setCatalog from '../../redux/actions/categories';
 
 import useStyles from './_header-navbar';
 
@@ -21,15 +19,10 @@ function HeaderNavbar(props) {
   });
   const { categoriesVisible, subCategoriesVisible, chosenCategory } = features;
 
-  const { catalog, setCatalog } = props;
-  const { mainCategories, allCategories, catalogLoaded } = catalog;
+  const { catalog } = props;
+  const { mainCategories, allCategories } = catalog;
 
-  useEffect(() => {
-    getCategories()
-      .then((catalog) => {
-        setCatalog(catalog);
-      })
-  }, []);
+  // console.log('cat =', catalog);
 
   const toggleCatalog = () => {
     categoriesVisible
@@ -74,16 +67,9 @@ function HeaderNavbar(props) {
           <Box
             className={classes.catalogWrapper}
             onMouseLeave={hideCatalog}
-            // onMouseEnter={(event) => {
-            //   const height = event.currentTarget.offsetHeight;
-            //   setFeatures({
-            //     ...features,
-            //     categoryListHeight: height
-            //   });
-            // }}
           >
             <Paper className={classes.headerMenuCatalog}>
-              {categoriesVisible && catalogLoaded &&
+              {categoriesVisible &&
               (
                 <Categories
                   chosenCategory={chosenCategory}
@@ -109,24 +95,14 @@ function HeaderNavbar(props) {
   )
 }
 
-function mapStateToProps(state) {
-  return {
-    catalog: state.categoriesReducer,
-  }
-}
+const mapStateToProps = (state) => ({
+  catalog: state.categoriesReducer.catalog,
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    setCatalog: (allCategories) => {
-      const mainCategories = allCategories.filter((category) => category.parentId === 'null');
-      dispatch(setCatalog(allCategories, mainCategories))
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderNavbar);
+export default connect(mapStateToProps)(HeaderNavbar);
 
 HeaderNavbar.propTypes = {
-  catalog: PropTypes.objectOf(PropTypes.object).isRequired,
-  setCatalog: PropTypes.func.isRequired,
+  catalog: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.object, PropTypes.array, PropTypes.bool])
+  ).isRequired
 };

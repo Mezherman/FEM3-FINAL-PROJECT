@@ -15,33 +15,35 @@ export default function Categories(props) {
       ? classes.categoryHover
       : ''}`;
     return (
-      <li
+      <Link
+        to={`${RoutesName.products}/${category.id}`}
         key={category.id}
         id={category.id}
-        onMouseEnter={(event) => toggleSubCategories(event)}
+        className={classNames}
         onClick={toggleCatalog}
+        onMouseEnter={(event) => toggleSubCategories(event)}
       >
-        <Link
-          to={`${RoutesName.products}/${category.id}`}
-          key={category.id}
-          className={classNames}
-        >
+        <div>
           {category.name.toUpperCase()}
-        </Link>
-      </li>
+        </div>
+      </Link>
     )
   });
 
   return (
-    <ul className={`js_catalog-list ${classes.catalogList}`}>
+    <div className={`js_catalog-list ${classes.catalogList}`}>
       {categoryList}
-    </ul>
+    </div>
   )
 }
 
 Categories.propTypes = {
-  chosenCategory: PropTypes.string.isRequired,
+  chosenCategory: PropTypes.string,
   toggleSubCategories: PropTypes.func.isRequired,
   toggleCatalog: PropTypes.func.isRequired,
   mainCategories: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+Categories.defaultProps = {
+  chosenCategory: null
 };

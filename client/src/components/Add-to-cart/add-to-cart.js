@@ -10,9 +10,9 @@ import RemoveIcon from '@material-ui/icons/Remove';
 
 import ModalWindow from '../Modal-window/modal-window';
 
-import useStyles from './_add-to-basket';
+import useStyles from './_add-to-cart';
 
-export default function AddToBasket({ open, onModalClose, product }) {
+export default function AddToCart({ open, onModalClose, product }) {
   const classes = useStyles();
   const { imageUrls, name, currentPrice, specialPrice } = product;
   const [totalPrice, setTotalPrice] = useState(currentPrice);
@@ -31,7 +31,7 @@ export default function AddToBasket({ open, onModalClose, product }) {
     >
       <>
         <div className={classes.header}>
-          ADDED TO BASKET:
+          ADDED TO CART:
           <IconButton onClick={onModalClose}>
             <CloseIcon />
           </IconButton>
@@ -75,7 +75,7 @@ export default function AddToBasket({ open, onModalClose, product }) {
             </Grid>
           </Grid>
           <Grid container spacing={2}>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <Button
                 className={classes.btn}
                 size="large"
@@ -87,7 +87,7 @@ export default function AddToBasket({ open, onModalClose, product }) {
                 Continue shopping
               </Button>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <Link to={RoutesName.cart}>
                 <Button
                   className={classes.btn}
@@ -106,8 +106,7 @@ export default function AddToBasket({ open, onModalClose, product }) {
         <Divider />
         <div className={classes.footer}>
           <article>
-            Free delivery from &#8372;1000 | Free returns | Quick delivery with &apos;Nova
-            Poshta&apos;
+            Free delivery from &#8372;1000 | Free returns | Quick delivery with DHL;
           </article>
         </div>
       </>
@@ -115,7 +114,7 @@ export default function AddToBasket({ open, onModalClose, product }) {
   )
 }
 
-AddToBasket.propTypes = {
+AddToCart.propTypes = {
   product:
   PropTypes.objectOf(
     PropTypes.oneOfType([

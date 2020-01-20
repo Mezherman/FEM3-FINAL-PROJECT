@@ -55,7 +55,8 @@ const useStyles = makeStyles((theme) => ({
   },
   categoryHover: {
     backgroundColor: theme.palette.background.default,
-    color: theme.palette.primary.main
+    color: theme.palette.primary.main,
+    fontWeight: 'bold'
   },
   subCategoryList: {
     width: '200px',
@@ -75,7 +76,8 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary,
     cursor: 'pointer',
     '&:hover': {
-      color: theme.palette.primary.main
+      color: theme.palette.primary.main,
+      fontWeight: 'bold'
     }
   },
   subCategoryItemContent: {

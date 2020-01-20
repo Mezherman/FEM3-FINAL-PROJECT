@@ -1,12 +1,14 @@
-import Grid from '@material-ui/core/Grid';
 import React from 'react';
-import ProductList from '../Product-list/product-list';
+import { PropTypes } from 'prop-types';
+import { connect } from 'react-redux';
+import Grid from '@material-ui/core/Grid';
 import ContainerFilter from '../Filter/filter';
-import useStyles from './catalog-style';
+import ProductList from '../Product-list/product-list';
 import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 
-export default function Catalog({ assortment }) {
-  // console.log('category =', category);
+import useStyles from './catalog-style';
+
+function Catalog({ assortment }) {
   const classes = useStyles();
 
   return (
@@ -25,3 +27,13 @@ export default function Catalog({ assortment }) {
     </>
   )
 }
+
+const mapStateToProps = (state) => ({
+  catalog: state.categoriesReducer.catalog
+});
+
+export default connect(mapStateToProps)(Catalog)
+
+Catalog.propTypes = {
+  assortment: PropTypes.string.isRequired
+};

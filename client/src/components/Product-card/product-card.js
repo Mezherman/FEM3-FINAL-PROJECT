@@ -11,7 +11,7 @@ import * as cartActions from '../../redux/actions/CartActions';
 
 import { Link } from 'react-router-dom';
 import useStyles from './_product-card';
-import AddToBasket from '../Add-to-basket/add-to-basket';
+import AddToCart from '../Add-to-cart/add-to-cart';
 import RoutesName from '../../routes-list';
 
 function ProductCard({ product, cartActionsList }) {
@@ -25,7 +25,7 @@ function ProductCard({ product, cartActionsList }) {
   };
   return (
     <>
-      <AddToBasket
+      <AddToCart
         open={modalIsVisible}
         onModalClose={closeModal}
         product={{ imageUrls, name, currentPrice, previousPrice }}
@@ -71,7 +71,7 @@ function ProductCard({ product, cartActionsList }) {
             color="primary"
             disableElevation
             onClick={() => {
-              console.log('add product', product);
+              // console.log('add product', product);
               cartActionsList.addProductToCart(product);
               setModalVisibility(true)
             }}

@@ -17,7 +17,7 @@ import FormControl from '@material-ui/core/FormControl';
 import { createStyles, withStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import MyGallery from './carousel-react'
-import AddToBasket from '../Add-to-basket/add-to-basket';
+import AddToCart from '../Add-to-cart/add-to-cart';
 import useStyles from './_product-detail';
 
 export default function ProductDetail({ product }) {
@@ -81,7 +81,7 @@ export default function ProductDetail({ product }) {
 
   return (
     <Container maxWidth="xl">
-      <AddToBasket
+      <AddToCart
         open={modalIsVisible}
         onModalClose={closeModal}
         product={{ imageUrls, name, currentPrice }}

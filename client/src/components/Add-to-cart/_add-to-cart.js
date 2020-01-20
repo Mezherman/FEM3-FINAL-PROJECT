@@ -7,13 +7,14 @@ const useStyles = makeStyles((theme) => ({
   title: {
     display: 'flex',
     justifyContent: 'space-between',
-    padding: '10px 0'
+    padding: '10px 0',
+    fontSize: '20px'
   },
   header: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: theme.spacing(0, 2),
+    padding: theme.spacing(0.5, 2),
     fontWeight: 'bold'
   },
   body: {
@@ -45,14 +46,16 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer'
   },
   qty: {
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: '16px'
   },
   price: {
     minWidth: '20%',
     padding: '5px',
     backgroundColor: 'rgba(240,235,84,0.72)',
     textAlign: 'center',
-    borderRadius: '4px'
+    borderRadius: '4px',
+    fontSize: '18px'
   },
   total: {
     minWidth: '20%',

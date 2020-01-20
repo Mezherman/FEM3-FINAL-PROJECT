@@ -2,11 +2,11 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { ThemeProvider } from '@material-ui/styles';
+
 import configureStore from './store/configureStore';
+import App from './App';
 
 import './index.css';
-
-import App from './App';
 import theme from './_index';
 
 const store = configureStore();

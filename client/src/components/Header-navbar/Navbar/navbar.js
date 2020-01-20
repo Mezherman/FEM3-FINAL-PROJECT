@@ -42,4 +42,5 @@ export default function NavBar({ toggleCatalog, hideCatalog, children }) {
 NavBar.propTypes = {
   toggleCatalog: PropTypes.func.isRequired,
   hideCatalog: PropTypes.func.isRequired,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired
 };

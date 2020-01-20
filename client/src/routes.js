@@ -25,7 +25,7 @@ export default function Routes() {
       <Route
         path={`${RoutesName.products}/cooking/:subCategory`}
         exact
-        render={({ match, location }) => {
+        render={({ match }) => {
           const { subCategory } = match.params;
           return <Catalog assortment={subCategory} />
         }}
@@ -33,7 +33,7 @@ export default function Routes() {
       <Route
         path={`${RoutesName.products}/preparing/:subCategory`}
         exact
-        render={({ match, location }) => {
+        render={({ match }) => {
           const { subCategory } = match.params;
           return <Catalog assortment={subCategory} />
         }}
@@ -41,7 +41,7 @@ export default function Routes() {
       <Route
         path={`${RoutesName.products}/dining/:subCategory`}
         exact
-        render={({ match, location }) => {
+        render={({ match }) => {
           const { subCategory } = match.params;
           return <Catalog assortment={subCategory} />
         }}
@@ -49,7 +49,7 @@ export default function Routes() {
       <Route
         path={`${RoutesName.products}/drinking/:subCategory`}
         exact
-        render={({ match, location }) => {
+        render={({ match }) => {
           const { subCategory } = match.params;
           return <Catalog assortment={subCategory} />
         }}
@@ -64,7 +64,13 @@ export default function Routes() {
           const { pathname: url } = location;
           // console.log(id);
           // console.log(url);
-          return <ProductPage itemNo={categoryOrID} itemUrl={url} />
+          return (
+            <ProductPage
+              itemNo={categoryOrID}
+              itemUrl={url}
+              assortment={categoryOrID}
+            />
+          )
         }}
       />
       <Route path={RoutesName.cart} component={SummaryCart} />
