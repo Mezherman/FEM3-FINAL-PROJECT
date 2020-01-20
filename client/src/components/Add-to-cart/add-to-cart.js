@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Grid, IconButton, Divider, Button, Box, Paper } from '@material-ui/core';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import RoutesName from '../../routes-list';
 
 import ModalWindow from '../Modal-window/modal-window';
 
-import useStyles from './_add-to-basket';
+import useStyles from './_add-to-cart';
 
-export default function AddToBasket({ open, onModalClose, product }) {
+export default function AddToCart({ open, onModalClose, product }) {
   const classes = useStyles();
   const { imageUrls, name, currentPrice, specialPrice } = product;
   const [totalPrice, setTotalPrice] = useState(currentPrice);
@@ -29,7 +31,7 @@ export default function AddToBasket({ open, onModalClose, product }) {
     >
       <>
         <div className={classes.header}>
-          ADDED TO BASKET:
+          ADDED TO CART:
           <IconButton onClick={onModalClose}>
             <CloseIcon />
           </IconButton>
@@ -50,65 +52,67 @@ export default function AddToBasket({ open, onModalClose, product }) {
               <Divider />
               <Box className={classes.pricingBlock}>
                 <Box className={classes.price}>
-                  <span>{finalPrice}</span>
-                  <span className={classes.currency}>EUR</span>
+                  <span>
+&#8364;
+                    {finalPrice}
+                  </span>
                 </Box>
                 <Paper className={classes.qtyPicker}>
-                  <Box
+                  <RemoveIcon
                     className={classes.sign}
                     onClick={() => {
                       if (qty === 1) return;
                       setQty((prevQty) => prevQty - 1)
                     }}
-                  >
-                    <RemoveIcon />
-                  </Box>
+                  />
                   <Box className={classes.qty}>{qty}</Box>
-                  <Box
+                  <AddIcon
                     className={classes.sign}
                     onClick={() => setQty((prevQty) => prevQty + 1)}
-                  >
-                    <AddIcon />
-                  </Box>
+                  />
                 </Paper>
                 <Box className={classes.total}>
-                  <span>{totalPrice}</span>
-                  <span className={classes.currency}>EUR</span>
+                  <span>
+&#8364;
+                    {totalPrice}
+                  </span>
                 </Box>
               </Box>
             </Grid>
           </Grid>
           <Grid container spacing={2}>
-            <Grid item xs={6}>
+            <Grid item xs={12} md={6}>
               <Button
                 className={classes.btn}
                 size="large"
                 variant="contained"
                 color="primary"
                 disableElevation
+                onClick={onModalClose}
               >
                 Continue shopping
               </Button>
             </Grid>
-            <Grid item xs={6}>
-              <Button
-                className={classes.btn}
-                size="large"
-                variant="contained"
-                color="secondary"
-                disableElevation
-              >
-                <ShoppingCartOutlinedIcon />
-                <Box ml={2}>View basket</Box>
-              </Button>
+            <Grid item xs={12} md={6}>
+              <Link to={RoutesName.cart}>
+                <Button
+                  className={classes.btn}
+                  size="large"
+                  variant="contained"
+                  color="secondary"
+                  disableElevation
+                >
+                  <ShoppingCartOutlinedIcon />
+                  <Box ml={2}>View basket</Box>
+                </Button>
+              </Link>
             </Grid>
           </Grid>
         </div>
         <Divider />
         <div className={classes.footer}>
           <article>
-            Free delivery from &#8372;1000 | Free returns | Quick delivery with &apos;Nova
-            Poshta&apos;
+            Free delivery from &#8372;1000 | Free returns | Quick delivery with DHL;
           </article>
         </div>
       </>
@@ -116,13 +120,11 @@ export default function AddToBasket({ open, onModalClose, product }) {
   )
 }
 
-AddToBasket.propTypes = {
+AddToCart.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onModalClose: PropTypes.func.isRequired,
   product:
   PropTypes.objectOf(
-    PropTypes.oneOfType([
-      PropTypes.array,
-      PropTypes.string,
-      PropTypes.boolean])
+    PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.number])
   ).isRequired,
-  // product: PropTypes.objectOf(PropTypes.string).isRequired,
 };
