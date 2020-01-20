@@ -12,10 +12,12 @@ const useStylesMainCarousel = makeStyles((theme) => ({
 
   title: {
     fontSize: '4em',
+    margin: '10px',
   },
 
   description: {
-    fontSize: '3em',
+    fontSize: '2.3em',
+    margin: '10px',
   },
 
   textBlock: {
@@ -42,7 +44,15 @@ const useStylesMainCarousel = makeStyles((theme) => ({
       top: '31px%',
       maxWidth: '550px',
     },
-    borderTopLeftRadius: theme.spacing(1),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    // justifyContent: '',
+    top: '6%',
+    fontSize: '0.19rem',
+    right: 39,
+    padding: '2px',
+    borderRadius: theme.spacing(1),
     maxWidth: '550px',
     color: theme.palette.text.primary,
     position: 'absolute',
@@ -77,6 +87,50 @@ const useStylesMainCarousel = makeStyles((theme) => ({
     top: '19px',
     transform: 'rotate(135deg)',
     transformOrigin: 'bottom right',
+  },
+
+  // mainPagingItem: {
+  //   '&::after': {
+  //     display: 'none',
+  //   },
+  // },
+
+  ulMainPagingItem: {
+    position: 'relative',
+    top: '45px',
+    display: 'flex',
+    justifyContent: 'center',
+    margin: 0,
+    padding: 0,
+    listStyleType: 'none',
+  },
+
+  liMainPagingItem: {
+    position: 'relative',
+    bottom: '30px',
+    display: 'inline-block',
+    margin: '0 5px',
+    color: theme.palette.text.primary,
+    backgroundColor: theme.palette.background.default,
+    borderRadius: '8px',
+    boxShadow: '0 2px 3px 0 rgba(0, 0, 0, .41)',
+    cursor: 'pointer',
+    '&.active': {
+      backgroundColor: theme.palette.secondary.main,
+      '& button': {
+        color: 'white'
+      },
+    },
+  },
+
+  buttonMainPagingItem: {
+    display: 'inline-block',
+    padding: '9px 11px',
+    background: 'transparent',
+    border: 'none',
+    outline: 'none',
+    cursor: 'pointer',
+    opacity: 1,
   },
 
 }));
