@@ -2,9 +2,11 @@ import React, { useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
+import useStyles from './_product-list';
 
 import ProductCard from '../Product-card/product-card';
 import Spinner from '../Spinner/spinner';
+
 import getAllProducts, { getProductsByCategory } from '../../services/getProducts';
 import { productsRequested, productsLoaded, productsError } from '../../redux/actions/products';
 

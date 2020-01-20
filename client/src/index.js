@@ -5,9 +5,7 @@ import { ThemeProvider } from '@material-ui/styles';
 
 import configureStore from './store/configureStore';
 import App from './App';
-
-import './index.css';
-import theme from './_index';
+import theme from './theme';
 
 const store = configureStore();
 

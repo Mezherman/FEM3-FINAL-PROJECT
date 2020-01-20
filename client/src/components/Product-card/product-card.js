@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import 'typeface-roboto';
@@ -6,15 +6,20 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
 import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { connect, useDispatch } from 'react-redux'
 import * as cartActions from '../../redux/actions/CartActions';
 
+import { Link } from 'react-router-dom';
 import useStyles from './_product-card';
 import AddToCart from '../Add-to-cart/add-to-cart';
 import RoutesName from '../../routes-list';
 
-function ProductCard({ product, cartActionsList }) {
+function ProductCard({ product }) {
+  const dispatch = useDispatch();
+  const actions = useMemo(
+    () => bindActionCreators(cartActions, dispatch),
+    [dispatch]
+  )
   const { imageUrls, name, currentPrice, previousPrice, itemNo } = product;
   const classes = useStyles();
 
@@ -71,8 +76,8 @@ function ProductCard({ product, cartActionsList }) {
             color="primary"
             disableElevation
             onClick={() => {
-              // console.log('add product', product);
-              cartActionsList.addProductToCart(product);
+              console.log('add product', product);
+              actions.addProductToCart(product);
               setModalVisibility(true)
             }}
           >
@@ -84,15 +89,7 @@ function ProductCard({ product, cartActionsList }) {
   )
 }
 
-function mapStateToProps () {
-  return {};
-}
-function mapDispatchToProps(dispatch) {
-  return {
-    cartActionsList: bindActionCreators(cartActions, dispatch)
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(ProductCard)
+export default ProductCard;
 
 ProductCard.propTypes = {
   product:

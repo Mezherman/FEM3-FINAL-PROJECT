@@ -2,8 +2,7 @@ import { makeStyles } from '@material-ui/core';
 // import Menu from '@material-ui/core/Menu';
 // import React from 'react';
 
-// eslint-disable-next-line import/prefer-default-export
-export const useStylesSingIn = makeStyles((theme) => ({
+const useStylesSingIn = makeStyles((theme) => ({
   paper: {
     margin: theme.spacing(1),
     display: 'flex',
@@ -13,18 +12,28 @@ export const useStylesSingIn = makeStyles((theme) => ({
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
-    color: 'white',
+    color: theme.palette.primary.contrastText,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(1),
-    '& div>label': {
-      color: theme.palette.secondary.dark,
-    },
-    '& label>span>span': {
-      color: theme.palette.primary.main,
-    },
   },
+  labelText: {
+    color: theme.palette.secondary.dark,
+  },
+  checkBox: {
+    color: theme.palette.primary.main,
+  },
+  // secondForm: {
+  //   width: '100%', // Fix IE 11 issue.
+  //   marginTop: theme.spacing(1),
+  //   '& div>label': {
+  //     color: theme.palette.error.dark,
+  //   },
+  //   '& label>span>span': {
+  //     color: theme.palette.primary.main,
+  //   },
+  // },
   submit: {
     margin: theme.spacing(2, 0, 2),
   },
@@ -34,8 +43,13 @@ export const useStylesSingIn = makeStyles((theme) => ({
     textAlign: 'center',
     cursor: 'pointer',
   },
+  errorText: {
+    color: theme.palette.error.dark,
+  },
 
 }));
+
+export default useStylesSingIn;
 
 // export const StyledMenu = withStyles({
 //   paper: {
