@@ -38,6 +38,8 @@ const initialState = {
 export default function cart(state = initialState, action) {
   // console.log(action.type);
   switch (action.type) {
+    case 'REQUEST_ADD_PRODUCT_SUCCESS': {
+    }
     case 'ADD_PRODUCT': {
       const product = action.payload;
       if (!product || !product._id) return state;

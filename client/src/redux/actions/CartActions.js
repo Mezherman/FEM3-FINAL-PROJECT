@@ -9,10 +9,10 @@ export function increaseCartCount (count) {
 }
 
 export function addProductToCart (product) {
-  // ServicesCart.addProductToCart(product._id)
-  //   .then((data) => {
-  //     console.log('response', data);
-  //   })
+  ServicesCart.addProductToCart(product._id)
+    .then((data) => {
+      console.log('response', data);
+    })
   return {
     type: 'ADD_PRODUCT',
     payload: product
