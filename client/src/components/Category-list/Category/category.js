@@ -7,7 +7,7 @@ import ProductCarusel from '../Product-carusel/product-carusel'
 import ImgGrid from '../Image-grid/image-grid'
 
 function Category (props) {
-  const { data, index, name } = props;
+  const { data, index } = props;
   const classes = useStyles();
 
   const ifBreakpointSmall = ['xs', 'sm'].includes(props.width);
@@ -21,10 +21,10 @@ function Category (props) {
   const description = (
     <Grid item sm={12} md={6} lg={3} container direction="column" className={`${classes.categories_description} ${getPaddingClassByIndex(index)}`}>
       <Typography variant="h3" className={classes.categories_title}>
-        {data.title ?? '' }
+        {data.name ?? '' }
       </Typography>
       <Typography variant="body1" className={classes.categories_desc}>
-        {data.desc ?? ''}
+        {data.description ?? ''}
       </Typography>
       <Button variant="contained" color="secondary" className={classes.categories_btn}>
         Learn more
@@ -34,10 +34,10 @@ function Category (props) {
   );
 
   return (
-    <Grid container spacing={0} key={name} className={`${classes.categories_item} categories_item`} >
-      {ifBreakpointSmall || index % 2 !== 0 ? <ImgGrid src={data.img} /> : ''}
+    <Grid container spacing={0} key={data.name} className={`${classes.categories_item} categories_item`} >
+      {ifBreakpointSmall || index % 2 !== 0 ? <ImgGrid src={data.imgUrl} /> : ''}
       {description}
-      {ifBreakpointSmall || index % 2 !== 0 ? '' : <ImgGrid src={data.img} />}
+      {ifBreakpointSmall || index % 2 !== 0 ? '' : <ImgGrid src={data.imgUrl} />}
     </Grid>
   )
 }

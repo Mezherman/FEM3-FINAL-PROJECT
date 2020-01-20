@@ -1,73 +1,108 @@
-import React, { Component } from 'react'
-import FooterInfo from '../FooterInfo/footerInfo'
-import FooterAbout from '../FooterAbout/footerAbout'
-import './footer.scss'
+import React from 'react';
+import { Grid, Divider } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import RoutesName from '../../routes-list';
+import useStyles from './_footer';
 
-export default class Footer extends Component {
-  render() {
-    const linksFirstRow = [{
-      text: 'WMF Group',
-      url: '#'
-    },
-    {
-      text: 'Career',
-      url: '#'
-    }, {
-      text: 'Press',
-      url: '#'
-    }];
-    const linksSecondRow = [{
-      text: 'General terms and conditions',
-      url: '#'
-    },
-    {
-      text: 'Revocation',
-      url: '#'
-    }, {
-      text: 'Terms of Use',
-      url: '#'
-    },
-    {
-      text: 'Privacy',
-      url: '#'
-    }, {
-      text: 'Imprint',
-      url: '#'
-    }];
-    const linksThirdRow = [{
-      text: 'Payment Methods',
-      url: '#'
-    },
-    {
-      text: 'Shipping and delivery',
-      url: '#'
-    }, {
-      text: 'Catalog',
-      url: '#'
-    },
-    {
-      text: 'Contact us',
-      url: '#'
-    }, {
-      text: 'Guarantee',
-      url: '#'
-    }]
-    return (
-      <div>
-        <hr className="footer-horizontal-line" />
-        <footer className="footer">
-
-          <FooterAbout />
-          <div className="footer-info">
-            <FooterInfo column="Company" columnLinks={linksFirstRow} />
-            <FooterInfo column="Legal terms" columnLinks={linksSecondRow} />
-            <FooterInfo column="Consumer Care" columnLinks={linksThirdRow} />
+export default function Footer() {
+  const classes = useStyles();
+  return (
+    <>
+      <img
+        src={`${process.env.PUBLIC_URL}/img/header/03_wmf-kompass_essen_167x167px.jpg`}
+        alt="headerMainLogo"
+        className={classes.mainHeaderLogoImg}
+        useMap="#products"
+        style={{width: '80px', height: '80px'}}
+      />
+      <map name="products">
+        <Link to={RoutesName.aboutUs}>
+          <area
+            shape="poly"
+            coords="13,10,33,2,52,3,64,11,40,37"
+            href="#raz2"
+            label="Coocking"
+            title="Coocking"
+          />
+        </Link>
+        <Link to={RoutesName.delivery}>
+          <area
+            shape="poly"
+            coords="9,13,37,39,12,65,2,49,2,30"
+            href="#raz2"
+            label="Drinking"
+            title="Drinking"
+          />
+        </Link>
+        <area
+          shape="poly"
+          coords="14,69,38,41,64,66,45,76,32,76"
+          href="#raz3"
+          alt="Dining"
+          title="Dining"
+        />
+        <area
+          shape="poly"
+          coords="67,66,41,41,66,13,76,31,76,48"
+          href="#raz4"
+          alt="Preparing"
+          title="Preparing"
+        />
+      </map>
+      <Grid container justify="space-between" spacing={2} className={classes.container}>
+        <Grid xs={12} md={5} item container wrap="nowrap" alignItems="flex-start">
+          <Link to={RoutesName.home}>
+            <img
+              src={`${process.env.PUBLIC_URL}/img/header/wmf-logo-50x60.svg`}
+              alt="WMF"
+              className={classes.img}
+            />
+          </Link>
+          <div>
+            <h2 className={classes.title}>The culinary experts</h2>
+            <p>
+              For more than 160 years, the brands that make up the WMF Group have represented the
+              best in cooking, drinking and dining.
+            </p>
           </div>
-          <div className="copyright">
-            <p className="copyright-text">&copy; 2018 all rights reserved</p>
-          </div>
-        </footer>
-      </div>
-    )
-  }
+        </Grid>
+        <Grid xs={12} md={7} item>
+          <Grid container justify="center" spacing={4}>
+            <Grid item xs={12} sm={3}>
+              <Grid container item direction="column">
+                <h2 className={classes.title}>Company</h2>
+                <Divider />
+                <Link to={RoutesName.home} className={classes.links}>Home</Link>
+                <Link to={RoutesName.aboutUs} className={classes.links}>About us</Link>
+                <Link to={RoutesName.products} className={classes.links}>Products</Link>
+              </Grid>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <Grid container item direction="column">
+                <h2 className={classes.title}>Account</h2>
+                <Divider />
+                <Link to={RoutesName.signUp} className={classes.links}>Sign up</Link>
+                <Link to={RoutesName.signIn} className={classes.links}>Sign in</Link>
+                <Link to={RoutesName.cart} className={classes.links}>Shopping cart</Link>
+              </Grid>
+            </Grid>
+            <Grid item xs={12} sm={5}>
+              <Grid container item direction="column">
+                <h2 className={classes.title}>Contacts</h2>
+                <Divider />
+                <Link to={RoutesName.contacts} className={classes.links}> Contact list </Link>
+                <span>Professional Contacts</span>
+                <span>WMF Coffeemachines</span>
+                <span>WMF Professional Hotel Equipment</span>
+                <span>+38 (044) 123-456-789</span>
+                <span>+38 (050) 123-456-789</span>
+                <span>Mo-Fr: 08:00 - 18:00</span>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+      <p>&copy; 2020 all rights reserved</p>
+    </>
+  )
 }

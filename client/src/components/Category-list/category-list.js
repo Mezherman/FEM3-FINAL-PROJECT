@@ -1,36 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import Category from './Category/category'
-import getCategories from '../../services/getCategories';
-import useStyles from './styles'
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import Category from './Category/category';
+import useStyles from './styles';
+import { setMainCategories } from '../../redux/actions/categories';
 
 function CategoryList(props) {
+  // console.log('PROPS =', props);
+  const { mainCategories, setMainCategories } = props;
   const classes = useStyles();
-  const [categories, updateCategories] = useState([]);
-
-  const setCategoriesToState = () => {
-    getCategories().then((categoryList) => {
-      updateCategories(categoryList);
-    });
-  };
 
   useEffect(() => {
-    setCategoriesToState();
-  }, []);
+    setMainCategories(mainCategories)
+  });
 
   return (
     <section className={classes.categories_list}>
-      {
-        Object.keys(categories).map((categoryName, index) => (
-          <Category
-            key={categoryName}
-            data={categories[categoryName]}
-            name={categoryName}
-            index={index}
-          />
-        ))
-      }
+      {mainCategories &&
+      mainCategories.map((category, index) => (
+        <Category
+          key={category.name}
+          data={category}
+          name={category.name}
+          index={index}
+        />
+      ))}
     </section>
   )
 }
 
-export default CategoryList;
+function mapStateToProps(state) {
+  // console.log('STORE STATE =', state);
+  return {
+    mainCategories: state.categoriesReducer.mainCategories
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setMainCategories: (mainCategories) => dispatch(setMainCategories(mainCategories))
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryList);

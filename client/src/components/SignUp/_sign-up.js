@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
-import Variables from '../Variables/variables';
 
 const useStyles = makeStyles((theme) => ({
+
   paper: {
     marginTop: theme.spacing(2),
     display: 'flex',
@@ -9,67 +9,24 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(2),
   },
   title: {
-    fontSize: '32px'
+    fontSize: '32px',
+    [theme.breakpoints.up('md')]: {
+      marginBottom: 15
+    }
   },
-  labelText: {
-    color: Variables.colors.grayDark
-  },
-  accountContentLeft: {
-    marginBottom: '30px',
-    fontSize: '13px',
-  },
-  accountContentRight: {
-
-  },
-  rightTitle: {
-    fontStyle: 'italic',
-  },
-  list: {
-    listStyle: 'disc',
-    paddingLeft: '15px'
-  },
-  listItem: {
-    display: 'list-item'
-  },
-  labelBirthday: {
-    margin: theme.spacing(3, 0, 2, 0),
-    fontStyle: 'italic'
-  },
-  inputBirthDay: {
-    width: '25%',
-    paddingRight: '15px',
-    textAlign: 'center'
-  },
-  inputBirthMonth: {
-    width: '25%',
-    paddingRight: '15px'
-  },
-  inputBirthYear: {
-    width: '50%'
-  },
-  accountContentFooter: {
-    marginTop: '30px'
-  },
-  labelControl: {
-    alignItems: 'flex-start',
-    textAlign: 'justify'
-  },
-  labelAgreement: {
-    fontSize: '0.875rem',
-    color: 'black'
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    padding: theme.spacing(1, 1),
-    fontSize: '0.87rem'
-  },
-  linkSignIn: {
-    cursor: 'pointer'
+  dividerSignUp: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'inline',
+      backgroundColor: 'rgba(0, 0, 0, 0.2)',
+      height: 455,
+      alignSelf: 'flex-end'
+    }
   }
 }));
 
-export default useStyles
+export default useStyles;

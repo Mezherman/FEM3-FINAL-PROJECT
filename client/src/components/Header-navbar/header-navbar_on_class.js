@@ -2,7 +2,7 @@
 // import { Paper, Box, ClickAwayListener } from '@material-ui/core';
 // import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 //
-// import getCategories from '../../services/getCategories';
+// import getCatalog from '../../services/getCatalog';
 //
 // import './header-navbar.scss';
 //
@@ -10,16 +10,16 @@
 //   state = {
 //     categoriesVisible: false,
 //     subCategoriesVisible: false,
-//     categories: null,
+//     categoriesReducer: null,
 //     chosenCategory: null,
 //     categoryListHeight: null
 //   };
 //
 //   componentDidMount() {
-//     getCategories()
-//       .then((categories) => {
+//     getCatalog()
+//       .then((categoriesReducer) => {
 //         this.setState(() => (
-//           { categories }
+//           { categoriesReducer }
 //         ))
 //       })
 //   }
@@ -77,9 +77,9 @@
 //   };
 //
 //   showCategories = () => {
-//     const { categories, chosenCategory } = this.state;
+//     const { categoriesReducer, chosenCategory } = this.state;
 //     return (
-//       Object.keys(categories).map((category) => {
+//       Object.keys(categoriesReducer).map((category) => {
 //         const classNames = `catalog-list-item ${category === chosenCategory ? ' _hover' : ''}`;
 //         return (
 //           <li
@@ -102,8 +102,8 @@
 //   };
 //
 //   showSubCategories = () => {
-//     const { categories, chosenCategory } = this.state;
-//     const { subCategories } = categories[chosenCategory];
+//     const { categoriesReducer, chosenCategory } = this.state;
+//     const { subCategories } = categoriesReducer[chosenCategory];
 //     return (
 //       subCategories.map((subCategory) => (
 //         <span

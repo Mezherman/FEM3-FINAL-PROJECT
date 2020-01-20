@@ -219,7 +219,6 @@ function Header() {
       ) : null}
       {renderMobileMenu}
       {renderMenu}
-      {/* {renderSearchInput} */}
       <Search />
       <HeaderNavbar />
     </Container>

@@ -9,22 +9,67 @@ import RoutesName from './routes-list';
 import AboutUs from './components/About-us/about-us';
 import Contacts from './components/Contacts/contacts';
 import SignUp from './components/SignUp/sign-up'
+import Delivery from './components/Delivery/delivery';
 
 export default function Routes() {
   return (
     <Switch>
       <Route path={RoutesName.signUp} component={SignUp} />
-      <Route path={RoutesName.products} exact component={Catalog} />
       <Route
-        path={`${RoutesName.products}/:id`}
+        path={RoutesName.products}
+        exact
+        render={() => {
+          return <Catalog category='all' />
+        }}
+      />
+      <Route
+        path={`${RoutesName.products}/cooking/:subCategory`}
+        exact
         render={({ match, location }) => {
-          const { id } = match.params;
+          const { subCategory } = match.params;
+          return <Catalog category={subCategory} />
+        }}
+      />
+      <Route
+        path={`${RoutesName.products}/preparing/:subCategory`}
+        exact
+        render={({ match, location }) => {
+          const { subCategory } = match.params;
+          return <Catalog category={subCategory} />
+        }}
+      />
+      <Route
+        path={`${RoutesName.products}/dining/:subCategory`}
+        exact
+        render={({ match, location }) => {
+          const { subCategory } = match.params;
+          return <Catalog category={subCategory} />
+        }}
+      />
+      <Route
+        path={`${RoutesName.products}/drinking/:subCategory`}
+        exact
+        render={({ match, location }) => {
+          const { subCategory } = match.params;
+          return <Catalog category={subCategory} />
+        }}
+      />
+      <Route
+        path={`${RoutesName.products}/:categoryOrID`}
+        render={({ match, location }) => {
+          const { categoryOrID } = match.params;
+          if (isNaN(categoryOrID)) {
+            return <Catalog category={categoryOrID} />
+          }
           const { pathname: url } = location;
-          return <ProductPage itemId={id} itemUrl={url} />
+          // console.log(id);
+          // console.log(url);
+          return <ProductPage itemNo={categoryOrID} itemUrl={url} />
         }}
       />
       <Route path={RoutesName.cart} component={SummaryCart} />
       <Route path={RoutesName.aboutUs} component={AboutUs} />
+      <Route path={RoutesName.delivery} component={Delivery} />
       <Route path={RoutesName.contacts} component={Contacts} />
 
       /*in the end*/
