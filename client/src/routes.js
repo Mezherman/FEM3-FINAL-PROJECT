@@ -15,13 +15,13 @@ export default function Routes() {
   return (
     <Switch>
       <Route path={RoutesName.signUp} component={SignUp} />
-      {/*<Route*/}
-      {/*  path={RoutesName.products}*/}
-      {/*  exact*/}
-      {/*  render={() => {*/}
-      {/*    return <Catalog category='all' />*/}
-      {/*  }}*/}
-      {/*/>*/}
+      {/* <Route */}
+      {/*  path={RoutesName.products} */}
+      {/*  exact */}
+      {/*  render={() => { */}
+      {/*    return <Catalog category='all' /> */}
+      {/*  }} */}
+      {/* /> */}
       <Route
         path={`${RoutesName.products}/cooking/:subCategory`}
         exact

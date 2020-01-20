@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import RoutesName from '../../routes-list';
 import { Grid, IconButton, Divider, Button, Box, Paper } from '@material-ui/core';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import RoutesName from '../../routes-list';
 
 import ModalWindow from '../Modal-window/modal-window';
 
@@ -52,7 +52,10 @@ export default function AddToCart({ open, onModalClose, product }) {
               <Divider />
               <Box className={classes.pricingBlock}>
                 <Box className={classes.price}>
-                  <span>&#8364;{finalPrice}</span>
+                  <span>
+&#8364;
+                    {finalPrice}
+                  </span>
                 </Box>
                 <Paper className={classes.qtyPicker}>
                   <RemoveIcon
@@ -69,7 +72,10 @@ export default function AddToCart({ open, onModalClose, product }) {
                   />
                 </Paper>
                 <Box className={classes.total}>
-                  <span>&#8364;{totalPrice}</span>
+                  <span>
+&#8364;
+                    {totalPrice}
+                  </span>
                 </Box>
               </Box>
             </Grid>

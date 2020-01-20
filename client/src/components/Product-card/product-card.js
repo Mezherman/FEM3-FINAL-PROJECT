@@ -7,9 +7,9 @@ import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import * as cartActions from '../../redux/actions/CartActions';
 
-import { Link } from 'react-router-dom';
 import useStyles from './_product-card';
 import AddToCart from '../Add-to-cart/add-to-cart';
 import RoutesName from '../../routes-list';

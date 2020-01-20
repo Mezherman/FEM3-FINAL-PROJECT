@@ -84,7 +84,7 @@ function ProductBreadcrumbs({ assortment, catalog, products }) {
           </MenuItem>
         </Link>
       )}
-      {/*<Typography color="textPrimary">{currentPosition}</Typography>*/}
+      {/* <Typography color="textPrimary">{currentPosition}</Typography> */}
     </Breadcrumbs>
   );
 }

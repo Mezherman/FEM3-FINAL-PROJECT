@@ -15,8 +15,8 @@ export default function QuantitySelector ({ productQuantity, productId, onSetPro
     return items;
   }
 
-  const handleChange = quantity => event => {
-    const value = event.target.value;
+  const handleChange = (quantity) => (event) => {
+    const { value } = event.target;
     onSetProductQuantity(productId, value);
     updateQuantity(value);
   }

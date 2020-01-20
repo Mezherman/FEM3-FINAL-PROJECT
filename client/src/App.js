@@ -16,7 +16,7 @@ function App(props) {
   const { catalogLoading, fetchCatalog } = props;
   useEffect(() => {
     fetchCatalog();
-  }, []);
+  }, [fetchCatalog]);
   return (
     <>
       {!catalogLoading &&

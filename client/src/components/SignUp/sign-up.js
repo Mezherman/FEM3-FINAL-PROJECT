@@ -25,8 +25,8 @@ import {
 } from '@material-ui/core';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import LanguageIcon from '@material-ui/icons/Language';
-import RoutesName from '../../routes-list';
 import CloseIcon from '@material-ui/icons/Close';
+import RoutesName from '../../routes-list';
 
 import useStyles from './_sign-up';
 

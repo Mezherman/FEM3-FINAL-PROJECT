@@ -58,7 +58,6 @@ function Header(props) {
   const [anchorElLogin, setAnchorElLogin] = useState(null);
   const handleClick = (event) => {
     setAnchorElLogin(event.currentTarget);
-
   };
 
   const handleClose = () => {
