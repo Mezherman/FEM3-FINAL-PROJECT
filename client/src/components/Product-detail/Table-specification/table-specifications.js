@@ -10,9 +10,12 @@ import PropTypes from 'prop-types';
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    minWidth: 320,
     maxWidth: 1000
   },
+  name: {
+    fontWeight: '500'
+  }
 });
 
 function createData(name, data) {
@@ -57,7 +60,7 @@ export default function TableSpecifications({ data }) {
           {rows.map((row) => (
             <TableRow key={row.name}>
               {row.data ? (
-                <TableCell component="th" scope="row">
+                <TableCell className={classes.name} component="th" scope="row">
                   {row.name}
                 </TableCell>
               ) : null}
@@ -71,5 +74,11 @@ export default function TableSpecifications({ data }) {
 }
 
 TableSpecifications.propTypes = {
-  data: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.boolean])).isRequired,
+  data:
+  PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.string,
+      PropTypes.boolean])
+  ).isRequired,
 };

@@ -7,7 +7,7 @@ import configureStore from './store/configureStore';
 import './index.css';
 
 import App from './App';
-import theme from './_index';
+import theme from './theme';
 
 const store = configureStore();
 

@@ -5,19 +5,17 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import { useTheme } from '@material-ui/core/styles';
+import { useTheme, createStyles, withStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import './carousel-react.scss';
 import StopIcon from '@material-ui/icons/Stop';
 
-import ReactImageZoom from 'react-image-zoom';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import { createStyles, withStyles } from '@material-ui/core/styles';
+
 import InputBase from '@material-ui/core/InputBase';
-import List from '@material-ui/core/List';
 import ProductDetailCollapse from './Product-detail-collapse/product-detail-collapse';
 import useStyles from './_product-detail';
 import AddToBasket from '../Add-to-basket/add-to-basket';
@@ -26,15 +24,12 @@ import FeatureItem from './feature-item';
 import ProductDetailTab from './Product-detail-tab/product-detail-tab';
 
 export default function ProductDetail({ product }) {
-  const { imageUrls, name, currentPrice, previousPrice, myCustomParams, brand } = product;
+  const { imageUrls, name, currentPrice, previousPrice, myCustomParams, brand, enabled } = product;
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.up('md'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
-  console.log('Mobile', isMobile);
-  console.log('Tablet', isTablet);
-  console.log('Desctop', isDesktop);
   const [modalIsVisible, setModalVisibility] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const handleChange = (event) => {
@@ -43,8 +38,8 @@ export default function ProductDetail({ product }) {
   const closeModal = () => {
     setModalVisibility(false)
   };
-
-  //   const zoom = { width: 400, zoomWidth: 400, offset: { vertical: 0, "horizontal": -100, zoomStyle: {} }};
+  //   const zoom = { width: 400,
+  //   zoomWidth: 400, offset: { vertical: 0, "horizontal": -100, zoomStyle: {} }};
   //
   //   const zoomImage = imageUrls.map((url) => (
   //
@@ -102,13 +97,14 @@ export default function ProductDetail({ product }) {
       />
       <h1 className={classes.title}>{name.toUpperCase()[0] + name.slice(1)}</h1>
       <Grid container spacing={4} justify="center">
-        <Grid item xs={12} sm={12} md={7} xl={6}>
+        <Grid item xs={12} sm={12} md={6} xl={6}>
           <MyGallery
             images={images}
           />
           {!isTablet && <Divider />}
         </Grid>
-        <Grid item xs={12} sm={12} md={5} xl={6}>
+        <Grid item md={1} />
+        <Grid item xs={12} sm={12} md={5} xl={5}>
           <Grid container spacing={1}>
             {/* <Grid item xs={12} sm={12} md={12}> */}
             {/*  <Typography align="right"> */}
@@ -155,28 +151,44 @@ export default function ProductDetail({ product }) {
                       {currentPrice}
                     </span>
                   </div>
-                  <FormControl className={classes.margin}>
-                    <InputLabel htmlFor="quantity">Quantity</InputLabel>
-                    <NativeSelect
-                      id="quantity"
-                      value={quantity}
-                      onChange={handleChange}
-                      input={<BootstrapInput />}
+                  <p className={classes.fact}>
+                    Incl. Tax / Excl.
+                    {' '}
+                    <a href="#">Shipping</a>
+                  </p>
+                  <Box>
+                    <FormControl className={classes.margin}>
+                      <InputLabel htmlFor="quantity">Quantity</InputLabel>
+                      <NativeSelect
+                        id="quantity"
+                        value={quantity}
+                        onChange={handleChange}
+                        input={<BootstrapInput />}
 
-                    >
-                      <option value={1}>1</option>
-                      <option value={2}>2</option>
-                      <option value={3}>3</option>
-                    </NativeSelect>
-                  </FormControl>
+                      >
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                        <option value={3}>3</option>
+                      </NativeSelect>
+                    </FormControl>
+                  </Box>
                   <div className={classes.disableBlock}>
-                    <span>Disable:</span>
-                    <span>
-                      <StopIcon />
-                      In stock
-                    </span>
-                  </div>
 
+                    <span>Disable:</span>
+                    {enabled
+                      ? (
+                        <span >
+                          <StopIcon className={classes.inStock} />
+                    In stock
+                        </span>
+                      )
+                      : (
+                        <span>
+                          <StopIcon />
+                    Out of stock
+                        </span>
+                      )}
+                  </div>
                   <div className={classes.addToCart}>
                     <Button
                       size="large"
@@ -194,13 +206,18 @@ export default function ProductDetail({ product }) {
                 </Container>
               </Box>
             </Grid>
-            <Grid item xs={12} sm={6} md={12} xl={12}>
-              <List>
-                <FeatureItem label="Free delivery over 49€" />
-                <FeatureItem label="Free returns" />
-                <FeatureItem label="Secure payment" />
-                <FeatureItem label="Certified online shop" />
-              </List>
+            <Grid item xl={6} />
+            <Grid item xs={12} sm={12} md={12} xl={6}>
+              <Grid container>
+                <Grid item xs={12} sm={6} md={12} xl={12}>
+                  <FeatureItem label="Free delivery over 49€" />
+                  <FeatureItem label="Free returns" />
+                </Grid>
+                <Grid item xs={12} sm={6} md={12} xl={12}>
+                  <FeatureItem label="Secure payment" />
+                  <FeatureItem label="Certified online shop" />
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
           {!isTablet && <Divider />}
@@ -211,8 +228,8 @@ export default function ProductDetail({ product }) {
           <h3 className={classes.sectionTitle}>Product details</h3>
           {isDesktop && <ProductDetailTab data={product} />}
           {!isDesktop && <ProductDetailCollapse data={product} />}
+          {!isTablet && <Divider />}
         </Grid>
-
       </Grid>
     </Container>
   );

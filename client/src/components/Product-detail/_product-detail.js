@@ -11,10 +11,10 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
     border: '1px dashed',
     borderColor: theme.palette.background.primary,
-  [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
 
       display: 'none',
-  },
+    },
   },
   MuiListRoot: {
     listStyleType: 'disc',
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 2, 1),
     zIndex: '1000',
     backgroundColor: theme.palette.background.primary,
-  [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('md')]: {
       position: 'static',
       zIndex: '0',
       padding: theme.spacing(0),
@@ -45,11 +45,11 @@ const useStyles = makeStyles((theme) => ({
   },
   priceBox: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
   },
   oldPrice: {
     display: 'inline-block',
-    paddingBottom: theme.spacing(4),
+    paddingBottom: theme.spacing(1),
     color: theme.palette.text.primary,
     fontWeight: '300',
     fontSize: '15px',
@@ -58,12 +58,14 @@ const useStyles = makeStyles((theme) => ({
   },
   regularPrice: {
     display: 'inlineBlock',
-    paddingBottom: theme.spacing(4),
+    paddingBottom: theme.spacing(1),
     color: theme.palette.text.primary,
     fontWeight: '700',
     fontSize: '26px',
     textAlign: 'right',
-
+    [theme.breakpoints.up('md')]: {
+      fontSize: '32px',
+    },
   },
   specialPrice: {
     display: 'inlineBlock',
@@ -74,6 +76,15 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'right',
     verticalAlign: 'bottom',
   },
+    fact: {
+      textAlign: 'right',
+    },
+
+inStock: {
+    position: 'relative',
+    color: theme.palette.primary.main,
+  top: '7px'
+},
   sectionTitle: {
     fontSize: '18px',
     fontWeight: '500'

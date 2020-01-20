@@ -37,9 +37,9 @@ export default function CollapsingItem(props) {
       >
         <List component="div" disablePadding>
           <ListItem className={classes.nested}>
-            <ListItemText
-              primary={children}
-            />
+            <ListItemText >
+              {children}
+            </ListItemText>
           </ListItem>
         </List>
       </Collapse>
@@ -49,5 +49,6 @@ export default function CollapsingItem(props) {
 
 CollapsingItem.propTypes = {
   label: PropTypes.string.isRequired,
-  children: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.symbol])).isRequired,
+  children: PropTypes.node.isRequired,
+  // children: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.symbol])).isRequired,
 };
