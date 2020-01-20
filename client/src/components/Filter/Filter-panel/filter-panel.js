@@ -12,12 +12,12 @@ import Checkbox from '@material-ui/core/Checkbox'
 import { connect } from 'react-redux'
 import RangeSlider from '../Range/range'
 import useStyles from './_filter-panel';
-import { getBrandProducts, getCollectionProducts } from '../../../redux/actions/filter'
+import { getFilterProducts } from '../../../redux/actions/filter'
 
 function FilterPanel(props) {
   const classes = useStyles();
-  const { name, brand, getBrandProducts, text, checkbox, max } = props;
-  // console.log('BRAND =', brand);
+  const { name, filters, getFilterProducts, text, checkbox, max } = props;
+  // console.log('BRAND =', filter);
 
   const handleChange = (event) => {
     // const test = {
@@ -27,18 +27,18 @@ function FilterPanel(props) {
     // }
     // }
     console.log('PROPS =', props);
-    let brandsChosen = [];
+    let filtersChosen = [];
     if (event.target.checked) {
-      brand.push(event.target.value);
-      brandsChosen = brand;
+      filters.push(event.target.value);
+      filtersChosen = filters;
     } else {
-      const idx = brand.findIndex((el) => el === event.target.value);
-      const before = brand.slice(0, idx);
-      const after = brand.slice(idx + 1);
+      const idx = filters.findIndex((el) => el === event.target.value);
+      const before = filters.slice(0, idx);
+      const after = filters.slice(idx + 1);
 
-      brandsChosen = [...before, ...after];
+      filtersChosen = [...before, ...after];
     }
-    getBrandProducts(brandsChosen);
+    getFilterProducts(filtersChosen);
   };
 
   return (
@@ -77,17 +77,17 @@ function FilterPanel(props) {
 }
 
 const mapStateToProps = (state) => ({
-  brand: state.filterReducer.brand
+  filters: state.filterReducer.filters
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    getBrandProducts: (value) => dispatch(getBrandProducts(value))
+    getFilterProducts: (value) => dispatch(getFilterProducts(value))
   }
 }
 
 FilterPanel.propTypes = {
-  brand: PropTypes.arrayOf(PropTypes.string),
+  filters: PropTypes.arrayOf(PropTypes.string),
   name: PropTypes.string.isRequired,
   text: PropTypes.arrayOf(PropTypes.string),
   checkbox: PropTypes.bool,
@@ -98,7 +98,7 @@ FilterPanel.defaultProps = {
   checkbox: false,
   text: [''],
   max: null,
-  brand: []
+  filters: []
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterPanel)

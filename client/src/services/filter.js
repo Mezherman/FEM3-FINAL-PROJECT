@@ -4,18 +4,9 @@ axios.defaults.baseURL = 'http://localhost:5000';
 
 axios.defaults.headers.common.Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMTYwMTI2MTYyZDcyMjRkOGU1MjJjOCIsImZpcnN0TmFtZSI6IlZsYWQiLCJsYXN0TmFtZSI6Ik1lemhlcml0c2t5aSIsImlzQWRtaW4iOnRydWUsImlhdCI6MTU3ODk5Mjc5OSwiZXhwIjoxNTc5MDI4Nzk5fQ.DJHhj4JXSbmBO-zDmx6ia0USBGQpQ7ol7cEbm4GkFsk';
 
-export default function getAllFilterProducts() {
+export default function getAllFilterProducts(value) {
   return axios
-    .get('products/filter/')
+    .get(`products/filter?${value}`)
     .then((response) => console.log(response.data))
     .catch((error) => console.log(error))
 }
-
-// export async function getFilterProducts(filter) {
-//   return axios
-//     .get(`/products/filter?${filter}`)
-//     .then((response) => console.log('getFilterProducts = ', response))
-//     .catch((err) => {
-//       console.log('ERROR = ', err);
-//     });
-// }

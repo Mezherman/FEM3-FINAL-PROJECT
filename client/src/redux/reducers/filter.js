@@ -1,21 +1,14 @@
 const initialState = {
-  brand: [],
+  filters: [],
   price: [],
-  collection: []
 };
 
 export default function filterReducer(state = initialState, action) {
   switch (action.type) {
-    case 'GET_BRAND_PRODUCTS':
+    case 'GET_FILTER_PRODUCTS':
       return {
         ...state,
-        brand: action.payload
-      };
-
-    case 'GET_COLLECTION_PRODUCTS':
-      return {
-        ...state,
-        collection: action.payload
+        filters: action.payload
       };
 
     case 'GET_PRICE_PRODUCTS':

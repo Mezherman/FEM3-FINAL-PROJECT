@@ -17,7 +17,6 @@ function RangeSlider(props) {
 
   // console.log('get price RANGE = ',props.getPriceProducts(value));
 
-
   return (
     <>
       <Slider
