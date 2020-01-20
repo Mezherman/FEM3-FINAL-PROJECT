@@ -10,16 +10,73 @@ const useStylesMainCarousel = makeStyles((theme) => ({
     width: '100%',
   },
 
-  textBlock: {
+  title: {
+    fontSize: '4em',
+  },
 
-    borderBottomLeftRadius: theme.spacing(1),
-    maxWidth: '300px',
+  description: {
+    fontSize: '3em',
+  },
+
+  textBlock: {
+    [theme.breakpoints.up('xs')]: {
+      top: '6%',
+      maxWidth: '194px',
+      fontSize: '0.19rem',
+      right: 39,
+      padding: '2px',
+    },
+    [theme.breakpoints.up('sm')]: {
+      top: '15%',
+      maxWidth: '400px',
+      fontSize: '0.3rem',
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '0.32rem',
+      maxWidth: '450px',
+      top: '28%',
+      padding: theme.spacing(1),
+    },
+    [theme.breakpoints.up('lg')]: {
+      fontSize: '0.41rem',
+      top: '31px%',
+      maxWidth: '550px',
+    },
+    borderTopLeftRadius: theme.spacing(1),
+    maxWidth: '550px',
     color: theme.palette.text.primary,
-    padding: theme.spacing(1),
     position: 'absolute',
-    top: 55,
-    right: 55,
     backgroundColor: theme.palette.background.secondary,
+    boxShadow: 'inset -187px 33px 51px 21px rgba(235,235,235,0.5)',
+  },
+
+  mainArrowsControl: {
+    position: 'relative',
+    padding: '22px 18px',
+    background: theme.palette.background.default,
+    opacity: 0.8,
+    cursor: 'pointer',
+  },
+
+  mainArrowNext: {
+    borderTopLeftRadius: '5px',
+    borderBottomLeftRadius: '5px',
+  },
+
+  mainArrowPrev: {
+    borderTopRightRadius: '5px',
+    borderBottomRightRadius: '5px',
+    left: '1px',
+  },
+
+  mainArrowPrevTop: {
+    position: 'absolute',
+    right: '32px',
+    width: '26px',
+    height: '2px',
+    top: '19px',
+    transform: 'rotate(135deg)',
+    transformOrigin: 'bottom right',
   },
 
 }));

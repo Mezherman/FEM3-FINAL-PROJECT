@@ -171,7 +171,6 @@ export default function SignIn(props) {
               Sign In
           </Button>
           <Link
-            variant="body2"
             className={classes.text}
             to={RoutesName.signUp}
             onClick={onClose}

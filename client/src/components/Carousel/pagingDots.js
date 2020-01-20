@@ -10,10 +10,10 @@ export default function PagingDots (props) {
     slidesToShow,
     cellAlign,
     classItems,
-    classItemsActive,
+    buttonItems,
     ulPagingItem,
-    ulMainPagingItem,
-    mainCarousel,
+    // ulMainPagingItem,
+    // mainCarousel,
   } = props;
   // eslint-disable-next-line no-shadow
   function getDotIndexes (slideCount, slidesToScroll, slidesToShow, cellAlign) {
@@ -41,25 +41,20 @@ export default function PagingDots (props) {
   }
   const indexes = getDotIndexes(slideCount, slidesToScroll, slidesToShow, cellAlign);
   return (
-    <ul className={mainCarousel ? ulMainPagingItem : ulPagingItem}>
+    <ul className={ulPagingItem}>
       {indexes.map((index) => (
         <li
           key={index}
-          className={currentSlide === index ? classItemsActive : classItems}
+          className={currentSlide === index ? `${classItems} active` : classItems}
         >
-          {
-            mainCarousel
-              ? (
-                <button
-                  type="button"
-                  onClick={goToSlide.bind(null, index)}
-                  aria-label={'slide '.concat(index + 1, ' bullet')}
-                >
-                  {index + 1}
-                </button>
-              )
-              : null
-          }
+          <button
+            className={buttonItems}
+            type="button"
+            onClick={goToSlide.bind(null, index)}
+            aria-label={'slide '.concat(index + 1, ' bullet')}
+          >
+            {index + 1}
+          </button>
         </li>
       ))}
     </ul>
@@ -74,12 +69,15 @@ PagingDots.propTypes = {
   currentSlide: PropTypes.number.isRequired,
   goToSlide: PropTypes.func.isRequired,
   classItems: PropTypes.string.isRequired,
-  classItemsActive: PropTypes.string.isRequired,
+  // classItemsActive: PropTypes.string.isRequired,
   ulPagingItem: PropTypes.string.isRequired,
-  ulMainPagingItem: PropTypes.string.isRequired,
-  mainCarousel: PropTypes.bool,
+  // ulMainPagingItem: PropTypes.string.isRequired,
+  buttonItems: PropTypes.string,
+  // mainCarousel: PropTypes.bool,
 };
 
 PagingDots.defaultProps = {
-  mainCarousel: false
+  buttonItems: '',
+
+  // mainCarousel: false
 };

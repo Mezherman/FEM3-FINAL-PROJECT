@@ -15,19 +15,11 @@ const useStylesCarousel = makeStyles((theme) => ({
     [theme.breakpoints.up('xl')]: {
       height: 'calc(100vh - 180px)',
     },
-    '& div>div>ul>li>img': {
-      bottom: 0
-    },
-
+    // '& div>div>ul>li>img': {
+    //   bottom: 0
+    // },
   },
-  // mainCarousel: {
-  //   '& .slider-control-bottomcenter': {
-  //     position: 'absolute',
-  //     bottom: '-36px',
-  //     left: '50%',
-  //     transform: 'translateX(-50%)',
-  //     },
-  //   },
+
   mainPagingItem: {
     '&::after': {
       display: 'none',
@@ -106,35 +98,10 @@ const useStylesCarousel = makeStyles((theme) => ({
     listStyleType: 'none',
   },
 
-  mainArrowsControl: {
-    position: 'relative',
-    padding: '22px 18px',
-    background: theme.palette.background.default,
-    opacity: 0.8,
-    cursor: 'pointer',
-  },
-
-  mainArrowNext: {
-    borderTopLeftRadius: '5px',
-    borderBottomLeftRadius: '5px',
-  },
-
-  mainArrowPrev: {
-    borderTopRightRadius: '5px',
-    borderBottomRightRadius: '5px',
-    left: '1px',
-  },
-
-  mainArrowPrevTop: {
-    top: '19px',
-  },
-
-  mainArrowPrevTopBottom: {
-    right: '32px',
-  },
-
   arrowsTopBottom: {
-    backgroundColor: theme.palette.secondary.main,
+    background: theme.palette.text.primary,
+    transform: 'rotate(-135deg)',
+    transformOrigin: 'top right',
   },
 
   arrowNext: {
@@ -156,12 +123,12 @@ const useStylesCarousel = makeStyles((theme) => ({
     right: '5px',
     width: '26px',
     height: '2px',
-    background: theme.palette.text,
+    background: theme.palette.text.primary,
     '&::after': {
       position: 'absolute',
       top: 0,
       height: '100%',
-      background: theme.palette.primary,
+      background: theme.palette.primary.main,
       transition: 'all .15s',
       content: '',
     },
@@ -203,15 +170,15 @@ const useStylesCarousel = makeStyles((theme) => ({
 
   arrowPrevTopBottom: {
     position: 'absolute',
-    right: '22px',
+    right: '32px',
     width: '26px',
     height: '2px',
-    background: theme.palette.text,
+    background: theme.palette.text.primary,
     '&::after': {
       position: 'absolute',
       top: 0,
       height: '100%',
-      background: theme.palette.primary,
+      background: theme.palette.primary.main,
       transition: 'all .15s',
       content: '',
     },

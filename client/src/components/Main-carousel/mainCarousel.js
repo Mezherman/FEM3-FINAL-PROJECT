@@ -1,11 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import Carousels from '../components/Carousel/carousel';
-import PagingDots from '../components/Carousel/pagingDots';
-import useStylesCarousel from '../components/Carousel/_carousel';
 import { Link } from 'react-router-dom';
+import Carousels from '../Carousel/carousel';
+import PagingDots from '../Carousel/pagingDots';
+import useStylesCarousel from '../Carousel/_carousel';
 import useStylesMainCarousel from './_mainCarousel';
-
 
 axios.defaults.baseURL = 'http://localhost:5000';
 
@@ -31,7 +30,7 @@ export default function MainSlider() {
       <Carousels
         isProductSlider={false}
         autoPlay={false}
-        className={classes.mainCarousel}
+        // className={mainCarouselClasses.mainCarousel}
         autoplayInterval={2000}
         wrapAround
         slidesToShow={1}
@@ -43,15 +42,15 @@ export default function MainSlider() {
           // <div className="arrow-prev-top" />
           //  <div className="arrow-prev-bottom" />
           // </div>
-          <div className={`${classes.mainArrowsControl} ${classes.mainArrowPrev}`} onClick={previousSlide}>
-            <div className={`${classes.arrowPrevTopBottom} ${classes.mainArrowPrevTop}`} />
+          <div className={`${mainCarouselClasses.mainArrowsControl} ${mainCarouselClasses.mainArrowPrev}`} onClick={previousSlide}>
+            <div className={`${classes.arrowPrevTopBottom} ${mainCarouselClasses.mainArrowPrevTop}`} />
             <div className={`${classes.arrowPrevTopBottom} ${classes.arrowsTopBottom}`} />
           </div>
         )}
         renderCenterRightControls={({ nextSlide }) => (
           // eslint-disable-next-line max-len
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-          <div className={`${classes.mainArrowsControl} ${classes.mainArrowNext}`} onClick={nextSlide}>
+          <div className={`${mainCarouselClasses.mainArrowsControl} ${mainCarouselClasses.mainArrowNext}`} onClick={nextSlide}>
             <div className={`${classes.arrowNextTop} ${classes.arrowNextTopBottom}`} />
             <div className={`${classes.arrowNextBottom} ${classes.arrowNextTopBottom}`} />
           </div>
@@ -68,13 +67,13 @@ export default function MainSlider() {
       >
         {slides.map((item) => {
           // console.log(item);
-          const { imageUrl, title, description, route } = item;
+          const { imageUrl, title, description, route, _id } = item;
           return (
-            <Link to={route} classname={mainCarouselClasses.itemContainer}>
+            <Link to={route} key={_id} >
               <img src={imageUrl} className={mainCarouselClasses.img} alt="Special proposition for customers" />
               <div className={mainCarouselClasses.textBlock}>
-                <h3>{title}</h3>
-                <p>{description}</p>
+                <h3 className={mainCarouselClasses.title}>{title}</h3>
+                <p className={mainCarouselClasses.description}>{description}</p>
               </div>
             </Link>
           )
