@@ -3,10 +3,12 @@ import cart from './cart';
 import categoriesReducer from './categories';
 import productsReducer from './products';
 import formReducer from './form';
+import userReducer from './user';
 
 export default combineReducers({
   cart,
   categoriesReducer,
   productsReducer,
-  formReducer
+  formReducer,
+  userReducer
 })

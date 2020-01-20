@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 import FilledInput from '@material-ui/core/FilledInput';
 import FormControl from '@material-ui/core/FormControl';
@@ -21,13 +22,16 @@ import { FormLabel } from '@material-ui/core';
 import useStylesSingIn from './_sign-in';
 import RoutesName from '../../routes-list';
 
-export default function SignIn(props) {
+import loginLoaded from '../../redux/actions/user';
+
+function SignIn(props) {
   const [login, setLogin] = useState(null);
   const [password, setPassword] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [length, setLenght] = useState(1);
+  const [length, setLength] = useState(1);
 
-  const { onClose } = props;
+  const { onClose, user, loginLoaded } = props;
+  console.log('USER =', user);
   const classes = useStylesSingIn();
 
   // const userData = {
@@ -51,7 +55,7 @@ export default function SignIn(props) {
 
   const colorChanger = (event) => {
     if (event.target.value.length > 0) {
-      setLenght(event.target.length)
+      setLength(event.target.length)
     }
   };
 
@@ -73,6 +77,7 @@ export default function SignIn(props) {
     axios
       .post('/customers/login', userData)
       .then((loginResult) => {
+        loginLoaded(loginResult.data.token);
         onClose();
         localStorage.setItem('token', `${loginResult.data.token}`);
         const token = localStorage.getItem('token');
@@ -157,7 +162,7 @@ export default function SignIn(props) {
           {/*  <FilledInput id="component-filled" value={name} onChange={handleChange} /> */}
           {/* </FormControl> */}
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" className={classes.checkBox}/>}
+            control={<Checkbox value="remember" color="primary" className={classes.checkBox} />}
             label="Remember me"
           />
           <Button
@@ -183,6 +188,19 @@ export default function SignIn(props) {
     </Container>
   );
 }
+
+const mapStateToProps = (state) => {
+  console.log('STATE =', state);
+  return {
+    user: state.userReducer
+  }
+};
+
+const mapDispatchToProps = {
+  loginLoaded
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
 
 SignIn.propTypes = {
   onClose: PropTypes.func,

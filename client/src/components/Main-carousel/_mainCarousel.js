@@ -16,6 +16,9 @@ const useStylesMainCarousel = makeStyles((theme) => ({
   },
 
   description: {
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '2.8em',
+    },
     fontSize: '2.3em',
     margin: '10px',
   },

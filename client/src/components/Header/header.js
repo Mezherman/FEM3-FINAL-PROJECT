@@ -29,7 +29,7 @@ import useStyles from './_header.js';
 import Search from '../Search/search'
 import HeaderNavbar from '../Header-navbar/header-navbar';
 import PreviewBlock from '../Preview-block/preview-cart';
-import SignIn from '../SignIn/sign-in';
+import SignIn from '../Sign-in/sign-in';
 
 const StyledMenu = withStyles({
   paper: {
