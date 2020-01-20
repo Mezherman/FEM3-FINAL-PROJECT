@@ -1,6 +1,7 @@
 const initialState = {
   brand: [],
   price: [],
+  collection: []
 };
 
 export default function filterReducer(state = initialState, action) {
@@ -9,6 +10,12 @@ export default function filterReducer(state = initialState, action) {
       return {
         ...state,
         brand: action.payload
+      };
+
+    case 'GET_COLLECTION_PRODUCTS':
+      return {
+        ...state,
+        collection: action.payload
       };
 
     case 'GET_PRICE_PRODUCTS':
