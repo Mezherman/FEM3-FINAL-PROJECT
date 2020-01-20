@@ -11,7 +11,7 @@ import { productsRequested, productsLoaded, productsError } from '../../redux/ac
 import useStyles from './_product-list';
 
 function ProductList(props) {
-  const { assortment, products, error, productsLoading, fetchProducts } = props;
+  const { assortment, products, productsLoading, fetchProducts } = props;
   // console.log('products =', products);
   // console.log('PROPS =', props);
   const classes = useStyles();
@@ -23,8 +23,7 @@ function ProductList(props) {
   return (
     <div className={classes.productList}>
       {productsLoading && <Spinner />}
-      {error && <div>Error</div>}
-      {!productsLoading && !error &&
+      {!productsLoading &&
       products.map((product) => (
         <Grid item md={6} lg={4} key={product.itemNo}>
           <ProductCard
@@ -59,7 +58,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(ProductList)
 ProductList.propTypes = {
   assortment: PropTypes.string.isRequired,
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
-  error: PropTypes.oneOfType(PropTypes.object, PropTypes.string).isRequired,
   productsLoading: PropTypes.bool.isRequired,
   fetchProducts: PropTypes.func.isRequired
 };

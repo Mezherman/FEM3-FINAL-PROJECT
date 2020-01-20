@@ -121,12 +121,10 @@ export default function AddToCart({ open, onModalClose, product }) {
 }
 
 AddToCart.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onModalClose: PropTypes.func.isRequired,
   product:
   PropTypes.objectOf(
-    PropTypes.oneOfType([
-      PropTypes.array,
-      PropTypes.string,
-      PropTypes.boolean])
+    PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.number])
   ).isRequired,
-  // product: PropTypes.objectOf(PropTypes.string).isRequired,
 };

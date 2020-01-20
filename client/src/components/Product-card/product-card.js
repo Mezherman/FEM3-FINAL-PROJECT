@@ -100,7 +100,7 @@ ProductCard.propTypes = {
     PropTypes.oneOfType([
       PropTypes.array,
       PropTypes.string,
-      PropTypes.boolean])
+      PropTypes.number])
   ).isRequired,
   // name: PropTypes.string.isRequired,
   // imageUrls: PropTypes.array.isRequired,

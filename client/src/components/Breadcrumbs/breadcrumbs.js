@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import { MenuItem } from '@material-ui/core';
+import { Menu, MenuItem } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 
 import useStyles from './_breadcrumbs';
@@ -61,14 +61,14 @@ function ProductBreadcrumbs({ assortment, catalog, products }) {
   return (
     <Breadcrumbs aria-label="breadcrumb" color="primary" className={classes.wrapper}>
       <Link to="/" className={classes.item}>
-        <MenuItem className={classes.menuItem}>
+        <MenuItem className={classes.menuItem} component="span">
           <HomeIcon />
         </MenuItem>
       </Link>
       {category &&
       (
         <Link to={`${RoutesName.products}/${category.id}`} className={classes.item}>
-          <MenuItem className={classes.menuItem}>
+          <MenuItem className={classes.menuItem} component="span">
             {category.name}
           </MenuItem>
         </Link>
@@ -79,7 +79,7 @@ function ProductBreadcrumbs({ assortment, catalog, products }) {
           to={`${RoutesName.products}/${category.id}/${subCategory.id}`}
           className={classes.item}
         >
-          <MenuItem className={classes.menuItem}>
+          <MenuItem className={classes.menuItem} component="span">
             {subCategory.name}
           </MenuItem>
         </Link>
