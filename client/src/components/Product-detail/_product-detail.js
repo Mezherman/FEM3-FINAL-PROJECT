@@ -11,10 +11,10 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
     border: '1px dashed',
     borderColor: theme.palette.background.primary,
-    [theme.breakpoints.up('md')]: {
-
-      display: 'none',
-    },
+    // [theme.breakpoints.up('md')]: {
+    //
+    //   display: 'none',
+    // },
   },
   MuiListRoot: {
     listStyleType: 'disc',
