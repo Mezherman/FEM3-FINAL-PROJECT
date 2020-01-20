@@ -17,13 +17,12 @@ import FormControl from '@material-ui/core/FormControl';
 
 import InputBase from '@material-ui/core/InputBase';
 import ProductDetailCollapse from './Product-detail-collapse/product-detail-collapse';
-import useStyles from './_product-detail';
-import AddToBasket from '../Add-to-basket/add-to-basket';
-import MyGallery from './carousel-react'
 import AddToCart from '../Add-to-cart/add-to-cart';
-import useStyles from './_product-detail';
+import MyGallery from './carousel-react'
 import FeatureItem from './feature-item';
 import ProductDetailTab from './Product-detail-tab/product-detail-tab';
+
+import useStyles from './_product-detail';
 
 export default function ProductDetail({ product }) {
   const { imageUrls, name, currentPrice, previousPrice, myCustomParams, brand, enabled } = product;
