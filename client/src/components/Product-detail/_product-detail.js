@@ -5,12 +5,16 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '28px',
     fontWeight: '400',
   },
-  MuiBoxRoot: {
+  productFeatures: {
     height: '100%',
     padding: theme.spacing(1, 0),
     marginBottom: theme.spacing(1),
     border: '1px dashed',
     borderColor: theme.palette.background.primary,
+    [theme.breakpoints.up('md')]: {
+
+      display: 'none',
+    },
   },
   MuiListRoot: {
     listStyleType: 'disc',
@@ -18,17 +22,34 @@ const useStyles = makeStyles((theme) => ({
   disableBlock: {
     marginBottom: theme.spacing(1),
   },
+  addToCart: {
+    position: 'fixed',
+    left: '0',
+    bottom: '0',
+    width: '100%',
+    padding: theme.spacing(2, 2, 1),
+    zIndex: '1000',
+    backgroundColor: theme.palette.background.primary,
+    [theme.breakpoints.up('md')]: {
+      position: 'static',
+      zIndex: '0',
+      padding: theme.spacing(0),
+    },
+    // productFeatures: {
+    //       display: 'none',
+    //     }
+  },
   productShopArea: {
     padding: theme.spacing(2, 0),
     backgroundColor: theme.palette.background.primary
   },
   priceBox: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
   },
   oldPrice: {
     display: 'inline-block',
-    paddingBottom: theme.spacing(4),
+    paddingBottom: theme.spacing(1),
     color: theme.palette.text.primary,
     fontWeight: '300',
     fontSize: '15px',
@@ -37,12 +58,14 @@ const useStyles = makeStyles((theme) => ({
   },
   regularPrice: {
     display: 'inlineBlock',
-    paddingBottom: theme.spacing(4),
+    paddingBottom: theme.spacing(1),
     color: theme.palette.text.primary,
     fontWeight: '700',
     fontSize: '26px',
     textAlign: 'right',
-
+    [theme.breakpoints.up('md')]: {
+      fontSize: '32px',
+    },
   },
   specialPrice: {
     display: 'inlineBlock',
@@ -53,8 +76,18 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'right',
     verticalAlign: 'bottom',
   },
-  highlights: {
-    textAlign: 'justify'
+    fact: {
+      textAlign: 'right',
+    },
+
+inStock: {
+    position: 'relative',
+    color: theme.palette.primary.main,
+  top: '7px'
+},
+  sectionTitle: {
+    fontSize: '18px',
+    fontWeight: '500'
   },
   property: {
     fontWeight: 'bold',
