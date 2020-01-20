@@ -1,19 +1,38 @@
 const initialState = {
   products: {
-    12345: {
+    '5e1ce3c0afe1f2447c932b9b': {
       product: {
-        title: 'Set 66 DENVER',
-        price: '304',
-        specialPrice: '149',
-        url: 'https://www.wmf.com/media/catalog/product/cache/2/small_image/265x/9df78eab33525d08d6e5fb8d27136e95/1/1/11_4800_6041_100.jpg',
-        art: '592.213.49',
-        color: 'light grey',
-        _id: '12345'
+        enabled: true,
+        imageUrls:
+          [
+            '/img/products/preparing/knives/4000530678515/1.jpg',
+            '/img/products/preparing/knives/4000530678515/2.jpg',
+            '/img/products/preparing/knives/4000530678515/3.jpg',
+            '/img/products/preparing/knives/4000530678515/4.jpg',
+            '/img/products/preparing/knives/4000530678515/5.jpg',
+            '/img/products/preparing/knives/4000530678515/6.jpg',
+            '/img/products/preparing/knives/4000530678515/7.jpg',
+            '/img/products/preparing/knives/4000530678515/8.jpg'
+          ],
+        quantity: 10,
+        _id: '5e1ce3c0afe1f2447c932b9b',
+        name: 'knife block with knives 8-pc',
+        currentPrice: 359,
+        categories: 'knives',
+        color: 'stainless steel',
+        productUrl: '/knife-block-with-knives-8-pc-4000530678515',
+        brand: 'WMF',
+        manufacturer: 'WMF Corp',
+        manufacturerCountry: 'Germany',
+        myCustomParams: { EAN: 4000530678515, collection: 'Grand Gourmet', material: 'Special blade steel', setSize: 8, fragile: false },
+        itemNo: '44543',
+        date: '2020-01-13T21:40:16.778Z'
       },
-      productQuantity: 1
+      cartQuantity: 2,
     }
   },
-  cartQuantity: 1
+  totalCartQuantity: 2,
+  totalCartPrice: 0
 };
 
 export default function cart(state = initialState, action) {
@@ -25,36 +44,65 @@ export default function cart(state = initialState, action) {
 
       const products = { ...state.products };
       if (products[product._id]) {
-        products[product._id].productQuantity++;
+        products[product._id].cartQuantity++;
       } else {
         products[product._id] = {
           product,
-          productQuantity: 1
+          cartQuantity: 1
         };
       }
-      const newState = { ...state, products, cartQuantity: getCartQuantity(products) };
-      console.log('newSate ', newState);
+      const newState = {
+        ...state,
+        products,
+        totalCartQuantity: getCartQuantity(products),
+        totalCartPrice: getTotalCartPrice(products)
+      };
       return newState;
     }
-    case 'GET_CART_QUANTITY': {
-      return { ...state, cartQuantity: getCartQuantity(state.products) };
+    case 'REMOVE_PRODUCT': {
+      const productId = action.payload;
+      if (!productId) return state;
+      const products = { ...state.products };
+      if (!products[productId]) {
+        return state;
+      }
+
+      delete products[productId];
+      const newState = {
+        ...state,
+        products,
+        totalCartQuantity: getCartQuantity(products),
+        totalCartPrice: getTotalCartPrice(products)
+      };
+      return newState;
     }
     case 'SET_PRODUCT_QUANTITY': {
       const newQuantity = action.payload.quantity;
-      const _id = action.payload.product_id;
-      console.log('newQuantity', newQuantity);
-      console.log('_id', _id);
+      const _id = action.payload.productId;
+      if (newQuantity < 1) return { ...state };
+      if (!_id) return { ...state };
       const { products } = state;
       if (!products[_id]) return { ...state };
-      products[_id].productQuantity = +newQuantity;
-      return { ...state, products, cartQuantity: getCartQuantity(products) }
+      products[_id].cartQuantity = +newQuantity;
+      return {
+        ...state,
+        products,
+        totalCartQuantity: getCartQuantity(products),
+        totalCartPrice: getTotalCartPrice(products)
+      }
     }
     default: return { ...state };
   }
 
   function getCartQuantity (products) {
     return Object.values(products).reduce(
-      (totalQuantity, current) => totalQuantity + current.productQuantity,
+      (totalQuantity, current) => totalQuantity + current.cartQuantity,
+      0
+    );
+  }
+  function getTotalCartPrice (products) {
+    return Object.values(products).reduce(
+      (totalPrice, current) => totalPrice + (current.cartQuantity * current.product.currentPrice),
       0
     );
   }
