@@ -7,13 +7,14 @@ const useStyles = makeStyles((theme) => ({
   title: {
     display: 'flex',
     justifyContent: 'space-between',
-    padding: '10px 0'
+    padding: '10px 0',
+    fontSize: '20px'
   },
   header: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: theme.spacing(0, 2),
+    padding: theme.spacing(0.5, 2),
     fontWeight: 'bold'
   },
   body: {
@@ -38,20 +39,23 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   sign: {
+    fontSize: '36px',
     textAlign: 'center',
     padding: '5px',
     backgroundColor: 'gray',
     cursor: 'pointer'
   },
   qty: {
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: '16px'
   },
   price: {
     minWidth: '20%',
     padding: '5px',
     backgroundColor: 'rgba(240,235,84,0.72)',
     textAlign: 'center',
-    borderRadius: '4px'
+    borderRadius: '4px',
+    fontSize: '18px'
   },
   total: {
     minWidth: '20%',
@@ -63,9 +67,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: theme.spacing(2, 0),
-  },
-  currency: {
-    marginLeft: '5px'
   }
 }));
 

@@ -11,7 +11,7 @@ import * as cartActions from '../../redux/actions/CartActions';
 
 import { Link } from 'react-router-dom';
 import useStyles from './_product-card';
-import AddToBasket from '../Add-to-basket/add-to-basket';
+import AddToCart from '../Add-to-cart/add-to-cart';
 import RoutesName from '../../routes-list';
 
 function ProductCard({ product }) {
@@ -30,7 +30,7 @@ function ProductCard({ product }) {
   };
   return (
     <>
-      <AddToBasket
+      <AddToCart
         open={modalIsVisible}
         onModalClose={closeModal}
         product={{ imageUrls, name, currentPrice, previousPrice }}
@@ -97,7 +97,7 @@ ProductCard.propTypes = {
     PropTypes.oneOfType([
       PropTypes.array,
       PropTypes.string,
-      PropTypes.boolean])
+      PropTypes.number])
   ).isRequired,
   // name: PropTypes.string.isRequired,
   // imageUrls: PropTypes.array.isRequired,

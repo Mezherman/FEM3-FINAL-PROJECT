@@ -13,7 +13,7 @@ export default function Footer() {
         alt="headerMainLogo"
         className={classes.mainHeaderLogoImg}
         useMap="#products"
-        style={{width: '80px', height: '80px'}}
+        style={{ width: '80px', height: '80px' }}
       />
       <map name="products">
         <Link to={RoutesName.aboutUs}>

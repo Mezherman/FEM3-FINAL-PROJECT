@@ -15,43 +15,43 @@ export default function Routes() {
   return (
     <Switch>
       <Route path={RoutesName.signUp} component={SignUp} />
-      <Route
-        path={RoutesName.products}
-        exact
-        render={() => {
-          return <Catalog category='all' />
-        }}
-      />
+      {/* <Route */}
+      {/*  path={RoutesName.products} */}
+      {/*  exact */}
+      {/*  render={() => { */}
+      {/*    return <Catalog category='all' /> */}
+      {/*  }} */}
+      {/* /> */}
       <Route
         path={`${RoutesName.products}/cooking/:subCategory`}
         exact
-        render={({ match, location }) => {
+        render={({ match }) => {
           const { subCategory } = match.params;
-          return <Catalog category={subCategory} />
+          return <Catalog assortment={subCategory} />
         }}
       />
       <Route
         path={`${RoutesName.products}/preparing/:subCategory`}
         exact
-        render={({ match, location }) => {
+        render={({ match }) => {
           const { subCategory } = match.params;
-          return <Catalog category={subCategory} />
+          return <Catalog assortment={subCategory} />
         }}
       />
       <Route
         path={`${RoutesName.products}/dining/:subCategory`}
         exact
-        render={({ match, location }) => {
+        render={({ match }) => {
           const { subCategory } = match.params;
-          return <Catalog category={subCategory} />
+          return <Catalog assortment={subCategory} />
         }}
       />
       <Route
         path={`${RoutesName.products}/drinking/:subCategory`}
         exact
-        render={({ match, location }) => {
+        render={({ match }) => {
           const { subCategory } = match.params;
-          return <Catalog category={subCategory} />
+          return <Catalog assortment={subCategory} />
         }}
       />
       <Route
@@ -59,12 +59,18 @@ export default function Routes() {
         render={({ match, location }) => {
           const { categoryOrID } = match.params;
           if (isNaN(categoryOrID)) {
-            return <Catalog category={categoryOrID} />
+            return <Catalog assortment={categoryOrID} />
           }
           const { pathname: url } = location;
           // console.log(id);
           // console.log(url);
-          return <ProductPage itemNo={categoryOrID} itemUrl={url} />
+          return (
+            <ProductPage
+              itemNo={categoryOrID}
+              itemUrl={url}
+              assortment={categoryOrID}
+            />
+          )
         }}
       />
       <Route path={RoutesName.cart} component={SummaryCart} />

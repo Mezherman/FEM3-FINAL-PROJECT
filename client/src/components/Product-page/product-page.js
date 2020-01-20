@@ -4,49 +4,62 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { getProductsByItemNo } from '../../services/getProducts';
 import ProductDetail from '../Product-detail/product-detail';
-import setProducts from '../../redux/actions/products';
+import { productsRequested, productsLoaded } from '../../redux/actions/products';
+import Spinner from '../Spinner/spinner';
+import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 
 function ProductPage(props) {
-  const { itemNo, chosenProduct, setProducts } = props;
+  // console.log('PROPS =', props);
+  const { assortment, itemNo, chosenProduct, fetchProduct, productsLoading } = props;
+
   useEffect(() => {
     if (!chosenProduct) {
-      getProductsByItemNo(itemNo)
-        .then((response) => {
-          // console.log('resp =', [response.data]);
-          setProducts([response.data]);
-        })
+      fetchProduct(itemNo);
     }
-  }, []);
+  }, [chosenProduct, itemNo, fetchProduct]);
 
   return (
     <>
-      {chosenProduct && (
-        <div className="product-essential">
-          <Grid key={chosenProduct.itemNo}>
-            <ProductDetail
-              product={chosenProduct}
-            />
-          </Grid>
-        </div>
-      )}
+      {productsLoading
+        ? <Spinner />
+        : (
+          <>
+            <ProductBreadcrumbs assortment={assortment} />
+            <div className="product-essential">
+              <Grid key={chosenProduct.itemNo}>
+                <ProductDetail
+                  product={chosenProduct}
+                />
+              </Grid>
+            </div>
+          </>
+        )}
     </>
   )
 }
 
-function mapStateToProps(state, { itemNo }) {
-  const chosenProduct = state.productsReducer.products.filter((product) => (
+const mapStateToProps = (state, { itemNo }) => {
+  // console.log('STATE =', state);
+  const chosenProduct = state.productsReducer.products.find((product) => (
     product.itemNo === itemNo
   ));
-  return {
-    chosenProduct: chosenProduct[0]
-  }
-}
 
-function mapDispatchToProps(dispatch) {
+  // console.log('chosen prod MSTP =', chosenProduct);
   return {
-    setProducts: (products) => dispatch(setProducts(products))
+    chosenProduct,
+    productsLoading: state.productsReducer.productsLoading
   }
-}
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchProduct: (itemNo) => {
+    dispatch(productsRequested());
+    getProductsByItemNo(itemNo)
+      .then((response) => {
+        dispatch(productsLoaded([response.data]));
+      })
+  }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);
 
