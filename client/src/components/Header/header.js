@@ -58,7 +58,6 @@ function Header() {
   const [anchorElLogin, setAnchorElLogin] = useState(null);
   const handleClick = (event) => {
     setAnchorElLogin(event.currentTarget);
-
   };
 
   const handleClose = () => {
@@ -224,6 +223,4 @@ function Header() {
     </Container>
   );
 }
-
-
 export default Header;

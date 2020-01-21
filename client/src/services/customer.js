@@ -14,6 +14,7 @@ export default async function login(userData = null) {
     .then((data) => {
       if (data.success) {
         axios.defaults.headers.common.Authorization = data.token;
+        window.localStorage.setItem('auth-token', data.token)
       }
     })
 }

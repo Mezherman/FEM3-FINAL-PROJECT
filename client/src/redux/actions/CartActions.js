@@ -1,21 +1,14 @@
 import React from 'react';
 import * as ServicesCart from '../../services/cart';
 
-export function increaseCartCount (count) {
-  return {
-    type: 'INCREASE_COUNT',
-    payload: count
-  }
-}
 
-export function addProductToCart (product) {
-  ServicesCart.addProductToCart(product._id)
-    .then((data) => {
-      console.log('response', data);
-    })
+export function addProductToCart (product, quantity) {
   return {
     type: 'ADD_PRODUCT',
-    payload: product
+    payload: {
+      product,
+      quantity
+    }
   }
 }
 export function removeProductFromCart (productId) {

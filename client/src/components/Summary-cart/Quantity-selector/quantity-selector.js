@@ -8,7 +8,7 @@ export default function QuantitySelector ({ cartQuantity, productId, onSetProduc
   const createListItems = () => {
     const items = [];
     for (let i = 1; i <= 100; i++) {
-      items.push(<option value={i}>{i}</option>);
+      items.push(<option key={i} value={i}>{i}</option>);
     }
     return items;
   }
