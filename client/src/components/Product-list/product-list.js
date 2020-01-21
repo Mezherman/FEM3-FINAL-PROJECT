@@ -36,7 +36,10 @@ function ProductList(props) {
   )
 }
 
-const mapStateToProps = (state) => state.productsReducer;
+const mapStateToProps = (state) => {
+  // console.log('STATE PRODUCT LIST =', state);
+  return state.productsReducer;
+}
 
 const mapDispatchToProps = (dispatch) => ({
   fetchProducts: (assortment) => {

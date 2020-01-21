@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
@@ -12,34 +12,64 @@ import Checkbox from '@material-ui/core/Checkbox'
 import { connect } from 'react-redux'
 import RangeSlider from '../Range/range'
 import useStyles from './_filter-panel';
-import { getFilterProducts } from '../../../redux/actions/filter'
+import { getFilterProducts } from '../../../redux/actions/filter';
 
 function FilterPanel(props) {
   const classes = useStyles();
-  const { name, filters, getFilterProducts, text, checkbox, max } = props;
+  const { name, filterResults, getFilterProducts, text, checkbox, max, colors } = props;
+  console.log('name =', name);
+  console.log(colors);
 
-  const propsName = name;
+  // console.log('filters =', filters);
 
   const handleChange = (event) => {
-
-    console.log('PROPS =', props);
-    let filtersChosen = [];
-    if (event.target.checked) {
-      filters.push(event.target.value);
-      filtersChosen = filters;
+    let currentRange = [];
+    let newFilters = {};
+    if (filterResults[name.toLowerCase()]) {
+      currentRange = [...filterResults[name.toLowerCase()]];
+      if (event.target.checked) {
+        currentRange.push(event.target.value);
+      } else {
+        const idx = currentRange.findIndex((el) => el === event.target.value);
+        currentRange = [
+          ...currentRange.slice(0, idx),
+          ...currentRange.slice(idx + 1)
+        ];
+      }
     } else {
-      const idx = filters.findIndex((el) => el === event.target.value);
+      currentRange.push(event.target.value)
+    }
 
-      filtersChosen = [
-        ...filters.slice(0, idx),
-        ...filters.slice(idx + 1)
-      ];
-    }
-    const filter = {
-      [propsName]: filtersChosen
-    }
-    console.log('testing ->', filter)
-    getFilterProducts(filtersChosen);
+    newFilters = {
+      ...filterResults,
+      [name.toLowerCase()]: currentRange
+    };
+
+    console.log('in component =', newFilters)
+    getFilterProducts(newFilters);
+  };
+
+  const colorFilter = (colors) => {
+    return (
+      <FormControl component="fieldset">
+        <FormGroup aria-label="position" column="true">
+          {colors.map((el) => (
+            <FormControlLabel
+              color="primary"
+              key={el.name}
+              value={el.name}
+              control={<Checkbox
+                // style={{color: 'orange'}}
+              />}
+              label={el.name}
+              name={el.name}
+              onChange={handleChange}
+
+            />
+          ))}
+        </FormGroup>
+      </FormControl>
+    )
   };
 
   return (
@@ -52,33 +82,18 @@ function FilterPanel(props) {
         >
           <Typography>{name}</Typography>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails >
-          {checkbox
-            ? (
-              <FormControl component="fieldset">
-                <FormGroup aria-label="position" column="true">
-                  {text.map((el) => (
-                    <FormControlLabel
-                      key={el}
-                      value={el}
-                      control={<Checkbox />}
-                      label={el}
-                      name={el}
-                      onChange={handleChange}
-                    />
-                  ))}
-                </FormGroup>
-              </FormControl>
-            )
-            : <RangeSlider max={max} />}
+        <ExpansionPanelDetails>
+          {name === 'Color' && colorFilter(colors)}
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </div>
   );
 }
 
+{/*<RangeSlider max={max} />*/}
+
 const mapStateToProps = (state) => ({
-  filters: state.filterReducer.filters
+  filterResults: state.filterReducer.filterResults
 });
 
 function mapDispatchToProps(dispatch) {
@@ -88,7 +103,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 FilterPanel.propTypes = {
-  filters: PropTypes.arrayOf(PropTypes.string),
+  filters: PropTypes.objectOf(PropTypes.array),
   name: PropTypes.string.isRequired,
   text: PropTypes.arrayOf(PropTypes.string),
   checkbox: PropTypes.bool,
@@ -99,7 +114,7 @@ FilterPanel.defaultProps = {
   checkbox: false,
   text: [''],
   max: null,
-  filters: []
+  filters: {}
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterPanel)
