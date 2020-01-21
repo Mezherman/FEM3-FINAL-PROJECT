@@ -13,7 +13,7 @@ function Filter(props) {
     const brandSet = new Set();
     // const withoutBrand = products.filter(product => !product.brand)
     products.filter(product => brandSet.add(product.brand))
-    console.log('brandSet =', brandSet);
+    // console.log('brandSet =', brandSet);
     // console.log('withoutBrand =', withoutBrand);
   })
 
@@ -22,11 +22,11 @@ function Filter(props) {
 
   useEffect(() => {
     getColors().then((colors) => {
-      console.log(colors);
+      // console.log(colors);
       filterParamsLoaded('colors', colors);
     })
     getBrands().then((brands) => {
-      console.log(brands);
+      console.log('brands',brands);
       filterParamsLoaded('brands', brands);
     })
   }, []);
@@ -49,11 +49,13 @@ function Filter(props) {
   ];
 
   console.log('filterParams.colors =', filterParams.colors);
+  console.log('filterParams.brands =', filterParams.brands);
   const filter = filterText.map((item) => (
     <FilterPanel
       key={item.id}
       {...item}
       colors={filterParams.colors}
+      brands={filterParams.brands}
     />
   ));
 
@@ -72,10 +74,11 @@ function Filter(props) {
   let valOfColor = '';
 
   function parseToFilterValue(obj) {
+    console.log('OBJ -> ',obj)
 
-    // if (obj.filterResults.brand.length > 0) {
+    // if (obj.brand.length > 0) {
     //   let brands = 'brand='
-    //   const items = obj.filterResults.brand.map(item => item)
+    //   const items = obj.brand.map(item => item)
     //   const str = items.join(',')
     //   brands.concat(str)
     //   valOfBrands = brands.concat(str)
@@ -105,7 +108,8 @@ function Filter(props) {
     return valToFilter
   }
 
-  console.log('filterResults =', filterResults);
+  // console.log('filterResults =', filterResults);
+  console.log('filterParams =', filterResults);
   parseToFilterValue(filterResults);
 
   return (

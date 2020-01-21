@@ -4,7 +4,8 @@ const initialState = {
   },
   currentPrice: [],
   filterParams: {
-    colors: []
+    colors: [],
+    brands: []
   }
 };
 
