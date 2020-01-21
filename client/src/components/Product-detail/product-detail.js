@@ -104,8 +104,8 @@ export default function ProductDetail({ product }) {
           />
           {!isTablet && <Divider />}
         </Grid>
-        <Grid item md={1} xl={2}/>
-        <Grid item xs={12} sm={12} md={5} xl={5}>
+        <Grid item md={1} xl={3}/>
+        <Grid item xs={12} sm={12} md={5} xl={4}>
           <Grid container spacing={1}>
             {/* <Grid item xs={12} sm={12} md={12}> */}
             {/*  <Typography align="right"> */}
@@ -134,7 +134,7 @@ export default function ProductDetail({ product }) {
               </Box>
             </Grid>
             }
-            <Grid item xs={12} sm={6} md={12} xl={6}>
+            <Grid item xs={12} sm={6} md={12} xl={12}>
               <Box
                 className={classes.productShopArea}
               >
@@ -209,7 +209,7 @@ export default function ProductDetail({ product }) {
               </Box>
             </Grid>
             <Grid item xl={6} />
-            <Grid item xs={12} sm={12} md={12} xl={6}>
+            <Grid item xs={12} sm={12} md={12} xl={12}>
               <Grid container>
                 <Grid item xs={12} sm={6} md={12} xl={12}>
                   <FeatureItem label="Free delivery over 49€" />
