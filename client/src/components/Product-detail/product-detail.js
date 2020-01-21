@@ -39,13 +39,6 @@ export default function ProductDetail({ product }) {
   const closeModal = () => {
     setModalVisibility(false)
   };
-  //   const zoom = { width: 400,
-  //   zoomWidth: 400, offset: { vertical: 0, "horizontal": -100, zoomStyle: {} }};
-  //
-  //   const zoomImage = imageUrls.map((url) => (
-  //
-  //   <ReactImageZoom {img: url, ...zoom} />
-  // ));
 
   const images = imageUrls.map((url) => (
     {

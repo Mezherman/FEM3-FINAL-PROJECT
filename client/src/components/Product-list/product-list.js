@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
@@ -17,6 +17,13 @@ function ProductList(props) {
   // console.log('PROPS =', props);
   const classes = useStyles();
 
+  const [favorites, setFavorites] = useState([]);
+
+  const getFavorites = (data) => {
+    // setFavorites({ favorites: favorites })
+    console.log('favor from card')
+    console.log(data)
+  }
   useEffect(() => {
     fetchProducts(assortment);
   }, [assortment, fetchProducts]);
@@ -29,12 +36,14 @@ function ProductList(props) {
         <Grid item md={6} lg={4} key={product.itemNo}>
           <ProductCard
             product={product}
+            getFavorites={getFavorites}
           />
         </Grid>
       ))}
     </div>
   )
 }
+
 
 const mapStateToProps = (state) => state.productsReducer;
 
