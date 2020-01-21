@@ -68,7 +68,12 @@ function Header() {
   const [anchorEl, setAnchorEl] = useState(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
   const [prevBlockIsVisible, setPrevBlockIsVisible] = useState(false);
+  // const [sideBar, openSideBar] = useState(false)
 
+  // const toggleDrawer = (open) => {
+  //     openSideBar(true )
+  // };
+  // console.log(sideBar);
   const handleChange = () => {
     setPrevBlockIsVisible((prev) => !prev);
   };
@@ -91,6 +96,7 @@ function Header() {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget)
+    console.log(event);
   }
 
   const menuId = 'primary-search-account-menu';
@@ -127,7 +133,12 @@ function Header() {
 
   return (
     <Container maxWidth="xl" disableGutters className={classes.grow}>
-      <AppBar position="static" color="inherit" elevation={0}>
+      <AppBar
+        position="static"
+        color="inherit"
+        elevation={0}
+        // onLeftIconButtonTouchTap={() => console.log('App')}
+      >
         <Toolbar className={classes.justify}>
           <Box className={classes.boxLogo}>
             <IconButton
@@ -223,6 +234,5 @@ function Header() {
     </Container>
   );
 }
-
 
 export default Header;

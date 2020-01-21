@@ -23,7 +23,6 @@ function HeaderNavbar(props) {
   const { mainCategories, allCategories } = catalog;
 
   // console.log('cat =', catalog);
-
   const toggleCatalog = () => {
     categoriesVisible
       ? hideCatalog()
