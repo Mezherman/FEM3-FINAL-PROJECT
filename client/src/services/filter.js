@@ -19,8 +19,13 @@ function getBrands() {
   return axios('/filters/brands').then((response) => (response.data))
 }
 
+function getManufacturer() {
+  return axios('/filters/manufacturers').then((respronse) => respronse.data)
+}
+
 export {
   getAllFilterProducts,
   getColors,
-  getBrands
+  getBrands,
+  getManufacturer
 }

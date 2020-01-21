@@ -3,17 +3,17 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux'
 import FilterPanel from './Filter-panel/filter-panel'
 import useStyles from './_filter';
-import { getAllFilterProducts, getColors, getBrands } from '../../services/filter';
+import { getAllFilterProducts, getColors, getBrands, getManufacturer } from '../../services/filter'
 import { productsLoaded } from '../../redux/actions/products';
 import { filterParamsLoaded } from '../../redux/actions/filter';
 import { tempFilterData } from '../../services/filter-temp'
 
 function Filter(props) {
   tempFilterData().then((products) => {
-    const brandSet = new Set();
-    // const withoutBrand = products.filter(product => !product.brand)
-    products.filter(product => brandSet.add(product.brand))
-    // console.log('brandSet =', brandSet);
+    const manufacturerSet = new Set();
+    const withoutBrand = products.filter(product => manufacturerSet.add(product.manufacturer))
+    // products.filter(product => manufacturerSet.add(product.manufacturer))
+    console.log('manufacturerSet =', manufacturerSet);
     // console.log('withoutBrand =', withoutBrand);
   })
 
@@ -26,8 +26,12 @@ function Filter(props) {
       filterParamsLoaded('colors', colors);
     })
     getBrands().then((brands) => {
-      console.log('brands',brands);
+      // console.log('brands',brands);
       filterParamsLoaded('brands', brands);
+    })
+    getManufacturer().then((manufacturers) => {
+      // console.log('manufacturers', manufacturers);
+      filterParamsLoaded('manufacturers',manufacturers)
     })
   }, []);
 
@@ -48,25 +52,18 @@ function Filter(props) {
     { name: 'Color', checkbox: true, text: ['red', 'orange'], id: 11 },
   ];
 
-  console.log('filterParams.colors =', filterParams.colors);
-  console.log('filterParams.brands =', filterParams.brands);
+  // console.log('filterParams.colors =', filterParams.colors);
+  // console.log('filterParams.manufacturers =', filterParams.manufacturers);
+  // console.log('filterParams.brands =', filterParams.brands);
   const filter = filterText.map((item) => (
     <FilterPanel
       key={item.id}
       {...item}
       colors={filterParams.colors}
       brands={filterParams.brands}
+      manufacturers={filterParams.manufacturers}
     />
   ));
-
-  // const test = {
-  //   filters: {
-  //     brand: ['WMF'],
-  //     collection: [],
-  //     color: ['red']
-  //   },
-  //   currentPrice: []
-  // }
 
   let valToFilter;
   let valOfBrands = '';
@@ -74,7 +71,7 @@ function Filter(props) {
   let valOfColor = '';
 
   function parseToFilterValue(obj) {
-    console.log('OBJ -> ',obj)
+    // console.log('OBJ -> ',obj)
 
     // if (obj.brand.length > 0) {
     //   let brands = 'brand='
@@ -84,12 +81,12 @@ function Filter(props) {
     //   valOfBrands = brands.concat(str)
     // }
     //
-    // if (obj.filterResults.collection.length > 0) {
-    //   let collection = 'collection='
-    //   const items = obj.filterResults.collection.map(item => item)
+    // if (obj.filterResults.manufacturer.length > 0) {
+    //   let manufacturer = 'manufacturer='
+    //   const items = obj.filterResults.manufacturer.map(item => item)
     //   const str = items.join(',')
-    //   collection.concat(str)
-    //   valOfCollection = collection.concat(str)
+    //   manufacturer.concat(str)
+    //   valOfCollection = manufacturer.concat(str)
     //   // console.log('end of  => ', valOfBrands)
     //   // return valOfBrands
     // }
@@ -109,7 +106,7 @@ function Filter(props) {
   }
 
   // console.log('filterResults =', filterResults);
-  console.log('filterParams =', filterResults);
+  // console.log('filterParams =', filterParams);
   parseToFilterValue(filterResults);
 
   return (
@@ -135,7 +132,7 @@ function Filter(props) {
 }
 
 function mapStateToProps(state) {
-  console.log('STATE FILTER =>', state.filterReducer);
+  // console.log('STATE FILTER =>', state.filterReducer);
   return {
     filterResults: state.filterReducer.filterResults,
     filterParams: state.filterReducer.filterParams
