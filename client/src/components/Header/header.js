@@ -161,7 +161,42 @@ function Header() {
               src={`${process.env.PUBLIC_URL}/img/header/03_wmf-kompass_essen_167x167px.jpg`}
               alt="headerMainLogo"
               className={classes.mainHeaderLogoImg}
+              useMap="#products"
             />
+            <map name="products">
+              <Link to={`${process.env.PUBLIC_URL}/products/cooking`}>
+                <area
+                  shape="poly"
+                  coords="13,10,33,2,52,3,64,11,40,37"
+                  label="Cooking"
+                  title="Cooking"
+                />
+              </Link>
+              <Link to={`${process.env.PUBLIC_URL}/products/drinking`}>
+                <area
+                  shape="poly"
+                  coords="9,13,37,39,12,65,2,49,2,30"
+                  label="Drinking"
+                  title="Drinking"
+                />
+              </Link>
+              <Link to={`${process.env.PUBLIC_URL}/products/dining`}>
+                <area
+                  shape="poly"
+                  coords="14,69,38,41,64,66,45,76,32,76"
+                  alt="Dining"
+                  title="Dining"
+                />
+              </Link>
+              <Link to={`${process.env.PUBLIC_URL}/products/preparing`}>
+                <area
+                  shape="poly"
+                  coords="67,66,41,41,66,13,76,31,76,48"
+                  alt="Preparing"
+                  title="Preparing"
+                />
+              </Link>
+            </map>
           </Box>
 
           <Box className={classes.iconButtonBox}>

@@ -12,7 +12,11 @@ const useStyles = makeStyles((theme) => ({
   },
   links: {
     color: theme.palette.text.primary,
-    '&:hover': { color: theme.palette.secondary.dark },
+    paddingTop: theme.spacing(2),
+    '&:hover': {
+      color: theme.palette.secondary.dark,
+      textDecoration: 'underline'
+    },
     textDecoration: 'none'
   }
 }));

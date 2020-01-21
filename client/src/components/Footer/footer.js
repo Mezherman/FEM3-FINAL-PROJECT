@@ -8,47 +8,7 @@ export default function Footer() {
   const classes = useStyles();
   return (
     <>
-      <img
-        src={`${process.env.PUBLIC_URL}/img/header/03_wmf-kompass_essen_167x167px.jpg`}
-        alt="headerMainLogo"
-        className={classes.mainHeaderLogoImg}
-        useMap="#products"
-        style={{ width: '80px', height: '80px' }}
-      />
-      <map name="products">
-        <Link to={RoutesName.aboutUs}>
-          <area
-            shape="poly"
-            coords="13,10,33,2,52,3,64,11,40,37"
-            href="#raz2"
-            label="Coocking"
-            title="Coocking"
-          />
-        </Link>
-        <Link to={RoutesName.delivery}>
-          <area
-            shape="poly"
-            coords="9,13,37,39,12,65,2,49,2,30"
-            href="#raz2"
-            label="Drinking"
-            title="Drinking"
-          />
-        </Link>
-        <area
-          shape="poly"
-          coords="14,69,38,41,64,66,45,76,32,76"
-          href="#raz3"
-          alt="Dining"
-          title="Dining"
-        />
-        <area
-          shape="poly"
-          coords="67,66,41,41,66,13,76,31,76,48"
-          href="#raz4"
-          alt="Preparing"
-          title="Preparing"
-        />
-      </map>
+      <Divider />
       <Grid container justify="space-between" spacing={2} className={classes.container}>
         <Grid xs={12} md={5} item container wrap="nowrap" alignItems="flex-start">
           <Link to={RoutesName.home}>
