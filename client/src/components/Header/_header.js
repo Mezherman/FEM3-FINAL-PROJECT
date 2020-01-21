@@ -4,6 +4,15 @@ const useStyles = makeStyles((theme) => ({
   wrapper: {
     boxShadow: '0 0 16px rgba(0, 0, 0, 0.15)',
   },
+  delivery: {
+    backgroundColor: theme.palette.secondary.main,
+    padding: theme.spacing(1, 0)
+  },
+  deliveryTitle: {
+    color: theme.palette.primary.contrastText,
+    textAlign: 'center',
+    textTransform: 'uppercase',
+  },
   grow: {
     padding: theme.spacing(3, 0),
     flexGrow: 1,
