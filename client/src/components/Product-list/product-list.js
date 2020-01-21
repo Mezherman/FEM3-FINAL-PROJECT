@@ -17,13 +17,15 @@ function ProductList(props) {
   // console.log('PROPS =', props);
   const classes = useStyles();
 
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState([1, 2, 3]);
 
-  const getFavorites = (data) => {
-    // setFavorites({ favorites: favorites })
-    console.log('favor from card')
-    console.log(data)
-  }
+  // useEffect(() => {
+  //   setFavorites([1, 2, 3])
+  // }, [])
+
+  const addToFavorite = (id) => {
+    setFavorites(favorites.concat(id))
+  };
   useEffect(() => {
     fetchProducts(assortment);
   }, [assortment, fetchProducts]);
@@ -36,7 +38,7 @@ function ProductList(props) {
         <Grid item md={6} lg={4} key={product.itemNo}>
           <ProductCard
             product={product}
-            getFavorites={getFavorites}
+            addToFavorite={addToFavorite}
           />
         </Grid>
       ))}

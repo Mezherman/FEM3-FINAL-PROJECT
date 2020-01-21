@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import { IconButton } from '@material-ui/core';
@@ -23,18 +23,17 @@ function ProductCard({ product }) {
     () => bindActionCreators(cartActions, dispatch),
     [dispatch]
   )
-  const { imageUrls, name, currentPrice, previousPrice, itemNo, getFavorites } = product;
+  const { imageUrls, name, currentPrice, previousPrice, itemNo } = product;
   const classes = useStyles();
-  console.log(getFavorites);
   const [modalIsVisible, setModalVisibility] = useState(false);
   const closeModal = () => {
     setModalVisibility(false)
   };
-  const [isFavorite, setFavorite] = useState(false);
+  const [favorite, setFavorites] = useState(false);
   const addToFavorite = () => {
-    setFavorite(!isFavorite);
-    console.log('favorite', itemNo);
+    setFavorites(!favorite)
   };
+
   return (
     <>
       <AddToCart
@@ -46,12 +45,11 @@ function ProductCard({ product }) {
       <div className={classes.card}>
         <Divider />
         <div className={classes.iconWrapper}>
-
-          {/*<IconButton onClick={addToFavorite} onClick={getFavorites}>*/}
-          <IconButton onClick={getFavorites}>
-            {isFavorite
-              ? <FavoriteIcon color="primary" />
-              : <FavoriteBorderIcon color="primary" /> }
+          <IconButton onClick={addToFavorite}>
+            {favorite ? (
+              <FavoriteIcon color="primary" />)
+              : (<FavoriteBorderIcon color="primary" />
+              )}
           </IconButton>
 
         </div>
