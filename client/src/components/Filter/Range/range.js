@@ -34,13 +34,13 @@ function RangeSlider(props) {
 function mapStateToProps(state) {
   // console.log('MAP STATE TO PROPS =>', state.filterReducer.price)
   return {
-    state: state.filterReducer.price
+    state: state.filterReducer.currentPrice
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getPriceProducts: (price) => dispatch(getPriceProducts(price))
+    getPriceProducts: (currentPrice) => dispatch(getPriceProducts(currentPrice))
   }
 }
 

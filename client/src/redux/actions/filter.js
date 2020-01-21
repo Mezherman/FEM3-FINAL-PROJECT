@@ -5,9 +5,9 @@ export function getFilterProducts(products) {
   }
 }
 
-export function getPriceProducts(price) {
+export function getPriceProducts(currentPrice) {
   return {
     type: 'GET_PRICE_PRODUCTS',
-    payload: price
+    payload: currentPrice
   }
 }

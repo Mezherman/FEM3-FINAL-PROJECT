@@ -1,6 +1,6 @@
 const initialState = {
   filters: [],
-  price: [],
+  currentPrice: [],
 };
 
 export default function filterReducer(state = initialState, action) {
@@ -14,7 +14,7 @@ export default function filterReducer(state = initialState, action) {
     case 'GET_PRICE_PRODUCTS':
       return {
         ...state,
-        price: action.payload
+        currentPrice: action.payload
       };
 
     default:

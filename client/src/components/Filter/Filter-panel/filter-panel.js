@@ -17,15 +17,11 @@ import { getFilterProducts } from '../../../redux/actions/filter'
 function FilterPanel(props) {
   const classes = useStyles();
   const { name, filters, getFilterProducts, text, checkbox, max } = props;
-  // console.log('BRAND =', filter);
+
+  const propsName = name;
 
   const handleChange = (event) => {
-    // const test = {
-    //   ...filter,
-    //   props.name: {
-    //
-    // }
-    // }
+
     console.log('PROPS =', props);
     let filtersChosen = [];
     if (event.target.checked) {
@@ -33,11 +29,16 @@ function FilterPanel(props) {
       filtersChosen = filters;
     } else {
       const idx = filters.findIndex((el) => el === event.target.value);
-      const before = filters.slice(0, idx);
-      const after = filters.slice(idx + 1);
 
-      filtersChosen = [...before, ...after];
+      filtersChosen = [
+        ...filters.slice(0, idx),
+        ...filters.slice(idx + 1)
+      ];
     }
+    const filter = {
+      [propsName]: filtersChosen
+    }
+    console.log('testing ->', filter)
     getFilterProducts(filtersChosen);
   };
 
