@@ -13,7 +13,7 @@ function Filter(props) {
     const manufacturerSet = new Set();
     const withoutBrand = products.filter(product => manufacturerSet.add(product.manufacturer))
     // products.filter(product => manufacturerSet.add(product.manufacturer))
-    console.log('manufacturerSet =', manufacturerSet);
+    // console.log('manufacturerSet =', manufacturerSet);
     // console.log('withoutBrand =', withoutBrand);
   })
 

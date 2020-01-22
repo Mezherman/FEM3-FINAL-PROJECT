@@ -29,9 +29,10 @@ import { withStyles } from '@material-ui/core/styles';
 
 function FilterPanel(props) {
   const classes = useStyles();
-  const { name, filterResults, getFilterProducts, text, checkbox, max, colors, manufacturer } = props;
+  const { name, filterResults, getFilterProducts, text, checkbox, max, colors, manufacturer, brands } = props;
   // console.log('name =', name);
   console.log('Colors=>', colors);
+  console.log('BRANDS =>', brands);
   // console.log('manufacturer ->', manufacturer)
   // console.log('filters =', filters);
 
@@ -58,7 +59,7 @@ function FilterPanel(props) {
       [name.toLowerCase()]: currentRange
     };
 
-    console.log('in component =', newFilters)
+    // console.log('in component =', newFilters)
     getFilterProducts(newFilters);
   };
 
@@ -84,29 +85,29 @@ function FilterPanel(props) {
     )
   };
 
-  // const brandFilter = (brands) => {
-  //   return (
-  //     <FormControl component="fieldset">
-  //       <FormGroup aria-label="position" column="true">
-  //         {brands.map((el) => (
-  //           <FormControlLabel
-  //             color="primary"
-  //             key={el.name}
-  //             value={el.name}
-  //             control={<Checkbox
-  //               // style={{color: 'orange'}}
-  //             />}
-  //             label={el.name}
-  //             name={el.name}
-  //             onChange={handleChange}
-  //
-  //           />
-  //         ))}
-  //       </FormGroup>
-  //     </FormControl>
-  //   )
-  // };
-  //
+  const brandFilter = (brands) => {
+    return (
+      <FormControl component="fieldset">
+        <FormGroup aria-label="position" column="true">
+          {brands.map((el) => (
+            <FormControlLabel
+              color="primary"
+              key={el.name}
+              value={el.name}
+              control={<Checkbox
+                // style={{color: 'orange'}}
+              />}
+              label={el.name}
+              name={el.name}
+              onChange={handleChange}
+
+            />
+          ))}
+        </FormGroup>
+      </FormControl>
+    )
+  };
+
   // const manufacturerFilter = (manufacturer) => {
   //   return (
   //     <FormControl component="fieldset">
@@ -142,7 +143,7 @@ function FilterPanel(props) {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           {name === 'Color' && colorFilter(colors)}
-          {/*{name === 'Color' && brandFilter(brands)}*/}
+          {name === 'Brand' && brandFilter(brands)}
           {/*{name === 'Manufacturer' && manufacturerFilter(manufacturer)}*/}
         </ExpansionPanelDetails>
       </ExpansionPanel>
