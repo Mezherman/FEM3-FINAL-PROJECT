@@ -39,13 +39,6 @@ export default function ProductDetail({ product }) {
   const closeModal = () => {
     setModalVisibility(false)
   };
-  //   const zoom = { width: 400,
-  //   zoomWidth: 400, offset: { vertical: 0, "horizontal": -100, zoomStyle: {} }};
-  //
-  //   const zoomImage = imageUrls.map((url) => (
-  //
-  //   <ReactImageZoom {img: url, ...zoom} />
-  // ));
 
   const images = imageUrls.map((url) => (
     {
@@ -98,21 +91,21 @@ export default function ProductDetail({ product }) {
       />
       <h1 className={classes.title}>{name.toUpperCase()[0] + name.slice(1)}</h1>
       <Grid container spacing={4} justify="center">
-        <Grid item xs={12} sm={12} md={6} xl={6}>
+        <Grid item xs={12} sm={12} md={6} xl={5}>
           <MyGallery
             images={images}
           />
           {!isTablet && <Divider />}
         </Grid>
-        <Grid item md={1} />
-        <Grid item xs={12} sm={12} md={5} xl={5}>
+        <Grid item md={1} xl={3}/>
+        <Grid item xs={12} sm={12} md={5} xl={4}>
           <Grid container spacing={1}>
             {/* <Grid item xs={12} sm={12} md={12}> */}
             {/*  <Typography align="right"> */}
             {/*    <a href="#">Submit a review</a> */}
             {/*  </Typography> */}
             {/* </Grid> */}
-            <Grid item xs={12} sm={6} md={12} xl={6}>
+            {!isTablet && <Grid item xs={12} sm={6} md={12} xl={6}>
               <Box
                 border={1}
                 borderColor="text.primary"
@@ -133,7 +126,8 @@ export default function ProductDetail({ product }) {
                 </ul>
               </Box>
             </Grid>
-            <Grid item xs={12} sm={6} md={12} xl={6}>
+            }
+            <Grid item xs={12} sm={6} md={12} xl={12}>
               <Box
                 className={classes.productShopArea}
               >
@@ -208,7 +202,7 @@ export default function ProductDetail({ product }) {
               </Box>
             </Grid>
             <Grid item xl={6} />
-            <Grid item xs={12} sm={12} md={12} xl={6}>
+            <Grid item xs={12} sm={12} md={12} xl={12}>
               <Grid container>
                 <Grid item xs={12} sm={6} md={12} xl={12}>
                   <FeatureItem label="Free delivery over 49€" />
@@ -221,9 +215,9 @@ export default function ProductDetail({ product }) {
               </Grid>
             </Grid>
           </Grid>
-          {!isTablet && <Divider />}
         </Grid>
       </Grid>
+      {!isDesktop&&<Divider />}
       <Grid container>
         <Grid item xs={12} >
           <h3 className={classes.sectionTitle}>Product details</h3>

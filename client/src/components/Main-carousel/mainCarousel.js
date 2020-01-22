@@ -29,7 +29,7 @@ export default function MainSlider() {
     <div className={classes.carouselContainer}>
       <Carousels
         isProductSlider={false}
-        autoPlay={false}
+        autoPlay={true}
         // className={mainCarouselClasses.mainCarousel}
         autoplayInterval={2000}
         wrapAround

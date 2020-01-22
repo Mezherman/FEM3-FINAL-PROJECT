@@ -25,7 +25,7 @@ function createData(name, data) {
 export default function TableSpecifications({ data }) {
   // console.log('TAble', data);
   const classes = useStyles();
-  const { brand, color, manufacturerCountry, myCustomParams } = data;
+  const { itemNo, brand, color, manufacturerCountry, myCustomParams } = data;
   const {
     EAN,
     collection,
@@ -38,6 +38,7 @@ export default function TableSpecifications({ data }) {
   } = myCustomParams;
   const rows = [
     createData('EAN', EAN),
+    createData('Art.', itemNo),
     createData('Brand', brand),
     createData('Collection', collection),
     createData('Size sets', `${setSize}-pc.`),

@@ -1,8 +1,21 @@
 import { fade, makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
+  wrapper: {
+    boxShadow: '0 0 16px rgba(0, 0, 0, 0.15)',
+  },
+  delivery: {
+    backgroundColor: theme.palette.secondary.main,
+    padding: theme.spacing(1, 0)
+  },
+  deliveryTitle: {
+    color: theme.palette.primary.contrastText,
+    textAlign: 'center',
+    textTransform: 'uppercase',
+  },
   grow: {
-    flexGrow: 1
+    padding: theme.spacing(3, 0),
+    flexGrow: 1,
   },
   justify: {
     justifyContent: 'space-between'
@@ -165,7 +178,7 @@ const useStyles = makeStyles((theme) => ({
   },
   boxLogo: {
     [theme.breakpoints.up('lg')]: {
-      width: 'calc(100% / 4 - 31px)'
+      // width: 'calc(100% / 4 - 31px)'
     }
   },
   logoIcon: {
