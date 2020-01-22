@@ -4,7 +4,8 @@ const initialState = {
     mainCategories: [],
   },
   error: null,
-  catalogLoading: true
+  catalogLoading: true,
+  catalogLocation: ''
 };
 
 export default function categoriesReducer(state = initialState, action) {
@@ -32,6 +33,12 @@ export default function categoriesReducer(state = initialState, action) {
         error: action.payload.error,
         catalogLoading: false
       };
+
+    case 'CATALOG_LOCATION':
+      return {
+        ...state,
+        catalogLocation: action.payload
+      }
 
     default: {
       return state

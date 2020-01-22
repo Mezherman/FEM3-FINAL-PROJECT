@@ -21,8 +21,14 @@ const catalogError = (error) => ({
   }
 });
 
+const catalogLocation = (category) => ({
+  type: 'CATALOG_LOCATION',
+  payload: category
+});
+
 export {
   catalogRequested,
   catalogLoaded,
-  catalogError
+  catalogError,
+  catalogLocation
 }

@@ -29,10 +29,10 @@ import { withStyles } from '@material-ui/core/styles';
 
 function FilterPanel(props) {
   const classes = useStyles();
-  const { name, filterResults, getFilterProducts, text, checkbox, max, colors, manufacturer, brands } = props;
+  const { name, filterResults, getFilterProducts, max, colors, manufacturer, brands } = props;
   // console.log('name =', name);
-  console.log('Colors=>', colors);
-  console.log('BRANDS =>', brands);
+  // console.log('Colors=>', colors);
+  // console.log('BRANDS =>', brands);
   // console.log('manufacturer ->', manufacturer)
   // console.log('filters =', filters);
 
@@ -144,6 +144,7 @@ function FilterPanel(props) {
         <ExpansionPanelDetails>
           {name === 'Color' && colorFilter(colors)}
           {name === 'Brand' && brandFilter(brands)}
+          {name === 'Price' && <RangeSlider max={max} />}
           {/*{name === 'Manufacturer' && manufacturerFilter(manufacturer)}*/}
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -151,11 +152,12 @@ function FilterPanel(props) {
   );
 }
 
-{/*<RangeSlider max={max} />*/}
-
-const mapStateToProps = (state) => ({
-  filterResults: state.filterReducer.filterResults
-});
+const mapStateToProps = (state) => {
+  // console.log('STATE =', state);
+  return {
+    filterResults: state.filterReducer.filterResults
+  }
+};
 
 function mapDispatchToProps(dispatch) {
   return {

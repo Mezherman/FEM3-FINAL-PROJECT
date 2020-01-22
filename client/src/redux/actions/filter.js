@@ -1,8 +1,8 @@
-function getFilterProducts(filters) {
+function getFilterProducts(filterResults) {
   // console.log('in action =', filters);
   return {
     type: 'GET_FILTER_PRODUCTS',
-    payload: filters
+    payload: filterResults
   }
 }
 

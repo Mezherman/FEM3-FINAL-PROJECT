@@ -1,8 +1,10 @@
 const initialState = {
   filterResults: {
-    color: []
+    color: [],
+    brand: [],
+    manufacturer: [],
+    price: [0, 700],
   },
-  currentPrice: [],
   filterParams: {
     colors: [],
     brands: [],

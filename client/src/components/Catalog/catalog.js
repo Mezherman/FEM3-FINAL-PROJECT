@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
@@ -6,10 +6,16 @@ import ContainerFilter from '../Filter/filter';
 import ProductList from '../Product-list/product-list';
 import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 
+import { catalogLocation } from '../../redux/actions/categories';
+
 import useStyles from './catalog-style';
 
-function Catalog({ assortment }) {
+function Catalog({ assortment, catalogLocation }) {
   const classes = useStyles();
+
+  useEffect(() => {
+    catalogLocation(assortment)
+  }, [assortment])
 
   return (
     <>
@@ -32,7 +38,11 @@ const mapStateToProps = (state) => ({
   catalog: state.categoriesReducer.catalog
 });
 
-export default connect(mapStateToProps)(Catalog)
+const mapDispatchToProps = {
+  catalogLocation
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Catalog)
 
 Catalog.propTypes = {
   assortment: PropTypes.string.isRequired
