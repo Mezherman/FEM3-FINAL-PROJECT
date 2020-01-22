@@ -21,7 +21,10 @@ import putUserData from '../../services/putUserData'
 
 axios.defaults.headers.common.Authorization = localStorage.getItem('token');
 
-// axios.defaults.headers.common.Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMWUxNGFmNjAzMzg5MWMxYzQ1OWY0ZiIsImZpcnN0TmFtZSI6IlBlYWNlZnVsIiwibGFzdE5hbWUiOiJXYXJyaW9yIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTc5NjIyMzkwLCJleHAiOjE1Nzk2NTgzOTB9.9P7-73ASL9H8c02BChYYrrYbRnlReydUHxDdjVoUDUY';
+// axios.defaults.headers.common.Authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6I
+// kpXVCJ9.eyJpZCI6IjVlMWUxNGFmNjAzMzg5MWMxYzQ1OWY0ZiIsImZpcnN0TmFtZSI6IlBlYWNlZnVsIiwibGFzdE
+// 5hbWUiOiJXYXJyaW9yIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTc5NjIyMzkwLCJleHAiOjE1Nzk2NT
+// gzOTB9.9P7-73ASL9H8c02BChYYrrYbRnlReydUHxDdjVoUDUY';
 
 // axios.defaults.headers.common.Authorization = localStorage.getItem('token');
 

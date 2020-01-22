@@ -5,23 +5,16 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { connect } from 'react-redux';
-
-import FilledInput from '@material-ui/core/FilledInput';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-
 import { FormLabel } from '@material-ui/core';
 import useStylesSingIn from './_sign-in';
 import RoutesName from '../../routes-list';
-
+import postLoginData from '../../services/postLoginData'
 import loginLoaded from '../../redux/actions/user';
 
 function SignIn(props) {
@@ -69,13 +62,11 @@ function SignIn(props) {
 
   function handleClick(event) {
     event.preventDefault();
-    // const password = handleOnChangePassword;
     const userData = {
       loginOrEmail: login,
       password
     };
-    axios
-      .post('/customers/login', userData)
+    postLoginData(userData)
       .then((loginResult) => {
         loginLoaded(loginResult.data.token);
         onClose();
@@ -95,8 +86,8 @@ function SignIn(props) {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
+    <Container  maxWidth="xs">
+      {/*<CssBaseline />*/}
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />

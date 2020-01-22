@@ -1,5 +1,6 @@
-import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
+import { Route, Switch, Redirect } from 'react-router-dom'
 import Home from './components/Home/home';
 import Catalog from './components/Catalog/catalog'
 import ProductPage from './components/Product-page/product-page'
@@ -12,11 +13,61 @@ import SignUp from './components/SignUp/sign-up'
 import Delivery from './components/Delivery/delivery';
 import EditPersonalData from './components/My-account/edit-personal-data';
 import PersonalData from './components/My-account/personal-data';
+import LoginModal from './components/Login-modal-window/login-modal-window';
 
 export default function Routes() {
+  const { loggedIn } = useSelector((state) => state.userReducer);
+  const [modalIsVisible, setModalVisibility] = useState(true);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // const onSuccessLogin = () => {
+  //   setIsLoggedIn(true)
+  // };
+  const closeModal = () => {
+    setModalVisibility(false);
+  };
+
   return (
     <Switch>
       <Route path={RoutesName.signUp} component={SignUp} />
+      <Route
+        path={RoutesName.login}
+        render={() => (
+          <div>
+            <Home />
+            <LoginModal
+              isLoggedIn={loggedIn}
+              // onSuccessLogin={onSuccessLogin}
+              onModalClose={closeModal}
+              open={modalIsVisible}
+            />
+          </div>
+        )}
+      />
+      <Route
+        path={RoutesName.personalData}
+        render={() => (
+          loggedIn
+            ? (
+              <PersonalData
+                isLoggedIn={loggedIn}
+              />
+            )
+
+            : (
+              <div>
+                <Home />
+                <LoginModal
+                  isLoggedIn={loggedIn}
+                  // onSuccessLogin={onSuccessLogin}
+                  onModalClose={closeModal}
+                  open={modalIsVisible}
+                />
+              </div>
+            )
+        )}
+      />
+
       {/* <Route */}
       {/*  path={RoutesName.products} */}
       {/*  exact */}
@@ -77,7 +128,6 @@ export default function Routes() {
       />
       <Route path={RoutesName.cart} component={SummaryCart} />
       <Route path={RoutesName.editPersonalData} component={EditPersonalData} />
-      <Route path={RoutesName.personalData} component={PersonalData} />
       <Route path={RoutesName.aboutUs} component={AboutUs} />
       <Route path={RoutesName.delivery} component={Delivery} />
       <Route path={RoutesName.contacts} component={Contacts} />

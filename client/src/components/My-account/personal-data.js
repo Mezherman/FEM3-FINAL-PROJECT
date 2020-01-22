@@ -8,12 +8,13 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Checkbox from '@material-ui/core/Checkbox';
 import Avatar from '@material-ui/core/Avatar';
 import { Button, Grid, Typography } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import Divider from '@material-ui/core/Divider';
 import getUserData from '../../services/getUserData';
 import usePdstyles from './_personal-data';
 import RoutesName from '../../routes-list';
 
-export default function PersonalData () {
+export default function PersonalData ({ isLoggedIn }) {
   const pdClasses = usePdstyles();
 
   const [newUserData, setNewUserData] = useState({
@@ -114,6 +115,7 @@ export default function PersonalData () {
 
   ];
 
+  // if (isLoggedIn) {
   return (
     <Grid
       item
@@ -132,7 +134,7 @@ export default function PersonalData () {
         align="center"
         className={pdClasses.header}
       >
-        Personal Details
+          Personal Details
       </Typography>
       <List
         dense
@@ -141,34 +143,37 @@ export default function PersonalData () {
         {listItem.map(({ text, userData }, index) => {
           const labelId = `checkbox-list-secondary-label-${index}`;
           return (
-            // eslint-disable-next-line react/no-array-index-key
+          // eslint-disable-next-line react/no-array-index-key
             <ListItem key={`${text}${index}`} button>
               <ListItemText id={labelId} primary={text} />
 
               <ListItemSecondaryAction>
                 <ListItem
-                  key="1"
-                  button
+                  key={`${userData}`}
+                  // button
                   // className={classes.root}
                 >
                   <ListItemText id="2" primary={userData} />
                 </ListItem>
               </ListItemSecondaryAction>
+              <Divider absolute />
             </ListItem>
           );
         })}
       </List>
       <Link to={RoutesName.editPersonalData} className={pdClasses.link}>
         <Button
-        // size="large"
+          // size="large"
           variant="contained"
           color="secondary"
           className={pdClasses.button}
-        // disableElevation
+          // disableElevation
         >
-        EDIT YOUR DATA
+            EDIT YOUR DATA
         </Button>
       </Link>
     </Grid>
   );
+  // }
+  // return <Redirect to={RoutesName.login} />
 }

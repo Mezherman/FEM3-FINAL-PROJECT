@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '0 auto'
   },
   paper: {
-    minWidth: '60%',
+    // minWidth: '60%',
     maxWidth: '70%',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
