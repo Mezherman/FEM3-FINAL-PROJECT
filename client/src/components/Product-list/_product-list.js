@@ -4,6 +4,7 @@ const useStyles = makeStyles((theme) => ({
   productList: {
     display: 'flex',
     flexWrap: 'wrap',
+    paddingBottom: theme.spacing(5)
   }
 }));
 

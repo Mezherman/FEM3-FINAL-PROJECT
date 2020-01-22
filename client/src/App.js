@@ -21,7 +21,7 @@ function App(props) {
     <>
       {!catalogLoading &&
       (
-        <Container maxWidth="xl">
+        <>
           <Router>
             <Header />
             <ScrollToAnchor />
@@ -29,7 +29,7 @@ function App(props) {
             <Footer />
           </Router>
           <ScrollTop {...props} />
-        </Container>
+        </>
       )}
     </>
   )

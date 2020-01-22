@@ -11,8 +11,10 @@ const useStylesMainCarousel = makeStyles((theme) => ({
   },
 
   title: {
-    fontSize: '4em',
-    margin: '10px',
+    // fontSize: '4em',
+    // margin: '10px',
+
+    fontSize: '5em',
   },
 
   description: {
@@ -46,6 +48,8 @@ const useStylesMainCarousel = makeStyles((theme) => ({
       fontSize: '0.41rem',
       top: '31px%',
       maxWidth: '550px',
+      padding: theme.spacing(3, 3),
+
     },
     display: 'flex',
     flexDirection: 'column',
@@ -56,10 +60,12 @@ const useStylesMainCarousel = makeStyles((theme) => ({
     right: 39,
     padding: '2px',
     borderRadius: theme.spacing(1),
-    maxWidth: '550px',
+    // maxWidth: '550px',
+    // borderTopLeftRadius: theme.spacing(1),
+    maxWidth: '700px',
     color: theme.palette.text.primary,
     position: 'absolute',
-    backgroundColor: theme.palette.background.secondary,
+    backgroundColor: theme.palette.background.carousel,
     boxShadow: 'inset -187px 33px 51px 21px rgba(235,235,235,0.5)',
   },
 
