@@ -1,6 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
+    footerWrapper: {
+      padding: theme.spacing(2,0),
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
+    },
   container: {
     marginTop: theme.spacing(2)
   },
@@ -11,8 +16,11 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(2)
   },
   links: {
-    color: theme.palette.text.primary,
-    '&:hover': { color: theme.palette.secondary.dark },
+    color: theme.palette.secondary.contrastText,
+    '&:hover': {
+      textDecoration: 'underline',
+      cursor: 'pointer',
+    },
     textDecoration: 'none'
   }
 }));
