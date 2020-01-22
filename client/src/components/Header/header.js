@@ -129,15 +129,14 @@ function Header() {
   )
 
   return (
-    <Box>
+    <Box >
       <Box className={classes.delivery}>
         <Container maxWidth="xl" >
           <h3 className={classes.deliveryTitle}>Free shipping on all orders over &#8364;100</h3>
         </Container>
       </Box>
       <Container maxWidth="xl" disableGutters className={classes.grow}>
-        {/* <AppBar position="static" color="inherit" elevation={0}> */}
-        <div color="inherit" elevation={0}>
+        <AppBar position="sticky" color="inherit" elevation={0}>
           <Toolbar className={classes.justify}>
             <Box className={classes.boxLogo}>
               <IconButton
@@ -228,7 +227,7 @@ function Header() {
               </MenuItem>
             </Box>
           </Toolbar>
-        </div>
+        </AppBar>
 
         {prevBlockIsVisible ? (
           <PreviewBlock
