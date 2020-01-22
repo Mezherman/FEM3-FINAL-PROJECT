@@ -4,7 +4,7 @@ const RoutesName = {
   cart: '/shopping-cart',
   signUp: '/sign-up',
   signIn: '/login',
-  aboutUs: '/about-us',
+  aboutUs: '/about',
   contacts: '/contacts',
   delivery: '/delivery'
 };

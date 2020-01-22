@@ -73,6 +73,13 @@ export default function Routes() {
           )
         }}
       />
+      <Route
+        path={`${RoutesName.products}/search`}
+        exact
+        render={() => {
+          return <Catalog assortment={'cooking'} />
+        }}
+      />
       <Route path={RoutesName.cart} component={SummaryCart} />
       <Route path={RoutesName.aboutUs} component={AboutUs} />
       <Route path={RoutesName.delivery} component={Delivery} />

@@ -19,7 +19,7 @@ function Catalog({ assortment, catalogLocation }) {
 
   return (
     <>
-      <ProductBreadcrumbs assortment={assortment} />
+      {/*<ProductBreadcrumbs assortment={assortment} />*/}
       <Grid container spacing={2} className={classes.root}>
         <Grid item sm={12} md={4}>
           <div className={classes.filter}>
