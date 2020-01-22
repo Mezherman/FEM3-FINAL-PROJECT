@@ -10,6 +10,8 @@ import AboutUs from './components/About-us/about-us';
 import Contacts from './components/Contacts/contacts';
 import SignUp from './components/SignUp/sign-up'
 import Delivery from './components/Delivery/delivery';
+import EditPersonalData from './components/My-account/edit-personal-data';
+import PersonalData from './components/My-account/personal-data';
 
 export default function Routes() {
   return (
@@ -74,6 +76,8 @@ export default function Routes() {
         }}
       />
       <Route path={RoutesName.cart} component={SummaryCart} />
+      <Route path={RoutesName.editPersonalData} component={EditPersonalData} />
+      <Route path={RoutesName.personalData} component={PersonalData} />
       <Route path={RoutesName.aboutUs} component={AboutUs} />
       <Route path={RoutesName.delivery} component={Delivery} />
       <Route path={RoutesName.contacts} component={Contacts} />
