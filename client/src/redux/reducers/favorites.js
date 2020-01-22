@@ -12,6 +12,10 @@ export default function favoritesReducer(state = initialState, action) {
         favorites: action.payload,
         error: null,
         favoritesLoading: false
+      };
+    case 'SHOW_FAVORITES':
+      return {
+        favorites: action.payload
       }
     default:
       return state

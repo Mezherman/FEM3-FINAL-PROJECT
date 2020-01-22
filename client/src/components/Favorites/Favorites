@@ -9,9 +9,9 @@ import Spinner from '../Spinner/spinner';
 import getAllProducts, { getProductsByCategory } from '../../services/getProducts';
 import { productsRequested, productsLoaded, productsError } from '../../redux/actions/products';
 
-import useStyles from './_product-list';
+import useStyles from '../Product-list/_product-list';
 
-function ProductList(props) {
+function Favorites(props) {
   const { assortment, products, productsLoading, fetchProducts } = props;
   // console.log('products =', products);
   // console.log('PROPS =', props);

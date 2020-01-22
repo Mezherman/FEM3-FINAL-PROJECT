@@ -13,3 +13,9 @@ export default function addToFavorites(products) {
   return axios.put('/wishlist', products)
     .then((response) => console.log(response.data))
 }
+
+export function getFavorites() {
+  return axios.get('/wishlist')
+    .then((response) => console.log('favorites friom DB', response.data))
+}
+

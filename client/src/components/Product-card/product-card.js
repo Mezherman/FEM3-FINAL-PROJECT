@@ -20,6 +20,7 @@ import RoutesName from '../../routes-list';
 
 import addToFavorites from '../../services/favorites';
 import { favoritesAdded } from '../../redux/actions/favorites'
+import AddToFavoriteBtn from '../Add-to-favorite-btn';
 
 function ProductCard({ product, favorites, favoritesReducer,  favoritesLoading, favoritesAdded }) {
   console.log('favorites =', favorites);
@@ -35,7 +36,7 @@ function ProductCard({ product, favorites, favoritesReducer,  favoritesLoading, 
   const closeModal = () => {
     setModalVisibility(false)
   };
-  const isFavorite = favorites.includes(itemId);
+  // const isFavorite = favorites.includes(itemId);
   // const [favorite, setFavorites] = useState(false);
   // const addToFavorite = () => {
   //   setFavorites(!favorite)
@@ -52,27 +53,11 @@ function ProductCard({ product, favorites, favoritesReducer,  favoritesLoading, 
       <div className={classes.card}>
         <Divider />
         <div className={classes.iconWrapper}>
-          <IconButton onClick={() => {
-            console.log('!!!!!', favorites);
-            let favoritesArr = [...favorites]
-            if (favoritesArr.includes(itemId)) {
-              console.log(favoritesArr);
-              const index = favoritesArr.findIndex((item) => item === itemId )
-              console.log('index=', index);
-              favoritesArr.splice(index, 1)
-            } else {
-              favoritesArr.push(itemId)
-            }
-            console.log(favoritesArr);
-            favoritesAdded(favoritesArr)}}>
-
-
-            {isFavorite ? (
-              <FavoriteIcon color="primary" />)
-              : (<FavoriteBorderIcon color="primary" />
-              )}
-          </IconButton>
-
+          <AddToFavoriteBtn
+            favorites={favorites}
+            itemId={itemId}
+            favoritesAdded={favoritesAdded}
+          />
         </div>
 
         <Link

@@ -8,6 +8,12 @@ const favoritesAdded = (favorites) => ({
   payload: favorites
 });
 
+const favoritesShow = (favorites) => ({
+  type: 'SHOW_FAVORITES',
+  payload: favorites
+});
+
 export {
   favoritesAdded,
+  favoritesShow
 }
