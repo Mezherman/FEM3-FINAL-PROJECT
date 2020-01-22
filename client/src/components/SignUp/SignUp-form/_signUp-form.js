@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   labelText: {
-    color: theme.palette.secondary.dark,
+    color: theme.palette.secondary.dark
   },
   labelBirthday: {
     margin: theme.spacing(3, 0, 2, 0),
