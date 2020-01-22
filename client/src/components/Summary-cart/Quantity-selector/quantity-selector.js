@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { MenuItem, NativeSelect } from '@material-ui/core';
+import { Select, Grid } from '@material-ui/core';
 import propTypes from 'prop-types';
 import useStyles from './_quantity-selector';
 
-export default function QuantitySelector ({ productQuantity, productId, onSetProductQuantity }) {
-  console.log('productId', productId);
+export default function QuantitySelector ({ cartQuantity, productId, onSetProductQuantity }) {
   const classes = useStyles();
-  const [quantity, updateQuantity] = useState(productQuantity);
   const createListItems = () => {
     const items = [];
     for (let i = 1; i <= 100; i++) {
@@ -15,33 +13,57 @@ export default function QuantitySelector ({ productQuantity, productId, onSetPro
     return items;
   }
 
-  const handleChange = quantity => event => {
-    const value = event.target.value;
-    onSetProductQuantity(productId, value);
-    updateQuantity(value);
+  const setProductQuantity = (val) => {
+    onSetProductQuantity(productId, val);
+  }
+
+  const handleSelected = (quantity) => (event) => {
+    const { value } = event.target;
+    setProductQuantity(value);
   }
 
   return (
-    <NativeSelect
-      value={quantity}
-      onChange={
-        handleChange('quantity')
-      }
-      inputProps={{
-        name: 'quantity',
-        id: 'name-native-disabled',
-      }}
-      className={classes.root}
-    >
-      {createListItems()}
-    </NativeSelect>
+    <Grid container justify={"center"}>
+      <Grid item>
+        <span
+          className={classes.increase}
+          onClick={() => { setProductQuantity(cartQuantity - 1) }}
+        >
+          -
+        </span>
+      </Grid>
+      <Grid item>
+        <Select
+          native
+          value={cartQuantity}
+          onChange={
+            handleSelected('quantity')
+          }
+          inputProps={{
+            name: 'quantity',
+            id: 'name-native-disabled',
+          }}
+          className={`${classes.root}`}
+        >
+          {createListItems()}
+        </Select>
+      </Grid>
+      <Grid item>
+        <span
+          className={classes.increase}
+          onClick={() => { setProductQuantity(cartQuantity + 1) }}
+        >
+          +
+        </span>
+      </Grid>
+    </Grid>
   )
 }
 
 QuantitySelector.propTypes = {
-  productQuantity: propTypes.number,
+  cartQuantity: propTypes.number,
 };
 
 QuantitySelector.defaultProps = {
-  productQuantity: 1,
+  cartQuantity: 1,
 }

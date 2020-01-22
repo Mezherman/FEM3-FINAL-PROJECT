@@ -22,33 +22,25 @@ export async function getProductsByCategory(categoryName) {
     });
     return axios
       .get(`/products/filter?categories=${subCategoriesList}`)
-      .then((response) => {
-        // console.log('getProductsByCategory = ', response.data);
-        return response.data.products
-      })
-      .catch((err) => {
-        console.log('ERROR = ', err);
-      });
-  } else {
-    return axios
-      .get(`/products/filter?categories=${categoryName}`)
-      .then((response) => {
-        // console.log('getProductsByCategory = ', response.data);
-        return response.data.products
-      })
+      .then((response) => response.data.products)
       .catch((err) => {
         console.log('ERROR = ', err);
       });
   }
+  return axios
+    .get(`/products/filter?categories=${categoryName}`)
+    .then((response) => response.data.products)
+    .catch((err) => {
+      console.log('ERROR = ', err);
+    });
 }
 
 export function getProductsByItemNo(itemNo) {
   return axios
     .get(`/products/${itemNo}`)
-    .then((product) => {
-      console.log('getProductsByitemNo = ', product);
-      return product
-    })
+    .then((product) =>
+      // console.log('getProductsByitemNo = ', product);
+      product)
     .catch((err) => {
       console.log('ERROR = ', err);
     });
