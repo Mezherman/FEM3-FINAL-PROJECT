@@ -6,7 +6,8 @@ export default function(values) {
         'lastName',
         'email',
         'password',
-        'phone',
+        'telephone',
+        'login'
     ];
     requiredFields.forEach(field => {
         if (!values[field]) {
@@ -50,13 +51,11 @@ export default function(values) {
         errors.password = 'Password must be between 7 and 30 characters';
     }
     if (
-        values.phone &&
-        !/^[0-9-+\s()]{10,18}$/i.test(values.phone)
+        values.telephone &&
+        !/^[0-9-+\s()]{10,18}$/i.test(values.telephone)
     ) {
-        errors.phone = 'Invalid phone number, at least 10 symbols required';
+        errors.telephone = 'Invalid phone number, at least 10 symbols required';
     }
 
     return errors;
 }
-
-// Password must be between 7 and 30 characters

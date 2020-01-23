@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
-import axios from 'axios';
 
 import {
   CssBaseline,
@@ -22,7 +21,6 @@ import validate from './validate';
 import useStyles from './_sign-up';
 import postNewUser from '../../services/postNewUser';
 
-axios.defaults.baseURL = 'http://localhost:5000';
 
 let SignUp = (props) => {
   const { handleSubmit } = props;
@@ -54,27 +52,20 @@ let SignUp = (props) => {
   };
 
   const submitNewUser = (values) => {
-    // const newUser = {
-    //   "isAdmin": false,
-    //   ...values
-    // };
-    // event.preventDefault();
 
-    // postNewUser(newUser, handleOpenSignUpModal, setErrorModal, setRedirect);
-    axios
-      .post('/customers', values)
-      .then((response) => {
-        console.log(response);
-        if (response.statusText === 'OK') {
-          handleOpenSignUpModal();
-
-          // setRedirect(true);
-        }
-      })
-      .catch((error) => {
-        handleOpenSetErrorModal();
-        console.log(error.response.data);
-      });
+    postNewUser(values, handleOpenSignUpModal, handleOpenSetErrorModal);
+    // axios
+    //   .post('/customers', values)
+    //   .then((response) => {
+    //     console.log(response);
+    //     if (response.statusText === 'OK') {
+    //       handleOpenSignUpModal();
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     handleOpenSetErrorModal();
+    //     console.log(error.response.data);
+    //   });
   };
 
   return (
@@ -184,117 +175,3 @@ SignUp = reduxForm({
 })(SignUp);
 
 export default SignUp;
-// import React, { useState } from 'react';
-// import { reduxForm } from 'redux-form';
-// import axios from 'axios';
-//
-// import {
-//   CssBaseline,
-//   Grid,
-//   Typography,
-//   Container,
-//   Divider
-// } from '@material-ui/core';
-//
-// import SignUpInfo from './SignUp-info/signUp-info';
-// import SignUpForm from './SignUp-form/signUp-form';
-// import SignUpFooter from './SignUp-footer/signUp-footer';
-// import useStyles from './_sign-up';
-//
-// // function SignUp() {
-// const SignUp = (props) => {
-//   const { handleSubmit } = props;
-//   const classes = useStyles();
-//   const [newUserData, setNewUserData] = useState({
-//     gender: 'Mr',
-//     firstName: '',
-//     lastName: '',
-//     // birthday: '',
-//     birthdayDay: '',
-//     birthdayMonth: '',
-//     birthdayYear: '',
-//     email: '',
-//     password: '',
-//     country: 'Austria',
-//     agreement: false,
-//     isAdmin: false,
-//   });
-//
-//   // const handleChange = (key) => (event) => {
-//   //   if (key === 'agreement') {
-//   //     setNewUserData({ ...newUserData, [key]: event.target.checked });
-//   //   } else {
-//   //     setNewUserData({ ...newUserData, [key]: event.target.value });
-//   //   }
-//   // };
-//
-//   const submitNewUser = (event) => {
-//     event.preventDefault();
-//     console.log(newUserData);
-//     // axios
-//     //   .post('/customers', newUserData)
-//     //   .then((response) => {
-//     //     console.log(response);
-//     //     if (response.statusText === 'OK') {
-//     //       // setRegistration(true);
-//     //       console.log(response);
-//     //     }
-//     //   })
-//     //   .catch((error) => {
-//     //     // setMessage(error.message);
-//     //     console.log(error.response.data);
-//     //   });
-//   };
-//
-//   return (
-//     <Container component="div" disableGutters>
-//       <CssBaseline />
-//       <div className={classes.paper}>
-//         <Typography
-//           component="h1"
-//           variant="h5"
-//           align="center"
-//           className={classes.title}
-//         >
-//           Your registration for the myWMF Customer Club
-//         </Typography>
-//
-//         <form
-//           className={classes.form}
-//           noValidate={false}
-//           onSubmit={submitNewUser}
-//         >
-//           <Grid
-//             container
-//             spacing={3}
-//             direction="row-reverse"
-//             alignItems="center"
-//             alignContent="flex-end"
-//             justify="space-evenly"
-//           >
-//             <SignUpInfo />
-//             <Divider
-//               light
-//               orientation="vertical"
-//               className={classes.dividerSignUp}
-//             />
-//             <SignUpForm
-//               handleChange={handleChange}
-//             />
-//             <SignUpFooter
-//               submitNewUser={submitNewUser}
-//               handleChange={handleChange}
-//             />
-//
-//           </Grid>
-//         </form>
-//       </div>
-//     </Container>
-//   );
-// }
-//
-// SignUp = reduxForm({
-//   form: 'registration',
-// })(SignUp);
-//
-// export default SignUp;
