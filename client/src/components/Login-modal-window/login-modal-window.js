@@ -18,7 +18,7 @@ export default function LoginModal({ open, onModalClose, onSuccessLogin }) {
       open={open}
       onModalClose={onModalClose}
     >
-      <SignIn onClose={() => {}} onSuccessLogin={onSuccessLogin} />
+      <SignIn onClose={onModalClose} />
     </ModalWindow>
   );
   // }
