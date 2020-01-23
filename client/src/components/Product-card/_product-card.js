@@ -9,6 +9,10 @@ const useStyles = makeStyles((theme) => ({
       cursor: 'pointer',
     }
   },
+    iconWrapper: {
+    display: 'flex',
+      justifyContent: 'flex-end',
+    },
   link: {
     textDecoration: 'none'
   },

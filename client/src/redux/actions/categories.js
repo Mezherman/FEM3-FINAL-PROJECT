@@ -1,18 +1,28 @@
-export default function getCatalog(allCategories, mainCategories) {
-  return {
-    type: 'GET_CATEGORIES',
-    payload: {
-      allCategories,
-      mainCategories
-    }
-  }
-}
+const catalogRequested = () => ({
+  type: 'FETCH_CATALOG_REQUEST'
+});
 
-export function setMainCategories(mainCategories) {
-  return {
-    type: 'SET_MAIN_CATEGORIES',
-    payload: {
-      mainCategories
-    }
+const catalogLoaded = (allCategories) => ({
+  type: 'FETCH_CATALOG_SUCCESS',
+  payload: {
+    catalog: {
+      allCategories,
+      mainCategories: allCategories.filter((category) => category.parentId === 'null')
+    },
+    error: null
   }
+});
+
+const catalogError = (error) => ({
+  type: 'FETCH_CATALOG_FAILURE',
+  payload: {
+    catalog: {},
+    error
+  }
+});
+
+export {
+  catalogRequested,
+  catalogLoaded,
+  catalogError
 }
