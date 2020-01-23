@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
@@ -12,40 +12,34 @@ import Checkbox from '@material-ui/core/Checkbox'
 import { connect } from 'react-redux'
 import RangeSlider from '../Range/range'
 import useStyles from './_filter-panel';
-import { getBrandProducts } from '../../../redux/actions/filter'
+import { getBrandProducts, getCollectionProducts } from '../../../redux/actions/filter'
 
 function FilterPanel(props) {
   const classes = useStyles();
-  const { name, text, checkbox, max, brand } = props;
+  const { name, brand, getBrandProducts, text, checkbox, max } = props;
   // console.log('BRAND =', brand);
 
-  const [value, setValue] = useState([]);
-
   const handleChange = (event) => {
-    brand.push(event.target.value)
+    // const test = {
+    //   ...filter,
+    //   props.name: {
+    //
+    // }
+    // }
+    console.log('PROPS =', props);
+    let brandsChosen = [];
+    if (event.target.checked) {
+      brand.push(event.target.value);
+      brandsChosen = brand;
+    } else {
+      const idx = brand.findIndex((el) => el === event.target.value);
+      const before = brand.slice(0, idx);
+      const after = brand.slice(idx + 1);
 
-    const idx = brand.findIndex((el) => {
-      console.log(el === event.target.value);
-      return  el === event.target.value
-    })
-    console.log('index', idx)
-
-    const before = brand.slice(0, idx)
-    const after = brand.slice(idx + 1)
-
-    const Arr = [...before, ...after];
-
-    console.log('arr ->', Arr)
-
-    // console.log('TEST =', brand);
-    props.getBrandProducts(Arr);
+      brandsChosen = [...before, ...after];
+    }
+    getBrandProducts(brandsChosen);
   };
-
-  // console.log('value', value)
-
-  // console.log(props.getBrandProducts)
-
-  // console.log('props', props.getBrandProducts('silit'))
 
   return (
     <div>
@@ -82,12 +76,9 @@ function FilterPanel(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  // console.log('state in filter-panel', state)
-  return {
-    brand: state.filterReducer.brand
-  }
-}
+const mapStateToProps = (state) => ({
+  brand: state.filterReducer.brand
+});
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -96,18 +87,18 @@ function mapDispatchToProps(dispatch) {
 }
 
 FilterPanel.propTypes = {
+  brand: PropTypes.arrayOf(PropTypes.string),
   name: PropTypes.string.isRequired,
   text: PropTypes.arrayOf(PropTypes.string),
   checkbox: PropTypes.bool,
-  // range: PropTypes.bool,
   max: PropTypes.number
 };
 
 FilterPanel.defaultProps = {
-  // range: false,
   checkbox: false,
   text: [''],
-  max: null
+  max: null,
+  brand: []
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterPanel)

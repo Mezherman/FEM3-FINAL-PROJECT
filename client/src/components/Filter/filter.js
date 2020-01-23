@@ -29,8 +29,9 @@ function Filter(props) {
     <FilterPanel
       key={item.id}
       {...item}
+      // onChange={(item) => console.log(item.name)}
     />
-  ))
+  ));
 
   // getAllFilterProducts()
 
@@ -49,8 +50,8 @@ function Filter(props) {
   );
 }
 
-function mapStateToProps (state) {
-  // console.log('STATE FILTER =>', state.filterReducer);
+function mapStateToProps(state) {
+  console.log('STATE FILTER =>', state.filterReducer);
   return state.filterReducer
 }
 

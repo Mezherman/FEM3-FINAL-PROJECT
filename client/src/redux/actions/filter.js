@@ -11,3 +11,10 @@ export function getPriceProducts(price) {
     payload: price
   }
 }
+
+export function getCollectionProducts(collection) {
+  return {
+    type: 'GET_COLLECTION_PRODUCTS',
+    payload: collection
+  }
+}
