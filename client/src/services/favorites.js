@@ -17,17 +17,14 @@ export function getFavoritesList() {
 
 //Array of Favorite Prod
 export function getFavoriteProducts() {
-  // const itemIdString = itemIdArr.join(',');
   return axios.get('/wishlist')
     .then((response) => response.data.products)
 }
 
 export function addFavoritesToDB(itemId) {
-  console.log(itemId);
   return axios
     .put(`/wishlist/${itemId}`)
     .then(updatedWishlist => {
-      console.log('upd favor =', updatedWishlist);
       return updatedWishlist.data
     })
     .catch(err => err);
@@ -37,9 +34,6 @@ export function updateFavoriteProducts(favorites) {
   const favoritesObj = {products: favorites};
   return axios.put('/wishlist', favoritesObj)
     .then((response) => {
-      console.log(response);
       return response.data
     })
 }
-
-
