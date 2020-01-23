@@ -8,8 +8,7 @@ const RoutesName = {
   aboutUs: '/about',
   contacts: '/contacts',
   delivery: '/delivery',
-  favorites: '/favorites'
-  delivery: '/delivery',
+  favorites: '/favorites',
   personalData: '/personal-data',
   editPersonalData: '/edit-personal-data',
 };

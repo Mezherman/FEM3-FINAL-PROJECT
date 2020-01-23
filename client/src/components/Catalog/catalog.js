@@ -13,8 +13,6 @@ import { productsError, productsLoaded, productsRequested } from '../../redux/ac
 import getAllProducts, { getProductsByCategory } from '../../services/getProducts';
 import { catalogLocation } from '../../redux/actions/categories';
 
-import useStyles from './catalog-style';
-
 function Catalog({ assortment, fetchProducts, catalogLocation }) {
   const classes = useStyles();
 

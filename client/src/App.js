@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { Container } from '@material-ui/core';
 import 'typeface-roboto';
 
 import Routes from './routes';

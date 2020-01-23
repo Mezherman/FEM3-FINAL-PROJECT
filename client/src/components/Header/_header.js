@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'visible',
     '&:hover': {
       backgroundColor: 'transparent'
-    },
+    }
     // '&:last-child > button': {
     //   marginRight: '0'
     // }

@@ -140,10 +140,10 @@ function Header() {
   )
 
   return (
-    <Box >
+    <Box>
       <CssBaseline />
       <Box className={classes.delivery}>
-        <Container maxWidth="xl" >
+        <Container maxWidth="xl">
           <h3 className={classes.deliveryTitle}>Free shipping on all orders over &#8364;100</h3>
         </Container>
       </Box>
@@ -198,9 +198,9 @@ function Header() {
 
               <MenuItem className={classes.headerMenuItem}>
                 <Link to={RoutesName.favorites}>
-                <IconButton edge="end" className={classes.iconButton}>
-                  <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
-                </IconButton>
+                  <IconButton edge="end" className={classes.iconButton}>
+                    <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
+                  </IconButton>
                 </Link>
                 <span className={classes.menuTitle}>Favorites</span>
               </MenuItem>
