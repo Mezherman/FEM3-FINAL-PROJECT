@@ -36,7 +36,7 @@ function ProductDetail({ product, favorites, favoritesReducer,  favoritesLoading
     myCustomParams,
     brand,
     enabled,
-    _id: itemId
+    itemId
   } = product;
   const classes = useStyles();
   const theme = useTheme();
@@ -93,7 +93,7 @@ function ProductDetail({ product, favorites, favoritesReducer,  favoritesLoading
       },
     },
   }),)(InputBase);
-  console.log('favorites detail', favorites);
+  console.log('favorites.js detail', favorites);
 
   return (
     <Container maxWidth="xl">

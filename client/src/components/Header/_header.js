@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.contrastText,
     textAlign: 'center',
     textTransform: 'uppercase',
+    margin: '0',
   },
   grow: {
     padding: theme.spacing(3, 0),

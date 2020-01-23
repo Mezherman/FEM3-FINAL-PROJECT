@@ -20,10 +20,22 @@ const useStyles = makeStyles((theme) => ({
     },
     '& .MuiCheckbox-colorSecondary.Mui-checked': {
       color: theme.palette.primary.main
+    },
+    '&.MuiFormLabel-root': {
+      color: theme.palette.secondary.dark
+    },
+    '&.MuiFormLabel-root.Mui-error ': {
+      color: theme.palette.error.dark
+    },
+    '& .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline': {
+      borderColor: theme.palette.error.dark
+    },
+    '& .MuiFormHelperText-root.Mui-error ': {
+      color: theme.palette.error.dark
     }
   },
   labelText: {
-    color: theme.palette.secondary.dark,
+    color: theme.palette.secondary.dark
   },
   labelBirthday: {
     margin: theme.spacing(3, 0, 2, 0),
