@@ -11,11 +11,18 @@ const useStylesMainCarousel = makeStyles((theme) => ({
   },
 
   title: {
-    fontSize: '4em',
+    // fontSize: '4em',
+    // margin: '10px',
+
+    fontSize: '5em',
   },
 
   description: {
-    fontSize: '3em',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '2.8em',
+    },
+    fontSize: '2.3em',
+    margin: '10px',
   },
 
   textBlock: {
@@ -41,12 +48,24 @@ const useStylesMainCarousel = makeStyles((theme) => ({
       fontSize: '0.41rem',
       top: '31px%',
       maxWidth: '550px',
+      padding: theme.spacing(3, 3),
+
     },
-    borderTopLeftRadius: theme.spacing(1),
-    maxWidth: '550px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    // justifyContent: '',
+    top: '6%',
+    fontSize: '0.19rem',
+    right: 39,
+    padding: '2px',
+    borderRadius: theme.spacing(1),
+    // maxWidth: '550px',
+    // borderTopLeftRadius: theme.spacing(1),
+    maxWidth: '700px',
     color: theme.palette.text.primary,
     position: 'absolute',
-    backgroundColor: theme.palette.background.secondary,
+    backgroundColor: theme.palette.background.carousel,
     boxShadow: 'inset -187px 33px 51px 21px rgba(235,235,235,0.5)',
   },
 
@@ -77,6 +96,50 @@ const useStylesMainCarousel = makeStyles((theme) => ({
     top: '19px',
     transform: 'rotate(135deg)',
     transformOrigin: 'bottom right',
+  },
+
+  // mainPagingItem: {
+  //   '&::after': {
+  //     display: 'none',
+  //   },
+  // },
+
+  ulMainPagingItem: {
+    position: 'relative',
+    top: '45px',
+    display: 'flex',
+    justifyContent: 'center',
+    margin: 0,
+    padding: 0,
+    listStyleType: 'none',
+  },
+
+  liMainPagingItem: {
+    position: 'relative',
+    bottom: '30px',
+    display: 'inline-block',
+    margin: '0 5px',
+    color: theme.palette.text.primary,
+    backgroundColor: theme.palette.background.default,
+    borderRadius: '8px',
+    boxShadow: '0 2px 3px 0 rgba(0, 0, 0, .41)',
+    cursor: 'pointer',
+    '&.active': {
+      backgroundColor: theme.palette.secondary.main,
+      '& button': {
+        color: 'white'
+      },
+    },
+  },
+
+  buttonMainPagingItem: {
+    display: 'inline-block',
+    padding: '9px 11px',
+    background: 'transparent',
+    border: 'none',
+    outline: 'none',
+    cursor: 'pointer',
+    opacity: 1,
   },
 
 }));

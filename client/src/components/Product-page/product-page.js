@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
+import { Container } from '@material-ui/core';
 import { getProductsByItemNo } from '../../services/getProducts';
 import ProductDetail from '../Product-detail/product-detail';
 import { productsRequested, productsLoaded } from '../../redux/actions/products';
@@ -24,14 +25,16 @@ function ProductPage(props) {
         ? <Spinner />
         : (
           <>
-            <ProductBreadcrumbs assortment={assortment} />
-            <div className="product-essential">
-              <Grid key={chosenProduct.itemNo}>
-                <ProductDetail
-                  product={chosenProduct}
-                />
-              </Grid>
-            </div>
+            <Container maxWidth="xl">
+              <ProductBreadcrumbs assortment={assortment} />
+              <div className="product-essential">
+                <Grid key={chosenProduct.itemNo}>
+                  <ProductDetail
+                    product={chosenProduct}
+                  />
+                </Grid>
+              </div>
+            </Container>
           </>
         )}
     </>

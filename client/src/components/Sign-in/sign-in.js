@@ -5,29 +5,27 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types';
-import axios from 'axios';
-
-import FilledInput from '@material-ui/core/FilledInput';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-
+import { connect } from 'react-redux';
 import { FormLabel } from '@material-ui/core';
+import jwtDecode from 'jwt-decode';
 import useStylesSingIn from './_sign-in';
 import RoutesName from '../../routes-list';
+import postLoginData from '../../services/postLoginData'
+import loginLoaded from '../../redux/actions/user';
 
-export default function SignIn(props) {
+function SignIn(props) {
   const [login, setLogin] = useState(null);
   const [password, setPassword] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [length, setLenght] = useState(1);
+  const [length, setLength] = useState(1);
 
-  const { onClose } = props;
+  const { onClose, user, loginLoaded } = props;
+  console.log('USER =', user);
   const classes = useStylesSingIn();
 
   // const userData = {
@@ -51,7 +49,7 @@ export default function SignIn(props) {
 
   const colorChanger = (event) => {
     if (event.target.value.length > 0) {
-      setLenght(event.target.length)
+      setLength(event.target.length)
     }
   };
 
@@ -63,21 +61,26 @@ export default function SignIn(props) {
     setPassword(event.target.value)
   };
 
+  // if (localStorage.getItem('token')) {
+  //   loginLoaded(localStorage.getItem('token'))
+  // }
+
   function handleClick(event) {
     event.preventDefault();
-    // const password = handleOnChangePassword;
     const userData = {
       loginOrEmail: login,
       password
     };
-    axios
-      .post('/customers/login', userData)
+    postLoginData(userData)
       .then((loginResult) => {
-        onClose();
+        loginLoaded(loginResult.data.token);
+        // onClose();
         localStorage.setItem('token', `${loginResult.data.token}`);
-        const token = localStorage.getItem('token');
+        // localStorage.setItem('L', `${loginResult.data.token}`);
+        // const token = localStorage.getItem('token');
+        // console.log(token)
+
         setErrorMessage(null);
-        console.log(token)
 
         /* Do something with jwt-token if login successed */
       })
@@ -90,8 +93,7 @@ export default function SignIn(props) {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
+    <Container maxWidth="xs">
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -157,7 +159,7 @@ export default function SignIn(props) {
           {/*  <FilledInput id="component-filled" value={name} onChange={handleChange} /> */}
           {/* </FormControl> */}
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" className={classes.checkBox}/>}
+            control={<Checkbox value="remember" color="primary" className={classes.checkBox} />}
             label="Remember me"
           />
           <Button
@@ -173,7 +175,7 @@ export default function SignIn(props) {
           <Link
             className={classes.text}
             to={RoutesName.signUp}
-            onClick={onClose}
+            // onClick={onClose}
           >
               Don&#8242;t have an account?
             <strong> Sign Up </strong>
@@ -183,6 +185,19 @@ export default function SignIn(props) {
     </Container>
   );
 }
+
+const mapStateToProps = (state) => {
+  console.log('STATE =', state);
+  return {
+    user: state.userReducer
+  }
+};
+
+const mapDispatchToProps = {
+  loginLoaded
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
 
 SignIn.propTypes = {
   onClose: PropTypes.func,

@@ -1,8 +1,19 @@
 const initialState = {
-  loggedIn: true,
-  token: window.localStorage.getItem('auth-token')
+  token: '',
+  loggedIn: false,
+  firstName: '',
+  lastName: ''
 };
 
-export default function userReduser(state = initialState, action) {
-  return state;
+export default function userReducer(state = initialState, action) {
+  switch (action.type) {
+    case 'FETCH_LOGIN_SUCCESS':
+      return action.payload;
+
+    case 'FETCH_LOGIN_ERROR':
+      return state;
+    default: {
+      return state
+    }
+  }
 }

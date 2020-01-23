@@ -1,15 +1,18 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
+import { IconButton } from '@material-ui/core';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import 'typeface-roboto';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
 import { bindActionCreators } from 'redux'
 import { connect, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom';
 import * as cartActions from '../../redux/actions/CartActions';
 
-import { Link } from 'react-router-dom';
 import useStyles from './_product-card';
 import AddToCart from '../Add-to-cart/add-to-cart';
 import RoutesName from '../../routes-list';
@@ -22,12 +25,15 @@ function ProductCard({ product }) {
   )
   const { imageUrls, name, currentPrice, previousPrice, itemNo } = product;
   const classes = useStyles();
-
   const [modalIsVisible, setModalVisibility] = useState(false);
-
   const closeModal = () => {
     setModalVisibility(false)
   };
+  const [favorite, setFavorites] = useState(false);
+  const addToFavorite = () => {
+    setFavorites(!favorite)
+  };
+
   return (
     <>
       <AddToCart
@@ -37,11 +43,21 @@ function ProductCard({ product }) {
       />
 
       <div className={classes.card}>
+        <Divider />
+        <div className={classes.iconWrapper}>
+          <IconButton onClick={addToFavorite}>
+            {favorite ? (
+              <FavoriteIcon color="primary" />)
+              : (<FavoriteBorderIcon color="primary" />
+              )}
+          </IconButton>
+
+        </div>
+
         <Link
           to={`${RoutesName.products}/${itemNo}`}
           className={classes.link}
         >
-          <Divider />
           <Container maxWidth="sm">
             <div className={classes.imgWrapper}>
               <img

@@ -1,60 +1,69 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
-import axios from 'axios';
 
 import {
   CssBaseline,
   Grid,
   Typography,
   Container,
-  Divider
+  Divider,
+  Button,
+  Modal,
+  Fade,
+  Backdrop
 } from '@material-ui/core';
-import { ValidatorForm } from 'react-material-ui-form-validator';
 
 import SignUpInfo from './SignUp-info/signUp-info';
 import SignUpForm from './SignUp-form/signUp-form';
 import SignUpFooter from './SignUp-footer/signUp-footer';
+import validate from './validate';
 import useStyles from './_sign-up';
+import postNewUser from '../../services/postNewUser';
 
-let SignUp = () => {
+
+let SignUp = (props) => {
+  const { handleSubmit } = props;
   const classes = useStyles();
-  const [newUserData, setNewUserData] = useState({
-    gender: 'Mr',
-    firstName: '',
-    lastName: '',
-    // birthday: '',
-    birthdayDay: '',
-    birthdayMonth: '',
-    birthdayYear: '',
-    email: '',
-    password: '',
-    country: 'Austria',
-    agreement: false,
-    isAdmin: false,
-  });
+  const [signUpModal, setSignUpModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
-  const handleChange = (key) => (event) => {
-    if (key === 'agreement') {
-      setNewUserData({ ...newUserData, [key]: event.target.checked });
-    } else {
-      setNewUserData({ ...newUserData, [key]: event.target.value });
+  const handleOpenSignUpModal = () => {
+    setSignUpModal(true);
+  };
+
+  const handleCloseSignUpModal = () => {
+    setSignUpModal(false);
+    setRedirect(true);
+  };
+  const handleOpenSetErrorModal = () => {
+    setErrorModal(true);
+  };
+
+  const handleCloseSetErrorModal = () => {
+    setErrorModal(false);
+  };
+
+  const renderRedirect = () => {
+    if (redirect) {
+      return <Redirect to='/' />
     }
   };
 
-  const submitNewUser = (event) => {
-    event.preventDefault();
-    console.log(newUserData);
+  const submitNewUser = (values) => {
+
+    postNewUser(values, handleOpenSignUpModal, handleOpenSetErrorModal);
     // axios
-    //   .post('/customers', newUserData)
+    //   .post('/customers', values)
     //   .then((response) => {
     //     console.log(response);
     //     if (response.statusText === 'OK') {
-    //       // setRegistration(true);
-    //       console.log(response);
+    //       handleOpenSignUpModal();
     //     }
     //   })
     //   .catch((error) => {
-    //     // setMessage(error.message);
+    //     handleOpenSetErrorModal();
     //     console.log(error.response.data);
     //   });
   };
@@ -62,6 +71,7 @@ let SignUp = () => {
   return (
     <Container component="div" disableGutters>
       <CssBaseline />
+      {redirect && renderRedirect()}
       <div className={classes.paper}>
         <Typography
           component="h1"
@@ -72,11 +82,7 @@ let SignUp = () => {
           Your registration for the myWMF Customer Club
         </Typography>
 
-        <ValidatorForm
-          className={classes.form}
-          noValidate={false}
-          onSubmit={submitNewUser}
-        >
+        <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitNewUser)}>
           <Grid
             container
             spacing={3}
@@ -91,23 +97,81 @@ let SignUp = () => {
               orientation="vertical"
               className={classes.dividerSignUp}
             />
-            <SignUpForm
-              handleChange={handleChange}
-            />
-            <SignUpFooter
-              submitNewUser={submitNewUser}
-              handleChange={handleChange}
-            />
-
+            <SignUpForm />
+            <SignUpFooter />
           </Grid>
-        </ValidatorForm>
+        </form>
+        {/*<Button onClick={handleOpenSignUpModal}>Open registration modal</Button>*/}
+        { signUpModal &&
+        <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modalInfoIcon}
+            open={signUpModal}
+            onClose={handleCloseSignUpModal}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+        >
+          <Fade in={signUpModal}>
+            <div className={classes.paperInfoIcon}>
+              <h2 id="transition-modal-title" className={classes.modalInfoTitle}>
+                Your account was successfully registered
+              </h2>
+              <Button
+                  onClick={handleCloseSignUpModal}
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+              >
+                OK
+              </Button>
+            </div>
+          </Fade>
+        </Modal>
+        }
+
+        { errorModal &&
+        <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modalInfoIcon}
+            open={errorModal}
+            onClose={handleCloseSetErrorModal}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+        >
+          <Fade in={errorModal}>
+            <div className={classes.paperInfoError}>
+              <h2 id="transition-modal-title" className={classes.modalInfoTitle}>
+                Something go wrong. Try again
+              </h2>
+              <Button
+                  onClick={handleCloseSetErrorModal}
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+              >
+                OK
+              </Button>
+            </div>
+          </Fade>
+        </Modal>
+        }
+
       </div>
     </Container>
   );
-}
+};
 
 SignUp = reduxForm({
-  form: 'registration'
+  form: 'registration',
+  validate,
 })(SignUp);
 
 export default SignUp;

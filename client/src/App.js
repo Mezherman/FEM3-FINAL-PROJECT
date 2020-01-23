@@ -15,14 +15,16 @@ import Notification from './components/Notification/notification'
 
 function App(props) {
   const { catalogLoading, fetchCatalog } = props;
+
   useEffect(() => {
     fetchCatalog();
   }, [fetchCatalog]);
+
   return (
     <>
       {!catalogLoading &&
       (
-        <Container maxWidth="xl">
+        <>
           <Router>
             <Header />
             <ScrollToAnchor />
@@ -31,7 +33,7 @@ function App(props) {
             <Footer />
           </Router>
           <ScrollTop {...props} />
-        </Container>
+        </>
       )}
     </>
   )
