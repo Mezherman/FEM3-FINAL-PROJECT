@@ -14,16 +14,22 @@ import PropTypes from 'prop-types';
 import getUserData from '../../services/getUserData';
 import usePdstyles from './_personal-data';
 import RoutesName from '../../routes-list';
+import axios from 'axios';
+
+// axios.defaults.baseURL = 'http://localhost:5000';
+
+axios.defaults.headers.common.Authorization = localStorage.getItem('token');
 
 export default function PersonalData ({ isLoggedIn }) {
   const pdClasses = usePdstyles();
 
   const [newUserData, setNewUserData] = useState({
-    gender: 'male',
+    gender: '',
     firstName: '',
     lastName: '',
     birthdayDay: '',
     birthdayMonth: '',
+    telephone: '',
     birthdayYear: '',
     email: '',
     password: '',
@@ -75,7 +81,7 @@ export default function PersonalData ({ isLoggedIn }) {
     telephone,
     login,
     email,
-    password,
+    // password,
     country,
 
   } = newUserData;
@@ -116,7 +122,7 @@ export default function PersonalData ({ isLoggedIn }) {
 
   ];
 
-  if (isLoggedIn) {
+  // if (isLoggedIn) {
     return (
       <Grid
         item
@@ -175,8 +181,8 @@ export default function PersonalData ({ isLoggedIn }) {
         </Link>
       </Grid>
     );
-  }
-  return <Redirect to={RoutesName.login} />
+  // }
+  // return ()
 }
 
 PersonalData.propTypes = {

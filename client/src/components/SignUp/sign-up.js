@@ -52,7 +52,7 @@ let SignUp = (props) => {
   };
 
   const submitNewUser = (values) => {
-
+    // console.log(values);
     postNewUser(values, handleOpenSignUpModal, handleOpenSetErrorModal);
     // axios
     //   .post('/customers', values)

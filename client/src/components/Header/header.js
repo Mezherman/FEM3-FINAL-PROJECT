@@ -34,6 +34,13 @@ import PreviewBlock from '../Preview-block/preview-cart';
 import LoginModal from '../Login-modal-window/login-modal-window';
 import SearchIcon from '@material-ui/icons/Search';
 
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+// import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+
 // const StyledMenu = withStyles({
 //   // paper: {
 //   //   border: '1px solid #d3d4d5',
@@ -139,6 +146,40 @@ function Header() {
     </Menu>
   )
 
+  // MY-ACCOUNT-ICON
+
+  const [open, setOpen] = useState(false);
+  const anchorRef = React.useRef(null);
+
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  function handleListKeyDown(event) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setOpen(false);
+    }
+  }
+
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpen = React.useRef(open);
+  React.useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
+
   return (
     <Box >
       <CssBaseline />
@@ -234,6 +275,47 @@ function Header() {
               {/*  <MenuItem style={{ display: 'none' }} />*/}
               {/*  <SignIn onClose={handleClose} />*/}
               {/*</StyledMenu>*/}
+              <Divider orientation="vertical" className={classes.dividerStyle} />
+              <MenuItem
+                className={classes.headerMenuItem}
+                aria-controls="customized-menu"
+                aria-haspopup="true"
+                variant="contained"
+                // onClick={handleClick}
+                component=""
+                ref={anchorRef}
+                // aria-controls={open ? 'menu-list-grow' : undefined}
+                // aria-haspopup="true"
+                onClick={handleToggle}
+                // href={RoutesName.signIn}
+              >
+                <IconButton edge="end" className={classes.iconButton}>
+                  <PersonIcon fontSize="large" className={classes.iconsStyle} />
+                </IconButton>
+                <span className={classes.menuTitle}>MyACC</span>
+              </MenuItem>
+              <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+                {({ TransitionProps, placement }) => (
+                  <Grow
+                    {...TransitionProps}
+                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                  >
+                    <Paper>
+                      <ClickAwayListener onClickAway={handleClose}>
+                        <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                          <Link to={RoutesName.personalData}>
+                            <MenuItem onClick={handleClose}>Profile</MenuItem>
+                          </Link>
+                          <Link to={RoutesName.myOrders}>
+                            <MenuItem onClick={handleClose}>My orders</MenuItem>
+                          </Link>
+                            <MenuItem onClick={handleClose}>Logout</MenuItem>
+                        </MenuList>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
               <Divider orientation="vertical" className={classes.dividerStyle} />
               <MenuItem className={classes.headerMenuItem} onClick={handleChange}>
                 <IconButton edge="end" aria-label="card" className={classes.iconButton}>

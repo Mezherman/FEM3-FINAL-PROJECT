@@ -14,6 +14,8 @@ import Delivery from './components/Delivery/delivery';
 import EditPersonalData from './components/My-account/edit-personal-data';
 import PersonalData from './components/My-account/personal-data';
 import LoginModal from './components/Login-modal-window/login-modal-window';
+import EditFormWithValidation from './components/My-account/form-with-validation'
+import MyForm from './components/My-account/form-mui-valid'
 
 export default function Routes() {
   const { loggedIn } = useSelector((state) => state.userReducer);
@@ -43,24 +45,22 @@ export default function Routes() {
       <Route
         path={RoutesName.personalData}
         render={() => (
-          // loggedIn
-          //   ? (
-          <PersonalData
-            isLoggedIn={loggedIn}
-          />
-          // )
+          loggedIn
+            ? (
+              <PersonalData />
+            )
           //
-          // : (
-          //   <div>
-          //     <Home />
-          //     <LoginModal
-          //       isLoggedIn={loggedIn}
-          //       // onSuccessLogin={onSuccessLogin}
-          //       onModalClose={closeModal}
-          //       open={modalIsVisible}
-          //     />
-          //   </div>
-          // )
+            : (
+              <div>
+                <Home />
+                <LoginModal
+                  isLoggedIn={loggedIn}
+                  // onSuccessLogin={onSuccessLogin}
+                  onModalClose={closeModal}
+                  open={modalIsVisible}
+                />
+              </div>
+            )
         )}
       />
 
@@ -127,6 +127,8 @@ export default function Routes() {
       <Route path={RoutesName.aboutUs} component={AboutUs} />
       <Route path={RoutesName.delivery} component={Delivery} />
       <Route path={RoutesName.contacts} component={Contacts} />
+      <Route path="/edit" component={EditFormWithValidation} />
+      <Route path="/edit-mui" component={MyForm} />
 
       /*in the end*/
       <Route path={RoutesName.home} exact>

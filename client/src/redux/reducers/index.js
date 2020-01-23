@@ -14,5 +14,6 @@ export default combineReducers({
   // mainCategoriesReducer,
   form: formReducer,
   filterReducer,
-  userReducer
+  userReducer,
+
 });
