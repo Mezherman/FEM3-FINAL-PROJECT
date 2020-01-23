@@ -93,7 +93,7 @@ function ProductCard({ product }) {
             disableElevation
             onClick={() => {
               console.log('add product', product);
-              actions.addProductToCart(product);
+              actions.addProductToCart(product, 1);
               setModalVisibility(true)
             }}
           >

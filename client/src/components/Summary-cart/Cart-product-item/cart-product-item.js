@@ -13,7 +13,6 @@ export default function CartProductItem({ product, onSetProductQuantity, onRemov
   const headerClasses = useHeaderStyles();
   const { product: currentProduct, cartQuantity } = product;
   const subTotalProduct = currentProduct.currentPrice * cartQuantity;
-  console.log('currentProduct', currentProduct);
   return (
     <Grid container justify="space-between" className={`${classes.root} ${headerClasses.underline}`}>
       <Grid item lg={3}>

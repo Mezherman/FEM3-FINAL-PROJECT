@@ -1,6 +1,12 @@
 import jwtDecode from 'jwt-decode';
 
-const loginLoaded = (token) => {
+const loginLoaded = () => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return {
+      type: 'FETCH_LOGIN_ERROR',
+    }
+  }
   const decoded = jwtDecode(token);
   const { firstName, lastName, exp } = decoded;
 
