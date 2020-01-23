@@ -10,6 +10,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { Button, Grid, Typography } from '@material-ui/core';
 import { Link, Redirect } from 'react-router-dom';
 import Divider from '@material-ui/core/Divider';
+import PropTypes from 'prop-types';
 import getUserData from '../../services/getUserData';
 import usePdstyles from './_personal-data';
 import RoutesName from '../../routes-list';
@@ -115,65 +116,69 @@ export default function PersonalData ({ isLoggedIn }) {
 
   ];
 
-  // if (isLoggedIn) {
-  return (
-    <Grid
-      item
-      xs={12}
-      sm={10}
-      md={5}
-      container
-      direction="column"
-      justify="center"
+  if (isLoggedIn) {
+    return (
+      <Grid
+        item
+        xs={12}
+        sm={10}
+        md={5}
+        container
+        direction="column"
+        justify="center"
       // alignContent="center"
       // alignItems="center"
-    >
-      <Typography
-        component="h1"
-        variant="h5"
-        align="center"
-        className={pdClasses.header}
       >
+        <Typography
+          component="h1"
+          variant="h5"
+          align="center"
+          className={pdClasses.header}
+        >
           Personal Details
-      </Typography>
-      <List
-        dense
+        </Typography>
+        <List
+          dense
         // className={classes.root}
-      >
-        {listItem.map(({ text, userData }, index) => {
-          const labelId = `checkbox-list-secondary-label-${index}`;
-          return (
-          // eslint-disable-next-line react/no-array-index-key
-            <ListItem key={`${text}${index}`} button>
-              <ListItemText id={labelId} primary={text} />
+        >
+          {listItem.map(({ text, userData }, index) => {
+            const labelId = `checkbox-list-secondary-label-${index}`;
+            return (
+            // eslint-disable-next-line react/no-array-index-key
+              <ListItem key={`${text}${index}`} button>
+                <ListItemText id={labelId} primary={text} />
 
-              <ListItemSecondaryAction>
-                <ListItem
-                  key={`${userData}`}
+                <ListItemSecondaryAction>
+                  <ListItem
+                    key={`${userData}`}
                   // button
                   // className={classes.root}
-                >
-                  <ListItemText id="2" primary={userData} />
-                </ListItem>
-              </ListItemSecondaryAction>
-              <Divider absolute />
-            </ListItem>
-          );
-        })}
-      </List>
-      <Link to={RoutesName.editPersonalData} className={pdClasses.link}>
-        <Button
+                  >
+                    <ListItemText id="2" primary={userData} />
+                  </ListItem>
+                </ListItemSecondaryAction>
+                <Divider absolute />
+              </ListItem>
+            );
+          })}
+        </List>
+        <Link to={RoutesName.editPersonalData} className={pdClasses.link}>
+          <Button
           // size="large"
-          variant="contained"
-          color="secondary"
-          className={pdClasses.button}
+            variant="contained"
+            color="secondary"
+            className={pdClasses.button}
           // disableElevation
-        >
+          >
             EDIT YOUR DATA
-        </Button>
-      </Link>
-    </Grid>
-  );
-  // }
-  // return <Redirect to={RoutesName.login} />
+          </Button>
+        </Link>
+      </Grid>
+    );
+  }
+  return <Redirect to={RoutesName.login} />
 }
+
+PersonalData.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired
+};

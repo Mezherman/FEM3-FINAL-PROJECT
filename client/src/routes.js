@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom'
 import Home from './components/Home/home';
@@ -17,12 +17,9 @@ import LoginModal from './components/Login-modal-window/login-modal-window';
 
 export default function Routes() {
   const { loggedIn } = useSelector((state) => state.userReducer);
-  const [modalIsVisible, setModalVisibility] = useState(true);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // const onSuccessLogin = () => {
-  //   setIsLoggedIn(true)
-  // };
+  const [modalIsVisible, setModalVisibility] = useState(true);
+
   const closeModal = () => {
     setModalVisibility(false);
   };
@@ -37,7 +34,6 @@ export default function Routes() {
             <Home />
             <LoginModal
               isLoggedIn={loggedIn}
-              // onSuccessLogin={onSuccessLogin}
               onModalClose={closeModal}
               open={modalIsVisible}
             />
@@ -47,24 +43,24 @@ export default function Routes() {
       <Route
         path={RoutesName.personalData}
         render={() => (
-          loggedIn
-            ? (
-              <PersonalData
-                isLoggedIn={loggedIn}
-              />
-            )
-
-            : (
-              <div>
-                <Home />
-                <LoginModal
-                  isLoggedIn={loggedIn}
-                  // onSuccessLogin={onSuccessLogin}
-                  onModalClose={closeModal}
-                  open={modalIsVisible}
-                />
-              </div>
-            )
+          // loggedIn
+          //   ? (
+          <PersonalData
+            isLoggedIn={loggedIn}
+          />
+          // )
+          //
+          // : (
+          //   <div>
+          //     <Home />
+          //     <LoginModal
+          //       isLoggedIn={loggedIn}
+          //       // onSuccessLogin={onSuccessLogin}
+          //       onModalClose={closeModal}
+          //       open={modalIsVisible}
+          //     />
+          //   </div>
+          // )
         )}
       />
 

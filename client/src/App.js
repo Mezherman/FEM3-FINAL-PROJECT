@@ -14,9 +14,11 @@ import { catalogRequested, catalogLoaded, catalogError } from './redux/actions/c
 
 function App(props) {
   const { catalogLoading, fetchCatalog } = props;
+
   useEffect(() => {
     fetchCatalog();
   }, [fetchCatalog]);
+
   return (
     <>
       {!catalogLoading &&

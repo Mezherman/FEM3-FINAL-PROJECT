@@ -12,6 +12,7 @@ import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormLabel } from '@material-ui/core';
+import jwtDecode from 'jwt-decode';
 import useStylesSingIn from './_sign-in';
 import RoutesName from '../../routes-list';
 import postLoginData from '../../services/postLoginData'
@@ -60,6 +61,10 @@ function SignIn(props) {
     setPassword(event.target.value)
   };
 
+  // if (localStorage.getItem('token')) {
+  //   loginLoaded(localStorage.getItem('token'))
+  // }
+
   function handleClick(event) {
     event.preventDefault();
     const userData = {
@@ -69,11 +74,13 @@ function SignIn(props) {
     postLoginData(userData)
       .then((loginResult) => {
         loginLoaded(loginResult.data.token);
-        onClose();
+        // onClose();
         localStorage.setItem('token', `${loginResult.data.token}`);
-        const token = localStorage.getItem('token');
+        // localStorage.setItem('L', `${loginResult.data.token}`);
+        // const token = localStorage.getItem('token');
+        // console.log(token)
+
         setErrorMessage(null);
-        console.log(token)
 
         /* Do something with jwt-token if login successed */
       })
@@ -86,8 +93,7 @@ function SignIn(props) {
   }
 
   return (
-    <Container  maxWidth="xs">
-      {/*<CssBaseline />*/}
+    <Container maxWidth="xs">
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -169,7 +175,7 @@ function SignIn(props) {
           <Link
             className={classes.text}
             to={RoutesName.signUp}
-            onClick={onClose}
+            // onClick={onClose}
           >
               Don&#8242;t have an account?
             <strong> Sign Up </strong>

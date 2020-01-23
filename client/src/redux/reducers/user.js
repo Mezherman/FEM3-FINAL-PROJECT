@@ -1,6 +1,8 @@
 const initialState = {
   token: '',
-  loggedIn: false
+  loggedIn: false,
+  firstName: '',
+  lastName: ''
 };
 
 export default function userReducer(state = initialState, action) {
@@ -8,6 +10,8 @@ export default function userReducer(state = initialState, action) {
     case 'FETCH_LOGIN_SUCCESS':
       return action.payload;
 
+    case 'FETCH_LOGIN_ERROR':
+      return state;
     default: {
       return state
     }

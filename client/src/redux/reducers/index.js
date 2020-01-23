@@ -11,6 +11,6 @@ export default combineReducers({
   categoriesReducer,
   productsReducer,
   formReducer,
-  filterReducer
+  filterReducer,
   userReducer
 })
