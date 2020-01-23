@@ -25,7 +25,7 @@ function SignIn(props) {
   const [length, setLength] = useState(1);
 
   const { onClose, user, loginLoaded } = props;
-  console.log('USER =', user);
+  // console.log('USER =', user);
   const classes = useStylesSingIn();
 
   // const userData = {
@@ -74,7 +74,7 @@ function SignIn(props) {
     postLoginData(userData)
       .then((loginResult) => {
         loginLoaded(loginResult.data.token);
-        // onClose();
+        onClose();
         localStorage.setItem('token', `${loginResult.data.token}`);
         // localStorage.setItem('L', `${loginResult.data.token}`);
         // const token = localStorage.getItem('token');
