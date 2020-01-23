@@ -21,14 +21,20 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import RangeSlider from '../../Filter/Range/range';
+import store from '../../../index';
 
 export default function NavBar({ toggleCatalog, hideCatalog, children }) {
   const classes = useStyles();
   const [drawer, setDrawer] = useState(false);
-
+  const mainCategories = store.getState().categoriesReducer.catalog.mainCategories;
+  console.log(mainCategories);
   const toggleDrawer = (open) => {
     setDrawer(open)
   }
+
+  // const test = mainCategories.map((category) => (
+  //   <CollapsingItem disablePadding label={category.name} />
+  // ))
   return (
     <>
       <Button onClick={() => toggleDrawer(true)}>Open</Button>
@@ -69,21 +75,20 @@ export default function NavBar({ toggleCatalog, hideCatalog, children }) {
         {/*</ExpansionPanelSummary>*/}
 
 
-
         <List
           disablePadding
           component="nav"
           aria-labelledby="nested-list-subheader"
           className={classes.root}
         >
-          <CollapsingItem border={1} label="CATALOG" >
+          <CollapsingItem border={1} label="CATALOG">
             <CollapsingItem disablePadding label="COOCKING">
-              <ListItem disablePadding button >POTS</ListItem>
+              <ListItem disablePadding button>POTS</ListItem>
               <ListItem disablePadding button>FRYING</ListItem>
             </CollapsingItem>
-            <CollapsingItem disablePadding label="DINING" />
-            <CollapsingItem disablePadding label="DRINKING" />
-            <CollapsingItem disablePadding label="PREPARING" />
+            <CollapsingItem disablePadding label="DINING"/>
+            <CollapsingItem disablePadding label="DRINKING"/>
+            <CollapsingItem disablePadding label="PREPARING"/>
           </CollapsingItem>
 
           <ListItem
@@ -91,21 +96,21 @@ export default function NavBar({ toggleCatalog, hideCatalog, children }) {
             onMouseLeave={hideCatalog}
             onClick={toggleCatalog}
           >
-        CATALOG
+            CATALOG
           </ListItem>
           <ListItem>
             <Link to={RoutesName.aboutUs} className={classes.headerMenuListHyperlink}>
-          ABOUT US
+              ABOUT US
             </Link>
           </ListItem>
           <ListItem>
             <Link to={RoutesName.delivery} className={classes.headerMenuListHyperlink}>
-          DELIVERY & PAYMENT TERMS
+              DELIVERY & PAYMENT TERMS
             </Link>
           </ListItem>
           <ListItem>
             <Link to={RoutesName.contacts} className={classes.headerMenuListHyperlink}>
-          CONTACTS
+              CONTACTS
             </Link>
           </ListItem>
           {children}
