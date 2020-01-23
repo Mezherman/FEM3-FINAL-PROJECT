@@ -12,23 +12,21 @@ import { productsRequested, productsLoaded, productsError } from '../../redux/ac
 import useStyles from './_product-list';
 
 function ProductList(props) {
-  const { assortment, products, productsLoading, fetchProducts } = props;
-  // console.log('products =', products);
+  const { assortment, products, productsLoading } = props;
+  console.log('products =', products);
   // console.log('PROPS =', props);
   const classes = useStyles();
 
-  // const [favorites, setFavorites] = useState([1, 2, 3]);
+  // const [favorites.js, setFavorites] = useState([1, 2, 3]);
 
   // useEffect(() => {
   //   setFavorites([1, 2, 3])
   // }, [])
 
   // const addToFavorite = (id) => {
-  //   setFavorites(favorites.concat(id))
+  //   setFavorites(favorites.js.concat(id))
   // };
-  useEffect(() => {
-    fetchProducts(assortment);
-  }, [assortment, fetchProducts]);
+
 
   return (
     <div className={classes.productList}>
@@ -48,23 +46,7 @@ function ProductList(props) {
 
 const mapStateToProps = (state) => state.productsReducer;
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchProducts: (assortment) => {
-    dispatch(productsRequested());
-    if (assortment === 'all') {
-      getAllProducts()
-        .then((products) => dispatch(productsLoaded(products)))
-        .catch((err) => dispatch(productsError(err)));
-    } else {
-      getProductsByCategory(assortment)
-        .then((products) => {
-          dispatch(productsLoaded(products));
-        })
-    }
-  }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProductList)
+export default connect(mapStateToProps)(ProductList)
 
 ProductList.propTypes = {
   assortment: PropTypes.string.isRequired,

@@ -3,22 +3,22 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import React from 'react';
 
-export default function AddToFavoriteBtn ({favorites, itemId, favoritesAdded}) {
-  const isFavorite = favorites.includes(itemId);
+export default function AddToFavoriteBtn ({favorites, itemNo, favoritesAdded}) {
+  const isFavorite = favorites.includes(itemNo);
 
   return (
     <IconButton onClick={() => {
-      console.log('!!!!!', favorites);
+      // console.log('!!!!!', favorites);
       const favoritesArr = [...favorites]
-      if (favoritesArr.includes(itemId)) {
-        console.log(favoritesArr);
-        const index = favoritesArr.findIndex((item) => item === itemId)
-        console.log('index=', index);
+      if (favoritesArr.includes(itemNo)) {
+        // console.log(favoritesArr);
+        const index = favoritesArr.findIndex((item) => item === itemNo)
+        // console.log('index=', index);
         favoritesArr.splice(index, 1)
       } else {
-        favoritesArr.push(itemId)
+        favoritesArr.push(itemNo)
       }
-      console.log(favoritesArr);
+      // console.log(favoritesArr);
       favoritesAdded(favoritesArr)
     }}
     >

@@ -23,20 +23,20 @@ import { favoritesAdded } from '../../redux/actions/favorites'
 import AddToFavoriteBtn from '../Add-to-favorite-btn';
 
 function ProductCard({ product, favorites, favoritesReducer,  favoritesLoading, favoritesAdded }) {
-  console.log('favorites =', favorites);
-  console.log('favoritesReduc=', favoritesReducer);
+  // console.log('favorites =', favorites);
+  // console.log('favoritesReduc=', favoritesReducer);
   const dispatch = useDispatch();
   const actions = useMemo(
     () => bindActionCreators(cartActions, dispatch),
     [dispatch]
   )
-  const { imageUrls, name, currentPrice, previousPrice, itemNo, _id: itemId } = product;
+  const { imageUrls, name, currentPrice, previousPrice, itemNo } = product;
   const classes = useStyles();
   const [modalIsVisible, setModalVisibility] = useState(false);
   const closeModal = () => {
     setModalVisibility(false)
   };
-  // const isFavorite = favorites.includes(itemId);
+  // const isFavorite = favorites.js.includes(itemId);
   // const [favorite, setFavorites] = useState(false);
   // const addToFavorite = () => {
   //   setFavorites(!favorite)
@@ -55,7 +55,7 @@ function ProductCard({ product, favorites, favoritesReducer,  favoritesLoading, 
         <div className={classes.iconWrapper}>
           <AddToFavoriteBtn
             favorites={favorites}
-            itemId={itemId}
+            itemNo={itemNo}
             favoritesAdded={favoritesAdded}
           />
         </div>

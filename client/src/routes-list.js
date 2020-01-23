@@ -6,7 +6,8 @@ const RoutesName = {
   signIn: '/login',
   aboutUs: '/about-us',
   contacts: '/contacts',
-  delivery: '/delivery'
+  delivery: '/delivery',
+  favorites: '/favorites'
 };
 
 export default RoutesName;

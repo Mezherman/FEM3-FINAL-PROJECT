@@ -185,9 +185,11 @@ function Header() {
               <Divider orientation="vertical" className={classes.dividerStyle} />
 
               <MenuItem className={classes.headerMenuItem}>
+                <Link to={RoutesName.favorites}>
                 <IconButton edge="end" className={classes.iconButton}>
                   <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
                 </IconButton>
+                </Link>
                 <span className={classes.menuTitle}>Favorites</span>
               </MenuItem>
               <Divider orientation="vertical" className={classes.dividerStyle} />

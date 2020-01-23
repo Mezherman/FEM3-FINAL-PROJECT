@@ -36,7 +36,7 @@ function ProductDetail({ product, favorites, favoritesReducer,  favoritesLoading
     myCustomParams,
     brand,
     enabled,
-    _id: itemId
+    itemNo
   } = product;
   const classes = useStyles();
   const theme = useTheme();
@@ -93,7 +93,7 @@ function ProductDetail({ product, favorites, favoritesReducer,  favoritesLoading
       },
     },
   }),)(InputBase);
-  console.log('favorites detail', favorites);
+  console.log('favorites.js detail', favorites);
 
   return (
     <Container maxWidth="xl">
@@ -107,7 +107,7 @@ function ProductDetail({ product, favorites, favoritesReducer,  favoritesLoading
         <Grid item xs={12} sm={12} md={6} xl={5}>
           <AddToFavoriteBtn
             favorites={favorites}
-            itemId={itemId}
+            itemNo={itemNo}
             favoritesAdded={favoritesAdded}
           />
           <MyGallery

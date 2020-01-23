@@ -10,6 +10,7 @@ import AboutUs from './components/About-us/about-us';
 import Contacts from './components/Contacts/contacts';
 import SignUp from './components/SignUp/sign-up'
 import Delivery from './components/Delivery/delivery';
+import Favorites from './components/Favorites/favorites'
 
 export default function Routes() {
   return (
@@ -73,6 +74,7 @@ export default function Routes() {
           )
         }}
       />
+      <Route path={RoutesName.favorites} component={Favorites} />
       <Route path={RoutesName.cart} component={SummaryCart} />
       <Route path={RoutesName.aboutUs} component={AboutUs} />
       <Route path={RoutesName.delivery} component={Delivery} />
