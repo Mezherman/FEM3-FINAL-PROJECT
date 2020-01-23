@@ -99,8 +99,8 @@ function ProductCard({ product, favorites, favoritesReducer,  favoritesLoading, 
             disableElevation
             onClick={() => {
               console.log('add product', product);
-              actions.addProductToCart(product);
-             setModalVisibility(true)
+              actions.addProductToCart(product, 1);
+              setModalVisibility(true)
             }}
           >
             <ShoppingCartOutlinedIcon />

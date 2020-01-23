@@ -17,6 +17,7 @@ import useStylesSingIn from './_sign-in';
 import RoutesName from '../../routes-list';
 import postLoginData from '../../services/postLoginData'
 import loginLoaded from '../../redux/actions/user';
+import { mergeDBWithLocalStorage } from '../../redux/actions/CartActions';
 
 function SignIn(props) {
   const [login, setLogin] = useState(null);
@@ -24,7 +25,7 @@ function SignIn(props) {
   const [errorMessage, setErrorMessage] = useState(null);
   const [length, setLength] = useState(1);
 
-  const { onClose, user, loginLoaded } = props;
+  const { onClose, user, loginLoaded, mergeCart } = props;
   // console.log('USER =', user);
   const classes = useStylesSingIn();
 
@@ -73,9 +74,10 @@ function SignIn(props) {
     };
     postLoginData(userData)
       .then((loginResult) => {
-        loginLoaded(loginResult.data.token);
-        onClose();
         localStorage.setItem('token', `${loginResult.data.token}`);
+        loginLoaded();
+        onClose();
+        mergeCart();
         // localStorage.setItem('L', `${loginResult.data.token}`);
         // const token = localStorage.getItem('token');
         // console.log(token)
@@ -193,10 +195,10 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = {
-  loginLoaded
-};
-
+const mapDispatchToProps = (dispatch) => ({
+  loginLoaded: () => { dispatch(loginLoaded()) },
+  mergeCart: () => { dispatch(mergeDBWithLocalStorage()) }
+});
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
 
 SignIn.propTypes = {

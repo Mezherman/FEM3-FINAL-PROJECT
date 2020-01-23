@@ -10,14 +10,18 @@ import Footer from './components/Footer/footer'
 import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
 import getCategories from './services/getCategories';
 import { catalogRequested, catalogLoaded, catalogError } from './redux/actions/categories';
+import Notification from './components/Notification/notification'
+import loginLoaded from './redux/actions/user';
+import { mergeDBWithLocalStorage } from './redux/actions/CartActions';
 
 function App(props) {
-  const { catalogLoading, fetchCatalog } = props;
+  const { catalogLoading, fetchCatalog, login, mergeCart } = props;
 
   useEffect(() => {
     fetchCatalog();
+    login();
+    mergeCart();
   }, [fetchCatalog]);
-
   return (
     <>
       {!catalogLoading &&
@@ -27,6 +31,7 @@ function App(props) {
             <Header />
             <ScrollToAnchor />
             <Routes />
+            <Notification />
             <Footer />
           </Router>
           <ScrollTop {...props} />
@@ -38,7 +43,9 @@ function App(props) {
 
 const mapStateToProps = (state) => ({
   catalogLoading: state.categoriesReducer.catalogLoading,
-  error: state.categoriesReducer.error
+  error: state.categoriesReducer.error,
+  notification: state.notification,
+  loggedIn: state.userReducer.loggedIn
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -46,13 +53,23 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(catalogRequested());
     getCategories()
       .then((catalog) => dispatch(catalogLoaded(catalog)))
-      .catch((err) => dispatch(catalogError(err)))
+      .catch((err) => dispatch(catalogError(err)));
+  },
+  login: () => {
+    dispatch(loginLoaded());
+  },
+  mergeCart: () => {
+    dispatch(mergeDBWithLocalStorage());
   }
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
 
 App.propTypes = {
   catalogLoading: PropTypes.bool.isRequired,
-  fetchCatalog: PropTypes.func.isRequired
+  loggedIn: PropTypes.bool.isRequired,
+  fetchCatalog: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
+  mergeCart: PropTypes.func.isRequired
 };
