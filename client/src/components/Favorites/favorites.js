@@ -18,7 +18,7 @@ function Favorites(props) {
   console.log(1);
   const { favorites, favoritesLoading, productsLoaded, products } = props;
   console.log(favorites);
-  getFavoriteProducts(favorites)
+  getFavoriteProducts()
     .then((products) => {
       console.log('PRODUCTS =', products);
       productsLoaded(products)
