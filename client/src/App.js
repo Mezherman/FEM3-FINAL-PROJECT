@@ -11,6 +11,7 @@ import Footer from './components/Footer/footer'
 import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
 import getCategories from './services/getCategories';
 import { catalogRequested, catalogLoaded, catalogError } from './redux/actions/categories';
+import Notification from './components/Notification/notification'
 
 function App(props) {
   const { catalogLoading, fetchCatalog } = props;
@@ -26,6 +27,7 @@ function App(props) {
             <Header />
             <ScrollToAnchor />
             <Routes />
+
             <Footer />
           </Router>
           <ScrollTop {...props} />
@@ -37,7 +39,8 @@ function App(props) {
 
 const mapStateToProps = (state) => ({
   catalogLoading: state.categoriesReducer.catalogLoading,
-  error: state.categoriesReducer.error
+  error: state.categoriesReducer.error,
+  notification: state.notification
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -45,8 +48,12 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(catalogRequested());
     getCategories()
       .then((catalog) => dispatch(catalogLoaded(catalog)))
-      .catch((err) => dispatch(catalogError(err)))
+      .catch((err) => dispatch(catalogError(err)));
+  },
+  login: () => {
+
   }
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

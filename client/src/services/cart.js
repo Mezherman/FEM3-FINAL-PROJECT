@@ -1,52 +1,40 @@
 import axios from 'axios';
-import login from './customer';
+import enhancerAxios from '../services/enhancer-axios';
 
 axios.defaults.baseURL = 'http://localhost:5000';
-axios.defaults.headers.common.Authorization = window.localStorage.getItem('auth-token');
 
-export default async function getCart(cart) {
-  if (axios.defaults.headers.common.Authorization) {
-    const newCart = await axios.get('/cart').then((response) => {
-      return response.data
-    });
-    if (newCart) {
-      cart.products = newCart.products;
-    }
-  }
+export default function getCart() {
+  return enhancerAxios('/cart', { method: 'get' });
 }
 
-export async function addProductToCart(productId, cart) {
-  await login();
-  console.log(window.localStorage.getItem('auth-token'));
-  console.log(axios.defaults.headers.common.Authorization);
-  if (axios.defaults.headers.common.Authorization) {
-    const newCart = await axios.put(`/cart/${productId}`).then((response) => response.data);
-    if (newCart) {
-      cart.products = newCart.products;
-    }
-  }
+export function addProductToCart(productId) {
+  return enhancerAxios(`/cart/${productId}`, { method: 'put' });
 }
-export async function updateCart(cart) {
-  if (axios.defaults.headers.common.Authorization) {
-    const newCart = await axios.put('/cart', cart).then((response) => response.data);
-    if (newCart) {
-      cart.products = newCart.products;
-    }
-  }
+export function updateCart(updatedCart) {
+  return enhancerAxios('/cart', { method: 'put' }, updatedCart);
 }
-export async function deleteProductFromCart(productId, cart) {
-  if (axios.defaults.headers.common.Authorization) {
-    const newCart = await axios.put(`/cart/${productId}`).then((response) => response.data);
-    if (newCart) {
-      cart.products = newCart.products;
-    }
-  }
+export function deleteProductFromCart(productId) {
+  return enhancerAxios(`/cart/${productId}`, { method: 'delete' });
 }
-export async function deleteCart(cart) {
-  if (axios.defaults.headers.common.Authorization) {
-    const newCart = await axios.delete('/cart').then((response) => response.data);
-    if (newCart) {
-      cart.products = newCart.products;
-    }
+export function deleteCart() {
+  return enhancerAxios('/cart', { method: 'delete' });
+}
+
+export function getCartQuantity (products) {
+  return products.reduce(
+    (totalQuantity, current) => totalQuantity + current.cartQuantity,
+    0
+  );
+}
+export function getTotalCartPrice (products) {
+  return products.reduce(
+    (totalPrice, current) => totalPrice + (current.cartQuantity * current.product.currentPrice),
+    0
+  );
+}
+export function findProductById (products, productId) {
+  if (products.length > 0) {
+    return products.indexOf(products.find((el) => el.product._id === productId));
   }
+  return -1;
 }
