@@ -204,9 +204,9 @@ function Header() {
 
               <MenuItem className={classes.headerMenuItem}>
                 <Link to={RoutesName.favorites}>
-                <IconButton edge="end" className={classes.iconButton}>
-                  <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
-                </IconButton>
+                  <IconButton edge="end" className={classes.iconButton}>
+                    <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
+                  </IconButton>
                 </Link>
                 <span className={classes.menuTitle}>Favorites</span>
               </MenuItem>
@@ -231,17 +231,17 @@ function Header() {
                 onModalClose={closeModal}
                 open={modalIsVisible}
               />
-              {/*<StyledMenu*/}
-              {/*  className="customized-menu"*/}
-              {/*  id="customized-menu"*/}
-              {/*  anchorEl={anchorElLogin}*/}
-              {/*  keepMounted*/}
-              {/*  open={Boolean(anchorElLogin)}*/}
-              {/*  onClose={handleClose}*/}
-              {/*>*/}
-              {/*  <MenuItem style={{ display: 'none' }} />*/}
-              {/*  <SignIn onClose={handleClose} />*/}
-              {/*</StyledMenu>*/}
+              {/* <StyledMenu */}
+              {/*  className="customized-menu" */}
+              {/*  id="customized-menu" */}
+              {/*  anchorEl={anchorElLogin} */}
+              {/*  keepMounted */}
+              {/*  open={Boolean(anchorElLogin)} */}
+              {/*  onClose={handleClose} */}
+              {/* > */}
+              {/*  <MenuItem style={{ display: 'none' }} /> */}
+              {/*  <SignIn onClose={handleClose} /> */}
+              {/* </StyledMenu> */}
               <Divider orientation="vertical" className={classes.dividerStyle} />
               <MenuItem className={classes.headerMenuItem} onClick={handleChange}>
                 <IconButton edge="end" aria-label="card" className={classes.iconButton}>

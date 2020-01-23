@@ -1,13 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
-  MuiListPadding: {
-    paddingRight: theme.spacing(2)
-  },
-  MuiListItemGutters: {
-    paddingRight: theme.spacing(0)
-
-  },
   headerMenuWrapper: {
     display: 'none',
     [theme.breakpoints.up('md')]: {
