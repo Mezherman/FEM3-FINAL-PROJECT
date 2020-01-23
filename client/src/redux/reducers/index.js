@@ -5,6 +5,7 @@ import cart from './cart';
 import categoriesReducer from './categories';
 import productsReducer from './products';
 import filterReducer from './filter'
+import userReducer from './user';
 
 export default combineReducers({
   cart,
@@ -13,5 +14,6 @@ export default combineReducers({
   mainCategoriesReducer,
   form: formReducer,
   filterReducer,
+  userReducer
 });
 
