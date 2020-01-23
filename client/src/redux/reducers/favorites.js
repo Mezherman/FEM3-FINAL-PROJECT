@@ -7,7 +7,7 @@ const initialState = {
 export default function favoritesReducer(state = initialState, action) {
   switch (action.type) {
     case 'ADD_FAVORITES_SUCCESS':
-      console.log('in red', action.payload);
+      // console.log('in reducer', action.payload);
       return {
         favorites: action.payload,
         error: null,

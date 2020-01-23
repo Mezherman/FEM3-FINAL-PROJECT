@@ -20,7 +20,7 @@ export default function categoriesReducer(state = initialState, action) {
       return {
         catalog: action.payload.catalog,
         error: null,
-        catalogLoading: false
+        catalogLoading: false,
       };
 
     case 'FETCH_CATALOG_FAILURE':

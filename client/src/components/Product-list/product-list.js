@@ -13,7 +13,7 @@ import useStyles from './_product-list';
 
 function ProductList(props) {
   const { assortment, products, productsLoading } = props;
-  console.log('products =', products);
+  // console.log('products =', products);
   // console.log('PROPS =', props);
   const classes = useStyles();
 
