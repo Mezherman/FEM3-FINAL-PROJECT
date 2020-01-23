@@ -5,7 +5,7 @@ const RoutesName = {
   login: '/login',
   signUp: '/sign-up',
   signIn: '/login',
-  aboutUs: '/about-us',
+  aboutUs: '/about',
   contacts: '/contacts',
   delivery: '/delivery',
   favorites: '/favorites'

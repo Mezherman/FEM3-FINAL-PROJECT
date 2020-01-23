@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
@@ -12,34 +12,124 @@ import Checkbox from '@material-ui/core/Checkbox'
 import { connect } from 'react-redux'
 import RangeSlider from '../Range/range'
 import useStyles from './_filter-panel';
-import { getBrandProducts, getCollectionProducts } from '../../../redux/actions/filter'
+import { getFilterProducts } from '../../../redux/actions/filter';
+
+import { withStyles } from '@material-ui/core/styles';
+
+// const CheckBoxStyles = withStyles ({
+//   root: {
+//     '&$checked': {
+//       color: 'yellow',
+//     },
+//   },
+//   checked: {},
+// })(props => <Checkbox color="default" {...props} />)
+
+// const CustomCheckbox = withStyles(checkBoxStyles)(Checkbox);
 
 function FilterPanel(props) {
   const classes = useStyles();
-  const { name, brand, getBrandProducts, text, checkbox, max } = props;
-  // console.log('BRAND =', brand);
+  const { name, filterResults, getFilterProducts, max, colors, manufacturer, brands } = props;
+  // console.log('name =', name);
+  // console.log('Colors=>', colors);
+  // console.log('BRANDS =>', brands);
+  // console.log('manufacturer ->', manufacturer)
+  // console.log('filters =', filters);
 
   const handleChange = (event) => {
-    // const test = {
-    //   ...filter,
-    //   props.name: {
-    //
-    // }
-    // }
-    console.log('PROPS =', props);
-    let brandsChosen = [];
-    if (event.target.checked) {
-      brand.push(event.target.value);
-      brandsChosen = brand;
+    let currentRange = [];
+    let newFilters = {};
+    if (filterResults[name.toLowerCase()]) {
+      currentRange = [...filterResults[name.toLowerCase()]];
+      if (event.target.checked) {
+        currentRange.push(event.target.value);
+      } else {
+        const idx = currentRange.findIndex((el) => el === event.target.value);
+        currentRange = [
+          ...currentRange.slice(0, idx),
+          ...currentRange.slice(idx + 1)
+        ];
+      }
     } else {
-      const idx = brand.findIndex((el) => el === event.target.value);
-      const before = brand.slice(0, idx);
-      const after = brand.slice(idx + 1);
-
-      brandsChosen = [...before, ...after];
+      currentRange.push(event.target.value)
     }
-    getBrandProducts(brandsChosen);
+
+    newFilters = {
+      ...filterResults,
+      [name.toLowerCase()]: currentRange
+    };
+
+    // console.log('in component =', newFilters)
+    getFilterProducts(newFilters);
   };
+
+  const colorFilter = (colors) => {
+    return (
+      <FormControl component="fieldset">
+        <FormGroup aria-label="position" column="true">
+          {colors.map((el) => (
+            <FormControlLabel
+              style={{color: `${el.cssValue}`}}
+              key={el.name}
+              value={el.name}
+              control={
+                <Checkbox style={{color: `${el.cssValue}`}} /> }
+              label={el.name}
+              name={el.name}
+              onChange={handleChange}
+
+            />
+          ))}
+        </FormGroup>
+      </FormControl>
+    )
+  };
+
+  const brandFilter = (brands) => {
+    return (
+      <FormControl component="fieldset">
+        <FormGroup aria-label="position" column="true">
+          {brands.map((el) => (
+            <FormControlLabel
+              color="primary"
+              key={el.name}
+              value={el.name}
+              control={<Checkbox
+                // style={{color: 'orange'}}
+              />}
+              label={el.name}
+              name={el.name}
+              onChange={handleChange}
+
+            />
+          ))}
+        </FormGroup>
+      </FormControl>
+    )
+  };
+
+  // const manufacturerFilter = (manufacturer) => {
+  //   return (
+  //     <FormControl component="fieldset">
+  //       <FormGroup aria-label="position" column="true">
+  //         {manufacturer.map((el) => (
+  //           <FormControlLabel
+  //             color="primary"
+  //             key={el.name}
+  //             value={el.name}
+  //             control={<Checkbox
+  //               // style={{color: 'orange'}}
+  //             />}
+  //             label={el.name}
+  //             name={el.name}
+  //             onChange={handleChange}
+  //
+  //           />
+  //         ))}
+  //       </FormGroup>
+  //     </FormControl>
+  //   )
+  // };
 
   return (
     <div>
@@ -51,43 +141,32 @@ function FilterPanel(props) {
         >
           <Typography>{name}</Typography>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails >
-          {checkbox
-            ? (
-              <FormControl component="fieldset">
-                <FormGroup aria-label="position" column="true">
-                  {text.map((el) => (
-                    <FormControlLabel
-                      key={el}
-                      value={el}
-                      control={<Checkbox />}
-                      label={el}
-                      name={el}
-                      onChange={handleChange}
-                    />
-                  ))}
-                </FormGroup>
-              </FormControl>
-            )
-            : <RangeSlider max={max} />}
+        <ExpansionPanelDetails>
+          {name === 'Color' && colorFilter(colors)}
+          {name === 'Brand' && brandFilter(brands)}
+          {name === 'Price' && <RangeSlider max={max} />}
+          {/*{name === 'Manufacturer' && manufacturerFilter(manufacturer)}*/}
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </div>
   );
 }
 
-const mapStateToProps = (state) => ({
-  brand: state.filterReducer.brand
-});
+const mapStateToProps = (state) => {
+  // console.log('STATE =', state);
+  return {
+    filterResults: state.filterReducer.filterResults
+  }
+};
 
 function mapDispatchToProps(dispatch) {
   return {
-    getBrandProducts: (value) => dispatch(getBrandProducts(value))
+    getFilterProducts: (value) => dispatch(getFilterProducts(value))
   }
 }
 
 FilterPanel.propTypes = {
-  brand: PropTypes.arrayOf(PropTypes.string),
+  filters: PropTypes.objectOf(PropTypes.array),
   name: PropTypes.string.isRequired,
   text: PropTypes.arrayOf(PropTypes.string),
   checkbox: PropTypes.bool,
@@ -98,7 +177,7 @@ FilterPanel.defaultProps = {
   checkbox: false,
   text: [''],
   max: null,
-  brand: []
+  filters: {}
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilterPanel)

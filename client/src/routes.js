@@ -124,6 +124,13 @@ export default function Routes() {
         }}
       />
       <Route path={RoutesName.favorites} component={Favorites} />
+      <Route
+        path={`${RoutesName.products}/search`}
+        exact
+        render={() => {
+          return <Catalog assortment={'cooking'} />
+        }}
+      />
       <Route path={RoutesName.cart} component={SummaryCart} />
       <Route path={RoutesName.editPersonalData} component={EditPersonalData} />
       <Route path={RoutesName.aboutUs} component={AboutUs} />

@@ -1,20 +1,30 @@
-export function getBrandProducts(products) {
+function getFilterProducts(filterResults) {
+  // console.log('in action =', filters);
   return {
-    type: 'GET_BRAND_PRODUCTS',
-    payload: products
+    type: 'GET_FILTER_PRODUCTS',
+    payload: filterResults
   }
 }
 
-export function getPriceProducts(price) {
+function getPriceProducts(currentPrice) {
   return {
     type: 'GET_PRICE_PRODUCTS',
-    payload: price
+    payload: currentPrice
   }
 }
 
-export function getCollectionProducts(collection) {
+function filterParamsLoaded(filterTitle, params) {
   return {
-    type: 'GET_COLLECTION_PRODUCTS',
-    payload: collection
+    type: 'FETCH_FILTER_PARAMS_SUCCESS',
+    payload: {
+      filterTitle,
+      params
+    }
   }
+}
+
+export {
+  getFilterProducts,
+  getPriceProducts,
+  filterParamsLoaded
 }
