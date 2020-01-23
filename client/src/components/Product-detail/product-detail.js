@@ -36,7 +36,7 @@ function ProductDetail({ product, favorites, favoritesReducer,  favoritesLoading
     myCustomParams,
     brand,
     enabled,
-    itemNo
+    itemId
   } = product;
   const classes = useStyles();
   const theme = useTheme();
@@ -107,7 +107,7 @@ function ProductDetail({ product, favorites, favoritesReducer,  favoritesLoading
         <Grid item xs={12} sm={12} md={6} xl={5}>
           <AddToFavoriteBtn
             favorites={favorites}
-            itemNo={itemNo}
+            itemId={itemId}
             favoritesAdded={favoritesAdded}
           />
           <MyGallery

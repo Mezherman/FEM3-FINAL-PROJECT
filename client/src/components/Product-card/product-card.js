@@ -30,7 +30,7 @@ function ProductCard({ product, favorites, favoritesReducer,  favoritesLoading, 
     () => bindActionCreators(cartActions, dispatch),
     [dispatch]
   )
-  const { imageUrls, name, currentPrice, previousPrice, itemNo } = product;
+  const { imageUrls, name, currentPrice, previousPrice, itemNo, _id: itemId } = product;
   const classes = useStyles();
   const [modalIsVisible, setModalVisibility] = useState(false);
   const closeModal = () => {
@@ -55,7 +55,7 @@ function ProductCard({ product, favorites, favoritesReducer,  favoritesLoading, 
         <div className={classes.iconWrapper}>
           <AddToFavoriteBtn
             favorites={favorites}
-            itemNo={itemNo}
+            itemId={itemId}
             favoritesAdded={favoritesAdded}
           />
         </div>
