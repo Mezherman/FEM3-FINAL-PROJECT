@@ -167,7 +167,7 @@ let SignUp = (props) => {
       </div>
     </Container>
   );
-}
+};
 
 SignUp = reduxForm({
   form: 'registration',
