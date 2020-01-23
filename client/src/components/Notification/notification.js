@@ -9,7 +9,7 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-export default function Notification(){
+export default function Notification() {
   const { type, message, fading, open } = useSelector((state) => state.notification);
   const dispatch = useDispatch()
   const actions = useMemo(
@@ -19,7 +19,12 @@ export default function Notification(){
 
   if (fading) {
     return (
-      <Snackbar open={open} autoHideDuration={6000} onClose={actions.closeNotification}>
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={actions.closeNotification}
+      >
         <Alert onClose={actions.closeNotification} severity={type}>
           {message}
         </Alert>

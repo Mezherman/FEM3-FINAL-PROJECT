@@ -12,8 +12,6 @@ export default function cart(state = initialState, action) {
     case 'REMOVE_PRODUCT_SUCCESS':
     case 'UPDATE_CART_SUCCESS': {
       const { newCart } = action.payload;
-      console.log('newCart', newCart);
-
       if (newCart) {
         return {
           ...state,

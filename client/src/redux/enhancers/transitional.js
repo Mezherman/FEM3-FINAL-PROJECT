@@ -1,10 +1,13 @@
 import React from 'react';
 import * as ServicesCart from '../../services/cart';
 
+const _ = require('lodash');
+
 const transitional = (store) => (next) => (action) => {
   const storeCart = store.getState().cart;
-  const cartFromState = { ...storeCart };
+  const cartFromState = _.cloneDeep(storeCart);
   switch (action.type) {
+    // cart
     case 'ADD_PRODUCT': {
       const { product } = action.payload;
       const productQuantity = action.payload.quantity ?? 1;
@@ -59,6 +62,40 @@ const transitional = (store) => (next) => (action) => {
         type: 'UPDATE_CART',
         payload: { ...action.payload, cart: cartFromState }
       });
+    }
+    case 'MERGE_CART': {
+      let localStorageCart = window.localStorage.getItem('cart');
+      localStorageCart = localStorageCart ? JSON.parse(localStorageCart) : {};
+      const products = [];
+      if (store.getState().userReducer.loggedIn) {
+        if (localStorageCart.products && localStorageCart.products.length) {
+          return next({
+            ...action,
+            type: 'SET_CART_FROM_LOCAL_WITH_DB',
+            payload: {
+              localStorageProducts: localStorageCart.products
+            }
+          });
+        }
+        return next({
+          ...action,
+          type: 'SET_CART_FROM_DB',
+        });
+      }
+      if (localStorageCart.products && localStorageCart.products.length) {
+        return next({
+          ...action,
+          type: 'SET_CART_FROM_LOCAL',
+          payload: {
+            localStorageProducts: localStorageCart.products
+          }
+        });
+      }
+
+      return next({
+        ...action,
+        type: 'SET_CART_FAIL'
+      })
     }
     default: return next(action);
   }

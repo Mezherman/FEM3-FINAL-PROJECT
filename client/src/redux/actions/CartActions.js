@@ -26,3 +26,9 @@ export function setProductQuantity (productId, quantity) {
     }
   }
 }
+
+export function mergeDBWithLocalStorage () {
+  return {
+    type: 'MERGE_CART',
+  }
+}

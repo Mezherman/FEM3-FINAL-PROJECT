@@ -3,7 +3,7 @@ import enhancerAxios from '../services/enhancer-axios';
 
 axios.defaults.baseURL = 'http://localhost:5000';
 
-export default function getCart() {
+export function getCart() {
   return enhancerAxios('/cart', { method: 'get' });
 }
 

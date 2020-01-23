@@ -1,4 +1,0 @@
-
-const loadData = async () => {
-
-}

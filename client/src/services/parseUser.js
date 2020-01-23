@@ -1,5 +1,5 @@
 // import jwtDecode from 'jwt-decode';
-import loginLoaded from '../redux/actions/user'
+import loginLoaded from '../redux/actions/user';
 
 // const token = localStorage.getItem('token');
 
