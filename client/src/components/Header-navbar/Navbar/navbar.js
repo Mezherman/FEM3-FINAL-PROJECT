@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Menu, MenuItem, Button, Box } from '@material-ui/core';
+import { Menu, MenuItem, Button, Box, useTheme, Divider } from '@material-ui/core';
 
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -24,84 +25,115 @@ import store from '../../../index';
 
 export default function NavBar({ toggleCatalog, hideCatalog, children }) {
   const classes = useStyles();
+  const theme = useTheme();
   const [drawer, setDrawer] = useState(false);
   const { mainCategories } = store.getState().categoriesReducer.catalog;
   const { allCategories } = store.getState().categoriesReducer.catalog;
-  console.log(mainCategories);
-  console.log(allCategories);
+  const isMobile = useMediaQuery(theme.breakpoints.up('xs'));
+  const isTablet = useMediaQuery(theme.breakpoints.up('md'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+
+  // console.log('mob', isMobile);
+  // console.log('tab', isTablet);
+  console.log('desc', !isDesktop);
+
   const toggleDrawer = (open) => {
     setDrawer(open)
-  }
+  };
 
   // const mainCategoryArr = mainCategories.map((category) => (
   //   <CollapsingItem disablePadding label={category.name} />
   // ));
   return (
+  // mobile
     <>
-      <Button onClick={() => toggleDrawer(true)}>Open</Button>
-      <Drawer
-        open={drawer}
-        onClose={() => toggleDrawer(false)}
-      >
-        <List
-          disablePadding
-          component="nav"
-          aria-labelledby="nested-list-subheader"
-          className={classes.root}
-        >
-          <CollapsingItem border={1} label="CATALOG">
-            {mainCategories.map((category) => (
-              <CollapsingItem disablePadding label={category.name}>
-                {allCategories.filter((subCategory) => {
-                  return subCategory.parentId === category.id;
-                  console.log(subCategory.name);
-                }).map((subCategory) => (
-                  <MenuItem >
-                    <Link
-                      to={`${RoutesName.products}/${subCategory.id}`}
-                      key={category.id}
-                    >
-                    {subCategory.name}
-                    </Link>
-                  </MenuItem>
+      {!isDesktop && (
+        <>
+          <Button onClick={() => toggleDrawer(true)}>Open</Button>
+          <Drawer
+            open={drawer}
+            onClose={() => toggleDrawer(false)}
+          >
+            <List
+              disablePadding
+              component="nav"
+              aria-labelledby="nested-list-subheader"
+              className={classes.root}
+            >
+              <CollapsingItem border={1} label="CATALOG">
+                {mainCategories.map((category) => (
+                  <>
+                    <CollapsingItem disablePadding label={category.name}>
+                      {allCategories.filter((subCategory) => {
+                        return subCategory.parentId === category.id;
+                        console.log(subCategory.name);
+                      }).map((subCategory) => (
+                        <>
+                          <Divider />
+                        <MenuItem >
+                          <Link
+                            to={`${RoutesName.products}/${subCategory.id}`}
+                            key={category.id}
+                          >
+                            {subCategory.name}
+                          </Link>
+                        </MenuItem>
+                          {/*<Divider />*/}
+                        </>
+                      ))}
+                    </CollapsingItem>
+                    <Divider />
+                  </>
                 ))}
+
               </CollapsingItem>
-            ))}
-
-            {/* <CollapsingItem disablePadding label="COOCKING"> */}
-            {/*  */}
-            {/*  <MenuItem disablePadding button>POTS</MenuItem> */}
-            {/*  <MenuItem disablePadding button>FRYING</MenuItem> */}
-            {/* </CollapsingItem> */}
-            {/* <CollapsingItem disablePadding label="DINING"/> */}
-            {/* <CollapsingItem disablePadding label="DRINKING"/> */}
-            {/* <CollapsingItem disablePadding label="PREPARING"/> */}
-          </CollapsingItem>
-
-        </List>
-      </Drawer>
-      <MenuItem
-        className={`js_header-menu-list-item ${classes.headerMenuListItem}`}
-        onMouseLeave={hideCatalog}
-        onClick={toggleCatalog}
-      >
-            CATALOG
-      </MenuItem>
-      <MenuItem>
-        <Link to={RoutesName.aboutUs} className={classes.headerMenuListHyperlink}>
+              <MenuItem>
+                <Link to={RoutesName.aboutUs} className={classes.headerMenuListHyperlink}>
               ABOUT US
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <Link to={RoutesName.delivery} className={classes.headerMenuListHyperlink}>
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to={RoutesName.delivery} className={classes.headerMenuListHyperlink}>
               DELIVERY & PAYMENT TERMS
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <Link to={RoutesName.contacts} className={classes.headerMenuListHyperlink}>
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to={RoutesName.contacts} className={classes.headerMenuListHyperlink}>
               CONTACTS
-        </Link>
-      </MenuItem>
+                </Link>
+              </MenuItem>
+            </List>
+          </Drawer>
+        </>
+      )}
+
+      {/* Desktop */}
+      {isDesktop && (
+        <>
+          <MenuItem
+            className={`js_header-menu-list-item ${classes.headerMenuListItem}`}
+            onMouseLeave={hideCatalog}
+            onClick={toggleCatalog}
+          >
+          CATALOG
+          </MenuItem>
+          <MenuItem>
+            <Link to={RoutesName.aboutUs} className={classes.headerMenuListHyperlink}>
+            ABOUT US
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to={RoutesName.delivery} className={classes.headerMenuListHyperlink}>
+            DELIVERY & PAYMENT TERMS
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to={RoutesName.contacts} className={classes.headerMenuListHyperlink}>
+            CONTACTS
+            </Link>
+          </MenuItem>
+        </>
+      )}
       {children}
     </>
   )
