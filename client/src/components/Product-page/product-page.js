@@ -5,13 +5,17 @@ import Grid from '@material-ui/core/Grid';
 import { Container } from '@material-ui/core';
 import { getProductsByItemNo } from '../../services/getProducts';
 import ProductDetail from '../Product-detail/product-detail';
+import setProducts from '../../redux/actions/products';
+import ProductCardCarousel from './Product-card-carousel/product-card-carousel';
 import { productsRequested, productsLoaded } from '../../redux/actions/products';
 import Spinner from '../Spinner/spinner';
 import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 
 function ProductPage(props) {
   // console.log('PROPS =', props);
-  const { assortment, itemNo, chosenProduct, fetchProduct, productsLoading } = props;
+  const { assortment, itemNo, chosenProduct, fetchProduct, productsLoading, setProducts } = props;
+
+  const cardsToShow = ['740039', '354326', '679386', '281039'];
 
   useEffect(() => {
     if (!chosenProduct) {
@@ -34,6 +38,7 @@ function ProductPage(props) {
                   />
                 </Grid>
               </div>
+              <ProductCardCarousel cardsToShow={chosenProduct} />
             </Container>
           </>
         )}

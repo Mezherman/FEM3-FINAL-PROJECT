@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button, Hidden } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import SummaryItem from '../Summary-item/summary-item';
 import RoutesList from '../../../routes-list';
@@ -8,16 +8,28 @@ import useStyles from './_summary';
 export default function Summary({ totalCartPrice }) {
   const classes = useStyles();
   return (
-    <Grid item lg={3} className={classes.root}>
-      <SummaryItem title="Summary" type="title" />
-      <SummaryItem title="Grand Total" value={totalCartPrice} type="total" />
-      <Grid container justify={"center"}>
-        <Link to={RoutesList.checkout} >
-          <Button  variant="contained" color="primary">
-            Proceed to Checkout
-          </Button>
-        </Link>
-      </Grid>
+    <Grid item sm={3} xs={12} className={classes.root}>
+      <Hidden xsDown>
+        <SummaryItem title="Summary" type="title" />
+        <SummaryItem title="Grand Total" value={'€'+totalCartPrice} type="total" />
+        <Grid container justify="center">
+          <Link to={RoutesList.checkout} className={classes.link}>
+            <Button variant="contained" color="primary" className={classes.button}>
+              Proceed to Checkout
+            </Button>
+          </Link>
+        </Grid>
+      </Hidden>
+      <Hidden smUp>
+        <SummaryItem title="Grand Total" value={'€'+totalCartPrice} type="total" />
+        <Grid container justify="center">
+          <Link to={RoutesList.checkout} className={classes.link}>
+            <Button variant="contained" color="primary" className={classes.button}>
+              Proceed to Checkout
+            </Button>
+          </Link>
+        </Grid>
+      </Hidden>
     </Grid>
   );
 }

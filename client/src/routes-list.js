@@ -9,9 +9,9 @@ const RoutesName = {
   aboutUs: '/about',
   contacts: '/contacts',
   delivery: '/delivery',
-  favorites: '/favorites',
   personalData: '/personal-data',
   editPersonalData: '/edit-personal-data',
+  favorites: '/favorites',
 };
 
 export default RoutesName;

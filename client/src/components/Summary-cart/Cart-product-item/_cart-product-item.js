@@ -6,6 +6,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1rem',
     padding: '10px 0 20px',
   },
+  img_block: {
+    justifyContent: 'flex-start',
+    [theme.breakpoints.up('sm')]: {
+      justifyContent: 'center',
+    }
+  },
   img: {
     width: '150px'
   },

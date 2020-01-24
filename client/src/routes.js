@@ -11,10 +11,10 @@ import AboutUs from './components/About-us/about-us';
 import Contacts from './components/Contacts/contacts';
 import SignUp from './components/SignUp/sign-up'
 import Delivery from './components/Delivery/delivery';
-import Favorites from './components/Favorites/favorites'
 import EditPersonalData from './components/My-account/edit-personal-data';
 import PersonalData from './components/My-account/personal-data';
 import LoginModal from './components/Login-modal-window/login-modal-window';
+import Favorites from './components/Favorites/favorites'
 import Checkout from './components/Checkout/checkout';
 
 export default function Routes() {
