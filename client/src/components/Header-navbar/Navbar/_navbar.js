@@ -15,8 +15,28 @@ const useStyles = makeStyles((theme) => ({
       }
     },
   },
+  headerMenuList: {
+    position: 'relative',
+    display: 'inline-flex',
+    listStyleType: 'none',
+    margin: 0,
+    padding: 0,
+  },
+  headerMenuListHyperlink: {
+    padding: '10px',
+    color: theme.palette.text.primary,
+    textDecoration: 'none',
+    '&:hover': {
+      color: theme.palette.secondary.dark
+    }
+  },
+  headerMenuListItem: {
+    color: theme.palette.primary.main,
+    fontWeight: 'bold',
+    fontSize: '16px'
+  },
   menuItem: {
-color: 'red',
+    color: 'red',
   },
   category: {
     color: 'red',

@@ -1,27 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import Grid from '@material-ui/core/Grid';
-
 import Spinner from '../Spinner/spinner';
-import { getFavoriteProducts } from '../../services/favorites';
 
-import { productsLoaded } from '../../redux/actions/products';
+import { favoritesUpdated } from '../../redux/actions/favorites';
+import { productsRequested, productsLoaded, productsError } from '../../redux/actions/products';
 
-import useStyles from '../Product-list/_product-list';
 import ProductList from '../Product-list/product-list';
 
 function Favorites(props) {
-  const { favorites, favoritesLoading, productsLoaded, products } = props;
-  getFavoriteProducts()
-    .then((products) => {
-      productsLoaded(products)
-    });
+  const { productsLoading, productsLoaded, productsRequested, productsError, products, loggedIn, favorites } = props;
+  // console.log('PROPS =', props);
+  // console.log('loggedIn =', loggedIn);
+
+  useEffect(() => {
+    productsRequested();
+    if (loggedIn) {
+      // console.log('FAVORITES =', favorites);
+      productsLoaded(favorites)
+    } else {
+      productsError()
+    }
+  }, [favorites]);
 
   return (
     <>
       {
-        favoritesLoading
+        productsLoading
           ? <Spinner />
           : <ProductList products={products} />
       }
@@ -29,20 +34,24 @@ function Favorites(props) {
   )
 }
 
-//
 const mapStateToProps = (state) => {
-  console.log('STATE =', state);
+  // console.log('STATE =', state);
   return {
+    productsLoading: state.productsReducer.productsLoading,
+    loggedIn: state.userReducer.loggedIn,
     favorites: state.favoritesReducer.favorites
   };
-}
-//
+};
+
 const mapDispatchToProps = {
-  productsLoaded
+  productsRequested,
+  productsLoaded,
+  productsError,
+  favoritesUpdated
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Favorites)
-//
+
 // ProductList.propTypes = {
 //   assortment: PropTypes.string.isRequired,
 //   products: PropTypes.arrayOf(PropTypes.object).isRequired,

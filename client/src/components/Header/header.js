@@ -151,10 +151,10 @@ function Header() {
   )
 
   return (
-    <Box >
+    <Box>
       <CssBaseline />
       <Box className={classes.delivery}>
-        <Container maxWidth="xl" >
+        <Container maxWidth="xl">
           <h3 className={classes.deliveryTitle}>Free shipping on all orders over &#8364;100</h3>
         </Container>
       </Box>

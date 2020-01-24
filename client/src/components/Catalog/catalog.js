@@ -11,12 +11,14 @@ import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 import useStyles from './_catalog';
 import { productsError, productsLoaded, productsRequested } from '../../redux/actions/products';
 import getAllProducts, { getProductsByCategory } from '../../services/getProducts';
+import { catalogLocation } from '../../redux/actions/categories';
 
-function Catalog({ assortment, fetchProducts }) {
+function Catalog({ assortment, fetchProducts, catalogLocation }) {
   const classes = useStyles();
 
   useEffect(() => {
-    console.log(123456);
+    // console.log(123456);
+    catalogLocation(assortment)
     fetchProducts(assortment);
   }, [assortment, fetchProducts]);
 
@@ -57,7 +59,8 @@ const mapDispatchToProps = (dispatch) => ({
           dispatch(productsLoaded(products));
         })
     }
-  }
+  },
+  catalogLocation: (assortment) => dispatch(catalogLocation(assortment))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Catalog)
