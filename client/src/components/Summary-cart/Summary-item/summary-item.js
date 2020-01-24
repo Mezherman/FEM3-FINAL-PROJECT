@@ -6,10 +6,10 @@ export default function SummaryItem({ title, value, type = 'item' }) {
   const classes = useStyles();
   return (
     <Grid container justify="space-between" className={`${classes.root} ${classes[type]}`}>
-      <Grid item lx={9}>
+      <Grid item lg={9}>
         {title}
       </Grid>
-      <Grid item lx={3}>
+      <Grid item lg={3}>
         {value}
       </Grid>
     </Grid>

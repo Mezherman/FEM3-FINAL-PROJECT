@@ -40,6 +40,11 @@ const theme = createMuiTheme({
       carousel: 'rgba(255, 255, 255, .6)'
     },
   },
+  typography: {
+    a: {
+      textDecoration: 'none',
+    },
+  },
 });
 
 export default theme;
