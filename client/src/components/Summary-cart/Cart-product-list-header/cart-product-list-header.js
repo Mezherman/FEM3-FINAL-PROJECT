@@ -8,7 +8,7 @@ export default function CartProductListHeader() {
   // const classes = useStyles();
   return (
     <Grid container justify="space-between" className={`${classes.root} ${classes.underline}`}>
-      <Grid item lg={3}>
+      <Grid item lg={3} >
         Product
       </Grid>
       <Grid item lg={3} />
