@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
       }
     },
   },
+  menuItem: {
+color: 'red',
+  },
   category: {
     color: 'red',
     fontWeight: '500',

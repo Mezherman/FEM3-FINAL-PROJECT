@@ -43,6 +43,7 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
                 {mainCategories.map((category) => (
                   <>
                     <CollapsingItem
+                      key={category.id}
                       className={classes.category}
                       label={category.name}
                     >
@@ -104,7 +105,7 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
           >
           CATALOG
           </MenuItem>
-          <MenuItem>
+          <MenuItem className={classes.menuItem}>
             <Link to={RoutesName.aboutUs} className={classes.headerMenuListHyperlink}>
             ABOUT US
             </Link>

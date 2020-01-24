@@ -199,10 +199,14 @@ function Header() {
 
             <HeaderNavbar
               drawer={drawer}
-              toggleDrawer={toggleDrawer}/>
+              toggleDrawer={toggleDrawer}>
+            </HeaderNavbar>
+
 
             <Box className={classes.iconButtonBox}>
-              <MenuItem className={classes.headerMenuItem}>
+              <MenuItem
+                className={classes.headerMenuItem}>
+              <Search />
                 <IconButton edge="end" className={classes.iconButton}>
                   <SearchIcon fontSize="large" className={classes.iconsStyle} />
                 </IconButton>
@@ -271,7 +275,6 @@ function Header() {
         ) : null}
         {renderMobileMenu}
         {renderMenu}
-        {/* <Search /> */}
       </Container>
       <Divider />
     </Box>
