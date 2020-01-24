@@ -82,7 +82,13 @@ function Header() {
   const [anchorEl, setAnchorEl] = useState(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
   const [prevBlockIsVisible, setPrevBlockIsVisible] = useState(false);
+  const [drawer, setDrawer] = useState(false);
+  // const [sideBar, openSideBar] = useState(false)
 
+  // const toggleDrawer = (open) => {
+  //     openSideBar(true )
+  // };
+  // console.log(sideBar);
   const handleChange = () => {
     setPrevBlockIsVisible((prev) => !prev);
   };
@@ -105,7 +111,12 @@ function Header() {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget)
+    console.log(event);
   }
+// toggle side navbar
+  const toggleDrawer = (open) => {
+    setDrawer(open)
+  };
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -152,12 +163,13 @@ function Header() {
           <Toolbar className={classes.justify}>
             <Box className={classes.boxLogo}>
               <IconButton
+                onClick={() => toggleDrawer(true)}
                 edge="start"
                 className={classes.menuButton}
                 aria-label="show more"
                 aria-controls={mobileMenuId}
                 aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
+                // onClick={handleMobileMenuOpen}
               >
                 <MenuIcon fontSize="large" />
               </IconButton>
@@ -185,10 +197,16 @@ function Header() {
             {/*  /> */}
             {/* </Box> */}
 
-            <HeaderNavbar />
+            <HeaderNavbar
+              drawer={drawer}
+              toggleDrawer={toggleDrawer}>
+            </HeaderNavbar>
+
 
             <Box className={classes.iconButtonBox}>
-              <MenuItem className={classes.headerMenuItem}>
+              <MenuItem
+                className={classes.headerMenuItem}>
+              <Search />
                 <IconButton edge="end" className={classes.iconButton}>
                   <SearchIcon fontSize="large" className={classes.iconsStyle} />
                 </IconButton>
@@ -197,9 +215,11 @@ function Header() {
               <Divider orientation="vertical" className={classes.dividerStyle} />
 
               <MenuItem className={classes.headerMenuItem}>
-                <IconButton edge="end" className={classes.iconButton}>
-                  <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
-                </IconButton>
+                <Link to={RoutesName.favorites}>
+                  <IconButton edge="end" className={classes.iconButton}>
+                    <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
+                  </IconButton>
+                </Link>
                 <span className={classes.menuTitle}>Favorites</span>
               </MenuItem>
               <Divider orientation="vertical" className={classes.dividerStyle} />
@@ -223,17 +243,17 @@ function Header() {
                 onModalClose={closeModal}
                 open={modalIsVisible}
               />
-              {/*<StyledMenu*/}
-              {/*  className="customized-menu"*/}
-              {/*  id="customized-menu"*/}
-              {/*  anchorEl={anchorElLogin}*/}
-              {/*  keepMounted*/}
-              {/*  open={Boolean(anchorElLogin)}*/}
-              {/*  onClose={handleClose}*/}
-              {/*>*/}
-              {/*  <MenuItem style={{ display: 'none' }} />*/}
-              {/*  <SignIn onClose={handleClose} />*/}
-              {/*</StyledMenu>*/}
+              {/* <StyledMenu */}
+              {/*  className="customized-menu" */}
+              {/*  id="customized-menu" */}
+              {/*  anchorEl={anchorElLogin} */}
+              {/*  keepMounted */}
+              {/*  open={Boolean(anchorElLogin)} */}
+              {/*  onClose={handleClose} */}
+              {/* > */}
+              {/*  <MenuItem style={{ display: 'none' }} /> */}
+              {/*  <SignIn onClose={handleClose} /> */}
+              {/* </StyledMenu> */}
               <Divider orientation="vertical" className={classes.dividerStyle} />
               <MenuItem className={classes.headerMenuItem} onClick={handleChange}>
                 <IconButton edge="end" aria-label="card" className={classes.iconButton}>
@@ -255,7 +275,6 @@ function Header() {
         ) : null}
         {renderMobileMenu}
         {renderMenu}
-        {/* <Search /> */}
       </Container>
       <Divider />
     </Box>

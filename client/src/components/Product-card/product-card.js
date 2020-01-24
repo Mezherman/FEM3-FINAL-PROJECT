@@ -17,22 +17,30 @@ import useStyles from './_product-card';
 import AddToCart from '../Add-to-cart/add-to-cart';
 import RoutesName from '../../routes-list';
 
-function ProductCard({ product }) {
+
+import addToFavorites from '../../services/favorites';
+import { favoritesAdded } from '../../redux/actions/favorites'
+import AddToFavoriteBtn from '../Add-to-favorite-btn';
+
+function ProductCard({ product, favorites, favoritesReducer,  favoritesLoading, favoritesAdded }) {
+  // console.log('favorites =', favorites);
+  // console.log('favoritesReduc=', favoritesReducer);
   const dispatch = useDispatch();
   const actions = useMemo(
     () => bindActionCreators(cartActions, dispatch),
     [dispatch]
   )
-  const { imageUrls, name, currentPrice, previousPrice, itemNo } = product;
+  const { imageUrls, name, currentPrice, previousPrice, itemNo, _id: itemId } = product;
   const classes = useStyles();
   const [modalIsVisible, setModalVisibility] = useState(false);
   const closeModal = () => {
     setModalVisibility(false)
   };
-  const [favorite, setFavorites] = useState(false);
-  const addToFavorite = () => {
-    setFavorites(!favorite)
-  };
+  // const isFavorite = favorites.js.includes(itemId);
+  // const [favorite, setFavorites] = useState(false);
+  // const addToFavorite = () => {
+  //   setFavorites(!favorite)
+  // };
 
   return (
     <>
@@ -45,13 +53,11 @@ function ProductCard({ product }) {
       <div className={classes.card}>
         <Divider />
         <div className={classes.iconWrapper}>
-          <IconButton onClick={addToFavorite}>
-            {favorite ? (
-              <FavoriteIcon color="primary" />)
-              : (<FavoriteBorderIcon color="primary" />
-              )}
-          </IconButton>
-
+          <AddToFavoriteBtn
+            favorites={favorites}
+            itemId={itemId}
+            favoritesAdded={favoritesAdded}
+          />
         </div>
 
         <Link
@@ -104,8 +110,16 @@ function ProductCard({ product }) {
     </>
   )
 }
+const mapStateToProps = (state) => {
+  // console.log('state', state);
+  return state.favoritesReducer;
+}
 
-export default ProductCard;
+const mapDispatchToProps = {
+  favoritesAdded
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);
 
 ProductCard.propTypes = {
   product:

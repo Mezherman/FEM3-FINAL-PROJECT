@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
@@ -9,9 +9,16 @@ import ProductList from '../Product-list/product-list';
 import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 
 import useStyles from './_catalog';
+import { productsError, productsLoaded, productsRequested } from '../../redux/actions/products';
+import getAllProducts, { getProductsByCategory } from '../../services/getProducts';
 
-function Catalog({ assortment }) {
+function Catalog({ assortment, fetchProducts }) {
   const classes = useStyles();
+
+  useEffect(() => {
+    console.log(123456);
+    fetchProducts(assortment);
+  }, [assortment, fetchProducts]);
 
   return (
     <>
@@ -33,10 +40,27 @@ function Catalog({ assortment }) {
 }
 
 const mapStateToProps = (state) => ({
-  catalog: state.categoriesReducer.catalog
+  catalog: state.categoriesReducer.catalog,
+  fetchProducts: state.productsReducer.fetchProducts
 });
 
-export default connect(mapStateToProps)(Catalog)
+const mapDispatchToProps = (dispatch) => ({
+  fetchProducts: (assortment) => {
+    dispatch(productsRequested());
+    if (assortment === 'all') {
+      getAllProducts()
+        .then((products) => dispatch(productsLoaded(products)))
+        .catch((err) => dispatch(productsError(err)));
+    } else {
+      getProductsByCategory(assortment)
+        .then((products) => {
+          dispatch(productsLoaded(products));
+        })
+    }
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Catalog)
 
 Catalog.propTypes = {
   assortment: PropTypes.string.isRequired

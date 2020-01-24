@@ -11,6 +11,7 @@ const RoutesName = {
   delivery: '/delivery',
   personalData: '/personal-data',
   editPersonalData: '/edit-personal-data',
+  favorites: '/favorites',
 };
 
 export default RoutesName;
