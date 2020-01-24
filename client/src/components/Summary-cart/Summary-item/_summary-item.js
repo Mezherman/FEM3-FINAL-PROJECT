@@ -18,8 +18,11 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: '1px solid #ffffff',
   },
   total: {
-    fontSize: '1.2rem',
     fontWeight: 'bold',
+    fontSize: '1.2rem',
+    [theme.breakpoints.up('sm')]: {
+      margin: '10px 0',
+    }
   },
   alignRight: {
     textAlign: 'right',
