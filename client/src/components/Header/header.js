@@ -82,6 +82,7 @@ function Header() {
   const [anchorEl, setAnchorEl] = useState(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
   const [prevBlockIsVisible, setPrevBlockIsVisible] = useState(false);
+  const [drawer, setDrawer] = useState(false);
   // const [sideBar, openSideBar] = useState(false)
 
   // const toggleDrawer = (open) => {
@@ -112,6 +113,10 @@ function Header() {
     setMobileMoreAnchorEl(event.currentTarget)
     console.log(event);
   }
+// toggle side navbar
+  const toggleDrawer = (open) => {
+    setDrawer(open)
+  };
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -158,12 +163,13 @@ function Header() {
           <Toolbar className={classes.justify}>
             <Box className={classes.boxLogo}>
               <IconButton
+                onClick={() => toggleDrawer(true)}
                 edge="start"
                 className={classes.menuButton}
                 aria-label="show more"
                 aria-controls={mobileMenuId}
                 aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
+                // onClick={handleMobileMenuOpen}
               >
                 <MenuIcon fontSize="large" />
               </IconButton>
@@ -191,7 +197,9 @@ function Header() {
             {/*  /> */}
             {/* </Box> */}
 
-            <HeaderNavbar />
+            <HeaderNavbar
+              drawer={drawer}
+              toggleDrawer={toggleDrawer}/>
 
             <Box className={classes.iconButtonBox}>
               <MenuItem className={classes.headerMenuItem}>

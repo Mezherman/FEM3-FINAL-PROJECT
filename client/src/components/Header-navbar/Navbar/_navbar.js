@@ -1,8 +1,23 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  '&.MuiListItem-gutters': {
-    paddingRight: '0',
+  root: {
+    textTransform: 'uppercase',
+    color: theme.palette.text.primary,
+    '& li > a': {
+      // fontSize: '14px',
+      textDecoration: 'none',
+      textTransform: 'uppercase',
+      color: theme.palette.text.primary,
+      '&:hover': {
+        color: theme.palette.background.primary,
+        paddingLeft: theme.spacing(1),
+      }
+    },
+  },
+  category: {
+    color: 'red',
+    fontWeight: '500',
   }
 }))
 
