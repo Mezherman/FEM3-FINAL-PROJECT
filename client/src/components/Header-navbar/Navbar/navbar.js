@@ -6,6 +6,7 @@ import { Menu, MenuItem, Button, Box } from '@material-ui/core';
 import RoutesName from '../../../routes-list';
 
 import useStyles from '../_header-navbar';
+import LogOut from '../../Temp/logOut';
 
 export default function NavBar({ toggleCatalog, hideCatalog, children }) {
   const classes = useStyles();
@@ -35,6 +36,7 @@ export default function NavBar({ toggleCatalog, hideCatalog, children }) {
         </Link>
       </MenuItem>
       {children}
+      <LogOut />
     </Box>
   )
 }

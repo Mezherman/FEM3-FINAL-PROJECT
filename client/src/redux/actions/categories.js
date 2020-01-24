@@ -1,3 +1,10 @@
+const getCatalogFromDB = () => {
+  // console.log('action catalog worked');
+  return {
+    type: 'SET_CATALOG_FROM_DB'
+  }
+};
+
 const catalogRequested = () => ({
   type: 'FETCH_CATALOG_REQUEST'
 });
@@ -27,6 +34,7 @@ const catalogLocation = (category) => ({
 });
 
 export {
+  getCatalogFromDB,
   catalogRequested,
   catalogLoaded,
   catalogError,

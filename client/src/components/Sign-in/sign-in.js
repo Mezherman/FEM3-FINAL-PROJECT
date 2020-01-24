@@ -18,6 +18,7 @@ import RoutesName from '../../routes-list';
 import postLoginData from '../../services/postLoginData'
 import loginLoaded from '../../redux/actions/user';
 import { mergeDBWithLocalStorage } from '../../redux/actions/CartActions';
+import { getFavoritesFromDB } from '../../redux/actions/favorites';
 
 function SignIn(props) {
   const [login, setLogin] = useState(null);
@@ -25,7 +26,7 @@ function SignIn(props) {
   const [errorMessage, setErrorMessage] = useState(null);
   const [length, setLength] = useState(1);
 
-  const { onClose, user, loginLoaded, mergeCart } = props;
+  const { onClose, user, loginLoaded, mergeCart, fetchFavorites } = props;
   // console.log('USER =', user);
   const classes = useStylesSingIn();
 
@@ -78,6 +79,7 @@ function SignIn(props) {
         loginLoaded();
         onClose();
         mergeCart();
+        fetchFavorites();
         // localStorage.setItem('L', `${loginResult.data.token}`);
         // const token = localStorage.getItem('token');
         // console.log(token)
@@ -197,7 +199,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   loginLoaded: () => { dispatch(loginLoaded()) },
-  mergeCart: () => { dispatch(mergeDBWithLocalStorage()) }
+  mergeCart: () => { dispatch(mergeDBWithLocalStorage()) },
+  fetchFavorites: () => dispatch(getFavoritesFromDB())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
 

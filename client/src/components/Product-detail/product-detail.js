@@ -24,10 +24,9 @@ import FeatureItem from './feature-item';
 import ProductDetailTab from './Product-detail-tab/product-detail-tab';
 
 import useStyles from './_product-detail';
-import AddToFavoriteBtn from '../Add-to-favorite-btn';
-import { favoritesAdded } from '../../redux/actions/favorites';
+import AddToFavoriteBtn from '../Add-to-favorites/Add-to-favorite-btn';
 
-function ProductDetail({ product, favorites, favoritesReducer,  favoritesLoading, favoritesAdded }) {
+function ProductDetail({ product, favorites }) {
   const {
     imageUrls,
     name,
@@ -36,7 +35,7 @@ function ProductDetail({ product, favorites, favoritesReducer,  favoritesLoading
     myCustomParams,
     brand,
     enabled,
-    itemId
+    _id: itemId
   } = product;
   const classes = useStyles();
   const theme = useTheme();
@@ -93,7 +92,6 @@ function ProductDetail({ product, favorites, favoritesReducer,  favoritesLoading
       },
     },
   }),)(InputBase);
-  console.log('favorites.js detail', favorites);
 
   return (
     <Container maxWidth="xl">
@@ -108,7 +106,6 @@ function ProductDetail({ product, favorites, favoritesReducer,  favoritesLoading
           <AddToFavoriteBtn
             favorites={favorites}
             itemId={itemId}
-            favoritesAdded={favoritesAdded}
           />
           <MyGallery
             images={images}
@@ -248,15 +245,10 @@ function ProductDetail({ product, favorites, favoritesReducer,  favoritesLoading
     </Container>
   );
 }
-const mapStateToProps = (state) => {
-  console.log('state', state);
-  return state.favoritesReducer;
-}
+const mapStateToProps = (state) => state.favoritesReducer;
 
-const mapDispatchToProps = {
-  favoritesAdded
-}
-export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);
+export default connect(mapStateToProps)(ProductDetail);
+
 ProductDetail.propTypes = {
   product:
   PropTypes.objectOf(

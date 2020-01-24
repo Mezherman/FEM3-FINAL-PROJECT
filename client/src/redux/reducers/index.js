@@ -7,11 +7,9 @@ import productsReducer from './products';
 import filterReducer from './filter';
 import userReducer from './user';
 import favoritesReducer from './favorites';
-import tempLogger from './test';
 import notification from './notification';
 
 export default combineReducers({
-  tempLogger,
   cart,
   categoriesReducer,
   productsReducer,

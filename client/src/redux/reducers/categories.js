@@ -19,6 +19,7 @@ export default function categoriesReducer(state = initialState, action) {
       };
 
     case 'FETCH_CATALOG_SUCCESS':
+      // console.log('reducer catalog worked');
       return {
         ...state,
         catalog: action.payload.catalog,
@@ -38,7 +39,7 @@ export default function categoriesReducer(state = initialState, action) {
       return {
         ...state,
         catalogLocation: action.payload
-      }
+      };
 
     default: {
       return state

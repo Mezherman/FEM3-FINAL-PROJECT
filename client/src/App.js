@@ -8,20 +8,21 @@ import Routes from './routes';
 import Header from './components/Header/header'
 import Footer from './components/Footer/footer'
 import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
-import getCategories from './services/getCategories';
-import { catalogRequested, catalogLoaded, catalogError } from './redux/actions/categories';
+import { getCatalogFromDB } from './redux/actions/categories';
 import Notification from './components/Notification/notification'
 import loginLoaded from './redux/actions/user';
 import { mergeDBWithLocalStorage } from './redux/actions/CartActions';
+import { getFavoritesFromDB } from './redux/actions/favorites'
 
 function App(props) {
-  const { catalogLoading, fetchCatalog, login, mergeCart } = props;
-
+  const { catalogLoading, login, mergeCart, fetchFavorites, fetchCatalog } = props;
+  // console.log('loading=', catalogLoading);
   useEffect(() => {
     fetchCatalog();
     login();
     mergeCart();
-  }, [fetchCatalog]);
+    fetchFavorites();
+  }, []);
   return (
     <>
       {!catalogLoading &&
@@ -50,18 +51,12 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   fetchCatalog: () => {
-    dispatch(catalogRequested());
-    getCategories()
-      .then((catalog) => dispatch(catalogLoaded(catalog)))
-      .catch((err) => dispatch(catalogError(err)));
+    dispatch(getCatalogFromDB())
+    // dispatch(catalogRequested());
   },
-  login: () => {
-    dispatch(loginLoaded());
-  },
-  mergeCart: () => {
-    dispatch(mergeDBWithLocalStorage());
-  }
-
+  login: () => dispatch(loginLoaded()),
+  mergeCart: () => dispatch(mergeDBWithLocalStorage()),
+  fetchFavorites: () => dispatch(getFavoritesFromDB())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

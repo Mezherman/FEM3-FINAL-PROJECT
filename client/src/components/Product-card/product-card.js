@@ -16,31 +16,20 @@ import * as cartActions from '../../redux/actions/CartActions';
 import useStyles from './_product-card';
 import AddToCart from '../Add-to-cart/add-to-cart';
 import RoutesName from '../../routes-list';
+import AddToFavoriteBtn from '../Add-to-favorites/Add-to-favorite-btn';
 
-
-import addToFavorites from '../../services/favorites';
-import { favoritesAdded } from '../../redux/actions/favorites'
-import AddToFavoriteBtn from '../Add-to-favorite-btn';
-
-function ProductCard({ product, favorites, favoritesReducer,  favoritesLoading, favoritesAdded }) {
-  // console.log('favorites =', favorites);
-  // console.log('favoritesReduc=', favoritesReducer);
+function ProductCard({ product, favorites }) {
   const dispatch = useDispatch();
-  const actions = useMemo(
+  const actions = useMemo (
     () => bindActionCreators(cartActions, dispatch),
     [dispatch]
-  )
+  );
   const { imageUrls, name, currentPrice, previousPrice, itemNo, _id: itemId } = product;
   const classes = useStyles();
   const [modalIsVisible, setModalVisibility] = useState(false);
   const closeModal = () => {
     setModalVisibility(false)
   };
-  // const isFavorite = favorites.js.includes(itemId);
-  // const [favorite, setFavorites] = useState(false);
-  // const addToFavorite = () => {
-  //   setFavorites(!favorite)
-  // };
 
   return (
     <>
@@ -56,7 +45,6 @@ function ProductCard({ product, favorites, favoritesReducer,  favoritesLoading, 
           <AddToFavoriteBtn
             favorites={favorites}
             itemId={itemId}
-            favoritesAdded={favoritesAdded}
           />
         </div>
 
@@ -115,11 +103,7 @@ const mapStateToProps = (state) => {
   return state.favoritesReducer;
 }
 
-const mapDispatchToProps = {
-  favoritesAdded
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);
+export default connect(mapStateToProps)(ProductCard);
 
 ProductCard.propTypes = {
   product:
