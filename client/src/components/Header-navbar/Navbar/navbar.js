@@ -52,8 +52,9 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
                       )
                         .map((subCategory) => (
                           <>
-                            <Divider />
+                            <Divider key={subCategory.id} />
                             <MenuItem
+                              key={subCategory.id}
                               onClick={() => toggleDrawer(false)}
                             >
                               <Link
