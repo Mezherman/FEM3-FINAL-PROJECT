@@ -113,7 +113,7 @@ function Header() {
     setMobileMoreAnchorEl(event.currentTarget)
     console.log(event);
   }
-// toggle side navbar
+  // toggle side navbar
   const toggleDrawer = (open) => {
     setDrawer(open)
   };
@@ -151,15 +151,15 @@ function Header() {
   )
 
   return (
-    <Box>
+    <>
       <CssBaseline />
       <Box className={classes.delivery}>
         <Container maxWidth="xl">
-          <h3 className={classes.deliveryTitle}>Free shipping on all orders over &#8364;100</h3>
+          <p className={classes.deliveryTitle}>Free shipping on all orders over &#8364;100</p>
         </Container>
       </Box>
-      <Container maxWidth="xl" disableGutters className={classes.grow}>
-        <AppBar position="sticky" color="inherit" elevation={0}>
+      <AppBar position="sticky" top="0" color="inherit" elevation={0}>
+        <Container maxWidth="xl" disableGutters className={classes.grow}>
           <Toolbar className={classes.justify}>
             <Box className={classes.boxLogo}>
               <IconButton
@@ -169,7 +169,6 @@ function Header() {
                 aria-label="show more"
                 aria-controls={mobileMenuId}
                 aria-haspopup="true"
-                // onClick={handleMobileMenuOpen}
               >
                 <MenuIcon fontSize="large" />
               </IconButton>
@@ -199,14 +198,14 @@ function Header() {
 
             <HeaderNavbar
               drawer={drawer}
-              toggleDrawer={toggleDrawer}>
-            </HeaderNavbar>
-
+              toggleDrawer={toggleDrawer}
+            />
 
             <Box className={classes.iconButtonBox}>
               <MenuItem
-                className={classes.headerMenuItem}>
-              <Search />
+                className={classes.headerMenuItem}
+              >
+                <Search />
                 <IconButton edge="end" className={classes.iconButton}>
                   <SearchIcon fontSize="large" className={classes.iconsStyle} />
                 </IconButton>
@@ -265,19 +264,19 @@ function Header() {
               </MenuItem>
             </Box>
           </Toolbar>
-        </AppBar>
+        </Container>
+        <Divider />
+      </AppBar>
 
-        {prevBlockIsVisible ? (
-          <PreviewBlock
-            checked={prevBlockIsVisible}
-            onClose={handleChange}
-          />
-        ) : null}
-        {renderMobileMenu}
-        {renderMenu}
-      </Container>
-      <Divider />
-    </Box>
+      {prevBlockIsVisible ? (
+        <PreviewBlock
+          checked={prevBlockIsVisible}
+          onClose={handleChange}
+        />
+      ) : null}
+      {renderMobileMenu}
+      {renderMenu}
+    </>
   );
 }
 export default Header;

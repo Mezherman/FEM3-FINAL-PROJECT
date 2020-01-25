@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '0',
   },
   grow: {
-    padding: theme.spacing(3, 0),
+    padding: theme.spacing(1, 0),
     flexGrow: 1,
   },
   justify: {
