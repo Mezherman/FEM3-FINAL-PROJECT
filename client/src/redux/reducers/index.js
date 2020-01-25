@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
+import { reducer as form } from 'redux-form';
 
 import cart from './cart';
 import categoriesReducer from './categories';
@@ -13,7 +13,7 @@ export default combineReducers({
   cart,
   categoriesReducer,
   productsReducer,
-  formReducer,
+  form,
   filterReducer,
   notification,
   userReducer,
