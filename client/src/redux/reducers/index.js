@@ -10,7 +10,7 @@ export default combineReducers({
   cart,
   categoriesReducer,
   productsReducer,
-  mainCategoriesReducer,
+  // mainCategoriesReducer,
   form: formReducer,
   filterReducer,
 });

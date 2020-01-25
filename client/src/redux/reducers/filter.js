@@ -1,23 +1,44 @@
 const initialState = {
-  brand: [],
-  price: [],
+    filterResults: {
+        color: [],
+        brand: [],
+        manufacturer: [],
+        price: [0, 700],
+    },
+    filterParams: {
+        colors: [],
+        brands: [],
+        manufacturers: []
+    }
 };
 
 export default function filterReducer(state = initialState, action) {
-  switch (action.type) {
-    case 'GET_BRAND_PRODUCTS':
-      return {
-        ...state,
-        brand: action.payload
-      };
+    // console.log(action.payload);
+    switch (action.type) {
+        case 'GET_FILTER_PRODUCTS': {
+            // console.log('in reducer =', state.filters);
+            return {
+                ...state,
+                filterResults: action.payload
+            };
+        }
 
-    case 'GET_PRICE_PRODUCTS':
-      return {
-        ...state,
-        price: action.payload
-      };
+        case 'GET_PRICE_PRODUCTS':
+            return {
+                ...state,
+                currentPrice: action.payload
+            };
 
-    default:
-      return state
-  }
+        case 'FETCH_FILTER_PARAMS_SUCCESS':
+            return {
+                ...state,
+                filterParams: {
+                    ...state.filterParams,
+                    [action.payload.filterTitle]: action.payload.params
+                }
+            };
+
+        default:
+            return state
+    }
 }

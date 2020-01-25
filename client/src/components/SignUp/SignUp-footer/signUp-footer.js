@@ -17,11 +17,12 @@ import useStyles from './_signUp-footer';
 const SignUpFooter = () => {
   const classes = useStyles();
 
-    const renderCheckboxField = ({ input, name, ...rest }) => (
+    const renderCheckboxField = ({ input, name, meta: { touched, error }, ...rest }) => (
         <FormControlLabel className={classes.root}
-            control={(
+                          control={(
                 <Checkbox value="agreeCreateProfile" className={classes.radioLabel}
-                          onChange={(event, value) => input.onChange(value)}
+                          onChange={(event, value) => input.onChange(event.target.value)}
+                          // onChange={(event, value) => input.onChange(value)}
                 />
             )}
             label={(
@@ -32,6 +33,11 @@ const SignUpFooter = () => {
                     offers and a newsletter on products, innovations and special promotions by
                     e-mail. You may revoke your consent at any time, e.g. in your myWMF customer
                     account in the “My communication” section.
+                    {
+                        touched && error &&
+                        <p>{error}</p>
+                        // стилизовать ошибку
+                    }
                 </FormLabel>
             )}
         />
@@ -52,9 +58,7 @@ const SignUpFooter = () => {
           <Field name="agreement" component={renderCheckboxField} />
       </Grid>
 
-      <Button type="submit" variant="contained" color="primary" className={classes.submit}
-        // onSubmit={handleSubmit}
-      >
+      <Button type="submit" variant="contained" color="primary" className={classes.submit}>
         Become a myWMF Club member now
       </Button>
       <RouteLink

@@ -60,7 +60,6 @@ const SignUpForm = () => {
           {...custom}
           className={classes.root}
           label={(<FormLabel className={classes.root} required>{label}</FormLabel>)}
-
       />
   );
   const renderBirthdayField = ({ input, label, name, value, meta: { touched, error }, ...custom }) => (
@@ -188,10 +187,10 @@ const SignUpForm = () => {
           <Field name="telephone" component={renderTextField} label="Phone number" type="tel" />
         </Box>
 
-        <Field name="country" component={renderSelectField} label={selectCountry}>
-          <MenuItem value='Austria'>Austria</MenuItem>
-          <MenuItem value='Germany'>Germany</MenuItem>
-        </Field>
+        {/*<Field name="country" component={renderSelectField} label={selectCountry}>*/}
+        {/*  <MenuItem value='Austria'>Austria</MenuItem>*/}
+        {/*  <MenuItem value='Germany'>Germany</MenuItem>*/}
+        {/*</Field>*/}
 
       </Grid>
   )
