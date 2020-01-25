@@ -16,22 +16,19 @@ import * as cartActions from '../../redux/actions/CartActions';
 import useStyles from './_product-card';
 import AddToCart from '../Add-to-cart/add-to-cart';
 import RoutesName from '../../routes-list';
+import AddToFavoriteBtn from '../Add-to-favorites/Add-to-favorite-btn';
 
-function ProductCard({ product }) {
+function ProductCard({ product, favorites }) {
   const dispatch = useDispatch();
-  const actions = useMemo(
+  const actions = useMemo (
     () => bindActionCreators(cartActions, dispatch),
     [dispatch]
-  )
-  const { imageUrls, name, currentPrice, previousPrice, itemNo } = product;
+  );
+  const { imageUrls, name, currentPrice, previousPrice, itemNo, _id: itemId } = product;
   const classes = useStyles();
   const [modalIsVisible, setModalVisibility] = useState(false);
   const closeModal = () => {
     setModalVisibility(false)
-  };
-  const [favorite, setFavorites] = useState(false);
-  const addToFavorite = () => {
-    setFavorites(!favorite)
   };
 
   return (
@@ -45,13 +42,10 @@ function ProductCard({ product }) {
       <div className={classes.card}>
         <Divider />
         <div className={classes.iconWrapper}>
-          <IconButton onClick={addToFavorite}>
-            {favorite ? (
-              <FavoriteIcon color="primary" />)
-              : (<FavoriteBorderIcon color="primary" />
-              )}
-          </IconButton>
-
+          <AddToFavoriteBtn
+            favorites={favorites}
+            itemId={itemId}
+          />
         </div>
 
         <Link
@@ -93,7 +87,7 @@ function ProductCard({ product }) {
             disableElevation
             onClick={() => {
               console.log('add product', product);
-              actions.addProductToCart(product);
+              actions.addProductToCart(product, 1);
               setModalVisibility(true)
             }}
           >
@@ -104,8 +98,12 @@ function ProductCard({ product }) {
     </>
   )
 }
+const mapStateToProps = (state) => {
+  // console.log('state', state);
+  return state.favoritesReducer;
+}
 
-export default ProductCard;
+export default connect(mapStateToProps)(ProductCard);
 
 ProductCard.propTypes = {
   product:

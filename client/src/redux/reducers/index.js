@@ -5,13 +5,17 @@ import cart from './cart';
 import categoriesReducer from './categories';
 import productsReducer from './products';
 import filterReducer from './filter'
+import userReducer from './user';
+import notification from './notification';
+import favoritesReducer from './favorites';
 
 export default combineReducers({
   cart,
   categoriesReducer,
   productsReducer,
-  // mainCategoriesReducer,
   form: formReducer,
   filterReducer,
-});
-
+  notification,
+  userReducer,
+  favoritesReducer
+})

@@ -2,6 +2,12 @@ import React from 'react'
 import { makeStyles } from '@material-ui/styles'
 
 const useStyles = makeStyles((theme) => ({
+  main: {
+    justify: 'flex-end',
+    [theme.breakpoints.up('sm')]: {
+      justifyContent: 'center',
+    }
+  },
   root: {
     border: '1px solid rgba(0, 0, 0, 0.42)',
     borderRadius: '6px',

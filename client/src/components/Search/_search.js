@@ -7,7 +7,10 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   container: {
-    position: 'relative'
+    position: 'absolute',
+    top: '0',
+    display: 'none'
+    // right: '100px'
   },
   searchIcon: {
     height: '100%',

@@ -9,7 +9,7 @@ import {
   Box,
   Container,
   Divider,
-  withStyles,
+  // withStyles,
 } from '@material-ui/core'
 
 import MenuIcon from '@material-ui/icons/Menu'
@@ -21,57 +21,74 @@ import PersonIcon from '@material-ui/icons/Person'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 // import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import RoutesName from '../../routes-list';
 
 import './header.scss';
-import useStyles from './_header.js';
+import useStyles from './_header';
 
 import Search from '../Search/search'
 import HeaderNavbar from '../Header-navbar/header-navbar';
 import PreviewBlock from '../Preview-block/preview-cart';
-import SignIn from '../SignIn/sign-in';
-
+import LoginModal from '../Login-modal-window/login-modal-window';
 import SearchIcon from '@material-ui/icons/Search';
 
-const StyledMenu = withStyles({
-  paper: {
-    border: '1px solid #d3d4d5',
-  },
-})((props) => (
-  <Menu
-    elevation={0}
-    backgroundcolor="transparent"
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'center',
-    }}
-    transformOrigin={{
-      vertical: 'top',
-      horizontal: 'center',
-    }}
-    /* eslint-disable-next-line react/jsx-props-no-spreading */
-    {...props}
-  />
-));
+// const StyledMenu = withStyles({
+//   // paper: {
+//   //   border: '1px solid #d3d4d5',
+//   // },
+// })((props) => (
+//   <Menu
+//     elevation={0}
+//     backgroundcolor="transparent"
+//     getContentAnchorEl={null}
+//     anchorOrigin={{
+//       vertical: 'bottom',
+//       horizontal: 'center',
+//     }}
+//     transformOrigin={{
+//       vertical: 'top',
+//       horizontal: 'center',
+//     }}
+//     /* eslint-disable-next-line react/jsx-props-no-spreading */
+//     {...props}
+//   />
+// ));
 
 function Header() {
-  const totalCartQuantity = useSelector((state) => state.cart.totalCartQuantity);
-  const [anchorElLogin, setAnchorElLogin] = useState(null);
-  const handleClick = (event) => {
-    setAnchorElLogin(event.currentTarget);
+  const [modalIsVisible, setModalVisibility] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // const onSuccessLogin = () => {
+  //   setIsLoggedIn(true)
+  // };
+  const closeModal = () => {
+    setModalVisibility(false);
   };
 
-  const handleClose = () => {
-    setAnchorElLogin(null);
+  const handleClick = () => {
+    setModalVisibility(true);
   };
+
+  const totalCartQuantity = useSelector((state) => state.cart.totalCartQuantity);
+  // const [anchorElLogin, setAnchorElLogin] = useState(null);
+
+  // const handleClose = () => {
+  //   setAnchorElLogin(null);
+  // };
 
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = useState(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
   const [prevBlockIsVisible, setPrevBlockIsVisible] = useState(false);
+  const [drawer, setDrawer] = useState(false);
+  // const [sideBar, openSideBar] = useState(false)
 
+  // const toggleDrawer = (open) => {
+  //     openSideBar(true )
+  // };
+  // console.log(sideBar);
   const handleChange = () => {
     setPrevBlockIsVisible((prev) => !prev);
   };
@@ -94,7 +111,12 @@ function Header() {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget)
+    console.log(event);
   }
+// toggle side navbar
+  const toggleDrawer = (open) => {
+    setDrawer(open)
+  };
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -129,9 +151,10 @@ function Header() {
   )
 
   return (
-    <Box >
+    <Box>
+      <CssBaseline />
       <Box className={classes.delivery}>
-        <Container maxWidth="xl" >
+        <Container maxWidth="xl">
           <h3 className={classes.deliveryTitle}>Free shipping on all orders over &#8364;100</h3>
         </Container>
       </Box>
@@ -140,12 +163,13 @@ function Header() {
           <Toolbar className={classes.justify}>
             <Box className={classes.boxLogo}>
               <IconButton
+                onClick={() => toggleDrawer(true)}
                 edge="start"
                 className={classes.menuButton}
                 aria-label="show more"
                 aria-controls={mobileMenuId}
                 aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
+                // onClick={handleMobileMenuOpen}
               >
                 <MenuIcon fontSize="large" />
               </IconButton>
@@ -173,10 +197,16 @@ function Header() {
             {/*  /> */}
             {/* </Box> */}
 
-            <HeaderNavbar />
+            <HeaderNavbar
+              drawer={drawer}
+              toggleDrawer={toggleDrawer}>
+            </HeaderNavbar>
+
 
             <Box className={classes.iconButtonBox}>
-              <MenuItem className={classes.headerMenuItem}>
+              <MenuItem
+                className={classes.headerMenuItem}>
+              <Search />
                 <IconButton edge="end" className={classes.iconButton}>
                   <SearchIcon fontSize="large" className={classes.iconsStyle} />
                 </IconButton>
@@ -185,9 +215,11 @@ function Header() {
               <Divider orientation="vertical" className={classes.dividerStyle} />
 
               <MenuItem className={classes.headerMenuItem}>
-                <IconButton edge="end" className={classes.iconButton}>
-                  <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
-                </IconButton>
+                <Link to={RoutesName.favorites}>
+                  <IconButton edge="end" className={classes.iconButton}>
+                    <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
+                  </IconButton>
+                </Link>
                 <span className={classes.menuTitle}>Favorites</span>
               </MenuItem>
               <Divider orientation="vertical" className={classes.dividerStyle} />
@@ -205,17 +237,23 @@ function Header() {
                 </IconButton>
                 <span className={classes.menuTitle}>Login</span>
               </MenuItem>
-              <StyledMenu
-                className="customized-menu"
-                id="customized-menu"
-                anchorEl={anchorElLogin}
-                keepMounted
-                open={Boolean(anchorElLogin)}
-                onClose={handleClose}
-              >
-                <MenuItem style={{ display: 'none' }} />
-                <SignIn onClose={handleClose} />
-              </StyledMenu>
+              <LoginModal
+                // isLoggedIn={loggedIn}
+                // onSuccessLogin={onSuccessLogin}
+                onModalClose={closeModal}
+                open={modalIsVisible}
+              />
+              {/* <StyledMenu */}
+              {/*  className="customized-menu" */}
+              {/*  id="customized-menu" */}
+              {/*  anchorEl={anchorElLogin} */}
+              {/*  keepMounted */}
+              {/*  open={Boolean(anchorElLogin)} */}
+              {/*  onClose={handleClose} */}
+              {/* > */}
+              {/*  <MenuItem style={{ display: 'none' }} /> */}
+              {/*  <SignIn onClose={handleClose} /> */}
+              {/* </StyledMenu> */}
               <Divider orientation="vertical" className={classes.dividerStyle} />
               <MenuItem className={classes.headerMenuItem} onClick={handleChange}>
                 <IconButton edge="end" aria-label="card" className={classes.iconButton}>
@@ -237,11 +275,9 @@ function Header() {
         ) : null}
         {renderMobileMenu}
         {renderMenu}
-        {/* <Search /> */}
       </Container>
       <Divider />
     </Box>
   );
 }
-
 export default Header;

@@ -10,7 +10,7 @@ function CategoryList({ mainCategories }) {
 
   return (
     <section className={classes.categories_list}>
-      {mainCategories.map((category, index) => (
+      {mainCategories && mainCategories.map((category, index) => (
         <Category
           key={category.name}
           data={category}

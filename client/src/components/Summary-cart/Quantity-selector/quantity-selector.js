@@ -7,8 +7,8 @@ export default function QuantitySelector ({ cartQuantity, productId, onSetProduc
   const classes = useStyles();
   const createListItems = () => {
     const items = [];
-    for (let i = 1; i <= 100; i++) {
-      items.push(<option value={i}>{i}</option>);
+    for (let i = 1; i <= 20; i++) {
+      items.push(<option key={i} value={i}>{i}</option>);
     }
     return items;
   }
@@ -23,7 +23,7 @@ export default function QuantitySelector ({ cartQuantity, productId, onSetProduc
   }
 
   return (
-    <Grid container justify={"center"}>
+    <Grid container className={classes.main} >
       <Grid item>
         <span
           className={classes.increase}
@@ -62,6 +62,8 @@ export default function QuantitySelector ({ cartQuantity, productId, onSetProduc
 
 QuantitySelector.propTypes = {
   cartQuantity: propTypes.number,
+  productId: propTypes.string,
+  onSetProductQuantity: propTypes.func
 };
 
 QuantitySelector.defaultProps = {

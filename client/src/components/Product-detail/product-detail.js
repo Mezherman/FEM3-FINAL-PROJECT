@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
@@ -23,9 +24,19 @@ import FeatureItem from './feature-item';
 import ProductDetailTab from './Product-detail-tab/product-detail-tab';
 
 import useStyles from './_product-detail';
+import AddToFavoriteBtn from '../Add-to-favorites/Add-to-favorite-btn';
 
-export default function ProductDetail({ product }) {
-  const { imageUrls, name, currentPrice, previousPrice, myCustomParams, brand, enabled } = product;
+function ProductDetail({ product, favorites }) {
+  const {
+    imageUrls,
+    name,
+    currentPrice,
+    previousPrice,
+    myCustomParams,
+    brand,
+    enabled,
+    _id: itemId
+  } = product;
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
@@ -92,12 +103,16 @@ export default function ProductDetail({ product }) {
       <h1 className={classes.title}>{name.toUpperCase()[0] + name.slice(1)}</h1>
       <Grid container spacing={4} justify="center">
         <Grid item xs={12} sm={12} md={6} xl={5}>
+          <AddToFavoriteBtn
+            favorites={favorites}
+            itemId={itemId}
+          />
           <MyGallery
             images={images}
           />
           {!isTablet && <Divider />}
         </Grid>
-        <Grid item md={1} xl={3}/>
+        <Grid item md={1} xl={3} />
         <Grid item xs={12} sm={12} md={5} xl={4}>
           <Grid container spacing={1}>
             {/* <Grid item xs={12} sm={12} md={12}> */}
@@ -105,28 +120,29 @@ export default function ProductDetail({ product }) {
             {/*    <a href="#">Submit a review</a> */}
             {/*  </Typography> */}
             {/* </Grid> */}
-            {!isTablet && <Grid item xs={12} sm={6} md={12} xl={6}>
-              <Box
-                border={1}
-                borderColor="text.primary"
-                className={classes.productFeatures}
-              >
-                <ul className={classes.MuiListRoot}>
-                  <li>
-                    {brand}
-                  </li>
-                  <li>
+            {!isTablet && (
+              <Grid item xs={12} sm={6} md={12} xl={6}>
+                <Box
+                  border={1}
+                  borderColor="text.primary"
+                  className={classes.productFeatures}
+                >
+                  <ul className={classes.MuiListRoot}>
+                    <li>
+                      {brand}
+                    </li>
+                    <li>
                     Collection:
-                    {' '}
-                    {myCustomParams.collection}
-                  </li>
-                  <li>
-                    {myCustomParams.setSize > 1 ? `${myCustomParams.setSize}-pcs.` : `${myCustomParams.setSize}-pc.`}
-                  </li>
-                </ul>
-              </Box>
-            </Grid>
-            }
+                      {' '}
+                      {myCustomParams.collection}
+                    </li>
+                    <li>
+                      {myCustomParams.setSize > 1 ? `${myCustomParams.setSize}-pcs.` : `${myCustomParams.setSize}-pc.`}
+                    </li>
+                  </ul>
+                </Box>
+              </Grid>
+            )}
             <Grid item xs={12} sm={6} md={12} xl={12}>
               <Box
                 className={classes.productShopArea}
@@ -217,7 +233,7 @@ export default function ProductDetail({ product }) {
           </Grid>
         </Grid>
       </Grid>
-      {!isDesktop&&<Divider />}
+      {!isDesktop && <Divider />}
       <Grid container>
         <Grid item xs={12} >
           <h3 className={classes.sectionTitle}>Product details</h3>
@@ -229,6 +245,9 @@ export default function ProductDetail({ product }) {
     </Container>
   );
 }
+const mapStateToProps = (state) => state.favoritesReducer;
+
+export default connect(mapStateToProps)(ProductDetail);
 
 ProductDetail.propTypes = {
   product:
