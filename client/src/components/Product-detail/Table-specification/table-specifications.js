@@ -54,6 +54,7 @@ export default function TableSpecifications({ data }) {
     createData('Capacity (in l)', capacity),
     createData('Care', care),
   ];
+  console.log(sizes);
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -71,7 +72,7 @@ export default function TableSpecifications({ data }) {
         </TableBody>
       </Table>
     </TableContainer>
-  );
+  )
 }
 
 TableSpecifications.propTypes = {

@@ -5,6 +5,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '28px',
     fontWeight: '400',
   },
+  itemNo: {
+    textAlign: 'right',
+  },
   productFeatures: {
     height: '100%',
     padding: theme.spacing(1, 0),

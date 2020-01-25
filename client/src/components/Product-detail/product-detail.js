@@ -35,6 +35,7 @@ function ProductDetail({ product, favorites }) {
     myCustomParams,
     brand,
     enabled,
+    itemNo,
     _id: itemId
   } = product;
   const classes = useStyles();
@@ -101,12 +102,17 @@ function ProductDetail({ product, favorites }) {
         product={{ imageUrls, name, currentPrice }}
       />
       <h1 className={classes.title}>{name.toUpperCase()[0] + name.slice(1)}</h1>
+      <p className={classes.itemNo}>
+        Item.No {itemNo}
+      </p>
       <Grid container spacing={4} justify="center">
         <Grid item xs={12} sm={12} md={6} xl={5}>
+          <Box display="flex" justifyContent="flex-end">
           <AddToFavoriteBtn
             favorites={favorites}
             itemId={itemId}
           />
+          </Box>
           <MyGallery
             images={images}
           />
@@ -115,11 +121,6 @@ function ProductDetail({ product, favorites }) {
         <Grid item md={1} xl={3} />
         <Grid item xs={12} sm={12} md={5} xl={4}>
           <Grid container spacing={1}>
-            {/* <Grid item xs={12} sm={12} md={12}> */}
-            {/*  <Typography align="right"> */}
-            {/*    <a href="#">Submit a review</a> */}
-            {/*  </Typography> */}
-            {/* </Grid> */}
             {!isTablet && (
               <Grid item xs={12} sm={6} md={12} xl={6}>
                 <Box
@@ -185,7 +186,7 @@ function ProductDetail({ product, favorites }) {
                   </Box>
                   <div className={classes.disableBlock}>
 
-                    <span>Disable:</span>
+                    <span>Deliverable:</span>
                     {enabled
                       ? (
                         <span >
