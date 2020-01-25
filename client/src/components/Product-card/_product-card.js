@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     height: 'auto',
   },
   title: {
-    height: '100px',
+    height: '80px',
     paddingBottom: '20px',
     // overflow: 'hidden',
     color: theme.palette.text.primary,

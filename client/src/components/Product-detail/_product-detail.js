@@ -79,18 +79,19 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'right',
     verticalAlign: 'bottom',
   },
-    fact: {
-      textAlign: 'right',
-    },
+  fact: {
+    textAlign: 'right',
+  },
 
-inStock: {
+  inStock: {
     position: 'relative',
     color: theme.palette.primary.main,
-  top: '7px'
-},
+    top: '7px'
+  },
   sectionTitle: {
-    fontSize: '18px',
-    fontWeight: '500'
+    fontSize: '20px',
+    fontWeight: '500',
+    paddingTop: theme.spacing(3)
   },
   property: {
     fontWeight: 'bold',

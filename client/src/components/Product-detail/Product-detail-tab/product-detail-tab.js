@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { createStyles, makeStyles } from '@material-ui/core';
+import { createStyles, makeStyles, Container } from '@material-ui/core';
 import TableSpecification from '../Table-specification/table-specifications';
 import PropTypes from 'prop-types';
 
@@ -11,12 +11,16 @@ const useStyles = makeStyles((theme) => createStyles({
     backgroundColor: theme.palette.background.paper,
   },
   highlights: {
+    fontSize: '1rem',
     textAlign: 'justify',
-    lineHeight: '1.5',
+    lineHeight: '2',
+    paddingBottom: theme.spacing(3)
   },
   description: {
+    fontSize: '1rem',
     textAlign: 'justify',
-    lineHeight: '1.5',
+    lineHeight: '2',
+    paddingBottom: theme.spacing(3)
   },
 }),);
 
@@ -28,9 +32,9 @@ export default function ProductDetailTab({ data }) {
     <>
       <Tabs>
         <TabList>
-          <Tab>Product Description</Tab>
-          <Tab>Highlights</Tab>
-          <Tab>Specifications</Tab>
+          <Tab><h4>Highlights</h4></Tab>
+          <Tab><h4>Product Description</h4></Tab>
+          <Tab><h4>Specifications</h4></Tab>
         </TabList>
 
         <TabPanel>
