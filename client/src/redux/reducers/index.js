@@ -13,7 +13,7 @@ export default combineReducers({
   cart,
   categoriesReducer,
   productsReducer,
-  formReducer,
+  form: formReducer,
   filterReducer,
   notification,
   userReducer,
