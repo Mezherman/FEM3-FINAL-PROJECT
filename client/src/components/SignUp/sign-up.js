@@ -21,7 +21,6 @@ import validate from './validate';
 import useStyles from './_sign-up';
 import postNewUser from '../../services/postNewUser';
 
-
 let SignUp = (props) => {
   const { handleSubmit } = props;
   const classes = useStyles();

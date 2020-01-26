@@ -16,7 +16,7 @@ import jwtDecode from 'jwt-decode';
 import useStylesSingIn from './_sign-in';
 import RoutesName from '../../routes-list';
 import postLoginData from '../../services/postLoginData'
-import loginLoaded from '../../redux/actions/user';
+import loginLoaded, { fetchCustomerData } from '../../redux/actions/user';
 import { mergeDBWithLocalStorage } from '../../redux/actions/CartActions';
 import { getFavoritesFromDB } from '../../redux/actions/favorites';
 
@@ -79,6 +79,7 @@ function SignIn(props) {
         loginLoaded();
         onClose();
         mergeCart();
+        fetchCustomerData();
         fetchFavorites();
         // localStorage.setItem('L', `${loginResult.data.token}`);
         // const token = localStorage.getItem('token');
@@ -200,6 +201,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   loginLoaded: () => { dispatch(loginLoaded()) },
   mergeCart: () => { dispatch(mergeDBWithLocalStorage()) },
+  fetchCustomerData: () => dispatch(fetchCustomerData()),
   fetchFavorites: () => dispatch(getFavoritesFromDB())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

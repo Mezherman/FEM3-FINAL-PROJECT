@@ -16,6 +16,7 @@ import PersonalData from './components/My-account/personal-data';
 import LoginModal from './components/Login-modal-window/login-modal-window';
 import Favorites from './components/Favorites/favorites'
 import Checkout from './components/Checkout/checkout';
+import CheckoutStatus from './components/Checkout/Status/status';
 
 export default function Routes() {
   const { loggedIn } = useSelector((state) => state.userReducer);
@@ -132,6 +133,8 @@ export default function Routes() {
           return <Catalog assortment={'cooking'} />
         }}
       />
+      <Route path={RoutesName.checkoutSuccess} component={CheckoutStatus} />
+      <Route path={RoutesName.checkoutError} component={CheckoutStatus} />
       <Route path={RoutesName.checkout} component={Checkout} />
       <Route path={RoutesName.cart} component={SummaryCart} />
       <Route path={RoutesName.editPersonalData} component={EditPersonalData} />

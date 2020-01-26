@@ -18,6 +18,15 @@ export default function userReducer(state = initialState, action) {
         lastName: ''
       };
 
+    case 'FETCH_CUSTOMER_DATA_SUCCESS':
+      return {
+        ...state,
+        customer: action.payload
+      };
+
+    case 'FETCH_CUSTOMER_DATA_FAILURE':
+      return state;
+
     default: {
       return state
     }
