@@ -14,9 +14,9 @@ import {
   Backdrop
 } from '@material-ui/core';
 
-import SignUpInfo from './SignUp-info/signUp-info';
-import SignUpForm from './SignUp-form/signUp-form';
-import SignUpFooter from './SignUp-footer/signUp-footer';
+import SignUpInfo from './Sign-up-info/signUp-info';
+import SignUpForm from './Sign-up-form/sign-up-form';
+import SignUpFooter from './Sign-up-footer/sign-up-footer';
 import validate from './validate';
 import useStyles from './_sign-up';
 import postNewUser from '../../services/postNewUser';

@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import InfoOutlinedIcon from '@material-ui/core/SvgIcon/SvgIcon';
 import { Link } from 'react-router-dom';
-import useStyles from '../SignUp/SignUp-form/_signUp-form';
+import useStyles from '../SignUp/Sign-up-form/_sign-up-form';
 import usePdstyles from './_personal-data'
 import RoutesName from '../../routes-list';
 
