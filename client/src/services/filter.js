@@ -2,20 +2,28 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:5000';
 
-// axios.defaults.headers.common.Authorization = localStorage.getItem('token');
-
-export default function getAllFilterProducts() {
+function getFilteredProducts(value) {
   return axios
-    .get('products/filter/')
-    .then((response) => console.log(response.data))
+    .get(`/products/filter?${value}`)
+    .then((response) => response.data.products)
     .catch((error) => console.log(error))
 }
 
-// export async function getFilterProducts(filter) {
-//   return axios
-//     .get(`/products/filter?${filter}`)
-//     .then((response) => console.log('getFilterProducts = ', response))
-//     .catch((err) => {
-//       console.log('ERROR = ', err);
-//     });
-// }
+function getColors() {
+  return axios('/colors').then((response) => (response.data))
+}
+
+function getBrands() {
+  return axios('/filters/brands').then((response) => (response.data))
+}
+
+function getManufacturer() {
+  return axios('/filters/manufacturers').then((respronse) => respronse.data)
+}
+
+export {
+  getFilteredProducts,
+  getColors,
+  getBrands,
+  getManufacturer,
+}

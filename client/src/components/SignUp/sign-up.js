@@ -29,6 +29,17 @@ let SignUp = (props) => {
   const [errorModal, setErrorModal] = useState(false);
   const [redirect, setRedirect] = useState(false);
 
+  let initialState = {
+    gender: 'Mr',
+    firstName: '',
+    lastName: '',
+    login: '',
+    email: '',
+    password: '',
+    telephone: '',
+    birthdate: ''
+  };
+
   const handleOpenSignUpModal = () => {
     setSignUpModal(true);
   };
@@ -52,8 +63,15 @@ let SignUp = (props) => {
   };
 
   const submitNewUser = (values) => {
-    // console.log(values);
-    postNewUser(values, handleOpenSignUpModal, handleOpenSetErrorModal);
+    const newUser = {
+      ...initialState,
+      ...values,
+      birthdate: values.birthdayDay + '.' + values.birthdayMonth + '.' + values.birthdayYear
+    };
+
+    console.log(newUser);
+    postNewUser(newUser, handleOpenSignUpModal, handleOpenSetErrorModal);
+
     // axios
     //   .post('/customers', values)
     //   .then((response) => {

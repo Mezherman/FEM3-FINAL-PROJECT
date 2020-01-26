@@ -11,7 +11,13 @@ export default function userReducer(state = initialState, action) {
       return action.payload;
 
     case 'FETCH_LOGIN_ERROR':
-      return state;
+      return {
+        token: '',
+        loggedIn: false,
+        firstName: '',
+        lastName: ''
+      };
+
     default: {
       return state
     }

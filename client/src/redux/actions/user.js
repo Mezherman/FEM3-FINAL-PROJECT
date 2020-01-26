@@ -7,6 +7,7 @@ const loginLoaded = () => {
       type: 'FETCH_LOGIN_ERROR',
     }
   }
+
   const decoded = jwtDecode(token);
   const { firstName, lastName, exp } = decoded;
 
@@ -23,6 +24,7 @@ const loginLoaded = () => {
       }
     }
   }
+
   return {
     type: 'FETCH_LOGIN_ERROR',
   }

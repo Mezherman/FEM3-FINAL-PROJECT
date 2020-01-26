@@ -6,11 +6,12 @@ const RoutesName = {
   login: '/login',
   signUp: '/sign-up',
   signIn: '/login',
-  aboutUs: '/about-us',
+  aboutUs: '/about',
   contacts: '/contacts',
   delivery: '/delivery',
   personalData: '/personal-data',
   editPersonalData: '/edit-personal-data',
+  favorites: '/favorites',
   myOrders: '/orders',
 };
 

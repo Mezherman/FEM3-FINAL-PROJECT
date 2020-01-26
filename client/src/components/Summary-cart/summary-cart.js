@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { bindActionCreators } from 'redux'
 import { useDispatch, useSelector } from 'react-redux';
-import { Grid } from '@material-ui/core';
+import { Grid, Container } from '@material-ui/core';
 import Summary from './Summary/summary';
 import * as cartActions from '../../redux/actions/CartActions'
 import CartProductList from './Cart-product-list/cart-product-list';
@@ -21,13 +21,13 @@ function SummaryCart() {
     )
   }
   return (
-    <div>
+    <Container maxWidth="xl">
       <h1>Your Shopping Cart</h1>
       <Grid container spacing={4} alignItems="flex-start">
         <CartProductList products={cart.products} actions={actions} />
         <Summary totalCartPrice={cart.totalCartPrice} />
       </Grid>
-    </div>
+    </Container>
   );
 }
 export default SummaryCart;
