@@ -21,12 +21,24 @@ import validate from './validate';
 import useStyles from './_sign-up';
 import postNewUser from '../../services/postNewUser';
 
+
 let SignUp = (props) => {
   const { handleSubmit } = props;
   const classes = useStyles();
   const [signUpModal, setSignUpModal] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
   const [redirect, setRedirect] = useState(false);
+
+  let initialState = {
+    gender: 'Mr',
+    firstName: '',
+    lastName: '',
+    login: '',
+    email: '',
+    password: '',
+    telephone: '',
+    birthdate: ''
+  };
 
   const handleOpenSignUpModal = () => {
     setSignUpModal(true);
@@ -51,9 +63,15 @@ let SignUp = (props) => {
   };
 
   const submitNewUser = (values) => {
-    console.log('VALUES=', values);
+    const newUser = {
+      ...initialState,
+      ...values,
+      birthdate: values.birthdayDay + '.' + values.birthdayMonth + '.' + values.birthdayYear
+    };
 
-    postNewUser(values, handleOpenSignUpModal, handleOpenSetErrorModal);
+    console.log(newUser);
+    postNewUser(newUser, handleOpenSignUpModal, handleOpenSetErrorModal);
+
     // axios
     //   .post('/customers', values)
     //   .then((response) => {

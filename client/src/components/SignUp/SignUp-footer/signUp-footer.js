@@ -3,12 +3,12 @@ import { Field } from 'redux-form';
 import { Link as RouteLink } from 'react-router-dom';
 
 import {
-  Button,
-  Checkbox,
-  FormControlLabel,
-  FormLabel,
-  Grid,
-  Typography
+    Button,
+    Checkbox,
+    FormControlLabel,
+    FormLabel,
+    Grid,
+    Typography
 } from '@material-ui/core';
 import RoutesName from '../../../routes-list';
 
@@ -17,29 +17,33 @@ import useStyles from './_signUp-footer';
 const SignUpFooter = () => {
   const classes = useStyles();
 
-  const renderCheckboxField = ({ input, name, ...rest }) => (
-    <FormControlLabel
-      className={classes.root}
-      control={(
-        <Checkbox value="agreeCreateProfile" className={classes.radioLabel}
-                  onChange={(event, value) => input.onChange(value)}
+    const renderCheckboxField = ({ input, name, meta: { touched, error }, ...rest }) => (
+        <FormControlLabel className={classes.root}
+                          control={(
+                <Checkbox value="agreeCreateProfile" className={classes.radioLabel}
+                          onChange={(event, value) => input.onChange(event.target.value)}
+                          // onChange={(event, value) => input.onChange(value)}
+                />
+            )}
+            label={(
+                <FormLabel className={classes.labelAgreement}>
+                    I agree that the WMF Group may create a personal profile based on my
+                    personal data, purchasing and usage behaviour, in order to better tailor
+                    advertising and web offers to my personal interests and to send me these
+                    offers and a newsletter on products, innovations and special promotions by
+                    e-mail. You may revoke your consent at any time, e.g. in your myWMF customer
+                    account in the “My communication” section.
+                    {
+                        touched && error &&
+                        <p>{error}</p>
+                        // стилизовать ошибку
+                    }
+                </FormLabel>
+            )}
         />
-      )}
-      label={(
-        <FormLabel className={classes.labelAgreement}>
-          I agree that the WMF Group may create a personal profile based on my
-          personal data, purchasing and usage behaviour, in order to better tailor
-          advertising and web offers to my personal interests and to send me these
-          offers and a newsletter on products, innovations and special promotions by
-          e-mail. You may revoke your consent at any time, e.g. in your myWMF
-          customer
-          account in the “My communication” section.
-        </FormLabel>
-      )}
-    />
-  );
+    );
 
-  return (
+    return (
     <Grid item xs={12} md={11} className={classes.accountContentFooter}>
       <Typography paragraph variant="subtitle2">
         Secure your welcome bonus!
@@ -51,12 +55,10 @@ const SignUpFooter = () => {
       </Typography>
 
       <Grid item xs={12}>
-        <Field name="agreement" component={renderCheckboxField} />
+          <Field name="agreement" component={renderCheckboxField} />
       </Grid>
 
-      <Button type="submit" variant="contained" color="primary" className={classes.submit}
-        // onSubmit={handleSubmit}
-      >
+      <Button type="submit" variant="contained" color="primary" className={classes.submit}>
         Become a myWMF Club member now
       </Button>
       <RouteLink

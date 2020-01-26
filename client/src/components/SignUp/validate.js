@@ -7,7 +7,8 @@ export default function (values) {
     'email',
     'password',
     'telephone',
-    'login'
+    'login',
+    'agreement'
   ];
   requiredFields.forEach(field => {
     if (!values[field]) {
@@ -24,7 +25,7 @@ export default function (values) {
     values.birthdayDay &&
     (values.birthdayDay > 31 || values.birthdayDay < 1)
   ) {
-    errors.birthdayDay = 'Invalid birthday day';
+    errors.birthdayDay = 'Invalid day';
   }
   if (
     values.login &&
@@ -36,13 +37,13 @@ export default function (values) {
     values.birthdayMonth &&
     (values.birthdayMonth > 12 || values.birthdayMonth < 1)
   ) {
-    errors.birthdayMonth = 'Invalid birthday month';
+    errors.birthdayMonth = 'Invalid month';
   }
   if (
     values.birthdayYear &&
     !/^[1|2][8-9][0-9][0-9]$/i.test(values.birthdayYear)
   ) {
-    errors.birthdayYear = 'Invalid birthday year';
+    errors.birthdayYear = 'Invalid year';
   }
   if (
     values.password &&
@@ -55,6 +56,11 @@ export default function (values) {
     !/^[0-9-+\s()]{10,18}$/i.test(values.telephone)
   ) {
     errors.telephone = 'Invalid phone number, at least 10 symbols required';
+  }
+  if (
+    !values.agreement
+  ) {
+    errors.agreement = 'We need your agreement to create your personal profile';
   }
 
   return errors;
