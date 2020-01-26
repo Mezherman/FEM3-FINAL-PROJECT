@@ -4,6 +4,7 @@ const useStyles = makeStyles((theme) => ({
 
   paper: {
     marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(5),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -14,8 +15,12 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     fontSize: '32px',
+    marginTop: theme.spacing(1),
     [theme.breakpoints.up('md')]: {
       marginBottom: 15
+    },
+    [theme.breakpoints.up('lg')]: {
+      marginTop: theme.spacing(3),
     }
   },
   dividerSignUp: {

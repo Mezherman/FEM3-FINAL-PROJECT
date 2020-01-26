@@ -14,13 +14,12 @@ import {
   Backdrop
 } from '@material-ui/core';
 
-import SignUpInfo from './SignUp-info/signUp-info';
-import SignUpForm from './SignUp-form/signUp-form';
-import SignUpFooter from './SignUp-footer/signUp-footer';
+import SignUpInfo from './Sign-up-info/sign-up-info';
+import SignUpForm from './Sign-up-form/sign-up-form';
+import SignUpFooter from './Sign-up-footer/sign-up-footer';
 import validate from './validate';
 import useStyles from './_sign-up';
 import postNewUser from '../../services/postNewUser';
-
 
 let SignUp = (props) => {
   const { handleSubmit } = props;
@@ -63,14 +62,17 @@ let SignUp = (props) => {
   };
 
   const submitNewUser = (values) => {
-    const newUser = {
+    console.log(values);
+    console.log("This is values");
+
+    initialState = {
       ...initialState,
       ...values,
       birthdate: values.birthdayDay + '.' + values.birthdayMonth + '.' + values.birthdayYear
     };
 
-    console.log(newUser);
-    postNewUser(newUser, handleOpenSignUpModal, handleOpenSetErrorModal);
+    console.log(initialState);
+    // postNewUser(initialState, handleOpenSignUpModal, handleOpenSetErrorModal);
 
     // axios
     //   .post('/customers', values)
@@ -119,6 +121,7 @@ let SignUp = (props) => {
             <SignUpFooter />
           </Grid>
         </form>
+
         {/*<Button onClick={handleOpenSignUpModal}>Open registration modal</Button>*/}
         { signUpModal &&
         <Modal

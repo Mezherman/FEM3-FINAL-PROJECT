@@ -32,6 +32,11 @@ const useStyles = makeStyles((theme) => ({
     },
     '& .MuiFormHelperText-root.Mui-error ': {
       color: theme.palette.error.dark
+    },
+  },
+  input: {
+    '& .MuiOutlinedInput-input': {
+      textAlign: 'center'
     }
   },
   labelText: {
@@ -93,6 +98,14 @@ const useStyles = makeStyles((theme) => ({
     '&:not(:last-child)': {
       width: '25%',
       paddingRight: '15px',
+    },
+    '& input[type=number]::-webkit-inner-spin-button': {
+        '-webkit-appearance': 'none',
+        margin: 0
+    },
+    '& input[type=number]::-webkit-outer-spin-button': {
+        '-webkit-appearance': 'none',
+        margin: 0
     }
   },
   helperBirth: {
@@ -100,6 +113,9 @@ const useStyles = makeStyles((theme) => ({
     margin: 0,
     textAlign: 'center',
     color: theme.palette.primary.dark
+  },
+  eye: {
+    cursor: 'pointer'
   }
 }));
 

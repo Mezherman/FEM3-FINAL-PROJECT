@@ -23,8 +23,8 @@ function Search({ productsLoaded, history }) {
   const a = { test: 1 };
   let b = { ...a };
   b = { xyz: 3 };
-  console.log('a =', a);
-  console.log('b =', b);
+  // console.log('a =', a);
+  // console.log('b =', b);
 
   const [value, setValue] = useState('');
   const [isSearching, setSearching] = useState(false);

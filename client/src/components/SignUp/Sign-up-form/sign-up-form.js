@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Field } from 'redux-form';
 
 import {
@@ -16,34 +16,48 @@ import {
   RadioGroup,
   TextField,
   Typography,
-  Box
+  Box,
+    IconButton,
+
 } from '@material-ui/core';
 
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import CloseIcon from '@material-ui/icons/Close';
-import useStyles from './_signUp-form';
+import useStyles from './_sign-up-form';
 
 const SignUpForm = () => {
-  const [openInfo, setOpenInfo] = React.useState(false);
-  const [selectCountry, setSelectCountry] = React.useState('Austria');
+  const [openInfo, setOpenInfo] = useState(false);
+  const [gender, setGender] = useState('Mr');
+  const [eyeToggle, setEyeToggle] = useState(true);
 
+  const handleMouseDownPassword = event => {
+      event.preventDefault();
+  };
   const handleOpenInfo = () => {
     setOpenInfo(true);
   };
   const handleCloseInfo = () => {
     setOpenInfo(false);
   };
+  const togglePasswordMask = () => {
+      setEyeToggle((prev) => (setEyeToggle(!prev)));
+  };
 
   const classes = useStyles();
 
   const renderRadioGroup = ({ input, name, ...rest }) => (
       <RadioGroup {...input} {...rest}
-          value={input.value}
+          value={gender}
           aria-label="gender"
-          defaultValue={input.checked}
+          defaultValue={'Mr'}
           className={classes.radioGender}
           name={name}
-          onChange={(event, value) => input.onChange(value)}
+           onChange={(event, value) => {
+               input.onChange(value);
+               setGender(event.target.value);
+           }}
       />
   );
 
@@ -53,13 +67,70 @@ const SignUpForm = () => {
           name={name}
           variant="outlined"
           fullWidth
-          id={name}
+          id={`${label}id`}
           error={!!(touched && error)}
           helperText={touched && error}
           {...input}
           {...custom}
           className={classes.root}
-          label={(<FormLabel className={classes.root} required>{label}</FormLabel>)}
+          label={
+              (<FormLabel className={classes.root} required>{label}</FormLabel>)
+          }
+      />
+  );
+  const renderFirstField = ({ input, label, name, value, type, meta: { touched, error }, ...custom }) => (
+      <TextField
+          type={type}
+          name={name}
+          variant="outlined"
+          fullWidth
+          autoFocus
+          id={`${label}id`}
+          error={!!(touched && error)}
+          helperText={touched && error}
+          {...input}
+          {...custom}
+          className={classes.root}
+          label={
+              (<FormLabel className={classes.root} required>{label}</FormLabel>)
+          }
+      />
+  );
+  const renderPasswordField = ({ input, label, name, value, type, meta: { touched, error }, ...custom }) => (
+      <TextField
+          type={eyeToggle ? 'password' : 'text'}
+          name={name}
+          variant="outlined"
+          fullWidth
+          id={name+type}
+          error={!!(touched && error)}
+          helperText={touched && error}
+          {...input}
+          {...custom}
+          className={classes.root}
+          label={
+              (<FormLabel className={classes.root} required>{label}</FormLabel>)
+          }
+          InputProps={{
+              endAdornment: (
+                  <InputAdornment position="end">
+                      <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={togglePasswordMask}
+                          // onMouseDown={handleMouseDownPassword}
+                      >
+                          {eyeToggle ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+
+                      {/*{ eyeToggle*/}
+                      {/*    ?*/}
+                      {/*    <VisibilityIcon className={classes.eye} onClick={togglePasswordMask} />*/}
+                      {/*    :*/}
+                      {/*    <VisibilityOffIcon className={classes.eye} onClick={togglePasswordMask} />*/}
+                      {/*}*/}
+                  </InputAdornment>
+              )
+          }}
       />
   );
   const renderBirthdayField = ({ input, label, name, value, meta: { touched, error }, ...custom }) => (
@@ -68,7 +139,7 @@ const SignUpForm = () => {
           name={name}
           type="number"
           variant="outlined"
-          className={classes.inputBirthDay}
+          className={`${classes.inputBirthDay} ${classes.input}`}
           {...custom}
           {...input}
           helperText={ touched && error ||
@@ -79,23 +150,23 @@ const SignUpForm = () => {
       />
   );
 
-  const renderSelectField = ({ input, label, value, meta: { touched, error }, children, ...custom }) => (
-      <TextField
-          select
-          variant="outlined"
-          fullWidth
-          label={(<FormLabel className={classes.labelText}>{selectCountry}</FormLabel>)}
-          value={value}
-          {...input}
-          onChange={(event, index, value) => {
-            input.onChange(event.target.value);
-            setSelectCountry(event.target.value);
-          }}
-          children={children}
-          {...custom}
-      >
-      </TextField>
-  );
+  // const renderSelectField = ({ input, label, value, meta: { touched, error }, children, ...custom }) => (
+  //     <TextField
+  //         select
+  //         variant="outlined"
+  //         fullWidth
+  //         label={(<FormLabel className={classes.labelText}>{selectCountry}</FormLabel>)}
+  //         value={value}
+  //         {...input}
+  //         onChange={(event, index, value) => {
+  //           input.onChange(event.target.value);
+  //           setSelectCountry(event.target.value);
+  //         }}
+  //         children={children}
+  //         {...custom}
+  //     >
+  //     </TextField>
+  // );
 
   return (
       <Grid item xs={12} sm={10} md={5} >
@@ -181,7 +252,7 @@ const SignUpForm = () => {
           <Field name="email" component={renderTextField} label="Email Address" type="email" />
         </Box>
         <Box mb={2}>
-          <Field name="password" component={renderTextField} label="Password" type="password" />
+          <Field name="password" component={renderPasswordField} label="Password" type="password" />
         </Box>
         <Box mb={2}>
           <Field name="telephone" component={renderTextField} label="Phone number" type="tel" />

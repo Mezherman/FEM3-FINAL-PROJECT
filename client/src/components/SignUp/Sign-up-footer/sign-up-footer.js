@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Field } from 'redux-form';
 import { Link as RouteLink } from 'react-router-dom';
 
@@ -8,21 +8,23 @@ import {
     FormControlLabel,
     FormLabel,
     Grid,
-    Typography
+    Typography,
+    FormHelperText
 } from '@material-ui/core';
 import RoutesName from '../../../routes-list';
 
-import useStyles from './_signUp-footer';
+import useStyles from './_sign-up-footer';
 
 const SignUpFooter = () => {
-  const classes = useStyles();
+    const classes = useStyles();
 
     const renderCheckboxField = ({ input, name, meta: { touched, error }, ...rest }) => (
         <FormControlLabel className={classes.root}
                           control={(
-                <Checkbox value="agreeCreateProfile" className={classes.radioLabel}
-                          onChange={(event, value) => input.onChange(event.target.value)}
-                          // onChange={(event, value) => input.onChange(value)}
+                <Checkbox
+                    className={classes.radioLabel}
+                    checked={input.value ? true : false}
+                    onChange={input.onChange}
                 />
             )}
             label={(
@@ -35,8 +37,7 @@ const SignUpFooter = () => {
                     account in the “My communication” section.
                     {
                         touched && error &&
-                        <p>{error}</p>
-                        // стилизовать ошибку
+                        <FormHelperText>{touched && error}</FormHelperText>
                     }
                 </FormLabel>
             )}
@@ -72,6 +73,6 @@ const SignUpFooter = () => {
 
     </Grid>
   )
-}
+};
 
 export default SignUpFooter;
