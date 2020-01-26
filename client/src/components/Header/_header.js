@@ -111,10 +111,17 @@ const useStyles = makeStyles((theme) => ({
     // }
   },
   iconsStyle: {
-    color: '#000000',
-    fontSize: '27px',
+    // color: theme.palette.secondary.main,
+    color: theme.palette.text.primary,
+    fontSize: '26px',
     opacity: '.7'
   },
+
+  iconLoggedIn: {
+    color: theme.palette.primary.main,
+    fontSize: '26px',
+  },
+
   iconButtonBox: {
     height: '100%',
     display: 'flex',

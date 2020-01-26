@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Backdrop,
   Box, Button, Container, Fade, FormControl,
@@ -17,8 +17,46 @@ import CloseIcon from '@material-ui/icons/Close';
 import useStyles from '../SignUp/SignUp-form/_signUp-form';
 import postNewUser from '../../services/postNewUser';
 import validate from '../SignUp/validate';
+import usePdstyles from './_personal-data';
+import getUserData from '../../services/getUserData';
 
 function EditFormWithValidation(props) {
+  const [newUserData, setNewUserData] = useState({
+    gender: 'Mr',
+    firstName: '',
+    lastName: '',
+    // birthdayDay: '',
+    // birthdayMonth: '',
+    // birthdayYear: '',
+    email: '',
+    telephone: '',
+    // password: '',
+    // country: 'Austria',
+    agreement: false,
+    isAdmin: false,
+  });
+
+  const { gender, firstName, lastName } = newUserData;
+  console.log('USER NAME =>', firstName);
+
+  // const classes = useStyles();
+  // const pdClasses = usePdstyles();
+
+  useEffect(() => {
+    getUserData()
+      .then((loggedInCustomer) => {
+        setNewUserData({
+          ...newUserData,
+          ...loggedInCustomer.data
+        });
+        /* Do something with loggedInCustomer */
+      })
+      .catch((err) => {
+        console.log('ERROR', err);
+        /* Do something with error */
+      });
+  }, []);
+
   // SignUPForm
 
   // const [openInfo, setOpenInfo] = React.useState(false);
@@ -35,32 +73,32 @@ function EditFormWithValidation(props) {
 
   // SignUP
 
-  const [signUpModal, setSignUpModal] = useState(false);
+  // const [signUpModal, setSignUpModal] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
-  const [redirect, setRedirect] = useState(false);
+  // const [redirect, setRedirect] = useState(false);
 
-  const handleOpenSignUpModal = () => {
-    setSignUpModal(true);
-  };
+  // const handleOpenSignUpModal = () => {
+  //   setSignUpModal(true);
+  // };
 
-  const handleCloseSignUpModal = () => {
-    setSignUpModal(false);
-    setRedirect(true);
-  };
-  const handleOpenSetErrorModal = () => {
-    setErrorModal(true);
-  };
+  // const handleCloseSignUpModal = () => {
+  //   setSignUpModal(false);
+  //   setRedirect(true);
+  // };
+  // const handleOpenSetErrorModal = () => {
+  //   setErrorModal(true);
+  // };
 
   const handleCloseSetErrorModal = () => {
     setErrorModal(false);
   };
 
-  const renderRedirect = () => {
-    if (redirect) {
-      return <Redirect to="/" />
-    }
-    return null
-  };
+  // const renderRedirect = () => {
+  //   if (redirect) {
+  //     return <Redirect to="/" />
+  //   }
+  //   return null
+  // };
 
   const submitNewUser = (values) => {
 
@@ -111,8 +149,8 @@ function EditFormWithValidation(props) {
       id={name}
       error={!!(touched && error)}
       helperText={touched && error}
-      // value={value}
-      // defaultValue={userValue}
+      value={value}
+      defaultValue={value}
       {...input}
       {...custom}
       className={classes.root}
@@ -120,40 +158,40 @@ function EditFormWithValidation(props) {
     />
   );
 
-  const nameCustomInput = 'Ivan';
-
-  const CustomInput = ({
-                         input,
-                         label,
-                         name,
-                         value,
-                         type,
-                         meta: { touched, error },
-                         ...custom
-                       }) => (
-    <TextField
-      type={type}
-      name={name}
-      variant="outlined"
-      fullWidth
-      id={name}
-      error={!!(touched && error)}
-      helperText={touched && error}
-      autoComplete="First Name"
-      // name="firstName"
-      // variant="outlined"
-      // fullWidth
-      // id="firstName"
-      value={value}
-      autoFocus
-      defaultValue={nameCustomInput}
-      // {...input}
-      {...custom}
-      label={(
-        <FormLabel className={classes.labelText} required>First Name</FormLabel>
-      )}
-    />
-  )
+  // const nameCustomInput = 'Ivan';
+  //
+  // const CustomInput = ({
+  //   input,
+  //   label,
+  //   name,
+  //   value,
+  //   type,
+  //   meta: { touched, error },
+  //   ...custom
+  // }) => (
+  //   <TextField
+  //     type={type}
+  //     name={name}
+  //     variant="outlined"
+  //     fullWidth
+  //     id={name}
+  //     error={!!(touched && error)}
+  //     helperText={touched && error}
+  //     autoComplete="First Name"
+  //     // name="firstName"
+  //     // variant="outlined"
+  //     // fullWidth
+  //     // id="firstName"
+  //     value={value}
+  //     autoFocus
+  //     defaultValue={nameCustomInput}
+  //     // {...input}
+  //     {...custom}
+  //     label={(
+  //       <FormLabel className={classes.labelText} required>First Name</FormLabel>
+  //     )}
+  //   />
+  // )
 
   // const renderBirthdayField = ({
   // input, label, name, value, meta: { touched, error }, ...custom }) => (
@@ -192,13 +230,14 @@ function EditFormWithValidation(props) {
   // );
 
   const { handleSubmit } = props;
+  const name = "Ivan";
 
   return (
     <Container >
       <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitNewUser)}>
         <Grid item xs={12} sm={10} md={5} >
           <Typography paragraph component="p" variant="subtitle2" className={classes.rightTitle}>
-        Please enter the following information:
+            Please enter the following information:
           </Typography>
 
           {/* <Field name="gender" component={renderRadioGroup} > */}
@@ -220,7 +259,7 @@ function EditFormWithValidation(props) {
 
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <Field name="firstName" component={CustomInput} label="First Name" />
+              {/*<Field name="firstName" component={CustomInput} label="First Name" />*/}
               <Field name="firstName" component={renderTextField} label="First Name" />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -315,7 +354,7 @@ function EditFormWithValidation(props) {
           <Fade in={errorModal}>
             <div className={classes.paperInfoError}>
               <h2 id="transition-modal-title" className={classes.modalInfoTitle}>
-              Something go wrong. Try again
+                Something go wrong. Try again
               </h2>
               <Button
                 onClick={handleCloseSetErrorModal}
@@ -323,7 +362,7 @@ function EditFormWithValidation(props) {
                 color="primary"
                 className={classes.submit}
               >
-              OK
+                OK
               </Button>
             </div>
           </Fade>

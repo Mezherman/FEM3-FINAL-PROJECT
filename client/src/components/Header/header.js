@@ -40,6 +40,8 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 // import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+// import store from '../../index';
+// import connect from 'react-redux'
 
 // const StyledMenu = withStyles({
 //   // paper: {
@@ -64,6 +66,8 @@ import MenuList from '@material-ui/core/MenuList';
 // ));
 
 function Header() {
+  // console.log('STOREEEEEEEEE', store.getState());
+
   const [modalIsVisible, setModalVisibility] = useState(false);
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -79,6 +83,8 @@ function Header() {
   };
 
   const totalCartQuantity = useSelector((state) => state.cart.totalCartQuantity);
+  const { loggedIn } = useSelector((state) => state.userReducer);
+  console.log('ISLOGGEDIN AAAAAAAAA', loggedIn);
   // const [anchorElLogin, setAnchorElLogin] = useState(null);
 
   // const handleClose = () => {
@@ -244,57 +250,105 @@ function Header() {
                 <span className={classes.menuTitle}>Favorites</span>
               </MenuItem>
               <Divider orientation="vertical" className={classes.dividerStyle} />
+
               <MenuItem
                 className={classes.headerMenuItem}
                 aria-controls="customized-menu"
                 aria-haspopup="true"
                 variant="contained"
-                onClick={handleClick}
+                onClick={loggedIn ? handleToggle : handleClick}
                 component=""
                 href={RoutesName.signIn}
+                ref={loggedIn ? anchorRef : null}
               >
                 <IconButton edge="end" className={classes.iconButton}>
-                  <PersonIcon fontSize="large" className={classes.iconsStyle} />
+                  <PersonIcon fontSize="large" className={loggedIn ? classes.iconLoggedIn : classes.iconsStyle} />
                 </IconButton>
-                <span className={classes.menuTitle}>Login</span>
+                <span className={classes.menuTitle}>{loggedIn ? 'My Account' : 'Login'}</span>
               </MenuItem>
-              <LoginModal
-                // isLoggedIn={loggedIn}
-                // onSuccessLogin={onSuccessLogin}
-                onModalClose={closeModal}
-                open={modalIsVisible}
-              />
-              {/*<StyledMenu*/}
-              {/*  className="customized-menu"*/}
-              {/*  id="customized-menu"*/}
-              {/*  anchorEl={anchorElLogin}*/}
-              {/*  keepMounted*/}
-              {/*  open={Boolean(anchorElLogin)}*/}
-              {/*  onClose={handleClose}*/}
-              {/*>*/}
-              {/*  <MenuItem style={{ display: 'none' }} />*/}
-              {/*  <SignIn onClose={handleClose} />*/}
-              {/*</StyledMenu>*/}
+              {loggedIn
+                ? (
+                  <Popper
+                    open={open}
+                    anchorEl={anchorRef.current}
+                    role={undefined}
+                    transition
+                    disablePortal
+                  >
+                    {({ TransitionProps, placement }) => (
+                      <Grow
+                        {...TransitionProps}
+                        style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                      >
+                        <Paper>
+                          <ClickAwayListener onClickAway={handleClose}>
+                            <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                              <Link to={RoutesName.personalData}>
+                                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                              </Link>
+                              <Link to={RoutesName.myOrders}>
+                                <MenuItem onClick={handleClose}>My orders</MenuItem>
+                              </Link>
+                              <MenuItem onClick={handleClose}>Logout</MenuItem>
+                            </MenuList>
+                          </ClickAwayListener>
+                        </Paper>
+                      </Grow>
+                    )}
+                  </Popper>
+                )
+                : (
+                  <LoginModal
+                    // isLoggedIn={loggedIn}
+                    // onSuccessLogin={onSuccessLogin}
+                    onModalClose={closeModal}
+                    open={modalIsVisible}
+                  />
+                )}
+              {/* <LoginModal */}
+              {/*  // isLoggedIn={loggedIn} */}
+              {/*  // onSuccessLogin={onSuccessLogin} */}
+              {/*  onModalClose={closeModal} */}
+              {/*  open={modalIsVisible} */}
+              {/* /> */}
+              {/* <StyledMenu */}
+              {/*  className="customized-menu" */}
+              {/*  id="customized-menu" */}
+              {/*  anchorEl={anchorElLogin} */}
+              {/*  keepMounted */}
+              {/*  open={Boolean(anchorElLogin)} */}
+              {/*  onClose={handleClose} */}
+              {/* > */}
+              {/*  <MenuItem style={{ display: 'none' }} /> */}
+              {/*  <SignIn onClose={handleClose} /> */}
+              {/* </StyledMenu> */}
               <Divider orientation="vertical" className={classes.dividerStyle} />
-              <MenuItem
-                className={classes.headerMenuItem}
-                aria-controls="customized-menu"
-                aria-haspopup="true"
-                variant="contained"
-                // onClick={handleClick}
-                component=""
-                ref={anchorRef}
-                // aria-controls={open ? 'menu-list-grow' : undefined}
-                // aria-haspopup="true"
-                onClick={handleToggle}
-                // href={RoutesName.signIn}
+              {/* <div> */}
+              {/* <MenuItem */}
+              {/*  className={classes.headerMenuItem} */}
+              {/*  aria-controls="customized-menu" */}
+              {/*  aria-haspopup="true" */}
+              {/*  variant="contained" */}
+              {/*  // onClick={handleClick} */}
+              {/*  component="" */}
+              {/*  ref={anchorRef} */}
+              {/*  // aria-controls={open ? 'menu-list-grow' : undefined} */}
+              {/*  // aria-haspopup="true" */}
+              {/*  onClick={handleToggle} */}
+              {/* // href={RoutesName.signIn} */}
+              {/* > */}
+              {/*  <IconButton edge="end" className={classes.iconButton}> */}
+              {/*    <PersonIcon fontSize="large" className={classes.iconsStyle} /> */}
+              {/*  </IconButton> */}
+              {/*  <span className={classes.menuTitle}>MyACC</span> */}
+              {/* </MenuItem> */}
+              <Popper
+                open={open}
+                anchorEl={anchorRef.current}
+                role={undefined}
+                transition
+                disablePortal
               >
-                <IconButton edge="end" className={classes.iconButton}>
-                  <PersonIcon fontSize="large" className={classes.iconsStyle} />
-                </IconButton>
-                <span className={classes.menuTitle}>MyACC</span>
-              </MenuItem>
-              <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
                 {({ TransitionProps, placement }) => (
                   <Grow
                     {...TransitionProps}
@@ -309,13 +363,14 @@ function Header() {
                           <Link to={RoutesName.myOrders}>
                             <MenuItem onClick={handleClose}>My orders</MenuItem>
                           </Link>
-                            <MenuItem onClick={handleClose}>Logout</MenuItem>
+                          <MenuItem onClick={handleClose}>Logout</MenuItem>
                         </MenuList>
                       </ClickAwayListener>
                     </Paper>
                   </Grow>
                 )}
               </Popper>
+              {/* </div> */}
               <Divider orientation="vertical" className={classes.dividerStyle} />
               <MenuItem className={classes.headerMenuItem} onClick={handleChange}>
                 <IconButton edge="end" aria-label="card" className={classes.iconButton}>
@@ -343,4 +398,7 @@ function Header() {
     </Box>
   );
 }
+
+const mapStateToProps = (state) => state;
+
 export default Header;

@@ -18,7 +18,7 @@ import axios from 'axios';
 
 // axios.defaults.baseURL = 'http://localhost:5000';
 
-axios.defaults.headers.common.Authorization = localStorage.getItem('token');
+// axios.defaults.headers.common.Authorization = localStorage.getItem('token');
 
 export default function PersonalData ({ isLoggedIn }) {
   const pdClasses = usePdstyles();
@@ -33,25 +33,30 @@ export default function PersonalData ({ isLoggedIn }) {
     birthdayYear: '',
     email: '',
     password: '',
-    country: 'Austria',
+    // country: '',
     agreement: false,
     isAdmin: false,
   });
 
   useEffect(() => {
-    getUserData()
-      .then((loggedInCustomer) => {
-        setNewUserData({
-          ...newUserData,
-          ...loggedInCustomer.data
+    console.log("IsloggedIn PersonalData", isLoggedIn);
+    console.log(axios.defaults.headers.common.Authorization);
+    if (isLoggedIn) {
+      getUserData()
+        .then((loggedInCustomer) => {
+          setNewUserData({
+            ...newUserData,
+            ...loggedInCustomer.data
+          });
+          /* Do something with loggedInCustomer */
+        })
+        .catch((err) => {
+          console.log('ERROR', err);
+          /* Do something with error */
         });
-        /* Do something with loggedInCustomer */
-      })
-      .catch((err) => {
-        console.log('ERROR', err);
-        /* Do something with error */
-      });
-  }, []);
+    }
+    // return null
+  }, [isLoggedIn]);
 
   console.log(newUserData);
 

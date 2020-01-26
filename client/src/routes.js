@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import Home from './components/Home/home';
 import Catalog from './components/Catalog/catalog'
 import ProductPage from './components/Product-page/product-page'
@@ -14,17 +14,31 @@ import Delivery from './components/Delivery/delivery';
 import EditPersonalData from './components/My-account/edit-personal-data';
 import PersonalData from './components/My-account/personal-data';
 import LoginModal from './components/Login-modal-window/login-modal-window';
-import EditFormWithValidation from './components/My-account/form-with-validation'
+import EditFormWithValidation from './components/My-account/edit-form-with-validation'
 import MyForm from './components/My-account/form-mui-valid'
 
 export default function Routes() {
+  // const history = useHistory();
+  // const user = useSelector((state) => state.userReducer);
+  // const [modalIsVisible, setModalVisibility] = useState(true);
+  // const { loggedIn } = useSelector((state) => state.userReducer);
+  // let closeModal = null;
+  // if(ifloggedIn){
+  //    const closeModal = () => {
+  //     console.log('close modal');
+  //     setModalVisibility(false);
+  //   };
   const { loggedIn } = useSelector((state) => state.userReducer);
-
-  const [modalIsVisible, setModalVisibility] = useState(true);
-
+  const history = useHistory();
+  const [modalIsVisible, setModalVisibility] = useState(!loggedIn);
   const closeModal = () => {
     setModalVisibility(false);
   };
+
+  if (!loggedIn && !modalIsVisible) {
+    setModalVisibility(true);
+    history.push(RoutesName.home);
+  }
 
   return (
     <Switch>
@@ -47,7 +61,7 @@ export default function Routes() {
         render={() => (
           loggedIn
             ? (
-              <PersonalData />
+              <PersonalData isLoggedIn={loggedIn} />
             )
           //
             : (
@@ -55,8 +69,11 @@ export default function Routes() {
                 <Home />
                 <LoginModal
                   isLoggedIn={loggedIn}
+                  // isLoggedIn={()=>{loggedIn(loggedIn)}}
                   // onSuccessLogin={onSuccessLogin}
                   onModalClose={closeModal}
+                  // onModalClose={ closeModal}
+                  // onModalCloseBack={closeModalFromBack}
                   open={modalIsVisible}
                 />
               </div>

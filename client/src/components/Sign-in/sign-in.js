@@ -25,7 +25,7 @@ function SignIn(props) {
   const [errorMessage, setErrorMessage] = useState(null);
   const [length, setLength] = useState(1);
 
-  const { onClose, user, loginLoaded, mergeCart } = props;
+  const { onClose, onModalCloseBack, user, loginLoaded, mergeCart } = props;
   // console.log('USER =', user);
   const classes = useStylesSingIn();
 
@@ -67,6 +67,7 @@ function SignIn(props) {
   // }
 
   function handleClick(event) {
+    console.log('event');
     event.preventDefault();
     const userData = {
       loginOrEmail: login,
@@ -76,7 +77,9 @@ function SignIn(props) {
       .then((loginResult) => {
         localStorage.setItem('token', `${loginResult.data.token}`);
         loginLoaded();
+        console.log('after loged in');
         onClose();
+
         mergeCart();
         // localStorage.setItem('L', `${loginResult.data.token}`);
         // const token = localStorage.getItem('token');

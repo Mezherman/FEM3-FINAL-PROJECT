@@ -16,7 +16,7 @@ import loginLoaded from './redux/actions/user';
 import { mergeDBWithLocalStorage } from './redux/actions/CartActions';
 
 function App(props) {
-  const { catalogLoading, fetchCatalog, login, mergeCart } = props;
+  const { catalogLoading, fetchCatalog, login, mergeCart, loggedIn } = props;
 
   useEffect(() => {
     fetchCatalog();
@@ -31,7 +31,7 @@ function App(props) {
           <Router>
             <Header />
             <ScrollToAnchor />
-            <Routes />
+            <Routes loggedIn={loggedIn} />
             <Notification />
             <Footer />
           </Router>
