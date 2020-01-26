@@ -179,7 +179,7 @@ function SignIn(props) {
           <Link
             className={classes.text}
             to={RoutesName.signUp}
-            // onClick={onClose}
+            onClick={onClose}
           >
               Don&#8242;t have an account?
             <strong> Sign Up </strong>
