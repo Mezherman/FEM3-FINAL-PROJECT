@@ -10,29 +10,24 @@ import Footer from './components/Footer/footer'
 import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
 import { getCatalogFromDB } from './redux/actions/categories';
 import Notification from './components/Notification/notification'
-import { loginLoaded, userLoadedData } from './redux/actions/user';
+import loginLoaded, { fetchCustomerData } from './redux/actions/user';
 import { mergeDBWithLocalStorage } from './redux/actions/CartActions';
-import { getFavoritesFromDB } from './redux/actions/favorites'
-// import getUserData from './services/getUserData'
+import { getFavoritesFromDB } from './redux/actions/favorites';
+import getOrders from './services/getOrders';
 
 function App(props) {
-  const { catalogLoading, userData, login, mergeCart, fetchFavorites, fetchCatalog } = props;
+  const { catalogLoading, login, mergeCart, fetchFavorites, fetchCatalog, fetchCustomerData } = props;
   // console.log('loading=', catalogLoading);
   useEffect(() => {
     fetchCatalog();
     login();
-    userData();
-    // getUserData()
-    //   .then((response) => {
-    //     userData({ ...response.data });
-    //   })
-    //   .catch((err) => {
-    //     console.log("ERROR, Don't have an access to customer data", err);
-    //     /* Do something with error */
-    //   });
     mergeCart();
+    fetchCustomerData();
     fetchFavorites();
+    getOrders()
+      .then((response) => console.log(response));
   }, []);
+
   return (
     <>
       {!catalogLoading &&
@@ -41,7 +36,6 @@ function App(props) {
           <Router>
             <Header />
             <ScrollToAnchor />
-            {/*<Routes loggedIn={loggedIn} />*/}
             <Routes />
             <Notification />
             <Footer />
@@ -66,7 +60,7 @@ const mapDispatchToProps = (dispatch) => ({
     // dispatch(catalogRequested());
   },
   login: () => dispatch(loginLoaded()),
-  userData: (params) => { dispatch(userLoadedData(params)) },
+  fetchCustomerData: () => dispatch(fetchCustomerData()),
   mergeCart: () => dispatch(mergeDBWithLocalStorage()),
   fetchFavorites: () => dispatch(getFavoritesFromDB())
 });
@@ -78,6 +72,5 @@ App.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
   fetchCatalog: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
-  mergeCart: PropTypes.func.isRequired,
-  userData: PropTypes.func.isRequired
+  mergeCart: PropTypes.func.isRequired
 };

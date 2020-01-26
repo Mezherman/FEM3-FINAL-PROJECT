@@ -16,12 +16,9 @@ import jwtDecode from 'jwt-decode';
 import useStylesSingIn from './_sign-in';
 import RoutesName from '../../routes-list';
 import postLoginData from '../../services/postLoginData'
-// import { loginLoaded, userLoadedData } from '../../redux/actions/user';
-// eslint-disable-next-line import/named
-import { loginLoaded, userLoadedData } from '../../redux/actions/user';
+import loginLoaded, { fetchCustomerData } from '../../redux/actions/user';
 import { mergeDBWithLocalStorage } from '../../redux/actions/CartActions';
 import { getFavoritesFromDB } from '../../redux/actions/favorites';
-import getUserData from '../../services/getUserData';
 
 function SignIn(props) {
   const [login, setLogin] = useState(null);
@@ -82,26 +79,13 @@ function SignIn(props) {
         loginLoaded();
         onClose();
         mergeCart();
+        fetchCustomerData();
         fetchFavorites();
         // localStorage.setItem('L', `${loginResult.data.token}`);
         // const token = localStorage.getItem('token');
         // console.log(token)
 
         setErrorMessage(null);
-        getUserData()
-          .then((loggedInCustomer) => {
-            userLoadedData({ ...loggedInCustomer.data });
-            // console.log(userLoadedData());
-            // loginLoaded({ firstName, lastName, login, email, telephone, gender });
-            // setNewUserData({
-            //   ...newUserData,
-            //   ...loggedInCustomer.data
-            // });
-          })
-          .catch((err) => {
-            console.log("ERROR, Don't have an access to customer data", err);
-            /* Do something with error */
-          });
 
         /* Do something with jwt-token if login successed */
       })
@@ -216,8 +200,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   loginLoaded: () => { dispatch(loginLoaded()) },
-  userLoadedData: (params) => { dispatch(userLoadedData(params)) },
   mergeCart: () => { dispatch(mergeDBWithLocalStorage()) },
+  fetchCustomerData: () => dispatch(fetchCustomerData()),
   fetchFavorites: () => dispatch(getFavoritesFromDB())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

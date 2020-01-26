@@ -2,17 +2,18 @@ const initialState = {
   token: '',
   loggedIn: false,
   firstName: '',
-  lastName: ''
+  lastName: '',
+  customer: {}
 };
 
-const initialCustomerData = {
-  gender: '',
-  firstName: '',
-  lastName: '',
-  telephone: '',
-  email: '',
-  login: ''
-};
+// const initialCustomerData = {
+//   gender: '',
+//   firstName: '',
+//   lastName: '',
+//   telephone: '',
+//   email: '',
+//   login: ''
+// };
 
 export default function user(state = initialState, action) {
   switch (action.type) {
@@ -22,14 +23,23 @@ export default function user(state = initialState, action) {
     case 'FETCH_LOGIN_ERROR':
       return state;
 
-    case 'FETCH_USER_DATA_SUCCESS':
+    // case 'FETCH_USER_DATA_SUCCESS':
+    //   return {
+    //     ...state,
+    //     customerData: {
+    //       ...initial,
+    //       ...action.payload
+    //     },
+    //   };
+
+    case 'FETCH_CUSTOMER_DATA_SUCCESS':
       return {
         ...state,
-        customerData: {
-          ...initialCustomerData,
-          ...action.payload
-        },
+        customer: action.payload
       };
+
+    case 'FETCH_CUSTOMER_DATA_FAILURE':
+      return state;
 
     default: {
       return state

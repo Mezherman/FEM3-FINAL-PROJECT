@@ -30,7 +30,7 @@ export default function PersonalData () {
     telephone,
     email,
     login
-  } = useSelector((state) => state.user.customerData);
+  } = useSelector((state) => state.user.customer);
   const { loggedIn } = useSelector((state) => state.user);
 
   // const firstName = useSelector((state) => console.log(state.user));

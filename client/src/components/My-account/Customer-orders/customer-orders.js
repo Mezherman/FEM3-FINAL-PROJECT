@@ -1,14 +1,14 @@
 import React from 'react';
 import { Container, Grid, Hidden } from '@material-ui/core';
 import CartProductListHeader
-  from '../Summary-cart/Cart-product-list-header/cart-product-list-header';
-import CartProductItem from '../Summary-cart/Cart-product-item/cart-product-item';
-import useHeaderStyles from '../Summary-cart/Cart-product-list-header/_cart-product-list-header';
+  from '../../Summary-cart/Cart-product-list-header/cart-product-list-header';
+import CartProductItem from '../../Summary-cart/Cart-product-item/cart-product-item';
+import useHeaderStyles from '../../Summary-cart/Cart-product-list-header/_cart-product-list-header';
 
-const MyOrders = (props) => {
+const CustomerOrders = (props) => {
   const classes = useHeaderStyles();
   // const { products, actions } = props;
-  // const list = [];
+  // const list = ;
   // products.forEach((product) => {
   //   list.push(<CartProductItem key={product.product._id} product={product}
   //     onSetProductQuantity={actions.setProductQuantity}
@@ -52,4 +52,4 @@ const MyOrders = (props) => {
   )
 };
 
-export default MyOrders;
+export default CustomerOrders;
