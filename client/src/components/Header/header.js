@@ -8,10 +8,10 @@ import {
   MenuItem,
   Box,
   Container,
-  Divider,
+  Divider
   // withStyles,
 } from '@material-ui/core'
-
+import { useTheme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu'
 // import SearchIcon from '@material-ui/icons/Search'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
@@ -33,6 +33,7 @@ import HeaderNavbar from '../Header-navbar/header-navbar';
 import PreviewBlock from '../Preview-block/preview-cart';
 import LoginModal from '../Login-modal-window/login-modal-window';
 import SearchIcon from '@material-ui/icons/Search';
+import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
 
 // const StyledMenu = withStyles({
 //   // paper: {
@@ -78,17 +79,21 @@ function Header() {
   //   setAnchorElLogin(null);
   // };
 
-  const classes = useStyles()
-  const [anchorEl, setAnchorEl] = useState(null)
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const [prevBlockIsVisible, setPrevBlockIsVisible] = useState(false);
   const [drawer, setDrawer] = useState(false);
-  // const [sideBar, openSideBar] = useState(false)
+  const [searchInput, searchIsShown] = useState(false);
 
-  // const toggleDrawer = (open) => {
-  //     openSideBar(true )
-  // };
-  // console.log(sideBar);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.up('md'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+  console.log('Mobile', isMobile);
+  console.log('Tablet', isTablet);
+  console.log('Desctop', isDesktop);
+
   const handleChange = () => {
     setPrevBlockIsVisible((prev) => !prev);
   };
@@ -116,6 +121,11 @@ function Header() {
   // toggle side navbar
   const toggleDrawer = (open) => {
     setDrawer(open)
+  };
+
+  const toggleSearch = () => {
+    searchIsShown(!searchInput)
+    console.log(searchInput);
   };
 
   const menuId = 'primary-search-account-menu';
@@ -162,6 +172,7 @@ function Header() {
         <Container maxWidth="xl" disableGutters className={classes.grow}>
           <Toolbar className={classes.justify}>
             <Box className={classes.boxLogo}>
+
               <IconButton
                 onClick={() => toggleDrawer(true)}
                 edge="start"
@@ -172,15 +183,18 @@ function Header() {
               >
                 <MenuIcon fontSize="large" />
               </IconButton>
-              <Link to={RoutesName.home}>
-                <IconButton edge="start" className={classes.logoIcon}>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/img/header/wmf-logo-30x35.svg`}
-                    alt="logo"
-                    className="header-logo"
-                  />
-                </IconButton>
-              </Link>
+
+              {isMobile && (
+                <Link to={RoutesName.home}>
+                  <IconButton edge="start" className={classes.logoIcon}>
+                    <img
+                      src={`${process.env.PUBLIC_URL}/img/header/wmf-logo-30x35.svg`}
+                      alt="logo"
+                      className="header-logo"
+                    />
+                  </IconButton>
+                </Link>
+              )}
             </Box>
 
             {/* <Box className={classes.mainBoxLogo}> */}
@@ -201,16 +215,29 @@ function Header() {
               toggleDrawer={toggleDrawer}
             />
 
+            {searchInput &&
+            <Search />}
+            {isMobile && searchInput &&
+            <Search />}
+            {isTablet &&
+            <Search />}
+            {isDesktop && searchInput &&
+            <Search />}
+
             <Box className={classes.iconButtonBox}>
               <MenuItem
                 className={classes.headerMenuItem}
               >
-                <Search />
-                <IconButton edge="end" className={classes.iconButton}>
+                <IconButton
+                  onClick={toggleSearch}
+                  edge="end"
+                  className={classes.iconButton}
+                >
                   <SearchIcon fontSize="large" className={classes.iconsStyle} />
                 </IconButton>
                 <span className={classes.menuTitle}>Search</span>
               </MenuItem>
+
               <Divider orientation="vertical" className={classes.dividerStyle} />
 
               <MenuItem className={classes.headerMenuItem}>
@@ -218,8 +245,8 @@ function Header() {
                   <IconButton edge="end" className={classes.iconButton}>
                     <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
                   </IconButton>
-                </Link>
                 <span className={classes.menuTitle}>Favorites</span>
+                </Link>
               </MenuItem>
               <Divider orientation="vertical" className={classes.dividerStyle} />
               <MenuItem

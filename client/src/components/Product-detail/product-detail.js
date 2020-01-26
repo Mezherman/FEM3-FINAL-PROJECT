@@ -238,7 +238,10 @@ function ProductDetail({ product, favorites }) {
       <Grid container>
         <Grid item xs={12} >
           <h3
-            className={classes.sectionTitle}>Product details</h3>
+            className={classes.sectionTitle}
+          >
+            Product details
+          </h3>
           {isDesktop && <ProductDetailTab data={product} />}
           {!isDesktop && <ProductDetailCollapse data={product} />}
           {!isTablet && <Divider />}

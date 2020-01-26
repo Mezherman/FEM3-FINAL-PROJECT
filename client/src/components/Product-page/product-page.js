@@ -51,7 +51,7 @@ function ProductPage(props) {
                   />
                 </Grid>
               </div>
-              <ProductCardCarousel itemNo={itemNo} products={productsToShow} />
+              <ProductCardCarousel products={productsToShow} />
             </Container>
           </>
         )}

@@ -20,7 +20,7 @@ function ProductCardCarousel(props) {
     md: 3,
     lg: 4,
     xl: 4,
-  }
+  };
   const productCardList = (products) => (
     products.map((item) => (
       <>

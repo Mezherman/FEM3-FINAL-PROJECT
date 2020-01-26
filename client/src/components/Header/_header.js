@@ -128,6 +128,9 @@ const useStyles = makeStyles((theme) => ({
     },
     '& #customized-menu': {
       display: 'none'
+    },
+    '&a' : {
+      textDecoration: 'none',
     }
   },
   iconButton: {
@@ -158,6 +161,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       display: 'block',
       fontSize: '14px',
+      textAlign: 'center',
+      color: theme.palette.text.primary,
+      textDecoration: 'none',
       '&:hover': {
         textDecoration: 'underline'
       }
