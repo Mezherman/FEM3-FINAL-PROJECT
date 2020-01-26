@@ -219,7 +219,7 @@ function Header() {
             <Search />}
             {isMobile && searchInput &&
             <Search />}
-            {isTablet &&
+            {!isMobile && isTablet &&
             <Search />}
             {isDesktop && searchInput &&
             <Search />}
