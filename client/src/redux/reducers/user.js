@@ -5,17 +5,30 @@ const initialState = {
   lastName: ''
 };
 
-export default function userReducer(state = initialState, action) {
+const initialCustomerData = {
+  gender: '',
+  firstName: '',
+  lastName: '',
+  telephone: '',
+  email: '',
+  login: ''
+};
+
+export default function user(state = initialState, action) {
   switch (action.type) {
     case 'FETCH_LOGIN_SUCCESS':
       return action.payload;
 
     case 'FETCH_LOGIN_ERROR':
+      return state;
+
+    case 'FETCH_USER_DATA_SUCCESS':
       return {
-        token: '',
-        loggedIn: false,
-        firstName: '',
-        lastName: ''
+        ...state,
+        customerData: {
+          ...initialCustomerData,
+          ...action.payload
+        },
       };
 
     default: {

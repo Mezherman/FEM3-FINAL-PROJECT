@@ -102,7 +102,7 @@ const useStyles = makeStyles((theme) => ({
   },
   headerMenuItem: {
     flexDirection: 'column',
-    padding: '0',
+    padding: '0 5px',
     overflow: 'visible',
     '&:hover': {
       backgroundColor: 'transparent'
@@ -155,7 +155,7 @@ const useStyles = makeStyles((theme) => ({
   menuLink: {
     textDecoration: 'none',
     textAlign: 'center',
-    color: '#000000',
+    color: theme.palette.text.primary,
     '&:hover': {
       textDecoration: 'underline'
     }
@@ -193,7 +193,11 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       padding: '12px 15px'
     }
-  }
+  },
+  // linkDecoration: {
+  //   color: theme.palette.,
+  //   textDecoration: 'none',
+  // },
 }))
 
 export default useStyles

@@ -1,6 +1,8 @@
 import jwtDecode from 'jwt-decode';
+// import getUserData from '../../services/getUserData';
 
-const loginLoaded = () => {
+export const loginLoaded = () => {
+  // console.log('Params from action', params);
   const token = localStorage.getItem('token');
   if (!token) {
     return {
@@ -8,26 +10,32 @@ const loginLoaded = () => {
     }
   }
 
+  // let userData = {};
+
+  // console.log('USER DATA FROM ACTION', userData);
+
   const decoded = jwtDecode(token);
-  const { firstName, lastName, exp } = decoded;
+  // const { firstName, lastName, exp } = decoded;
 
   const time = new Date().getTime() / 1000;
 
-  if (time < exp) {
+  if (time < decoded.exp) {
     return {
       type: 'FETCH_LOGIN_SUCCESS',
       payload: {
         loggedIn: true,
         token,
-        firstName,
-        lastName
       }
     }
   }
-
   return {
     type: 'FETCH_LOGIN_ERROR',
   }
 };
 
-export default loginLoaded;
+export const userLoadedData = (params) => ({
+  type: 'FETCH_USER_DATA_SUCCESS',
+  payload: {
+    ...params
+  }
+});

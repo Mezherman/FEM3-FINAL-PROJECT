@@ -11,7 +11,7 @@ function login(loginOrEmail, password) {
   axios
     .post('/customers/login', userData)
     .then((response) => {
-      axios.defaults.headers.common.Authorization = response.data.token;
+      // axios.defaults.headers.common.Authorization = response.data.token;
       console.log(response.data.token);
       console.log('Logged in successfully');
     })

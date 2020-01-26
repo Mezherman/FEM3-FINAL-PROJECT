@@ -18,19 +18,20 @@ import Favorites from './components/Favorites/favorites'
 import Checkout from './components/Checkout/checkout';
 import EditFormWithValidation from './components/My-account/edit-form-with-validation'
 import MyForm from './components/My-account/form-mui-valid'
+import MyOrders from './components/My-account/my-orders';
 
 export default function Routes() {
   // const history = useHistory();
-  // const user = useSelector((state) => state.userReducer);
+  // const user = useSelector((state) => state.user);
   // const [modalIsVisible, setModalVisibility] = useState(true);
-  // const { loggedIn } = useSelector((state) => state.userReducer);
+  // const { loggedIn } = useSelector((state) => state.user);
   // let closeModal = null;
   // if(ifloggedIn){
   //    const closeModal = () => {
   //     console.log('close modal');
   //     setModalVisibility(false);
   //   };
-  const { loggedIn } = useSelector((state) => state.userReducer);
+  const { loggedIn } = useSelector((state) => state.user);
   const history = useHistory();
   const [modalIsVisible, setModalVisibility] = useState(!loggedIn);
   const closeModal = () => {
@@ -65,7 +66,29 @@ export default function Routes() {
             ? (
               <PersonalData isLoggedIn={loggedIn} />
             )
-          //
+            : (
+              <div>
+                <Home />
+                <LoginModal
+                  isLoggedIn={loggedIn}
+                  // isLoggedIn={()=>{loggedIn(loggedIn)}}
+                  // onSuccessLogin={onSuccessLogin}
+                  onModalClose={closeModal}
+                  // onModalClose={ closeModal}
+                  // onModalCloseBack={closeModalFromBack}
+                  open={modalIsVisible}
+                />
+              </div>
+            )
+        )}
+      />
+      <Route
+        path={RoutesName.myOrders}
+        render={() => (
+          loggedIn
+            ? (
+              <MyOrders isLoggedIn={loggedIn} />
+            )
             : (
               <div>
                 <Home />

@@ -4,8 +4,8 @@ import { reducer as form } from 'redux-form';
 import cart from './cart';
 import categoriesReducer from './categories';
 import productsReducer from './products';
-import filterReducer from './filter'
-import userReducer from './user';
+import filterReducer from './filter';
+import user from './user';
 import notification from './notification';
 import favoritesReducer from './favorites';
 
@@ -16,6 +16,6 @@ export default combineReducers({
   form,
   filterReducer,
   notification,
-  userReducer,
+  user,
   favoritesReducer
 })

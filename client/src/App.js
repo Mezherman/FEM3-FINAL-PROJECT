@@ -10,16 +10,26 @@ import Footer from './components/Footer/footer'
 import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
 import { getCatalogFromDB } from './redux/actions/categories';
 import Notification from './components/Notification/notification'
-import loginLoaded from './redux/actions/user';
+import { loginLoaded, userLoadedData } from './redux/actions/user';
 import { mergeDBWithLocalStorage } from './redux/actions/CartActions';
 import { getFavoritesFromDB } from './redux/actions/favorites'
+// import getUserData from './services/getUserData'
 
 function App(props) {
-  const { catalogLoading, login, mergeCart, fetchFavorites, fetchCatalog } = props;
+  const { catalogLoading, userData, login, mergeCart, fetchFavorites, fetchCatalog } = props;
   // console.log('loading=', catalogLoading);
   useEffect(() => {
     fetchCatalog();
     login();
+    userData();
+    // getUserData()
+    //   .then((response) => {
+    //     userData({ ...response.data });
+    //   })
+    //   .catch((err) => {
+    //     console.log("ERROR, Don't have an access to customer data", err);
+    //     /* Do something with error */
+    //   });
     mergeCart();
     fetchFavorites();
   }, []);
@@ -47,7 +57,7 @@ const mapStateToProps = (state) => ({
   catalogLoading: state.categoriesReducer.catalogLoading,
   error: state.categoriesReducer.error,
   notification: state.notification,
-  loggedIn: state.userReducer.loggedIn
+  loggedIn: state.user.loggedIn
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -56,6 +66,7 @@ const mapDispatchToProps = (dispatch) => ({
     // dispatch(catalogRequested());
   },
   login: () => dispatch(loginLoaded()),
+  userData: (params) => { dispatch(userLoadedData(params)) },
   mergeCart: () => dispatch(mergeDBWithLocalStorage()),
   fetchFavorites: () => dispatch(getFavoritesFromDB())
 });
@@ -67,5 +78,6 @@ App.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
   fetchCatalog: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
-  mergeCart: PropTypes.func.isRequired
+  mergeCart: PropTypes.func.isRequired,
+  userData: PropTypes.func.isRequired
 };

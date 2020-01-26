@@ -81,7 +81,7 @@ function Header() {
   };
 
   const totalCartQuantity = useSelector((state) => state.cart.totalCartQuantity);
-  const { loggedIn } = useSelector((state) => state.userReducer);
+  const { loggedIn } = useSelector((state) => state.user);
   console.log('ISLOGGEDIN AAAAAAAAA', loggedIn);
   // const [anchorElLogin, setAnchorElLogin] = useState(null);
 
@@ -176,6 +176,12 @@ function Header() {
     }
 
     setOpen(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+
+    window.location.reload(); // window.location.reload()
   };
 
   function handleListKeyDown(event) {
@@ -301,13 +307,15 @@ function Header() {
                         <Paper>
                           <ClickAwayListener onClickAway={handleClose}>
                             <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                              <Link to={RoutesName.personalData}>
+                              <Link to={RoutesName.personalData} className={classes.menuLink}>
                                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                               </Link>
-                              <Link to={RoutesName.myOrders}>
+                              <Link to={RoutesName.myOrders} className={classes.menuLink}>
                                 <MenuItem onClick={handleClose}>My orders</MenuItem>
                               </Link>
-                              <MenuItem onClick={handleClose}>Logout</MenuItem>
+                              <MenuItem onClick={handleLogout} className={classes.menuLink}>
+                                Logout
+                              </MenuItem>
                             </MenuList>
                           </ClickAwayListener>
                         </Paper>
@@ -360,34 +368,34 @@ function Header() {
               {/*  </IconButton> */}
               {/*  <span className={classes.menuTitle}>MyACC</span> */}
               {/* </MenuItem> */}
-              <Popper
-                open={open}
-                anchorEl={anchorRef.current}
-                role={undefined}
-                transition
-                disablePortal
-              >
-                {({ TransitionProps, placement }) => (
-                  <Grow
-                    {...TransitionProps}
-                    style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                  >
-                    <Paper>
-                      <ClickAwayListener onClickAway={handleClose}>
-                        <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                          <Link to={RoutesName.personalData}>
-                            <MenuItem onClick={handleClose}>Profile</MenuItem>
-                          </Link>
-                          <Link to={RoutesName.myOrders}>
-                            <MenuItem onClick={handleClose}>My orders</MenuItem>
-                          </Link>
-                          <MenuItem onClick={handleClose}>Logout</MenuItem>
-                        </MenuList>
-                      </ClickAwayListener>
-                    </Paper>
-                  </Grow>
-                )}
-              </Popper>
+              {/*<Popper*/}
+              {/*  open={open}*/}
+              {/*  anchorEl={anchorRef.current}*/}
+              {/*  role={undefined}*/}
+              {/*  transition*/}
+              {/*  disablePortal*/}
+              {/*>*/}
+              {/*  {({ TransitionProps, placement }) => (*/}
+              {/*    <Grow*/}
+              {/*      {...TransitionProps}*/}
+              {/*      style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}*/}
+              {/*    >*/}
+              {/*      <Paper>*/}
+              {/*        <ClickAwayListener onClickAway={handleClose}>*/}
+              {/*          <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>*/}
+              {/*            <Link to={RoutesName.personalData}>*/}
+              {/*              <MenuItem onClick={handleClose}>Profile</MenuItem>*/}
+              {/*            </Link>*/}
+              {/*            <Link to={RoutesName.myOrders}>*/}
+              {/*              <MenuItem onClick={handleClose}>My orders</MenuItem>*/}
+              {/*            </Link>*/}
+              {/*            <MenuItem onClick={handleClose}>Logout</MenuItem>*/}
+              {/*          </MenuList>*/}
+              {/*        </ClickAwayListener>*/}
+              {/*      </Paper>*/}
+              {/*    </Grow>*/}
+              {/*  )}*/}
+              {/*</Popper>*/}
               {/* </div> */}
               <Divider orientation="vertical" className={classes.dividerStyle} />
               <MenuItem className={classes.headerMenuItem} onClick={handleChange}>
@@ -410,6 +418,7 @@ function Header() {
         ) : null}
         {renderMobileMenu}
         {renderMenu}
+        {/* <Search /> */}
       </Container>
       <Divider />
     </Box>

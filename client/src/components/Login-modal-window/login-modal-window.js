@@ -14,7 +14,7 @@ import ModalWindow from '../Modal-window/modal-window';
 import SignIn from '../Sign-in/sign-in';
 
 export default function LoginModal({ isLoggedIn, open, onModalClose, onSuccessLogin }) {
-  const { loggedIn } = useSelector((state) => state.userReducer);
+  const { loggedIn } = useSelector((state) => state.user);
   const history = useHistory();
 
   const closeModalFromBack = () => {
