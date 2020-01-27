@@ -53,7 +53,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   },
   text: {
-    textAlign: 'justify'
+    textAlign: 'justify',
+    paddingBottom: theme.spacing(3),
   },
   video: {
     width: '100%',

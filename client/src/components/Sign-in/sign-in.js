@@ -26,7 +26,7 @@ function SignIn(props) {
   const [errorMessage, setErrorMessage] = useState(null);
   const [length, setLength] = useState(1);
 
-  const { onClose, user, loginLoaded, mergeCart, fetchFavorites } = props;
+  const { onClose, user, loginLoaded, userLoadedData, mergeCart, fetchFavorites } = props;
   // console.log('USER =', user);
   const classes = useStylesSingIn();
 
@@ -180,7 +180,7 @@ function SignIn(props) {
           <Link
             className={classes.text}
             to={RoutesName.signUp}
-            // onClick={onClose}
+            onClick={onClose}
           >
               Don&#8242;t have an account?
             <strong> Sign Up </strong>
@@ -194,7 +194,7 @@ function SignIn(props) {
 const mapStateToProps = (state) => {
   console.log('STATE =', state);
   return {
-    user: state.userReducer
+    user: state.user
   }
 };
 

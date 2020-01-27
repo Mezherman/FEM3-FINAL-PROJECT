@@ -20,6 +20,7 @@ axios.defaults.baseURL = 'http://localhost:5000';
 // }
 
 const getCustomer = () => {
+  // console.log('AXIOS DEFAULTS =', axios.defaults.headers.common.Authorization);
   return axios
     .get('/customers/customer')
     .then((loggedInCustomer) => {

@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '0',
   },
   grow: {
-    padding: theme.spacing(3, 0),
+    padding: theme.spacing(1, 0),
     flexGrow: 1,
   },
   justify: {
@@ -102,7 +102,7 @@ const useStyles = makeStyles((theme) => ({
   },
   headerMenuItem: {
     flexDirection: 'column',
-    padding: '0',
+    padding: '0 5px',
     overflow: 'visible',
     '&:hover': {
       backgroundColor: 'transparent'
@@ -112,10 +112,17 @@ const useStyles = makeStyles((theme) => ({
     // }
   },
   iconsStyle: {
-    color: '#000000',
-    fontSize: '27px',
+    // color: theme.palette.secondary.main,
+    color: theme.palette.text.primary,
+    fontSize: '26px',
     opacity: '.7'
   },
+
+  iconLoggedIn: {
+    color: theme.palette.primary.main,
+    fontSize: '26px',
+  },
+
   iconButtonBox: {
     height: '100%',
     display: 'flex',
@@ -128,6 +135,9 @@ const useStyles = makeStyles((theme) => ({
     },
     '& #customized-menu': {
       display: 'none'
+    },
+    '& a': {
+      textDecoration: 'none',
     }
   },
   iconButton: {
@@ -148,7 +158,7 @@ const useStyles = makeStyles((theme) => ({
   menuLink: {
     textDecoration: 'none',
     textAlign: 'center',
-    color: '#000000',
+    color: theme.palette.text.primary,
     '&:hover': {
       textDecoration: 'underline'
     }
@@ -158,6 +168,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       display: 'block',
       fontSize: '14px',
+      textAlign: 'center',
+      color: theme.palette.text.primary,
+      textDecoration: 'none',
       '&:hover': {
         textDecoration: 'underline'
       }
@@ -186,7 +199,11 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       padding: '12px 15px'
     }
-  }
+  },
+  // linkDecoration: {
+  //   color: theme.palette.,
+  //   textDecoration: 'none',
+  // },
 }))
 
 export default useStyles

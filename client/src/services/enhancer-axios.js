@@ -16,8 +16,7 @@ export default function enhancerAxios (url, options = { method: 'get' }, data = 
     data
   })
     .then((response) => response.data)
-    .catch((err) => {
-      console.log(err);
+    .catch((err) => err);
       return null;
     })
   )

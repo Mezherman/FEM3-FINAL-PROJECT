@@ -13,6 +13,8 @@ import Notification from './components/Notification/notification'
 import loginLoaded, { fetchCustomerData } from './redux/actions/user';
 import { mergeDBWithLocalStorage } from './redux/actions/CartActions';
 import { getFavoritesFromDB } from './redux/actions/favorites'
+import ScrollToTopOnMount from './components/Pages-scroll-to-top/Pages-scroll-top-top';
+import getOrders from './services/getOrders';
 
 function App(props) {
   const { catalogLoading, login, mergeCart, fetchFavorites, fetchCatalog, fetchCustomerData } = props;
@@ -24,12 +26,14 @@ function App(props) {
     fetchCustomerData();
     fetchFavorites();
   }, []);
+
   return (
     <>
       {!catalogLoading &&
       (
         <>
           <Router>
+            <ScrollToTopOnMount />
             <Header />
             <ScrollToAnchor />
             <Routes />
@@ -47,7 +51,7 @@ const mapStateToProps = (state) => ({
   catalogLoading: state.categoriesReducer.catalogLoading,
   error: state.categoriesReducer.error,
   notification: state.notification,
-  loggedIn: state.userReducer.loggedIn
+  loggedIn: state.user.loggedIn
 });
 
 const mapDispatchToProps = (dispatch) => ({

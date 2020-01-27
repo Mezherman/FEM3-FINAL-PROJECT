@@ -7,7 +7,7 @@ import { getCustomer } from '../../services/customer';
 const db = (store) => (next) => async (action) => {
   // console.log('ACTION =', action);
   const storeCart = { ...store.getState().cart };
-  const { loggedIn, token } = store.getState().userReducer;
+  const { loggedIn, token } = store.getState().user;
 
   switch (action.type) {
     case 'SET_CATALOG_FROM_DB': {
