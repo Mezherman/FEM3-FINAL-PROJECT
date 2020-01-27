@@ -24,8 +24,6 @@ function App(props) {
     mergeCart();
     fetchCustomerData();
     fetchFavorites();
-    getOrders()
-      .then((response) => response.data);
   }, []);
 
   return (
