@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, List, ListItem, Typography } from '@material-ui/core';
 
-import useStyles from './_signUp-info';
+import useStyles from './_sign-up-info';
 
 export default function SignUpInfo () {
   const classes = useStyles();

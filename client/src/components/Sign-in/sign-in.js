@@ -16,7 +16,7 @@ import jwtDecode from 'jwt-decode';
 import useStylesSingIn from './_sign-in';
 import RoutesName from '../../routes-list';
 import postLoginData from '../../services/postLoginData'
-import loginLoaded from '../../redux/actions/user';
+import loginLoaded, { fetchCustomerData } from '../../redux/actions/user';
 import { mergeDBWithLocalStorage } from '../../redux/actions/CartActions';
 import { getFavoritesFromDB } from '../../redux/actions/favorites';
 
@@ -26,7 +26,7 @@ function SignIn(props) {
   const [errorMessage, setErrorMessage] = useState(null);
   const [length, setLength] = useState(1);
 
-  const { onClose, user, loginLoaded, mergeCart, fetchFavorites } = props;
+  const { onClose, user, loginLoaded, userLoadedData, mergeCart, fetchFavorites } = props;
   // console.log('USER =', user);
   const classes = useStylesSingIn();
 
@@ -79,6 +79,7 @@ function SignIn(props) {
         loginLoaded();
         onClose();
         mergeCart();
+        fetchCustomerData();
         fetchFavorites();
         // localStorage.setItem('L', `${loginResult.data.token}`);
         // const token = localStorage.getItem('token');
@@ -179,7 +180,7 @@ function SignIn(props) {
           <Link
             className={classes.text}
             to={RoutesName.signUp}
-            // onClick={onClose}
+            onClick={onClose}
           >
               Don&#8242;t have an account?
             <strong> Sign Up </strong>
@@ -193,13 +194,14 @@ function SignIn(props) {
 const mapStateToProps = (state) => {
   console.log('STATE =', state);
   return {
-    user: state.userReducer
+    user: state.user
   }
 };
 
 const mapDispatchToProps = (dispatch) => ({
   loginLoaded: () => { dispatch(loginLoaded()) },
   mergeCart: () => { dispatch(mergeDBWithLocalStorage()) },
+  fetchCustomerData: () => dispatch(fetchCustomerData()),
   fetchFavorites: () => dispatch(getFavoritesFromDB())
 });
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
