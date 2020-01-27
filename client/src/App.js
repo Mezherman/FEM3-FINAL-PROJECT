@@ -74,4 +74,3 @@ App.propTypes = {
   login: PropTypes.func.isRequired,
   mergeCart: PropTypes.func.isRequired
 };
-
