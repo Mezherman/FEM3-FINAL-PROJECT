@@ -15,17 +15,6 @@ import RangeSlider from '../Range/range'
 import useStyles from './_filter-panel';
 import { getFilterProducts } from '../../../redux/actions/filter';
 
-// const CheckBoxStyles = withStyles ({
-//   root: {
-//     '&$checked': {
-//       color: 'yellow',
-//     },
-//   },
-//   checked: {},
-// })(props => <Checkbox color="default" {...props} />)
-
-// const CustomCheckbox = withStyles(checkBoxStyles)(Checkbox);
-
 function FilterPanel(props) {
   const classes = useStyles();
   const { name, filterResults, getFilterProducts, max, colors, manufacturer, brands } = props;
