@@ -12,7 +12,9 @@ import { getCatalogFromDB } from './redux/actions/categories';
 import Notification from './components/Notification/notification'
 import loginLoaded, { fetchCustomerData } from './redux/actions/user';
 import { mergeDBWithLocalStorage } from './redux/actions/CartActions';
-import { getFavoritesFromDB } from './redux/actions/favorites';
+import { getFavoritesFromDB } from './redux/actions/favorites'
+import ScrollToTopOnMount from './components/Pages-scroll-to-top/Pages-scroll-top-top';
+import getOrders from './services/getOrders';
 
 function App(props) {
   const { catalogLoading, login, mergeCart, fetchFavorites, fetchCatalog, fetchCustomerData } = props;
@@ -31,6 +33,7 @@ function App(props) {
       (
         <>
           <Router>
+            <ScrollToTopOnMount />
             <Header />
             <ScrollToAnchor />
             <Routes />
