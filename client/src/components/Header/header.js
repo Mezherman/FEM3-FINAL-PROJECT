@@ -235,12 +235,14 @@ function Header() {
               {/*  <SignIn onClose={handleClose} />*/}
               {/*</StyledMenu>*/}
               <Divider orientation="vertical" className={classes.dividerStyle} />
-              <MenuItem className={classes.headerMenuItem} onClick={handleChange}>
-                <IconButton edge="end" aria-label="card" className={classes.iconButton}>
-                  <Badge badgeContent={totalCartQuantity.toString()} color="error">
-                    <ShoppingCartOutlinedIcon fontSize="large" className={classes.iconsStyle} />
-                  </Badge>
-                </IconButton>
+              <MenuItem className={classes.headerMenuItem}>
+                <Link to={RoutesName.cart}>
+                  <IconButton edge="end" aria-label="card" className={classes.iconButton}>
+                    <Badge badgeContent={totalCartQuantity.toString()} color="error">
+                      <ShoppingCartOutlinedIcon fontSize="large" className={classes.iconsStyle} />
+                    </Badge>
+                  </IconButton>
+                </Link>
                 <span className={classes.menuTitle}>Cart</span>
               </MenuItem>
             </Box>

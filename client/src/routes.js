@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import Home from './components/Home/home';
 import Catalog from './components/Catalog/catalog'
 import ProductPage from './components/Product-page/product-page'
@@ -17,15 +17,41 @@ import LoginModal from './components/Login-modal-window/login-modal-window';
 
 export default function Routes() {
   const { loggedIn } = useSelector((state) => state.userReducer);
-
-  const [modalIsVisible, setModalVisibility] = useState(true);
-
+  const history = useHistory();
+  const [modalIsVisible, setModalVisibility] = useState(!loggedIn);
   const closeModal = () => {
     setModalVisibility(false);
   };
 
+  if (!loggedIn && !modalIsVisible) {
+    setModalVisibility(true);
+    history.push(RoutesName.home);
+  }
   return (
     <Switch>
+      <Route
+        path={RoutesName.personalData}
+        render={() => (
+          loggedIn
+            ? (
+              <PersonalData
+                isLoggedIn={loggedIn}
+              />
+            )
+            : (
+              <div>
+                <Home />
+                <LoginModal
+                  isLoggedIn={loggedIn}
+                  onModalClose={closeModal}
+                  open={modalIsVisible}
+                />
+              </div>
+            )
+
+        )}
+      />
+
       <Route path={RoutesName.signUp} component={SignUp} />
       <Route
         path={RoutesName.login}
@@ -38,29 +64,6 @@ export default function Routes() {
               open={modalIsVisible}
             />
           </div>
-        )}
-      />
-      <Route
-        path={RoutesName.personalData}
-        render={() => (
-          // loggedIn
-          //   ? (
-          <PersonalData
-            isLoggedIn={loggedIn}
-          />
-          // )
-          //
-          // : (
-          //   <div>
-          //     <Home />
-          //     <LoginModal
-          //       isLoggedIn={loggedIn}
-          //       // onSuccessLogin={onSuccessLogin}
-          //       onModalClose={closeModal}
-          //       open={modalIsVisible}
-          //     />
-          //   </div>
-          // )
         )}
       />
 

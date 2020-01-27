@@ -6,9 +6,10 @@ const initialState = {
 };
 
 export default function userReducer(state = initialState, action) {
+  console.log('user reduser ', action);
   switch (action.type) {
     case 'FETCH_LOGIN_SUCCESS':
-      return action.payload;
+      return { ...state, ...action.payload };
 
     case 'FETCH_LOGIN_ERROR':
       return state;
