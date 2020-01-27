@@ -3,28 +3,30 @@ import PropTypes from 'prop-types';
 import Slider from '@material-ui/core/Slider';
 import { connect } from 'react-redux'
 import useStyles from './_range';
-import { getPriceProducts } from '../../../redux/actions/filter'
+import { getFilterProducts } from '../../../redux/actions/filter'
 
 function RangeSlider(props) {
+  const { getFilterProducts, max, filterResults } = props;
   const classes = useStyles();
-  const { max } = props;
-  const [value, setValue] = useState([0, max]);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const handleChange = (event, price) => {
+
+    return getFilterProducts({
+      ...filterResults,
+      price
+    });
+  }
 
   // useEffect()
 
-  // console.log('get price RANGE = ',props.getPriceProducts(value));
-
+  // console.log('get price RANGE = ', getFilterProducts(value));
 
   return (
     <>
       <Slider
         className={classes.root}
-        max={max}
+        max={filterResults.price[1]}
         valueLabelDisplay="on"
-        value={value}
+        value={filterResults.price}
         onChange={handleChange}
         aria-labelledby="range-slider"
       />
@@ -35,13 +37,13 @@ function RangeSlider(props) {
 function mapStateToProps(state) {
   // console.log('MAP STATE TO PROPS =>', state.filterReducer.price)
   return {
-    state: state.filterReducer.price
+    filterResults: state.filterReducer.filterResults
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getPriceProducts: (price) => dispatch(getPriceProducts(price))
+    getFilterProducts: (priceRange) => dispatch(getFilterProducts(priceRange))
   }
 }
 

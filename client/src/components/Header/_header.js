@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.contrastText,
     textAlign: 'center',
     textTransform: 'uppercase',
+    margin: '0',
   },
   grow: {
     padding: theme.spacing(3, 0),
@@ -105,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'visible',
     '&:hover': {
       backgroundColor: 'transparent'
-    },
+    }
     // '&:last-child > button': {
     //   marginRight: '0'
     // }

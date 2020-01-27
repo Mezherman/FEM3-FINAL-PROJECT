@@ -25,7 +25,7 @@ export default function CollapsingItem(props) {
 
   return (
     <>
-      <ListItem button onClick={handleClick}>
+      <ListItem disablePadding button onClick={handleClick}>
         <ListItemText primary={label} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
@@ -36,7 +36,7 @@ export default function CollapsingItem(props) {
         transition="height 800ms cubic-bezier(0.4, 0, 0.2, 1)"
       >
         <List component="div" disablePadding>
-          <ListItem className={classes.nested}>
+          <ListItem disablePadding className={classes.nested}>
             <ListItemText >
               {children}
             </ListItemText>

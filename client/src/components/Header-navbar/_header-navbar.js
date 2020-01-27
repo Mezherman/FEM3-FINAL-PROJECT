@@ -2,11 +2,10 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
   headerMenuWrapper: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-      justifyContent: 'center'
-    }
+    // display: 'none',
+    // [theme.breakpoints.up('md')]: {
+    display: 'flex',
+    // }
   },
   headerMenuCatalog: {
     display: 'flex'

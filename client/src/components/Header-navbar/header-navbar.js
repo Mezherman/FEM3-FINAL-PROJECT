@@ -19,11 +19,10 @@ function HeaderNavbar(props) {
   });
   const { categoriesVisible, subCategoriesVisible, chosenCategory } = features;
 
-  const { catalog } = props;
+  const { catalog, drawer, toggleDrawer } = props;
   const { mainCategories, allCategories } = catalog;
 
   // console.log('cat =', catalog);
-
   const toggleCatalog = () => {
     categoriesVisible
       ? hideCatalog()
@@ -61,6 +60,8 @@ function HeaderNavbar(props) {
     <>
       <div className={classes.headerMenuWrapper}>
         <NavBar
+          drawer={drawer}
+          toggleDrawer={toggleDrawer}
           hideCatalog={hideCatalog}
           toggleCatalog={toggleCatalog}
         >
@@ -95,13 +96,18 @@ function HeaderNavbar(props) {
   )
 }
 
-const mapStateToProps = (state) => ({
-  catalog: state.categoriesReducer.catalog,
-});
+const mapStateToProps = (state) => {
+  // console.log('STATE =', state);
+  return {
+    catalog: state.categoriesReducer.catalog,
+  }
+};
 
 export default connect(mapStateToProps)(HeaderNavbar);
 
 HeaderNavbar.propTypes = {
+  toggleDrawer: PropTypes.func.isRequired,
+  drawer: PropTypes.bool.isRequired,
   catalog: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.object, PropTypes.array, PropTypes.bool])
   ).isRequired
