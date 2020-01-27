@@ -67,11 +67,7 @@ import MenuList from '@material-ui/core/MenuList';
 
 function Header() {
   const [modalIsVisible, setModalVisibility] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // const onSuccessLogin = () => {
-  //   setIsLoggedIn(true)
-  // };
   const closeModal = () => {
     setModalVisibility(false);
   };

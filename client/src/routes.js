@@ -176,7 +176,7 @@ export default function Routes() {
       <Route path={RoutesName.delivery} component={Delivery} />
       <Route path={RoutesName.contacts} component={Contacts} />
       <Route path={RoutesName.editPersonalData} component={EditPersonalData} />
-      <Route path="/edit" component={EditFormWithValidation} />
+      {/*<Route path="/edit" component={EditFormWithValidation} />*/}
       <Route path="/edit-mui" component={MyForm} />
 
       /*in the end*/
