@@ -34,6 +34,14 @@ const useStyles = makeStyles((theme) => ({
   },
   p_l_4: {
     paddingLeft: '2rem'
+  },
+  link: {
+    textDecoration: 'none',
+  },
+  categories_item: {
+    [theme.breakpoints.up('lg')]: {
+      marginBottom: '30px',
+    }
   }
 }));
 
