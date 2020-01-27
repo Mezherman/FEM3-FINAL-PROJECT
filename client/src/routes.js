@@ -16,6 +16,8 @@ import PersonalData from './components/My-account/personal-data';
 import LoginModal from './components/Login-modal-window/login-modal-window';
 import Favorites from './components/Favorites/favorites'
 import Checkout from './components/Checkout/checkout';
+import CheckoutTest from './components/Checkout/checkout-test';
+import CheckoutStatus from './components/Checkout/Status/status';
 import EditFormWithValidation from './components/My-account/edit-form-with-validation'
 import MyForm from './components/My-account/form-mui-valid'
 import CustomerOrders from './components/My-account/Customer-orders/customer-orders';
@@ -170,6 +172,8 @@ export default function Routes() {
         exact
         render={() => <Catalog assortment="cooking" />}
       />
+      <Route path={RoutesName.checkoutSuccess} component={CheckoutStatus} />
+      <Route path={RoutesName.checkoutError} component={CheckoutStatus} />
       <Route path={RoutesName.checkout} component={Checkout} />
       <Route path={RoutesName.cart} component={SummaryCart} />
       <Route path={RoutesName.aboutUs} component={AboutUs} />

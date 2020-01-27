@@ -11,7 +11,7 @@ import { tempFilterData } from '../../services/filter-temp'
 function Filter(props) {
   tempFilterData().then((products) => {
     const manufacturerSet = new Set();
-    const withoutBrand = products.filter(product => manufacturerSet.add(product.manufacturer))
+    const withoutBrand = products.filter((product) => manufacturerSet.add(product.manufacturer))
     // products.filter(product => manufacturerSet.add(product.manufacturer))
     // console.log('manufacturerSet =', manufacturerSet);
     // console.log('withoutBrand =', withoutBrand);
@@ -35,10 +35,9 @@ function Filter(props) {
       // console.log('manufacturers', manufacturers);
       filterParamsLoaded('manufacturers', manufacturers)
     })
-  }, []);
+  }, [filterParamsLoaded]);
 
   const filterText = ['Brand', 'Price', 'Color'];
-
 
   // console.log('filterParams.colors =', filterParams.colors);
   // console.log('filterParams.manufacturers =', filterParams.manufacturers);
@@ -55,7 +54,7 @@ function Filter(props) {
 
   let valToFilter;
   let valOfBrands = '';
-  let valOfCollection = '';
+  const valOfCollection = '';
   let valOfColor = '';
   let valOfPrice = '';
 
@@ -63,8 +62,8 @@ function Filter(props) {
     // console.log('OBJ -> ',obj)
 
     if (obj.brand.length > 0) {
-      let brands = 'brand='
-      const items = obj.brand.map(item => item)
+      const brands = 'brand='
+      const items = obj.brand.map((item) => item)
       const str = items.join(',')
       brands.concat(str)
       valOfBrands = brands.concat(str)
@@ -81,15 +80,15 @@ function Filter(props) {
     // }
 
     if (obj.price.length > 0) {
-      let price = '';
-      const items = obj.price.map(item => item)
+      const price = '';
+      const items = obj.price.map((item) => item)
       const str = price.concat('minPrice=', items[0], '&', 'maxPrice=', items[1])
       valOfPrice = str
     }
 
     if (obj.color.length > 0) {
-      let color = 'color='
-      const items = obj.color.map(item => item)
+      const color = 'color='
+      const items = obj.color.map((item) => item)
       const str = items.join(',')
       color.concat(str)
       valOfColor = color.concat(str)

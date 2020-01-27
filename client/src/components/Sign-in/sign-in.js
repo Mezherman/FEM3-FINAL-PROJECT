@@ -191,13 +191,11 @@ function SignIn(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  console.log('STATE =', state);
-  return {
+const mapStateToProps = (state) =>
+  // console.log('STATE =', state);
+  ({
     user: state.user
-  }
-};
-
+  });
 const mapDispatchToProps = (dispatch) => ({
   loginLoaded: () => { dispatch(loginLoaded()) },
   mergeCart: () => { dispatch(mergeDBWithLocalStorage()) },

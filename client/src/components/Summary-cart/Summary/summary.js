@@ -11,7 +11,7 @@ export default function Summary({ totalCartPrice }) {
     <Grid item sm={3} xs={12} className={classes.root}>
       <Hidden xsDown>
         <SummaryItem title="Summary" type="title" />
-        <SummaryItem title="Grand Total" value={'€'+totalCartPrice} type="total" />
+        <SummaryItem title="Grand Total" value={`€${totalCartPrice}`} type="total" />
         <Grid container justify="center">
           <Link to={RoutesList.checkout} className={classes.link}>
             <Button variant="contained" color="primary" className={classes.button}>
@@ -21,7 +21,7 @@ export default function Summary({ totalCartPrice }) {
         </Grid>
       </Hidden>
       <Hidden smUp>
-        <SummaryItem title="Grand Total" value={'€'+totalCartPrice} type="total" />
+        <SummaryItem title="Grand Total" value={`€${totalCartPrice}`} type="total" />
         <Grid container justify="center">
           <Link to={RoutesList.checkout} className={classes.link}>
             <Button variant="contained" color="primary" className={classes.button}>

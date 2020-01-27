@@ -20,7 +20,7 @@ import AddToFavoriteBtn from '../Add-to-favorites/Add-to-favorite-btn';
 
 function ProductCard({ product, favorites }) {
   const dispatch = useDispatch();
-  const actions = useMemo (
+  const actions = useMemo(
     () => bindActionCreators(cartActions, dispatch),
     [dispatch]
   );
@@ -42,11 +42,14 @@ function ProductCard({ product, favorites }) {
       <div className={classes.card}>
         <Divider />
         <div className={classes.iconWrapper}>
-            <span className={classes.itemNo}>Item.No {itemNo}</span>
-            <AddToFavoriteBtn
-              favorites={favorites}
-              itemId={itemId}
-            />
+          <span className={classes.itemNo}>
+Item.No
+            {itemNo}
+          </span>
+          <AddToFavoriteBtn
+            favorites={favorites}
+            itemId={itemId}
+          />
         </div>
 
         <Link
@@ -87,7 +90,7 @@ function ProductCard({ product, favorites }) {
             color="primary"
             disableElevation
             onClick={() => {
-              console.log('add product', product);
+              // console.log('add product', product);
               actions.addProductToCart(product, 1);
               setModalVisibility(true)
             }}
@@ -99,10 +102,9 @@ function ProductCard({ product, favorites }) {
     </>
   )
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) =>
   // console.log('state', state);
-  return state.favoritesReducer;
-}
+  state.favoritesReducer
 
 export default connect(mapStateToProps)(ProductCard);
 

@@ -16,8 +16,8 @@ const CustomerOrders = (props) => {
   // })
   return (
     <Container maxWidth="xl">
-      {/*<Grid item container sm={9} xs={12}>*/}
-      {/*<Hidden xsDown>*/}
+      {/* <Grid item container sm={9} xs={12}> */}
+      {/* <Hidden xsDown> */}
       <Grid
         container
         justify="space-between"
@@ -43,11 +43,11 @@ const CustomerOrders = (props) => {
         <Grid item lg={2} className={classes.alignRight}>
           Status
         </Grid>
-        {/*<Grid item lg={1}/>*/}
+        {/* <Grid item lg={1}/> */}
       </Grid>
-      {/*</Hidden>*/}
-      {/*{list}*/}
-      {/*</Grid>*/}
+      {/* </Hidden> */}
+      {/* {list} */}
+      {/* </Grid> */}
     </Container>
   )
 };
