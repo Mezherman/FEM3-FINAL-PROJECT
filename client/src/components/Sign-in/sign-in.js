@@ -20,13 +20,13 @@ import loginLoaded, { fetchCustomerData } from '../../redux/actions/user';
 import { mergeDBWithLocalStorage } from '../../redux/actions/CartActions';
 import { getFavoritesFromDB } from '../../redux/actions/favorites';
 
-function SignIn(props) {
+function SignIn (props) {
   const [login, setLogin] = useState(null);
   const [password, setPassword] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [length, setLength] = useState(1);
 
-  const { onClose, user, loginLoaded, userLoadedData, mergeCart, fetchFavorites } = props;
+  const { onClose, user, loginLoaded, userLoadedData, mergeCart, fetchFavorites, fetchCustomerData } = props;
   // console.log('USER =', user);
   const classes = useStylesSingIn();
 
@@ -67,7 +67,7 @@ function SignIn(props) {
   //   loginLoaded(localStorage.getItem('token'))
   // }
 
-  function handleClick(event) {
+  function handleClick (event) {
     event.preventDefault();
     const userData = {
       loginOrEmail: login,
@@ -104,7 +104,7 @@ function SignIn(props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-            Sign In
+          Sign In
         </Typography>
         <Typography className={classes.errorText} component="h3" variant="inherit">
           {errorMessage}
@@ -163,10 +163,11 @@ function SignIn(props) {
           {/*  <InputLabel htmlFor="component-filled">Name</InputLabel> */}
           {/*  <FilledInput id="component-filled" value={name} onChange={handleChange} /> */}
           {/* </FormControl> */}
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" className={classes.checkBox} />}
-            label="Remember me"
-          />
+          {/* <FormControlLabel */}
+          {/* eslint-disable-next-line max-len */}
+          {/*  control={<Checkbox value="remember" color="primary" className={classes.checkBox} />} */}
+          {/*  label="Remember me" */}
+          {/* /> */}
           <Button
             type="submit"
             fullWidth
@@ -175,14 +176,14 @@ function SignIn(props) {
             className={classes.submit}
             onClick={handleClick}
           >
-              Sign In
+            Sign In
           </Button>
           <Link
             className={classes.text}
             to={RoutesName.signUp}
             onClick={onClose}
           >
-              Don&#8242;t have an account?
+            Don&#8242;t have an account?
             <strong> Sign Up </strong>
           </Link>
         </form>
@@ -197,8 +198,12 @@ const mapStateToProps = (state) =>
     user: state.user
   });
 const mapDispatchToProps = (dispatch) => ({
-  loginLoaded: () => { dispatch(loginLoaded()) },
-  mergeCart: () => { dispatch(mergeDBWithLocalStorage()) },
+  loginLoaded: () => {
+    dispatch(loginLoaded())
+  },
+  mergeCart: () => {
+    dispatch(mergeDBWithLocalStorage())
+  },
   fetchCustomerData: () => dispatch(fetchCustomerData()),
   fetchFavorites: () => dispatch(getFavoritesFromDB())
 });
@@ -209,5 +214,6 @@ SignIn.propTypes = {
 };
 
 SignIn.defaultProps = {
-  onClose: () => {}
+  onClose: () => {
+  }
 };

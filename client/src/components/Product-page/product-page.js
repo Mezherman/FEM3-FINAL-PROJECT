@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import { Container, Box } from '@material-ui/core';
 import { getProductsByItemNo } from '../../services/getProducts';
 import ProductDetail from '../Product-detail/product-detail';
-import { productsRequested, productsLoaded } from setProducts from '../../redux/actions/products';
+import { productsRequested, productsLoaded } from '../../redux/actions/products';
 import ProductCardCarousel from './Product-card-carousel/product-card-carousel';
 
 import Spinner from '../Spinner/spinner';
