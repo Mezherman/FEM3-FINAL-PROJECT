@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { MenuItem, useTheme, Divider, Box } from '@material-ui/core';
+import { MenuItem, useTheme, Divider } from '@material-ui/core';
 
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Drawer from '@material-ui/core/Drawer';
@@ -10,8 +10,6 @@ import CollapsingItem from '../../Product-detail/Product-detail-collapse/collaps
 import useStyles from './_navbar';
 import RoutesName from '../../../routes-list';
 import store from '../../../index';
-
-import LogOut from '../../Temp/logOut';
 
 export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, toggleDrawer }) {
   const classes = useStyles();
@@ -100,7 +98,7 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
 
       {/* Desktop */}
       {isDesktop && (
-        <Box className={classes.headerMenuList}>
+        <>
           <MenuItem
             className={`js_header-menu-list-item ${classes.headerMenuListItem}`}
             onMouseLeave={hideCatalog}
@@ -123,10 +121,9 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
             CONTACTS
             </Link>
           </MenuItem>
-        </Box>
+        </>
       )}
       {children}
-      <LogOut />
     </>
   )
 }
