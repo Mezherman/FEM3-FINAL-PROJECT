@@ -13,6 +13,16 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     outline: 'none'
+  },
+  [theme.breakpoints.up('md')]: {
+    paper: {
+      maxWidth: '60%'
+    }
+  },
+  [theme.breakpoints.up('lg')]: {
+    paper: {
+      maxWidth: '50%'
+    }
   }
 }));
 
