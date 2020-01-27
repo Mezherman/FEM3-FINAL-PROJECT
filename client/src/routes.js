@@ -16,44 +16,20 @@ import PersonalData from './components/My-account/personal-data';
 import LoginModal from './components/Login-modal-window/login-modal-window';
 import Favorites from './components/Favorites/favorites'
 import Checkout from './components/Checkout/checkout';
+import CheckoutStatus from './components/Checkout/Status/status';
+import CustomerOrders from './components/My-account/Customer-orders/customer-orders';
 
-export default function Routes() {
-  const { loggedIn } = useSelector((state) => state.userReducer);
-  const history = useHistory();
-  const [modalIsVisible, setModalVisibility] = useState(!loggedIn);
+export default function Routes () {
+  const { loggedIn } = useSelector((state) => state.user);
+
+  const [modalIsVisible, setModalVisibility] = useState(true);
+
   const closeModal = () => {
     setModalVisibility(false);
   };
 
-  if (!loggedIn && !modalIsVisible) {
-    setModalVisibility(true);
-    history.push(RoutesName.home);
-  }
   return (
     <Switch>
-      <Route
-        path={RoutesName.personalData}
-        render={() => (
-          loggedIn
-            ? (
-              <PersonalData
-                isLoggedIn={loggedIn}
-              />
-            )
-            : (
-              <div>
-                <Home />
-                <LoginModal
-                  isLoggedIn={loggedIn}
-                  onModalClose={closeModal}
-                  open={modalIsVisible}
-                />
-              </div>
-            )
-
-        )}
-      />
-
       <Route path={RoutesName.signUp} component={SignUp} />
       <Route
         path={RoutesName.login}
@@ -68,7 +44,30 @@ export default function Routes() {
           </div>
         )}
       />
-
+      <Route
+        path={RoutesName.personalData}
+        render={() => (
+          // loggedIn
+          //   ? (
+          <PersonalData
+            isLoggedIn={loggedIn}
+          />
+          // )
+          //
+          // : (
+          //   <div>
+          //     <Home />
+          //     <LoginModal
+          //       isLoggedIn={loggedIn}
+          //       // onSuccessLogin={onSuccessLogin}
+          //       onModalClose={closeModal}
+          //       open={modalIsVisible}
+          //     />
+          //   </div>
+          // )
+        )}
+      />
+      <Route path={RoutesName.myOrders} component={CustomerOrders} />
       {/* <Route */}
       {/*  path={RoutesName.products} */}
       {/*  exact */}
@@ -132,9 +131,11 @@ export default function Routes() {
         path={`${RoutesName.products}/search`}
         exact
         render={() => {
-          return <Catalog assortment={'cooking'} />
+          return <Catalog assortment="cooking" />
         }}
       />
+      <Route path={RoutesName.checkoutSuccess} component={CheckoutStatus} />
+      <Route path={RoutesName.checkoutError} component={CheckoutStatus} />
       <Route path={RoutesName.checkout} component={Checkout} />
       <Route path={RoutesName.cart} component={SummaryCart} />
       <Route path={RoutesName.editPersonalData} component={EditPersonalData} />

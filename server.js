@@ -82,7 +82,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-sendLetter(app);
+// sendLetter(app);
 
 const port = process.env.PORT || 5000;
 

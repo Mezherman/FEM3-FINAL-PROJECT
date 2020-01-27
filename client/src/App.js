@@ -10,25 +10,30 @@ import Footer from './components/Footer/footer'
 import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
 import { getCatalogFromDB } from './redux/actions/categories';
 import Notification from './components/Notification/notification'
-import loginLoaded from './redux/actions/user';
+import loginLoaded, { fetchCustomerData } from './redux/actions/user';
 import { mergeDBWithLocalStorage } from './redux/actions/CartActions';
 import { getFavoritesFromDB } from './redux/actions/favorites'
+import ScrollToTopOnMount from './components/Pages-scroll-to-top/Pages-scroll-top-top';
+import getOrders from './services/getOrders';
 
 function App(props) {
-  const { catalogLoading, login, mergeCart, fetchFavorites, fetchCatalog } = props;
+  const { catalogLoading, login, mergeCart, fetchFavorites, fetchCatalog, fetchCustomerData } = props;
   // console.log('loading=', catalogLoading);
   useEffect(() => {
     fetchCatalog();
     login();
     mergeCart();
+    fetchCustomerData();
     fetchFavorites();
   }, []);
+
   return (
     <>
       {!catalogLoading &&
       (
         <>
           <Router>
+            <ScrollToTopOnMount />
             <Header />
             <ScrollToAnchor />
             <Routes />
@@ -46,7 +51,7 @@ const mapStateToProps = (state) => ({
   catalogLoading: state.categoriesReducer.catalogLoading,
   error: state.categoriesReducer.error,
   notification: state.notification,
-  loggedIn: state.userReducer.loggedIn
+  loggedIn: state.user.loggedIn
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -55,6 +60,7 @@ const mapDispatchToProps = (dispatch) => ({
     // dispatch(catalogRequested());
   },
   login: () => dispatch(loginLoaded()),
+  fetchCustomerData: () => dispatch(fetchCustomerData()),
   mergeCart: () => dispatch(mergeDBWithLocalStorage()),
   fetchFavorites: () => dispatch(getFavoritesFromDB())
 });
@@ -68,3 +74,4 @@ App.propTypes = {
   login: PropTypes.func.isRequired,
   mergeCart: PropTypes.func.isRequired
 };
+

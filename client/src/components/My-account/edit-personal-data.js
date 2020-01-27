@@ -45,7 +45,8 @@ function EditPersonalData (props) {
     birthdayMonth: '',
     birthdayYear: '',
     email: '',
-    password: '',
+    telephone: '',
+    // password: '',
     country: 'Austria',
     agreement: false,
     isAdmin: false,
@@ -55,35 +56,11 @@ function EditPersonalData (props) {
   const pdClasses = usePdstyles();
 
   useEffect(() => {
-    // console.log(localStorage.getItem('token'));
-    // console.log('TOKEEEEEEEEEEN ', axios.defaults.headers.common.Authorization);
-    // axios
-    //   .get('/customers/customer')
     getUserData()
       .then((loggedInCustomer) => {
-        // const {
-        //   firstName,
-        //   lastName,
-        //   login,
-        //   email,
-        //   password,
-        //   telephone,
-        //   gender,
-        //   avatarUrl,
-        // } = loggedInCustomer.data;
-        // console.log(loggedInCustomer.data.firstName);
-        // console.log(firstName);
         setNewUserData({
           ...newUserData,
           ...loggedInCustomer.data
-          // firstName,
-          // lastName,
-          // login,
-          // email,
-          // password,
-          // telephone,
-          // gender,
-          // avatarUrl
         });
         /* Do something with loggedInCustomer */
       })
@@ -250,8 +227,10 @@ function EditPersonalData (props) {
             id="firstName"
             autoFocus
             value={firstName}
+
+            // required
             label={(
-              <FormLabel className={classes.labelText}>First Name</FormLabel>
+              <FormLabel className={classes.labelText} required>First Name</FormLabel>
             )}
             onChange={handleChange('firstName')}
           />

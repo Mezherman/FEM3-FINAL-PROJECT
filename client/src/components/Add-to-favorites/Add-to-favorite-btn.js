@@ -40,7 +40,7 @@ function AddToFavoriteBtn({ favorites, itemId, favoritesUpdated, favoritesCleare
 }
 
 const mapStateToProps = (state) => ({
-  loggedIn: state.userReducer.loggedIn
+  loggedIn: state.user.loggedIn
 });
 
 const mapDispatchToProps = {

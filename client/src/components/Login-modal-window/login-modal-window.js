@@ -7,12 +7,26 @@ import CloseIcon from '@material-ui/icons/Close';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import RoutesName from '../../routes-list';
+import {useSelector} from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 import ModalWindow from '../Modal-window/modal-window';
 import SignIn from '../Sign-in/sign-in';
 
-export default function LoginModal({ open, onModalClose, onSuccessLogin }) {
-  // if (open) {
+export default function LoginModal({ isLoggedIn, open, onModalClose, onSuccessLogin }) {
+  const { loggedIn } = useSelector((state) => state.user);
+  const history = useHistory();
+
+  const closeModalFromBack = () => {
+    // setModalVisibility(false);
+    history.push(RoutesName.home);
+
+  };
+if (isLoggedIn) {
+  return (
+    <Redirect to={RoutesName.home} />
+  );
+} else {
   return (
     <ModalWindow
       open={open}
@@ -20,7 +34,17 @@ export default function LoginModal({ open, onModalClose, onSuccessLogin }) {
     >
       <SignIn onClose={onModalClose} />
     </ModalWindow>
-  );
+  )
+}
+  // return (
+  //   <ModalWindow
+  //     open={open}
+  //     onModalClose={onModalClose}
+  //   >
+  //     <SignIn onClose={onModalClose} />
+  //   </ModalWindow>
+  // );
+
   // }
   // return <Redirect to={RoutesName.home} />
 }

@@ -38,7 +38,7 @@ const mapStateToProps = (state) => {
   // console.log('STATE =', state);
   return {
     productsLoading: state.productsReducer.productsLoading,
-    loggedIn: state.userReducer.loggedIn,
+    loggedIn: state.user.loggedIn,
     favorites: state.favoritesReducer.favorites
   };
 };
