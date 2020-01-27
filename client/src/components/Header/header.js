@@ -82,7 +82,7 @@ function Header() {
 
   const totalCartQuantity = useSelector((state) => state.cart.totalCartQuantity);
   const { loggedIn } = useSelector((state) => state.user);
-  console.log('ISLOGGEDIN AAAAAAAAA', loggedIn);
+  // console.log('ISLOGGEDIN AAAAAAAAA', loggedIn);
   // const [anchorElLogin, setAnchorElLogin] = useState(null);
 
   // const handleClose = () => {
@@ -122,7 +122,7 @@ function Header() {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget)
-    console.log(event);
+    // console.log(event);
   }
 // toggle side navbar
   const toggleDrawer = (open) => {

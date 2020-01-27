@@ -14,7 +14,7 @@ import useStyles from './_checkout';
 function Checkout(props) {
   const classes = useStyles();
   const { history, handleSubmit } = props;
-  const { cart, userReducer } = useSelector((state) => state);
+  const { cart, user } = useSelector((state) => state);
 
   let initialState = {
     gender: 'Mr',
@@ -59,7 +59,7 @@ function Checkout(props) {
 
   // console.log('CART=', cart);
 
-  const customer = userReducer.loggedIn ? userReducer.customer : { _id: 'unknown' };
+  const customer = user.loggedIn ? user.customer : { _id: 'unknown' };
 
   return (
     <Container maxWidth="xl" disableGutters>

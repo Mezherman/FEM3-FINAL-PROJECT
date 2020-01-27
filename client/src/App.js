@@ -25,7 +25,7 @@ function App(props) {
     fetchCustomerData();
     fetchFavorites();
     getOrders()
-      .then((response) => console.log(response));
+      .then((response) => response.data);
   }, []);
 
   return (
