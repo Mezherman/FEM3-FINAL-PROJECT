@@ -7,6 +7,7 @@ export default function enhancerAxios (url, options = { method: 'get' }, data = 
 
   const token = window.localStorage.getItem('token');
   if (!axios.defaults.headers.common.Authorization) {
+    // console.log(123456789);
     axios.defaults.headers.common.Authorization = token ?? '';
   }
 
@@ -17,7 +18,7 @@ export default function enhancerAxios (url, options = { method: 'get' }, data = 
   })
     .then((response) => response.data)
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
       return null;
     })
   )

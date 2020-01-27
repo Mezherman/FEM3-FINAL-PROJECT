@@ -21,7 +21,6 @@ import validate from './validate';
 import useStyles from './_sign-up';
 import postNewUser from '../../services/postNewUser';
 
-
 let SignUp = (props) => {
   const { handleSubmit } = props;
   const classes = useStyles();
@@ -120,18 +119,18 @@ let SignUp = (props) => {
           </Grid>
         </form>
         {/*<Button onClick={handleOpenSignUpModal}>Open registration modal</Button>*/}
-        { signUpModal &&
+        {signUpModal &&
         <Modal
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
-            className={classes.modalInfoIcon}
-            open={signUpModal}
-            onClose={handleCloseSignUpModal}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500,
-            }}
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modalInfoIcon}
+          open={signUpModal}
+          onClose={handleCloseSignUpModal}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
         >
           <Fade in={signUpModal}>
             <div className={classes.paperInfoIcon}>
@@ -139,10 +138,10 @@ let SignUp = (props) => {
                 Your account was successfully registered
               </h2>
               <Button
-                  onClick={handleCloseSignUpModal}
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
+                onClick={handleCloseSignUpModal}
+                variant="contained"
+                color="primary"
+                className={classes.submit}
               >
                 OK
               </Button>
@@ -151,18 +150,18 @@ let SignUp = (props) => {
         </Modal>
         }
 
-        { errorModal &&
+        {errorModal &&
         <Modal
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
-            className={classes.modalInfoIcon}
-            open={errorModal}
-            onClose={handleCloseSetErrorModal}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500,
-            }}
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modalInfoIcon}
+          open={errorModal}
+          onClose={handleCloseSetErrorModal}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
         >
           <Fade in={errorModal}>
             <div className={classes.paperInfoError}>
@@ -170,10 +169,10 @@ let SignUp = (props) => {
                 Something go wrong. Try again
               </h2>
               <Button
-                  onClick={handleCloseSetErrorModal}
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
+                onClick={handleCloseSetErrorModal}
+                variant="contained"
+                color="primary"
+                className={classes.submit}
               >
                 OK
               </Button>
