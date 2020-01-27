@@ -14,7 +14,7 @@ import { Field, reduxForm } from 'redux-form';
 import InfoOutlinedIcon from '@material-ui/core/SvgIcon/SvgIcon';
 import { Redirect } from 'react-router-dom';
 import CloseIcon from '@material-ui/icons/Close';
-import useStyles from '../SignUp/SignUp-form/_signUp-form';
+import useStyles from '../SignUp/Sign-up-form/_sign-up-form';
 import postNewUser from '../../services/postNewUser';
 import validate from '../SignUp/validate';
 import usePdstyles from './_personal-data';
