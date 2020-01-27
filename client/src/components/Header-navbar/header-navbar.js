@@ -97,7 +97,7 @@ function HeaderNavbar(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log('STATE =', state);
+  // console.log('STATE =', state);
   return {
     catalog: state.categoriesReducer.catalog,
   }
