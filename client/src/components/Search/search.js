@@ -8,7 +8,6 @@ import useStyles from './_search';
 import search from '../../services/search';
 import getAllProducts from '../../services/getProducts'
 import { productsLoaded } from '../../redux/actions/products'
-import RoutesName from '../../routes-list';
 
 function Search({ productsLoaded, history }) {
   const classes = useStyles();
@@ -20,19 +19,11 @@ function Search({ productsLoaded, history }) {
     })
   }, []);
 
-  const a = { test: 1 };
-  let b = { ...a };
-  b = { xyz: 3 };
-  console.log('a =', a);
-  console.log('b =', b);
-
   const [value, setValue] = useState('');
-  const [isSearching, setSearching] = useState(false);
 
   const handleChange = (event) => {
     setValue(event.target.value);
     history.push('/products/search')
-    // console.log('value => ', value)
   };
 
   const searchItem = {
@@ -51,7 +42,7 @@ function Search({ productsLoaded, history }) {
       <SearchIcon
         className={classes.searchIcon}
       />
-      {/*<input type="search" placeholder="search" />*/}
+
       <Autocomplete
         size="small"
         freeSolo
@@ -77,8 +68,7 @@ function Search({ productsLoaded, history }) {
   )
 }
 
-const mapStateToProps = (state) => {
-};
+const mapStateToProps = () => {};
 
 const mapDispatchToProps = {
   productsLoaded
