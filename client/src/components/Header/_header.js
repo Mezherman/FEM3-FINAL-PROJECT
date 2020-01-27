@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '0',
   },
   grow: {
-    padding: theme.spacing(3, 0),
+    padding: theme.spacing(1, 0),
     flexGrow: 1,
   },
   justify: {
@@ -135,6 +135,9 @@ const useStyles = makeStyles((theme) => ({
     },
     '& #customized-menu': {
       display: 'none'
+    },
+    '& a': {
+      textDecoration: 'none',
     }
   },
   iconButton: {
@@ -165,6 +168,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       display: 'block',
       fontSize: '14px',
+      textAlign: 'center',
+      color: theme.palette.text.primary,
+      textDecoration: 'none',
       '&:hover': {
         textDecoration: 'underline'
       }

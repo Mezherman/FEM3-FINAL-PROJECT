@@ -1,5 +1,5 @@
 import axios from 'axios';
-import enhancerAxios from '../services/enhancer-axios';
+import enhancerAxios from './enhancer-axios';
 
 axios.defaults.baseURL = 'http://localhost:5000';
 

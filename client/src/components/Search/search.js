@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
-import TextField from '@material-ui/core/TextField';
+import { TextField, Button, Popover, IconButton, Slide } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search'
 import { Link, Redirect, Route, withRouter } from 'react-router-dom';
@@ -10,7 +10,7 @@ import getAllProducts from '../../services/getProducts'
 import { productsLoaded } from '../../redux/actions/products'
 import RoutesName from '../../routes-list';
 
-function Search({ productsLoaded, history }) {
+function Search({ productsLoaded, history, searchInput }) {
   const classes = useStyles();
   const [data, setData] = useState([]);
 
@@ -47,33 +47,37 @@ function Search({ productsLoaded, history }) {
   }
 
   return (
-    <div className={classes.container}>
-      <SearchIcon
-        className={classes.searchIcon}
-      />
-      {/*<input type="search" placeholder="search" />*/}
-      <Autocomplete
-        size="small"
-        freeSolo
-        options={data.map((option) => option.name)}
-        renderInput={(params) => (
-          <TextField
-            className={classes.root}
-            fullWidth
-            {...params}
-            variant="outlined"
-            margin="none"
-            placeholder="Search..."
-            onKeyUp={(event) => {
-              if (event.keyCode === 13) {
-                handleChange(event);
-                // setSearching(true)
-              }
-            }}
-          />
-        )}
-      />
-    </div>
+    <>
+      {/* {searchInput && ( */}
+      <div className={classes.searchInput}>
+        <SearchIcon
+          className={classes.searchIcon}
+        />
+        {/* <input type="search" placeholder="search" /> */}
+        <Autocomplete
+          size="small"
+          freeSolo
+          options={data.map((option) => option.name)}
+          renderInput={(params) => (
+            <TextField
+              className={classes.root}
+              fullWidth
+              {...params}
+              variant="outlined"
+              margin="none"
+              placeholder="Search..."
+              onKeyUp={(event) => {
+                if (event.keyCode === 13) {
+                  handleChange(event);
+                  // setSearching(true)
+                }
+              }}
+            />
+          )}
+        />
+      </div>
+      {/* )} */}
+    </>
   )
 }
 

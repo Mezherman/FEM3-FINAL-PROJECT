@@ -68,7 +68,7 @@ function EditPersonalData (props) {
         console.log('ERROR', err);
         /* Do something with error */
       });
-  }, []);
+  }, [newUserData]);
   // console.log(newUserData);
 
   const {

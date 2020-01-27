@@ -10,7 +10,7 @@ export default function (values) {
     'login',
     'agreement'
   ];
-  requiredFields.forEach(field => {
+  requiredFields.forEach((field) => {
     if (!values[field]) {
       errors[field] = 'Required';
     }

@@ -1,30 +1,43 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
-import { Container } from '@material-ui/core';
+import { Container, Box } from '@material-ui/core';
 import { getProductsByItemNo } from '../../services/getProducts';
 import ProductDetail from '../Product-detail/product-detail';
-import setProducts from '../../redux/actions/products';
+import { productsRequested, productsLoaded } from setProducts from '../../redux/actions/products';
 import ProductCardCarousel from './Product-card-carousel/product-card-carousel';
-import { productsRequested, productsLoaded } from '../../redux/actions/products';
+
 import Spinner from '../Spinner/spinner';
 import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
+import { getFilteredProducts } from '../../services/filter';
 
 function ProductPage(props) {
   // console.log('PROPS =', props);
   const { assortment, itemNo, chosenProduct, fetchProduct, productsLoading, setProducts } = props;
 
+  const [productsToShow, setProductsToShow] = useState([]);
   const cardsToShow = ['740039', '354326', '679386', '281039'];
-
+  const cardsToShowString = cardsToShow.toString();
+  // console.log(cardsToShowString);
   useEffect(() => {
     if (!chosenProduct) {
       fetchProduct(itemNo);
     }
   }, [chosenProduct, itemNo, fetchProduct]);
 
+  useEffect(() => {
+    getFilteredProducts(`itemNo=${cardsToShowString}`)
+      .then((response) => {
+        // console.log('resp', response);
+        setProductsToShow(response)
+      })
+  }, [cardsToShowString]);
+
+  // console.log('products slider', productsToShow);
+
   return (
-    <>
+      <>
       {productsLoading
         ? <Spinner />
         : (
@@ -38,7 +51,7 @@ function ProductPage(props) {
                   />
                 </Grid>
               </div>
-              <ProductCardCarousel cardsToShow={chosenProduct} />
+              <ProductCardCarousel products={productsToShow} />
             </Container>
           </>
         )}
