@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import Home from './components/Home/home';
 import Catalog from './components/Catalog/catalog'
 import ProductPage from './components/Product-page/product-page'
@@ -16,17 +16,32 @@ import PersonalData from './components/My-account/personal-data';
 import LoginModal from './components/Login-modal-window/login-modal-window';
 import Favorites from './components/Favorites/favorites'
 import Checkout from './components/Checkout/checkout';
-import CheckoutStatus from './components/Checkout/Status/status';
+import EditFormWithValidation from './components/My-account/edit-form-with-validation'
+import MyForm from './components/My-account/form-mui-valid'
 import CustomerOrders from './components/My-account/Customer-orders/customer-orders';
 
-export default function Routes () {
+export default function Routes() {
+  // const history = useHistory();
+  // const user = useSelector((state) => state.user);
+  // const [modalIsVisible, setModalVisibility] = useState(true);
+  // const { loggedIn } = useSelector((state) => state.user);
+  // let closeModal = null;
+  // if(ifloggedIn){
+  //    const closeModal = () => {
+  //     console.log('close modal');
+  //     setModalVisibility(false);
+  //   };
   const { loggedIn } = useSelector((state) => state.user);
-
-  const [modalIsVisible, setModalVisibility] = useState(true);
-
+  const history = useHistory();
+  const [modalIsVisible, setModalVisibility] = useState(!loggedIn);
   const closeModal = () => {
     setModalVisibility(false);
   };
+
+  if (!loggedIn && !modalIsVisible) {
+    setModalVisibility(true);
+    history.push(RoutesName.home);
+  }
 
   return (
     <Switch>
@@ -47,27 +62,50 @@ export default function Routes () {
       <Route
         path={RoutesName.personalData}
         render={() => (
-          // loggedIn
-          //   ? (
-          <PersonalData
-            isLoggedIn={loggedIn}
-          />
-          // )
-          //
-          // : (
-          //   <div>
-          //     <Home />
-          //     <LoginModal
-          //       isLoggedIn={loggedIn}
-          //       // onSuccessLogin={onSuccessLogin}
-          //       onModalClose={closeModal}
-          //       open={modalIsVisible}
-          //     />
-          //   </div>
-          // )
+          loggedIn
+            ? (
+              <PersonalData isLoggedIn={loggedIn} />
+            )
+            : (
+              <div>
+                <Home />
+                <LoginModal
+                  isLoggedIn={loggedIn}
+                  // isLoggedIn={()=>{loggedIn(loggedIn)}}
+                  // onSuccessLogin={onSuccessLogin}
+                  onModalClose={closeModal}
+                  // onModalClose={ closeModal}
+                  // onModalCloseBack={closeModalFromBack}
+                  open={modalIsVisible}
+                />
+              </div>
+            )
         )}
       />
-      <Route path={RoutesName.myOrders} component={CustomerOrders} />
+      <Route
+        path={RoutesName.myOrders}
+        render={() => (
+          loggedIn
+            ? (
+              <CustomerOrders isLoggedIn={loggedIn} />
+            )
+            : (
+              <div>
+                <Home />
+                <LoginModal
+                  isLoggedIn={loggedIn}
+                  // isLoggedIn={()=>{loggedIn(loggedIn)}}
+                  // onSuccessLogin={onSuccessLogin}
+                  onModalClose={closeModal}
+                  // onModalClose={ closeModal}
+                  // onModalCloseBack={closeModalFromBack}
+                  open={modalIsVisible}
+                />
+              </div>
+            )
+        )}
+      />
+
       {/* <Route */}
       {/*  path={RoutesName.products} */}
       {/*  exact */}
@@ -130,18 +168,16 @@ export default function Routes () {
       <Route
         path={`${RoutesName.products}/search`}
         exact
-        render={() => {
-          return <Catalog assortment="cooking" />
-        }}
+        render={() => <Catalog assortment="cooking" />}
       />
-      <Route path={RoutesName.checkoutSuccess} component={CheckoutStatus} />
-      <Route path={RoutesName.checkoutError} component={CheckoutStatus} />
       <Route path={RoutesName.checkout} component={Checkout} />
       <Route path={RoutesName.cart} component={SummaryCart} />
-      <Route path={RoutesName.editPersonalData} component={EditPersonalData} />
       <Route path={RoutesName.aboutUs} component={AboutUs} />
       <Route path={RoutesName.delivery} component={Delivery} />
       <Route path={RoutesName.contacts} component={Contacts} />
+      <Route path={RoutesName.editPersonalData} component={EditPersonalData} />
+      <Route path="/edit" component={EditFormWithValidation} />
+      <Route path="/edit-mui" component={MyForm} />
 
       /*in the end*/
       <Route path={RoutesName.home} exact>

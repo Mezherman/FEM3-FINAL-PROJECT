@@ -13,7 +13,6 @@ import Notification from './components/Notification/notification'
 import loginLoaded, { fetchCustomerData } from './redux/actions/user';
 import { mergeDBWithLocalStorage } from './redux/actions/CartActions';
 import { getFavoritesFromDB } from './redux/actions/favorites';
-import getOrders from './services/getOrders';
 
 function App(props) {
   const { catalogLoading, login, mergeCart, fetchFavorites, fetchCatalog, fetchCustomerData } = props;
