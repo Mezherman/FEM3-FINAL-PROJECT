@@ -36,8 +36,9 @@ const SignUpForm = () => {
 
   const classes = useStyles();
 
-  const renderRadioGroup = ({ input, name, ...rest }) => (
-    <RadioGroup
+  const renderRadioGroup = ({ input, name, ...rest }) => {
+    console.log('INPUT =', input);
+    return <RadioGroup
       {...input}
       {...rest}
       value={input.value}
@@ -47,7 +48,7 @@ const SignUpForm = () => {
       name={name}
       onChange={(event, value) => input.onChange(value)}
     />
-  );
+  };
 
   const renderTextField = ({ input, label, name, value, type, meta: { touched, error }, ...custom }) => (
     <TextField

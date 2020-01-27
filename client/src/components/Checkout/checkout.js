@@ -1,23 +1,31 @@
 import React from 'react';
 import { connect, useSelector } from 'react-redux';
-import { Button, Container } from '@material-ui/core';
+import { Button, Container, Grid } from '@material-ui/core';
 import { reduxForm } from 'redux-form';
+import SignUpForm from '../SignUp/SignUp-form/signUp-form';
+import SignUpFotter from '../SignUp/SignUp-footer/signUp-footer';
+import SignUp from '../SignUp/sign-up';
+import CheckoutTest from './checkout-test';
 
 import CheckoutForm from './Checkout-form/checkout-form';
 import validateCheckoutForm from './validate-checkout-form';
+import validate from '../SignUp/validate';
 
 import { placeOrderToDB } from '../../services/checkout';
 import { getCustomer } from '../../services/customer';
 
-import useStyles from './_checkout';
+import useStyles from '../SignUp/_sign-up';
 
-function Checkout(props) {
+let Checkout = (props) => {
+  console.log('PROPS IN CHECKOUT =', props);
   const classes = useStyles();
   const { history, handleSubmit } = props;
-  const { cart, userReducer } = useSelector((state) => state);
+  // const { cart, userReducer } = useSelector((state) => state);
 
   let initialState = {
     gender: 'Mr',
+    firstName: '',
+    lastName: ''
   };
 
   const submitNewOrder = (values) => {
@@ -59,13 +67,16 @@ function Checkout(props) {
 
   // console.log('CART=', cart);
 
-  const customer = userReducer.loggedIn ? userReducer.customer : { _id: 'unknown' };
+  // const customer = userReducer.loggedIn ? userReducer.customer : { _id: 'unknown' };
 
   return (
-    <Container maxWidth="xl" disableGutters>
-      <span>I am CHECKOUT page</span>
+    <Container component="div" maxWidth="xl" disableGutters>
       <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitNewOrder)}>
-        <CheckoutForm />
+        <Grid container>
+          <Grid item md={4}>
+            <CheckoutForm />
+          </Grid>
+        </Grid>
         <Button
           type="submit"
           onClick={() => {
@@ -77,9 +88,16 @@ function Checkout(props) {
       </form>
     </Container>
   )
-}
+};
 
-export default reduxForm({
+const mapStateToProps = (state) => ({
+  cart: state.cart,
+  user: state.userReducer
+});
+
+Checkout = reduxForm({
   form: 'checkout',
-  validateCheckoutForm
+  validateCheckoutForm,
 })(Checkout);
+
+export default connect(mapStateToProps)(Checkout)

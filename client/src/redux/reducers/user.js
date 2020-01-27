@@ -2,7 +2,8 @@ const initialState = {
   token: '',
   loggedIn: false,
   firstName: '',
-  lastName: ''
+  lastName: '',
+  customer: {}
 };
 
 export default function userReducer(state = initialState, action) {
