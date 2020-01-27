@@ -16,7 +16,7 @@ export default function DialogModal({ onCloseDialogWithStatus, isOpen }) {
       open={isOpen}
       TransitionComponent={Transition}
       keepMounted
-      onClose={() => {onCloseDialogWithStatus(false)}}
+      onClose={() => { onCloseDialogWithStatus(false) }}
       aria-labelledby="alert-dialog-slide-title"
       aria-describedby="alert-dialog-slide-description"
     >
@@ -26,10 +26,10 @@ export default function DialogModal({ onCloseDialogWithStatus, isOpen }) {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => { onCloseDialogWithStatus(false) } } color="danger">
+        <Button onClick={() => { onCloseDialogWithStatus(false) }} color="danger">
           Disagree
         </Button>
-        <Button onClick={() => { onCloseDialogWithStatus(false) } } color="primary">
+        <Button onClick={() => { onCloseDialogWithStatus(false) }} color="primary">
           Agree
         </Button>
       </DialogActions>

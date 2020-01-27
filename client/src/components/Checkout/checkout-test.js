@@ -26,7 +26,7 @@ function CheckoutTest (props) {
   const [errorModal, setErrorModal] = useState(false);
   const [redirect, setRedirect] = useState(false);
 
-  let initialState = {
+  const initialState = {
     gender: 'Mr',
     firstName: '',
     lastName: '',
@@ -63,7 +63,7 @@ function CheckoutTest (props) {
     const newUser = {
       ...initialState,
       ...values,
-      birthdate: values.birthdayDay + '.' + values.birthdayMonth + '.' + values.birthdayYear
+      birthdate: `${values.birthdayDay}.${values.birthdayMonth}.${values.birthdayYear}`
     };
 
     console.log(newUser);
@@ -85,9 +85,9 @@ function CheckoutTest (props) {
 
   return (
     <Container component="div" disableGutters>
-        <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitNewUser)}>
-            <CheckoutForm />
-        </form>
+      <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitNewUser)}>
+        <CheckoutForm />
+      </form>
     </Container>
   );
 }

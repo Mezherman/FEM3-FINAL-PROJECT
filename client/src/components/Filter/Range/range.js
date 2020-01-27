@@ -8,13 +8,10 @@ import { getFilterProducts } from '../../../redux/actions/filter'
 function RangeSlider(props) {
   const { getFilterProducts, max, filterResults } = props;
   const classes = useStyles();
-  const handleChange = (event, price) => {
-
-    return getFilterProducts({
-      ...filterResults,
-      price
-    });
-  }
+  const handleChange = (event, price) => getFilterProducts({
+    ...filterResults,
+    price
+  })
 
   // useEffect()
 

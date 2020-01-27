@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 export default class MyForm extends React.Component {
-
   state = {
     email: '',
   }
@@ -23,7 +22,7 @@ export default class MyForm extends React.Component {
       <ValidatorForm
         ref="form"
         onSubmit={this.handleSubmit}
-        onError={errors => console.log(errors)}
+        onError={(errors) => console.log(errors)}
       >
         <TextValidator
           label="Email"

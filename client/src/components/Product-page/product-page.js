@@ -5,9 +5,9 @@ import Grid from '@material-ui/core/Grid';
 import { Container, Box } from '@material-ui/core';
 import { getProductsByItemNo } from '../../services/getProducts';
 import ProductDetail from '../Product-detail/product-detail';
-import setProducts from '../../redux/actions/products';
+import { productsRequested, productsLoaded } from setProducts from '../../redux/actions/products';
 import ProductCardCarousel from './Product-card-carousel/product-card-carousel';
-import { productsRequested, productsLoaded } from '../../redux/actions/products';
+
 import Spinner from '../Spinner/spinner';
 import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 import { getFilteredProducts } from '../../services/filter';
@@ -32,12 +32,12 @@ function ProductPage(props) {
         // console.log('resp', response);
         setProductsToShow(response)
       })
-  }, []);
+  }, [cardsToShowString]);
 
-    // console.log('products slider', productsToShow);
+  // console.log('products slider', productsToShow);
 
-    return (
-    <>
+  return (
+      <>
       {productsLoading
         ? <Spinner />
         : (

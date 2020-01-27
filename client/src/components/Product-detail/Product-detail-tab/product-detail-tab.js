@@ -2,8 +2,8 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { createStyles, makeStyles, Container } from '@material-ui/core';
-import TableSpecification from '../Table-specification/table-specifications';
 import PropTypes from 'prop-types';
+import TableSpecification from '../Table-specification/table-specifications';
 
 const useStyles = makeStyles((theme) => createStyles({
   root: {

@@ -11,11 +11,11 @@ export default function enhancerAxios(url, options = { method: 'get' }, data = {
   }
 
   return (axios({
-      method: `${options.method}`,
-      url: `${url}`,
-      data
-    })
-      .then((response) => response.data)
-      .catch((err) => err)
+    method: `${options.method}`,
+    url: `${url}`,
+    data
+  })
+    .then((response) => response.data)
+    .catch((err) => err)
   )
 }

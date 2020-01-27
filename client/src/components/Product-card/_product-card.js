@@ -15,9 +15,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     fontWeight: '300',
   },
-    itemNo: {
+  itemNo: {
     paddingLeft: theme.spacing(1)
-    },
+  },
   link: {
     textDecoration: 'none'
   },

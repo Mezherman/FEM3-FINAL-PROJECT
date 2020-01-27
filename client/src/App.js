@@ -25,7 +25,7 @@ function App(props) {
     mergeCart();
     fetchCustomerData();
     fetchFavorites();
-  }, []);
+  }, [fetchCatalog, fetchCustomerData, fetchFavorites, login, mergeCart]);
 
   return (
     <>

@@ -19,16 +19,17 @@ const SignUpFooter = () => {
   const classes = useStyles();
 
   const renderCheckboxField = ({ input, name, meta: { touched, error }, ...rest }) => (
-    <FormControlLabel className={classes.root}
-                      control={(
-                        <Checkbox
-                          className={classes.radioLabel}
-                          checked={input.value ? true : false}
-                          onChange={input.onChange}
-                        />
-                      )}
-                      label={(
-                        <FormLabel className={classes.labelAgreement}>
+    <FormControlLabel
+      className={classes.root}
+      control={(
+        <Checkbox
+          className={classes.radioLabel}
+          checked={!!input.value}
+          onChange={input.onChange}
+        />
+      )}
+      label={(
+        <FormLabel className={classes.labelAgreement}>
                           I agree that the WMF Group may create a personal profile based on my
                           personal data, purchasing and usage behaviour, in order to better tailor
                           advertising and web offers to my personal interests and to send me these
@@ -36,12 +37,12 @@ const SignUpFooter = () => {
                           e-mail. You may revoke your consent at any time, e.g. in your myWMF
                           customer
                           account in the “My communication” section.
-                          {
-                            touched && error &&
-                            <FormHelperText>{touched && error}</FormHelperText>
-                          }
-                        </FormLabel>
-                      )}
+          {
+            touched && error &&
+            <FormHelperText>{touched && error}</FormHelperText>
+          }
+        </FormLabel>
+      )}
     />
   );
 
@@ -77,7 +78,6 @@ const SignUpFooter = () => {
 };
 
 export default SignUpFooter;
-
 
 // import React from 'react';
 // import { Field } from 'redux-form';

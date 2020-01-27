@@ -38,16 +38,18 @@ const SignUpForm = () => {
 
   const renderRadioGroup = ({ input, name, ...rest }) => {
     console.log('INPUT =', input);
-    return <RadioGroup
-      {...input}
-      {...rest}
-      value={input.value}
-      aria-label="gender"
-      defaultValue={input.checked}
-      className={classes.radioGender}
-      name={name}
-      onChange={(event, value) => input.onChange(value)}
-    />
+    return (
+      <RadioGroup
+        {...input}
+        {...rest}
+        value={input.value}
+        aria-label="gender"
+        defaultValue={input.checked}
+        className={classes.radioGender}
+        name={name}
+        onChange={(event, value) => input.onChange(value)}
+      />
+    )
   };
 
   const renderTextField = ({ input, label, name, value, type, meta: { touched, error }, ...custom }) => (
@@ -74,11 +76,11 @@ const SignUpForm = () => {
       className={classes.inputBirthDay}
       {...custom}
       {...input}
-      helperText={touched && error ||
-      <FormHelperText className={classes.helperBirth} component="span">
-        {label}
-      </FormHelperText>
-      }
+      helperText={touched && error || (
+        <FormHelperText className={classes.helperBirth} component="span">
+          {label}
+        </FormHelperText>
+      )}
     />
   );
 
@@ -96,8 +98,7 @@ const SignUpForm = () => {
       }}
       children={children}
       {...custom}
-    >
-    </TextField>
+    />
   );
 
   return (
@@ -107,11 +108,19 @@ const SignUpForm = () => {
       </Typography>
 
       <Field name="gender" component={renderRadioGroup}>
-        <FormControlLabel className={classes.root} value="Mr" label="Mr" name="gender"
-                          control={<Radio className={classes.radioLabel} />}
+        <FormControlLabel
+          className={classes.root}
+          value="Mr"
+          label="Mr"
+          name="gender"
+          control={<Radio className={classes.radioLabel} />}
         />
-        <FormControlLabel className={classes.root} value="Mrs" label="Mrs" name="gender"
-                          control={<Radio className={classes.radioLabel} />}
+        <FormControlLabel
+          className={classes.root}
+          value="Mrs"
+          label="Mrs"
+          name="gender"
+          control={<Radio className={classes.radioLabel} />}
         />
       </Field>
 
@@ -127,7 +136,6 @@ const SignUpForm = () => {
       <Box mb={1} mt={2}>
         <Field name="login" component={renderTextField} label="Login" type="text" />
       </Box>
-
 
       <FormControl>
         <InputAdornment htmlFor="birthdayDay" className={classes.labelBirthday}>
@@ -174,12 +182,24 @@ const SignUpForm = () => {
 
       <Grid item>
         <Box mb={2}>
-          <Field name="birthdayDay" component={renderBirthdayField} label="DD"
-                 value="birthdayDay" />
-          <Field name="birthdayMonth" component={renderBirthdayField} label="MM"
-                 value="birthdayMonth" />
-          <Field name="birthdayYear" component={renderBirthdayField} label="YYYY"
-                 value="birthdayYear" />
+          <Field
+            name="birthdayDay"
+            component={renderBirthdayField}
+            label="DD"
+            value="birthdayDay"
+          />
+          <Field
+            name="birthdayMonth"
+            component={renderBirthdayField}
+            label="MM"
+            value="birthdayMonth"
+          />
+          <Field
+            name="birthdayYear"
+            component={renderBirthdayField}
+            label="YYYY"
+            value="birthdayYear"
+          />
         </Box>
       </Grid>
 
@@ -193,10 +213,10 @@ const SignUpForm = () => {
         <Field name="telephone" component={renderTextField} label="Phone number" type="tel" />
       </Box>
 
-      {/*<Field name="country" component={renderSelectField} label={selectCountry}>*/}
-      {/*  <MenuItem value='Austria'>Austria</MenuItem>*/}
-      {/*  <MenuItem value='Germany'>Germany</MenuItem>*/}
-      {/*</Field>*/}
+      {/* <Field name="country" component={renderSelectField} label={selectCountry}> */}
+      {/*  <MenuItem value='Austria'>Austria</MenuItem> */}
+      {/*  <MenuItem value='Germany'>Germany</MenuItem> */}
+      {/* </Field> */}
 
     </Grid>
   )

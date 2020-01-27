@@ -26,12 +26,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import RoutesName from '../../routes-list';
 
 import './header.scss';
-import useStyles from './_header';
 
-import Search from '../Search/search'
-import HeaderNavbar from '../Header-navbar/header-navbar';
-import PreviewBlock from '../Preview-block/preview-cart';
-import LoginModal from '../Login-modal-window/login-modal-window';
 import SearchIcon from '@material-ui/icons/Search';
 import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
 
@@ -41,6 +36,11 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 // import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+import LoginModal from '../Login-modal-window/login-modal-window';
+import PreviewBlock from '../Preview-block/preview-cart';
+import HeaderNavbar from '../Header-navbar/header-navbar';
+import Search from '../Search/search'
+import useStyles from './_header';
 // import store from '../../index';
 // import connect from 'react-redux'
 
@@ -296,7 +296,7 @@ function Header() {
                   <IconButton edge="end" className={classes.iconButton}>
                     <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
                   </IconButton>
-                <span className={classes.menuTitle}>Favorites</span>
+                  <span className={classes.menuTitle}>Favorites</span>
                 </Link>
               </MenuItem>
               <Divider orientation="vertical" className={classes.dividerStyle} />
@@ -379,54 +379,54 @@ function Header() {
                 <Link to={RoutesName.cart}>
                   <IconButton edge="end" aria-label="card" className={classes.iconButton}>
                     <Badge badgeContent={totalCartQuantity.toString()} color="error">
-              {/* <div> */}
-              {/* <MenuItem */}
-              {/*  className={classes.headerMenuItem} */}
-              {/*  aria-controls="customized-menu" */}
-              {/*  aria-haspopup="true" */}
-              {/*  variant="contained" */}
-              {/*  // onClick={handleClick} */}
-              {/*  component="" */}
-              {/*  ref={anchorRef} */}
-              {/*  // aria-controls={open ? 'menu-list-grow' : undefined} */}
-              {/*  // aria-haspopup="true" */}
-              {/*  onClick={handleToggle} */}
-              {/* // href={RoutesName.signIn} */}
-              {/* > */}
-              {/*  <IconButton edge="end" className={classes.iconButton}> */}
-              {/*    <PersonIcon fontSize="large" className={classes.iconsStyle} /> */}
-              {/*  </IconButton> */}
-              {/*  <span className={classes.menuTitle}>MyACC</span> */}
-              {/* </MenuItem> */}
-              {/*<Popper*/}
-              {/*  open={open}*/}
-              {/*  anchorEl={anchorRef.current}*/}
-              {/*  role={undefined}*/}
-              {/*  transition*/}
-              {/*  disablePortal*/}
-              {/*>*/}
-              {/*  {({ TransitionProps, placement }) => (*/}
-              {/*    <Grow*/}
-              {/*      {...TransitionProps}*/}
-              {/*      style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}*/}
-              {/*    >*/}
-              {/*      <Paper>*/}
-              {/*        <ClickAwayListener onClickAway={handleClose}>*/}
-              {/*          <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>*/}
-              {/*            <Link to={RoutesName.personalData}>*/}
-              {/*              <MenuItem onClick={handleClose}>Profile</MenuItem>*/}
-              {/*            </Link>*/}
-              {/*            <Link to={RoutesName.myOrders}>*/}
-              {/*              <MenuItem onClick={handleClose}>My orders</MenuItem>*/}
-              {/*            </Link>*/}
-              {/*            <MenuItem onClick={handleClose}>Logout</MenuItem>*/}
-              {/*          </MenuList>*/}
-              {/*        </ClickAwayListener>*/}
-              {/*      </Paper>*/}
-              {/*    </Grow>*/}
-              {/*  )}*/}
-              {/*</Popper>*/}
-              {/* </div> */}
+                      {/* <div> */}
+                      {/* <MenuItem */}
+                      {/*  className={classes.headerMenuItem} */}
+                      {/*  aria-controls="customized-menu" */}
+                      {/*  aria-haspopup="true" */}
+                      {/*  variant="contained" */}
+                      {/*  // onClick={handleClick} */}
+                      {/*  component="" */}
+                      {/*  ref={anchorRef} */}
+                      {/*  // aria-controls={open ? 'menu-list-grow' : undefined} */}
+                      {/*  // aria-haspopup="true" */}
+                      {/*  onClick={handleToggle} */}
+                      {/* // href={RoutesName.signIn} */}
+                      {/* > */}
+                      {/*  <IconButton edge="end" className={classes.iconButton}> */}
+                      {/*    <PersonIcon fontSize="large" className={classes.iconsStyle} /> */}
+                      {/*  </IconButton> */}
+                      {/*  <span className={classes.menuTitle}>MyACC</span> */}
+                      {/* </MenuItem> */}
+                      {/* <Popper */}
+                      {/*  open={open} */}
+                      {/*  anchorEl={anchorRef.current} */}
+                      {/*  role={undefined} */}
+                      {/*  transition */}
+                      {/*  disablePortal */}
+                      {/* > */}
+                      {/*  {({ TransitionProps, placement }) => ( */}
+                      {/*    <Grow */}
+                      {/*      {...TransitionProps} */}
+                      {/*      style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }} */}
+                      {/*    > */}
+                      {/*      <Paper> */}
+                      {/*        <ClickAwayListener onClickAway={handleClose}> */}
+                      {/*          <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}> */}
+                      {/*            <Link to={RoutesName.personalData}> */}
+                      {/*              <MenuItem onClick={handleClose}>Profile</MenuItem> */}
+                      {/*            </Link> */}
+                      {/*            <Link to={RoutesName.myOrders}> */}
+                      {/*              <MenuItem onClick={handleClose}>My orders</MenuItem> */}
+                      {/*            </Link> */}
+                      {/*            <MenuItem onClick={handleClose}>Logout</MenuItem> */}
+                      {/*          </MenuList> */}
+                      {/*        </ClickAwayListener> */}
+                      {/*      </Paper> */}
+                      {/*    </Grow> */}
+                      {/*  )} */}
+                      {/* </Popper> */}
+                      {/* </div> */}
                       <ShoppingCartOutlinedIcon fontSize="large" className={classes.iconsStyle} />
                     </Badge>
                   </IconButton>

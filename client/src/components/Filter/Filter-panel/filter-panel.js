@@ -10,11 +10,10 @@ import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import { connect } from 'react-redux'
+import { withStyles } from '@material-ui/core/styles';
 import RangeSlider from '../Range/range'
 import useStyles from './_filter-panel';
 import { getFilterProducts } from '../../../redux/actions/filter';
-
-import { withStyles } from '@material-ui/core/styles';
 
 // const CheckBoxStyles = withStyles ({
 //   root: {
@@ -63,50 +62,47 @@ function FilterPanel(props) {
     getFilterProducts(newFilters);
   };
 
-  const colorFilter = (colors) => {
-    return (
-      <FormControl component="fieldset">
-        <FormGroup aria-label="position" column="true">
-          {colors.map((el) => (
-            <FormControlLabel
-              style={{color: `${el.cssValue}`}}
-              key={el.name}
-              value={el.name}
-              control={
-                <Checkbox style={{color: `${el.cssValue}`}} /> }
-              label={el.name}
-              name={el.name}
-              onChange={handleChange}
+  const colorFilter = (colors) => (
+    <FormControl component="fieldset">
+      <FormGroup aria-label="position" column="true">
+        {colors.map((el) => (
+          <FormControlLabel
+            style={{ color: `${el.cssValue}` }}
+            key={el.name}
+            value={el.name}
+            control={
+              <Checkbox style={{ color: `${el.cssValue}` }} />
+            }
+            label={el.name}
+            name={el.name}
+            onChange={handleChange}
 
-            />
-          ))}
-        </FormGroup>
-      </FormControl>
-    )
-  };
+          />
+        ))}
+      </FormGroup>
+    </FormControl>
+  );
 
-  const brandFilter = (brands) => {
-    return (
-      <FormControl component="fieldset">
-        <FormGroup aria-label="position" column="true">
-          {brands.map((el) => (
-            <FormControlLabel
-              color="primary"
-              key={el.name}
-              value={el.name}
-              control={<Checkbox
-                // style={{color: 'orange'}}
-              />}
-              label={el.name}
-              name={el.name}
-              onChange={handleChange}
+  const brandFilter = (brands) => (
+    <FormControl component="fieldset">
+      <FormGroup aria-label="position" column="true">
+        {brands.map((el) => (
+          <FormControlLabel
+            color="primary"
+            key={el.name}
+            value={el.name}
+            control={(
+              <Checkbox />
+            )}
+            label={el.name}
+            name={el.name}
+            onChange={handleChange}
 
-            />
-          ))}
-        </FormGroup>
-      </FormControl>
-    )
-  };
+          />
+        ))}
+      </FormGroup>
+    </FormControl>
+  );
 
   // const manufacturerFilter = (manufacturer) => {
   //   return (
@@ -145,20 +141,18 @@ function FilterPanel(props) {
           {name === 'Color' && colorFilter(colors)}
           {name === 'Brand' && brandFilter(brands)}
           {name === 'Price' && <RangeSlider max={max} />}
-          {/*{name === 'Manufacturer' && manufacturerFilter(manufacturer)}*/}
+          {/* {name === 'Manufacturer' && manufacturerFilter(manufacturer)} */}
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </div>
   );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) =>
   // console.log('STATE =', state);
-  return {
+  ({
     filterResults: state.filterReducer.filterResults
-  }
-};
-
+  });
 function mapDispatchToProps(dispatch) {
   return {
     getFilterProducts: (value) => dispatch(getFilterProducts(value))

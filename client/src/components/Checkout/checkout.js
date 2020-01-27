@@ -18,7 +18,7 @@ let Checkout = (props) => {
   const { history, handleSubmit } = props;
   // const { cart, userReducer } = useSelector((state) => state);
 
-  let initialState = {
+  const initialState = {
     gender: 'Mr',
     firstName: '',
     lastName: ''

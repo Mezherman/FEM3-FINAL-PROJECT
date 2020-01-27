@@ -30,29 +30,30 @@ export default function CheckoutForm() {
       defaultValue={input.checked}
       className={classes.radioGender}
       name={name}
-      onChange={(event, value) => {
+      onChange={(event, value) =>
         // console.log('123', event, value);
-        return input.onChange(value)
-      }}
+        input.onChange(value)}
     />
   );
 
   const renderTextField = (props) => {
     // console.log(props);
     const { input, label, name, value, type, meta: { touched, error }, ...custom } = props;
-    return <TextField
-      type={type}
-      name={name}
-      variant="outlined"
-      fullWidth
-      id={name}
-      error={!!(touched && error)}
-      helperText={touched && error}
-      {...input}
-      {...custom}
-      className={classes.root}
-      label={(<FormLabel className={classes.root} required>{label}</FormLabel>)}
-    />
+    return (
+      <TextField
+        type={type}
+        name={name}
+        variant="outlined"
+        fullWidth
+        id={name}
+        error={!!(touched && error)}
+        helperText={touched && error}
+        {...input}
+        {...custom}
+        className={classes.root}
+        label={(<FormLabel className={classes.root} required>{label}</FormLabel>)}
+      />
+    )
   };
 
   return (
