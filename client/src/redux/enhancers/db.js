@@ -2,11 +2,12 @@ import React from 'react';
 import * as ServicesCart from '../../services/cart';
 import { getFavoriteProducts } from '../../services/favorites';
 import getCategories from '../../services/getCategories';
+import { getCustomer } from '../../services/customer';
 
 const db = (store) => (next) => async (action) => {
   // console.log('ACTION =', action);
   const storeCart = { ...store.getState().cart };
-  const { loggedIn, token } = store.getState().userReducer;
+  const { loggedIn, token } = store.getState().user;
 
   switch (action.type) {
     case 'SET_CATALOG_FROM_DB': {
@@ -131,6 +132,19 @@ const db = (store) => (next) => async (action) => {
           : next({
             type: 'UPDATE_FAVORITES_SUCCESS',
             payload: []
+          });
+      }
+
+      case 'SET_CUSTOMER_DATA_FROM_DB': {
+        const customer = await getCustomer();
+        return customer
+          ? next({
+            type: 'FETCH_CUSTOMER_DATA_SUCCESS',
+            payload: customer.data
+          })
+          : next({
+            type: 'FETCH_CUSTOMER_DATA_FAILURE',
+            payload: {}
           });
       }
 

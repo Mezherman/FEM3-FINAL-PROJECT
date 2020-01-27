@@ -2,7 +2,7 @@ import React from 'react';
 import * as ServicesCart from '../../services/cart';
 
 const localStorage = (store) => (next) => (action) => {
-  const { loggedIn, token } = store.getState().userReducer;
+  const { loggedIn, token } = store.getState().user;
   if (!loggedIn || !token) {
     switch (action.type) {
       // cart

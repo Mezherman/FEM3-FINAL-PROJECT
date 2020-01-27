@@ -30,4 +30,13 @@ const loginLoaded = () => {
   }
 };
 
+const fetchCustomerData = () => {
+  return {
+    type: 'SET_CUSTOMER_DATA_FROM_DB'
+  }
+};
+
 export default loginLoaded;
+export {
+  fetchCustomerData
+}

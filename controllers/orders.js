@@ -18,15 +18,15 @@ exports.placeOrder = async (req, res, next) => {
     let cartProducts = [];
 
     if (req.body.deliveryAddress) {
-      order.deliveryAddress = JSON.parse(req.body.deliveryAddress);
+      order.deliveryAddress = req.body.deliveryAddress;
     }
 
     if (req.body.shipping) {
-      order.shipping = JSON.parse(req.body.shipping);
+      order.shipping = req.body.shipping;
     }
 
     if (req.body.paymentInfo) {
-      order.paymentInfo = JSON.parse(req.body.paymentInfo);
+      order.paymentInfo = (req.body.paymentInfo);
     }
 
     if (req.body.customerId) {
@@ -97,12 +97,14 @@ exports.placeOrder = async (req, res, next) => {
       newOrder
         .save()
         .then(async order => {
-          const mailResult = await sendMail(
-            subscriberMail,
-            letterSubject,
-            letterHtml,
-            res
-          );
+          // const mailResult = await sendMail(
+          //   subscriberMail,
+          //   letterSubject,
+          //   letterHtml,
+          //   res
+          // );
+
+          const mailResult = "to be created";
 
           res.json({ order, mailResult });
         })
@@ -197,12 +199,14 @@ exports.updateOrder = (req, res, next) => {
       )
         .populate("customerId")
         .then(async order => {
-          const mailResult = await sendMail(
-            subscriberMail,
-            letterSubject,
-            letterHtml,
-            res
-          );
+          // const mailResult = await sendMail(
+          //   subscriberMail,
+          //   letterSubject,
+          //   letterHtml,
+          //   res
+          // );
+
+          const mailResult = "to be created";
 
           res.json({ order, mailResult });
         })
@@ -254,12 +258,14 @@ exports.cancelOrder = (req, res, next) => {
       )
         .populate("customerId")
         .then(async order => {
-          const mailResult = await sendMail(
-            subscriberMail,
-            letterSubject,
-            letterHtml,
-            res
-          );
+          // const mailResult = await sendMail(
+          //   subscriberMail,
+          //   letterSubject,
+          //   letterHtml,
+          //   res
+          // );
+
+          const mailResult = "to be created";
 
           res.json({ order, mailResult });
         })
