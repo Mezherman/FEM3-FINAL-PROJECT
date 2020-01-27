@@ -19,7 +19,7 @@ function ProductPage(props) {
   const [productsToShow, setProductsToShow] = useState([]);
   const cardsToShow = ['740039', '354326', '679386', '281039'];
   const cardsToShowString = cardsToShow.toString();
-  console.log(cardsToShowString);
+  // console.log(cardsToShowString);
   useEffect(() => {
     if (!chosenProduct) {
       fetchProduct(itemNo);
@@ -29,12 +29,12 @@ function ProductPage(props) {
   useEffect(() => {
     getFilteredProducts(`itemNo=${cardsToShowString}`)
       .then((response) => {
-        console.log('resp', response);
+        // console.log('resp', response);
         setProductsToShow(response)
       })
   }, []);
 
-    console.log('products slider', productsToShow);
+    // console.log('products slider', productsToShow);
 
     return (
     <>

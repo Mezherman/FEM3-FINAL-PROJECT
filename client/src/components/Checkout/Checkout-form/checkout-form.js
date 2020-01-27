@@ -31,14 +31,14 @@ export default function CheckoutForm() {
       className={classes.radioGender}
       name={name}
       onChange={(event, value) => {
-        console.log('123', event, value);
+        // console.log('123', event, value);
         return input.onChange(value)
       }}
     />
   );
 
   const renderTextField = (props) => {
-    console.log(props);
+    // console.log(props);
     const { input, label, name, value, type, meta: { touched, error }, ...custom } = props;
     return <TextField
       type={type}

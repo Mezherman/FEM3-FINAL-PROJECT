@@ -2,10 +2,6 @@ import React from 'react';
 import { connect, useSelector } from 'react-redux';
 import { Button, Container, Grid } from '@material-ui/core';
 import { reduxForm } from 'redux-form';
-import SignUpForm from '../SignUp/SignUp-form/signUp-form';
-import SignUpFotter from '../SignUp/SignUp-footer/signUp-footer';
-import SignUp from '../SignUp/sign-up';
-import CheckoutTest from './checkout-test';
 
 import CheckoutForm from './Checkout-form/checkout-form';
 import validateCheckoutForm from './validate-checkout-form';
@@ -17,7 +13,7 @@ import { getCustomer } from '../../services/customer';
 import useStyles from '../SignUp/_sign-up';
 
 let Checkout = (props) => {
-  console.log('PROPS IN CHECKOUT =', props);
+  // console.log('PROPS IN CHECKOUT =', props);
   const classes = useStyles();
   const { history, handleSubmit } = props;
   // const { cart, userReducer } = useSelector((state) => state);

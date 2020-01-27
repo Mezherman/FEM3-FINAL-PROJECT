@@ -101,9 +101,9 @@ function Header() {
   const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.up('md'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
-  console.log('Mobile', isMobile);
-  console.log('Tablet', isTablet);
-  console.log('Desctop', isDesktop);
+  // console.log('Mobile', isMobile);
+  // console.log('Tablet', isTablet);
+  // console.log('Desctop', isDesktop);
 
   const handleChange = () => {
     setPrevBlockIsVisible((prev) => !prev);

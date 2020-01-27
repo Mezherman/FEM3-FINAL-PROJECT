@@ -87,7 +87,7 @@ function ProductCard({ product, favorites }) {
             color="primary"
             disableElevation
             onClick={() => {
-              console.log('add product', product);
+              // console.log('add product', product);
               actions.addProductToCart(product, 1);
               setModalVisibility(true)
             }}

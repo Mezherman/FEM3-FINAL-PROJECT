@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-export default function enhancerAxios (url, options = { method: 'get' }, data = {}) {
+export default function enhancerAxios(url, options = { method: 'get' }, data = {}) {
   axios.defaults.headers = axios.defaults.headers || {};
   axios.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -11,13 +11,11 @@ export default function enhancerAxios (url, options = { method: 'get' }, data = 
   }
 
   return (axios({
-    method: `${options.method}`,
-    url: `${url}`,
-    data
-  })
-    .then((response) => response.data)
-    .catch((err) => err);
-      return null;
+      method: `${options.method}`,
+      url: `${url}`,
+      data
     })
+      .then((response) => response.data)
+      .catch((err) => err)
   )
 }

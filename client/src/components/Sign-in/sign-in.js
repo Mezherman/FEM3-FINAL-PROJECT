@@ -192,7 +192,7 @@ function SignIn(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log('STATE =', state);
+  // console.log('STATE =', state);
   return {
     user: state.user
   }

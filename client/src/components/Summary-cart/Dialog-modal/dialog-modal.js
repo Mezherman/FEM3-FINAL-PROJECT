@@ -9,7 +9,7 @@ import Slide from '@material-ui/core/Slide';
 const Transition = React.forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 export default function DialogModal({ onCloseDialogWithStatus, isOpen }) {
-  console.log(isOpen);
+  // console.log(isOpen);
 
   return (
     <Dialog
