@@ -13,21 +13,13 @@ const initialState = {
 };
 
 export default function filterReducer(state = initialState, action) {
-  // console.log(action.payload);
   switch (action.type) {
     case 'GET_FILTER_PRODUCTS': {
-      // console.log('in reducer =', state.filters);
       return {
         ...state,
         filterResults: action.payload
       };
     }
-
-    case 'GET_PRICE_PRODUCTS':
-      return {
-        ...state,
-        currentPrice: action.payload
-      };
 
     case 'FETCH_FILTER_PARAMS_SUCCESS':
       return {

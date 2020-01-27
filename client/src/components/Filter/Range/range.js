@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types';
 import Slider from '@material-ui/core/Slider';
 import { connect } from 'react-redux'
@@ -6,22 +6,18 @@ import useStyles from './_range';
 import { getFilterProducts } from '../../../redux/actions/filter'
 
 function RangeSlider(props) {
-  const { getFilterProducts, max, filterResults } = props;
+  const { getFilterProducts, filterResults } = props;
   const classes = useStyles();
   const handleChange = (event, price) => getFilterProducts({
     ...filterResults,
     price
   })
 
-  // useEffect()
-
-  // console.log('get price RANGE = ', getFilterProducts(value));
-
   return (
     <>
       <Slider
         className={classes.root}
-        max={filterResults.price[1]}
+        max={700}
         valueLabelDisplay="on"
         value={filterResults.price}
         onChange={handleChange}

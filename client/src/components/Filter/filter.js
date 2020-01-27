@@ -9,46 +9,44 @@ import { filterParamsLoaded } from '../../redux/actions/filter';
 import { tempFilterData } from '../../services/filter-temp'
 
 function Filter(props) {
-  tempFilterData().then((products) => {
-    const manufacturerSet = new Set();
-    const withoutBrand = products.filter((product) => manufacturerSet.add(product.manufacturer))
-    // products.filter(product => manufacturerSet.add(product.manufacturer))
-    // console.log('manufacturerSet =', manufacturerSet);
-    // console.log('withoutBrand =', withoutBrand);
-  })
+  // tempFilterData().then((products) => {
+  //   const manufacturerSet = new Set();
+  //   const withoutBrand = products.filter((product) => manufacturerSet.add(product.manufacturer))
+  // products.filter(product => manufacturerSet.add(product.manufacturer))
+  // console.log('manufacturerSet =', manufacturerSet);
+  // console.log('withoutBrand =', withoutBrand);
+  // })
 
-  const { productsLoaded, filterParamsLoaded, filterParams, filterResults, categoriesReducer } = props;
+  const {
+    productsLoaded,
+    filterParamsLoaded,
+    filterParams,
+    filterResults,
+    categoriesReducer
+  } = props;
+
   const { catalogLocation, catalog } = categoriesReducer;
   const { allCategories } = catalog;
   const classes = useStyles();
 
   useEffect(() => {
     getColors().then((colors) => {
-      // console.log(colors);
       filterParamsLoaded('colors', colors);
     })
     getBrands().then((brands) => {
-      // console.log('brands',brands);
       filterParamsLoaded('brands', brands);
-    })
-    getManufacturer().then((manufacturers) => {
-      // console.log('manufacturers', manufacturers);
-      filterParamsLoaded('manufacturers', manufacturers)
     })
   }, [filterParamsLoaded]);
 
   const filterText = ['Brand', 'Price', 'Color'];
 
   // console.log('filterParams.colors =', filterParams.colors);
-  // console.log('filterParams.manufacturers =', filterParams.manufacturers);
-  // console.log('filterParams.brands =', filterParams.brands);
   const filter = filterText.map((name) => (
     <FilterPanel
       key={name}
       name={name}
       colors={filterParams.colors}
       brands={filterParams.brands}
-      manufacturers={filterParams.manufacturers}
     />
   ));
 
@@ -68,16 +66,6 @@ function Filter(props) {
       brands.concat(str)
       valOfBrands = brands.concat(str)
     }
-
-    // if (obj.filterResults.manufacturer.length > 0) {
-    //   let manufacturer = 'manufacturer='
-    //   const items = obj.filterResults.manufacturer.map(item => item)
-    //   const str = items.join(',')
-    //   manufacturer.concat(str)
-    //   valOfCollection = manufacturer.concat(str)
-    //   // console.log('end of  => ', valOfBrands)
-    //   // return valOfBrands
-    // }
 
     if (obj.price.length > 0) {
       const price = '';
@@ -123,7 +111,6 @@ function Filter(props) {
         onClick={() => {
           getFilteredProducts(valToFilter)
             .then((products) => {
-              // console.log(products);
               productsLoaded(products)
             });
         }}
@@ -135,7 +122,6 @@ function Filter(props) {
 }
 
 function mapStateToProps(state) {
-  // console.log('STATE =>', state);
   return {
     filterResults: state.filterReducer.filterResults,
     filterParams: state.filterReducer.filterParams,
