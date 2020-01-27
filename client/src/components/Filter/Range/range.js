@@ -6,7 +6,7 @@ import useStyles from './_range';
 import { getFilterProducts } from '../../../redux/actions/filter'
 
 function RangeSlider(props) {
-  const { getFilterProducts, filterResults } = props;
+  const { getFilterProducts, filterResults, max } = props;
   const classes = useStyles();
   const handleChange = (event, price) => getFilterProducts({
     ...filterResults,
@@ -17,7 +17,7 @@ function RangeSlider(props) {
     <>
       <Slider
         className={classes.root}
-        max={700}
+        max={max}
         valueLabelDisplay="on"
         value={filterResults.price}
         onChange={handleChange}
@@ -28,7 +28,6 @@ function RangeSlider(props) {
 }
 
 function mapStateToProps(state) {
-  // console.log('MAP STATE TO PROPS =>', state.filterReducer.price)
   return {
     filterResults: state.filterReducer.filterResults
   }
@@ -41,7 +40,9 @@ function mapDispatchToProps(dispatch) {
 }
 
 RangeSlider.propTypes = {
-  max: PropTypes.number
+  max: PropTypes.number,
+  getFilterProducts: PropTypes.func.isRequired,
+  filterResults: PropTypes.objectOf(PropTypes.array).isRequired,
 };
 
 RangeSlider.defaultProps = {

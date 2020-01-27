@@ -2,13 +2,11 @@ const initialState = {
   filterResults: {
     color: [],
     brand: [],
-    manufacturer: [],
     price: [0, 700],
   },
   filterParams: {
     colors: [],
     brands: [],
-    manufacturers: []
   }
 };
 

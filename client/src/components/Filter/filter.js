@@ -43,6 +43,7 @@ function Filter(props) {
   // console.log('filterParams.colors =', filterParams.colors);
   const filter = filterText.map((name) => (
     <FilterPanel
+      max={700}
       key={name}
       name={name}
       colors={filterParams.colors}
