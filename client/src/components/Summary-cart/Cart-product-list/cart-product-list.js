@@ -3,6 +3,7 @@ import { Grid, Hidden } from '@material-ui/core';
 import EmptyCart from '../Empty-cart/empty-cart';
 import CartProductItem from '../Cart-product-item/cart-product-item';
 import CartProductListHeader from '../Cart-product-list-header/cart-product-list-header';
+import HelpPanel from '../Help-panel/help-panel'
 
 export default function cartProductList(props) {
   const { products, actions } = props;
@@ -16,6 +17,9 @@ export default function cartProductList(props) {
         <CartProductListHeader />
       </Hidden>
       {list}
+      <Grid item xs={12}>
+        <HelpPanel />
+      </Grid>
     </Grid>
   );
 }

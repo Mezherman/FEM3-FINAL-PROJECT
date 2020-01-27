@@ -349,6 +349,10 @@ function Header() {
               {/*  <SignIn onClose={handleClose} /> */}
               {/* </StyledMenu> */}
               <Divider orientation="vertical" className={classes.dividerStyle} />
+              <MenuItem className={classes.headerMenuItem}>
+                <Link to={RoutesName.cart}>
+                  <IconButton edge="end" aria-label="card" className={classes.iconButton}>
+                    <Badge badgeContent={totalCartQuantity.toString()} color="error">
               {/* <div> */}
               {/* <MenuItem */}
               {/*  className={classes.headerMenuItem} */}
@@ -397,12 +401,6 @@ function Header() {
               {/*  )}*/}
               {/*</Popper>*/}
               {/* </div> */}
-              <Divider orientation="vertical" className={classes.dividerStyle} />
-              <MenuItem className={classes.headerMenuItem} onClick={handleChange}>
-                <Link to={RoutesName.cart}>
-                  <IconButton edge="end" aria-label="card" className={classes.iconButton}>
-                    <Badge
-                      badgeContent={totalCartQuantity.toString()} color="error">
                       <ShoppingCartOutlinedIcon fontSize="large" className={classes.iconsStyle} />
                     </Badge>
                   </IconButton>

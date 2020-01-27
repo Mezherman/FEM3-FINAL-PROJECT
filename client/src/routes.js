@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom'
 import Home from './components/Home/home';
 import Catalog from './components/Catalog/catalog'
 import ProductPage from './components/Product-page/product-page'
