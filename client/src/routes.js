@@ -30,12 +30,12 @@ export default function Routes () {
 
   return (
     <Switch>
-      <Route path={RoutesName.signUp} component={SignUp}/>
+      <Route path={RoutesName.signUp} component={SignUp} />
       <Route
         path={RoutesName.login}
         render={() => (
           <div>
-            <Home/>
+            <Home />
             <LoginModal
               isLoggedIn={loggedIn}
               onModalClose={closeModal}
@@ -67,7 +67,7 @@ export default function Routes () {
           // )
         )}
       />
-      <Route path={RoutesName.myOrders} component={CustomerOrders}/>
+      <Route path={RoutesName.myOrders} component={CustomerOrders} />
       {/* <Route */}
       {/*  path={RoutesName.products} */}
       {/*  exact */}
@@ -80,7 +80,7 @@ export default function Routes () {
         exact
         render={({ match }) => {
           const { subCategory } = match.params;
-          return <Catalog assortment={subCategory}/>
+          return <Catalog assortment={subCategory} />
         }}
       />
       <Route
@@ -88,7 +88,7 @@ export default function Routes () {
         exact
         render={({ match }) => {
           const { subCategory } = match.params;
-          return <Catalog assortment={subCategory}/>
+          return <Catalog assortment={subCategory} />
         }}
       />
       <Route
@@ -96,7 +96,7 @@ export default function Routes () {
         exact
         render={({ match }) => {
           const { subCategory } = match.params;
-          return <Catalog assortment={subCategory}/>
+          return <Catalog assortment={subCategory} />
         }}
       />
       <Route
@@ -104,7 +104,7 @@ export default function Routes () {
         exact
         render={({ match }) => {
           const { subCategory } = match.params;
-          return <Catalog assortment={subCategory}/>
+          return <Catalog assortment={subCategory} />
         }}
       />
       <Route
@@ -112,7 +112,7 @@ export default function Routes () {
         render={({ match, location }) => {
           const { categoryOrID } = match.params;
           if (isNaN(categoryOrID)) {
-            return <Catalog assortment={categoryOrID}/>
+            return <Catalog assortment={categoryOrID} />
           }
           const { pathname: url } = location;
           // console.log(id);
@@ -126,28 +126,29 @@ export default function Routes () {
           )
         }}
       />
-      <Route path={RoutesName.favorites} component={Favorites}/>
+      <Route path={RoutesName.favorites} component={Favorites} />
       <Route
         path={`${RoutesName.products}/search`}
         exact
         render={() => {
-          return <Catalog assortment={'cooking'}/>
+          return <Catalog assortment="cooking" />
         }}
       />
-      <Route path={RoutesName.checkoutSuccess} component={CheckoutStatus}/>
-      <Route path={RoutesName.checkoutError} component={CheckoutStatus}/>
-      <Route path={RoutesName.checkout} component={Checkout}/>
-      <Route path={RoutesName.cart} component={SummaryCart}/>
-      <Route path={RoutesName.editPersonalData} component={EditPersonalData}/>
-      <Route path={RoutesName.aboutUs} component={AboutUs}/>
-      <Route path={RoutesName.delivery} component={Delivery}/>
-      <Route path={RoutesName.contacts} component={Contacts}/>
+      <Route path={RoutesName.checkoutSuccess} component={CheckoutStatus} />
+      <Route path={RoutesName.checkoutError} component={CheckoutStatus} />
+      <Route path={RoutesName.checkout} component={Checkout} />
+      <Route path={RoutesName.cart} component={SummaryCart} />
+      <Route path={RoutesName.editPersonalData} component={EditPersonalData} />
+      <Route path={RoutesName.aboutUs} component={AboutUs} />
+      <Route path={RoutesName.delivery} component={Delivery} />
+      <Route path={RoutesName.contacts} component={Contacts} />
+
       /*in the end*/
       <Route path={RoutesName.home} exact>
-        <Home/>
+        <Home />
       </Route>
       <Route path="*">
-        <NoMatch/>
+        <NoMatch />
       </Route>
     </Switch>
   );
