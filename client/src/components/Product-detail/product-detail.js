@@ -25,6 +25,7 @@ import ProductDetailTab from './Product-detail-tab/product-detail-tab';
 
 import useStyles from './_product-detail';
 import AddToFavoriteBtn from '../Add-to-favorites/Add-to-favorite-btn';
+import IncreaseBlock from '../Increase-block/increase-block';
 
 function ProductDetail({ product, favorites }) {
   const {
@@ -113,9 +114,11 @@ function ProductDetail({ product, favorites }) {
             itemId={itemId}
           />
           </Box>
+          <Container>
           <MyGallery
             images={images}
           />
+          </Container>
           {!isTablet && <Divider />}
         </Grid>
         <Grid item md={1} xl={3} />
@@ -168,22 +171,23 @@ function ProductDetail({ product, favorites }) {
                     {' '}
                     <a href="#">Shipping</a>
                   </p>
-                  <Box>
-                    <FormControl className={classes.margin}>
-                      <InputLabel htmlFor="quantity">Quantity</InputLabel>
-                      <NativeSelect
-                        id="quantity"
-                        value={quantity}
-                        onChange={handleChange}
-                        input={<BootstrapInput />}
+                  <IncreaseBlock />
+                  {/*<Box>*/}
+                  {/*  <FormControl className={classes.margin}>*/}
+                  {/*    <InputLabel htmlFor="quantity">Quantity</InputLabel>*/}
+                  {/*    <NativeSelect*/}
+                  {/*      id="quantity"*/}
+                  {/*      value={quantity}*/}
+                  {/*      onChange={handleChange}*/}
+                  {/*      input={<BootstrapInput />}*/}
 
-                      >
-                        <option value={1}>1</option>
-                        <option value={2}>2</option>
-                        <option value={3}>3</option>
-                      </NativeSelect>
-                    </FormControl>
-                  </Box>
+                  {/*    >*/}
+                  {/*      <option value={1}>1</option>*/}
+                  {/*      <option value={2}>2</option>*/}
+                  {/*      <option value={3}>3</option>*/}
+                  {/*    </NativeSelect>*/}
+                  {/*  </FormControl>*/}
+                  {/*</Box>*/}
                   <div className={classes.disableBlock}>
 
                     <span>Deliverable:</span>

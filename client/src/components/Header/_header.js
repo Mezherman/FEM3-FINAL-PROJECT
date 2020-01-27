@@ -129,7 +129,7 @@ const useStyles = makeStyles((theme) => ({
     '& #customized-menu': {
       display: 'none'
     },
-    '&a' : {
+    '& a': {
       textDecoration: 'none',
     }
   },

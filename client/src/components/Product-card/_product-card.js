@@ -9,9 +9,14 @@ const useStyles = makeStyles((theme) => ({
       cursor: 'pointer',
     }
   },
-    iconWrapper: {
+  iconWrapper: {
     display: 'flex',
-      justifyContent: 'flex-end',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    fontWeight: '300',
+  },
+    itemNo: {
+    paddingLeft: theme.spacing(1)
     },
   link: {
     textDecoration: 'none'
@@ -38,15 +43,16 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
   },
   priceBox: {
+    position: 'relative',
     textAlign: 'right',
   },
   oldPrice: {
-    position: 'relative',
-    right: theme.spacing(3),
+    position: 'absolute',
+    left: '0',
     display: 'inline-block',
     paddingBottom: theme.spacing(3),
     color: theme.palette.text.primary,
-    fontWeight: '300',
+    fontWeight: '400',
     fontSize: '20px',
     // text-align: right;
     textDecoration: 'line-through',

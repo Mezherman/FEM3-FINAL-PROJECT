@@ -44,13 +44,18 @@ const useStyles = makeStyles((theme) => ({
   },
   productShopArea: {
     padding: theme.spacing(2, 0),
-    backgroundColor: theme.palette.background.primary
+    backgroundColor: theme.palette.background.primary,
+    borderRadius: '3px',
   },
   priceBox: {
+    position: 'relative',
     display: 'flex',
     justifyContent: 'flex-end',
   },
   oldPrice: {
+    position: 'absolute',
+    top: '10px',
+    left: '0',
     display: 'inline-block',
     paddingBottom: theme.spacing(1),
     color: theme.palette.text.primary,
@@ -63,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'inlineBlock',
     paddingBottom: theme.spacing(1),
     color: theme.palette.text.primary,
-    fontWeight: '700',
+    fontWeight: '500',
     fontSize: '26px',
     textAlign: 'right',
     [theme.breakpoints.up('md')]: {
@@ -72,10 +77,10 @@ const useStyles = makeStyles((theme) => ({
   },
   specialPrice: {
     display: 'inlineBlock',
-    paddingBottom: '30px',
+    paddingBottom: theme.spacing(2),
     color: theme.palette.text.secondary,
     fontWeight: '700',
-    fontSize: '26px',
+    fontSize: '32px',
     textAlign: 'right',
     verticalAlign: 'bottom',
   },

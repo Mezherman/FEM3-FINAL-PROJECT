@@ -42,10 +42,11 @@ function ProductCard({ product, favorites }) {
       <div className={classes.card}>
         <Divider />
         <div className={classes.iconWrapper}>
-          <AddToFavoriteBtn
-            favorites={favorites}
-            itemId={itemId}
-          />
+            <span className={classes.itemNo}>Item.No {itemNo}</span>
+            <AddToFavoriteBtn
+              favorites={favorites}
+              itemId={itemId}
+            />
         </div>
 
         <Link
