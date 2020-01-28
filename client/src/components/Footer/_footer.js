@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
     margin: 0
   },
   img: {
-    paddingRight: theme.spacing(2)
+    paddingRight: theme.spacing(2),
+    width: '80px'
   },
   links: {
     color: theme.palette.secondary.contrastText,
