@@ -25,7 +25,7 @@ function App(props) {
     mergeCart();
     fetchCustomerData();
     fetchFavorites();
-  }, []);
+  }, [fetchCatalog, fetchCustomerData, fetchFavorites, login, mergeCart]);
 
   return (
     <>
@@ -74,4 +74,3 @@ App.propTypes = {
   login: PropTypes.func.isRequired,
   mergeCart: PropTypes.func.isRequired
 };
-

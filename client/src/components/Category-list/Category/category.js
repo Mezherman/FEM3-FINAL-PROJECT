@@ -22,18 +22,18 @@ function Category (props) {
 
   const description = (
     <Grid item sm={12} md={6} lg={3} container direction="column" className={`${classes.categories_description} ${getPaddingClassByIndex(index)}`}>
-        <Typography variant="h3" className={classes.categories_title}>
-          {data.name ?? '' }
-        </Typography>
-        <Typography variant="body1" className={classes.categories_desc}>
-          {data.description ?? ''}
-        </Typography>
-        <Link to={`${RoutesName.products}/${data.id}`} className={classes.link}>
-          <Button variant="contained" color="secondary" className={classes.categories_btn}>
+      <Typography variant="h3" className={classes.categories_title}>
+        {data.name ?? '' }
+      </Typography>
+      <Typography variant="body1" className={classes.categories_desc}>
+        {data.description ?? ''}
+      </Typography>
+      <Link to={`${RoutesName.products}/${data.id}`} className={classes.link}>
+        <Button variant="contained" color="secondary" className={classes.categories_btn}>
             Learn more
-          </Button>
-        </Link>
-        {/*{data.products && data.products.length > 0 ? (<ProductCarusel products={data.products} />) : '' }*/}
+        </Button>
+      </Link>
+      {/* {data.products && data.products.length > 0 ? (<ProductCarusel products={data.products} />) : '' } */}
     </Grid>
   );
 

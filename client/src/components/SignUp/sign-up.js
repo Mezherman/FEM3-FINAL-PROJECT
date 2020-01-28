@@ -28,7 +28,7 @@ let SignUp = (props) => {
   const [errorModal, setErrorModal] = useState(false);
   const [redirect, setRedirect] = useState(false);
 
-  let initialState = {
+  const initialState = {
     gender: 'Mr',
     firstName: '',
     lastName: '',
@@ -57,7 +57,7 @@ let SignUp = (props) => {
 
   const renderRedirect = () => {
     if (redirect) {
-      return <Redirect to='/' />
+      return <Redirect to="/" />
     }
   };
 
@@ -65,7 +65,7 @@ let SignUp = (props) => {
     const newUser = {
       ...initialState,
       ...values,
-      birthdate: values.birthdayDay + '.' + values.birthdayMonth + '.' + values.birthdayYear
+      birthdate: `${values.birthdayDay}.${values.birthdayMonth}.${values.birthdayYear}`
     };
 
     console.log(newUser);
@@ -118,68 +118,68 @@ let SignUp = (props) => {
             <SignUpFooter />
           </Grid>
         </form>
-        {/*<Button onClick={handleOpenSignUpModal}>Open registration modal</Button>*/}
-        {signUpModal &&
-        <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          className={classes.modalInfoIcon}
-          open={signUpModal}
-          onClose={handleCloseSignUpModal}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <Fade in={signUpModal}>
-            <div className={classes.paperInfoIcon}>
-              <h2 id="transition-modal-title" className={classes.modalInfoTitle}>
+        {/* <Button onClick={handleOpenSignUpModal}>Open registration modal</Button> */}
+        {signUpModal && (
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modalInfoIcon}
+            open={signUpModal}
+            onClose={handleCloseSignUpModal}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Fade in={signUpModal}>
+              <div className={classes.paperInfoIcon}>
+                <h2 id="transition-modal-title" className={classes.modalInfoTitle}>
                 Your account was successfully registered
-              </h2>
-              <Button
-                onClick={handleCloseSignUpModal}
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
+                </h2>
+                <Button
+                  onClick={handleCloseSignUpModal}
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                >
                 OK
-              </Button>
-            </div>
-          </Fade>
-        </Modal>
-        }
+                </Button>
+              </div>
+            </Fade>
+          </Modal>
+        )}
 
-        {errorModal &&
-        <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          className={classes.modalInfoIcon}
-          open={errorModal}
-          onClose={handleCloseSetErrorModal}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <Fade in={errorModal}>
-            <div className={classes.paperInfoError}>
-              <h2 id="transition-modal-title" className={classes.modalInfoTitle}>
+        {errorModal && (
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modalInfoIcon}
+            open={errorModal}
+            onClose={handleCloseSetErrorModal}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <Fade in={errorModal}>
+              <div className={classes.paperInfoError}>
+                <h2 id="transition-modal-title" className={classes.modalInfoTitle}>
                 Something go wrong. Try again
-              </h2>
-              <Button
-                onClick={handleCloseSetErrorModal}
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
+                </h2>
+                <Button
+                  onClick={handleCloseSetErrorModal}
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                >
                 OK
-              </Button>
-            </div>
-          </Fade>
-        </Modal>
-        }
+                </Button>
+              </div>
+            </Fade>
+          </Modal>
+        )}
 
       </div>
     </Container>

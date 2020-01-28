@@ -1,7 +1,9 @@
 export default function (values) {
   const errors = {};
   const requiredFields = [
-    'gender'
+    'gender',
+    'firstName',
+    'lastName'
   ];
   requiredFields.forEach((field) => {
     if (!values[field]) {

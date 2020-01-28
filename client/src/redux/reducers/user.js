@@ -14,14 +14,14 @@ export default function user(state = initialState, action) {
     case 'FETCH_LOGIN_ERROR':
       return state;
 
-    // case 'FETCH_USER_DATA_SUCCESS':
-    //   return {
-    //     ...state,
-    //     customerData: {
-    //       ...initial,
-    //       ...action.payload
-    //     },
-    //   };
+      // case 'FETCH_USER_DATA_SUCCESS':
+      //   return {
+      //     ...state,
+      //     customerData: {
+      //       ...initial,
+      //       ...action.payload
+      //     },
+      //   };
 
     case 'FETCH_CUSTOMER_DATA_SUCCESS':
       return {

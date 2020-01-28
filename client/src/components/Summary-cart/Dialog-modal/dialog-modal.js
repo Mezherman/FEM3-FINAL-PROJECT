@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -14,7 +15,7 @@ export default function DialogModal({ onCloseDialogWithStatus, isOpen }) {
       open={isOpen}
       TransitionComponent={Transition}
       keepMounted
-      onClose={() => {onCloseDialogWithStatus(false)}}
+      onClose={() => { onCloseDialogWithStatus(false) }}
       aria-labelledby="alert-dialog-slide-title"
       aria-describedby="alert-dialog-slide-description"
     >
@@ -33,4 +34,9 @@ export default function DialogModal({ onCloseDialogWithStatus, isOpen }) {
       </DialogActions>
     </Dialog>
   );
+}
+
+DialogModal.PropType = {
+  onCloseDialogWithStatus: PropTypes.func.require,
+  isOpen: PropTypes.bool,
 }

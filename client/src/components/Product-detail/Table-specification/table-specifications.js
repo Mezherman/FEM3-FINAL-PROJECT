@@ -8,7 +8,10 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
+  tableWrapper: {
+    maxWidth: '980px',
+  },
   table: {
     minWidth: 320,
     maxWidth: 1000
@@ -16,7 +19,7 @@ const useStyles = makeStyles({
   name: {
     fontWeight: '500'
   }
-});
+}));
 
 function createData(name, data) {
   return { name, data };
@@ -54,10 +57,11 @@ export default function TableSpecifications({ data }) {
     createData('Capacity (in l)', capacity),
     createData('Care', care),
   ];
+  console.log(sizes);
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} className={classes.tableWrapper}>
       <Table className={classes.table} aria-label="simple table">
-        <TableBody>
+        <TableBody className={classes.root}>
           {rows.map((row) => (
             <TableRow key={row.name}>
               {row.data ? (
@@ -65,13 +69,20 @@ export default function TableSpecifications({ data }) {
                   {row.name}
                 </TableCell>
               ) : null}
-              {row.data ? <TableCell acomponent="th" scope="row">{row.data}</TableCell> : null }
+              {row.data ? (
+                <TableCell
+                  acomponent="th"
+                  scope="row"
+                >
+                  {row.data}
+                </TableCell>
+              ) : null }
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-  );
+  )
 }
 
 TableSpecifications.propTypes = {

@@ -12,10 +12,10 @@ import { Link, Redirect } from 'react-router-dom';
 import Divider from '@material-ui/core/Divider';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 import getUserData from '../../services/getUserData';
 import usePdstyles from './_personal-data';
 import RoutesName from '../../routes-list';
-import { useSelector } from 'react-redux';
 // import
 // axios.defaults.baseURL = 'http://localhost:5000';
 
@@ -171,17 +171,17 @@ export default function PersonalData () {
           return (
             // eslint-disable-next-line react/no-array-index-key
             <ListItem key={`${text}${index}`} button>
-              <ListItemText id={labelId} primary={text}/>
+              <ListItemText id={labelId} primary={text} />
               <ListItemSecondaryAction>
                 <ListItem
                   key={`${userData}`}
                   // button
                   // className={classes.root}
                 >
-                  <ListItemText id="2" primary={userData}/>
+                  <ListItemText id="2" primary={userData} />
                 </ListItem>
               </ListItemSecondaryAction>
-              <Divider absolute/>
+              <Divider absolute />
             </ListItem>
           );
         })}

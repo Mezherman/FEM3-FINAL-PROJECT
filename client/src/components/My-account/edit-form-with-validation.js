@@ -14,7 +14,7 @@ import { Field, reduxForm } from 'redux-form';
 import InfoOutlinedIcon from '@material-ui/core/SvgIcon/SvgIcon';
 import { Redirect } from 'react-router-dom';
 import CloseIcon from '@material-ui/icons/Close';
-import useStyles from '../SignUp/SignUp-form/_signUp-form';
+import useStyles from '../SignUp/Sign-up-form/_sign-up-form';
 import postNewUser from '../../services/postNewUser';
 import validate from '../SignUp/validate';
 import usePdstyles from './_personal-data';
@@ -55,7 +55,7 @@ function EditFormWithValidation(props) {
         console.log('ERROR', err);
         /* Do something with error */
       });
-  }, []);
+  }, [newUserData]);
 
   // SignUPForm
 
@@ -230,7 +230,7 @@ function EditFormWithValidation(props) {
   // );
 
   const { handleSubmit } = props;
-  const name = "Ivan";
+  const name = 'Ivan';
 
   return (
     <Container >
@@ -259,7 +259,7 @@ function EditFormWithValidation(props) {
 
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              {/*<Field name="firstName" component={CustomInput} label="First Name" />*/}
+              {/* <Field name="firstName" component={CustomInput} label="First Name" /> */}
               <Field name="firstName" component={renderTextField} label="First Name" />
             </Grid>
             <Grid item xs={12} sm={6}>

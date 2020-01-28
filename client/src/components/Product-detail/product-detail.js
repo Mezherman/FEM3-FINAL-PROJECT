@@ -25,6 +25,7 @@ import ProductDetailTab from './Product-detail-tab/product-detail-tab';
 
 import useStyles from './_product-detail';
 import AddToFavoriteBtn from '../Add-to-favorites/Add-to-favorite-btn';
+import IncreaseBlock from '../Increase-block/increase-block';
 
 function ProductDetail({ product, favorites }) {
   const {
@@ -35,6 +36,7 @@ function ProductDetail({ product, favorites }) {
     myCustomParams,
     brand,
     enabled,
+    itemNo,
     _id: itemId
   } = product;
   const classes = useStyles();
@@ -101,25 +103,29 @@ function ProductDetail({ product, favorites }) {
         product={{ imageUrls, name, currentPrice }}
       />
       <h1 className={classes.title}>{name.toUpperCase()[0] + name.slice(1)}</h1>
+      <p className={classes.itemNo}>
+        Item.No
+        {' '}
+        {itemNo}
+      </p>
       <Grid container spacing={4} justify="center">
         <Grid item xs={12} sm={12} md={6} xl={5}>
-          <AddToFavoriteBtn
-            favorites={favorites}
-            itemId={itemId}
-          />
-          <MyGallery
-            images={images}
-          />
+          <Box display="flex" justifyContent="flex-end">
+            <AddToFavoriteBtn
+              favorites={favorites}
+              itemId={itemId}
+            />
+          </Box>
+          <Container>
+            <MyGallery
+              images={images}
+            />
+          </Container>
           {!isTablet && <Divider />}
         </Grid>
         <Grid item md={1} xl={3} />
         <Grid item xs={12} sm={12} md={5} xl={4}>
           <Grid container spacing={1}>
-            {/* <Grid item xs={12} sm={12} md={12}> */}
-            {/*  <Typography align="right"> */}
-            {/*    <a href="#">Submit a review</a> */}
-            {/*  </Typography> */}
-            {/* </Grid> */}
             {!isTablet && (
               <Grid item xs={12} sm={6} md={12} xl={6}>
                 <Box
@@ -167,25 +173,26 @@ function ProductDetail({ product, favorites }) {
                     {' '}
                     <a href="#">Shipping</a>
                   </p>
-                  <Box>
-                    <FormControl className={classes.margin}>
-                      <InputLabel htmlFor="quantity">Quantity</InputLabel>
-                      <NativeSelect
-                        id="quantity"
-                        value={quantity}
-                        onChange={handleChange}
-                        input={<BootstrapInput />}
+                  <IncreaseBlock />
+                  {/* <Box> */}
+                  {/*  <FormControl className={classes.margin}> */}
+                  {/*    <InputLabel htmlFor="quantity">Quantity</InputLabel> */}
+                  {/*    <NativeSelect */}
+                  {/*      id="quantity" */}
+                  {/*      value={quantity} */}
+                  {/*      onChange={handleChange} */}
+                  {/*      input={<BootstrapInput />} */}
 
-                      >
-                        <option value={1}>1</option>
-                        <option value={2}>2</option>
-                        <option value={3}>3</option>
-                      </NativeSelect>
-                    </FormControl>
-                  </Box>
+                  {/*    > */}
+                  {/*      <option value={1}>1</option> */}
+                  {/*      <option value={2}>2</option> */}
+                  {/*      <option value={3}>3</option> */}
+                  {/*    </NativeSelect> */}
+                  {/*  </FormControl> */}
+                  {/* </Box> */}
                   <div className={classes.disableBlock}>
 
-                    <span>Disable:</span>
+                    <span>Deliverable:</span>
                     {enabled
                       ? (
                         <span >
@@ -236,7 +243,11 @@ function ProductDetail({ product, favorites }) {
       {!isDesktop && <Divider />}
       <Grid container>
         <Grid item xs={12} >
-          <h3 className={classes.sectionTitle}>Product details</h3>
+          <h3
+            className={classes.sectionTitle}
+          >
+            Product details
+          </h3>
           {isDesktop && <ProductDetailTab data={product} />}
           {!isDesktop && <ProductDetailCollapse data={product} />}
           {!isTablet && <Divider />}

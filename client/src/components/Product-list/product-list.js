@@ -13,20 +13,7 @@ import useStyles from './_product-list';
 
 function ProductList(props) {
   const { assortment, products, productsLoading } = props;
-  // console.log('products =', products);
-  // console.log('PROPS =', props);
   const classes = useStyles();
-
-  // const [favorites.js, setFavorites] = useState([1, 2, 3]);
-
-  // useEffect(() => {
-  //   setFavorites([1, 2, 3])
-  // }, [])
-
-  // const addToFavorite = (id) => {
-  //   setFavorites(favorites.js.concat(id))
-  // };
-
 
   return (
     <div className={classes.productList}>
@@ -42,7 +29,6 @@ function ProductList(props) {
     </div>
   )
 }
-
 
 const mapStateToProps = (state) => state.productsReducer;
 
