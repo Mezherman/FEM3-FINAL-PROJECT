@@ -14,60 +14,44 @@ import { Field, reduxForm } from 'redux-form';
 import InfoOutlinedIcon from '@material-ui/core/SvgIcon/SvgIcon';
 import { Redirect } from 'react-router-dom';
 import CloseIcon from '@material-ui/icons/Close';
+import { useSelector } from 'react-redux';
 import useStyles from '../SignUp/Sign-up-form/_sign-up-form';
 import postNewUser from '../../services/postNewUser';
 import validate from '../SignUp/validate';
 import usePdstyles from './_personal-data';
-import getUserData from '../../services/getUserData';
+// import getUserData from '../../services/getUserData';
 
-function EditFormWithValidation (props) {
-  const [newUserData, setNewUserData] = useState({
-    gender: 'Mr',
-    firstName: '',
-    lastName: '',
-    // birthdayDay: '',
-    // birthdayMonth: '',
-    // birthdayYear: '',
-    email: '',
-    telephone: '',
-    // password: '',
-    // country: 'Austria',
-    agreement: false,
-    isAdmin: false,
-  });
+function PutPersonalData (props) {
+  // const [newUserData, setNewUserData] = useState({
+  //   gender: 'Mr',
+  //   firstName: '',
+  //   lastName: '',
+  //   // birthdayDay: '',
+  //   // birthdayMonth: '',
+  //   // birthdayYear: '',
+  //   email: '',
+  //   telephone: '',
+  //   // password: '',
+  //   // country: 'Austria',
+  //   agreement: false,
+  //   isAdmin: false,
+  // });
 
-  const { gender, firstName, lastName } = newUserData;
-  console.log('USER NAME =>', firstName);
+  // const { gender, firstName, lastName } = newUserData;
 
-  // const classes = useStyles();
-  // const pdClasses = usePdstyles();
+  const { handleSubmit } = props;
+  const {
+    gender,
+    firstName,
+    lastName,
+    telephone,
+    email,
+    login,
+    // handleSubmit
+  } = props;
+  console.log(firstName);
 
-  useEffect(() => {
-    getUserData()
-      .then((loggedInCustomer) => {
-        setNewUserData({
-          ...newUserData,
-          ...loggedInCustomer.data
-        });
-        /* Do something with loggedInCustomer */
-      })
-      .catch((err) => {
-        console.log('ERROR', err);
-        /* Do something with error */
-      });
-  }, [newUserData]);
-
-  // SignUPForm
-
-  // const [openInfo, setOpenInfo] = React.useState(false);
-  // const [selectCountry, setSelectCountry] = React.useState('Austria');
-
-  // const handleOpenInfo = () => {
-  //   setOpenInfo(true);
-  // };
-  // const handleCloseInfo = () => {
-  //   setOpenInfo(false);
-  // };
+  // console.log('USER NAME =>', firstName);
 
   const classes = useStyles();
 
@@ -75,7 +59,6 @@ function EditFormWithValidation (props) {
 
   // const [signUpModal, setSignUpModal] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
-  // const [redirect, setRedirect] = useState(false);
 
   // const handleOpenSignUpModal = () => {
   //   setSignUpModal(true);
@@ -88,7 +71,6 @@ function EditFormWithValidation (props) {
   // const handleOpenSetErrorModal = () => {
   //   setErrorModal(true);
   // };
-
   const handleCloseSetErrorModal = () => {
     setErrorModal(false);
   };
@@ -100,47 +82,18 @@ function EditFormWithValidation (props) {
   //   return null
   // };
 
-  const submitNewUser = (values) => {
+  // const [redirect, setRedirect] = useState(false);
 
-    // postNewUser(values, handleOpenSignUpModal, handleOpenSetErrorModal);
-    // axios
-    //   .post('/customers', values)
-    //   .then((response) => {
-    //     console.log(response);
-    //     if (response.statusText === 'OK') {
-    //       handleOpenSignUpModal();
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     handleOpenSetErrorModal();
-    //     console.log(error.response.data);
-    //   });
-  };
-
-  // const renderRadioGroup = ({ input, name, ...rest }) => (
-  //   <RadioGroup
-  //     {...input}
-  //     {...rest}
-  //     value={input.value}
-  //     aria-label="gender"
-  //     defaultValue={input.checked}
-  //     className={classes.radioGender}
-  //     name={name}
-  //     onChange={(event, value) => input.onChange(value)}
-  //   />
-  // );
-
-  // const userValue = 'Ivan';
+  const submitNewUser = (values) => {}
 
   const renderTextField = ({
-                             input,
-                             label,
-                             name,
-                             value,
-                             type,
-                             meta: { touched, error },
-                             ...custom
-                           }) => (
+    label,
+    name,
+    type,
+    defaultValue,
+    meta: { touched, error },
+    input: { value, onBlur, onChange }
+  }) => (
     <TextField
       type={type}
       name={name}
@@ -149,88 +102,14 @@ function EditFormWithValidation (props) {
       id={name}
       error={!!(touched && error)}
       helperText={touched && error}
-      value={value}
-      defaultValue={value}
-      {...input}
-      {...custom}
+      onBlur={onBlur}
+      onChange={(event) => onChange(event.target.value)}
+      // defaultValue={!touched ? defaultValue : value}
+      value={value || defaultValue}
       className={classes.root}
       label={(<FormLabel className={classes.root} required>{label}</FormLabel>)}
     />
   );
-
-  // const nameCustomInput = 'Ivan';
-  //
-  // const CustomInput = ({
-  //   input,
-  //   label,
-  //   name,
-  //   value,
-  //   type,
-  //   meta: { touched, error },
-  //   ...custom
-  // }) => (
-  //   <TextField
-  //     type={type}
-  //     name={name}
-  //     variant="outlined"
-  //     fullWidth
-  //     id={name}
-  //     error={!!(touched && error)}
-  //     helperText={touched && error}
-  //     autoComplete="First Name"
-  //     // name="firstName"
-  //     // variant="outlined"
-  //     // fullWidth
-  //     // id="firstName"
-  //     value={value}
-  //     autoFocus
-  //     defaultValue={nameCustomInput}
-  //     // {...input}
-  //     {...custom}
-  //     label={(
-  //       <FormLabel className={classes.labelText} required>First Name</FormLabel>
-  //     )}
-  //   />
-  // )
-
-  // const renderBirthdayField = ({
-  // input, label, name, value, meta: { touched, error }, ...custom }) => (
-  //   <TextField
-  //     error={!!(touched && error)}
-  //     name={name}
-  //     type="number"
-  //     variant="outlined"
-  //     className={classes.inputBirthDay}
-  //     {...custom}
-  //     {...input}
-  //     helperText={touched && error || (
-  //       <FormHelperText className={classes.helperBirth} component="span">
-  //         {label}
-  //       </FormHelperText>
-  //     )}
-  //   />
-  // );
-
-  // const renderSelectField = ({
-  // input, label, value, meta: { touched, error }, children, ...custom }) => (
-  //   <TextField
-  //     select
-  //     variant="outlined"
-  //     fullWidth
-  //     label={(<FormLabel className={classes.labelText}>{selectCountry}</FormLabel>)}
-  //     value={value}
-  //     {...input}
-  //     onChange={(event, index, value) => {
-  //       input.onChange(event.target.value);
-  //       setSelectCountry(event.target.value);
-  //     }}
-  //     // children={children}
-  //     {...custom}
-  //   />
-  // );
-
-  const { handleSubmit } = props;
-  const name = 'Ivan';
 
   return (
     <Container>
@@ -261,10 +140,9 @@ function EditFormWithValidation (props) {
               <Field
                 name="firstName"
                 component={(args) => {
-                  const defaultValue = {};
                   const newArgs = {
                     ...args,
-                    defaultValue
+                    defaultValue: firstName
                   };
                   return renderTextField(newArgs)
                 }}
@@ -272,11 +150,32 @@ function EditFormWithValidation (props) {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Field name="lastName" component={renderTextField} label="Last Name" />
+              <Field
+                component={(args) => {
+                  const newArgs = {
+                    ...args,
+                    defaultValue: lastName
+                  };
+                  return renderTextField(newArgs)
+                }}
+                name="lastName"
+                label="Last Name"
+              />
             </Grid>
           </Grid>
           <Box mb={1} mt={2}>
-            <Field name="login" component={renderTextField} label="Login" type="text" />
+            <Field
+              name="login"
+              component={(args) => {
+                const newArgs = {
+                  ...args,
+                  defaultValue: login
+                };
+                return renderTextField(newArgs)
+              }}
+              label="Login"
+              type="text"
+            />
           </Box>
           {/* <FormControl> */}
           {/*  <InputAdornment htmlFor="birthdayDay" className={classes.labelBirthday}> */}
@@ -328,13 +227,35 @@ function EditFormWithValidation (props) {
           {/*  </Box> */}
           {/* </Grid> */}
           <Box mb={2}>
-            <Field name="email" component={renderTextField} label="Email Address" type="email" />
+            <Field
+              name="email"
+              component={(args) => {
+                const newArgs = {
+                  ...args,
+                  defaultValue: email
+                };
+                return renderTextField(newArgs)
+              }}
+              label="Email Address"
+              type="email"
+            />
           </Box>
           {/* <Box mb={2}> */}
           {/*  <Field name="password" component={renderTextField} label="Password" type="password" /> */}
           {/* </Box> */}
           <Box mb={2}>
-            <Field name="telephone" component={renderTextField} label="Phone number" type="tel" />
+            <Field
+              name="telephone"
+              component={(args) => {
+                const newArgs = {
+                  ...args,
+                  defaultValue: telephone
+                };
+                return renderTextField(newArgs)
+              }}
+              label="Phone number"
+              type="tel"
+            />
           </Box>
           {/* <Field name="country" component={renderSelectField} label={selectCountry}> */}
           {/*  <MenuItem value="Austria">Austria</MenuItem> */}
@@ -376,9 +297,9 @@ function EditFormWithValidation (props) {
   )
 }
 
-EditFormWithValidation = reduxForm({
+PutPersonalData = reduxForm({
   form: 'edit',
   validate,
-})(EditFormWithValidation);
+})(PutPersonalData);
 
-export default EditFormWithValidation
+export default PutPersonalData

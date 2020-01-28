@@ -18,7 +18,7 @@ import Favorites from './components/Favorites/favorites'
 import Checkout from './components/Checkout/checkout';
 import CheckoutTest from './components/Checkout/checkout-test';
 import CheckoutStatus from './components/Checkout/Status/status';
-import EditFormWithValidation from './components/My-account/edit-form-with-validation'
+import PutPersonalData from './components/My-account/put-personal-data'
 import MyForm from './components/My-account/form-mui-valid'
 import CustomerOrders from './components/My-account/Customer-orders/customer-orders';
 
