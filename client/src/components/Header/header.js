@@ -285,8 +285,8 @@ function Header() {
                   className={classes.iconButton}
                 >
                   <SearchIcon fontSize="large" className={classes.iconsStyle} />
+                  <span className={classes.menuTitle}>Search</span>
                 </IconButton>
-                <span className={classes.menuTitle}>Search</span>
               </MenuItem>
 
               <Divider orientation="vertical" className={classes.dividerStyle} />

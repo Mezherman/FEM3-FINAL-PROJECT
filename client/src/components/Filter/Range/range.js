@@ -23,7 +23,7 @@ const IOSSlider = withStyles((theme) => ({
     // marginTop: -14,
     // marginLeft: -14,
     // '&:focus,&:hover,&$active': {
-    //   boxShadow: '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
+    //  boxShadow: '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
     //   '@media (hover: none)': {
     //     boxShadow: Shadow,
     //   },
