@@ -20,7 +20,7 @@ import validate from '../SignUp/validate';
 import usePdstyles from './_personal-data';
 import getUserData from '../../services/getUserData';
 
-function EditFormWithValidation(props) {
+function EditFormWithValidation (props) {
   const [newUserData, setNewUserData] = useState({
     gender: 'Mr',
     firstName: '',
@@ -133,14 +133,14 @@ function EditFormWithValidation(props) {
   // const userValue = 'Ivan';
 
   const renderTextField = ({
-    input,
-    label,
-    name,
-    value,
-    type,
-    meta: { touched, error },
-    ...custom
-  }) => (
+                             input,
+                             label,
+                             name,
+                             value,
+                             type,
+                             meta: { touched, error },
+                             ...custom
+                           }) => (
     <TextField
       type={type}
       name={name}
@@ -233,13 +233,12 @@ function EditFormWithValidation(props) {
   const name = 'Ivan';
 
   return (
-    <Container >
+    <Container>
       <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitNewUser)}>
-        <Grid item xs={12} sm={10} md={5} >
+        <Grid item xs={12} sm={10} md={5}>
           <Typography paragraph component="p" variant="subtitle2" className={classes.rightTitle}>
             Please enter the following information:
           </Typography>
-
           {/* <Field name="gender" component={renderRadioGroup} > */}
           {/*  <FormControlLabel */}
           {/*    className={classes.root} */}
@@ -256,11 +255,21 @@ function EditFormWithValidation(props) {
           {/*    control={<Radio className={classes.radioLabel} />} */}
           {/*  /> */}
           {/* </Field> */}
-
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               {/* <Field name="firstName" component={CustomInput} label="First Name" /> */}
-              <Field name="firstName" component={renderTextField} label="First Name" />
+              <Field
+                name="firstName"
+                component={(args) => {
+                  const defaultValue = {};
+                  const newArgs = {
+                    ...args,
+                    defaultValue
+                  };
+                  return renderTextField(newArgs)
+                }}
+                label="First Name"
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
               <Field name="lastName" component={renderTextField} label="Last Name" />
@@ -269,7 +278,6 @@ function EditFormWithValidation(props) {
           <Box mb={1} mt={2}>
             <Field name="login" component={renderTextField} label="Login" type="text" />
           </Box>
-
           {/* <FormControl> */}
           {/*  <InputAdornment htmlFor="birthdayDay" className={classes.labelBirthday}> */}
           {/* Do you fancy a birthday surprise? */}
@@ -312,7 +320,6 @@ function EditFormWithValidation(props) {
           {/*    </Modal> */}
           {/*  </InputAdornment> */}
           {/* </FormControl> */}
-
           {/* <Grid item> */}
           {/*  <Box mb={2}> */}
           {/*    <Field name="birthdayDay" component={renderBirthdayField} label="DD" value="birthdayDay" /> */}
@@ -320,7 +327,6 @@ function EditFormWithValidation(props) {
           {/*    <Field name="birthdayYear" component={renderBirthdayField} label="YYYY" value="birthdayYear" /> */}
           {/*  </Box> */}
           {/* </Grid> */}
-
           <Box mb={2}>
             <Field name="email" component={renderTextField} label="Email Address" type="email" />
           </Box>
@@ -330,15 +336,13 @@ function EditFormWithValidation(props) {
           <Box mb={2}>
             <Field name="telephone" component={renderTextField} label="Phone number" type="tel" />
           </Box>
-
           {/* <Field name="country" component={renderSelectField} label={selectCountry}> */}
           {/*  <MenuItem value="Austria">Austria</MenuItem> */}
           {/*  <MenuItem value="Germany">Germany</MenuItem> */}
           {/* </Field> */}
-
         </Grid>
       </form>
-      { errorModal && (
+      {errorModal && (
         <Modal
           aria-labelledby="transition-modal-title"
           aria-describedby="transition-modal-description"
