@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
     '& .MuiSlider-thumb': {
       marginLeft: 0
-    },
+    }
   },
   inputs: {
     display: 'flex',
