@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types';
-import Slider from '@material-ui/core/Slider';
+import { Slider, Input }from '@material-ui/core';
 import { connect } from 'react-redux'
 import useStyles from './_range';
-import Input from '@material-ui/core/Input';
 import { getFilterProducts } from '../../../redux/actions/filter'
 
 function RangeSlider(props) {
@@ -25,7 +24,6 @@ function RangeSlider(props) {
   };
 
   const handleInputMin = (event) => {
-    // console.log('e =>',event.target.value);value
     setMinValue(event.target.value === '' ? '' : Number(event.target.value));
     setValue([minValue, maxValue]);
     getFilterProducts({
@@ -55,11 +53,11 @@ function RangeSlider(props) {
       />
       <div className={classes.inputs}>
         <Input
+          className={classes.input}
           value={minValue}
           margin="dense"
           onChange={handleInputMin}
           inputProps={{
-            // step: 10,
             min: 0,
             max,
             type: 'number',
@@ -67,11 +65,11 @@ function RangeSlider(props) {
           }}
         />
         <Input
+          className={classes.input}
           value={maxValue}
           margin="dense"
           onChange={handleInputMax}
           inputProps={{
-            // step: 10,
             min: 0,
             max,
             type: 'number',

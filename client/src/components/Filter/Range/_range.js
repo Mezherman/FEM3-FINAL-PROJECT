@@ -2,28 +2,24 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '&.PrivateValueLabel-circle-457': {
+    '&.PrivateValueLabel-circle': {
       transform: 'none',
       borderRadius: 0,
       backgroundColor: 'inherit'
     },
-    '&.PrivateValueLabel-label-458': {
+    '&.PrivateValueLabel-label': {
       color: theme.palette.primary.main,
-      transform: 'none'
+      // transform: 'none',
+      display: 'none'
     },
-    '&.PrivateValueLabel-circle-397': {
-      transform: 'none',
-      borderRadius: 0,
-      backgroundColor: 'inherit'
-    },
-    '&.PrivateValueLabel-label-398': {
-      color: theme.palette.primary.main,
-      transform: 'none'
+    '&.PrivateValueLabel-offset': {
+      display: 'none'
     },
     '&.MuiSlider-valueLabel': {
       fontSize: '1rem',
       top: '25px',
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      display: 'none'
     },
     '& .MuiSlider-thumb': {
       marginLeft: 0
@@ -32,6 +28,23 @@ const useStyles = makeStyles((theme) => ({
   inputs: {
     display: 'flex',
     justifyContent: 'space-between',
+  },
+  input: {
+    '& input[type=number]::-webkit-inner-spin-button': {
+      '-webkit-appearance': 'none',
+      margin: 0
+    },
+    '& input[type=number]::-webkit-outer-spin-button': {
+      '-webkit-appearance': 'none',
+      margin: 0
+    },
+    // '&.MuiInput-underline::before': {
+    //   content: 'none'
+    // },
+    '&.MuiInput-underline::after': {
+      content: 'none'
+    },
+
   }
 }));
 
