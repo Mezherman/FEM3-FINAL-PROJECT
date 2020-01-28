@@ -4,6 +4,7 @@ import CartProductListHeader
   from '../../Summary-cart/Cart-product-list-header/cart-product-list-header';
 import CartProductItem from '../../Summary-cart/Cart-product-item/cart-product-item';
 import useHeaderStyles from '../../Summary-cart/Cart-product-list-header/_cart-product-list-header';
+import CollapseOrderItem from './Order-item/collapse-order-item';
 
 const CustomerOrders = (props) => {
   const classes = useHeaderStyles();
@@ -45,6 +46,7 @@ const CustomerOrders = (props) => {
         </Grid>
         {/* <Grid item lg={1}/> */}
       </Grid>
+      <CollapseOrderItem />
       {/* </Hidden> */}
       {/* {list} */}
       {/* </Grid> */}

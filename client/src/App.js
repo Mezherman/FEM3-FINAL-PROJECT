@@ -14,7 +14,6 @@ import loginLoaded, { fetchCustomerData } from './redux/actions/user';
 import { mergeDBWithLocalStorage } from './redux/actions/CartActions';
 import { getFavoritesFromDB } from './redux/actions/favorites'
 import ScrollToTopOnMount from './components/Pages-scroll-to-top/Pages-scroll-top-top';
-import getOrders from './services/getOrders';
 
 function App(props) {
   const { catalogLoading, login, mergeCart, fetchFavorites, fetchCatalog, fetchCustomerData } = props;
