@@ -9,8 +9,6 @@ import Slide from '@material-ui/core/Slide';
 const Transition = React.forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
 export default function DialogModal({ onCloseDialogWithStatus, isOpen }) {
-  console.log(isOpen);
-
   return (
     <Dialog
       open={isOpen}
@@ -21,15 +19,15 @@ export default function DialogModal({ onCloseDialogWithStatus, isOpen }) {
       aria-describedby="alert-dialog-slide-description"
     >
       <DialogContent>
-        <DialogContentText id="alert-dialog-slide-description">
+        <DialogContentText id="alert-dialog-slide-description" color="text.primary">
           Delete product from shopping cart?
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => { onCloseDialogWithStatus(false) } } color="danger">
+        <Button variant="contained" onClick={() => { onCloseDialogWithStatus(false) } } color="secondary">
           Disagree
         </Button>
-        <Button onClick={() => { onCloseDialogWithStatus(false) } } color="primary">
+        <Button variant="contained" onClick={() => { onCloseDialogWithStatus(true) } } color="primary">
           Agree
         </Button>
       </DialogActions>

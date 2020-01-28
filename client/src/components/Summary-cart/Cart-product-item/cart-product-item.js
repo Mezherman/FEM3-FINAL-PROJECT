@@ -19,6 +19,7 @@ export default function CartProductItem({ product, onSetProductQuantity, onRemov
   const { product: currentProduct, cartQuantity } = product;
   const subTotalProduct = currentProduct.currentPrice * cartQuantity;
   const onCloseDialogWithStatus = (status) => {
+    console.log(status);
     if (status) {
       onRemoveProduct(currentProduct._id);
     }

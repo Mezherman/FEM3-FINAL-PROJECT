@@ -53,7 +53,7 @@ const db = (store) => (next) => async (action) => {
         if (cartFromDB && cartFromDB.products.length) {
           products = cartFromDB.products;
         }
-        if (!products.length) {
+        if (!products && !products.length) {
           return next({ ...action, type: 'SET_CART_FAIL' });
         }
         const newCart = { products };

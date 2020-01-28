@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '6px',
   },
   title: {
+    textTransform: 'capitalize',
     fontWeight: 'bold',
     marginBottom: '10px'
   },
