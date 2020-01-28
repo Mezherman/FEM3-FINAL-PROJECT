@@ -8,6 +8,7 @@ import filterReducer from './filter'
 import userReducer from './user';
 import notification from './notification';
 import favoritesReducer from './favorites';
+import sortingReducer from './sorting';
 
 export default combineReducers({
   cart,
@@ -17,5 +18,6 @@ export default combineReducers({
   filterReducer,
   notification,
   userReducer,
-  favoritesReducer
+  favoritesReducer,
+  sortingReducer
 })

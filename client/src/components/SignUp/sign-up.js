@@ -14,13 +14,14 @@ import {
   Backdrop
 } from '@material-ui/core';
 
+import { PropTypes } from 'prop-types';
+
 import SignUpInfo from './Sign-up-info/signUp-info';
 import SignUpForm from './Sign-up-form/sign-up-form';
 import SignUpFooter from './Sign-up-footer/sign-up-footer';
 import validate from './validate';
 import useStyles from './_sign-up';
 import postNewUser from '../../services/postNewUser';
-
 
 let SignUp = (props) => {
   const { handleSubmit } = props;
@@ -29,7 +30,7 @@ let SignUp = (props) => {
   const [errorModal, setErrorModal] = useState(false);
   const [redirect, setRedirect] = useState(false);
 
-  let initialState = {
+  const initialState = {
     gender: 'Mr',
     firstName: '',
     lastName: '',
@@ -58,7 +59,7 @@ let SignUp = (props) => {
 
   const renderRedirect = () => {
     if (redirect) {
-      return <Redirect to='/' />
+      return <Redirect to="/" />
     }
   };
 
@@ -66,24 +67,11 @@ let SignUp = (props) => {
     const newUser = {
       ...initialState,
       ...values,
-      birthdate: values.birthdayDay + '.' + values.birthdayMonth + '.' + values.birthdayYear
+      birthdate: `${values.birthdayDay}.${values.birthdayMonth}.${values.birthdayYear}`
     };
 
     console.log(newUser);
     postNewUser(newUser, handleOpenSignUpModal, handleOpenSetErrorModal);
-
-    // axios
-    //   .post('/customers', values)
-    //   .then((response) => {
-    //     console.log(response);
-    //     if (response.statusText === 'OK') {
-    //       handleOpenSignUpModal();
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     handleOpenSetErrorModal();
-    //     console.log(error.response.data);
-    //   });
   };
 
   return (
@@ -119,9 +107,9 @@ let SignUp = (props) => {
             <SignUpFooter />
           </Grid>
         </form>
-        {/*<Button onClick={handleOpenSignUpModal}>Open registration modal</Button>*/}
-        { signUpModal &&
-        <Modal
+        {/* <Button onClick={handleOpenSignUpModal}>Open registration modal</Button> */}
+        { signUpModal && (
+          <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
             className={classes.modalInfoIcon}
@@ -132,27 +120,27 @@ let SignUp = (props) => {
             BackdropProps={{
               timeout: 500,
             }}
-        >
-          <Fade in={signUpModal}>
-            <div className={classes.paperInfoIcon}>
-              <h2 id="transition-modal-title" className={classes.modalInfoTitle}>
+          >
+            <Fade in={signUpModal}>
+              <div className={classes.paperInfoIcon}>
+                <h2 id="transition-modal-title" className={classes.modalInfoTitle}>
                 Your account was successfully registered
-              </h2>
-              <Button
+                </h2>
+                <Button
                   onClick={handleCloseSignUpModal}
                   variant="contained"
                   color="primary"
                   className={classes.submit}
-              >
+                >
                 OK
-              </Button>
-            </div>
-          </Fade>
-        </Modal>
-        }
+                </Button>
+              </div>
+            </Fade>
+          </Modal>
+        )}
 
-        { errorModal &&
-        <Modal
+        { errorModal && (
+          <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
             className={classes.modalInfoIcon}
@@ -163,24 +151,24 @@ let SignUp = (props) => {
             BackdropProps={{
               timeout: 500,
             }}
-        >
-          <Fade in={errorModal}>
-            <div className={classes.paperInfoError}>
-              <h2 id="transition-modal-title" className={classes.modalInfoTitle}>
+          >
+            <Fade in={errorModal}>
+              <div className={classes.paperInfoError}>
+                <h2 id="transition-modal-title" className={classes.modalInfoTitle}>
                 Something go wrong. Try again
-              </h2>
-              <Button
+                </h2>
+                <Button
                   onClick={handleCloseSetErrorModal}
                   variant="contained"
                   color="primary"
                   className={classes.submit}
-              >
+                >
                 OK
-              </Button>
-            </div>
-          </Fade>
-        </Modal>
-        }
+                </Button>
+              </div>
+            </Fade>
+          </Modal>
+        )}
 
       </div>
     </Container>
@@ -191,5 +179,9 @@ SignUp = reduxForm({
   form: 'registration',
   validate,
 })(SignUp);
+
+SignUp.propTypes = {
+  handleSubmit: PropTypes.func.isRequired
+};
 
 export default SignUp;
