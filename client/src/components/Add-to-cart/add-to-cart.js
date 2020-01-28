@@ -103,7 +103,7 @@ export default function AddToCart({ open, onModalClose, product }) {
                   disableElevation
                 >
                   <ShoppingCartOutlinedIcon />
-                  <Box ml={2}>View basket</Box>
+                  <Box ml={2}>View cart</Box>
                 </Button>
               </Link>
             </Grid>
@@ -112,7 +112,7 @@ export default function AddToCart({ open, onModalClose, product }) {
         <Divider />
         <div className={classes.footer}>
           <article>
-            Free delivery from &#8372;1000 | Free returns | Quick delivery with DHL;
+            Free delivery from &#8372;1000 | Free returns | Quick delivery with DHL
           </article>
         </div>
       </>

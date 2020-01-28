@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
-import { TextField, Button, Popover, IconButton, Slide } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search'
-import { Link, Redirect, Route, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import useStyles from './_search';
 import search from '../../services/search';
 import getAllProducts from '../../services/getProducts'
 import { productsLoaded } from '../../redux/actions/products'
-import RoutesName from '../../routes-list';
 
-function Search({ productsLoaded, history, searchInput }) {
+function Search({ productsLoaded, history }) {
   const classes = useStyles();
   const [data, setData] = useState([]);
 
@@ -20,19 +19,11 @@ function Search({ productsLoaded, history, searchInput }) {
     })
   }, []);
 
-  const a = { test: 1 };
-  let b = { ...a };
-  b = { xyz: 3 };
-  // console.log('a =', a);
-  // console.log('b =', b);
-
   const [value, setValue] = useState('');
-  const [isSearching, setSearching] = useState(false);
 
   const handleChange = (event) => {
     setValue(event.target.value);
     history.push('/products/search')
-    // console.log('value => ', value)
   };
 
   const searchItem = {
@@ -48,12 +39,10 @@ function Search({ productsLoaded, history, searchInput }) {
 
   return (
     <>
-      {/* {searchInput && ( */}
       <div className={classes.searchInput}>
         <SearchIcon
           className={classes.searchIcon}
         />
-        {/* <input type="search" placeholder="search" /> */}
         <Autocomplete
           size="small"
           freeSolo
@@ -69,20 +58,17 @@ function Search({ productsLoaded, history, searchInput }) {
               onKeyUp={(event) => {
                 if (event.keyCode === 13) {
                   handleChange(event);
-                  // setSearching(true)
                 }
               }}
             />
           )}
         />
       </div>
-      {/* )} */}
     </>
   )
 }
 
-const mapStateToProps = (state) => {
-};
+const mapStateToProps = () => {};
 
 const mapDispatchToProps = {
   productsLoaded
