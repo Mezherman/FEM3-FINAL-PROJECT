@@ -29,6 +29,10 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 0
     },
   },
+  inputs: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  }
 }));
 
 export default useStyles;

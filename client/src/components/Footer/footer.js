@@ -35,7 +35,6 @@ export default function Footer() {
                     <Divider />
                     <Link to={RoutesName.home} className={classes.links}>Home</Link>
                     <Link to={RoutesName.aboutUs} className={classes.links}>About us</Link>
-                    <Link to={RoutesName.products} className={classes.links}>Products</Link>
                   </Grid>
                 </Grid>
                 <Grid item xs={12} sm={4}>

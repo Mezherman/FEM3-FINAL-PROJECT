@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
     },
     '& .Mui-checked': {
       color: theme.palette.primary.main
+    },
+    '& .MuiExpansionPanelDetails-root': {
+      flexDirection: 'column'
     }
   }
 }));
