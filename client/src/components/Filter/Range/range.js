@@ -1,9 +1,57 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types';
-import { Slider, Input }from '@material-ui/core';
+import { Slider, Input } from '@material-ui/core';
 import { connect } from 'react-redux'
+import { withStyles } from '@material-ui/core/styles';
 import useStyles from './_range';
 import { getFilterProducts } from '../../../redux/actions/filter'
+
+// const Shadow =
+//   '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
+
+const IOSSlider = withStyles((theme) => ({
+  root: {
+    color: theme.palette.primary.main,
+    left: '2%',
+    // padding: '15px 0',
+  },
+  thumb: {
+    // height: 28,
+    // width: 28,
+    backgroundColor: theme.palette.primary.main,
+    // boxShadow: Shadow,
+    // marginTop: -14,
+    // marginLeft: -14,
+    // '&:focus,&:hover,&$active': {
+    //   boxShadow: '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
+    //   '@media (hover: none)': {
+    //     boxShadow: Shadow,
+    //   },
+    // },
+  },
+  // active: {},
+  valueLabel: {
+    display: 'none'
+  },
+  // track: {
+  //   height: 2,
+  // },
+  // rail: {
+  //   height: 2,
+  //   opacity: 0.5,
+  //   backgroundColor: '#bfbfbf',
+  // },
+  // mark: {
+  //   backgroundColor: '#bfbfbf',
+  //   height: 8,
+  //   width: 1,
+  //   marginTop: -3,
+  // },
+  // markActive: {
+  //   opacity: 1,
+  //   backgroundColor: 'currentColor',
+  // },
+}))(Slider);
 
 function RangeSlider(props) {
   const classes = useStyles();
@@ -43,14 +91,22 @@ function RangeSlider(props) {
 
   return (
     <>
-      <Slider
-        className={classes.root}
+      <IOSSlider
         max={max}
         valueLabelDisplay="on"
         value={value}
         onChange={handleChange}
         aria-labelledby="range-slider"
       />
+
+      {/* <Slider */}
+      {/*  className={classes.root} */}
+      {/*  max={max} */}
+      {/*  valueLabelDisplay="on" */}
+      {/*  value={value} */}
+      {/*  onChange={handleChange} */}
+      {/*  aria-labelledby="range-slider" */}
+      {/* /> */}
       <div className={classes.inputs}>
         <Input
           className={classes.input}
