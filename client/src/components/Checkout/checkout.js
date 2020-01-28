@@ -1,9 +1,9 @@
 import React from 'react';
-import { connect, useSelector } from 'react-redux';
-import { Button, Container, Grid } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { Button, Container, Grid, Typography } from '@material-ui/core';
 import { reduxForm } from 'redux-form';
 
-import CheckoutForm from './Checkout-form/checkout-form';
+import CustomerInfo from './Checkout-form/customer-info';
 import validateCheckoutForm from './validate-checkout-form';
 import validate from '../SignUp/validate';
 
@@ -15,8 +15,7 @@ import useStyles from '../SignUp/_sign-up';
 let Checkout = (props) => {
   // console.log('PROPS IN CHECKOUT =', props);
   const classes = useStyles();
-  const { history, handleSubmit } = props;
-  // const { cart, userReducer } = useSelector((state) => state);
+  const { history, handleSubmit, user } = props;
 
   const initialState = {
     gender: 'Mr',
@@ -24,29 +23,33 @@ let Checkout = (props) => {
     lastName: ''
   };
 
-  const submitNewOrder = (values) => {
-    const newOrder = {
-      ...initialState,
-      ...values
-    };
+  const customer = user.loggedIn ? user.customer : { _id: 'unknown' };
 
+
+  const submitNewOrder = (order) => {
+    console.log('FORM values =', order);
     // const newOrder = {
-    //   customerId: `${customer._id}`,
-    //   deliveryAddress: {
-    //     country: 'Ukraine',
-    //     city: 'Kiev',
-    //     address: 'Kreshchatic Street 56//A',
-    //     postal: '01044'
-    //   },
-    //   shipping: 'Kiev 50UAH',
-    //   paymentInfo: 'Credit card',
-    //   status: 'not shipped',
-    //   email: 'vlad.mezhik@gmail.com',
-    //   mobile: '+380630000000',
-    //   letterSubject: 'Thank you for order! You are welcome!',
-    //   letterHtml:
-    //     '<h1>Your order is placed. OrderNo is 023689452.</h1><p>{Other details about order in your HTML}</p>'
+    //   ...initialState,
+    //   ...values
     // };
+
+    const newOrder = {
+      customerId: `${customer._id}`,
+      deliveryAddress: {
+        country: order.country,
+        city: order.city,
+        address: `${order.street}, ${order.house}`,
+        postal: order.postalCode
+      },
+      shipping: 'Kiev 50UAH',
+      paymentInfo: 'Credit card',
+      status: 'not shipped',
+      email: order.email,
+      mobile: order.mobile,
+      letterSubject: 'Thank you for your order!',
+      letterHtml:
+        '<h1>Your order is placed. OrderNo is 023689452.</h1><p>{Other details about order in your HTML}</p>'
+    };
 
     console.log('NEW ORDER =', newOrder);
 
@@ -63,14 +66,12 @@ let Checkout = (props) => {
 
   // console.log('CART=', cart);
 
-  // const customer = userReducer.loggedIn ? userReducer.customer : { _id: 'unknown' };
-
   return (
     <Container component="div" maxWidth="xl" disableGutters>
       <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitNewOrder)}>
         <Grid container>
           <Grid item md={4}>
-            <CheckoutForm />
+            <CustomerInfo />
           </Grid>
         </Grid>
         <Button
@@ -88,7 +89,7 @@ let Checkout = (props) => {
 
 const mapStateToProps = (state) => ({
   cart: state.cart,
-  user: state.userReducer
+  user: state.user
 });
 
 Checkout = reduxForm({

@@ -17,7 +17,7 @@ import {
 import validate from '../SignUp/validate';
 import useStyles from '../SignUp/_sign-up';
 import postNewUser from '../../services/postNewUser';
-import CheckoutForm from './Checkout-form/checkout-form';
+import CustomerInfo from './Checkout-form/customer-info';
 
 function CheckoutTest (props) {
   const { handleSubmit } = props;
@@ -86,7 +86,7 @@ function CheckoutTest (props) {
   return (
     <Container component="div" disableGutters>
       <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitNewUser)}>
-        <CheckoutForm />
+        <CustomerInfo />
       </form>
     </Container>
   );

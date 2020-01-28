@@ -16,9 +16,9 @@ import {
 } from '@material-ui/core';
 import { Field } from 'redux-form';
 
-import useStyles from './_checkout-form';
+import useStyles from './_customer-info';
 
-export default function CheckoutForm() {
+export default function CustomerInfo() {
   const classes = useStyles();
 
   const renderRadioGroup = ({ input, name, ...rest }) => (
@@ -59,6 +59,7 @@ export default function CheckoutForm() {
   return (
     <Container>
       <Grid>
+        <Typography>Bla-Bla-Bla</Typography>
         <Field name="gender" component={renderRadioGroup}>
           <FormControlLabel
             className={classes.root}
@@ -84,7 +85,7 @@ export default function CheckoutForm() {
           </Grid>
           <Grid item xs={12}>
             <Field name="email" component={renderTextField} label="Email Address" type="email" />
-            <Field name="telephone" component={renderTextField} label="Phone number" type="tel" />
+            <Field name="mobile" component={renderTextField} label="Phone number" type="mobile" />
           </Grid>
           <Grid item xs={12} xl={8}>
             <Field name="street" component={renderTextField} label="Street" type="street" />
@@ -93,10 +94,13 @@ export default function CheckoutForm() {
             <Field name="house" component={renderTextField} label="House No" type="house" />
           </Grid>
           <Grid item xs={12} lg={6}>
-            <Field name="zipCode" component={renderTextField} label="Postal code" type="zipCode" />
+            <Field name="postalCode" component={renderTextField} label="Postal code" type="postalCode" />
           </Grid>
           <Grid item xs={12} lg={6}>
             <Field name="city" component={renderTextField} label="City" type="city" />
+          </Grid>
+          <Grid item xs={12}>
+            <Field name="country" component={renderTextField} label="Country" type="country" />
           </Grid>
         </Grid>
       </Grid>
