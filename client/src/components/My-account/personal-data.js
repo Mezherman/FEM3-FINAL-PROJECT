@@ -13,13 +13,10 @@ import Divider from '@material-ui/core/Divider';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import PutPersonalData from './put-personal-data'
 import getUserData from '../../services/getUserData';
 import usePdstyles from './_personal-data';
 import RoutesName from '../../routes-list';
-// import
-// axios.defaults.baseURL = 'http://localhost:5000';
-
-// axios.defaults.headers.common.Authorization = localStorage.getItem('token');
 
 export default function PersonalData () {
   const pdClasses = usePdstyles();
@@ -75,7 +72,9 @@ export default function PersonalData () {
   // console.log(newUserData);
 
   // const classes = useStyles();
-  const [checked, setChecked] = React.useState([1]);
+  const [checked, setChecked] = useState([1]);
+  const [editForm, setEditForm] = useState(false);
+  const handleEditForm = () => setEditForm(true);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -134,14 +133,20 @@ export default function PersonalData () {
       text: 'Login:',
       userData: loggedIn ? login : null
     },
-    {
-      text: 'Country:',
-      // userData: country
-    },
-
   ];
 
-  // if (isLoggedIn) {
+  if (editForm) {
+    return (
+      <PutPersonalData
+        gender={gender}
+        firstName={firstName}
+        lastName={lastName}
+        telephone={telephone}
+        email={email}
+        login={login}
+      />
+    )
+  }
   return (
     <Grid
       item
@@ -192,6 +197,7 @@ export default function PersonalData () {
           variant="contained"
           color="secondary"
           className={pdClasses.button}
+          onClick={handleEditForm}
           // disableElevation
         >
           EDIT YOUR PERSONAL INFO

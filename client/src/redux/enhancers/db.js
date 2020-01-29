@@ -5,7 +5,6 @@ import getCategories from '../../services/getCategories';
 import { getCustomer } from '../../services/customer';
 
 const db = (store) => (next) => async (action) => {
-  // console.log('ACTION =', action);
   const storeCart = { ...store.getState().cart };
   const { loggedIn, token } = store.getState().user;
 
@@ -28,6 +27,7 @@ const db = (store) => (next) => async (action) => {
   }
 
   if (loggedIn && token) {
+    console.log('ACTION =', action);
     const { cart } = { ...action.payload };
     switch (action.type) {
       case 'ADD_PRODUCT': {

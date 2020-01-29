@@ -14,7 +14,7 @@ import useStyles from './_add-to-cart';
 
 export default function AddToCart({ open, onModalClose, product }) {
   const classes = useStyles();
-  const { imageUrls, name, currentPrice, specialPrice } = product;
+  const { imageUrls, name, currentPrice, specialPrice, itemNo } = product;
   const [totalPrice, setTotalPrice] = useState(currentPrice);
   const [qty, setQty] = useState(1);
 
@@ -49,11 +49,15 @@ export default function AddToCart({ open, onModalClose, product }) {
                 </span>
                 <span className={classes.total}>TOTAL:</span>
               </div>
+              <p>
+                <span style={{ paddingRight: '5px' }}>Item.No</span>
+                {itemNo}
+              </p>
               <Divider />
               <Box className={classes.pricingBlock}>
                 <Box className={classes.price}>
                   <span>
-&#8364;
+                    &#8364;
                     {finalPrice}
                   </span>
                 </Box>
@@ -73,7 +77,7 @@ export default function AddToCart({ open, onModalClose, product }) {
                 </Paper>
                 <Box className={classes.total}>
                   <span>
-&#8364;
+                    &#8364;
                     {totalPrice}
                   </span>
                 </Box>

@@ -68,11 +68,7 @@ import useStyles from './_header';
 
 function Header() {
   const [modalIsVisible, setModalVisibility] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // const onSuccessLogin = () => {
-  //   setIsLoggedIn(true)
-  // };
   const closeModal = () => {
     setModalVisibility(false);
   };
@@ -285,8 +281,8 @@ function Header() {
                   className={classes.iconButton}
                 >
                   <SearchIcon fontSize="large" className={classes.iconsStyle} />
+                  <span className={classes.menuTitle}>Search</span>
                 </IconButton>
-                <span className={classes.menuTitle}>Search</span>
               </MenuItem>
 
               <Divider orientation="vertical" className={classes.dividerStyle} />
