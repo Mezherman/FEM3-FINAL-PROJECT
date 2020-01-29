@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 import Carousels from '../Carousel/carousel';
 import PagingDots from '../Carousel/pagingDots';
 import useStylesCarousel from '../Carousel/_carousel';
 import useStylesMainCarousel from './_mainCarousel';
-import Button from '@material-ui/core/Button';
 
 axios.defaults.baseURL = 'http://localhost:5000';
 
@@ -28,29 +28,29 @@ export default function MainSlider() {
     <div className={classes.carouselContainer}>
       <Carousels
         isProductSlider={false}
-        autoPlay={true}
+        autoPlay
         // className={mainCarouselClasses.mainCarousel}
         autoplayInterval={2000}
         wrapAround
         slidesToShow={1}
         dragging
-        renderCenterLeftControls={({ previousSlide }) => (
-          <div
-            className={`${mainCarouselClasses.mainArrowsControl} ${mainCarouselClasses.mainArrowPrev}`}
-            onClick={previousSlide}
-          >
-            <div
-              className={`${classes.arrowPrevTopBottom} ${mainCarouselClasses.mainArrowPrevTop}`}
-            />
-            <div className={`${classes.arrowPrevTopBottom} ${classes.arrowsTopBottom}`} />
-          </div>
-        )}
-        renderCenterRightControls={({ nextSlide }) => (
-          <div className={`${mainCarouselClasses.mainArrowsControl} ${mainCarouselClasses.mainArrowNext}`} onClick={nextSlide}>
-            <div className={`${classes.arrowNextTop} ${classes.arrowNextTopBottom}`} />
-            <div className={`${classes.arrowNextBottom} ${classes.arrowNextTopBottom}`} />
-          </div>
-        )}
+        // renderCenterLeftControls={({ previousSlide }) => (
+        //   {/*<div*/}
+        //   {/*  className={`${mainCarouselClasses.mainArrowsControl} ${mainCarouselClasses.mainArrowPrev}`}*/}
+        //   {/*  onClick={previousSlide}*/}
+        //   {/*>*/}
+        //   {/*  <div*/}
+        //   {/*    className={`${classes.arrowPrevTopBottom} ${mainCarouselClasses.mainArrowPrevTop}`}*/}
+        //   {/*  />*/}
+        //   {/*  <div className={`${classes.arrowPrevTopBottom} ${classes.arrowsTopBottom}`} />*/}
+        //   {/*</div>*/}
+        // )}
+        // renderCenterRightControls={({ nextSlide }) => (
+        //   {/*<div className={`${mainCarouselClasses.mainArrowsControl} ${mainCarouselClasses.mainArrowNext}`} onClick={nextSlide}>*/}
+        //   {/*  <div className={`${classes.arrowNextTop} ${classes.arrowNextTopBottom}`} />*/}
+        //   {/*  <div className={`${classes.arrowNextBottom} ${classes.arrowNextTopBottom}`} />*/}
+        //   {/*</div>*/}
+        // )}
         renderBottomCenterControls={
           ({
             currentSlide, goToSlide, slideCount, slidesToScroll, slidesToShow, cellAlign

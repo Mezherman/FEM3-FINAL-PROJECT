@@ -20,7 +20,7 @@ function Catalog({ assortment, fetchProducts, catalogLocation }) {
     // console.log(123456);
     catalogLocation(assortment)
     fetchProducts(assortment);
-  }, [assortment, fetchProducts]);
+  }, [assortment, catalogLocation, fetchProducts]);
 
   return (
     <>

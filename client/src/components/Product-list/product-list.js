@@ -14,18 +14,7 @@ import useStyles from './_product-list';
 
 function ProductList(props) {
   const { assortment, products, productsLoading, sortedProducts } = props;
-  // console.log('products =', products);
-  // console.log('PROPS =', props);
   const classes = useStyles();
-  // const [favorites.js, setFavorites] = useState([1, 2, 3]);
-
-  // useEffect(() => {
-  //   setFavorites([1, 2, 3])
-  // }, [])
-
-  // const addToFavorite = (id) => {
-  //   setFavorites(favorites.js.concat(id))
-  // };
   const renderProducts = (productsList) => (
     productsList.map((product) => (
       <Grid item md={6} lg={4} key={product.itemNo}>
@@ -42,28 +31,21 @@ function ProductList(props) {
       <div className={classes.productList}>
         {productsLoading && <Spinner />}
         {!productsLoading &&
-          (sortedProducts.length > 0) ? renderProducts(sortedProducts) : renderProducts(products)}
+        (sortedProducts.length > 0) ? renderProducts(sortedProducts) : renderProducts(products)}
       </div>
-
     </>
+  //   <div className={classes.productList}>
+  //     {productsLoading && <Spinner />}
+  //     {!productsLoading &&
+  //     products.map((product) => (
+  //       <Grid item md={6} lg={4} key={product.itemNo}>
+  //         <ProductCard
+  //           product={product}
+  //         />
+  //       </Grid>
+  //     ))}
+  //   </div>
   )
-  // return (
-  //   <>
-  //     <Sorting />
-  //     <div className={classes.productList}>
-  //       {productsLoading && <Spinner />}
-  //       {!productsLoading &&
-  //         products.map((product) => (
-  //           <Grid item md={6} lg={4} key={product.itemNo}>
-  //             <ProductCard
-  //               product={product}
-  //             />
-  //           </Grid>
-  //         ))}
-  //     </div>
-  //
-  //   </>
-  // )
 }
 
 const mapStateToProps = (state) => ({

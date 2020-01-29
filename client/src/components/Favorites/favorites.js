@@ -21,7 +21,7 @@ function Favorites(props) {
     } else {
       productsError()
     }
-  }, [favorites]);
+  }, [favorites, loggedIn, productsError, productsLoaded, productsRequested]);
 
   return (
     <>
@@ -34,15 +34,13 @@ function Favorites(props) {
   )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) =>
   // console.log('STATE =', state);
-  return {
+  ({
     productsLoading: state.productsReducer.productsLoading,
-    loggedIn: state.userReducer.loggedIn,
+    loggedIn: state.user.loggedIn,
     favorites: state.favoritesReducer.favorites
-  };
-};
-
+  });
 const mapDispatchToProps = {
   productsRequested,
   productsLoaded,

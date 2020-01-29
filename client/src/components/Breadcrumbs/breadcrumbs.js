@@ -35,13 +35,13 @@ function ProductBreadcrumbs({ assortment, catalog, products }) {
     case 'item': {
       const subCategoryId = products.find((product) => product.itemNo === assortment).categories;
       subCategory = allCategories.find((category) => category.id === subCategoryId);
-      category = mainCategories.find((category) => category.id === subCategory.parentId);
+      // category = mainCategories.find((category) => category.id === subCategory.parentId);
       break;
     }
 
     case 'subCategory': {
       subCategory = allCategories.find((category) => category.id === assortment);
-      category = mainCategories.find((category) => category.id === subCategory.parentId);
+      // category = mainCategories.find((category) => category.id === subCategory.parentId);
       break;
     }
 

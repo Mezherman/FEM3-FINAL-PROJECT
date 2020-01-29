@@ -28,7 +28,7 @@ export default function CartProductItem({ product, onSetProductQuantity, onRemov
     <Grid item container xs={12} justify="space-between" className={`${classes.root} ${headerClasses.underline}`}>
       <Grid container item sm={3} xs={12} className={classes.img_block}>
         <Grid item sm={12}>
-          <Link to={`${RoutesName.products}/${currentProduct._id}`}>
+          <Link to={`${RoutesName.products}/${currentProduct.itemNo}`}>
             <img
               className={classes.img}
               src={currentProduct.imageUrls ? currentProduct.imageUrls[0] : ''}
@@ -81,7 +81,7 @@ Item-Nr. :
         </Grid>
       </Grid>
       <Grid item sm={1} xs={12} className={headerClasses.alignCenter}>
-        <DeleteIcon color="secondary" className={classes.deleteBtn} onClick={()=> { handleDialogOpen() }} />
+        <DeleteIcon color="secondary" className={classes.deleteBtn} onClick={() => { handleDialogOpen() }} />
       </Grid>
       <DialogModal onCloseDialogWithStatus={onCloseDialogWithStatus} isOpen={isDialogOpen} />
 

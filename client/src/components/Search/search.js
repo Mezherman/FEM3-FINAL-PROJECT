@@ -3,12 +3,11 @@ import { connect } from 'react-redux'
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search'
-import { Link, Redirect, Route, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import useStyles from './_search';
 import search from '../../services/search';
 import getAllProducts from '../../services/getProducts'
 import { productsLoaded } from '../../redux/actions/products'
-import RoutesName from '../../routes-list';
 
 function Search({ productsLoaded, history }) {
   const classes = useStyles();
@@ -20,19 +19,11 @@ function Search({ productsLoaded, history }) {
     })
   }, []);
 
-  const a = { test: 1 };
-  let b = { ...a };
-  b = { xyz: 3 };
-  // console.log('a =', a);
-  // console.log('b =', b);
-
   const [value, setValue] = useState('');
-  const [isSearching, setSearching] = useState(false);
 
   const handleChange = (event) => {
     setValue(event.target.value);
     history.push('/products/search')
-    // console.log('value => ', value)
   };
 
   const searchItem = {
@@ -47,38 +38,37 @@ function Search({ productsLoaded, history }) {
   }
 
   return (
-    <div className={classes.container}>
-      <SearchIcon
-        className={classes.searchIcon}
-      />
-      {/*<input type="search" placeholder="search" />*/}
-      <Autocomplete
-        size="small"
-        freeSolo
-        options={data.map((option) => option.name)}
-        renderInput={(params) => (
-          <TextField
-            className={classes.root}
-            fullWidth
-            {...params}
-            variant="outlined"
-            margin="none"
-            placeholder="Search..."
-            onKeyUp={(event) => {
-              if (event.keyCode === 13) {
-                handleChange(event);
-                // setSearching(true)
-              }
-            }}
-          />
-        )}
-      />
-    </div>
+    <>
+      <div className={classes.searchInput}>
+        <SearchIcon
+          className={classes.searchIcon}
+        />
+        <Autocomplete
+          size="small"
+          freeSolo
+          options={data.map((option) => option.name)}
+          renderInput={(params) => (
+            <TextField
+              className={classes.root}
+              fullWidth
+              {...params}
+              variant="outlined"
+              margin="none"
+              placeholder="Search..."
+              onKeyUp={(event) => {
+                if (event.keyCode === 13) {
+                  handleChange(event);
+                }
+              }}
+            />
+          )}
+        />
+      </div>
+    </>
   )
 }
 
-const mapStateToProps = (state) => {
-};
+const mapStateToProps = () => {};
 
 const mapDispatchToProps = {
   productsLoaded

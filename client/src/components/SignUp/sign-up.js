@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
+import { useSelector } from 'react-redux';
 
 import {
   CssBaseline,
@@ -73,7 +74,11 @@ let SignUp = (props) => {
     console.log(newUser);
     postNewUser(newUser, handleOpenSignUpModal, handleOpenSetErrorModal);
   };
+  const { loggedIn } = useSelector((state) => state.user);
 
+  if (loggedIn) {
+    return <Redirect />
+  }
   return (
     <Container component="div" disableGutters>
       <CssBaseline />

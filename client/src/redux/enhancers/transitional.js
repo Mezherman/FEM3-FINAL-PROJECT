@@ -67,7 +67,7 @@ const transitional = (store) => (next) => (action) => {
       let localStorageCart = window.localStorage.getItem('cart');
       localStorageCart = localStorageCart ? JSON.parse(localStorageCart) : {};
       const products = [];
-      if (store.getState().userReducer.loggedIn) {
+      if (store.getState().user.loggedIn) {
         if (localStorageCart.products && localStorageCart.products.length) {
           return next({
             ...action,

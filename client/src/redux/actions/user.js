@@ -30,4 +30,19 @@ const loginLoaded = () => {
   }
 };
 
-export default loginLoaded;
+const fetchCustomerData = () => ({
+  type: 'SET_CUSTOMER_DATA_FROM_DB'
+});
+
+const orders = (data) => ({
+  type: 'FETCH_ORDERS_SUCCESS',
+  payload: {
+    orders: data
+  }
+});
+
+export {
+  loginLoaded,
+  fetchCustomerData,
+  orders
+}

@@ -1,10 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid/Grid'
 import { Button, Typography } from '@material-ui/core'
 import withWidth from '@material-ui/core/withWidth/withWidth'
 import useStyles from './styles'
 import ProductCarusel from '../Product-carusel/product-carusel'
 import ImgGrid from '../Image-grid/image-grid'
+import RoutesName from '../../../routes-list';
 
 function Category (props) {
   const { data, index } = props;
@@ -26,10 +28,12 @@ function Category (props) {
       <Typography variant="body1" className={classes.categories_desc}>
         {data.description ?? ''}
       </Typography>
-      <Button variant="contained" color="secondary" className={classes.categories_btn}>
-        Learn more
-      </Button>
-      {data.products && data.products.length > 0 ? (<ProductCarusel products={data.products} />) : '' }
+      <Link to={`${RoutesName.products}/${data.id}`} className={classes.link}>
+        <Button variant="contained" color="secondary" className={classes.categories_btn}>
+            Learn more
+        </Button>
+      </Link>
+      {/* {data.products && data.products.length > 0 ? (<ProductCarusel products={data.products} />) : '' } */}
     </Grid>
   );
 

@@ -21,7 +21,7 @@ export default function CartProductListHeader() {
       <Grid item lg={2} className={classes.alignRight}>
         Subtottal
       </Grid>
-      <Grid item lg={1}/>
+      <Grid item lg={1} />
     </Grid>
 
   );
