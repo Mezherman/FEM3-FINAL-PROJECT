@@ -19,12 +19,15 @@ import {
   IconButton
 } from '@material-ui/core';
 
+import { PropTypes } from 'prop-types';
+
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 import CloseIcon from '@material-ui/icons/Close';
 import useStyles from './_sign-up-form';
+import SignUpFooter from '../Sign-up-footer/sign-up-footer';
 
 const SignUpForm = () => {
   const [openInfo, setOpenInfo] = useState(false);
@@ -64,7 +67,9 @@ const SignUpForm = () => {
     />
   );
 
-  const renderTextField = ({ input, label, name, value, type, meta: { touched, error }, ...custom }) => (
+  const renderTextField = ({
+    input, label, name, value, type, meta: { touched, error }, ...custom
+  }) => (
     <TextField
       type={type}
       name={name}
@@ -82,7 +87,9 @@ const SignUpForm = () => {
     />
   );
 
-  const renderFirstField = ({ input, label, name, value, type, meta: { touched, error }, ...custom }) => (
+  const renderFirstField = ({
+    input, label, name, value, type, meta: { touched, error }, ...custom
+  }) => (
     <TextField
       type={type}
       name={name}
@@ -101,7 +108,9 @@ const SignUpForm = () => {
     />
   );
 
-  const renderPasswordField = ({ input, label, name, value, type, meta: { touched, error }, ...custom }) => (
+  const renderPasswordField = ({
+    input, label, name, value, type, meta: { touched, error }, ...custom
+  }) => (
     <TextField
       type={eyeToggle ? 'password' : 'text'}
       name={name}
@@ -126,20 +135,15 @@ const SignUpForm = () => {
             >
               {eyeToggle ? <Visibility /> : <VisibilityOff />}
             </IconButton>
-
-            {/* { eyeToggle */}
-            {/*    ? */}
-            {/*    <VisibilityIcon className={classes.eye} onClick={togglePasswordMask} /> */}
-            {/*    : */}
-            {/*    <VisibilityOffIcon className={classes.eye} onClick={togglePasswordMask} /> */}
-            {/* } */}
           </InputAdornment>
         )
       }}
     />
   );
 
-  const renderBirthdayField = ({ input, label, name, value, meta: { touched, error }, ...custom }) => (
+  const renderBirthdayField = ({
+    input, label, name, value, meta: { touched, error }, ...custom
+  }) => (
     <TextField
       error={!!(touched && error)}
       name={name}
@@ -149,31 +153,13 @@ const SignUpForm = () => {
       // className={classes.inputBirthDay}
       {...custom}
       {...input}
-      helperText={touched && error || (
+      helperText={(touched && error) || (
         <FormHelperText className={classes.helperBirth} component="span">
           {label}
         </FormHelperText>
       )}
     />
   );
-
-  // const renderSelectField = ({ input, label, value, meta: { touched, error }, children, ...custom }) => (
-  //     <TextField
-  //         select
-  //         variant="outlined"
-  //         fullWidth
-  //         label={(<FormLabel className={classes.labelText}>{selectCountry}</FormLabel>)}
-  //         value={value}
-  //         {...input}
-  //         onChange={(event, index, value) => {
-  //           input.onChange(event.target.value);
-  //           setSelectCountry(event.target.value);
-  //         }}
-  //         children={children}
-  //         {...custom}
-  //     >
-  //     </TextField>
-  // );
 
   return (
     <Grid item xs={12} sm={10} md={5} >
@@ -271,15 +257,22 @@ const SignUpForm = () => {
       <Box mb={2}>
         <Field name="telephone" component={renderTextField} label="Phone number" type="tel" />
       </Box>
-
-      {/* <Field name="country" component={renderSelectField} label={selectCountry}> */}
-      {/*  <MenuItem value='Austria'>Austria</MenuItem> */}
-      {/*  <MenuItem value='Germany'>Germany</MenuItem> */}
-      {/* </Field> */}
-
     </Grid>
   )
 }
+
+SignUpForm.propTypes = {
+  input: PropTypes.node,
+  name: PropTypes.string,
+  label: PropTypes.string,
+  meta: PropTypes.object,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.bool,
+  ]),
+  type: PropTypes.string
+};
 
 export default SignUpForm;
 // import React from 'react';

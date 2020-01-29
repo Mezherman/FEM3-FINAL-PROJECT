@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 
 import ProductCard from '../Product-card/product-card';
 import Spinner from '../Spinner/spinner';
+import Sorting from '../Sorting/sorting';
 
 import getAllProducts, { getProductsByCategory } from '../../services/getProducts';
 import { productsRequested, productsLoaded, productsError } from '../../redux/actions/products';
@@ -12,25 +13,46 @@ import { productsRequested, productsLoaded, productsError } from '../../redux/ac
 import useStyles from './_product-list';
 
 function ProductList(props) {
-  const { assortment, products, productsLoading } = props;
+  const { assortment, products, productsLoading, sortedProducts } = props;
   const classes = useStyles();
+  const renderProducts = (productsList) => (
+    productsList.map((product) => (
+      <Grid item md={6} lg={4} key={product.itemNo}>
+        <ProductCard
+          product={product}
+        />
+      </Grid>
+    ))
+  );
 
   return (
-    <div className={classes.productList}>
-      {productsLoading && <Spinner />}
-      {!productsLoading &&
-      products.map((product) => (
-        <Grid item md={6} lg={4} key={product.itemNo}>
-          <ProductCard
-            product={product}
-          />
-        </Grid>
-      ))}
-    </div>
+    <>
+      <Sorting />
+      <div className={classes.productList}>
+        {productsLoading && <Spinner />}
+        {!productsLoading &&
+        (sortedProducts.length > 0) ? renderProducts(sortedProducts) : renderProducts(products)}
+      </div>
+    </>
+  //   <div className={classes.productList}>
+  //     {productsLoading && <Spinner />}
+  //     {!productsLoading &&
+  //     products.map((product) => (
+  //       <Grid item md={6} lg={4} key={product.itemNo}>
+  //         <ProductCard
+  //           product={product}
+  //         />
+  //       </Grid>
+  //     ))}
+  //   </div>
   )
 }
 
-const mapStateToProps = (state) => state.productsReducer;
+const mapStateToProps = (state) => ({
+  products: state.productsReducer.products,
+  sortedProducts: state.sortingReducer.sortedProducts,
+  sortingType: state.sortingReducer.type
+});
 
 export default connect(mapStateToProps)(ProductList)
 
@@ -38,5 +60,6 @@ ProductList.propTypes = {
   assortment: PropTypes.string.isRequired,
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
   productsLoading: PropTypes.bool.isRequired,
-  fetchProducts: PropTypes.func.isRequired
+  fetchProducts: PropTypes.func.isRequired,
+  sortedProducts: PropTypes.arrayOf(PropTypes.object).isRequired
 };
