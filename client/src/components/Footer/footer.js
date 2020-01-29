@@ -12,13 +12,13 @@ export default function Footer() {
         <Container maxWidth="xl">
           <Grid container justify="space-between" spacing={2} className={classes.container}>
             <Grid xs={12} md={5} item container wrap="nowrap" alignItems="flex-start">
-              {/* <Link to={RoutesName.home}> */}
-              {/*  <img */}
-              {/*    src={`${process.env.PUBLIC_URL}/img/wmf-logo.png`} */}
-              {/*    alt="WMF" */}
-              {/*    className={classes.img} */}
-              {/*  /> */}
-              {/* </Link> */}
+              <Link to={RoutesName.home}>
+                <img
+                  src={`${process.env.PUBLIC_URL}/img/wmf-footer.jpg`}
+                  alt="WMF"
+                  className={classes.img}
+                />
+              </Link>
               <div>
                 <h2 className={classes.title}>The culinary experts</h2>
                 <p>
@@ -35,7 +35,6 @@ export default function Footer() {
                     <Divider />
                     <Link to={RoutesName.home} className={classes.links}>Home</Link>
                     <Link to={RoutesName.aboutUs} className={classes.links}>About us</Link>
-                    <Link to={RoutesName.products} className={classes.links}>Products</Link>
                   </Grid>
                 </Grid>
                 <Grid item xs={12} sm={4}>
