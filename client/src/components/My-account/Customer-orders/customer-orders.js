@@ -1,13 +1,13 @@
 import React from 'react';
-import { Container, Grid, Hidden } from '@material-ui/core';
+import { Container, Grid, Hidden, Typography } from '@material-ui/core';
 import CartProductListHeader
   from '../../Summary-cart/Cart-product-list-header/cart-product-list-header';
 import CartProductItem from '../../Summary-cart/Cart-product-item/cart-product-item';
-import useHeaderStyles from '../../Summary-cart/Cart-product-list-header/_cart-product-list-header';
+import useStyleOrders from './_customer-orders'
 import CollapseOrderItem from './Order-item/collapse-order-item';
 
 const CustomerOrders = (props) => {
-  const classes = useHeaderStyles();
+  const classes = useStyleOrders();
   // const { products, actions } = props;
   // const list = ;
   // products.forEach((product) => {
@@ -46,6 +46,7 @@ const CustomerOrders = (props) => {
       {/*  </Grid>*/}
       {/*  /!* <Grid item lg={1}/> *!/*/}
       {/*</Grid>*/}
+      <h1>Your Orders</h1>
       <CollapseOrderItem />
       {/* </Hidden> */}
       {/* {list} */}
