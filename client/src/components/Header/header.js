@@ -68,11 +68,7 @@ import useStyles from './_header';
 
 function Header() {
   const [modalIsVisible, setModalVisibility] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // const onSuccessLogin = () => {
-  //   setIsLoggedIn(true)
-  // };
   const closeModal = () => {
     setModalVisibility(false);
   };
