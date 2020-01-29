@@ -60,41 +60,6 @@ function ProductDetail({ product, favorites }) {
     }
   ));
 
-  const BootstrapInput = withStyles((theme) => createStyles({
-    root: {
-      'label + &': {
-        marginTop: theme.spacing(3),
-      },
-    },
-    input: {
-      borderRadius: 4,
-      position: 'relative',
-      backgroundColor: theme.palette.background.paper,
-      border: '1px solid #ced4da',
-      fontSize: 16,
-      padding: '10px 26px 10px 12px',
-      transition: theme.transitions.create(['border-color', 'box-shadow']),
-      // Use the system font instead of the default Roboto font.
-      fontFamily: [
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-      ].join(','),
-      '&:focus': {
-        borderRadius: 4,
-        borderColor: '#80bdff',
-        boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-      },
-    },
-  }),)(InputBase);
-
   return (
     <Container maxWidth="xl">
       <AddToCart
@@ -173,23 +138,12 @@ function ProductDetail({ product, favorites }) {
                     {' '}
                     <a href="#">Shipping</a>
                   </p>
-                  <IncreaseBlock />
-                  {/* <Box> */}
-                  {/*  <FormControl className={classes.margin}> */}
-                  {/*    <InputLabel htmlFor="quantity">Quantity</InputLabel> */}
-                  {/*    <NativeSelect */}
-                  {/*      id="quantity" */}
-                  {/*      value={quantity} */}
-                  {/*      onChange={handleChange} */}
-                  {/*      input={<BootstrapInput />} */}
 
-                  {/*    > */}
-                  {/*      <option value={1}>1</option> */}
-                  {/*      <option value={2}>2</option> */}
-                  {/*      <option value={3}>3</option> */}
-                  {/*    </NativeSelect> */}
-                  {/*  </FormControl> */}
-                  {/* </Box> */}
+                  <IncreaseBlock
+                    qty={quantity}
+                    onChange={handleChange}
+
+                  />
                   <div className={classes.disableBlock}>
 
                     <span>Deliverable:</span>
