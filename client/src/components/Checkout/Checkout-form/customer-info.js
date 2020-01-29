@@ -1,66 +1,25 @@
 import React from 'react';
-import { connect, useSelector } from 'react-redux';
-import {
-  Button,
-  Container,
-  Grid,
-  Typography,
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-  FormLabel,
-  Radio,
-  RadioGroup,
-  TextField,
-  Box
-} from '@material-ui/core';
+import { Container, Grid, Typography, FormControlLabel, Radio } from '@material-ui/core';
 import { Field } from 'redux-form';
 
-import useStyles from './_customer-info';
+import { RenderTextField, RenderRadioGroup } from './form-components';
 
-export default function CustomerInfo() {
+import useStyles from './_checkout-form';
+
+export default function CustomerInfo({ customer }) {
+  // console.log(customer);
   const classes = useStyles();
 
-  const renderRadioGroup = ({ input, name, ...rest }) => (
-    <RadioGroup
-      {...input}
-      {...rest}
-      value={input.value}
-      aria-label="gender"
-      defaultValue={input.checked}
-      className={classes.radioGender}
-      name={name}
-      onChange={(event, value) =>
-        // console.log('123', event, value);
-        input.onChange(value)}
-    />
-  );
-
-  const renderTextField = (props) => {
-    // console.log(props);
-    const { input, label, name, value, type, meta: { touched, error }, ...custom } = props;
-    return (
-      <TextField
-        type={type}
-        name={name}
-        variant="outlined"
-        fullWidth
-        id={name}
-        error={!!(touched && error)}
-        helperText={touched && error}
-        {...input}
-        {...custom}
-        className={classes.root}
-        label={(<FormLabel className={classes.root} required>{label}</FormLabel>)}
-      />
-    )
-  };
-
   return (
-    <Container>
+    <>
       <Grid>
-        <Typography>Bla-Bla-Bla</Typography>
-        <Field name="gender" component={renderRadioGroup}>
+        <Typography className={classes.blockTitle}>1. CUSTOMER INFO</Typography>
+        <Field name="gender" component={(args) => {
+          const className = 'radioGender';
+          const newArgs = { ...args, className }
+          return RenderRadioGroup(newArgs)
+        }}
+        >
           <FormControlLabel
             className={classes.root}
             value="Mr"
@@ -78,32 +37,72 @@ export default function CustomerInfo() {
         </Field>
         <Grid container spacing={2}>
           <Grid item xs={12} lg={6}>
-            <Field name="firstName" component={renderTextField} label="First Name" />
+            <Field
+              name="firstName"
+              component={(args) => {
+                // console.log('ARGS =', args);
+                const defaultValue = customer.firstName || '';
+                const newArgs = { ...args, defaultValue };
+                return RenderTextField(newArgs)
+              }}
+              label="First Name"
+            />
           </Grid>
           <Grid item xs={12} lg={6}>
-            <Field name="lastName" component={renderTextField} label="Last Name" />
+            <Field
+              name="lastName"
+              component={(args) => {
+                const defaultValue = customer.lastName || '';
+                const newArgs = { ...args, defaultValue };
+                return RenderTextField(newArgs)
+              }}
+              label="Last Name"
+            />
           </Grid>
           <Grid item xs={12}>
-            <Field name="email" component={renderTextField} label="Email Address" type="email" />
-            <Field name="mobile" component={renderTextField} label="Phone number" type="mobile" />
-          </Grid>
-          <Grid item xs={12} xl={8}>
-            <Field name="street" component={renderTextField} label="Street" type="street" />
-          </Grid>
-          <Grid item xs={12} xl={4}>
-            <Field name="house" component={renderTextField} label="House No" type="house" />
-          </Grid>
-          <Grid item xs={12} lg={6}>
-            <Field name="postalCode" component={renderTextField} label="Postal code" type="postalCode" />
-          </Grid>
-          <Grid item xs={12} lg={6}>
-            <Field name="city" component={renderTextField} label="City" type="city" />
+            <Field
+              name="email"
+              component={(args) => {
+                const defaultValue = customer.email || '';
+                const newArgs = { ...args, defaultValue };
+                return RenderTextField(newArgs)
+              }}
+              label="email"
+            />
           </Grid>
           <Grid item xs={12}>
-            <Field name="country" component={renderTextField} label="Country" type="country" />
+            <Field
+              name="mobile"
+              component={(args) => {
+                const defaultValue = customer.telephone || '';
+                const newArgs = { ...args, defaultValue };
+                return RenderTextField(newArgs)
+              }}
+              label="mobile"
+            />
+          </Grid>
+          <Grid item xs={12} lg={8}>
+            <Field name="street" component={RenderTextField} label="Street" type="street" />
+          </Grid>
+          <Grid item xs={12} lg={4}>
+            <Field name="house" component={RenderTextField} label="Flat" type="house" />
+          </Grid>
+          <Grid item xs={12} lg={6}>
+            <Field
+              name="postalCode"
+              component={RenderTextField}
+              label="Postal code"
+              type="postalCode"
+            />
+          </Grid>
+          <Grid item xs={12} lg={6}>
+            <Field name="city" component={RenderTextField} label="City" type="city" />
+          </Grid>
+          <Grid item xs={12}>
+            <Field name="country" component={RenderTextField} label="Country" type="country" />
           </Grid>
         </Grid>
       </Grid>
-    </Container>
+    </>
   )
 }

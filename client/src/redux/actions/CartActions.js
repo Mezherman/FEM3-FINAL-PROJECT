@@ -32,3 +32,9 @@ export function mergeDBWithLocalStorage () {
     type: 'MERGE_CART',
   }
 }
+
+export function clearCart () {
+  return {
+    type: 'CLEAR_CART',
+  }
+}

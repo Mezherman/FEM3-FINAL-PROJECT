@@ -21,10 +21,12 @@ function ProductPage(props) {
   const cardsToShowString = cardsToShow.toString();
   // console.log(cardsToShowString);
   useEffect(() => {
-    if (!chosenProduct) {
-      fetchProduct(itemNo);
-    }
-  }, [chosenProduct, itemNo, fetchProduct]);
+    // if (!chosenProduct) {
+    //   fetchProduct(itemNo);
+    // }
+
+    fetchProduct(itemNo);
+  }, [itemNo, fetchProduct]);
 
   useEffect(() => {
     getFilteredProducts(`itemNo=${cardsToShowString}`)

@@ -37,7 +37,8 @@ const theme = createMuiTheme({
       default: '#fff',
       primary: '#e2e2e2',
       secondary: '#f1f2f3',
-      carousel: 'rgba(255, 255, 255, .6)'
+      carousel: 'rgba(255, 255, 255, .6)',
+      dark: '#000'
     },
   },
   typography: {
