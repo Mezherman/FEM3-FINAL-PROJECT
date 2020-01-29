@@ -12,14 +12,16 @@ import {
 } from '@material-ui/core';
 import { Field, reduxForm } from 'redux-form';
 import InfoOutlinedIcon from '@material-ui/core/SvgIcon/SvgIcon';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import CloseIcon from '@material-ui/icons/Close';
 import { useSelector } from 'react-redux';
 import useStyles from '../SignUp/Sign-up-form/_sign-up-form';
 import postNewUser from '../../services/postNewUser';
 import validate from '../SignUp/validate';
 import usePdstyles from './_personal-data';
-// import getUserData from '../../services/getUserData';
+import RoutesName from '../../routes-list';
+import putUserData from '../../services/putUserData';
+// import usePdstyles from './_personal-data';
 
 function PutPersonalData (props) {
   // const [newUserData, setNewUserData] = useState({
@@ -54,6 +56,7 @@ function PutPersonalData (props) {
   // console.log('USER NAME =>', firstName);
 
   const classes = useStyles();
+  const pdClasses = usePdstyles();
 
   // SignUP
 
@@ -75,6 +78,23 @@ function PutPersonalData (props) {
     setErrorModal(false);
   };
 
+  const submitEditedUser = (event) => {
+    event.preventDefault();
+    // console.log(newUserData);
+    putUserData(newUserData)
+      .then((response) => {
+        console.log(response);
+        if (response.statusText === 'OK') {
+          // setRegistration(true);
+          console.log(response);
+        }
+      })
+      .catch((error) => {
+        // setMessage(error.message);
+        console.log(error.response.data);
+      });
+  };
+
   // const renderRedirect = () => {
   //   if (redirect) {
   //     return <Redirect to="/" />
@@ -84,7 +104,7 @@ function PutPersonalData (props) {
 
   // const [redirect, setRedirect] = useState(false);
 
-  const submitNewUser = (values) => {}
+  // const submitNewUser = (values) => {}
 
   const renderTextField = ({
     label,
@@ -262,6 +282,28 @@ function PutPersonalData (props) {
           {/*  <MenuItem value="Germany">Germany</MenuItem> */}
           {/* </Field> */}
         </Grid>
+        <div className={pdClasses.buttonsContainer}>
+          <Link to={RoutesName.home}>
+            <Button
+              // size="large"
+              variant="contained"
+              color="secondary"
+              className={`${classes.submit} ${pdClasses.button}`}
+              // disableElevation
+            >
+              CANCEL
+            </Button>
+          </Link>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={`${classes.submit} ${pdClasses.button}`}
+            onSubmit={submitEditedUser}
+          >
+            SAVE
+          </Button>
+        </div>
       </form>
       {errorModal && (
         <Modal
