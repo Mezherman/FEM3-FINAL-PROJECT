@@ -9,6 +9,7 @@ import user from './user';
 import notification from './notification';
 import favoritesReducer from './favorites';
 import sortingReducer from './sorting';
+// import form from './form';
 
 export default combineReducers({
   cart,
@@ -19,5 +20,6 @@ export default combineReducers({
   notification,
   user,
   favoritesReducer,
-  sortingReducer
+  sortingReducer,
+  // form
 })

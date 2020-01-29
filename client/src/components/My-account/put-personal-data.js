@@ -14,7 +14,7 @@ import { Field, reduxForm } from 'redux-form';
 import InfoOutlinedIcon from '@material-ui/core/SvgIcon/SvgIcon';
 import { Link, Redirect } from 'react-router-dom';
 import CloseIcon from '@material-ui/icons/Close';
-import { useSelector } from 'react-redux';
+import { useSelector, connect } from 'react-redux';
 import useStyles from '../SignUp/Sign-up-form/_sign-up-form';
 import postNewUser from '../../services/postNewUser';
 import validate from '../SignUp/validate';
@@ -22,26 +22,9 @@ import usePdstyles from './_personal-data';
 import RoutesName from '../../routes-list';
 import putUserData from '../../services/putUserData';
 // import usePdstyles from './_personal-data';
+import editCustomerData from '../../redux/actions/form'
 
 function PutPersonalData (props) {
-  // const [newUserData, setNewUserData] = useState({
-  //   gender: 'Mr',
-  //   firstName: '',
-  //   lastName: '',
-  //   // birthdayDay: '',
-  //   // birthdayMonth: '',
-  //   // birthdayYear: '',
-  //   email: '',
-  //   telephone: '',
-  //   // password: '',
-  //   // country: 'Austria',
-  //   agreement: false,
-  //   isAdmin: false,
-  // });
-
-  // const { gender, firstName, lastName } = newUserData;
-
-  const { handleSubmit } = props;
   const {
     gender,
     firstName,
@@ -49,9 +32,15 @@ function PutPersonalData (props) {
     telephone,
     email,
     login,
-    // handleSubmit
+    handleSubmit,
+    editCustomerData,
+    cancel
   } = props;
-  console.log(firstName);
+  // console.log(firstName);
+
+  // useEffect(() => {
+  //   return editCustomerData({ firstName, lastName, telephone, email, login })
+  // }, []);
 
   // console.log('USER NAME =>', firstName);
 
@@ -60,28 +49,18 @@ function PutPersonalData (props) {
 
   // SignUP
 
-  // const [signUpModal, setSignUpModal] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
 
-  // const handleOpenSignUpModal = () => {
-  //   setSignUpModal(true);
-  // };
-
-  // const handleCloseSignUpModal = () => {
-  //   setSignUpModal(false);
-  //   setRedirect(true);
-  // };
-  // const handleOpenSetErrorModal = () => {
-  //   setErrorModal(true);
-  // };
   const handleCloseSetErrorModal = () => {
     setErrorModal(false);
   };
 
-  const submitEditedUser = (event) => {
-    event.preventDefault();
+  const submitEditedUser = (values) => {
+    // event.preventDefault();
     // console.log(newUserData);
-    putUserData(newUserData)
+    putUserData({
+      ...values
+    })
       .then((response) => {
         console.log(response);
         if (response.statusText === 'OK') {
@@ -94,17 +73,6 @@ function PutPersonalData (props) {
         console.log(error.response.data);
       });
   };
-
-  // const renderRedirect = () => {
-  //   if (redirect) {
-  //     return <Redirect to="/" />
-  //   }
-  //   return null
-  // };
-
-  // const [redirect, setRedirect] = useState(false);
-
-  // const submitNewUser = (values) => {}
 
   const renderTextField = ({
     label,
@@ -124,39 +92,41 @@ function PutPersonalData (props) {
       helperText={touched && error}
       onBlur={onBlur}
       onChange={(event) => onChange(event.target.value)}
-      // defaultValue={!touched ? defaultValue : value}
       value={value || defaultValue}
       className={classes.root}
       label={(<FormLabel className={classes.root} required>{label}</FormLabel>)}
     />
   );
 
+  const renderBirthdayField = ({
+    input, label, name, value, meta: { touched, error }, ...custom
+  }) => (
+    <TextField
+      error={!!(touched && error)}
+      name={name}
+      type="number"
+      variant="outlined"
+      className={`${classes.inputBirthDay} ${classes.input}`}
+      // className={classes.inputBirthDay}
+      {...custom}
+      {...input}
+      helperText={(touched && error) || (
+        <FormHelperText className={classes.helperBirth} component="span">
+          {label}
+        </FormHelperText>
+      )}
+    />
+  );
+
   return (
     <Container>
-      <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitNewUser)}>
-        <Grid item xs={12} sm={10} md={5}>
+      <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitEditedUser)}>
+        <Grid item xs={12} >
           <Typography paragraph component="p" variant="subtitle2" className={classes.rightTitle}>
-            Please enter the following information:
+            Please enter the following information and check it:
           </Typography>
-          {/* <Field name="gender" component={renderRadioGroup} > */}
-          {/*  <FormControlLabel */}
-          {/*    className={classes.root} */}
-          {/*    value="Mr" */}
-          {/*    label="Mr" */}
-          {/*    name="gender" */}
-          {/*    control={<Radio className={classes.radioLabel} />} */}
-          {/*  /> */}
-          {/*  <FormControlLabel */}
-          {/*    className={classes.root} */}
-          {/*    value="Mrs" */}
-          {/*    label="Mrs" */}
-          {/*    name="gender" */}
-          {/*    control={<Radio className={classes.radioLabel} />} */}
-          {/*  /> */}
-          {/* </Field> */}
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              {/* <Field name="firstName" component={CustomInput} label="First Name" /> */}
               <Field
                 name="firstName"
                 component={(args) => {
@@ -167,6 +137,7 @@ function PutPersonalData (props) {
                   return renderTextField(newArgs)
                 }}
                 label="First Name"
+                type="text"
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -180,89 +151,40 @@ function PutPersonalData (props) {
                 }}
                 name="lastName"
                 label="Last Name"
+                type="text"
               />
             </Grid>
           </Grid>
-          <Box mb={1} mt={2}>
-            <Field
-              name="login"
-              component={(args) => {
-                const newArgs = {
-                  ...args,
-                  defaultValue: login
-                };
-                return renderTextField(newArgs)
-              }}
-              label="Login"
-              type="text"
-            />
-          </Box>
-          {/* <FormControl> */}
-          {/*  <InputAdornment htmlFor="birthdayDay" className={classes.labelBirthday}> */}
-          {/* Do you fancy a birthday surprise? */}
-          {/*    <InfoOutlinedIcon */}
-          {/*      fontSize="small" */}
-          {/*      className={classes.infoIcon} */}
-          {/*      type="button" */}
-          {/*      onClick={handleOpenInfo} */}
-          {/*    /> */}
-          {/*    <Modal */}
-          {/*      aria-labelledby="transition-modal-title" */}
-          {/*      aria-describedby="transition-modal-description" */}
-          {/*      className={classes.modalInfoIcon} */}
-          {/*      open={openInfo} */}
-          {/*      onClose={handleCloseInfo} */}
-          {/*      closeAfterTransition */}
-          {/*      BackdropComponent={Backdrop} */}
-          {/*      BackdropProps={{ */}
-          {/*        timeout: 500, */}
-          {/*      }} */}
-          {/*    > */}
-          {/*      <Fade in={openInfo}> */}
-          {/*        <div className={classes.paperInfoIcon}> */}
-          {/*          <h2 id="transition-modal-title" className={classes.modalInfoTitle}> */}
-          {/*        Birthday gift */}
-          {/*            <CloseIcon */}
-          {/*              className={classes.modalInfoClose} */}
-          {/*              color="action" */}
-          {/*              onClick={handleCloseInfo} */}
-          {/*            /> */}
-          {/*          </h2> */}
-          {/*          <p id="transition-modal-description" className={classes.modalInfoText}> */}
-          {/*        Let us surprise you – with a WMF gift on your birthday. Let us know */}
-          {/*        your date of birth and you will receive an e-mail every year */}
-          {/*        containing a birthday voucher, which you can then redeem in the */}
-          {/*        online shop or in one of our stores. */}
-          {/*          </p> */}
-          {/*        </div> */}
-          {/*      </Fade> */}
-          {/*    </Modal> */}
-          {/*  </InputAdornment> */}
-          {/* </FormControl> */}
-          {/* <Grid item> */}
-          {/*  <Box mb={2}> */}
-          {/*    <Field name="birthdayDay" component={renderBirthdayField} label="DD" value="birthdayDay" /> */}
-          {/*    <Field name="birthdayMonth" component={renderBirthdayField} label="MM" value="birthdayMonth" /> */}
-          {/*    <Field name="birthdayYear" component={renderBirthdayField} label="YYYY" value="birthdayYear" /> */}
-          {/*  </Box> */}
-          {/* </Grid> */}
-          <Box mb={2}>
-            <Field
-              name="email"
-              component={(args) => {
-                const newArgs = {
-                  ...args,
-                  defaultValue: email
-                };
-                return renderTextField(newArgs)
-              }}
-              label="Email Address"
-              type="email"
-            />
-          </Box>
-          {/* <Box mb={2}> */}
-          {/*  <Field name="password" component={renderTextField} label="Password" type="password" /> */}
-          {/* </Box> */}
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <Field
+                name="login"
+                component={(args) => {
+                  const newArgs = {
+                    ...args,
+                    defaultValue: login
+                  };
+                  return renderTextField(newArgs)
+                }}
+                label="Login"
+                type="text"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Field
+                name="email"
+                component={(args) => {
+                  const newArgs = {
+                    ...args,
+                    defaultValue: email
+                  };
+                  return renderTextField(newArgs)
+                }}
+                label="Email Address"
+                type="email"
+              />
+            </Grid>
+          </Grid>
           <Box mb={2}>
             <Field
               name="telephone"
@@ -277,29 +199,36 @@ function PutPersonalData (props) {
               type="tel"
             />
           </Box>
-          {/* <Field name="country" component={renderSelectField} label={selectCountry}> */}
-          {/*  <MenuItem value="Austria">Austria</MenuItem> */}
-          {/*  <MenuItem value="Germany">Germany</MenuItem> */}
-          {/* </Field> */}
+          <Grid item>
+            {/*<Box mb={2}>*/}
+            {/*  <Field name="birthdayDay" component={(args) => {*/}
+            {/*    const newArgs = {*/}
+            {/*      ...args,*/}
+            {/*      defaultValue: login*/}
+            {/*    };*/}
+            {/*    return renderBirthdayField(newArgs)*/}
+            {/*  }} label="DD" value="birthdayDay" />*/}
+            {/*  <Field name="birthdayMonth" component={renderBirthdayField} label="MM" value="birthdayMonth" />*/}
+            {/*  <Field name="birthdayYear" component={renderBirthdayField} label="YYYY" value="birthdayYear" />*/}
+            {/*</Box>*/}
+          </Grid>
         </Grid>
         <div className={pdClasses.buttonsContainer}>
-          <Link to={RoutesName.home}>
-            <Button
-              // size="large"
-              variant="contained"
-              color="secondary"
-              className={`${classes.submit} ${pdClasses.button}`}
-              // disableElevation
-            >
-              CANCEL
-            </Button>
-          </Link>
+          {/* <Link to={RoutesName.home}> */}
+          <Button
+            variant="contained"
+            color="secondary"
+            className={`${classes.submit} ${pdClasses.button}`}
+            onClick={() => cancel()}
+          >
+            CANCEL
+          </Button>
+          {/* </Link> */}
           <Button
             type="submit"
             variant="contained"
             color="primary"
             className={`${classes.submit} ${pdClasses.button}`}
-            onSubmit={submitEditedUser}
           >
             SAVE
           </Button>
@@ -344,4 +273,15 @@ PutPersonalData = reduxForm({
   validate,
 })(PutPersonalData);
 
-export default PutPersonalData
+// const mapStateToProps = (state) =>
+//   ({
+//     form: state.form
+//   });
+//
+// const mapDispatchToProps = (dispatch) => ({
+//   editCustomerData: (data) => dispatch(editCustomerData(data))
+// })
+//
+// export default connect(mapStateToProps, mapDispatchToProps)(PutPersonalData)
+
+export default PutPersonalData;
