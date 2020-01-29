@@ -1,12 +1,8 @@
-const ordersLoaded = (data) => {
-
-  return {
-    type: 'FETCH_ORDERS_SUCCESS',
-    payload: {
-
-
-    }
-  }
-};
-
-export default ordersLoaded;
+// const ordersLoaded = (data) => ({
+//   type: 'FETCH_ORDERS_SUCCESS',
+//   payload: {
+//     data
+//   }
+// });
+//
+// export default ordersLoaded;

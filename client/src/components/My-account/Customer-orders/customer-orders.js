@@ -19,33 +19,33 @@ const CustomerOrders = (props) => {
     <Container maxWidth="xl">
       {/* <Grid item container sm={9} xs={12}> */}
       {/* <Hidden xsDown> */}
-      <Grid
-        container
-        justify="space-between"
-        sm={12}
-        // xs={12}
-        className={`${classes.root} ${classes.underline}`}
-      >
-        <Grid item lg={2}>
-          Order
-        </Grid>
-        <Grid item lg={2}>
-          Date
-        </Grid>
-        <Grid item lg={2} >
-          Quantity
-        </Grid>
-        <Grid item lg={2} >
-          Summary
-        </Grid>
-        <Grid item lg={2} className={classes.alignCenter}>
-          Delivery Address
-        </Grid>
-        <Grid item lg={2} className={classes.alignRight}>
-          Status
-        </Grid>
-        {/* <Grid item lg={1}/> */}
-      </Grid>
+      {/*<Grid*/}
+      {/*  container*/}
+      {/*  justify="space-between"*/}
+      {/*  sm={12}*/}
+      {/*  // xs={12}*/}
+      {/*  className={`${classes.root} ${classes.underline}`}*/}
+      {/*>*/}
+      {/*  <Grid item lg={2}>*/}
+      {/*    Order*/}
+      {/*  </Grid>*/}
+      {/*  <Grid item lg={2}>*/}
+      {/*    Date*/}
+      {/*  </Grid>*/}
+      {/*  <Grid item lg={2} >*/}
+      {/*    Quantity*/}
+      {/*  </Grid>*/}
+      {/*  <Grid item lg={2} >*/}
+      {/*    Summary*/}
+      {/*  </Grid>*/}
+      {/*  <Grid item lg={2} className={classes.alignCenter}>*/}
+      {/*    Delivery Address*/}
+      {/*  </Grid>*/}
+      {/*  <Grid item lg={2} className={classes.alignRight}>*/}
+      {/*    Status*/}
+      {/*  </Grid>*/}
+      {/*  /!* <Grid item lg={1}/> *!/*/}
+      {/*</Grid>*/}
       <CollapseOrderItem />
       {/* </Hidden> */}
       {/* {list} */}

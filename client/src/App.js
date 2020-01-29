@@ -10,7 +10,7 @@ import Footer from './components/Footer/footer'
 import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
 import { getCatalogFromDB } from './redux/actions/categories';
 import Notification from './components/Notification/notification'
-import loginLoaded, { fetchCustomerData } from './redux/actions/user';
+import { loginLoaded, fetchCustomerData } from './redux/actions/user';
 import { mergeDBWithLocalStorage } from './redux/actions/CartActions';
 import { getFavoritesFromDB } from './redux/actions/favorites'
 import ScrollToTopOnMount from './components/Pages-scroll-to-top/Pages-scroll-top-top';
