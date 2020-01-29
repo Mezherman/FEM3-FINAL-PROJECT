@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { MenuItem, useTheme, Divider } from '@material-ui/core';
+import { MenuItem, useTheme, Divider, IconButton } from '@material-ui/core';
 
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Drawer from '@material-ui/core/Drawer';
@@ -17,10 +17,27 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
   const { mainCategories } = store.getState().categoriesReducer.catalog;
   const { allCategories } = store.getState().categoriesReducer.catalog;
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
-
+  const [drawerCat, drawerCatIsOpen] = useState(false);
+  const [drawerSubCat, drawerSubCatIsOpen] = useState(false);
+  const [subCategory, setSubCategory] = useState('');
   // console.log('mob', isMobile);
   // console.log('tab', isTablet);
   // console.log('desc', !isDesktop);
+
+  // console.log(allCategories);
+
+  const toggleDrawerCat = (open) => {
+    drawerCatIsOpen(open);
+  };
+  const toggleDrawerSubCat = (value) => {
+    setSubCategory(value);
+    drawerSubCatIsOpen(true)
+  };
+
+  console.log(subCategory);
+  // const toggleDrawerSubCat = (open) => {
+  //   drawerSubCatIsOpen(open)
+  // };
 
   return (
   // mobile
@@ -38,40 +55,62 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
               aria-labelledby="nested-list-subheader"
 
             >
-              <CollapsingItem border={1} label="CATALOG">
+              <MenuItem
+                onClick={() => toggleDrawerCat(true)}
+                border={1}
+                label="CATALOG"
+              >
+                CATALOG
+              </MenuItem>
 
-                {mainCategories.map((category) => (
-                  <>
-                    <CollapsingItem
-                      key={category.id}
-                      className={classes.category}
-                      label={category.name}
-                    >
-                      {allCategories.filter(
-                        (subCategory) => subCategory.parentId === category.id
-                      )
-                        .map((subCategory) => (
-                          <>
-                            <Divider key={subCategory.id} />
-                            <MenuItem
-                              key={subCategory.id}
-                              onClick={() => toggleDrawer(false)}
-                            >
-                              <Link
-                                to={`${RoutesName.products}/${subCategory.id}`}
-                                key={category.id}
-                              >
-                                {subCategory.name}
-                              </Link>
-                            </MenuItem>
-                          </>
-                        ))}
-                    </CollapsingItem>
-                    <Divider />
-                  </>
-                ))}
-                <Divider />
-              </CollapsingItem>
+              <Drawer
+                open={drawerCat}
+                onClose={() => toggleDrawerCat(false)}
+              >
+                <List>
+                  {mainCategories.map((category) => (
+                    <>
+                      <MenuItem
+                        onClick={() => toggleDrawerSubCat(category.id)}
+                        key={category.id}
+                        className={classes.category}
+                        label={category.name}
+                      >
+                        {category.name}
+                      </MenuItem>
+
+                      <Drawer
+                        open={drawerSubCat}
+                        onClose={() => toggleDrawerSubCat(false)}
+                      >
+                        <List>
+                          {allCategories.filter(
+                            (category) => category.parentId === subCategory)
+                            .map((subCategory) => (
+                              // console.log(subCategory1)
+                              <>
+                                <MenuItem
+                                  key={subCategory.id}
+                                  onClick={() =>
+                                    toggleDrawer(false)
+                                  }
+                                >
+                                  <Link
+                                    to={`${RoutesName.products}/${subCategory.id}`}
+                                    key={category.id}
+                                  >
+                                    {subCategory.name}
+                                  </Link>
+                                </MenuItem>
+                              </>
+                            ))}
+
+                        </List>
+                      </Drawer>
+                    </>
+                  ))}
+                </List>
+              </Drawer>
               <MenuItem>
                 <Link to={RoutesName.aboutUs} className={classes.headerMenuListHyperlink}>
               ABOUT US
