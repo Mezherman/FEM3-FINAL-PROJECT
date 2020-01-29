@@ -50,7 +50,8 @@ const useStyles = makeStyles((theme) => ({
     },
 
     '&:hover': {
-      backgroundColor: theme.palette.background.default,
+      border: 'none',
+      backgroundColor: 'rgba(0, 0, 0, .0)',
     },
   },
   nested: {
