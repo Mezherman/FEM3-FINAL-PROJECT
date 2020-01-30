@@ -14,7 +14,9 @@ import useStyles from './_product-list';
 function ProductList(props) {
   const { assortment, products, productsLoading } = props;
   const classes = useStyles();
-
+  console.log(products);
+  console.log(productsLoading);
+  console.log(assortment);
   return (
     <div className={classes.productList}>
       {productsLoading && <Spinner />}

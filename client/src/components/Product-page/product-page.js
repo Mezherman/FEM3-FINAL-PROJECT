@@ -6,7 +6,7 @@ import { Container, Box } from '@material-ui/core';
 import { getProductsByItemNo } from '../../services/getProducts';
 import ProductDetail from '../Product-detail/product-detail';
 import { productsRequested, productsLoaded } from '../../redux/actions/products';
-import ProductCardCarousel from './Product-card-carousel/product-card-carousel';
+import ProductCardCarousel from '../Product-card-carousel/product-card-carousel';
 
 import Spinner from '../Spinner/spinner';
 import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
@@ -15,9 +15,51 @@ import { getFilteredProducts } from '../../services/filter';
 function ProductPage(props) {
   // console.log('PROPS =', props);
   const { assortment, itemNo, chosenProduct, fetchProduct, productsLoading, setProducts } = props;
-
+  // console.log(assortment);
   const [productsToShow, setProductsToShow] = useState([]);
-  const cardsToShow = ['740039', '354326', '679386', '281039'];
+  const cardsToShow = ['896520', '896520', '896520', '896520', '896520', '217355'];
+  // thermos
+  // const cardsToShow = ['896520', '502739', '73816', '551930', '665912', '217355'];
+
+  // frying-pans
+  // const cardsToShow = ['369068', '394952', '873606', '314952', '588176', '547742'];
+
+  // pots
+  // const cardsToShow = ['239365', '579193', '82131', '512557', '293933', '792636'];
+
+  // steamers
+  // const cardsToShow = ['424953', '845357', '324156', '263657', '828323', '454682'];
+
+  // salad servers
+  // const cardsToShow = ['963240', '940745', '801864', '200428', '469025', '892663'];
+
+  // cutlery sets
+  // const cardsToShow = ['591935', '383254', '633043', '260056', '809408', '429137'];
+
+  // glasses
+  // const cardsToShow = ['120024', '648384', '281039', '672012', '49872', '642381'];
+
+  // knives
+  // const cardsToShow = ['588994', '122522', '117494', '44543', '483853', '457505'];
+
+  // kitchen gadgets
+  // const cardsToShow = ['344238', '730715', '979847', '971118', '937631', '597400'];
+
+  // preparing
+  // const cardsToShow = ['344238', '730715', '979847', '971118', '937631', '597400'];
+
+  // cooking
+  // const cardsToShow = ['344238', '730715', '979847', '971118', '937631', '597400'];
+
+  // drinking
+  // const cardsToShow = ['344238', '730715', '979847', '971118', '937631', '597400'];
+
+  // dining
+  // const cardsToShow = ['344238', '730715', '979847', '971118', '937631', '597400'];
+
+  // HOME
+  // const cardsToShow = ['342511', '142956', '740039', '29100'];
+
   const cardsToShowString = cardsToShow.toString();
   // console.log(cardsToShowString);
   useEffect(() => {

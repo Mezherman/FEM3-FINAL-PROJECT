@@ -5,13 +5,13 @@ import { Box, Divider, Button, SvgIcon, useTheme } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
 import withWidth from '@material-ui/core/withWidth';
-import ProductCard from '../../Product-card/product-card';
-import Carousels from '../../Carousel/carousel';
+import ProductCard from '../Product-card/product-card';
+import Carousels from '../Carousel/carousel';
 import useStyles from './_product-card-carousel';
-import RoutesName from '../../../routes-list';
+import RoutesName from '../../routes-list';
 
 function ProductCardCarousel(props) {
-  const { products } = props;
+  const { products, label } = props;
   const classes = useStyles();
 
   const slidesToShow = {
@@ -34,6 +34,7 @@ function ProductCardCarousel(props) {
 
   return (
     <Box className={classes.carousel}>
+      <h2>{label}</h2>
       <Carousels
       // autoPlay
         wrapAround

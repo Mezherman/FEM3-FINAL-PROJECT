@@ -15,6 +15,12 @@ const useStyles = makeStyles((theme) => ({
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    [theme.breakpoints.up('sm')]: {
+      maxWidth: '100%',
+    },
+    [theme.breakpoints.up('lg')]: {
+      maxWidth: '70%',
+    }
   },
   [theme.breakpoints.up('md')]: {
     qtyPicker: {
@@ -68,7 +74,7 @@ export default function IncreaseBlock() {
     // setQty(event.target.value === '' ? '' : Math.abs(event.target.value));
     //
   };
-  console.log(qty);
+  // console.log(qty);
   return (
     <Box className={classes.wrapper}>
       <div className={classes.qtyPicker}>
