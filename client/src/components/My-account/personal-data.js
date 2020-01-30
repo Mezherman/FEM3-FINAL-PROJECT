@@ -75,6 +75,7 @@ export default function PersonalData () {
   const [checked, setChecked] = useState([1]);
   const [editForm, setEditForm] = useState(false);
   const handleEditForm = () => setEditForm(true);
+  const canselEditForm = () => setEditForm(false);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -138,6 +139,7 @@ export default function PersonalData () {
   if (editForm) {
     return (
       <PutPersonalData
+        cancel={canselEditForm}
         gender={gender}
         firstName={firstName}
         lastName={lastName}

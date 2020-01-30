@@ -18,8 +18,6 @@ const usePdstyles = makeStyles((theme) => ({
     textDecoration: 'none',
     textAlign: 'center',
     color: theme.palette.text.primary,
-    // display: 'flex',
-    // justifyContent: 'center'
   },
 
   linkContainer: {
@@ -33,8 +31,12 @@ const usePdstyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-evenly',
     flexDirection: 'row',
-    // margin: `${theme.spacing(3)}px 0`
-  }
+  },
+
+  emailForm: {
+    marginTop: theme.spacing(1)
+  },
+
 }
 ));
 

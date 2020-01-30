@@ -27,7 +27,7 @@ const db = (store) => (next) => async (action) => {
   }
 
   if (loggedIn && token) {
-    console.log('ACTION =', action);
+    // console.log('ACTION =', action);
     const { cart } = { ...action.payload };
     switch (action.type) {
       case 'ADD_PRODUCT': {
