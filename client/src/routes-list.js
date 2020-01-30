@@ -14,7 +14,7 @@ const RoutesName = {
   personalData: '/personal-data',
   editPersonalData: '/edit-personal-data',
   favorites: '/favorites',
-  myOrders: '/orders',
+  myOrders: '/orders'
 };
 
 export default RoutesName;

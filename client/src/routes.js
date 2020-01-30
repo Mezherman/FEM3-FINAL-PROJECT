@@ -21,6 +21,7 @@ import CheckoutStatus from './components/Checkout/Status/status';
 import PutPersonalData from './components/My-account/put-personal-data'
 import MyForm from './components/My-account/form-mui-valid'
 import CustomerOrders from './components/My-account/Customer-orders/customer-orders';
+import AddNewCard from './components/Add-new-card/add-new-card'
 
 export default function Routes() {
   // const history = useHistory();
@@ -182,7 +183,6 @@ export default function Routes() {
       <Route path={RoutesName.editPersonalData} component={EditPersonalData} />
       {/*<Route path="/edit" component={EditFormWithValidation} />*/}
       <Route path="/edit-mui" component={MyForm} />
-
       /*in the end*/
       <Route path={RoutesName.home} exact>
         <Home />
