@@ -1,22 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Checkbox from '@material-ui/core/Checkbox';
-import Avatar from '@material-ui/core/Avatar';
-import { Box, Button, Grid, Typography } from '@material-ui/core';
-import { Link, Redirect } from 'react-router-dom';
+import { Button, Grid, Typography } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 import PutPersonalData from './put-personal-data'
-import getUserData from '../../services/getUserData';
 import usePdstyles from './_personal-data';
-import RoutesName from '../../routes-list';
 
 export default function PersonalData () {
   const pdClasses = usePdstyles();
@@ -30,52 +22,10 @@ export default function PersonalData () {
   } = useSelector((state) => state.user.customer);
   const { loggedIn } = useSelector((state) => state.user);
 
-  // const firstName = useSelector((state) => console.log(state.user));
-  // console.log(firstName);
-
-  // const [newUserData, setNewUserData] = useState({
-  //   gender: '',
-  //   firstName: '',
-  //   lastName: '',
-  //   birthdayDay: '',
-  //   birthdayMonth: '',
-  //   telephone: '',
-  //   birthdayYear: '',
-  //   email: '',
-  //   password: '',
-  //   // country: '',
-  //   agreement: false,
-  //   isAdmin: false,
-  // });
-
-  // useEffect(() => {
-  //   console.log('useEffect from pd');
-  //   // console.log('IsloggedIn PersonalData', isLoggedIn);
-  //   // console.log(axios.defaults.headers.common.Authorization);
-  //   if (loggedIn) {
-  //     getUserData()
-  //       .then((loggedInCustomer) => {
-  //         setNewUserData({
-  //           ...newUserData,
-  //           ...loggedInCustomer.data
-  //         });
-  //         /* Do something with loggedInCustomer */
-  //       })
-  //       .catch((err) => {
-  //         console.log('ERROR', err);
-  //         /* Do something with error */
-  //       });
-  //   }
-  //   // return null
-  // }, [loggedIn]);
-
-  // console.log(newUserData);
-
-  // const classes = useStyles();
   const [checked, setChecked] = useState([1]);
   const [editForm, setEditForm] = useState(false);
   const handleEditForm = () => setEditForm(true);
-  const canselEditForm = () => setEditForm(false);
+  const canсelEditForm = () => setEditForm(false);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -89,21 +39,6 @@ export default function PersonalData () {
 
     setChecked(newChecked);
   };
-
-  // const {
-  //   gender,
-  //   firstName,
-  //   lastName,
-  //   birthdayDay,
-  //   birthdayMonth,
-  //   birthdayYear,
-  //   telephone,
-  //   login,
-  //   email,
-  //   // password,
-  //   country,
-  //
-  // } = newUserData;
 
   const listItem = [
     {
@@ -139,7 +74,7 @@ export default function PersonalData () {
   if (editForm) {
     return (
       <PutPersonalData
-        cancel={canselEditForm}
+        cancel={canсelEditForm}
         gender={gender}
         firstName={firstName}
         lastName={lastName}

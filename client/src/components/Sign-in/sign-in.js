@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import { Link, Redirect } from 'react-router-dom';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormLabel } from '@material-ui/core';
+import {
+  FormLabel,
+  Avatar,
+  Button,
+  TextField,
+  Typography,
+  Container,
+  Checkbox,
+  FormControlLabel
+} from '@material-ui/core';
 import useStylesSingIn from './_sign-in';
 import RoutesName from '../../routes-list';
 import postLoginData from '../../services/postLoginData'
@@ -24,8 +26,15 @@ function SignIn (props) {
   const [errorMessage, setErrorMessage] = useState(null);
   const [length, setLength] = useState(1);
 
-  const { onClose, user, loginLoaded, userLoadedData, mergeCart, fetchFavorites, fetchCustomerData } = props;
-  // console.log('USER =', user);
+  const {
+    onClose,
+    user,
+    loginLoaded,
+    userLoadedData,
+    mergeCart,
+    fetchFavorites,
+    fetchCustomerData
+  } = props;
   const classes = useStylesSingIn();
 
   // const userData = {
@@ -84,8 +93,6 @@ function SignIn (props) {
         // console.log(token)
 
         setErrorMessage(null);
-
-        /* Do something with jwt-token if login successed */
       })
       .catch((err) => {
         setErrorMessage('Incorrect password or login');
@@ -190,11 +197,10 @@ function SignIn (props) {
   );
 }
 
-const mapStateToProps = (state) =>
-  // console.log('STATE =', state);
-  ({
-    user: state.user
-  });
+const mapStateToProps = (state) => ({
+  user: state.user
+});
+
 const mapDispatchToProps = (dispatch) => ({
   loginLoaded: () => {
     dispatch(loginLoaded())
@@ -205,6 +211,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchCustomerData: () => dispatch(fetchCustomerData()),
   fetchFavorites: () => dispatch(getFavoritesFromDB())
 });
+
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
 
 SignIn.propTypes = {
