@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
+import { useSelector } from 'react-redux';
 
 import {
   CssBaseline,
@@ -14,13 +15,14 @@ import {
   Backdrop
 } from '@material-ui/core';
 
+import { PropTypes } from 'prop-types';
+
 import SignUpInfo from './Sign-up-info/signUp-info';
 import SignUpForm from './Sign-up-form/sign-up-form';
 import SignUpFooter from './Sign-up-footer/sign-up-footer';
 import validate from './validate';
 import useStyles from './_sign-up';
 import postNewUser from '../../services/postNewUser';
-import { useSelector } from 'react-redux';
 
 let SignUp = (props) => {
   const { handleSubmit } = props;
@@ -71,19 +73,6 @@ let SignUp = (props) => {
 
     console.log(newUser);
     postNewUser(newUser, handleOpenSignUpModal, handleOpenSetErrorModal);
-
-    // axios
-    //   .post('/customers', values)
-    //   .then((response) => {
-    //     console.log(response);
-    //     if (response.statusText === 'OK') {
-    //       handleOpenSignUpModal();
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     handleOpenSetErrorModal();
-    //     console.log(error.response.data);
-    //   });
   };
   const { loggedIn } = useSelector((state) => state.user);
 
@@ -103,6 +92,7 @@ let SignUp = (props) => {
         >
           Your registration for the myWMF Customer Club
         </Typography>
+
         <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitNewUser)}>
           <Grid
             container
@@ -123,7 +113,7 @@ let SignUp = (props) => {
           </Grid>
         </form>
         {/* <Button onClick={handleOpenSignUpModal}>Open registration modal</Button> */}
-        {signUpModal && (
+        { signUpModal && (
           <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
@@ -139,7 +129,7 @@ let SignUp = (props) => {
             <Fade in={signUpModal}>
               <div className={classes.paperInfoIcon}>
                 <h2 id="transition-modal-title" className={classes.modalInfoTitle}>
-                  Your account was successfully registered
+                Your account was successfully registered
                 </h2>
                 <Button
                   onClick={handleCloseSignUpModal}
@@ -147,13 +137,14 @@ let SignUp = (props) => {
                   color="primary"
                   className={classes.submit}
                 >
-                  OK
+                OK
                 </Button>
               </div>
             </Fade>
           </Modal>
         )}
-        {errorModal && (
+
+        { errorModal && (
           <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
@@ -169,7 +160,7 @@ let SignUp = (props) => {
             <Fade in={errorModal}>
               <div className={classes.paperInfoError}>
                 <h2 id="transition-modal-title" className={classes.modalInfoTitle}>
-                  Something go wrong. Try again
+                Something go wrong. Try again
                 </h2>
                 <Button
                   onClick={handleCloseSetErrorModal}
@@ -177,12 +168,13 @@ let SignUp = (props) => {
                   color="primary"
                   className={classes.submit}
                 >
-                  OK
+                OK
                 </Button>
               </div>
             </Fade>
           </Modal>
         )}
+
       </div>
     </Container>
   );
@@ -192,5 +184,9 @@ SignUp = reduxForm({
   form: 'registration',
   validate,
 })(SignUp);
+
+SignUp.propTypes = {
+  handleSubmit: PropTypes.func.isRequired
+};
 
 export default SignUp;
