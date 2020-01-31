@@ -22,7 +22,7 @@ export default combineReducers({
   notification,
   user,
   favoritesReducer,
-  carouselReducer
+  carouselReducer,
   sortingReducer,
   slides
   // form
