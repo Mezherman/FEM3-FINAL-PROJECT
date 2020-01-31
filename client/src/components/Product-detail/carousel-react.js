@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => createStyles({
     top: '50%',
     transform: 'translateY(-50%)',
     zIndex: '1',
-    left: '-10%',
+    left: '-14%',
     position: 'absolute'
   },
   buttonRight: {
@@ -24,11 +24,19 @@ const useStyles = makeStyles((theme) => createStyles({
     zIndex: '1',
     left: '95%',
     position: 'absolute'
-  }
-
+  },
+  fullScreen: {
+    position: 'absolute',
+    bottom: '0',
+    right: '0',
+    color: theme.palette.text.primary,
+    '& active': {
+      color: 'white'
+    }
+  },
 }))
 
-const MyGallery = ({ images, srcSet }) => {
+const ProductDetailCarousel = ({ images, srcSet }) => {
   const theme = useTheme();
   const classes = useStyles();
 
@@ -60,32 +68,21 @@ const MyGallery = ({ images, srcSet }) => {
       renderFullscreenButton={
         (onClick, isFullscreen) => (
           <Button
-            // className={classes.buttonRight}
+            className={classes.fullScreen}
             onClick={onClick}
           >
             {isFullscreen
               ? (
-                <SvgIcon>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M24 9h-2v-4h-4v-2h6v6zm-6 12v-2h4v-4h2v6h-6zm-18-6h2v4h4v2h-6v-6zm6-12v2h-4v4h-2v-6h6z" />
-                  </svg>
+                <SvgIcon className="active" color="default" >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M15 2h2v5h7v2h-9v-7zm9 13v2h-7v5h-2v-7h9zm-15 7h-2v-5h-7v-2h9v7zm-9-13v-2h7v-5h2v7h-9z" /></svg>
                 </SvgIcon>
               )
               : (
-                <SvgIcon>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M24 9h-2v-4h-4v-2h6v6zm-6 12v-2h4v-4h2v6h-6zm-18-6h2v4h4v2h-6v-6zm6-12v2h-4v4h-2v-6h6z" />
-                  </svg>
+                <SvgIcon >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 9h-2v-5h-7v-2h9v7zm-9 13v-2h7v-5h2v7h-9zm-15-7h2v5h7v2h-9v-7zm9-13v2h-7v5h-2v-7h9z" /></svg>
                 </SvgIcon>
               )}
           </Button>
-
-          // <button
-          //   type='button'
-          //   className={
-          //     `image-gallery-fullscreen-button${isFullscreen ? ' active' : ''}`}
-          //   onClick={onClick}
-          // />
         )
       }
 
@@ -96,6 +93,6 @@ const MyGallery = ({ images, srcSet }) => {
       srcSet={srcSet}
     />
   )
-}
+};
 
-export default MyGallery;
+export default ProductDetailCarousel;

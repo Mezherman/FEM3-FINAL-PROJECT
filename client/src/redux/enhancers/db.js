@@ -5,6 +5,7 @@ import getCategories from '../../services/getCategories';
 import { getCustomer } from '../../services/customer';
 
 const db = (store) => (next) => async (action) => {
+  console.log(action);
   const storeCart = { ...store.getState().cart };
   const { loggedIn, token } = store.getState().user;
 
@@ -12,7 +13,7 @@ const db = (store) => (next) => async (action) => {
     case 'SET_CATALOG_FROM_DB': {
       // console.log('middleware catalog worked');
       const catalog = await getCategories();
-      // console.log('CATALOG =', catalog);
+      console.log('CATALOG =', catalog);
       return next({
         type: 'FETCH_CATALOG_SUCCESS',
         payload: {
@@ -53,7 +54,7 @@ const db = (store) => (next) => async (action) => {
         if (cartFromDB && cartFromDB.products.length) {
           products = cartFromDB.products;
         }
-        if (!products.length) {
+        if (!products && !products.length) {
           return next({ ...action, type: 'SET_CART_FAIL' });
         }
         const newCart = { products };

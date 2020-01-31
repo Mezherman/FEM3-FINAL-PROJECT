@@ -11,18 +11,18 @@ const useStylesMainCarousel = makeStyles((theme) => ({
   },
 
   title: {
-    // fontSize: '4em',
-    // margin: '10px',
-
+    margin: theme.spacing(0.5),
     fontSize: '5em',
   },
 
   description: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: '2.8em',
-    },
+    fontSize: '2.9em',
+    margin: theme.spacing(0.5),
+  },
+
+  showMore: {
+    padding: theme.spacing(0.5, 1),
     fontSize: '2.3em',
-    margin: '10px',
   },
 
   textBlock: {
@@ -34,34 +34,30 @@ const useStylesMainCarousel = makeStyles((theme) => ({
       padding: '2px',
     },
     [theme.breakpoints.up('sm')]: {
-      top: '15%',
+      top: '12%',
       maxWidth: '400px',
       fontSize: '0.3rem',
     },
     [theme.breakpoints.up('md')]: {
-      fontSize: '0.32rem',
+      top: '25%',
       maxWidth: '450px',
-      top: '28%',
+      fontSize: '0.32rem',
       padding: theme.spacing(1),
     },
     [theme.breakpoints.up('lg')]: {
-      fontSize: '0.41rem',
-      top: '31px%',
+      top: '20%',
       maxWidth: '550px',
-      padding: theme.spacing(3, 3),
-
+      fontSize: '0.39rem',
+      padding: theme.spacing(3),
     },
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    // justifyContent: '',
     top: '6%',
     fontSize: '0.19rem',
     right: 39,
     padding: '2px',
     borderRadius: theme.spacing(1),
-    // maxWidth: '550px',
-    // borderTopLeftRadius: theme.spacing(1),
     maxWidth: '700px',
     color: theme.palette.text.primary,
     position: 'absolute',
@@ -98,12 +94,6 @@ const useStylesMainCarousel = makeStyles((theme) => ({
     transformOrigin: 'bottom right',
   },
 
-  // mainPagingItem: {
-  //   '&::after': {
-  //     display: 'none',
-  //   },
-  // },
-
   ulMainPagingItem: {
     position: 'relative',
     top: '45px',
@@ -133,8 +123,14 @@ const useStylesMainCarousel = makeStyles((theme) => ({
   },
 
   buttonMainPagingItem: {
+    padding: theme.spacing(0.5, 1),
     display: 'inline-block',
-    padding: '9px 11px',
+    [theme.breakpoints.up('sm')]: {
+      padding: theme.spacing(0.7, 1.3),
+    },
+    [theme.breakpoints.up('md')]: {
+      padding: theme.spacing(1.2, 1.5),
+    },
     background: 'transparent',
     border: 'none',
     outline: 'none',
