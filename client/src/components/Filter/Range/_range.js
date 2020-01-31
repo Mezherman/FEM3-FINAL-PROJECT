@@ -44,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
     '&.MuiInput-underline::after': {
       content: 'none'
     },
-
   }
 }));
 
