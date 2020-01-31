@@ -13,7 +13,7 @@ import {
 import InfoOutlinedIcon from '@material-ui/core/SvgIcon/SvgIcon';
 import { Link } from 'react-router-dom';
 import useStyles from '../SignUp/Sign-up-form/_sign-up-form';
-import usePdstyles from './_personal-data';
+import usePdstyles from './Personal-data/_personal-data';
 import RoutesName from '../../routes-list';
 
 import getUserData from '../../services/getUserData'

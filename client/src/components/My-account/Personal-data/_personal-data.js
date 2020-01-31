@@ -60,6 +60,7 @@ const usePdstyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-evenly',
     flexDirection: 'row',
+    margin: theme.spacing(1, 0)
   },
 
   emailForm: {
@@ -68,6 +69,10 @@ const usePdstyles = makeStyles((theme) => ({
 
   logout: {
     color: theme.palette.error.dark
+  },
+
+  passwordInputs: {
+    margin: theme.spacing(1, 1, 0)
   },
 }
 ));

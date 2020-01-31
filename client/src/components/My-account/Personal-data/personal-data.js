@@ -14,7 +14,8 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PutPersonalData from './put-personal-data'
 import usePdstyles from './_personal-data';
-import RoutesName from '../../routes-list';
+import RoutesName from '../../../routes-list';
+import ChangePasswordForm from './change-password';
 
 export default function PersonalData () {
   const pdClasses = usePdstyles();
@@ -37,8 +38,11 @@ export default function PersonalData () {
 
   const [checked, setChecked] = useState([1]);
   const [editForm, setEditForm] = useState(false);
+  const [passwordForm, setChangePasswordForm] = useState(false);
   const handleEditForm = () => setEditForm(true);
+  const handleChangePassword = () => setChangePasswordForm(true);
   const canсelEditForm = () => setEditForm(false);
+  const canсelPasswordForm = () => setChangePasswordForm(false);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -97,6 +101,13 @@ export default function PersonalData () {
       />
     )
   }
+
+  if (passwordForm) {
+    return (
+      <ChangePasswordForm cancel={canсelPasswordForm} />
+    )
+  }
+
   return (
     <Container maxWidth="xl">
       <Grid
@@ -170,6 +181,7 @@ export default function PersonalData () {
                 component="a"
                 variant="subtitle1"
                 className={pdClasses.button}
+                onClick={handleChangePassword}
               >
                 Change password
               </Typography>

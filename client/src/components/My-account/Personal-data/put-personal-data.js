@@ -15,15 +15,15 @@ import InfoOutlinedIcon from '@material-ui/core/SvgIcon/SvgIcon';
 import { Link, Redirect } from 'react-router-dom';
 import CloseIcon from '@material-ui/icons/Close';
 import { useSelector, connect } from 'react-redux';
-import useStyles from '../SignUp/Sign-up-form/_sign-up-form';
-import postNewUser from '../../services/postNewUser';
-import validate from '../SignUp/validate';
+import useStyles from '../../SignUp/Sign-up-form/_sign-up-form';
+import postNewUser from '../../../services/postNewUser';
+import validate from './validate';
 import usePdstyles from './_personal-data';
-import RoutesName from '../../routes-list';
-import putUserData from '../../services/putUserData';
+import RoutesName from '../../../routes-list';
+import putUserData from '../../../services/putUserData';
 // import usePdstyles from './_personal-data';
 // import editCustomerData from '../../redux/actions/form'
-import { fetchCustomerData } from '../../redux/actions/user';
+import { fetchCustomerData } from '../../../redux/actions/user';
 
 function PutPersonalData (props) {
   const {
@@ -100,30 +100,31 @@ function PutPersonalData (props) {
     />
   );
 
-  const renderBirthdayField = ({
-    input, label, name, value, meta: { touched, error }, ...custom
-  }) => (
-    <TextField
-      error={!!(touched && error)}
-      name={name}
-      type="number"
-      variant="outlined"
-      className={`${classes.inputBirthDay} ${classes.input}`}
-      // className={classes.inputBirthDay}
-      {...custom}
-      {...input}
-      helperText={(touched && error) || (
-        <FormHelperText className={classes.helperBirth} component="span">
-          {label}
-        </FormHelperText>
-      )}
-    />
-  );
+  // const renderBirthdayField = ({
+  //   input, label, name, value, meta: { touched, error }, ...custom
+  // }) => (
+  //   <TextField
+  //     error={!!(touched && error)}
+  //     name={name}
+  //     type="number"
+  //     variant="outlined"
+  //     className={`${classes.inputBirthDay} ${classes.input}`}
+  //     // className={classes.inputBirthDay}
+  //     {...custom}
+  //     {...input}
+  //     helperText={(touched && error) || (
+  //       <FormHelperText className={classes.helperBirth} component="span">
+  //         {label}
+  //       </FormHelperText>
+  //     )}
+  //   />
+  // );
 
   return (
     <Container>
+      <h2>Edit Form</h2>
       <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitEditedUser)}>
-        <Grid item xs={12} >
+        <Grid item xs={12}>
           <Typography paragraph component="p" variant="subtitle2" className={classes.rightTitle}>
             Please enter the following information and check it:
           </Typography>
@@ -186,33 +187,31 @@ function PutPersonalData (props) {
                 type="email"
               />
             </Grid>
-          </Grid>
-          <Box mb={2}>
-            <Field
-              name="telephone"
-              component={(args) => {
-                const newArgs = {
-                  ...args,
-                  defaultValue: telephone
-                };
-                return renderTextField(newArgs)
-              }}
-              label="Phone number"
-              type="tel"
-            />
-          </Box>
-          <Grid item>
-            {/*<Box mb={2}>*/}
-            {/*  <Field name="birthdayDay" component={(args) => {*/}
-            {/*    const newArgs = {*/}
-            {/*      ...args,*/}
-            {/*      defaultValue: login*/}
-            {/*    };*/}
-            {/*    return renderBirthdayField(newArgs)*/}
-            {/*  }} label="DD" value="birthdayDay" />*/}
-            {/*  <Field name="birthdayMonth" component={renderBirthdayField} label="MM" value="birthdayMonth" />*/}
-            {/*  <Field name="birthdayYear" component={renderBirthdayField} label="YYYY" value="birthdayYear" />*/}
-            {/*</Box>*/}
+            <Grid item xs={12} sm={6}>
+              <Field
+                name="telephone"
+                component={(args) => {
+                  const newArgs = {
+                    ...args,
+                    defaultValue: telephone
+                  };
+                  return renderTextField(newArgs)
+                }}
+                label="Phone number"
+                type="tel"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              {/*  <Field name="birthdayDay" component={(args) => { */}
+              {/*    const newArgs = { */}
+              {/*      ...args, */}
+              {/*      defaultValue: login */}
+              {/*    }; */}
+              {/*    return renderBirthdayField(newArgs) */}
+              {/*  }} label="DD" value="birthdayDay" /> */}
+              {/*  <Field name="birthdayMonth" component={renderBirthdayField} label="MM" value="birthdayMonth" /> */}
+              {/*  <Field name="birthdayYear" component={renderBirthdayField} label="YYYY" value="birthdayYear" /> */}
+            </Grid>
           </Grid>
         </Grid>
         <div className={pdClasses.buttonsContainer}>

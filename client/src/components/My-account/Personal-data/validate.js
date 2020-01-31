@@ -7,7 +7,8 @@ export default function(values) {
     'email',
     'password',
     'telephone',
-    'login'
+    'login',
+    'newPassword',
   ];
   requiredFields.forEach((field) => {
     if (!values[field]) {
@@ -47,6 +48,12 @@ export default function(values) {
   if (
     values.password &&
         !/^[0-9a-zA-Z]{7,30}$/i.test(values.password)
+  ) {
+    errors.password = 'Password must be between 7 and 30 characters';
+  }
+  if (
+    values.newPassword &&
+        !/^[0-9a-zA-Z]{7,30}$/i.test(values.newPassword)
   ) {
     errors.password = 'Password must be between 7 and 30 characters';
   }
