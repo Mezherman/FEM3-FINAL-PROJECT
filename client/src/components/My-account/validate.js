@@ -1,20 +1,20 @@
 export default function(values) {
   const errors = {};
-  const requiredFields = [
-    'gender',
-    'firstName',
-    'lastName',
-    'email',
-    'password',
-    'telephone',
-    'login',
-    'agreement'
-  ];
-  requiredFields.forEach((field) => {
-    if (!values[field]) {
-      errors[field] = 'Required';
-    }
-  });
+  // const requiredFields = [
+  //   'gender',
+  //   'firstName',
+  //   'lastName',
+  //   'email',
+  //   'password',
+  //   'telephone',
+  //   'login',
+  //   'agreement'
+  // ];
+  // requiredFields.forEach((field) => {
+  //   if (!values[field]) {
+  //     errors[field] = 'Required';
+  //   }
+  // });
   if (
     values.email &&
     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
@@ -63,11 +63,6 @@ export default function(values) {
     !/^[0-9-+\s()]{10,18}$/i.test(values.telephone)
   ) {
     errors.telephone = 'Invalid phone number, at least 10 symbols required';
-  }
-  if (
-    !values.agreement
-  ) {
-    errors.agreement = 'We need your agreement to create your personal profile';
   }
 
   return errors;

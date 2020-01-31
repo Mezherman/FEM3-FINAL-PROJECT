@@ -10,15 +10,21 @@ import {
   Container
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import PutPersonalData from './put-personal-data'
+import { reduxForm } from 'redux-form';
+import PutPersonalData from './Put-personal-data/put-personal-data';
+import useStyles from '../../SignUp/Sign-up-form/_sign-up-form';
 import usePdstyles from './_personal-data';
 import RoutesName from '../../../routes-list';
-import ChangePasswordForm from './change-password';
+import ChangePasswordForm from './Put-personal-data/change-password';
+import validate from '../validate';
+import putUserData from '../../../services/putUserData';
+import { fetchCustomerData } from '../../../redux/actions/user';
 
-export default function PersonalData () {
+export default function PersonalData ({ handleSubmit }) {
   const pdClasses = usePdstyles();
+  const classes = useStyles();
   const {
     gender,
     firstName,
@@ -41,8 +47,8 @@ export default function PersonalData () {
   const [passwordForm, setChangePasswordForm] = useState(false);
   const handleEditForm = () => setEditForm(true);
   const handleChangePassword = () => setChangePasswordForm(true);
-  const canсelEditForm = () => setEditForm(false);
-  const canсelPasswordForm = () => setChangePasswordForm(false);
+  const cancelEditForm = () => setEditForm(false);
+  const cancelPasswordForm = () => setChangePasswordForm(false);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -88,23 +94,45 @@ export default function PersonalData () {
     },
   ];
 
+  const submitEditedUser = (values) => {
+    // event.preventDefault();
+    // console.log(newUserData);
+    putUserData({
+      ...values
+    })
+      .then((response) => {
+        console.log(response);
+        fetchCustomerData();
+        cancelEditForm();
+        // if (response.statusText === 'OK') {
+        //
+        // }
+      })
+      .catch((error) => {
+        // setMessage(error.message);
+        console.log(error.response.data);
+      });
+  };
+
   if (editForm) {
     return (
-      <PutPersonalData
-        cancel={canсelEditForm}
-        gender={gender}
-        firstName={firstName}
-        lastName={lastName}
-        telephone={telephone}
-        email={email}
-        login={login}
-      />
+      <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitEditedUser)}>
+        <PutPersonalData
+          cancel={cancelEditForm}
+          gender={gender}
+          firstName={firstName}
+          lastName={lastName}
+          telephone={telephone}
+          email={email}
+          login={login}
+        />
+      </form>
     )
   }
 
   if (passwordForm) {
     return (
-      <ChangePasswordForm cancel={canсelPasswordForm} />
+      <ChangePasswordForm cancel={cancelPasswordForm} />
     )
   }
 
@@ -121,13 +149,13 @@ export default function PersonalData () {
         // alignContent="center"
         // alignItems="center"
       >
-        {/*<Typography*/}
-        {/*  component="h1"*/}
-        {/*  variant="h5"*/}
-        {/*  align="center"*/}
-        {/*  className={pdClasses.header}*/}
-        {/*>*/}
-        {/*</Typography>*/}
+        {/* <Typography */}
+        {/*  component="h1" */}
+        {/*  variant="h5" */}
+        {/*  align="center" */}
+        {/*  className={pdClasses.header} */}
+        {/* > */}
+        {/* </Typography> */}
         <h1>Personal Details</h1>
         <Grid
           item
@@ -212,6 +240,11 @@ export default function PersonalData () {
   // return ()
 }
 
+PersonalData = reduxForm({
+  form: 'put',
+  validate,
+})(PersonalData);
+
 PersonalData.propTypes = {
-  // isLoggedIn: PropTypes.bool.isRequired
+  handleSubmit: PropTypes.func.isRequired
 };

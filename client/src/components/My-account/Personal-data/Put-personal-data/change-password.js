@@ -11,12 +11,12 @@ import {
   TextField,
   Typography
 } from '@material-ui/core';
-import useStyles from '../../SignUp/Sign-up-form/_sign-up-form';
-import validate from './validate';
-import usePdstyles from './_personal-data';
-import putUserData from '../../../services/putUserData';
-import { fetchCustomerData } from '../../../redux/actions/user';
-import putPassword from '../../../services/putPassword'
+import useStyles from '../../../SignUp/Sign-up-form/_sign-up-form';
+import validate from '../../validate';
+import usePdstyles from '../_personal-data';
+import putUserData from '../../../../services/putUserData';
+import { fetchCustomerData } from '../../../../redux/actions/user';
+import putPassword from '../../../../services/putPassword'
 
 function ChangePasswordForm (props) {
   const { cancel, handleSubmit } = props;
