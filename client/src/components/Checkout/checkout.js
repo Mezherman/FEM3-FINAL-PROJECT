@@ -20,15 +20,17 @@ import useStyles from '../SignUp/_sign-up';
 let Checkout = (props) => {
   // console.log('PROPS IN CHECKOUT =', props);
   const classes = useStyles();
-  const { history, handleSubmit, user, clearCart } = props;
+  const { history, handleSubmit, user, cart, clearCart } = props;
 
-  const customer = user.loggedIn ? user.customer : { _id: '5e30acb4264f5509ccd7bd96' };
+  console.log('CART =', cart);
 
   const initialState = {
     gender: 'Mr',
     firstName: '',
     lastName: ''
   };
+
+  const customer = user.loggedIn ? user.customer : '';
 
   const submitNewOrder = (order) => {
     // console.log('FORM values =', order);
@@ -37,8 +39,7 @@ let Checkout = (props) => {
     //   ...values
     // };
 
-    const newOrder = {
-      customerId: `${customer._id}`,
+    const interimOrder = {
       deliveryAddress: {
         country: order.country,
         city: order.city,
@@ -56,13 +57,31 @@ let Checkout = (props) => {
         ' your HTML}</p>'
     };
 
-    // console.log('NEW ORDER =', newOrder);
+    let newOrder = {};
+
+    if (customer) {
+      newOrder = {
+        ...interimOrder,
+        customerId: `${customer._id}`
+      }
+    } else {
+      newOrder = {
+        ...interimOrder,
+        products: cart.products
+      }
+    }
+
+    console.log('NEW ORDER =', newOrder);
 
     placeOrderToDB(newOrder)
-      .then((order) => {
+      .then((response) => {
         if (order.status === 200) {
           console.log('order successfully placed');
-          const { orderNo } = order.data.order;
+          const { orderNo, customerId } = response.data.order;
+
+          if (customerId) {
+
+          }
           deleteCart()
             .then((response) => {
               console.log('OK =', response);

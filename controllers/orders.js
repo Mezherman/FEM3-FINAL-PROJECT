@@ -1,14 +1,14 @@
-const Cart = require("../models/Cart");
-const Order = require("../models/Order");
-const Product = require("../models/Product");
-const sendMail = require("../commonHelpers/mailSender");
-const validateOrderForm = require("../validation/validationHelper");
-const queryCreator = require("../commonHelpers/queryCreator");
-const productAvailibilityChecker = require("../commonHelpers/productAvailibilityChecker");
-const subtractProductsFromCart = require("../commonHelpers/subtractProductsFromCart");
-const _ = require("lodash");
+const Cart = require('../models/Cart');
+const Order = require('../models/Order');
+const Product = require('../models/Product');
+const sendMail = require('../commonHelpers/mailSender');
+const validateOrderForm = require('../validation/validationHelper');
+const queryCreator = require('../commonHelpers/queryCreator');
+const productAvailibilityChecker = require('../commonHelpers/productAvailibilityChecker');
+const subtractProductsFromCart = require('../commonHelpers/subtractProductsFromCart');
+const _ = require('lodash');
 
-const uniqueRandom = require("unique-random");
+const uniqueRandom = require('unique-random');
 const rand = uniqueRandom(1000000, 9999999);
 
 exports.placeOrder = async (req, res, next) => {
@@ -38,19 +38,19 @@ exports.placeOrder = async (req, res, next) => {
     if (!req.body.products && cartProducts.length < 1) {
       res
         .status(400)
-        .json({ message: "The list of products is required, but absent!" });
+        .json({ message: 'The list of products is required, but absent!' });
     }
 
     if (cartProducts.length > 0) {
       order.products = _.cloneDeep(cartProducts);
     } else {
-      order.products = JSON.parse(req.body.products);
+      order.products = req.body.products;
     }
 
     order.totalSum = order.products.reduce(
       (sum, cartItem) =>
         sum + cartItem.product.currentPrice * cartItem.cartQuantity,
-      0
+          0
     );
 
     const productAvailibilityInfo = await productAvailibilityChecker(
@@ -59,7 +59,7 @@ exports.placeOrder = async (req, res, next) => {
 
     if (!productAvailibilityInfo.productsAvailibilityStatus) {
       res.json({
-        message: "Some of your products are unavailable for now",
+        message: 'Some of your products are unavailable for now',
         productAvailibilityInfo
       });
     } else {
@@ -77,21 +77,21 @@ exports.placeOrder = async (req, res, next) => {
       if (!letterSubject) {
         return res.status(400).json({
           message:
-            "This operation involves sending a letter to the client. Please provide field 'letterSubject' for the letter."
+            'This operation involves sending a letter to the client. Please provide field \'letterSubject\' for the letter.'
         });
       }
 
       if (!letterHtml) {
         return res.status(400).json({
           message:
-            "This operation involves sending a letter to the client. Please provide field 'letterHtml' for the letter."
+            'This operation involves sending a letter to the client. Please provide field \'letterHtml\' for the letter.'
         });
       }
 
       const newOrder = new Order(order);
 
       if (order.customerId) {
-        newOrder.populate("customerId").execPopulate();
+        newOrder.populate('customerId').execPopulate();
       }
 
       newOrder
@@ -104,7 +104,7 @@ exports.placeOrder = async (req, res, next) => {
           //   res
           // );
 
-          const mailResult = "to be created";
+          const mailResult = 'to be created';
 
           res.json({ order, mailResult });
         })
@@ -161,7 +161,7 @@ exports.updateOrder = (req, res, next) => {
 
         if (!productAvailibilityInfo.productsAvailibilityStatus) {
           res.json({
-            message: "Some of your products are unavailable for now",
+            message: 'Some of your products are unavailable for now',
             productAvailibilityInfo
           });
         }
@@ -181,14 +181,14 @@ exports.updateOrder = (req, res, next) => {
       if (!letterSubject) {
         return res.status(400).json({
           message:
-            "This operation involves sending a letter to the client. Please provide field 'letterSubject' for the letter."
+            'This operation involves sending a letter to the client. Please provide field \'letterSubject\' for the letter.'
         });
       }
 
       if (!letterHtml) {
         return res.status(400).json({
           message:
-            "This operation involves sending a letter to the client. Please provide field 'letterHtml' for the letter."
+            'This operation involves sending a letter to the client. Please provide field \'letterHtml\' for the letter.'
         });
       }
 
@@ -197,7 +197,7 @@ exports.updateOrder = (req, res, next) => {
         { $set: order },
         { new: true }
       )
-        .populate("customerId")
+        .populate('customerId')
         .then(async order => {
           // const mailResult = await sendMail(
           //   subscriberMail,
@@ -206,7 +206,7 @@ exports.updateOrder = (req, res, next) => {
           //   res
           // );
 
-          const mailResult = "to be created";
+          const mailResult = 'to be created';
 
           res.json({ order, mailResult });
         })
@@ -240,14 +240,14 @@ exports.cancelOrder = (req, res, next) => {
       if (!letterSubject) {
         return res.status(400).json({
           message:
-            "This operation involves sending a letter to the client. Please provide field 'letterSubject' for the letter."
+            'This operation involves sending a letter to the client. Please provide field \'letterSubject\' for the letter.'
         });
       }
 
       if (!letterHtml) {
         return res.status(400).json({
           message:
-            "This operation involves sending a letter to the client. Please provide field 'letterHtml' for the letter."
+            'This operation involves sending a letter to the client. Please provide field \'letterHtml\' for the letter.'
         });
       }
 
@@ -256,7 +256,7 @@ exports.cancelOrder = (req, res, next) => {
         { canceled: true },
         { new: true }
       )
-        .populate("customerId")
+        .populate('customerId')
         .then(async order => {
           // const mailResult = await sendMail(
           //   subscriberMail,
@@ -265,7 +265,7 @@ exports.cancelOrder = (req, res, next) => {
           //   res
           // );
 
-          const mailResult = "to be created";
+          const mailResult = 'to be created';
 
           res.json({ order, mailResult });
         })
@@ -303,7 +303,7 @@ exports.deleteOrder = (req, res, next) => {
 
 exports.getOrders = (req, res, next) => {
   Order.find({ customerId: req.user.id })
-    .populate("customerId")
+    .populate('customerId')
     .then(orders => res.json(orders))
     .catch(err =>
       res.status(400).json({
@@ -314,7 +314,7 @@ exports.getOrders = (req, res, next) => {
 
 exports.getOrder = (req, res, next) => {
   Order.findOne({ orderNo: req.params.orderNo })
-    .populate("customerId")
+    .populate('customerId')
     .then(order => res.json(order))
     .catch(err =>
       res.status(400).json({
