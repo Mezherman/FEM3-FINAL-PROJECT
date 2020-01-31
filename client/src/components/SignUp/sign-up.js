@@ -62,6 +62,7 @@ let SignUp = (props) => {
     if (redirect) {
       return <Redirect to="/" />
     }
+    return null
   };
 
   const submitNewUser = (values) => {
