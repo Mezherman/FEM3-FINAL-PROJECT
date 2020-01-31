@@ -21,8 +21,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       marginTop: theme.spacing(2)
     }
-  },
-
+  }
 }));
 
 export default useStyles;

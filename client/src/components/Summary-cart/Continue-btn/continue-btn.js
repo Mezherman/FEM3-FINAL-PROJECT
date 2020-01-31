@@ -1,15 +1,24 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import RoutesName from '../../../routes-list'
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { Grid } from '@material-ui/core';
+import RoutesName from '../../../routes-list';
+import useStyles from './_continue-btn';
 
-export default function () {
+export default function ContinueBtn () {
+  const classes = useStyles();
   const categories = useSelector((state) => state.categoriesReducer.catalog.mainCategories);
   return (
-    <div>
-      <Link to={`${RoutesName.products}/${categories[0].id}`}>
-        <span>continue Shopping</span>
-      </Link>
-    </div>
+    <Grid container alignItems="center" className={classes.root}>
+      <Grid item>
+        <ArrowBackIosIcon className={classes.icon} />
+      </Grid>
+      <Grid item>
+        <Link to={`${RoutesName.products}/${categories[0].id}`} className={classes.link}>
+          <span className={classes.text}>continue Shopping</span>
+        </Link>
+      </Grid>
+    </Grid>
   )
 }

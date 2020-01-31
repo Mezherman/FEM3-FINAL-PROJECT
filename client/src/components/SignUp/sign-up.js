@@ -2,27 +2,23 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
 import { useSelector } from 'react-redux';
+import { PropTypes } from 'prop-types';
 
 import {
   CssBaseline,
   Grid,
   Typography,
   Container,
-  Divider,
-  Button,
-  Modal,
-  Fade,
-  Backdrop
+  Divider
 } from '@material-ui/core';
-
-import { PropTypes } from 'prop-types';
 
 import SignUpInfo from './Sign-up-info/signUp-info';
 import SignUpForm from './Sign-up-form/sign-up-form';
 import SignUpFooter from './Sign-up-footer/sign-up-footer';
+import ModalResponse from './Modal-response/modal-response';
 import validate from './validate';
-import useStyles from './_sign-up';
 import postNewUser from '../../services/postNewUser';
+import useStyles from './_sign-up';
 
 let SignUp = (props) => {
   const { handleSubmit } = props;
@@ -80,6 +76,7 @@ let SignUp = (props) => {
   if (loggedIn) {
     return <Redirect />
   }
+
   return (
     <Container component="div" disableGutters>
       <CssBaseline />
@@ -104,76 +101,32 @@ let SignUp = (props) => {
             justify="space-evenly"
           >
             <SignUpInfo />
-            <Divider
-              light
-              orientation="vertical"
-              className={classes.dividerSignUp}
-            />
+            <Divider light orientation="vertical" className={classes.dividerSignUp} />
             <SignUpForm />
             <SignUpFooter />
           </Grid>
         </form>
+
         {/* <Button onClick={handleOpenSignUpModal}>Open registration modal</Button> */}
         { signUpModal && (
-          <Modal
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
-            className={classes.modalInfoIcon}
-            open={signUpModal}
-            onClose={handleCloseSignUpModal}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500,
-            }}
-          >
-            <Fade in={signUpModal}>
-              <div className={classes.paperInfoIcon}>
-                <h2 id="transition-modal-title" className={classes.modalInfoTitle}>
-                Your account was successfully registered
-                </h2>
-                <Button
-                  onClick={handleCloseSignUpModal}
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
-                >
-                OK
-                </Button>
-              </div>
-            </Fade>
-          </Modal>
+          <ModalResponse
+            openModal={signUpModal}
+            handleClose={handleCloseSignUpModal}
+            inModal={signUpModal}
+            classModal={classes.paperInfoIcon}
+            value='Your account was successfully registered'
+            submitClass={classes.submit}
+          />
         )}
-
         { errorModal && (
-          <Modal
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
-            className={classes.modalInfoIcon}
-            open={errorModal}
-            onClose={handleCloseSetErrorModal}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500,
-            }}
-          >
-            <Fade in={errorModal}>
-              <div className={classes.paperInfoError}>
-                <h2 id="transition-modal-title" className={classes.modalInfoTitle}>
-                Something go wrong. Try again
-                </h2>
-                <Button
-                  onClick={handleCloseSetErrorModal}
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
-                >
-                OK
-                </Button>
-              </div>
-            </Fade>
-          </Modal>
+          <ModalResponse
+            openModal={errorModal}
+            handleClose={handleCloseSetErrorModal}
+            inModal={errorModal}
+            classModal={classes.paperInfoError}
+            value='Something go wrong. Try again'
+            submitClass={classes.submit}
+          />
         )}
 
       </div>
