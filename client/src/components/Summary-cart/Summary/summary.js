@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Button, Hidden } from '@material-ui/core';
+import { Grid, Button, Hidden, Box } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import SummaryItem from '../Summary-item/summary-item';
 import RoutesList from '../../../routes-list';
@@ -8,7 +8,7 @@ import useStyles from './_summary';
 export default function Summary({ totalCartPrice }) {
   const classes = useStyles();
   return (
-    <Grid item sm={3} xs={12} className={classes.root}>
+    <Box>
       <Hidden xsDown>
         <SummaryItem title="Summary" type="title" />
         <SummaryItem title="Grand Total" value={`€${totalCartPrice}`} type="total" />
@@ -30,6 +30,6 @@ export default function Summary({ totalCartPrice }) {
           </Link>
         </Grid>
       </Hidden>
-    </Grid>
+    </Box>
   );
 }

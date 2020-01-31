@@ -25,6 +25,6 @@ const useStyles = makeStyles((theme) => ({
       padding: '12px',
       width: '100vw',
     }
-  }
+  },
 }));
 export default useStyles;
