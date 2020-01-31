@@ -51,7 +51,7 @@ function Filter(props) {
     />
   ));
 
-  let valToFilter;
+  let valToFilter = '';
   let valOfBrands = '';
   const valOfCollection = '';
   let valOfColor = '';
