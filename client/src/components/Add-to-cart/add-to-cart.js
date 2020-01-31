@@ -16,7 +16,7 @@ import { addProductToCart, setProductQuantity } from '../../redux/actions/CartAc
 
 export default function AddToCart({ open, onModalClose, product }) {
   const classes = useStyles();
-  const { imageUrls, name, currentPrice, specialPrice, itemId } = product;
+  const { imageUrls, name, currentPrice, specialPrice, itemNo, itemId } = product;
 
   //product in state state
   const productsState = useSelector((state) => state.cart.products);
@@ -65,11 +65,15 @@ export default function AddToCart({ open, onModalClose, product }) {
                 </span>
                 <span className={classes.total}>TOTAL:</span>
               </div>
+              <p>
+                <span style={{ paddingRight: '5px' }}>Item.No</span>
+                {itemNo}
+              </p>
               <Divider />
               <Box className={classes.pricingBlock}>
                 <Box className={classes.price}>
                   <span>
-&#8364;
+                    &#8364;
                     {finalPrice}
                   </span>
                 </Box>
@@ -89,7 +93,7 @@ export default function AddToCart({ open, onModalClose, product }) {
                 </Paper>
                 <Box className={classes.total}>
                   <span>
-&#8364;
+                    &#8364;
                     {totalPrice}
                   </span>
                 </Box>

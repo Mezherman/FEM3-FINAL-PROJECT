@@ -19,6 +19,7 @@ function App(props) {
     () => dispatch(loadAllData()),
     [dispatch]
   );
+  const categories = useSelector((state) => state.categoriesReducer.catalog.mainCategories);
 
   const isFetchingLoadData = useSelector((state) => state.isFetchingLoadData.isFetching);
   useEffect(() => {
@@ -27,7 +28,7 @@ function App(props) {
 
   return (
     <>
-      {isFetchingLoadData ? (<Spinner />)
+      {!categories.length ? (<Spinner />)
         : (
           <>
             <Router>

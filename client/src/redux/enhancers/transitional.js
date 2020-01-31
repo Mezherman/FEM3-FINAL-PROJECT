@@ -4,7 +4,7 @@ import * as ServicesCart from '../../services/cart';
 const _ = require('lodash');
 
 const transitional = (store) => (next) => (action) => {
-  console.log(action);
+  // console.log(action);
   const storeCart = store.getState().cart;
   const cartFromState = _.cloneDeep(storeCart);
   switch (action.type) {
@@ -24,7 +24,7 @@ const transitional = (store) => (next) => (action) => {
         });
         return next({ ...action, type: 'ADD_PRODUCT', payload: { ...action.payload, cart: cartFromState } });
       } if (productIndex >= 0 || productQuantity > 1) {
-        cartFromState.products[productIndex].cartQuantity++;
+        cartFromState.products[productIndex].cartQuantity += productQuantity;
       }
       return next({ ...action, type: 'UPDATE_CART', payload: { ...action.payload, cart: cartFromState } });
     }

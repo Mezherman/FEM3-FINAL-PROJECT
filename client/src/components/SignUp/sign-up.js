@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
+import { useSelector } from 'react-redux';
 
 import {
   CssBaseline,
@@ -13,6 +14,8 @@ import {
   Fade,
   Backdrop
 } from '@material-ui/core';
+
+import { PropTypes } from 'prop-types';
 
 import SignUpInfo from './Sign-up-info/signUp-info';
 import SignUpForm from './Sign-up-form/sign-up-form';
@@ -70,21 +73,12 @@ let SignUp = (props) => {
 
     console.log(newUser);
     postNewUser(newUser, handleOpenSignUpModal, handleOpenSetErrorModal);
-
-    // axios
-    //   .post('/customers', values)
-    //   .then((response) => {
-    //     console.log(response);
-    //     if (response.statusText === 'OK') {
-    //       handleOpenSignUpModal();
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     handleOpenSetErrorModal();
-    //     console.log(error.response.data);
-    //   });
   };
+  const { loggedIn } = useSelector((state) => state.user);
 
+  if (loggedIn) {
+    return <Redirect />
+  }
   return (
     <Container component="div" disableGutters>
       <CssBaseline />
@@ -119,7 +113,7 @@ let SignUp = (props) => {
           </Grid>
         </form>
         {/* <Button onClick={handleOpenSignUpModal}>Open registration modal</Button> */}
-        {signUpModal && (
+        { signUpModal && (
           <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
@@ -150,7 +144,7 @@ let SignUp = (props) => {
           </Modal>
         )}
 
-        {errorModal && (
+        { errorModal && (
           <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"
@@ -190,5 +184,9 @@ SignUp = reduxForm({
   form: 'registration',
   validate,
 })(SignUp);
+
+SignUp.propTypes = {
+  handleSubmit: PropTypes.func.isRequired
+};
 
 export default SignUp;

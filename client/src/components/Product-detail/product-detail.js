@@ -1,26 +1,21 @@
-import React, { useMemo, useState, useCallback } from 'react'
-import { connect, useDispatch } from 'react-redux'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import { useTheme, createStyles, withStyles } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Box } from '@material-ui/core';
 import './carousel-react.scss';
 import { bindActionCreators } from 'redux'
 import StopIcon from '@material-ui/icons/Stop';
 
-import NativeSelect from '@material-ui/core/NativeSelect';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-
-import InputBase from '@material-ui/core/InputBase';
 import ProductDetailCollapse from './Product-detail-collapse/product-detail-collapse';
 import AddToCart from '../Add-to-cart/add-to-cart';
-import MyGallery from './carousel-react'
+import ProductDetailCarousel from './carousel-react'
 import FeatureItem from './feature-item';
 import ProductDetailTab from './Product-detail-tab/product-detail-tab';
 
@@ -29,7 +24,7 @@ import AddToFavoriteBtn from '../Add-to-favorites/Add-to-favorite-btn';
 import IncreaseBlock from '../Increase-block/increase-block';
 import { addProductToCart, setProductQuantity } from '../../redux/actions/CartActions';
 
-function ProductDetail({ product, favorites }) {
+function ProductDetail({ product, favorites, actionAddProductToCart }) {
   const {
     imageUrls,
     name,
@@ -43,23 +38,10 @@ function ProductDetail({ product, favorites }) {
   } = product;
   const classes = useStyles();
   const theme = useTheme();
-  const dispatch = useDispatch();
-  const actionAddProductToCart = useCallback(
-    (productData, quantityVal) => dispatch(addProductToCart(productData, quantityVal)),
-    [dispatch]
-  );
-  const actionSetProductQuantityInCart = useCallback(
-    (productData, quantityVal) => dispatch(setProductQuantity(productData, quantityVal)),
-    [dispatch]
-  );
-  const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.up('md'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
   const [modalIsVisible, setModalVisibility] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const handleChange = (event) => {
-    setQuantity(event.target.value);
-  };
   const closeModal = () => {
     setModalVisibility(false)
   };
@@ -70,41 +52,6 @@ function ProductDetail({ product, favorites }) {
       thumbnail: url
     }
   ));
-
-  const BootstrapInput = withStyles((theme) => createStyles({
-    root: {
-      'label + &': {
-        marginTop: theme.spacing(3),
-      },
-    },
-    input: {
-      borderRadius: 4,
-      position: 'relative',
-      backgroundColor: theme.palette.background.paper,
-      border: '1px solid #ced4da',
-      fontSize: 16,
-      padding: '10px 26px 10px 12px',
-      transition: theme.transitions.create(['border-color', 'box-shadow']),
-      // Use the system font instead of the default Roboto font.
-      fontFamily: [
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-      ].join(','),
-      '&:focus': {
-        borderRadius: 4,
-        borderColor: '#80bdff',
-        boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
-      },
-    },
-  }),)(InputBase);
   return (
     <Container maxWidth="xl">
       <AddToCart
@@ -127,7 +74,7 @@ function ProductDetail({ product, favorites }) {
             />
           </Box>
           <Container>
-            <MyGallery
+            <ProductDetailCarousel
               images={images}
             />
           </Container>
@@ -183,23 +130,12 @@ function ProductDetail({ product, favorites }) {
                     {' '}
                     <a href="#">Shipping</a>
                   </p>
-                  <IncreaseBlock />
-                  {/* <Box> */}
-                  {/*  <FormControl className={classes.margin}> */}
-                  {/*    <InputLabel htmlFor="quantity">Quantity</InputLabel> */}
-                  {/*    <NativeSelect */}
-                  {/*      id="quantity" */}
-                  {/*      value={quantity} */}
-                  {/*      onChange={handleChange} */}
-                  {/*      input={<BootstrapInput />} */}
 
-                  {/*    > */}
-                  {/*      <option value={1}>1</option> */}
-                  {/*      <option value={2}>2</option> */}
-                  {/*      <option value={3}>3</option> */}
-                  {/*    </NativeSelect> */}
-                  {/*  </FormControl> */}
-                  {/* </Box> */}
+                  <IncreaseBlock
+                    qty={quantity}
+                    setQty={setQuantity}
+
+                  />
                   <div className={classes.disableBlock}>
 
                     <span>Deliverable:</span>
@@ -269,8 +205,12 @@ function ProductDetail({ product, favorites }) {
   );
 }
 const mapStateToProps = (state) => state.favoritesReducer;
+const mapDispatchToProps = (dispatch) => ({
+  actionAddProductToCart:
+    (productData, quantityVal) => dispatch(addProductToCart(productData, quantityVal)),
+})
 
-export default connect(mapStateToProps)(ProductDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);
 
 ProductDetail.propTypes = {
   product:
@@ -281,4 +221,5 @@ ProductDetail.propTypes = {
       PropTypes.boolean])
   )
     .isRequired,
+  actionAddProductToCart: PropTypes.func,
 };
