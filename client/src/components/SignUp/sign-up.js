@@ -20,6 +20,7 @@ import SignUpFooter from './Sign-up-footer/sign-up-footer';
 import validate from './validate';
 import useStyles from './_sign-up';
 import postNewUser from '../../services/postNewUser';
+import { useSelector } from 'react-redux';
 
 let SignUp = (props) => {
   const { handleSubmit } = props;
@@ -84,7 +85,11 @@ let SignUp = (props) => {
     //     console.log(error.response.data);
     //   });
   };
+  const { loggedIn } = useSelector((state) => state.user);
 
+  if (loggedIn) {
+    return <Redirect />
+  }
   return (
     <Container component="div" disableGutters>
       <CssBaseline />
@@ -98,7 +103,6 @@ let SignUp = (props) => {
         >
           Your registration for the myWMF Customer Club
         </Typography>
-
         <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitNewUser)}>
           <Grid
             container
@@ -135,7 +139,7 @@ let SignUp = (props) => {
             <Fade in={signUpModal}>
               <div className={classes.paperInfoIcon}>
                 <h2 id="transition-modal-title" className={classes.modalInfoTitle}>
-                Your account was successfully registered
+                  Your account was successfully registered
                 </h2>
                 <Button
                   onClick={handleCloseSignUpModal}
@@ -143,13 +147,12 @@ let SignUp = (props) => {
                   color="primary"
                   className={classes.submit}
                 >
-                OK
+                  OK
                 </Button>
               </div>
             </Fade>
           </Modal>
         )}
-
         {errorModal && (
           <Modal
             aria-labelledby="transition-modal-title"
@@ -166,7 +169,7 @@ let SignUp = (props) => {
             <Fade in={errorModal}>
               <div className={classes.paperInfoError}>
                 <h2 id="transition-modal-title" className={classes.modalInfoTitle}>
-                Something go wrong. Try again
+                  Something go wrong. Try again
                 </h2>
                 <Button
                   onClick={handleCloseSetErrorModal}
@@ -174,13 +177,12 @@ let SignUp = (props) => {
                   color="primary"
                   className={classes.submit}
                 >
-                OK
+                  OK
                 </Button>
               </div>
             </Fade>
           </Modal>
         )}
-
       </div>
     </Container>
   );

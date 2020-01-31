@@ -146,8 +146,12 @@ const useStyles = makeStyles((theme) => ({
       paddingBottom: '0',
       '&:hover': {
         backgroundColor: 'transparent'
+      },
+      '& .MuiIconButton-label': {
+        flexDirection: 'column'
       }
-    }
+    },
+
   },
   dividerStyle: {
     [theme.breakpoints.up('lg')]: {

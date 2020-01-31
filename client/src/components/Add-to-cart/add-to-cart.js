@@ -14,7 +14,7 @@ import useStyles from './_add-to-cart';
 
 export default function AddToCart({ open, onModalClose, product }) {
   const classes = useStyles();
-  const { imageUrls, name, currentPrice, specialPrice } = product;
+  const { imageUrls, name, currentPrice, specialPrice, itemNo } = product;
   const [totalPrice, setTotalPrice] = useState(currentPrice);
   const [qty, setQty] = useState(1);
 
@@ -49,11 +49,15 @@ export default function AddToCart({ open, onModalClose, product }) {
                 </span>
                 <span className={classes.total}>TOTAL:</span>
               </div>
+              <p>
+                <span style={{ paddingRight: '5px' }}>Item.No</span>
+                {itemNo}
+              </p>
               <Divider />
               <Box className={classes.pricingBlock}>
                 <Box className={classes.price}>
                   <span>
-&#8364;
+                    &#8364;
                     {finalPrice}
                   </span>
                 </Box>
@@ -73,7 +77,7 @@ export default function AddToCart({ open, onModalClose, product }) {
                 </Paper>
                 <Box className={classes.total}>
                   <span>
-&#8364;
+                    &#8364;
                     {totalPrice}
                   </span>
                 </Box>
@@ -103,7 +107,7 @@ export default function AddToCart({ open, onModalClose, product }) {
                   disableElevation
                 >
                   <ShoppingCartOutlinedIcon />
-                  <Box ml={2}>View basket</Box>
+                  <Box ml={2}>View cart</Box>
                 </Button>
               </Link>
             </Grid>
@@ -112,7 +116,7 @@ export default function AddToCart({ open, onModalClose, product }) {
         <Divider />
         <div className={classes.footer}>
           <article>
-            Free delivery from &#8372;1000 | Free returns | Quick delivery with DHL;
+            Free delivery from &#8372;1000 | Free returns | Quick delivery with DHL
           </article>
         </div>
       </>

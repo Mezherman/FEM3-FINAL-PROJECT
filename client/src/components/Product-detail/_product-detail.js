@@ -14,10 +14,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
     border: '1px dashed',
     borderColor: theme.palette.background.primary,
-    // [theme.breakpoints.up('md')]: {
-    //
-    //   display: 'none',
-    // },
   },
   MuiListRoot: {
     listStyleType: 'disc',
@@ -38,9 +34,6 @@ const useStyles = makeStyles((theme) => ({
       zIndex: '0',
       padding: theme.spacing(0),
     },
-    // productFeatures: {
-    //       display: 'none',
-    //     }
   },
   productShopArea: {
     padding: theme.spacing(2, 0),
@@ -59,8 +52,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'inline-block',
     paddingBottom: theme.spacing(1),
     color: theme.palette.text.primary,
-    fontWeight: '300',
-    fontSize: '15px',
+    fontWeight: '400',
+    fontSize: '24px',
     textDecoration: 'line-through',
     verticalAlign: 'bottom'
   },

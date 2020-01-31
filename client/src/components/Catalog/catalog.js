@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
@@ -11,14 +11,32 @@ import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 import useStyles from './_catalog';
 import { productsError, productsLoaded, productsRequested } from '../../redux/actions/products';
 import getAllProducts, { getProductsByCategory } from '../../services/getProducts';
+import { getCategory } from '../../services/getCategories';
 import { catalogLocation } from '../../redux/actions/categories';
+import { getFilteredProducts } from '../../services/filter';
+import ProductCardCarousel from '../Product-card-carousel/product-card-carousel';
 
 function Catalog({ assortment, fetchProducts, catalogLocation }) {
   const classes = useStyles();
+  const [topList, setTopList] = useState([]);
+  const [productsToShow, setProductsToShow] = useState([]);
+
+  useEffect(() => {
+    getCategory(assortment)
+      .then((response) => setTopList(response.topSellers))
+  }, [assortment]);
+
+  useEffect(() => {
+    const cardsToShowString = topList.toString();
+    getFilteredProducts(`itemNo=${cardsToShowString}`)
+      .then((response) => {
+        setProductsToShow(response)
+      })
+  }, [topList]);
 
   useEffect(() => {
     // console.log(123456);
-    catalogLocation(assortment)
+    catalogLocation(assortment);
     fetchProducts(assortment);
   }, [assortment, catalogLocation, fetchProducts]);
 
@@ -34,6 +52,12 @@ function Catalog({ assortment, fetchProducts, catalogLocation }) {
           </Grid>
           <Grid item sm={12} md={8}>
             <ProductList assortment={assortment} />
+          </Grid>
+          <Grid item sm={12}>
+            <ProductCardCarousel
+              products={productsToShow}
+              label="most popular products"
+            />
           </Grid>
         </Grid>
       </Container>
@@ -60,7 +84,7 @@ const mapDispatchToProps = (dispatch) => ({
         })
     }
   },
-  catalogLocation: (assortment) => dispatch(catalogLocation(assortment))
+  catalogLocation: (assortment) => dispatch(catalogLocation(assortment)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Catalog)
