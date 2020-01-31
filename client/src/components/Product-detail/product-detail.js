@@ -1,25 +1,20 @@
 import React, { useState } from 'react';
-import { connect, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import { useTheme, createStyles, withStyles } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Box } from '@material-ui/core';
 import './carousel-react.scss';
 import StopIcon from '@material-ui/icons/Stop';
 
-import NativeSelect from '@material-ui/core/NativeSelect';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-
-import InputBase from '@material-ui/core/InputBase';
 import ProductDetailCollapse from './Product-detail-collapse/product-detail-collapse';
 import AddToCart from '../Add-to-cart/add-to-cart';
-import MyGallery from './carousel-react'
+import ProductDetailCarousel from './carousel-react'
 import FeatureItem from './feature-item';
 import ProductDetailTab from './Product-detail-tab/product-detail-tab';
 
@@ -41,7 +36,6 @@ function ProductDetail({ product, favorites }) {
   } = product;
   const classes = useStyles();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.up('md'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
   const [modalIsVisible, setModalVisibility] = useState(false);
@@ -82,7 +76,7 @@ function ProductDetail({ product, favorites }) {
             />
           </Box>
           <Container>
-            <MyGallery
+            <ProductDetailCarousel
               images={images}
             />
           </Container>

@@ -1,14 +1,10 @@
-import React, { Component, useEffect, useState } from 'react';
-import Slider from 'react-slick';
-// import 'slick-carousel/slick/slick-theme.css';
-import { Box, Divider, Button, SvgIcon, useTheme } from '@material-ui/core';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
+import React from 'react';
+import { Box, Divider, Button, SvgIcon } from '@material-ui/core';
 import withWidth from '@material-ui/core/withWidth';
 import ProductCard from '../Product-card/product-card';
 import Carousels from '../Carousel/carousel';
 import useStyles from './_product-card-carousel';
-import RoutesName from '../../routes-list';
+import { PropTypes } from 'prop-types';
 
 function ProductCardCarousel(props) {
   const { products, label } = props;
@@ -67,5 +63,10 @@ function ProductCardCarousel(props) {
     </Box>
   );
 }
+
+ProductCardCarousel.propTypes = {
+  label: PropTypes.string.isRequired,
+  products: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default withWidth()(ProductCardCarousel);

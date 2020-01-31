@@ -15,7 +15,6 @@ import { getFilteredProducts } from '../../services/filter';
 function ProductPage(props) {
   // console.log('PROPS =', props);
   const { assortment, itemNo, chosenProduct, fetchProduct, productsLoading, setProducts } = props;
-  // console.log(assortment);
   const [productsToShow, setProductsToShow] = useState([]);
   const cardsToShow = ['896520', '896520', '896520', '896520', '896520', '217355'];
   // thermos
@@ -46,16 +45,16 @@ function ProductPage(props) {
   // const cardsToShow = ['344238', '730715', '979847', '971118', '937631', '597400'];
 
   // preparing
-  // const cardsToShow = ['344238', '730715', '979847', '971118', '937631', '597400'];
+  // const cardsToShow = ['344238', '122522', '979847', '971118', '44543', '457505'];
 
   // cooking
   // const cardsToShow = ['344238', '730715', '979847', '971118', '937631', '597400'];
 
   // drinking
-  // const cardsToShow = ['344238', '730715', '979847', '971118', '937631', '597400'];
+  // const cardsToShow = ['120024', '281039', '979847', '672012', '73816', '217355'];
 
   // dining
-  // const cardsToShow = ['344238', '730715', '979847', '971118', '937631', '597400'];
+  // const cardsToShow = ['383254', '200428', '896520', '591935', '801864', '892663'];
 
   // HOME
   // const cardsToShow = ['342511', '142956', '740039', '29100'];

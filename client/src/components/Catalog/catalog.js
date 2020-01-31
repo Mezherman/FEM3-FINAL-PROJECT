@@ -11,7 +11,7 @@ import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 import useStyles from './_catalog';
 import { productsError, productsLoaded, productsRequested } from '../../redux/actions/products';
 import getAllProducts, { getProductsByCategory } from '../../services/getProducts';
-import {getCategory} from '../../services/getCategories';
+import { getCategory } from '../../services/getCategories';
 import { catalogLocation } from '../../redux/actions/categories';
 import { getFilteredProducts } from '../../services/filter';
 import ProductCardCarousel from '../Product-card-carousel/product-card-carousel';
@@ -24,7 +24,7 @@ function Catalog({ assortment, fetchProducts, catalogLocation }) {
   useEffect(() => {
     getCategory(assortment)
       .then((response) => setTopList(response.topSellers))
-  }, [assortment])
+  }, [assortment]);
 
   useEffect(() => {
     const cardsToShowString = topList.toString();
@@ -36,7 +36,7 @@ function Catalog({ assortment, fetchProducts, catalogLocation }) {
 
   useEffect(() => {
     // console.log(123456);
-    catalogLocation(assortment)
+    catalogLocation(assortment);
     fetchProducts(assortment);
   }, [assortment, catalogLocation, fetchProducts]);
 
@@ -56,7 +56,8 @@ function Catalog({ assortment, fetchProducts, catalogLocation }) {
           <Grid item sm={12}>
             <ProductCardCarousel
               products={productsToShow}
-              label="most popular products"/>
+              label="most popular products"
+            />
           </Grid>
         </Grid>
       </Container>

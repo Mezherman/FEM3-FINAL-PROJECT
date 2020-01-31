@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Paper, Button, makeStyles, Input } from '@material-ui/core';
+import { Box, Button, makeStyles, Input } from '@material-ui/core';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 // import useStyles from '../Add-to-cart/_add-to-cart';
@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0),
   },
   qtyPicker: {
-    // width: '100px',
     maxWidth: '70%',
     display: 'inline-flex',
     alignItems: 'center',
@@ -32,10 +31,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '16px',
     // minWidth: '50px',
   },
-  // '.MuiInputBase-input MuiInput-input': {
-  //   // textAlign: 'center',
-  //
-  // },
   input: {
     '& .MuiInputBase-input': {
       minWidth: '40px',
@@ -96,7 +91,6 @@ export default function IncreaseBlock() {
           onChange={handleChange}
           inputProps={{
             min: 1,
-            // max,
             type: 'number',
           }}
         />

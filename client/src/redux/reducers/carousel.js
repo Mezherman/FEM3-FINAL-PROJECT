@@ -10,7 +10,7 @@ export default function carouselReducer(state = initialState, action) {
         ...state,
         topProducts: action.payload.products,
         error: null,
-      }
+      };
     default: {
       return state
     }

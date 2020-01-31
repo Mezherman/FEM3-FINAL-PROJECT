@@ -1,9 +1,6 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import { IconButton } from '@material-ui/core';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import 'typeface-roboto';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Divider from '@material-ui/core/Divider';
@@ -116,6 +113,7 @@ ProductCard.propTypes = {
       PropTypes.string,
       PropTypes.number])
   ).isRequired,
+  favorites: PropTypes.array.isRequired,
   // name: PropTypes.string.isRequired,
   // imageUrls: PropTypes.array.isRequired,
   // currentPrice: PropTypes.string.isRequired,
@@ -123,6 +121,7 @@ ProductCard.propTypes = {
 };
 
 // ProductCard.defaultProps = {
-//   specialPrice: false,
+// //   specialPrice: false,
 //   enabled: true
 // };
+
