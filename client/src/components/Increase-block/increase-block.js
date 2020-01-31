@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Paper, Button, makeStyles } from '@material-ui/core';
+import { Box, Button, makeStyles, Input } from '@material-ui/core';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 // import useStyles from '../Add-to-cart/_add-to-cart';
@@ -7,14 +7,19 @@ import AddIcon from '@material-ui/icons/Add';
 const useStyles = makeStyles((theme) => ({
   wrapper: {
     textAlign: 'right',
-    paddingBottom: theme.spacing(2),
-    // justifyContent: 'space-between',
+    margin: theme.spacing(3, 0),
   },
   qtyPicker: {
-    // width: '100px',
+    maxWidth: '70%',
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    [theme.breakpoints.up('sm')]: {
+      maxWidth: '100%',
+    },
+    [theme.breakpoints.up('lg')]: {
+      maxWidth: '70%',
+    }
   },
   [theme.breakpoints.up('md')]: {
     qtyPicker: {
@@ -24,39 +29,81 @@ const useStyles = makeStyles((theme) => ({
   qty: {
     textAlign: 'center',
     fontSize: '16px',
-    minWidth: '50px',
+    // minWidth: '50px',
   },
+  input: {
+    '& .MuiInputBase-input': {
+      minWidth: '40px',
+
+      textAlign: 'center',
+    },
+    '& input[type=number]::-webkit-inner-spin-button': {
+      '-webkit-appearance': 'none',
+      margin: 0
+    },
+    '& input[type=number]::-webkit-outer-spin-button': {
+      '-webkit-appearance': 'none',
+      margin: 0
+    },
+    '&.MuiInput-underline::after': {
+      content: 'none'
+    },
+  }
 }));
 
 export default function IncreaseBlock() {
   const classes = useStyles();
   const [qty, setQty] = useState(1);
 
+  const handleChange = (event) => {
+    if (event.target.value === '') {
+      setQty('');
+    } else if (event.target.value >= 99) {
+      setQty(99);
+    } else if (event.target.value === '0') {
+      setQty(1);
+    } else {
+      setQty(Number(Math.abs(event.target.value)))
+    }
+    // setQty (event.target.value === '' ? '' : );
+    // setQty(event.target.value === '' ? '' : Math.abs(event.target.value));
+    //
+  };
+  // console.log(qty);
   return (
     <Box className={classes.wrapper}>
-      <Paper className={classes.qtyPicker}>
+      <div className={classes.qtyPicker}>
         <Button
+          disabled={qty === 1 ? 'true' : false}
           onClick={() => {
-            if (qty === 1) return;
+            if (qty <= 1) return;
             setQty((prevQty) => prevQty - 1)
           }}
-          variant="contained"
-          color="secondary"
           disableElevation
-          // className={classes.sign}
         >
           <RemoveIcon />
         </Button>
-        <Box className={classes.qty}>{qty}</Box>
+
+        <Input
+          className={classes.input}
+          value={qty}
+          // margin="dense"
+          onChange={handleChange}
+          inputProps={{
+            min: 1,
+            type: 'number',
+          }}
+        />
+
         <Button
-          onClick={() => setQty((prevQty) => prevQty + 1)}
-          variant="contained"
-          color="secondary"
-          // className={classes.sign}
+          onClick={() => {
+            if (qty >= 99) return;
+            setQty((prevQty) => prevQty + 1)
+          }}
         >
           <AddIcon />
         </Button>
-      </Paper>
+      </div>
     </Box>
   )
 }

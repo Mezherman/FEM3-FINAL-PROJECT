@@ -9,3 +9,15 @@ export default function getCategories() {
       console.log('ERROR = ', err);
     });
 }
+
+function getCategory(id) {
+  return axios.get(`catalog/${id}`)
+    .then((response) => response.data)
+    .catch((err) => {
+      console.log('ERROR = ', err);
+    });
+}
+
+export {
+  getCategory,
+}
