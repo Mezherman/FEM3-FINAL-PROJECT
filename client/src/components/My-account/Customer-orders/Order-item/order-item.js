@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, connect } from 'react-redux';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Collapse from '@material-ui/core/Collapse';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import { Grid } from '@material-ui/core';
+import { ExpandLess, ExpandMore } from '@material-ui/icons';
+import { Grid, Divider, Collapse, ListItem, List, } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import Divider from '@material-ui/core/Divider';
 import getOrders from '../../../../services/getOrders';
 import { orders } from '../../../../redux/actions/user';
 import Spinner from '../../../Spinner/spinner';
@@ -22,8 +17,6 @@ const OrderItem = (props) => {
     if (!orders) {
       getOrders()
         .then((response) => {
-          // console.log(response);
-          // console.log('INSIDE');
           props.orders(response);
           setLoading(false);
         })
@@ -255,7 +248,9 @@ const OrderItem = (props) => {
   )
 };
 
-const mapStateToProps = (state) => ({ state });
+const mapStateToProps = (state) => ({
+  ordersItems: state.user.orders
+});
 
 const mapDispatchToProps = (dispatch) => ({
   orders: (data) => dispatch(orders(data))

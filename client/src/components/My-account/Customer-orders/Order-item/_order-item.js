@@ -53,6 +53,7 @@ const useStylesOrderItem = makeStyles((theme) => ({
   },
   img: {
     width: '70px',
+    margin: '1px 0',
     [theme.breakpoints.down('sm')]: {
       width: '90px',
     },

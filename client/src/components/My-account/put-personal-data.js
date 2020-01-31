@@ -22,7 +22,8 @@ import usePdstyles from './_personal-data';
 import RoutesName from '../../routes-list';
 import putUserData from '../../services/putUserData';
 // import usePdstyles from './_personal-data';
-import editCustomerData from '../../redux/actions/form'
+// import editCustomerData from '../../redux/actions/form'
+import { fetchCustomerData } from '../../redux/actions/user';
 
 function PutPersonalData (props) {
   const {
@@ -63,10 +64,11 @@ function PutPersonalData (props) {
     })
       .then((response) => {
         console.log(response);
-        if (response.statusText === 'OK') {
-          // setRegistration(true);
-          console.log(response);
-        }
+        fetchCustomerData();
+        cancel();
+        // if (response.statusText === 'OK') {
+        //
+        // }
       })
       .catch((error) => {
         // setMessage(error.message);
