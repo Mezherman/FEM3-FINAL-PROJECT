@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { reducer as form } from 'redux-form';
+import { reducer as formReducer } from 'redux-form';
 
 import cart from './cart';
 import categoriesReducer from './categories';
@@ -9,15 +9,21 @@ import user from './user';
 import notification from './notification';
 import favoritesReducer from './favorites';
 import carouselReducer from './carousel';
+import sortingReducer from './sorting';
+import slides from './slides'
+// import form from './form';
 
 export default combineReducers({
   cart,
   categoriesReducer,
   productsReducer,
-  form,
+  form: formReducer,
   filterReducer,
   notification,
   user,
   favoritesReducer,
-  carouselReducer
+  carouselReducer,
+  sortingReducer,
+  slides
+  // form
 })

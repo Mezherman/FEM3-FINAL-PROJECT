@@ -1,94 +1,259 @@
-import React, { useState } from 'react';
-import { PropTypes } from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { useSelector, connect } from 'react-redux';
+import { ExpandLess, ExpandMore } from '@material-ui/icons';
+import { Grid, Divider, Collapse, ListItem, List, } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { Grid, Hidden } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
-import RoutesName from '../../../routes-list';
-import QuantitySelector from '../Quantity-selector/quantity-selector';
-import useStyles from './_cart-product-item';
-import DialogModal from '../Dialog-modal/dialog-modal';
-import useHeaderStyles from '../Cart-product-list-header/_cart-product-list-header';
+import getOrders from '../../../../services/getOrders';
+import { orders } from '../../../../redux/actions/user';
+import Spinner from '../../../Spinner/spinner';
+import RoutesName from '../../../../routes-list';
+import useStylesOrderItem from './_order-item';
 
-export default function OrderItem({ product, onSetProductQuantity, onRemoveProduct }) {
-  const classes = useStyles();
-  const [isDialogOpen, setDialogOpen] = useState(false);
-  const handleDialogOpen = () => {
-    setDialogOpen(true);
-  }
-  const headerClasses = useHeaderStyles();
-  const { product: currentProduct, cartQuantity } = product;
-  const subTotalProduct = currentProduct.currentPrice * cartQuantity;
-  const onCloseDialogWithStatus = (status) => {
-    if (status) {
-      onRemoveProduct(currentProduct._id);
+const OrderItem = (props) => {
+  const { orders } = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!orders) {
+      getOrders()
+        .then((response) => {
+          props.orders(response);
+          setLoading(false);
+        })
+    } else {
+      setLoading(false);
     }
-    setDialogOpen(false);
-  }
+  }, [orders, props]);
 
-  console.log('ORDER', order);
+  const classes = useStylesOrderItem();
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
 
   return (
-    <Grid item container xs={12} justify="space-between" className={`${classes.root} ${headerClasses.underline}`}>
-      <Grid container item sm={3} xs={12} className={classes.img_block}>
-        <Grid item sm={12}>
-          <Link to={`${RoutesName.products}/${currentProduct._id}`}>
-            <img
-              className={classes.img}
-              src={currentProduct.imageUrls ? currentProduct.imageUrls[0] : ''}
-              alt={currentProduct.name ?? ''}
-            />
-          </Link>
-        </Grid>
-      </Grid>
-      <Grid item sm={3} xs={12}>
-        <p className={`${classes.marginTop} ${classes.title}`}>{currentProduct.name}</p>
-        <p className={classes.itemNum}>
-          Item-Nr. :
-          {currentProduct.itemNo}
-        </p>
-      </Grid>
-      <Grid item container justufy="space-between" sm={1} xs={12}>
-        <Hidden smUp>
-          <Grid item xs={6}>
-            <p>Price</p>
-          </Grid>
-        </Hidden>
-        <Grid item sm={12} xs={6} className={headerClasses.alignRight}>
-          <p className={`${classes.marginTop} ${classes.price} ${headerClasses.alignRight}`}>
-            €
-            {currentProduct.currentPrice}
+    <>
+      {loading && <Spinner />}
+      {!loading && orders.length > 0 ? orders.map((item) => {
+        const {
+          products,
+          deliveryAddress,
+          paymentInfo,
+          shipping,
+          email,
+          mobile,
+          status,
+          orderNo,
+          date,
+          totalSum
+        } = item;
+        const { country, city, address, postal } = deliveryAddress;
+        return (
+          <List
+            key={orderNo}
+            component="nav"
+            aria-labelledby="nested-list-subheader"
+            className={classes.root}
+          >
+            <ListItem className={classes.mainBlock} button onClick={handleClick}>
+              <Grid
+                item
+                container
+                className={classes.orderInfo}
+              >
+                <span>Order №:</span>
+                <span>{` ${orderNo}`}</span>
+              </Grid>
+              <Grid
+                item
+                container
+                className={classes.orderInfo}
+              >
+                <span>Date:</span>
+                <span>{` ${date.slice(0, 10)}`}</span>
+              </Grid>
+              <Grid
+                item
+                container
+                className={classes.orderInfo}
+              >
+                <span>Status: </span>
+                <span>{` ${status}`}</span>
+              </Grid>
+              <Grid
+                item
+                container
+                className={classes.orderInfo}
+              >
+                <span>Total Sum:</span>
+                <span>{` €${totalSum}`}</span>
+              </Grid>
+              <Grid
+                item
+                container
+                className={classes.orderInfo}
+              >
+                <span>Quantity: </span>
+                <span>{` ${products.length}`}</span>
+              </Grid>
+              {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Collapse
+              in={open}
+              timeout="auto"
+              unmountOnExit
+              onClick={handleClick}
+            >
+              <List component="div" disablePadding>
+                <ListItem className={classes.mainBlock} button>
+                  <Grid
+                    item
+                    container
+                    className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
+                  >
+                    <span>Shipping: </span>
+                    <span>{` ${shipping}`}</span>
+                  </Grid>
+                  <Grid
+                    item
+                    container
+                    className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
+                  >
+                    <span>Delivery Address: </span>
+                    <span>{` ${country}, ${city}, ${address}, ${postal}`}</span>
+                  </Grid>
+                  <Grid
+                    item
+                    container
+                    className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
+                  >
+                    <span>Payment: </span>
+                    <span>{` ${paymentInfo}`}</span>
+                  </Grid>
+                  <Grid
+                    item
+                    container
+                    className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
+                  >
+                    <span>Email: </span>
+                    <span>{` ${email}`}</span>
+                  </Grid>
+                  <Grid
+                    item
+                    container
+                    className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
+                  >
+                    <span>Mobile: </span>
+                    <span>{` ${mobile}`}</span>
+                  </Grid>
+                </ListItem>
+              </List>
+            </Collapse>
+            {products.map((its) => (
+              <Collapse
+                in={open}
+                timeout="auto"
+                unmountOnExit
+                key={its.product.itemNo}
+              >
+                <Divider variant="middle" />
+                <List component="div" disablePadding>
+                  <Link
+                    className={classes.link}
+                    to={`${RoutesName.products}/${its.product.itemNo}`}
+                  >
+                    <ListItem button className={classes.nested}>
+                      <Grid
+                        item
+                        container
+                        xs={12}
+                        justify="space-between"
+                        alignItems="center"
+                        className={classes.productContainer}
+                      >
+                        <Grid
+                          item
+                          container
+                          xs={12}
+                          sm={2}
+                          md={1}
+                          className={classes.imgContainer}
+                        >
+                          <img
+                            className={classes.img}
+                            src={its.product.imageUrls ? its.product.imageUrls[0] : ''}
+                            alt={its.product.name ?? ''}
+                          />
+                        </Grid>
+                        <Grid
+                          item
+                          container
+                          xs={12}
+                          sm={3}
+                          md={4}
+                          justify="center"
+                        >
+                          {`Item-Num. ${its.product.itemNo}`}
+                        </Grid>
+                        <Grid
+                          item
+                          container
+                          xs={12}
+                          sm={3}
+                          md={3}
+                          justify="center"
+                          className={`${classes.marginTop} ${classes.textCenter} ${classes.title}`}
+                        >
+                          {its.product.name}
+                        </Grid>
+                        <Grid
+                          item
+                          container
+                          xs={12}
+                          sm={1}
+                          md={2}
+                          justify="center"
+                          className={`${classes.marginTop} ${classes.fontBold} ${classes.textRight}`}
+                        >
+                          {`Price €${its.product.currentPrice}`}
+                        </Grid>
+                        <Grid
+                          item
+                          container
+                          xs={12}
+                          sm={1}
+                          md={2}
+                          className={`${classes.amoutContainer} ${classes.marginTop} ${classes.textCenter} ${classes.fontBold}`}
+                        >
+                          {`Amount ${its.cartQuantity}`}
+                        </Grid>
+                      </Grid>
+                    </ListItem>
+                  </Link>
+                </List>
+              </Collapse>
+            ))}
+          </List>
+        )
+      })
+        : (
+          <p>
+            So far, here is no orders, move on to the catalog and place your order.
+            <br />
+            <strong>Best wishes, your WMF</strong>
           </p>
-        </Grid>
-      </Grid>
-      <Grid item container sm={2} xs={12} >
-        <Hidden smUp>
-          <Grid item xs={6} sm={12}>
-            <p>Amount</p>
-          </Grid>
-        </Hidden>
-        <Grid item xs={6} sm={12}>
-          <QuantitySelector productId={currentProduct._id} onSetProductQuantity={onSetProductQuantity} cartQuantity={cartQuantity} />
-        </Grid>
-      </Grid>
-      <Grid item container justufy="space-between" sm={2} xs={12}>
-        <Hidden smUp>
-          <Grid item xs={6}>
-            <p>Subtotal</p>
-          </Grid>
-        </Hidden>
-        <Grid item xs={6} sm={12} className={headerClasses.alignRight}>
-          <p className={`${classes.marginTop} ${classes.price}`}>
-            €
-            { subTotalProduct }
-          </p>
-        </Grid>
-      </Grid>
-      <Grid item sm={1} xs={12} className={headerClasses.alignCenter}>
-        <DeleteIcon color="secondary" className={classes.deleteBtn} onClick={() => { handleDialogOpen() }} />
-      </Grid>
-      <DialogModal onCloseDialogWithStatus={onCloseDialogWithStatus} isOpen={isDialogOpen} />
+        )}
+    </>
+  )
+};
 
-    </Grid>
+const mapStateToProps = (state) => ({
+  ordersItems: state.user.orders
+});
 
-  );
-}
+const mapDispatchToProps = (dispatch) => ({
+  orders: (data) => dispatch(orders(data))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderItem);
