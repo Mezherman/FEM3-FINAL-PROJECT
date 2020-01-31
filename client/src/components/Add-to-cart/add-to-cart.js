@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
 import { Grid, IconButton, Divider, Button, Box, Paper } from '@material-ui/core';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import CloseIcon from '@material-ui/icons/Close';
@@ -11,18 +12,33 @@ import RoutesName from '../../routes-list';
 import ModalWindow from '../Modal-window/modal-window';
 
 import useStyles from './_add-to-cart';
+import { addProductToCart, setProductQuantity } from '../../redux/actions/CartActions'
 
 export default function AddToCart({ open, onModalClose, product }) {
   const classes = useStyles();
-  const { imageUrls, name, currentPrice, specialPrice } = product;
+  const { imageUrls, name, currentPrice, specialPrice, itemId } = product;
+
+  //product in state state
+  const productsState = useSelector((state) => state.cart.products);
+  const dispatch = useDispatch();
+  const actionSetProductQuantityInCart = useCallback(
+    (productData, quantityVal) => dispatch(setProductQuantity(productData, quantityVal)),
+    [dispatch]
+  );
+  const currentProductsFromState = productsState.find((el) => el.product._id === itemId);
+  const stateQuantity = currentProductsFromState ? currentProductsFromState.cartQuantity : 1;
+
   const [totalPrice, setTotalPrice] = useState(currentPrice);
-  const [qty, setQty] = useState(1);
+
+  const handleQty = (newQty) => {
+    actionSetProductQuantityInCart(product.itemId, newQty)
+  }
 
   const finalPrice = !specialPrice ? currentPrice : specialPrice;
 
   useEffect(() => {
-    setTotalPrice(qty * finalPrice)
-  }, [qty, finalPrice]);
+    setTotalPrice(stateQuantity * finalPrice)
+  }, [stateQuantity, finalPrice]);
 
   return (
     <ModalWindow
@@ -61,14 +77,14 @@ export default function AddToCart({ open, onModalClose, product }) {
                   <RemoveIcon
                     className={classes.sign}
                     onClick={() => {
-                      if (qty === 1) return;
-                      setQty((prevQty) => prevQty - 1)
+                      if (stateQuantity === 1) return;
+                      handleQty(stateQuantity - 1);
                     }}
                   />
-                  <Box className={classes.qty}>{qty}</Box>
+                  <Box className={classes.qty}>{stateQuantity}</Box>
                   <AddIcon
                     className={classes.sign}
-                    onClick={() => setQty((prevQty) => prevQty + 1)}
+                    onClick={() => { handleQty(stateQuantity + 1) }}
                   />
                 </Paper>
                 <Box className={classes.total}>
@@ -123,6 +139,7 @@ export default function AddToCart({ open, onModalClose, product }) {
 AddToCart.propTypes = {
   open: PropTypes.bool.isRequired,
   onModalClose: PropTypes.func.isRequired,
+  quantity: PropTypes.number,
   product:
   PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.number])

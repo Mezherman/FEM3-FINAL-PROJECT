@@ -37,6 +37,6 @@ export default function DialogModal({ onCloseDialogWithStatus, isOpen }) {
 }
 
 DialogModal.PropType = {
-  onCloseDialogWithStatus: PropTypes.func.require,
+  onCloseDialogWithStatus: PropTypes.func.isRequired,
   isOpen: PropTypes.bool,
 }

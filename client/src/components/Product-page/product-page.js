@@ -33,9 +33,7 @@ function ProductPage(props) {
         setProductsToShow(response)
       })
   }, [cardsToShowString]);
-
   // console.log('products slider', productsToShow);
-
   return (
       <>
       {productsLoading

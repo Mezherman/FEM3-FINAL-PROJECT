@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { bindActionCreators } from 'redux'
 import { useDispatch, useSelector } from 'react-redux';
 import { Grid, Container, Box } from '@material-ui/core';
@@ -14,6 +14,7 @@ import ContinueBtn from './Continue-btn/continue-btn';
 function SummaryCart() {
   const classes = useStyles();
   const cart = useSelector((state) => state.cart);
+  console.log(cart);
   const dispatch = useDispatch()
   const actions = useMemo(
     () => bindActionCreators(cartActions, dispatch),
@@ -21,7 +22,7 @@ function SummaryCart() {
   )
 
   let mainContainer = (
-    <Grid container spacing={4} alignItems="flex-start">
+    <Grid container spacing={4} alignItems="flex-start" className={classes.root}>
       <Grid item container sm={9} xs={12}>
         <CartProductList products={cart.products} actions={actions} />
         <Grid item xs={12}>
@@ -29,7 +30,7 @@ function SummaryCart() {
           <ContinueBtn />
         </Grid>
       </Grid>
-      <Grid item sm={3} xs={12} className={classes.summary}>
+      <Grid item sm={3} xs={12} className={`${classes.summary} ${classes.sticky}`}>
         <Summary totalCartPrice={cart.totalCartPrice} />
       </Grid>
     </Grid>

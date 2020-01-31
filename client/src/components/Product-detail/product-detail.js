@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState, useCallback } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
@@ -10,6 +10,7 @@ import { useTheme, createStyles, withStyles } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Box } from '@material-ui/core';
 import './carousel-react.scss';
+import { bindActionCreators } from 'redux'
 import StopIcon from '@material-ui/icons/Stop';
 
 import NativeSelect from '@material-ui/core/NativeSelect';
@@ -26,6 +27,7 @@ import ProductDetailTab from './Product-detail-tab/product-detail-tab';
 import useStyles from './_product-detail';
 import AddToFavoriteBtn from '../Add-to-favorites/Add-to-favorite-btn';
 import IncreaseBlock from '../Increase-block/increase-block';
+import { addProductToCart, setProductQuantity } from '../../redux/actions/CartActions';
 
 function ProductDetail({ product, favorites }) {
   const {
@@ -41,6 +43,15 @@ function ProductDetail({ product, favorites }) {
   } = product;
   const classes = useStyles();
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const actionAddProductToCart = useCallback(
+    (productData, quantityVal) => dispatch(addProductToCart(productData, quantityVal)),
+    [dispatch]
+  );
+  const actionSetProductQuantityInCart = useCallback(
+    (productData, quantityVal) => dispatch(setProductQuantity(productData, quantityVal)),
+    [dispatch]
+  );
   const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.up('md'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
@@ -94,13 +105,12 @@ function ProductDetail({ product, favorites }) {
       },
     },
   }),)(InputBase);
-
   return (
     <Container maxWidth="xl">
       <AddToCart
         open={modalIsVisible}
         onModalClose={closeModal}
-        product={{ imageUrls, name, currentPrice }}
+        product={{ imageUrls, name, currentPrice, itemId }}
       />
       <h1 className={classes.title}>{name.toUpperCase()[0] + name.slice(1)}</h1>
       <p className={classes.itemNo}>
@@ -215,6 +225,8 @@ function ProductDetail({ product, favorites }) {
                       color="primary"
                       disableElevation
                       onClick={() => {
+                        actionAddProductToCart(product, quantity);
+
                         setModalVisibility(true)
                       }}
                     >

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { PropTypes } from 'prop-types';
+import React, { useMemo, useState } from 'react'
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Grid, Hidden } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -82,7 +82,7 @@ Item-Nr. :
         </Grid>
       </Grid>
       <Grid item sm={1} xs={12} className={headerClasses.alignCenter}>
-        <DeleteIcon color="secondary" className={classes.deleteBtn} onClick={() => { handleDialogOpen() }} />
+        <DeleteIcon color="secondary" className={classes.deleteBtn} onClick={()=> { handleDialogOpen() }} />
       </Grid>
       <DialogModal onCloseDialogWithStatus={onCloseDialogWithStatus} isOpen={isDialogOpen} />
 
