@@ -1,0 +1,23 @@
+@import '../Variables/variables.scss';
+
+.header {
+  &-logo {
+    box-sizing: border-box;
+    height: 25px;
+    cursor: pointer;
+    opacity: .7;
+
+  }
+}
+@media screen and (min-width: 767px) and (max-width: 1199px) {
+
+}
+
+@media screen and (min-width: 1200px) {
+  .header {
+    &-logo {
+      height: 45px;
+    }
+  }
+}
+
