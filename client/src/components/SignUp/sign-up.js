@@ -127,7 +127,6 @@ let SignUp = (props) => {
             submitClass={classes.submit}
           />
         )}
-
       </div>
     </Container>
   );
