@@ -55,7 +55,7 @@ export default function(values) {
     values.newPassword &&
     !/^[0-9a-zA-Z]{7,30}$/i.test(values.newPassword)
   ) {
-    errors.password = 'Password must be between 7 and 30 characters';
+    errors.newPassword = 'Password must be between 7 and 30 characters';
   }
 
   if (

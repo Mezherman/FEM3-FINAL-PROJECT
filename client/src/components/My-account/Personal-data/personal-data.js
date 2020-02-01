@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Grid,
   Typography,
@@ -21,8 +21,15 @@ import ChangePasswordForm from './Put-personal-data/change-password';
 import validate from '../validate';
 import putUserData from '../../../services/putUserData';
 import { fetchCustomerData } from '../../../redux/actions/user';
+import putPassword from '../../../services/putPassword';
+import ModalResponse from '../../SignUp/Modal-response/modal-response';
 
 export default function PersonalData ({ handleSubmit }) {
+  const [signUpModal, setSignUpModal] = useState(false);
+  const handleCloseSignUpModal = () => {
+    setSignUpModal(false);
+    cancelEditForm();
+  };
   const pdClasses = usePdstyles();
   const classes = useStyles();
   const {
@@ -114,6 +121,27 @@ export default function PersonalData ({ handleSubmit }) {
       });
   };
 
+  const submitEditedUserPassword = (values) => {
+    // event.preventDefault();
+    // console.log(newUserData);
+    // console.log(values);
+    putPassword(values)
+      .then((response) => {
+        console.log(response);
+        fetchCustomerData();
+        setChangePasswordForm(false);
+        if (response.data.message) {
+          // cancelPasswordForm();
+          setSignUpModal(true);
+
+        }
+      })
+      .catch((error) => {
+        // setMessage(error.message);
+        console.log(error);
+      });
+  };
+
   if (editForm) {
     return (
       <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitEditedUser)}>
@@ -132,9 +160,28 @@ export default function PersonalData ({ handleSubmit }) {
 
   if (passwordForm) {
     return (
-      <ChangePasswordForm cancel={cancelPasswordForm} />
+      <form
+        className={classes.form}
+        noValidate={false}
+        onSubmit={handleSubmit(submitEditedUserPassword)}
+      >
+        <ChangePasswordForm cancel={cancelPasswordForm} />
+      </form>
     )
   }
+
+  // if (signUpModal) {
+  //   return (
+  //     <ModalResponse
+  //       openModal={signUpModal}
+  //       handleClose={handleCloseSignUpModal}
+  //       inModal={signUpModal}
+  //       classModal={classes.paperInfoIcon}
+  //       value="Your password was successfully changed"
+  //       submitClass={classes.submit}
+  //     />
+  //   )
+  // }
 
   return (
     <Container maxWidth="xl">
@@ -234,6 +281,26 @@ export default function PersonalData ({ handleSubmit }) {
           </Grid>
         </Grid>
       </Grid>
+      { signUpModal && (
+        <ModalResponse
+          openModal={signUpModal}
+          handleClose={handleCloseSignUpModal}
+          inModal={signUpModal}
+          classModal={pdClasses.paperInfoIcon}
+          value="Your password was successfully changed"
+          submitClass={pdClasses.submit}
+        />
+      )}
+      {/*{ errorModal && (*/}
+      {/*  <ModalResponse*/}
+      {/*    openModal={errorModal}*/}
+      {/*    handleClose={handleCloseSetErrorModal}*/}
+      {/*    inModal={errorModal}*/}
+      {/*    classModal={usePdstyles.paperInfoError}*/}
+      {/*    value='Something go wrong. Try again'*/}
+      {/*    submitClass={usePdstyles.submit}*/}
+      {/*  />*/}
+      {/*)}*/}
     </Container>
   );
   // }

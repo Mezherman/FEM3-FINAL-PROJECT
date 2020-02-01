@@ -63,6 +63,32 @@ const usePdstyles = makeStyles((theme) => ({
     margin: theme.spacing(1, 0)
   },
 
+    paperInfoIcon: {
+      backgroundColor: theme.palette.background.paper,
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(0, 0, 1),
+      border: `4px solid ${theme.palette.primary.main}`
+    },
+
+    paperInfoError: {
+      backgroundColor: theme.palette.background.paper,
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(0, 0, 1),
+      border: `4px solid ${theme.palette.error.dark}`
+    },
+
+    submit: {
+      display: 'block',
+      margin: '0 auto',
+      marginTop: theme.spacing(3),
+      marginBottom: theme.spacing(2),
+      padding: theme.spacing(1, 1),
+      fontSize: '0.87rem',
+      [theme.breakpoints.up('md')]: {
+        padding: theme.spacing(1, 3),
+      }
+    },
+
   emailForm: {
     marginTop: theme.spacing(1)
   },
