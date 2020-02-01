@@ -33,7 +33,7 @@ function ProductCard({ product, favorites }) {
       <AddToCart
         open={modalIsVisible}
         onModalClose={closeModal}
-        product={{ imageUrls, name, currentPrice, previousPrice, itemNo }}
+        product={{ imageUrls, name, currentPrice, previousPrice, itemNo, itemId }}
       />
 
       <div className={classes.card}>
