@@ -105,7 +105,7 @@ function SignIn (props) {
         <Typography className={classes.errorText} component="h3" variant="inherit">
           {errorMessage}
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.passwordForm} noValidate>
           <TextField
             variant="outlined"
             margin="normal"

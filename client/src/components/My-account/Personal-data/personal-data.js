@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Grid,
   Typography,
@@ -7,27 +7,39 @@ import {
   ListItem,
   List,
   ListItemText,
-  Container
+  Container, Button
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import PutPersonalData from './Put-personal-data/put-personal-data';
 import useStyles from '../../SignUp/Sign-up-form/_sign-up-form';
 import usePdstyles from './_personal-data';
 import RoutesName from '../../../routes-list';
 import ChangePasswordForm from './Put-personal-data/change-password';
-import validate from '../validate';
+import validate from './validate';
 import putUserData from '../../../services/putUserData';
 import { fetchCustomerData } from '../../../redux/actions/user';
+import { invalidPassword, validPassword } from '../../../redux/actions/password-validation';
 import putPassword from '../../../services/putPassword';
 import ModalResponse from '../../SignUp/Modal-response/modal-response';
+import CancelSaveButtons from './Put-personal-data/cancel-save-buttons';
 
 export default function PersonalData ({ handleSubmit }) {
-  const [signUpModal, setSignUpModal] = useState(false);
-  const handleCloseSignUpModal = () => {
-    setSignUpModal(false);
+  const [successModal, setSuccessModal] = useState(false);
+  const dispatch = useDispatch();
+
+  const handlerInvalidPassword = useCallback(() => {
+    dispatch(invalidPassword());
+  }, []);
+
+  const handlerValidPassword = useCallback(() => {
+    dispatch(validPassword());
+  }, []);
+
+  const handleCloseSuccessModal = () => {
+    setSuccessModal(false);
     cancelEditForm();
   };
   const pdClasses = usePdstyles();
@@ -45,30 +57,28 @@ export default function PersonalData ({ handleSubmit }) {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-
-    window.location.reload(); // window.location.reload()
+    window.location.reload();
   };
 
-  const [checked, setChecked] = useState([1]);
   const [editForm, setEditForm] = useState(false);
   const [passwordForm, setChangePasswordForm] = useState(false);
   const handleEditForm = () => setEditForm(true);
   const handleChangePassword = () => setChangePasswordForm(true);
   const cancelEditForm = () => setEditForm(false);
   const cancelPasswordForm = () => setChangePasswordForm(false);
+  // const [checked, setChecked] = useState([1]);
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    setChecked(newChecked);
-  };
+  // const handleToggle = (value) => () => {
+  //   const currentIndex = checked.indexOf(value);
+  //   const newChecked = [...checked];
+  //
+  //   if (currentIndex === -1) {
+  //     newChecked.push(value);
+  //   } else {
+  //     newChecked.splice(currentIndex, 1);
+  //   }
+  //   setChecked(newChecked);
+  // };
 
   const listItem = [
     {
@@ -111,29 +121,24 @@ export default function PersonalData ({ handleSubmit }) {
         console.log(response);
         fetchCustomerData();
         cancelEditForm();
-        // if (response.statusText === 'OK') {
-        //
-        // }
       })
       .catch((error) => {
         // setMessage(error.message);
-        console.log(error.response.data);
+        console.log(error);
       });
   };
 
   const submitEditedUserPassword = (values) => {
-    // event.preventDefault();
-    // console.log(newUserData);
-    // console.log(values);
     putPassword(values)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         fetchCustomerData();
-        setChangePasswordForm(false);
         if (response.data.message) {
-          // cancelPasswordForm();
-          setSignUpModal(true);
-
+          setChangePasswordForm(false);
+          setSuccessModal(true);
+          handlerValidPassword()
+        } else {
+          handlerInvalidPassword()
         }
       })
       .catch((error) => {
@@ -144,9 +149,12 @@ export default function PersonalData ({ handleSubmit }) {
 
   if (editForm) {
     return (
-      <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitEditedUser)}>
+      <form
+        className={classes.passwordForm}
+        noValidate={false}
+        onSubmit={handleSubmit(submitEditedUser)}
+      >
         <PutPersonalData
-          cancel={cancelEditForm}
           gender={gender}
           firstName={firstName}
           lastName={lastName}
@@ -154,6 +162,7 @@ export default function PersonalData ({ handleSubmit }) {
           email={email}
           login={login}
         />
+        <CancelSaveButtons cancel={cancelEditForm} />
       </form>
     )
   }
@@ -161,76 +170,43 @@ export default function PersonalData ({ handleSubmit }) {
   if (passwordForm) {
     return (
       <form
-        className={classes.form}
+        className={classes.passwordForm}
         noValidate={false}
         onSubmit={handleSubmit(submitEditedUserPassword)}
       >
-        <ChangePasswordForm cancel={cancelPasswordForm} />
+        <ChangePasswordForm />
+        <CancelSaveButtons cancel={cancelPasswordForm} />
       </form>
     )
   }
-
-  // if (signUpModal) {
-  //   return (
-  //     <ModalResponse
-  //       openModal={signUpModal}
-  //       handleClose={handleCloseSignUpModal}
-  //       inModal={signUpModal}
-  //       classModal={classes.paperInfoIcon}
-  //       value="Your password was successfully changed"
-  //       submitClass={classes.submit}
-  //     />
-  //   )
-  // }
 
   return (
     <Container maxWidth="xl">
       <Grid
         item
         xs={12}
-        // sm={10}
-        // md={5}
         container
         direction="column"
-        // justify="center"
-        // alignContent="center"
-        // alignItems="center"
       >
-        {/* <Typography */}
-        {/*  component="h1" */}
-        {/*  variant="h5" */}
-        {/*  align="center" */}
-        {/*  className={pdClasses.header} */}
-        {/* > */}
-        {/* </Typography> */}
         <h1>Personal Details</h1>
         <Grid
           item
           xs={12}
-          // sm={10}
-          // md={5}
           container
-          // direction="column"
           justify="center"
-          // alignContent="center"
-          // alignItems="center"
         >
           <Grid xs={12} sm={7}>
             <List
               dense
-              // className={classes.root}
             >
               {listItem.map(({ text, userData }, index) => {
                 const labelId = `checkbox-list-secondary-label-${index}`;
                 return (
-                  // eslint-disable-next-line react/no-array-index-key
-                  <ListItem key={`${text}${index}`} className={pdClasses.userData}>
+                  <ListItem key={text} className={pdClasses.userData}>
                     <ListItemText id={labelId} primary={text} />
                     <ListItemSecondaryAction>
                       <ListItem
-                        key={`${userData}`}
-                        // button
-                        // className={classes.root}
+                        key={userData}
                       >
                         <ListItemText id="2" primary={userData} />
                       </ListItem>
@@ -281,11 +257,11 @@ export default function PersonalData ({ handleSubmit }) {
           </Grid>
         </Grid>
       </Grid>
-      { signUpModal && (
+      { successModal && (
         <ModalResponse
-          openModal={signUpModal}
-          handleClose={handleCloseSignUpModal}
-          inModal={signUpModal}
+          openModal={successModal}
+          handleClose={handleCloseSuccessModal()}
+          inModal={successModal}
           classModal={pdClasses.paperInfoIcon}
           value="Your password was successfully changed"
           submitClass={pdClasses.submit}
@@ -303,8 +279,6 @@ export default function PersonalData ({ handleSubmit }) {
       {/*)}*/}
     </Container>
   );
-  // }
-  // return ()
 }
 
 PersonalData = reduxForm({

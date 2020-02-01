@@ -1,26 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Field, reduxForm } from 'redux-form';
+import React, { useState } from 'react';
+import { Field } from 'redux-form';
+import { useSelector } from 'react-redux';
 import {
   Backdrop,
-  Button, Container, Fade, FormControl,
-  FormControlLabel,
-  FormHelperText,
+  Button,
+  Container,
+  Fade,
   Modal,
-  FormLabel,
   Grid,
-  TextField,
-  Typography
 } from '@material-ui/core';
 import useStyles from '../../../SignUp/Sign-up-form/_sign-up-form';
-import validate from '../../validate';
 import usePdstyles from '../_personal-data';
-import putUserData from '../../../../services/putUserData';
-import { fetchCustomerData } from '../../../../redux/actions/user';
-import putPassword from '../../../../services/putPassword';
 import renderPasswordField from '../../../Render-password-field/render-password-field';
 
-function ChangePasswordForm (props) {
-  const { cancel, handleSubmit } = props;
+function ChangePasswordForm () {
+  const { invalid } = useSelector((state) => state.passwordForm);
   const classes = useStyles();
   const pdClasses = usePdstyles();
 
@@ -35,90 +29,28 @@ function ChangePasswordForm (props) {
     setEyeToggle((prev) => (setEyeToggle(!prev)));
   };
 
-  // const renderTextField = ({
-  //   label,
-  //   name,
-  //   type,
-  //   value,
-  //   meta: { touched, error },
-  //   // input: { onBlur, onChange }
-  //   input,
-  // }) => (
-  //   <TextField
-  //     type={type}
-  //     name={name}
-  //     variant="outlined"
-  //     fullWidth
-  //     id={name}
-  //     error={!!(touched && error)}
-  //     helperText={touched && error}
-  //     {...input}
-  //     // onBlur={onBlur}
-  //     // onChange={(event) => onChange(event.target.value)}
-  //     value={value}
-  //     className={classes.root}
-  //     label={(<FormLabel className={classes.root} required>{label}</FormLabel>)}
-  //   />
-  // );
-
-  // const submitEditedUserPassword = (values) => {
-  //   // event.preventDefault();
-  //   // console.log(newUserData);
-  //   console.log(values);
-  //   putPassword(values)
-  //     .then((response) => {
-  //       console.log(response);
-  //       fetchCustomerData();
-  //       cancel();
-  //       // if (response.statusText === 'OK') {
-  //       //
-  //       // }
-  //     })
-  //     .catch((error) => {
-  //       // setMessage(error.message);
-  //       console.log(error);
-  //     });
-  // };
-
   return (
     <Container maxWidth="xl">
       <h2>Edit Form</h2>
-      {/* <form */}
-      {/*  className={classes.form} */}
-      {/*  noValidate={false} */}
-      {/*  onSubmit={handleSubmit(submitEditedUserPassword)} */}
-      {/* > */}
       <Grid
         item
         xs={12}
         container
         justify="center"
-        // direction="column"
       >
         <Grid item xs={12} sm={5} lg={4} className={pdClasses.passwordInputs}>
-          {/* <Field */}
-          {/*  component={renderPasswordField} */}
-          {/*  name="password" */}
-          {/*  label="Password" */}
-          {/*  type="password" */}
-          {/* /> */}
           <Field
             name="password"
             component={renderPasswordField}
+            invalid={invalid}
             classes={classes}
-            label="Password"
+            label={invalid ? 'Invalid Password' : 'Password'}
             type="password"
             eyeToggle={eyeToggle}
             togglePasswordMask={togglePasswordMask}
           />
         </Grid>
         <Grid item xs={12} sm={5} lg={4} className={pdClasses.passwordInputs}>
-          {/* <Field */}
-          {/*  component={renderPasswordField} */}
-          {/*  name="newPassword" */}
-          {/*  label="New Password" */}
-          {/*  type="password" */}
-          {/* /> */}
           <Field
             name="newPassword"
             component={renderPasswordField}
@@ -130,25 +62,6 @@ function ChangePasswordForm (props) {
           />
         </Grid>
       </Grid>
-      <div className={pdClasses.buttonsContainer}>
-        <Button
-          variant="contained"
-          color="secondary"
-          className={`${classes.submit} ${pdClasses.button}`}
-          onClick={cancel}
-        >
-            CANCEL
-        </Button>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className={`${classes.submit} ${pdClasses.button}`}
-        >
-            SAVE
-        </Button>
-      </div>
-      {/* </form> */}
       {errorModal && (
         <Modal
           aria-labelledby="transition-modal-title"
@@ -182,10 +95,5 @@ function ChangePasswordForm (props) {
     </Container>
   )
 }
-
-// ChangePasswordForm = reduxForm({
-//   form: 'changePassword',
-//   validate,
-// })(ChangePasswordForm);
 
 export default ChangePasswordForm;

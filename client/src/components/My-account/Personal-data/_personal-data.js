@@ -100,6 +100,10 @@ const usePdstyles = makeStyles((theme) => ({
   passwordInputs: {
     margin: theme.spacing(1, 1, 0)
   },
+
+    errorText: {
+      color: theme.palette.error.dark,
+    },
 }
 ));
 

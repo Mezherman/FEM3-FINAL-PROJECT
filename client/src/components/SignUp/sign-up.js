@@ -91,7 +91,7 @@ let SignUp = (props) => {
           Your registration for the myWMF Customer Club
         </Typography>
 
-        <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitNewUser)}>
+        <form className={classes.passwordForm} noValidate={false} onSubmit={handleSubmit(submitNewUser)}>
           <Grid
             container
             spacing={3}

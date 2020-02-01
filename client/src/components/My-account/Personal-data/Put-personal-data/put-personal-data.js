@@ -17,14 +17,14 @@ import CloseIcon from '@material-ui/icons/Close';
 import { useSelector, connect } from 'react-redux';
 import useStyles from '../../../SignUp/Sign-up-form/_sign-up-form';
 import postNewUser from '../../../../services/postNewUser';
-import validate from '../../validate';
+import validate from '../validate';
 import usePdstyles from '../_personal-data';
 import RoutesName from '../../../../routes-list';
 import putUserData from '../../../../services/putUserData';
 // import usePdstyles from './_personal-data';
 // import editCustomerData from '../../redux/actions/form'
 import { fetchCustomerData } from '../../../../redux/actions/user';
-import RenderTextField from './renderTextField'
+import RenderEditTextField from '../../../Render-text-field/render-edit-text-field'
 
 function PutPersonalData (props) {
   const {
@@ -36,7 +36,7 @@ function PutPersonalData (props) {
     login,
     // handleSubmit,
     // editCustomerData,
-    cancel
+    // cancel
   } = props;
   // console.log(firstName);
 
@@ -137,30 +137,46 @@ function PutPersonalData (props) {
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
+            {/*<Field*/}
+            {/*  name="firstName"*/}
+            {/*  component={(args) => {*/}
+            {/*    const newArgs = {*/}
+            {/*      ...args,*/}
+            {/*      defaultValue: firstName*/}
+            {/*    };*/}
+            {/*    return <RenderTextField {...newArgs} />*/}
+            {/*  }}*/}
+            {/*  label="First Name"*/}
+            {/*  type="text"*/}
+            {/*/>*/}
             <Field
               name="firstName"
-              component={(args) => {
-                const newArgs = {
-                  ...args,
-                  defaultValue: firstName
-                };
-                return <RenderTextField {...newArgs} />
-              }}
+              component={RenderEditTextField}
+              defaultValue={firstName}
+              classes={classes}
               label="First Name"
               type="text"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
+            {/*<Field*/}
+            {/*  component={(args) => {*/}
+            {/*    const newArgs = {*/}
+            {/*      ...args,*/}
+            {/*      defaultValue: lastName*/}
+            {/*    };*/}
+            {/*    return <RenderTextField {...newArgs} />*/}
+            {/*    // return renderTextField(newArgs)*/}
+            {/*  }}*/}
+            {/*  name="lastName"*/}
+            {/*  label="Last Name"*/}
+            {/*  type="text"*/}
+            {/*/>*/}
             <Field
-              component={(args) => {
-                const newArgs = {
-                  ...args,
-                  defaultValue: lastName
-                };
-                return <RenderTextField {...newArgs} />
-                // return renderTextField(newArgs)
-              }}
               name="lastName"
+              component={RenderEditTextField}
+              defaultValue={lastName}
+              classes={classes}
               label="Last Name"
               type="text"
             />
@@ -168,46 +184,70 @@ function PutPersonalData (props) {
         </Grid>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
+            {/*<Field*/}
+            {/*  name="login"*/}
+            {/*  component={(args) => {*/}
+            {/*    const newArgs = {*/}
+            {/*      ...args,*/}
+            {/*      defaultValue: login*/}
+            {/*    };*/}
+            {/*    return <RenderTextField {...newArgs} />*/}
+            {/*    // return renderTextField(newArgs)*/}
+            {/*  }}*/}
+            {/*  label="Login"*/}
+            {/*  type="text"*/}
+            {/*/>*/}
             <Field
               name="login"
-              component={(args) => {
-                const newArgs = {
-                  ...args,
-                  defaultValue: login
-                };
-                return <RenderTextField {...newArgs} />
-                // return renderTextField(newArgs)
-              }}
+              component={RenderEditTextField}
+              defaultValue={login}
+              classes={classes}
               label="Login"
               type="text"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
+            {/*<Field*/}
+            {/*  name="email"*/}
+            {/*  component={(args) => {*/}
+            {/*    const newArgs = {*/}
+            {/*      ...args,*/}
+            {/*      defaultValue: email*/}
+            {/*    };*/}
+            {/*    return <RenderTextField {...newArgs} />*/}
+            {/*    // return renderTextField(newArgs)*/}
+            {/*  }}*/}
+            {/*  label="Email Address"*/}
+            {/*  type="email"*/}
+            {/*/>*/}
             <Field
               name="email"
-              component={(args) => {
-                const newArgs = {
-                  ...args,
-                  defaultValue: email
-                };
-                return <RenderTextField {...newArgs} />
-                // return renderTextField(newArgs)
-              }}
-              label="Email Address"
-              type="email"
+              component={RenderEditTextField}
+              defaultValue={email}
+              classes={classes}
+              label="Email"
+              type="text"
             />
           </Grid>
           <Grid item xs={12} sm={6}>
+            {/*<Field*/}
+            {/*  name="telephone"*/}
+            {/*  component={(args) => {*/}
+            {/*    const newArgs = {*/}
+            {/*      ...args,*/}
+            {/*      defaultValue: telephone*/}
+            {/*    };*/}
+            {/*    return <RenderTextField {...newArgs} />*/}
+            {/*    // return renderTextField(newArgs)*/}
+            {/*  }}*/}
+            {/*  label="Phone number"*/}
+            {/*  type="tel"*/}
+            {/*/>*/}
             <Field
               name="telephone"
-              component={(args) => {
-                const newArgs = {
-                  ...args,
-                  defaultValue: telephone
-                };
-                return <RenderTextField {...newArgs} />
-                // return renderTextField(newArgs)
-              }}
+              component={RenderEditTextField}
+              defaultValue={telephone}
+              classes={classes}
               label="Phone number"
               type="tel"
             />
@@ -225,26 +265,26 @@ function PutPersonalData (props) {
           </Grid>
         </Grid>
       </Grid>
-      <div className={pdClasses.buttonsContainer}>
-        {/* <Link to={RoutesName.home}> */}
-        <Button
-          variant="contained"
-          color="secondary"
-          className={`${classes.submit} ${pdClasses.button}`}
-          onClick={() => cancel()}
-        >
-            CANCEL
-        </Button>
-        {/* </Link> */}
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className={`${classes.submit} ${pdClasses.button}`}
-        >
-            SAVE
-        </Button>
-      </div>
+      {/*<div className={pdClasses.buttonsContainer}>*/}
+      {/*  /!* <Link to={RoutesName.home}> *!/*/}
+      {/*  <Button*/}
+      {/*    variant="contained"*/}
+      {/*    color="secondary"*/}
+      {/*    className={`${classes.submit} ${pdClasses.button}`}*/}
+      {/*    onClick={() => cancel()}*/}
+      {/*  >*/}
+      {/*      CANCEL*/}
+      {/*  </Button>*/}
+      {/*  /!* </Link> *!/*/}
+      {/*  <Button*/}
+      {/*    type="submit"*/}
+      {/*    variant="contained"*/}
+      {/*    color="primary"*/}
+      {/*    className={`${classes.submit} ${pdClasses.button}`}*/}
+      {/*  >*/}
+      {/*      SAVE*/}
+      {/*  </Button>*/}
+      {/*</div>*/}
       {/* </form> */}
       {errorModal && (
         <Modal

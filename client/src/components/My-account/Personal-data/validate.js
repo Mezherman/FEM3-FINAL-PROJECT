@@ -1,4 +1,9 @@
+import React from 'react'
+// import { useSelector } from 'react-redux';
+
 export default function(values) {
+  // const { invalid } = useSelector((state) => state.passwordForm);
+
   const errors = {};
   // const requiredFields = [
   //   'gender',

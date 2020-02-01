@@ -12,7 +12,7 @@ import loadDataReducer from './load-data';
 import carouselReducer from './carousel';
 import sortingReducer from './sorting';
 import slides from './slides'
-// import form from './form';
+import passwordForm from './password-form';
 
 export default combineReducers({
   cart,
@@ -26,6 +26,6 @@ export default combineReducers({
   isFetchingLoadData: loadDataReducer,
   carouselReducer,
   sortingReducer,
-  slides
-  // form
+  slides,
+  passwordForm,
 })

@@ -9,8 +9,18 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 const renderPasswordField = ({
-  input, label, name, value, type, meta: { touched, error }, classes, eyeToggle, togglePasswordMask, ...custom
-  }) => (
+  invalid,
+  input,
+  label,
+  name,
+  value,
+  type,
+  meta: { touched, error },
+  classes,
+  eyeToggle,
+  togglePasswordMask,
+  ...custom
+}) => (
   <TextField
     type={eyeToggle ? 'password' : 'text'}
     name={name}
@@ -21,9 +31,16 @@ const renderPasswordField = ({
     helperText={touched && error}
     {...input}
     {...custom}
-    className={classes.root}
+    className={invalid ? classes.invalidPassword : classes.root}
     label={
-      (<FormLabel className={classes.root} required>{label}</FormLabel>)
+      (
+        <FormLabel
+          className={invalid ? classes.invalidPassword : classes.root}
+          required
+        >
+          {label}
+        </FormLabel>
+      )
     }
     InputProps={{
       endAdornment: (

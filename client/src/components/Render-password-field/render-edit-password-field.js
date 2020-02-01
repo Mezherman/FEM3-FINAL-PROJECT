@@ -1,6 +1,6 @@
 import { FormLabel, TextField } from '@material-ui/core';
 import React from 'react';
-import useStyles from '../../../SignUp/Sign-up-form/_sign-up-form';
+import useStyles from '../SignUp/Sign-up-form/_sign-up-form';
 
 const RenderTextField = ({
   label,
@@ -9,8 +9,12 @@ const RenderTextField = ({
   defaultValue,
   meta: { touched, error },
   input: { value, onBlur, onChange, onFocus },
+  input
 }) => {
+  console.log('INPUT', input);
   const classes = useStyles();
+  // console.log('INPUT', onFocus);
+  // console.log('INPUT', onBlur);
   return (
     <TextField
       type={type}
