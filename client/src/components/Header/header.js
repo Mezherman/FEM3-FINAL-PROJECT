@@ -42,6 +42,7 @@ import PreviewBlock from '../Preview-block/preview-cart';
 import HeaderNavbar from '../Header-navbar/header-navbar';
 import Search from '../Search/search'
 import useStyles from './_header';
+
 // import store from '../../index';
 // import connect from 'react-redux'
 
@@ -238,17 +239,15 @@ function Header() {
                 <MenuIcon fontSize="large" />
               </IconButton>
 
-              {isMobile && (
-                <Link to={RoutesName.home}>
-                  <IconButton edge="start" className={classes.logoIcon}>
-                    <img
-                      src={`${process.env.PUBLIC_URL}/img/header/wmf-logo-30x35.svg`}
-                      alt="logo"
-                      className="header-logo"
-                    />
-                  </IconButton>
-                </Link>
-              )}
+              <Link to={RoutesName.home}>
+                <IconButton edge="start" className={classes.logoIcon}>
+                  <img
+                    src={`${process.env.PUBLIC_URL}/img/header/wmf-logo-30x35.svg`}
+                    alt="logo"
+                    className="header-logo"
+                  />
+                </IconButton>
+              </Link>
             </Box>
 
             {/* <Box className={classes.mainBoxLogo}> */}
@@ -268,6 +267,7 @@ function Header() {
               drawer={drawer}
               toggleDrawer={toggleDrawer}
             />
+            {isDesktop && <Search /> }
 
             {/* {isMobile && searchIsShown && */}
             {/* <Search />} */}
@@ -278,10 +278,11 @@ function Header() {
               <div>
                 <Box className={classes.iconButtonBox}>
                   {isMobile && searchIsShown && <Search />}
-                  {isDesktop && searchIsShown && <Search /> }
+
                   <MenuItem
                     className={classes.headerMenuItem}
                   >
+
                     <IconButton
                       onClick={toggleSearch}
                       edge="end"
@@ -292,7 +293,6 @@ function Header() {
                     </IconButton>
 
                   </MenuItem>
-
                   <Divider orientation="vertical" className={classes.dividerStyle} />
 
                   <MenuItem className={classes.headerMenuItem}>
