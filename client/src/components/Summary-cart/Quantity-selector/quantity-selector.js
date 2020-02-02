@@ -5,23 +5,24 @@ import useStyles from './_quantity-selector';
 
 export default function QuantitySelector ({ cartQuantity, productId, onSetProductQuantity }) {
   const classes = useStyles();
+
   const createListItems = () => {
     const items = [];
-    for (let i = 1; i <= 20; i++) {
+    for (let i = 1; i <= 100; i++) {
       items.push(<option key={i} value={i}>{i}</option>);
     }
     return items;
   }
 
   const setProductQuantity = (val) => {
-    onSetProductQuantity(productId, val);
+    onSetProductQuantity(productId, +val);
   }
 
   const handleSelected = (quantity) => (event) => {
     const { value } = event.target;
     setProductQuantity(value);
   }
-
+  console.log(cartQuantity);
   return (
     <Grid container className={classes.main} >
       <Grid item>

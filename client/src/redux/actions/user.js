@@ -34,7 +34,15 @@ const fetchCustomerData = () => ({
   type: 'SET_CUSTOMER_DATA_FROM_DB'
 });
 
-export default loginLoaded;
+const orders = (data) => ({
+  type: 'FETCH_ORDERS_SUCCESS',
+  payload: {
+    orders: data
+  }
+});
+
 export {
-  fetchCustomerData
+  loginLoaded,
+  fetchCustomerData,
+  orders
 }
