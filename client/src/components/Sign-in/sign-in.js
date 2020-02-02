@@ -77,7 +77,7 @@ function SignIn (props) {
     postLoginData(userData)
       .then((loginResult) => {
         localStorage.setItem('token', `${loginResult.data.token}`);
-        loadAllDataAfterLogin()
+        loadAllDataAfterLogin();
         onClose();
         // localStorage.setItem('L', `${loginResult.data.token}`);
         // const token = localStorage.getItem('token');

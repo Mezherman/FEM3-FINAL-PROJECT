@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   Grid,
   Typography,
@@ -7,7 +7,7 @@ import {
   ListItem,
   List,
   ListItemText,
-  Container, Button
+  Container,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -17,33 +17,59 @@ import PutPersonalData from './Put-personal-data/put-personal-data';
 import useStyles from '../../SignUp/Sign-up-form/_sign-up-form';
 import usePdstyles from './_personal-data';
 import RoutesName from '../../../routes-list';
-import ChangePasswordForm from './Put-personal-data/change-password';
+import ChangePasswordForm from './Put-personal-data/put-password';
 import validate from './validate';
 import putUserData from '../../../services/putUserData';
 import { fetchCustomerData } from '../../../redux/actions/user';
 import { invalidPassword, validPassword } from '../../../redux/actions/password-validation';
+import { loadAllDataAfterLogin } from '../../../redux/actions/load-all-data';
 import putPassword from '../../../services/putPassword';
 import ModalResponse from '../../SignUp/Modal-response/modal-response';
 import CancelSaveButtons from './Put-personal-data/cancel-save-buttons';
+import ErrorMessage from '../../Modal-error-message/modal-error';
 
 export default function PersonalData ({ handleSubmit }) {
+  const pdClasses = usePdstyles();
+  const classes = useStyles();
+
+  const [errorModal, setErrorModal] = useState(false);
   const [successModal, setSuccessModal] = useState(false);
-  const dispatch = useDispatch();
+  const [editForm, setEditForm] = useState(false);
+  const [passwordForm, setChangePasswordForm] = useState(false);
 
-  const handlerInvalidPassword = useCallback(() => {
-    dispatch(invalidPassword());
-  }, []);
-
-  const handlerValidPassword = useCallback(() => {
-    dispatch(validPassword());
-  }, []);
+  const handleEditForm = () => setEditForm(true);
+  const handleChangePassword = () => setChangePasswordForm(true);
+  const cancelEditForm = () => setEditForm(false);
+  const cancelPasswordForm = () => setChangePasswordForm(false);
 
   const handleCloseSuccessModal = () => {
     setSuccessModal(false);
     cancelEditForm();
   };
-  const pdClasses = usePdstyles();
-  const classes = useStyles();
+
+  const handleCloseSetErrorModal = () => {
+    setErrorModal(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    window.location.reload();
+  };
+
+  const dispatch = useDispatch();
+
+  const handlerInvalidPassword = useCallback(() => {
+    dispatch(invalidPassword());
+  }, [dispatch]);
+
+  const handlerValidPassword = useCallback(() => {
+    dispatch(validPassword());
+  }, [dispatch]);
+
+  const handlerCustomerData = useCallback(() => {
+    dispatch(loadAllDataAfterLogin());
+  }, [dispatch]);
+
   const {
     gender,
     firstName,
@@ -53,79 +79,40 @@ export default function PersonalData ({ handleSubmit }) {
     login,
     birthdate
   } = useSelector((state) => state.user.customer);
-  const { loggedIn } = useSelector((state) => state.user);
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    window.location.reload();
-  };
-
-  const [editForm, setEditForm] = useState(false);
-  const [passwordForm, setChangePasswordForm] = useState(false);
-  const handleEditForm = () => setEditForm(true);
-  const handleChangePassword = () => setChangePasswordForm(true);
-  const cancelEditForm = () => setEditForm(false);
-  const cancelPasswordForm = () => setChangePasswordForm(false);
-  // const [checked, setChecked] = useState([1]);
-
-  // const handleToggle = (value) => () => {
-  //   const currentIndex = checked.indexOf(value);
-  //   const newChecked = [...checked];
-  //
-  //   if (currentIndex === -1) {
-  //     newChecked.push(value);
-  //   } else {
-  //     newChecked.splice(currentIndex, 1);
-  //   }
-  //   setChecked(newChecked);
-  // };
-
-  const listItem = [
-    {
-      text: 'Gender:',
-      userData: loggedIn ? gender : null
-    },
-    {
-      text: 'First Name:',
-      userData: loggedIn ? firstName : null
-    },
-    {
-      text: 'Last Name:',
-      userData: loggedIn ? lastName : null
-    },
-    {
-      text: 'Birthday:',
-      userData: loggedIn ? birthdate : null
-    },
-    {
-      text: 'Phone number:',
-      userData: loggedIn ? telephone : null
-    },
-    {
-      text: 'Email:',
-      userData: loggedIn ? email : null
-    },
-    {
-      text: 'Login:',
-      userData: loggedIn ? login : null
-    },
-  ];
 
   const submitEditedUser = (values) => {
-    // event.preventDefault();
-    // console.log(newUserData);
-    putUserData({
-      ...values
-    })
-      .then((response) => {
-        console.log(response);
-        fetchCustomerData();
-        cancelEditForm();
+    if (values.birthdayDay || values.birthdayMonth || values.birthdayYear) {
+      putUserData({
+        ...values,
+        birthdate: `${values.birthdayDay}.${values.birthdayMonth}.${values.birthdayYear}`
       })
-      .catch((error) => {
-        // setMessage(error.message);
-        console.log(error);
-      });
+        .then((response) => {
+          handlerCustomerData();
+          // console.log(response);
+          fetchCustomerData();
+          cancelEditForm();
+          setSuccessModal(true)
+        })
+        .catch((error) => {
+          setErrorModal(true);
+          // console.log(error);
+        });
+    } else {
+      putUserData({
+        ...values
+      })
+        .then((response) => {
+          handlerCustomerData();
+          // console.log(response);
+          fetchCustomerData();
+          cancelEditForm();
+          setSuccessModal(true)
+        })
+        .catch((error) => {
+          setErrorModal(true);
+          // console.log(error);
+        });
+    }
   };
 
   const submitEditedUserPassword = (values) => {
@@ -142,8 +129,8 @@ export default function PersonalData ({ handleSubmit }) {
         }
       })
       .catch((error) => {
-        // setMessage(error.message);
-        console.log(error);
+        setErrorModal(true);
+        // console.log(error);
       });
   };
 
@@ -161,8 +148,10 @@ export default function PersonalData ({ handleSubmit }) {
           telephone={telephone}
           email={email}
           login={login}
+          birthdate={birthdate}
         />
         <CancelSaveButtons cancel={cancelEditForm} />
+        <ErrorMessage error={errorModal} classes={classes} handleClose={handleCloseSetErrorModal} />
       </form>
     )
   }
@@ -176,9 +165,41 @@ export default function PersonalData ({ handleSubmit }) {
       >
         <ChangePasswordForm />
         <CancelSaveButtons cancel={cancelPasswordForm} />
+        <ErrorMessage error={errorModal} classes={classes} handleClose={handleCloseSetErrorModal} />
       </form>
     )
   }
+
+  const listItem = [
+    {
+      text: 'Gender:',
+      userData: gender ?? null
+    },
+    {
+      text: 'First Name:',
+      userData: firstName ?? null
+    },
+    {
+      text: 'Last Name:',
+      userData: lastName ?? null
+    },
+    {
+      text: 'Birthday:',
+      userData: birthdate ?? null
+    },
+    {
+      text: 'Phone number:',
+      userData: telephone ?? null
+    },
+    {
+      text: 'Email:',
+      userData: email ?? null
+    },
+    {
+      text: 'Login:',
+      userData: login ?? null
+    },
+  ];
 
   return (
     <Container maxWidth="xl">
@@ -257,26 +278,15 @@ export default function PersonalData ({ handleSubmit }) {
           </Grid>
         </Grid>
       </Grid>
-      { successModal && (
-        <ModalResponse
-          openModal={successModal}
-          handleClose={handleCloseSuccessModal()}
-          inModal={successModal}
-          classModal={pdClasses.paperInfoIcon}
-          value="Your password was successfully changed"
-          submitClass={pdClasses.submit}
-        />
-      )}
-      {/*{ errorModal && (*/}
-      {/*  <ModalResponse*/}
-      {/*    openModal={errorModal}*/}
-      {/*    handleClose={handleCloseSetErrorModal}*/}
-      {/*    inModal={errorModal}*/}
-      {/*    classModal={usePdstyles.paperInfoError}*/}
-      {/*    value='Something go wrong. Try again'*/}
-      {/*    submitClass={usePdstyles.submit}*/}
-      {/*  />*/}
-      {/*)}*/}
+      <ModalResponse
+        success={successModal}
+        openModal={successModal}
+        handleClose={handleCloseSuccessModal}
+        inModal={successModal}
+        classModal={pdClasses.paperInfoIcon}
+        value="Your data was successfully changed"
+        submitClass={pdClasses.submit}
+      />
     </Container>
   );
 }
