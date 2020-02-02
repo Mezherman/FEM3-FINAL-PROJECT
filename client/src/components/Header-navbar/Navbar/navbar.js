@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { MenuItem, useTheme, makeStyles, createStyles, Divider, IconButton } from '@material-ui/core';
+import { MenuItem, useTheme, makeStyles, createStyles, Divider, IconButton, Typography } from '@material-ui/core';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 import GroupIcon from '@material-ui/icons/Group';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import PlaceIcon from '@material-ui/icons/Place';
+import HomeIcon from '@material-ui/icons/Home';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -37,27 +38,6 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
     drawerSubCatIsOpen(open);
   };
 
-  //   const useStyles1 = makeStyles((theme) => createStyles({
-  //
-  //     drawer: {
-  //       [theme.breakpoints.up('sm')]: {
-  //         width: '80%',
-  //         flexShrink: 0,
-  //       },
-  //     },
-  //     drawerPaper: {
-  //       width: '80%',
-  //     },
-  //     menuButton: {
-  //       marginRight: theme.spacing(2),
-  //       [theme.breakpoints.up('sm')]: {
-  //         display: 'none',
-  //       },
-  //     },
-  //   }),
-  // );
-
-  // const classes1 = useStyles1();
   return (
   // mobile
     <>
@@ -66,6 +46,7 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
           <Drawer
             open={drawer}
             onClose={() => toggleDrawer(false)}
+            transitionDuration={500}
             classes={{
               paper: classes.drawerPaper,
             }}
@@ -76,6 +57,18 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
               aria-labelledby="nested-list-subheader"
 
             >
+              <MenuItem
+                onClick={() => toggleDrawer(false)}
+              >
+                <Link
+                  to={RoutesName.home}
+                  className={classes.headerMenuListHyperlink}
+                >
+                  <HomeIcon className={classes.icon} />
+                  HOME
+                </Link>
+              </MenuItem>
+
               <MenuItem
                 onClick={() => {
                   toggleDrawerCat(true);
@@ -113,7 +106,7 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
                   className={classes.headerMenuListHyperlink}
                 >
                   <LocalShippingIcon className={classes.icon} />
-              DELIVERY & PAYMENT TERMS
+              DELIVERY & PAYMENT
                 </Link>
               </MenuItem>
 
@@ -131,6 +124,7 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
               </MenuItem>
             </List>
           </Drawer>
+
           {/* Category */}
           <Drawer
             open={drawerCat}
@@ -138,6 +132,7 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
             classes={{
               paper: classes.drawerPaper,
             }}
+            transitionDuration={500}
           >
 
             <List>
@@ -173,18 +168,22 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
             classes={{
               paper: classes.drawerPaper,
             }}
+            transitionDuration={500}
           >
 
             <List>
               <MenuItem
-
-                  onClick={() => toggleLastDrawer(false)}
+                onClick={() => toggleLastDrawer(false)}
               >
                 <Link
                   to={`${RoutesName.products}/${subCategory}`}
+                  className={classes.headerMenuListHyperlink}
+
                   // key={category.id}
                 >
-                  {subCategory}
+                  <Typography variant="h5">
+                    {subCategory.toUpperCase()[0] + subCategory.slice(1)}
+                  </Typography>
                 </Link>
               </MenuItem>
               {allCategories.filter(
