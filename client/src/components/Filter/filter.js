@@ -22,7 +22,8 @@ function Filter(props) {
     filterParamsLoaded,
     filterParams,
     filterResults,
-    categoriesReducer
+    categoriesReducer,
+    onClose
   } = props;
 
   const { catalogLocation, catalog } = categoriesReducer;
@@ -113,7 +114,8 @@ function Filter(props) {
           getFilteredProducts(valToFilter)
             .then((products) => {
               productsLoaded(products)
-            });
+            })
+            .then(onClose)
         }}
       >
         Filter

@@ -3,9 +3,6 @@ import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { Grid, Container, useTheme, SwipeableDrawer, Button, useMediaQuery } from '@material-ui/core';
 
-// import  from '@material-ui/core/SwipeableDrawer';
-// import  from '@material-ui/core/Button';
-// import  from '@material-ui/core/useMediaQuery/useMediaQuery'
 import Filter from '../Filter/filter';
 import ProductList from '../Product-list/product-list';
 import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
@@ -18,20 +15,20 @@ import { catalogLocation } from '../../redux/actions/categories';
 function Catalog({ assortment, fetchProducts, catalogLocation }) {
   const classes = useStyles();
 
+  const [filterIsOpen, setFilterIsOpen] = useState(false);
+
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+
+  const toggleFilter = () => {
+    setFilterIsOpen((prev) => !prev);
+  };
+
   useEffect(() => {
     // console.log(123456);
     catalogLocation(assortment)
     fetchProducts(assortment);
   }, [assortment, catalogLocation, fetchProducts]);
-
-  const [filterIsOpen, setFilterIsOpen] = useState(false);
-
-  const theme = useTheme();
-  const isTablet = useMediaQuery(theme.breakpoints.up('md'));
-
-  const toggleDrawer = () => {
-    setFilterIsOpen(!filterIsOpen);
-  };
 
   return (
     <>
@@ -39,7 +36,7 @@ function Catalog({ assortment, fetchProducts, catalogLocation }) {
         <ProductBreadcrumbs assortment={assortment} />
         <Grid container spacing={2} className={classes.root}>
           <Grid item sm={12} md={4}>
-            {isTablet
+            {isDesktop
               ? (
                 <div className={classes.filterDesktop}>
                   <Filter />
@@ -48,7 +45,7 @@ function Catalog({ assortment, fetchProducts, catalogLocation }) {
               : (
                 <div className={classes.filterMobile}>
                   <Button
-                    onClick={toggleDrawer}
+                    onClick={toggleFilter}
                     className={classes.button}
                   >
                   Open Filter
@@ -57,9 +54,9 @@ function Catalog({ assortment, fetchProducts, catalogLocation }) {
                   <SwipeableDrawer
                     anchor="bottom"
                     open={filterIsOpen}
-                    onClose={toggleDrawer}
+                    onClose={toggleFilter}
                   >
-                    <Filter />
+                    <Filter onClose={toggleFilter} />
                   </SwipeableDrawer>
                 </div>
               )}

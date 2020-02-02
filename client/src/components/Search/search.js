@@ -42,16 +42,17 @@ function Search({ productsLoaded, history }) {
       <div className={classes.searchInput}>
         <SearchIcon
           className={classes.searchIcon}
+
         />
-        <Autocomplete
-          size="small"
-          freeSolo
-          options={data.map((option) => option.name)}
-          renderInput={(params) => (
+        {/*<Autocomplete*/}
+        {/*  size="small"*/}
+        {/*  freeSolo*/}
+        {/*  options={data.map((option) => option.name)}*/}
+        {/*  renderInput={(params) => (*/}
             <TextField
               className={classes.root}
               fullWidth
-              {...params}
+              /*{...params}*/
               variant="outlined"
               margin="none"
               placeholder="Search..."
@@ -61,8 +62,9 @@ function Search({ productsLoaded, history }) {
                 }
               }}
             />
-          )}
-        />
+          {/*)}*/}
+        {/*/>*/}
+        {/*<button>SEARCH</button>*/}
       </div>
     </>
   )
