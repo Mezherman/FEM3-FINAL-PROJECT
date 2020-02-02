@@ -78,6 +78,9 @@ const useStyles = makeStyles((theme) => ({
   },
   eye: {
     cursor: 'pointer'
+  },
+  invalidPassword: {
+    color: theme.palette.error.dark
   }
 }));
 

@@ -1,24 +1,14 @@
+import { Backdrop, Button, Fade, Modal } from '@material-ui/core';
 import React from 'react';
 
-import {
-  Modal,
-  Fade,
-  Button,
-  Backdrop
-} from '@material-ui/core';
-import useStyles from './_modal-response';
-
-const ModalResponse = ({
-  success, openModal, handleClose, inModal, classModal, value, submitClass
-}) => {
-  const classes = useStyles();
-  if (success) {
+const ErrorMessage = ({ error, handleClose, classes }) => {
+  if (error) {
     return (
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modalInfoIcon}
-        open={openModal}
+        open={error}
         onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
@@ -26,18 +16,18 @@ const ModalResponse = ({
           timeout: 500,
         }}
       >
-        <Fade in={inModal}>
-          <div className={classModal}>
+        <Fade in={error}>
+          <div className={classes.paperInfoError}>
             <h2 id="transition-modal-title" className={classes.modalInfoTitle}>
-              {value}
+              Something go wrong. Try again
             </h2>
             <Button
               onClick={handleClose}
               variant="contained"
               color="primary"
-              className={submitClass}
+              className={classes.submit}
             >
-            OK
+              OK
             </Button>
           </div>
         </Fade>
@@ -47,4 +37,4 @@ const ModalResponse = ({
   return null
 };
 
-export default ModalResponse;
+export default ErrorMessage;

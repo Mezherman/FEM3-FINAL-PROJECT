@@ -2,10 +2,10 @@ import React from 'react';
 import * as ServicesCart from '../../services/cart';
 import { getFavoriteProducts } from '../../services/favorites';
 import getCategories from '../../services/getCategories';
-import { getCustomer } from '../../services/customer';
+import getCustomer from '../../services/customer';
 
 const db = (store) => (next) => async (action) => {
-  console.log(action);
+  // console.log(action);
   const storeCart = { ...store.getState().cart };
   const { loggedIn, token } = store.getState().user;
 
@@ -13,7 +13,7 @@ const db = (store) => (next) => async (action) => {
     case 'SET_CATALOG_FROM_DB': {
       // console.log('middleware catalog worked');
       const catalog = await getCategories();
-      console.log('CATALOG =', catalog);
+      // console.log('CATALOG =', catalog);
       return next({
         type: 'FETCH_CATALOG_SUCCESS',
         payload: {
@@ -138,6 +138,7 @@ const db = (store) => (next) => async (action) => {
 
       case 'SET_CUSTOMER_DATA_FROM_DB': {
         const customer = await getCustomer();
+        // console.log('CUSTOMER', customer);
         return customer
           ? next({
             type: 'FETCH_CUSTOMER_DATA_SUCCESS',

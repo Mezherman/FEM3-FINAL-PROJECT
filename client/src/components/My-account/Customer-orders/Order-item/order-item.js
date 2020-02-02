@@ -3,13 +3,14 @@ import { useSelector, connect } from 'react-redux';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import { Grid, Divider, Collapse, ListItem, List, } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import getOrders from '../../../../services/getOrders';
-import { orders } from '../../../../redux/actions/user';
+import { orders as ordersAction } from '../../../../redux/actions/user';
 import Spinner from '../../../Spinner/spinner';
 import RoutesName from '../../../../routes-list';
 import useStylesOrderItem from './_order-item';
 
-const OrderItem = (props) => {
+const OrderItem = ({ orderAction }) => {
   const { orders } = useSelector((state) => state.user);
   const [loading, setLoading] = useState(true);
 
@@ -17,13 +18,13 @@ const OrderItem = (props) => {
     if (!orders) {
       getOrders()
         .then((response) => {
-          props.orders(response);
+          orderAction(response);
           setLoading(false);
         })
     } else {
       setLoading(false);
     }
-  }, [orders, props]);
+  }, [orders, orderAction]);
 
   const classes = useStylesOrderItem();
   const [open, setOpen] = useState(false);
@@ -94,7 +95,7 @@ const OrderItem = (props) => {
                 container
                 className={classes.orderInfo}
               >
-                <span>Quantity: </span>
+                <span>Item&apos;s quantity: </span>
                 <span>{` ${products.length}`}</span>
               </Grid>
               {open ? <ExpandLess /> : <ExpandMore />}
@@ -253,7 +254,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  orders: (data) => dispatch(orders(data))
+  orderAction: (data) => dispatch(ordersAction(data))
 });
+
+OrderItem.propTypes = {
+  orderAction: PropTypes.func.isRequired
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderItem);

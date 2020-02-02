@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
+import PropTypes from 'prop-types';
 import Carousels from '../Carousel/carousel';
 import PagingDots from '../Carousel/pagingDots';
 import useStylesCarousel from '../Carousel/_carousel';
@@ -73,8 +74,7 @@ function MainSlider ({ fetchSlides }) {
           )
         }
       >
-        {mainSlides.map((item) => {
-          // console.log(item);
+        {mainSlides.length > 0 ? mainSlides.map((item) => {
           const { imageUrl, title, description, route, _id } = item;
           return (
             <Link to={route} key={_id}>
@@ -98,7 +98,7 @@ function MainSlider ({ fetchSlides }) {
               </div>
             </Link>
           )
-        })}
+        }) : () => <div>Sorry</div> }
       </Carousels>
     </div>
   )
@@ -113,3 +113,12 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainSlider)
+
+MainSlider.propTypes = {
+  fetchSlides: PropTypes.func.isRequired,
+};
+
+// MainSlider.defaultProps = {
+//   fetchSlides: () => {
+//   }
+// };

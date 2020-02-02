@@ -67,7 +67,7 @@ let Checkout = (props) => {
 
   return (
     <Container component="div" maxWidth="xl" disableGutters>
-      <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitNewOrder)}>
+      <form className={classes.passwordForm} noValidate={false} onSubmit={handleSubmit(submitNewOrder)}>
         <Grid container>
           <Grid item md={4}>
             <CheckoutForm />

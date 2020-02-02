@@ -1,4 +1,4 @@
-import axios, { useState } from 'axios';
+import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:5000';
 
@@ -19,12 +19,8 @@ axios.defaults.baseURL = 'http://localhost:5000';
 //     })
 // }
 
-const getCustomer = () =>
-  // console.log('AXIOS DEFAULTS =', axios.defaults.headers.common.Authorization);
-  axios
-    .get('/customers/customer')
-    .then((loggedInCustomer) => loggedInCustomer)
-    .catch((err) => err);
-export {
-  getCustomer
-}
+const getCustomer = () => axios
+  .get('/customers/customer')
+  .then((loggedInCustomer) => loggedInCustomer)
+  .catch((err) => err);
+export default getCustomer
