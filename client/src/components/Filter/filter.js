@@ -128,7 +128,8 @@ function mapStateToProps(state) {
   return {
     filterResults: state.filterReducer.filterResults,
     filterParams: state.filterReducer.filterParams,
-    categoriesReducer: state.categoriesReducer
+    categoriesReducer: state.categoriesReducer,
+    currentCategory: state.categoriesReducer.catalogLocation
   }
 }
 
