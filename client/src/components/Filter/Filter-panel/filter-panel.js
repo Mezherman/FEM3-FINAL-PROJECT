@@ -64,7 +64,7 @@ function FilterPanel(props) {
 
   return (
     <div>
-      <ExpansionPanel square className={classes.root}>
+      <ExpansionPanel square className={classes.root} defaultExpanded>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="value"

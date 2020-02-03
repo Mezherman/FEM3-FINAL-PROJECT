@@ -71,9 +71,11 @@ function RangeSlider(props) {
     });
   };
 
+  console.log('value', value)
+  console.log('max ->', maxValue)
+
   const handleInputMin = (event) => {
-    setMinValue(event.target.value === '' ? '' : Number(event.target.value));
-    setValue([minValue, maxValue]);
+    setValue([event.target.value === '' ? '' : Number(event.target.value), value[1]]);
     getFilterProducts({
       ...filterResults,
       price: value
@@ -82,7 +84,9 @@ function RangeSlider(props) {
 
   const handleInputMax = (event) => {
     setMaxValue(event.target.value === '' ? '' : Number(event.target.value));
-    setValue([minValue, maxValue]);
+    // setValue([...value, ])
+    // setValue([event.target.value === '' ? '' : Number(event.target.value), minValue]);
+    // setValue([minValue, maxValue]);
     getFilterProducts({
       ...filterResults,
       price: value
@@ -110,7 +114,7 @@ function RangeSlider(props) {
       <div className={classes.inputs}>
         <Input
           className={classes.input}
-          value={minValue}
+          value={value[0]}
           margin="dense"
           onChange={handleInputMin}
           inputProps={{
@@ -122,7 +126,7 @@ function RangeSlider(props) {
         />
         <Input
           className={classes.input}
-          value={maxValue}
+          value={value[1]}
           margin="dense"
           onChange={handleInputMax}
           inputProps={{
