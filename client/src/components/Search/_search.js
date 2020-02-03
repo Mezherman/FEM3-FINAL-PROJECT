@@ -11,12 +11,21 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     left: '0',
   },
+  [theme.breakpoints.up('md')]: {
+    search: {
+      zIndex: '1',
+      left: '20%',
+      top: '25%',
+      maxWidth: '50%',
+      position: 'absolute'
+    },
+  },
   [theme.breakpoints.up('lg')]: {
     search: {
       zIndex: '1',
-      left: '150px',
+      // left: '150px',
       width: 'auto',
-      position: 'relative'
+      // position: 'relative'
     },
   },
   inputRoot: {

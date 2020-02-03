@@ -8,9 +8,11 @@ import {
   MenuItem,
   Box,
   Container,
-  Divider
+  Divider,
   // withStyles,
 } from '@material-ui/core'
+
+import Collapse from '@material-ui/core/Collapse';
 
 import { useTheme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu'
@@ -97,6 +99,7 @@ function Header() {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.between('xs', 'md'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('md', 'lg'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
   // console.log('Mobile', isMobile);
   // console.log('Tablet', isTablet);
@@ -263,18 +266,17 @@ function Header() {
               drawer={drawer}
               toggleDrawer={toggleDrawer}
             />
-            {isDesktop && <Search /> }
+
 
             {/* {isMobile && searchIsShown && */}
             {/* <Search />} */}
-            {/* {!isMobile && isTablet && */}
-            {/* <Search />} */}
+            {/* {isTablet && <Search searchIsShown />}*/}
             {/* { <div style={{backgroundColor: 'red'}}><Search /></div>} */}
             <ClickAwayListener onClickAway={handleSearchAway}>
               <div>
                 <Box className={classes.iconButtonBox}>
-                  {isMobile && searchIsShown && <Search />}
-
+                  {/*{isMobile && <Search searchIsShown={searchIsShown} />}*/}
+                  {isDesktop && <Search searchIsShown={searchIsShown}/> }
                   <MenuItem
                     className={classes.headerMenuItem}
                   >
