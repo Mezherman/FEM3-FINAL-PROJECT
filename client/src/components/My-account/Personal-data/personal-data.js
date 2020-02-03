@@ -129,7 +129,7 @@ export default function PersonalData ({ handleSubmit }) {
   if (editForm) {
     return (
       <form
-        className={classes.passwordForm}
+        className={`${classes.passwordForm} ${pdClasses.container}`}
         noValidate={false}
         onSubmit={handleSubmit(submitEditedUser)}
       >
@@ -150,7 +150,7 @@ export default function PersonalData ({ handleSubmit }) {
   if (passwordForm) {
     return (
       <form
-        className={classes.passwordForm}
+        className={`${classes.passwordForm} ${pdClasses.container}`}
         noValidate={false}
         onSubmit={handleSubmit(submitEditedUserPassword)}
       >
@@ -163,14 +163,14 @@ export default function PersonalData ({ handleSubmit }) {
     { text: 'Gender:', userData: gender ?? null },
     { text: 'First Name:', userData: firstName ?? null },
     { text: 'Last Name:', userData: lastName ?? null },
-    { text: birthdate ? 'Birthday:' : null, userData: birthdate ?? null },
+    birthdate ? { text: 'Birthday:', userData: birthdate } : {},
     { text: 'Phone number:', userData: telephone ?? null },
     { text: 'Email:', userData: email ?? null },
     { text: 'Login:', userData: login ?? null },
   ];
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" className={pdClasses.container}>
       <Grid
         item
         xs={12}
