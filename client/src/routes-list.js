@@ -11,7 +11,6 @@ const RoutesName = {
   contacts: '/contacts',
   delivery: '/delivery',
   personalData: '/personal-data',
-  editPersonalData: '/edit-personal-data',
   favorites: '/favorites',
   myOrders: '/orders',
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import * as ServicesCart from '../../services/cart';
 import { getFavoriteProducts } from '../../services/favorites';
 import getCategories from '../../services/getCategories';
-import { getCustomer } from '../../services/customer';
+import getCustomer from '../../services/customer';
 
 const db = (store) => (next) => async (action) => {
   // console.log(action);
@@ -138,6 +138,7 @@ const db = (store) => (next) => async (action) => {
 
       case 'SET_CUSTOMER_DATA_FROM_DB': {
         const customer = await getCustomer();
+        // console.log('CUSTOMER', customer);
         return customer
           ? next({
             type: 'FETCH_CUSTOMER_DATA_SUCCESS',

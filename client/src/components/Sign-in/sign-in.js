@@ -77,7 +77,7 @@ function SignIn (props) {
     postLoginData(userData)
       .then((loginResult) => {
         localStorage.setItem('token', `${loginResult.data.token}`);
-        loadAllDataAfterLogin()
+        loadAllDataAfterLogin();
         onClose();
         // localStorage.setItem('L', `${loginResult.data.token}`);
         // const token = localStorage.getItem('token');
@@ -105,7 +105,7 @@ function SignIn (props) {
         <Typography className={classes.errorText} component="h3" variant="inherit">
           {errorMessage}
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.passwordForm} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
