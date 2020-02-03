@@ -12,8 +12,11 @@ import {
 import { Field } from 'redux-form';
 
 import { RenderTextField, RenderRadioGroup } from './form-components';
+import RenderCheckboxField from './form-components/checkbox-field';
 
 import useStyles from './_checkout-form';
+import ModalBirthdayInfo from '../../SignUp/Modal-birthday-info/modal-birthday-info';
+import ModalInfoWindow from '../../Info-window/info-window';
 
 export default function OrderConfirmation() {
   const classes = useStyles();
@@ -45,6 +48,7 @@ export default function OrderConfirmation() {
         <strong>&#8364;{totalCartPrice}</strong>
       </Box>
       <Divider />
+      <Field name="agreement" component={RenderCheckboxField} />
     </>
   )
 }

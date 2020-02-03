@@ -1,18 +1,5 @@
 import React from 'react';
-import {
-  Button,
-  Container,
-  Grid,
-  Typography,
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-  FormLabel,
-  Radio,
-  RadioGroup,
-  TextField,
-  Box
-} from '@material-ui/core';
+import { Typography, FormControlLabel, Radio, } from '@material-ui/core';
 import { Field } from 'redux-form';
 
 import { RenderTextField, RenderRadioGroup } from './form-components';

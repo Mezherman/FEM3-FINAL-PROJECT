@@ -50,7 +50,7 @@ exports.placeOrder = async (req, res, next) => {
     order.totalSum = order.products.reduce(
       (sum, cartItem) =>
         sum + cartItem.product.currentPrice * cartItem.cartQuantity,
-          0
+      0
     );
 
     const productAvailibilityInfo = await productAvailibilityChecker(
@@ -105,6 +105,52 @@ exports.placeOrder = async (req, res, next) => {
           // );
 
           const mailResult = 'to be created';
+
+          order.products.map(({ product: { _id }, cartQuantity: orderedQty }) => {
+            Product.findOne({ _id: _id })
+              .then(product => {
+                if (!product) {
+                  return res.status(400).json({
+                    message: `Product with id "${_id}" is not found.`
+                  });
+                } else {
+                  const newQty = product.quantity - orderedQty;
+                  const productFields = _.cloneDeep({ quantity: newQty });
+
+                  if (productFields.name) {
+                    try {
+                      productFields.name = productFields.name
+                        .toLowerCase()
+                        .trim()
+                        .replace(/\s\s+/g, ' ');
+                    } catch (err) {
+                      res.status(400).json({
+                        message: `Error happened on server: "${err}" `
+                      });
+                    }
+                  }
+
+                  const updatedProduct = queryCreator(productFields);
+
+                  Product.findOneAndUpdate(
+                    { _id },
+                    { $set: updatedProduct },
+                    { new: true }
+                  )
+                    .then(product => res.json(product))
+                    .catch(err =>
+                      res.status(400).json({
+                        message: `Error happened on server: "${err}" `
+                      })
+                    );
+                }
+              })
+              .catch(err => {
+                return res.status(400).json({
+                  message: `Error happened on server: "${err}" `
+                })
+              });
+          });
 
           res.json({ order, mailResult });
         })

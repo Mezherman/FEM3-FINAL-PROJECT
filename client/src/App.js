@@ -11,7 +11,7 @@ import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
 import Notification from './components/Notification/notification'
 import ScrollToTopOnMount from './components/Pages-scroll-to-top/Pages-scroll-top-top';
 import Spinner from './components/Spinner/spinner';
-import loadAllData from './redux/actions/load-all-data';
+import { loadAllData, fetchResponse } from './redux/actions/load-all-data';
 
 function App(props) {
   const dispatch = useDispatch();
@@ -19,16 +19,17 @@ function App(props) {
     () => dispatch(loadAllData()),
     [dispatch]
   );
-  const categories = useSelector((state) => state.categoriesReducer.catalog.mainCategories);
 
-  const isFetchingLoadData = useSelector((state) => state.isFetchingLoadData.isFetching);
   useEffect(() => {
-    loadData();
+    loadData().then(() => dispatch(fetchResponse()));
   }, [loadData]);
+
+  const categories = useSelector((state) => state.categoriesReducer.catalog.mainCategories);
+  const isFetchingLoadData = useSelector((state) => state.isFetchingLoadData.isFetching);
 
   return (
     <>
-      {!categories.length ? (<Spinner />)
+      {isFetchingLoadData ? (<Spinner />)
         : (
           <>
             <Router>
