@@ -70,11 +70,7 @@ export default function Routes() {
                 <Home />
                 <LoginModal
                   isLoggedIn={loggedIn}
-                  // isLoggedIn={()=>{loggedIn(loggedIn)}}
-                  // onSuccessLogin={onSuccessLogin}
                   onModalClose={closeModal}
-                  // onModalClose={ closeModal}
-                  // onModalCloseBack={closeModalFromBack}
                   open={modalIsVisible}
                 />
               </div>
@@ -93,11 +89,7 @@ export default function Routes() {
                 <Home />
                 <LoginModal
                   isLoggedIn={loggedIn}
-                  // isLoggedIn={()=>{loggedIn(loggedIn)}}
-                  // onSuccessLogin={onSuccessLogin}
                   onModalClose={closeModal}
-                  // onModalClose={ closeModal}
-                  // onModalCloseBack={closeModalFromBack}
                   open={modalIsVisible}
                 />
               </div>
@@ -163,7 +155,25 @@ export default function Routes() {
           )
         }}
       />
-      <Route path={RoutesName.favorites} component={Favorites} />
+      <Route
+        path={RoutesName.favorites}
+        render={() => (
+          loggedIn
+            ? (
+              <Favorites />
+            )
+            : (
+              <div>
+                <Home />
+                <LoginModal
+                  isLoggedIn={loggedIn}
+                  onModalClose={closeModal}
+                  open={modalIsVisible}
+                />
+              </div>
+            )
+        )}
+      />
       <Route
         path={`${RoutesName.products}/search`}
         exact

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import Spinner from '../Spinner/spinner';
 
 import { favoritesUpdated } from '../../redux/actions/favorites';
@@ -23,15 +24,18 @@ function Favorites(props) {
     }
   }, [favorites, loggedIn, productsError, productsLoaded, productsRequested]);
 
-  return (
-    <>
-      {
-        productsLoading
-          ? <Spinner />
-          : <ProductList products={products} />
-      }
-    </>
-  )
+  if (loggedIn) {
+    return (
+      <>
+        {
+          productsLoading
+            ? <Spinner />
+            : <ProductList products={products} />
+        }
+      </>
+    )
+  }
+  return <Redirect />
 }
 
 const mapStateToProps = (state) =>
