@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search'
 import { withRouter } from 'react-router-dom';
+import InputBase from '@material-ui/core/InputBase';
 import useStyles from './_search';
 import search from '../../services/search';
 import getAllProducts from '../../services/getProducts'
@@ -39,29 +38,23 @@ function Search({ productsLoaded, history }) {
 
   return (
     <>
-      <div className={classes.searchInput}>
+      <div className={classes.search}>
         <SearchIcon
           className={classes.searchIcon}
         />
-        <Autocomplete
-          size="small"
-          freeSolo
-          options={data.map((option) => option.name)}
-          renderInput={(params) => (
-            <TextField
-              className={classes.root}
-              fullWidth
-              {...params}
-              variant="outlined"
-              margin="none"
-              placeholder="Search..."
-              onKeyUp={(event) => {
-                if (event.keyCode === 13) {
-                  handleChange(event);
-                }
-              }}
-            />
-          )}
+        <InputBase
+          placeholder="Search…"
+          type="search"
+          classes={{
+            root: classes.inputRoot,
+            input: classes.inputInput,
+          }}
+          inputProps={{ 'aria-label': 'search' }}
+          onKeyUp={(event) => {
+            if (event.key === 'Enter') {
+              handleChange(event)
+            }
+          }}
         />
       </div>
     </>

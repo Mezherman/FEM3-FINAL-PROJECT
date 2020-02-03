@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
+import { Grid, Container, useTheme, SwipeableDrawer, Button, useMediaQuery } from '@material-ui/core';
 
-import ContainerFilter from '../Filter/filter';
+import Filter from '../Filter/filter';
 import ProductList from '../Product-list/product-list';
 import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 
@@ -34,6 +33,15 @@ function Catalog({ assortment, fetchProducts, catalogLocation }) {
       })
   }, [topList]);
 
+  const [filterIsOpen, setFilterIsOpen] = useState(false);
+
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+
+  const toggleFilter = () => {
+    setFilterIsOpen((prev) => !prev);
+  };
+
   useEffect(() => {
     // console.log(123456);
     catalogLocation(assortment);
@@ -46,9 +54,31 @@ function Catalog({ assortment, fetchProducts, catalogLocation }) {
         <ProductBreadcrumbs assortment={assortment} />
         <Grid container spacing={2} className={classes.root}>
           <Grid item sm={12} md={4}>
-            <div className={classes.filter}>
-              <ContainerFilter />
-            </div>
+            {isDesktop
+              ? (
+                <div className={classes.filterDesktop}>
+                  <Filter />
+                </div>
+              )
+              : (
+                <div className={classes.filterMobile}>
+                  <Button
+                    onClick={toggleFilter}
+                    className={classes.button}
+                  >
+                  Open Filter
+                  </Button>
+
+                  <SwipeableDrawer
+                    anchor="bottom"
+                    open={filterIsOpen}
+                    onClose={toggleFilter}
+                  >
+                    <Filter onClose={toggleFilter} />
+                  </SwipeableDrawer>
+                </div>
+              )}
+
           </Grid>
           <Grid item sm={12} md={8}>
             <ProductList assortment={assortment} />
