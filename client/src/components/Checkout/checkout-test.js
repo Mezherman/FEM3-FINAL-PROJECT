@@ -85,7 +85,7 @@ function CheckoutTest (props) {
 
   return (
     <Container component="div" disableGutters>
-      <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitNewUser)}>
+      <form className={classes.passwordForm} noValidate={false} onSubmit={handleSubmit(submitNewUser)}>
         <CheckoutForm />
       </form>
     </Container>

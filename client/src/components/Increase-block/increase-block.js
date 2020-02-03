@@ -51,9 +51,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function IncreaseBlock() {
+export default function IncreaseBlock({ qty, setQty }) {
   const classes = useStyles();
-  const [qty, setQty] = useState(1);
+  // const [qty, setQty] = useState(1);
 
   const handleChange = (event) => {
     if (event.target.value === '') {

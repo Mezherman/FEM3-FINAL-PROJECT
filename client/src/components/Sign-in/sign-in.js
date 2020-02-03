@@ -16,9 +16,7 @@ import {
 import useStylesSingIn from './_sign-in';
 import RoutesName from '../../routes-list';
 import postLoginData from '../../services/postLoginData'
-import { loginLoaded, fetchCustomerData } from '../../redux/actions/user';
-import { mergeDBWithLocalStorage } from '../../redux/actions/CartActions';
-import { getFavoritesFromDB } from '../../redux/actions/favorites';
+import { loadAllDataAfterLogin } from '../../redux/actions/load-all-data'
 
 function SignIn (props) {
   const [login, setLogin] = useState(null);
@@ -29,11 +27,7 @@ function SignIn (props) {
   const {
     onClose,
     user,
-    loginLoaded,
-    userLoadedData,
-    mergeCart,
-    fetchFavorites,
-    fetchCustomerData
+    loadAllDataAfterLogin,
   } = props;
   const classes = useStylesSingIn();
 
@@ -83,11 +77,8 @@ function SignIn (props) {
     postLoginData(userData)
       .then((loginResult) => {
         localStorage.setItem('token', `${loginResult.data.token}`);
-        loginLoaded();
+        loadAllDataAfterLogin();
         onClose();
-        mergeCart();
-        fetchCustomerData();
-        fetchFavorites();
         // localStorage.setItem('L', `${loginResult.data.token}`);
         // const token = localStorage.getItem('token');
         // console.log(token)
@@ -114,7 +105,7 @@ function SignIn (props) {
         <Typography className={classes.errorText} component="h3" variant="inherit">
           {errorMessage}
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.passwordForm} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -202,14 +193,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loginLoaded: () => {
-    dispatch(loginLoaded())
+  loadAllDataAfterLogin: () => {
+    dispatch(loadAllDataAfterLogin())
   },
-  mergeCart: () => {
-    dispatch(mergeDBWithLocalStorage())
-  },
-  fetchCustomerData: () => dispatch(fetchCustomerData()),
-  fetchFavorites: () => dispatch(getFavoritesFromDB())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

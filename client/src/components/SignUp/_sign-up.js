@@ -28,44 +28,18 @@ const useStyles = makeStyles((theme) => ({
       alignSelf: 'flex-end'
     }
   },
-  modalInfoIcon: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 250,
-    margin: '0 auto',
-    [theme.breakpoints.up('md')]: {
-      width: 350
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: 450
-    }
-  },
   paperInfoIcon: {
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(0, 0, 1),
-    border: `2px solid ${theme.palette.primary.main}`
+    border: `4px solid ${theme.palette.primary.main}`
   },
   paperInfoError: {
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(0, 0, 1),
-    border: `2px solid ${theme.palette.error.dark}`
+    border: `4px solid ${theme.palette.error.dark}`
   },
-  modalInfoTitle: {
-    position: 'relative',
-    textAlign: 'center',
-    margin: 0,
-    padding: theme.spacing(2, 3),
-    backgroundColor: '#dad7ce',
-    fontSize: 20,
-    fontWeight: 'normal'
-  },
-  // modalInfoBtn: {
-  //   padding: theme.spacing(2, 3),
-  //   textAlign: 'center'
-  // },
   submit: {
     display: 'block',
     margin: '0 auto',
@@ -76,8 +50,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       padding: theme.spacing(1, 3),
     }
-  },
-
+  }
 }));
 
 export default useStyles;

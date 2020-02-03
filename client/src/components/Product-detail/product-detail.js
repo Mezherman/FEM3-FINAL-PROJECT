@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
@@ -10,6 +10,7 @@ import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Box } from '@material-ui/core';
 import './carousel-react.scss';
+import { bindActionCreators } from 'redux'
 import StopIcon from '@material-ui/icons/Stop';
 
 import ProductDetailCollapse from './Product-detail-collapse/product-detail-collapse';
@@ -21,8 +22,9 @@ import ProductDetailTab from './Product-detail-tab/product-detail-tab';
 import useStyles from './_product-detail';
 import AddToFavoriteBtn from '../Add-to-favorites/Add-to-favorite-btn';
 import IncreaseBlock from '../Increase-block/increase-block';
+import { addProductToCart, setProductQuantity } from '../../redux/actions/CartActions';
 
-function ProductDetail({ product, favorites }) {
+function ProductDetail({ product, favorites, actionAddProductToCart }) {
   const {
     imageUrls,
     name,
@@ -41,9 +43,6 @@ function ProductDetail({ product, favorites }) {
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
   const [modalIsVisible, setModalVisibility] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const handleChange = (event) => {
-    setQuantity(event.target.value);
-  };
   const closeModal = () => {
     setModalVisibility(false)
   };
@@ -54,13 +53,12 @@ function ProductDetail({ product, favorites }) {
       thumbnail: url
     }
   ));
-
   return (
     <Container maxWidth="xl">
       <AddToCart
         open={modalIsVisible}
         onModalClose={closeModal}
-        product={{ imageUrls, name, currentPrice }}
+        product={{ imageUrls, name, currentPrice, itemId }}
       />
       <h1 className={classes.title}>{name.toUpperCase()[0] + name.slice(1)}</h1>
       <p className={classes.itemNo}>
@@ -136,7 +134,7 @@ function ProductDetail({ product, favorites }) {
 
                   <IncreaseBlock
                     qty={quantity}
-                    onChange={handleChange}
+                    setQty={setQuantity}
 
                   />
                   <div className={classes.disableBlock}>
@@ -163,6 +161,8 @@ function ProductDetail({ product, favorites }) {
                       color="primary"
                       disableElevation
                       onClick={() => {
+                        actionAddProductToCart(product, quantity);
+
                         setModalVisibility(true)
                       }}
                     >
@@ -205,8 +205,12 @@ function ProductDetail({ product, favorites }) {
   );
 }
 const mapStateToProps = (state) => state.favoritesReducer;
+const mapDispatchToProps = (dispatch) => ({
+  actionAddProductToCart:
+    (productData, quantityVal) => dispatch(addProductToCart(productData, quantityVal)),
+})
 
-export default connect(mapStateToProps)(ProductDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);
 
 ProductDetail.propTypes = {
   product:
@@ -217,4 +221,5 @@ ProductDetail.propTypes = {
       PropTypes.boolean])
   )
     .isRequired,
+  actionAddProductToCart: PropTypes.func,
 };

@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 const initialState = {
   token: '',
   loggedIn: false,
@@ -8,8 +10,13 @@ const initialState = {
 
 export default function user (state = initialState, action) {
   switch (action.type) {
-    case 'FETCH_LOGIN_SUCCESS':
+    case 'FETCH_LOGIN_SUCCESS': {
+      const { token } = action.payload;
+      if (!axios.defaults.headers.common.Authorization) {
+        axios.defaults.headers.common.Authorization = token ?? '';
+      }
       return { ...state, ...action.payload };
+    }
 
     case 'FETCH_LOGIN_ERROR':
       return state;
