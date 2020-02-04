@@ -98,12 +98,9 @@ function Header() {
   const [searchIsShown, setSearchIsShow] = useState(false);
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.between('xs', 'md'));
-  const isTablet = useMediaQuery(theme.breakpoints.between('md', 'lg'));
+  const isMobile = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.only('md'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
-  // console.log('Mobile', isMobile);
-  // console.log('Tablet', isTablet);
-  // console.log('Desctop', isDesktop);
 
   const handleChange = () => {
     setPrevBlockIsVisible((prev) => !prev);
@@ -270,13 +267,14 @@ function Header() {
 
             {/* {isMobile && searchIsShown && */}
             {/* <Search />} */}
-            {/* {isTablet && <Search searchIsShown />}*/}
+
             {/* { <div style={{backgroundColor: 'red'}}><Search /></div>} */}
             <ClickAwayListener onClickAway={handleSearchAway}>
               <div>
                 <Box className={classes.iconButtonBox}>
-                  {/*{isMobile && <Search searchIsShown={searchIsShown} />}*/}
-                  {isDesktop && <Search searchIsShown={searchIsShown}/> }
+                  {isMobile && <Search searchIsShown={searchIsShown} />}
+                  {isTablet && <Search searchIsShown />}
+                  {isDesktop && <Search searchIsShown={searchIsShown} /> }
                   <MenuItem
                     className={classes.headerMenuItem}
                   >

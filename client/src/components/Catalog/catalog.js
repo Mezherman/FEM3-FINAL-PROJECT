@@ -20,18 +20,18 @@ function Catalog({ assortment, fetchProducts, catalogLocation }) {
   const [topList, setTopList] = useState([]);
   const [productsToShow, setProductsToShow] = useState([]);
 
-  useEffect(() => {
-    getCategory(assortment)
-      .then((response) => setTopList(response.topSellers))
-  }, [assortment]);
-
-  useEffect(() => {
-    const cardsToShowString = topList.toString();
-    getFilteredProducts(`itemNo=${cardsToShowString}`)
-      .then((response) => {
-        setProductsToShow(response)
-      })
-  }, [topList]);
+  // useEffect(() => {
+  //   getCategory(assortment)
+  //     .then((response) => setTopList(response.topSellers))
+  // }, [assortment]);
+  //
+  // useEffect(() => {
+  //   const cardsToShowString = topList.toString();
+  //   getFilteredProducts(`itemNo=${cardsToShowString}`)
+  //     .then((response) => {
+  //       setProductsToShow(response)
+  //     })
+  // }, [topList]);
 
   const [filterIsOpen, setFilterIsOpen] = useState(false);
 
