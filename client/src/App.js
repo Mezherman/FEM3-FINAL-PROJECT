@@ -13,7 +13,7 @@ import ScrollToTopOnMount from './components/Pages-scroll-to-top/Pages-scroll-to
 import Spinner from './components/Spinner/spinner';
 import loadAllData from './redux/actions/load-all-data';
 
-function App(props) {
+function App() {
   const dispatch = useDispatch();
   const loadData = useCallback(
     () => dispatch(loadAllData()),
@@ -39,7 +39,8 @@ function App(props) {
               <Notification />
               <Footer />
             </Router>
-            <ScrollTop {...props} />
+            {/*<ScrollTop {...props} />*/}
+            <ScrollTop />
           </>
         )}
     </>
@@ -48,10 +49,10 @@ function App(props) {
 
 export default App;
 
-App.propTypes = {
-  catalogLoading: PropTypes.bool.isRequired,
-  loggedIn: PropTypes.bool.isRequired,
-  fetchCatalog: PropTypes.func.isRequired,
-  login: PropTypes.func.isRequired,
-  mergeCart: PropTypes.func.isRequired
-};
+// App.propTypes = {
+//   catalogLoading: PropTypes.bool.isRequired,
+//   loggedIn: PropTypes.bool.isRequired,
+//   fetchCatalog: PropTypes.func.isRequired,
+//   login: PropTypes.func.isRequired,
+//   mergeCart: PropTypes.func.isRequired
+// };

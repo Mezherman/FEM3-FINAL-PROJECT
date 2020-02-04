@@ -1,6 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const usePdstyles = makeStyles((theme) => ({
+  container: {
+    marginBottom: theme.spacing(10)
+  },
+
   button: {
     marginBottom: theme.spacing(1),
     cursor: 'pointer',
@@ -58,7 +62,7 @@ const usePdstyles = makeStyles((theme) => ({
 
   buttonsContainer: {
     display: 'flex',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     flexDirection: 'row',
     margin: theme.spacing(1, 0)
   },
@@ -77,11 +81,12 @@ const usePdstyles = makeStyles((theme) => ({
     border: `4px solid ${theme.palette.error.dark}`
   },
 
-  submit: {
+  cancelSubmit: {
     display: 'block',
-    margin: '0 auto',
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(2),
+    // margin: '0 auto',
+    margin: theme.spacing(3, 1, 2),
+    // marginTop: theme.spacing(3),
+    // marginBottom: theme.spacing(2),
     padding: theme.spacing(1, 1),
     fontSize: '0.87rem',
     [theme.breakpoints.up('md')]: {

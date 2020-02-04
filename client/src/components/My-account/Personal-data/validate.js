@@ -62,7 +62,9 @@ export default function(values) {
   ) {
     errors.newPassword = 'Password must be between 7 and 30 characters';
   }
-
+  if (values.newPassword !== values.confirmNewPassword) {
+    errors.confirmNewPassword = 'The passwords are different!';
+  }
   if (
     values.telephone &&
     !/^[0-9-+\s()]{10,18}$/i.test(values.telephone)
