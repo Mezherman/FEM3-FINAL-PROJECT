@@ -10,13 +10,20 @@ import FormGroup from '@material-ui/core/FormGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import { connect } from 'react-redux'
+import withWidth from '@material-ui/core/withWidth'
 import RangeSlider from '../Range/range'
 import useStyles from './_filter-panel';
 import { getFilterProducts } from '../../../redux/actions/filter';
 
 function FilterPanel(props) {
   const classes = useStyles();
-  const { name, filterResults, getFilterProducts, max, colors, brands } = props;
+  const { name, filterResults, getFilterProducts, max, colors, brands, width } = props;
+
+  const isShowPanel = {
+    md: 'true',
+    lg: 'true',
+    xl: 'true'
+  }
 
   const handleChange = (event) => {
     let currentRange = [];
@@ -64,11 +71,13 @@ function FilterPanel(props) {
 
   return (
     <div>
-      <ExpansionPanel square className={classes.root} defaultExpanded>
+      <ExpansionPanel
+        className={classes.root}
+        square
+        defaultExpanded={isShowPanel[width]}
+      >
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
-          aria-controls="value"
-          id="value-header"
         >
           <Typography>{name}</Typography>
         </ExpansionPanelSummary>
@@ -105,4 +114,6 @@ FilterPanel.defaultProps = {
   max: null,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FilterPanel)
+const filterPanel = withWidth()(FilterPanel)
+
+export default connect(mapStateToProps, mapDispatchToProps)(filterPanel)

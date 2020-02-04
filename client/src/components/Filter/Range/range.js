@@ -29,28 +29,13 @@ const IOSSlider = withStyles((theme) => ({
     //   },
     // },
   },
-  // active: {},
   valueLabel: {
-    display: 'none'
+    top: -22,
+    '& *': {
+      background: 'transparent',
+      color: '#000',
+    },
   },
-  // track: {
-  //   height: 2,
-  // },
-  // rail: {
-  //   height: 2,
-  //   opacity: 0.5,
-  //   backgroundColor: '#bfbfbf',
-  // },
-  // mark: {
-  //   backgroundColor: '#bfbfbf',
-  //   height: 8,
-  //   width: 1,
-  //   marginTop: -3,
-  // },
-  // markActive: {
-  //   opacity: 1,
-  //   backgroundColor: 'currentColor',
-  // },
 }))(Slider);
 
 function RangeSlider(props) {
@@ -71,9 +56,6 @@ function RangeSlider(props) {
     });
   };
 
-  console.log('value', value)
-  console.log('max ->', maxValue)
-
   const handleInputMin = (event) => {
     setValue([event.target.value === '' ? '' : Number(event.target.value), value[1]]);
     getFilterProducts({
@@ -83,10 +65,9 @@ function RangeSlider(props) {
   };
 
   const handleInputMax = (event) => {
-    setMaxValue(event.target.value === '' ? '' : Number(event.target.value));
-    // setValue([...value, ])
-    // setValue([event.target.value === '' ? '' : Number(event.target.value), minValue]);
-    // setValue([minValue, maxValue]);
+    // setMaxValue(event.target.value === '' ? '' : Number(event.target.value));
+    setValue([value[0], event.target.value === '' ? '' : Number(event.target.value)]);
+    // console.log(value)
     getFilterProducts({
       ...filterResults,
       price: value
@@ -97,20 +78,11 @@ function RangeSlider(props) {
     <>
       <IOSSlider
         max={max}
-        valueLabelDisplay="on"
+        valueLabelDisplay="auto"
         value={value}
         onChange={handleChange}
         aria-labelledby="range-slider"
       />
-
-      {/* <Slider */}
-      {/*  className={classes.root} */}
-      {/*  max={max} */}
-      {/*  valueLabelDisplay="on" */}
-      {/*  value={value} */}
-      {/*  onChange={handleChange} */}
-      {/*  aria-labelledby="range-slider" */}
-      {/* /> */}
       <div className={classes.inputs}>
         <Input
           className={classes.input}
