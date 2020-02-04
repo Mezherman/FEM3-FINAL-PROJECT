@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types';
 import { Slider, Input } from '@material-ui/core';
 import { connect } from 'react-redux'
@@ -9,7 +9,7 @@ import { getFilterProducts } from '../../../redux/actions/filter'
 // const Shadow =
 //   '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
 
-const IOSSlider = withStyles((theme) => ({
+const CustomSlider = withStyles((theme) => ({
   root: {
     color: theme.palette.primary.main,
     left: '2%',
@@ -42,13 +42,13 @@ function RangeSlider(props) {
   const classes = useStyles();
   const { getFilterProducts, filterResults, max } = props;
 
-  const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(max);
-  const [value, setValue] = useState([minValue, maxValue]);
+  const [value, setValue] = useState([0, max]);
+
+  useEffect(() => {
+    combineValues()
+  }, [value])
 
   const handleChange = (event, price) => {
-    setMinValue(price[0]);
-    setMaxValue(price[1]);
     setValue(price);
     getFilterProducts({
       ...filterResults,
@@ -56,27 +56,26 @@ function RangeSlider(props) {
     });
   };
 
-  const handleInputMin = (event) => {
-    setValue([event.target.value === '' ? '' : Number(event.target.value), value[1]]);
+  const combineValues = () => {
+    console.log('->',value)
+
     getFilterProducts({
       ...filterResults,
       price: value
     });
+  }
+
+  const handleInputMin = (event) => {
+    setValue([event.target.value === '' ? '' : Number(event.target.value), value[1]]);
   };
 
   const handleInputMax = (event) => {
-    // setMaxValue(event.target.value === '' ? '' : Number(event.target.value));
     setValue([value[0], event.target.value === '' ? '' : Number(event.target.value)]);
-    // console.log(value)
-    getFilterProducts({
-      ...filterResults,
-      price: value
-    });
   };
 
   return (
     <>
-      <IOSSlider
+      <CustomSlider
         max={max}
         valueLabelDisplay="auto"
         value={value}
