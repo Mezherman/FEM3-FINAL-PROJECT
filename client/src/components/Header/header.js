@@ -293,9 +293,9 @@ function Header() {
               <MenuItem className={classes.headerMenuItem}>
                 <Link to={RoutesName.favorites}>
                   <IconButton edge="end" className={classes.iconButton}>
-                    <Badge badgeContent={totalFavoritesQty.toString()} color="error">
+                    {/*<Badge badgeContent={totalFavoritesQty.toString()} color="error">*/}
                       <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
-                    </Badge>
+                    {/*</Badge>*/}
                   </IconButton>
                   <span className={classes.menuTitle}>Favorites</span>
                 </Link>
