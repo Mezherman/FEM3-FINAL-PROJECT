@@ -7,7 +7,6 @@ import CustomerInfo from './Checkout-form/customer-info';
 import DeliveryPaymentInfo from './Checkout-form/delivery-payment-info';
 import OrderConfirmation from './Checkout-form/order-confirmation';
 import validate from './validate';
-// import validate from '../SignUp/validate';
 import RoutesName from '../../routes-list';
 
 import { placeOrderToDB } from '../../services/checkout';
@@ -40,6 +39,7 @@ let Checkout = (props) => {
       status: 'not shipped',
       email: order.email,
       mobile: order.mobile,
+      comments: order.comments,
       letterSubject: 'Thank you for your order!',
       letterHtml:
         '<h1>Your order is placed. OrderNo is XXXXXXXXXX.</h1><p>{Other details about order in' +
@@ -62,8 +62,9 @@ let Checkout = (props) => {
   };
 
   const submitNewOrder = (order) => {
-    const newOrder = createOrder(order);
+    // console.log('order =', order);
 
+    const newOrder = createOrder(order);
     // console.log('NEW ORDER =', newOrder);
 
     placeOrderToDB(newOrder)
@@ -164,7 +165,8 @@ const mapStateToProps = (state) => {
   return {
     cart: state.cart,
     user: state.user,
-    isFetchingLoadData: state.isFetchingLoadData.isFetching
+    isFetchingLoadData: state.isFetchingLoadData.isFetching,
+    initialValues: state.user
   }
 };
 
@@ -174,6 +176,7 @@ const mapDispatchToProps = {
 
 Checkout = reduxForm({
   form: 'checkout',
+  values: { firstName: 'Petya' },
   validate,
 })(Checkout);
 

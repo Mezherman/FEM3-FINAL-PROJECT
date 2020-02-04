@@ -1,22 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import {
-  Container,
-  Grid,
-  Typography,
-  FormControlLabel,
-  Radio,
-  Divider,
-  Box
-} from '@material-ui/core';
 import { Field } from 'redux-form';
+import { Typography, Divider, Box } from '@material-ui/core';
 
-import { RenderTextField, RenderRadioGroup } from './form-components';
 import RenderCheckboxField from './form-components/checkbox-field';
 
 import useStyles from './_checkout-form';
-import ModalBirthdayInfo from '../../SignUp/Modal-birthday-info/modal-birthday-info';
-import ModalInfoWindow from '../../Info-window/info-window';
 
 export default function OrderConfirmation() {
   const classes = useStyles();

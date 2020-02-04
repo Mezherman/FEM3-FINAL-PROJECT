@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, FormControlLabel, Radio, } from '@material-ui/core';
 import { Field } from 'redux-form';
 
-import { RenderTextField, RenderRadioGroup } from './form-components';
+import RenderRadioGroup from './form-components/radio-group';
 
 import useStyles from './_checkout-form';
 
@@ -12,12 +12,7 @@ export default function DeliveryPaymentInfo() {
   return (
     <>
       <Typography className={classes.blockTitle}>2. PAYMENT METHODS</Typography>
-      <Field name="paymentMethod" component={(args) => {
-        const className = 'radioPaymentMethods';
-        const newArgs = { ...args, className };
-        return RenderRadioGroup(newArgs)
-      }}
-      >
+      <Field name="paymentMethod" component={RenderRadioGroup}>
         <FormControlLabel
           className={classes.root}
           value="creditCard"
@@ -34,12 +29,7 @@ export default function DeliveryPaymentInfo() {
         />
       </Field>
       <Typography className={classes.blockTitle}>3. DELIVERY OPTIONS</Typography>
-      <Field name="delivery" component={(args) => {
-        const className = 'deliveryMethod';
-        const newArgs = { ...args, className };
-        return RenderRadioGroup(newArgs)
-      }}
-      >
+      <Field name="delivery" component={RenderRadioGroup}>
         <FormControlLabel
           className={classes.root}
           value="DHL"

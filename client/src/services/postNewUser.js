@@ -3,11 +3,11 @@ import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:5000';
 
 function postNewUser(newUser, successModal, errorModal) {
-  console.log(1);
+  // console.log(1);
   axios
     .post('/customers', newUser)
     .then((response) => {
-      console.log(response);
+      // console.log(response);
       if (response.statusText === 'OK') {
         successModal();
       }

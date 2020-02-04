@@ -1,14 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  radioGender: {
-    flexDirection: 'row',
-    justifyContent: 'center'
-  },
-  radioPaymentMethods: {
-    flexDirection: 'column',
-    justifyContent: 'flex-start'
-  },
   radioLabel: {
     color: theme.palette.secondary.dark,
   },
@@ -49,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     margin: '5px 0',
+    fontSize: '18px'
   }
 }));
 
