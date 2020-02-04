@@ -8,6 +8,7 @@ import QuantitySelector from '../Quantity-selector/quantity-selector';
 import useStyles from './_cart-product-item';
 import DialogModal from '../Dialog-modal/dialog-modal';
 import useHeaderStyles from '../Cart-product-list-header/_cart-product-list-header';
+import IncreaseBlock from '../../Increase-block/increase-block';
 
 export default function CartProductItem({ product, onSetProductQuantity, onRemoveProduct }) {
   const classes = useStyles();
@@ -15,15 +16,18 @@ export default function CartProductItem({ product, onSetProductQuantity, onRemov
   const handleDialogOpen = () => {
     setDialogOpen(true);
   }
+
   const headerClasses = useHeaderStyles();
   const { product: currentProduct, cartQuantity } = product;
   const subTotalProduct = currentProduct.currentPrice * cartQuantity;
   const onCloseDialogWithStatus = (status) => {
-    console.log(status);
     if (status) {
       onRemoveProduct(currentProduct._id);
     }
     setDialogOpen(false);
+  }
+  const setQty = (qty) => {
+    onSetProductQuantity(currentProduct._id, qty)
   }
   return (
     <Grid item container xs={12} justify="space-between" className={`${classes.root} ${headerClasses.underline}`}>
@@ -65,7 +69,8 @@ Item-Nr. :
           </Grid>
         </Hidden>
         <Grid item xs={6} sm={12}>
-          <QuantitySelector productId={currentProduct._id} onSetProductQuantity={onSetProductQuantity} cartQuantity={cartQuantity} />
+          <IncreaseBlock setQty={setQty} qty={cartQuantity} />
+          {/*<QuantitySelector productId={currentProduct._id} onSetProductQuantity={onSetProductQuantity} cartQuantity={cartQuantity} />*/}
         </Grid>
       </Grid>
       <Grid item container justufy="space-between" sm={2} xs={12}>

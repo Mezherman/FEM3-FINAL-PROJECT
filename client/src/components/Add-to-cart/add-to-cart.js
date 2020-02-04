@@ -13,6 +13,7 @@ import ModalWindow from '../Modal-window/modal-window';
 
 import useStyles from './_add-to-cart';
 import { addProductToCart, setProductQuantity } from '../../redux/actions/CartActions'
+import IncreaseBlock from '../Increase-block/increase-block'
 
 export default function AddToCart({ open, onModalClose, product }) {
   const classes = useStyles();
@@ -39,7 +40,6 @@ export default function AddToCart({ open, onModalClose, product }) {
   useEffect(() => {
     setTotalPrice(stateQuantity * finalPrice)
   }, [stateQuantity, finalPrice]);
-
   return (
     <ModalWindow
       open={open}
@@ -77,20 +77,9 @@ export default function AddToCart({ open, onModalClose, product }) {
                     {finalPrice}
                   </span>
                 </Box>
-                <Paper className={classes.qtyPicker}>
-                  <RemoveIcon
-                    className={classes.sign}
-                    onClick={() => {
-                      if (stateQuantity === 1) return;
-                      handleQty(stateQuantity - 1);
-                    }}
-                  />
-                  <Box className={classes.qty}>{stateQuantity}</Box>
-                  <AddIcon
-                    className={classes.sign}
-                    onClick={() => { handleQty(stateQuantity + 1) }}
-                  />
-                </Paper>
+                <Box className={classes.qtyPicker}>
+                  <IncreaseBlock setQty={handleQty} qty={stateQuantity} />
+                </Box>
                 <Box className={classes.total}>
                   <span>
                     &#8364;
