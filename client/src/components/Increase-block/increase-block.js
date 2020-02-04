@@ -77,7 +77,7 @@ export default function IncreaseBlock({ qty, setQty }) {
           disabled={qty === 1 ? 'true' : false}
           onClick={() => {
             if (qty <= 1) return;
-            setQty((prevQty) => prevQty - 1)
+            setQty(qty - 1)
           }}
           disableElevation
         >
@@ -98,7 +98,7 @@ export default function IncreaseBlock({ qty, setQty }) {
         <Button
           onClick={() => {
             if (qty >= 99) return;
-            setQty((prevQty) => prevQty + 1)
+            setQty(qty + 1)
           }}
         >
           <AddIcon />

@@ -57,7 +57,7 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
       <AddToCart
         open={modalIsVisible}
         onModalClose={closeModal}
-        product={{ imageUrls, name, currentPrice, itemId }}
+        product={{ imageUrls, name, currentPrice, itemId, itemNo }}
       />
       <h1 className={classes.title}>{name.toUpperCase()[0] + name.slice(1)}</h1>
       <p className={classes.itemNo}>
