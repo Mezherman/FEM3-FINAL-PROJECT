@@ -3,6 +3,7 @@ import React from 'react';
 import useStyles from '../SignUp/Sign-up-form/_sign-up-form';
 
 const RenderEditTextField = ({
+  placeholder,
   label,
   name,
   type,
@@ -15,6 +16,7 @@ const RenderEditTextField = ({
     <TextField
       type={type}
       name={name}
+      placeholder={placeholder}
       variant="outlined"
       fullWidth
       id={name}

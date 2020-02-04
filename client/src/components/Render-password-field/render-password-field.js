@@ -26,7 +26,7 @@ const renderPasswordField = ({
     name={name}
     variant="outlined"
     fullWidth
-    id={name + type}
+    id={label}
     error={!!(touched && error)}
     helperText={touched && error}
     {...input}

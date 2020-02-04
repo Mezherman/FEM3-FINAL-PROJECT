@@ -151,6 +151,78 @@ const OrderItem = ({ orderAction }) => {
                 </ListItem>
               </List>
             </Collapse>
+            <Divider variant="middle" />
+            <Collapse
+              in={open}
+              timeout="auto"
+              unmountOnExit
+              onClick={handleClick}
+            >
+              <List component="div" disablePadding>
+                <ListItem className={classes.mainBlock} >
+                  <Grid
+                    item
+                    container
+                    xs={12}
+                    justify="space-between"
+                    alignItems="center"
+                    direction="row"
+                    className={classes.productContainer}
+                  >
+                    <Grid
+                      item
+                      container
+                      xs={12}
+                      sm={2}
+                      md={1}
+                      className={classes.imgContainer}
+                    />
+                    <Grid
+                      item
+                      container
+                      xs={12}
+                      sm={3}
+                      md={4}
+                      justify="center"
+                    >
+                      <span>Item-Num: </span>
+                    </Grid>
+                    <Grid
+                      item
+                      container
+                      xs={12}
+                      sm={3}
+                      md={3}
+                      justify="center"
+                      className={classes.textCenter}
+                    >
+                      <span>Product: </span>
+                    </Grid>
+                    <Grid
+                      item
+                      container
+                      xs={12}
+                      sm={1}
+                      md={2}
+                      justify="center"
+                      className={classes.textRight}
+                    >
+                      <span>Price: </span>
+                    </Grid>
+                    <Grid
+                      item
+                      container
+                      xs={12}
+                      sm={1}
+                      md={2}
+                      className={classes.textRight}
+                    >
+                      <span>Amount: </span>
+                    </Grid>
+                  </Grid>
+                </ListItem>
+              </List>
+            </Collapse>
             {products.map((its) => (
               <Collapse
                 in={open}
@@ -195,7 +267,8 @@ const OrderItem = ({ orderAction }) => {
                           md={4}
                           justify="center"
                         >
-                          {`Item-Num. ${its.product.itemNo}`}
+                          {/*{`Item-Num. ${its.product.itemNo}`}*/}
+                          {its.product.itemNo}
                         </Grid>
                         <Grid
                           item
@@ -217,7 +290,8 @@ const OrderItem = ({ orderAction }) => {
                           justify="center"
                           className={`${classes.marginTop} ${classes.fontBold} ${classes.textRight}`}
                         >
-                          {`Price €${its.product.currentPrice}`}
+                          {/*{`Price €${its.product.currentPrice}`}*/}
+                          {`€${its.product.currentPrice}`}
                         </Grid>
                         <Grid
                           item
@@ -227,7 +301,8 @@ const OrderItem = ({ orderAction }) => {
                           md={2}
                           className={`${classes.amoutContainer} ${classes.marginTop} ${classes.textCenter} ${classes.fontBold}`}
                         >
-                          {`Amount ${its.cartQuantity}`}
+                          {/*{`Amount ${its.cartQuantity}`}*/}
+                          {its.cartQuantity}
                         </Grid>
                       </Grid>
                     </ListItem>
