@@ -16,6 +16,13 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 320,
     maxWidth: 1000
   },
+  row: {
+      backgroundColor: theme.palette.background.default,
+    transition: theme.transitions.duration,
+    '&:hover': {
+      backgroundColor: theme.palette.background.primary,
+    }
+  },
   name: {
     fontWeight: '500'
   }
@@ -57,31 +64,35 @@ export default function TableSpecifications({ data }) {
     createData('Capacity (in l)', capacity),
     createData('Care', care),
   ];
-  console.log(sizes);
+  // console.log(sizes);
   return (
-    <TableContainer component={Paper} className={classes.tableWrapper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableBody className={classes.root}>
-          {rows.map((row) => (
-            <TableRow key={row.name}>
-              {row.data ? (
-                <TableCell className={classes.name} component="th" scope="row">
-                  {row.name}
-                </TableCell>
-              ) : null}
-              {row.data ? (
-                <TableCell
-                  acomponent="th"
-                  scope="row"
-                >
-                  {row.data}
-                </TableCell>
-              ) : null }
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      {sizes ? (
+        <TableContainer component={Paper} className={classes.tableWrapper}>
+          <Table className={classes.table} aria-label="simple table">
+            <TableBody className={classes.root}>
+              {rows.map((row) => (
+                <TableRow key={row.name} className={classes.row}>
+                  {row.data ? (
+                    <TableCell className={classes.name} component="th" scope="row">
+                      {row.name}
+                    </TableCell>
+                  ) : null}
+                  {row.data ? (
+                    <TableCell
+                      acomponent="th"
+                      scope="row"
+                    >
+                      {row.data}
+                    </TableCell>
+                  ) : null }
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : null}
+    </>
   )
 }
 
