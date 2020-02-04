@@ -44,7 +44,7 @@ const Sorting = (props) => {
       handleChange('sort', '');
       sendSorting([], '');
     }
-  }
+  };
 
   const getSortedList = (event) => {
     const type = event.target.value;
