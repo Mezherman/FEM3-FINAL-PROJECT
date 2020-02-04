@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 
 const renderTextField = ({
-  input, label, name, value, type, meta: { touched, error }, classes, ...custom
+  input, label, name, value, type, meta: { touched, error }, placeholder, classes, ...custom
   }) => (
   <TextField
     type={type}
@@ -16,6 +16,7 @@ const renderTextField = ({
     error={!!(touched && error)}
     helperText={touched && error}
     className={classes.root}
+    placeholder={placeholder || null}
     {...input}
     {...custom}
     label={

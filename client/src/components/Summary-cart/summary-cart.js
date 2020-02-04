@@ -14,7 +14,6 @@ import ContinueBtn from './Continue-btn/continue-btn';
 function SummaryCart() {
   const classes = useStyles();
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
   const dispatch = useDispatch()
   const actions = useMemo(
     () => bindActionCreators(cartActions, dispatch),

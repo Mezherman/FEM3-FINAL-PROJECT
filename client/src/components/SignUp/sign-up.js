@@ -4,13 +4,7 @@ import { reduxForm } from 'redux-form';
 import { useSelector } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
-import {
-  CssBaseline,
-  Grid,
-  Typography,
-  Container,
-  Divider
-} from '@material-ui/core';
+import { Container, CssBaseline, Divider, Grid, Typography } from '@material-ui/core';
 
 import SignUpInfo from './Sign-up-info/signUp-info';
 import SignUpForm from './Sign-up-form/sign-up-form';
@@ -26,6 +20,7 @@ let SignUp = (props) => {
   const [signUpModal, setSignUpModal] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
   const [redirect, setRedirect] = useState(false);
+  const [errorText, setErrorText] = useState('Something go wrong. Try again');
 
   const initialState = {
     gender: 'Mr',
@@ -46,8 +41,12 @@ let SignUp = (props) => {
     setSignUpModal(false);
     setRedirect(true);
   };
-  const handleOpenSetErrorModal = () => {
+  // const handleOpenSetErrorModal = () => {
+  //   setErrorModal(true);
+  // };
+  const handleOpenSetErrorModal = (errorAnswer) => {
     setErrorModal(true);
+    setErrorText(errorAnswer);
   };
 
   const handleCloseSetErrorModal = () => {
@@ -61,11 +60,26 @@ let SignUp = (props) => {
     return null
   };
 
+  const birthDayFunc = (birthdayDay, birthdayMonth, birthdayYear) => {
+    let day, month, year;
+
+    !birthdayDay ? (day = 'XX') : day = birthdayDay;
+    !birthdayMonth ? (month = 'XX') : month = birthdayMonth;
+    !birthdayYear ? (year = 'XXXX') : year = birthdayYear;
+
+    (day.length === 1) && (day = `0${day}`);
+    (month.length === 1) && (month = `0${month}`);
+
+    return `${day}.${month}.${year}`;
+  };
+
   const submitNewUser = (values) => {
+    const { birthdayDay, birthdayMonth, birthdayYear } = values;
+
     const newUser = {
       ...initialState,
       ...values,
-      birthdate: `${values.birthdayDay}.${values.birthdayMonth}.${values.birthdayYear}`
+      birthdate: birthDayFunc(birthdayDay, birthdayMonth, birthdayYear)
     };
 
     console.log(newUser);
@@ -107,14 +121,13 @@ let SignUp = (props) => {
           </Grid>
         </form>
 
-        {/* <Button onClick={handleOpenSignUpModal}>Open registration modal</Button> */}
         { signUpModal && (
           <ModalResponse
             openModal={signUpModal}
             handleClose={handleCloseSignUpModal}
             inModal={signUpModal}
             classModal={classes.paperInfoIcon}
-            value='Your account was successfully registered'
+            value="Your account was successfully registered"
             submitClass={classes.submit}
           />
         )}
@@ -124,11 +137,10 @@ let SignUp = (props) => {
             handleClose={handleCloseSetErrorModal}
             inModal={errorModal}
             classModal={classes.paperInfoError}
-            value='Something go wrong. Try again'
+            value={errorText}
             submitClass={classes.submit}
           />
         )}
-
       </div>
     </Container>
   );

@@ -11,10 +11,12 @@ import ProductCardCarousel from '../Product-card-carousel/product-card-carousel'
 import Spinner from '../Spinner/spinner';
 import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 import { getFilteredProducts } from '../../services/filter';
+import Comment from '../Comment/comment';
+import getCurrentProduct from '../../redux/actions/currentProduct';
 
 function ProductPage(props) {
   // console.log('PROPS =', props);
-  const { assortment, itemNo, chosenProduct, fetchProduct, productsLoading, setProducts } = props;
+  const { assortment, itemNo, chosenProduct, fetchProduct, productsLoading, setProducts, getChosenProduct } = props;
   const [productsToShow, setProductsToShow] = useState([]);
   const cardsToShow = ['896520', '896520', '896520', '896520', '896520', '217355'];
   // thermos
@@ -64,6 +66,8 @@ function ProductPage(props) {
   useEffect(() => {
     if (!chosenProduct) {
       fetchProduct(itemNo);
+    } else {
+      getChosenProduct(chosenProduct);
     }
   }, [chosenProduct, itemNo, fetchProduct]);
 
@@ -76,7 +80,7 @@ function ProductPage(props) {
   }, [cardsToShowString]);
   // console.log('products slider', productsToShow);
   return (
-      <>
+    <>
       {productsLoading
         ? <Spinner />
         : (
@@ -91,6 +95,7 @@ function ProductPage(props) {
                 </Grid>
               </div>
               <ProductCardCarousel products={productsToShow} />
+              <Comment />
             </Container>
           </>
         )}
@@ -118,7 +123,8 @@ const mapDispatchToProps = (dispatch) => ({
       .then((response) => {
         dispatch(productsLoaded([response.data]));
       })
-  }
+  },
+  getChosenProduct: (product) => dispatch(getCurrentProduct(product))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);
