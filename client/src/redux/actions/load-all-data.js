@@ -11,7 +11,7 @@ const fetchResponse = () => ({
   type: 'FETCH_LOAD_RESPONSE'
 });
 
-export default function loadAllData() {
+function loadAllData() {
   return (dispatch) => Promise.all([
     dispatch(fetchRequest()),
     dispatch(getCatalogFromDB()),
@@ -19,10 +19,11 @@ export default function loadAllData() {
     dispatch(fetchCustomerData()),
     dispatch(mergeDBWithLocalStorage()),
     dispatch(getFavoritesFromDB()),
-    dispatch(fetchResponse())
+    // dispatch(fetchResponse())
   ])
 }
-export function loadAllDataAfterLogin() {
+
+function loadAllDataAfterLogin() {
   return (dispatch) => Promise.all([
     dispatch(fetchRequest()),
     dispatch(loginLoaded()),
@@ -31,4 +32,10 @@ export function loadAllDataAfterLogin() {
     dispatch(getFavoritesFromDB()),
     dispatch(fetchResponse())
   ])
+}
+
+export {
+  loadAllData,
+  loadAllDataAfterLogin,
+  fetchResponse
 }

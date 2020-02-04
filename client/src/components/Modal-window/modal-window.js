@@ -13,24 +13,33 @@ export default function ModalWindow(props) {
   };
 
   return (
-    <Modal
-      aria-labelledby="transition-modal-title"
-      aria-describedby="transition-modal-description"
-      className={classes.modal}
-      open={open}
-      onClose={handleClose}
-      closeAfterTransition
-      BackdropComponent={Backdrop}
-      BackdropProps={{
-        timeout: 500,
+    <div
+      onKeyUp={(event) => {
+        console.log(event);
+        if (event.key === 'Escape') {
+          handleClose()
+        }
       }}
     >
-      <>
-        <Paper className={classes.paper}>
-          {children}
-        </Paper>
-      </>
-    </Modal>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <>
+          <Paper className={classes.paper}>
+            {children}
+          </Paper>
+        </>
+      </Modal>
+    </div>
   );
 }
 

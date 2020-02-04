@@ -16,7 +16,7 @@ export function updateCart(updatedCart) {
 export function deleteProductFromCart(productId) {
   return enhancerAxios(`/cart/${productId}`, { method: 'delete' });
 }
-export function deleteCart() {
+export function deleteCartFromDB() {
   return enhancerAxios('/cart', { method: 'delete' });
 }
 

@@ -3,8 +3,7 @@ const RoutesName = {
   products: '/products',
   cart: '/shopping-cart',
   checkout: '/checkout',
-  checkoutSuccess: '/checkout/success',
-  checkoutError: '/checkout/error',
+  orderConfirmation: '/checkout/confirmation',
   login: '/login',
   signUp: '/sign-up',
   signIn: '/login',
@@ -12,7 +11,6 @@ const RoutesName = {
   contacts: '/contacts',
   delivery: '/delivery',
   personalData: '/personal-data',
-  editPersonalData: '/edit-personal-data',
   favorites: '/favorites',
   myOrders: '/orders',
 };

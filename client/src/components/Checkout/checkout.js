@@ -1,99 +1,183 @@
 import React from 'react';
-import { connect, useSelector } from 'react-redux';
-import { Button, Container, Grid } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { Button, Container, Grid, Typography, Box } from '@material-ui/core';
 import { reduxForm } from 'redux-form';
 
-import CheckoutForm from './Checkout-form/checkout-form';
-import validateCheckoutForm from './validate-checkout-form';
-import validate from '../SignUp/validate';
+import CustomerInfo from './Checkout-form/customer-info';
+import DeliveryPaymentInfo from './Checkout-form/delivery-payment-info';
+import OrderConfirmation from './Checkout-form/order-confirmation';
+import validate from './validate';
+import RoutesName from '../../routes-list';
 
 import { placeOrderToDB } from '../../services/checkout';
-import { getCustomer } from '../../services/customer';
+import { deleteCartFromDB } from '../../services/cart';
+import { clearCart } from '../../redux/actions/CartActions';
 
-import useStyles from '../SignUp/_sign-up';
+import useStyles from './_checkout';
+import Spinner from '../Spinner/spinner';
 
 let Checkout = (props) => {
   // console.log('PROPS IN CHECKOUT =', props);
   const classes = useStyles();
-  const { history, handleSubmit } = props;
-  // const { cart, userReducer } = useSelector((state) => state);
+  const { history, handleSubmit, user, cart, clearCart, isFetchingLoadData } = props;
 
-  const initialState = {
-    gender: 'Mr',
-    firstName: '',
-    lastName: ''
-  };
+  // console.log('isFetchingLoadData =', isFetchingLoadData);
 
-  const submitNewOrder = (values) => {
-    const newOrder = {
-      ...initialState,
-      ...values
+  const customer = user.loggedIn ? user.customer : '';
+
+  const createOrder = (order) => {
+    // console.log(order);
+    const interimOrder = {
+      deliveryAddress: {
+        country: order.country,
+        city: order.city,
+        address: `${order.street}, ${order.house}`,
+        postal: order.postalCode
+      },
+      shipping: order.delivery,
+      paymentInfo: order.paymentMethod,
+      status: 'not shipped',
+      email: order.email,
+      mobile: order.mobile,
+      comments: order.comments,
+      letterSubject: 'Thank you for your order!',
+      letterHtml:
+        '<h1>Your order is placed. OrderNo is XXXXXXXXXX.</h1><p>{Other details about order in' +
+        ' your HTML}</p>'
     };
 
-    // const newOrder = {
-    //   customerId: `${customer._id}`,
-    //   deliveryAddress: {
-    //     country: 'Ukraine',
-    //     city: 'Kiev',
-    //     address: 'Kreshchatic Street 56//A',
-    //     postal: '01044'
-    //   },
-    //   shipping: 'Kiev 50UAH',
-    //   paymentInfo: 'Credit card',
-    //   status: 'not shipped',
-    //   email: 'vlad.mezhik@gmail.com',
-    //   mobile: '+380630000000',
-    //   letterSubject: 'Thank you for order! You are welcome!',
-    //   letterHtml:
-    //     '<h1>Your order is placed. OrderNo is 023689452.</h1><p>{Other details about order in your HTML}</p>'
-    // };
+    // console.log('CUSTOMER =', customer);
 
-    console.log('NEW ORDER =', newOrder);
+    if (customer) {
+      return {
+        ...interimOrder,
+        customerId: `${customer._id}`
+      }
+    }
 
-    // placeOrderToDB(newOrder)
-    //   .then(() => {
-    //     console.log('order successfully placed');
-    //     history.push('/checkout/success', { test: 1 });
-    //   })
-    //   .catch(() => {
-    //     console.log('order wasn\'t placed');
-    //     history.push('/checkout/error')
-    //   });
+    return {
+      ...interimOrder,
+      products: cart.products
+    }
   };
 
-  // console.log('CART=', cart);
+  const submitNewOrder = (order) => {
+    // console.log('order =', order);
 
-  // const customer = userReducer.loggedIn ? userReducer.customer : { _id: 'unknown' };
+    const newOrder = createOrder(order);
+    // console.log('NEW ORDER =', newOrder);
+
+    placeOrderToDB(newOrder)
+      .then((response) => {
+        // console.log('RESP =', response);
+        if (response.orderIsPlaced) {
+          console.log('order successfully placed');
+          const { orderNo, customerId } = response.placedOrder;
+
+          // console.log('customerId =', customerId);
+
+          if (customerId) {
+            deleteCartFromDB()
+              .then((response) => {
+                // console.log('OK =', response);
+                clearCart();
+              })
+              .catch((error) => console.log('ERROR =', error));
+          } else {
+            window.localStorage.setItem('cart', '');
+            clearCart();
+          }
+
+          history.push(RoutesName.orderConfirmation, {
+            orderDone: true,
+            orderNo
+          });
+        } else {
+          console.log('order wasn\'t placed');
+          history.push(RoutesName.orderConfirmation, {
+            orderDone: false,
+            message: response.message
+          });
+        }
+      })
+      .catch((error) => {
+        console.log('ERROR =', error);
+        history.push(RoutesName.orderConfirmation, { orderDone: false });
+      });
+  };
 
   return (
-    <Container component="div" maxWidth="xl" disableGutters>
-      <form className={classes.form} noValidate={false} onSubmit={handleSubmit(submitNewOrder)}>
-        <Grid container>
-          <Grid item md={4}>
-            <CheckoutForm />
-          </Grid>
-        </Grid>
-        <Button
-          type="submit"
-          onClick={() => {
-            console.log('order sent to DB');
-          }}
-        >
-          PLACE ORDER
-        </Button>
-      </form>
-    </Container>
+    <>
+      {isFetchingLoadData
+        ? <Spinner />
+        : (
+          <Container component="div" maxWidth="xl" disableGutters>
+            <form
+              className={classes.form}
+              noValidate={false}
+              onSubmit={handleSubmit(submitNewOrder)}
+            >
+              <Grid container spacing={3}>
+                <Grid item xs={12} sm={6} md={4}>
+                  <CustomerInfo customer={customer} />
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <DeliveryPaymentInfo />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <OrderConfirmation />
+                  <Box className={classes.btnWrapper}>
+                    <Button
+                      type="submit"
+                      size="large"
+                      variant="contained"
+                      color="primary"
+                      disableElevation
+                      className={classes.btn}
+                      onClick={() => {
+                        console.log('order sent to DB');
+                      }}
+                    >
+                      PLACE ORDER
+                    </Button>
+                    <Button
+                      size="large"
+                      variant="contained"
+                      color="secondary"
+                      disableElevation
+                      className={classes.btn}
+                      onClick={() => history.push(RoutesName.cart)}
+                    >
+                      BACK TO CART
+                    </Button>
+                  </Box>
+                </Grid>
+              </Grid>
+            </form>
+          </Container>
+        )}
+    </>
   )
 };
 
-const mapStateToProps = (state) => ({
-  cart: state.cart,
-  user: state.userReducer
-});
+const mapStateToProps = (state) => {
+  // console.log('STATE =', state);
+  return {
+    cart: state.cart,
+    user: state.user,
+    isFetchingLoadData: state.isFetchingLoadData.isFetching,
+    initialValues: state.user
+  }
+};
+
+const mapDispatchToProps = {
+  clearCart
+};
 
 Checkout = reduxForm({
   form: 'checkout',
-  validateCheckoutForm,
+  values: { firstName: 'Petya' },
+  validate,
 })(Checkout);
 
-export default connect(mapStateToProps)(Checkout)
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
