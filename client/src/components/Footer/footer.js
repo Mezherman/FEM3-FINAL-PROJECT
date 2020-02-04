@@ -21,7 +21,8 @@ export default function Footer() {
               </Link>
               <div>
                 <h2 className={classes.title}>The culinary experts</h2>
-                <p>
+                <Divider />
+                <p className={classes.text}>
               For more than 160 years, the brands that make up the WMF Group have represented the
               best in cooking, drinking and dining.
                 </p>
