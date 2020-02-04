@@ -80,10 +80,13 @@ const useStyles = makeStyles((theme) => ({
   fact: {
     textAlign: 'right',
   },
-
   inStock: {
     position: 'relative',
     color: theme.palette.primary.main,
+    top: '7px'
+  },
+  outStock: {
+    position: 'relative',
     top: '7px'
   },
   sectionTitle: {

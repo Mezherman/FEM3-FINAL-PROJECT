@@ -148,7 +148,7 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
                       )
                       : (
                         <span>
-                          <StopIcon />
+                          <StopIcon className={classes.outStock} />
                     Out of stock
                         </span>
                       )}
