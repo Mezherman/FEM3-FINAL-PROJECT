@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
   btn: {
     width: '100%'
   },
+  link: {
+    textDecoration: 'none'
+  },
   qtyPicker: {
     width: '100px',
     display: 'inline-flex',
