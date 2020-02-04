@@ -11,7 +11,8 @@ import favoritesReducer from './favorites';
 import loadDataReducer from './load-data';
 import carouselReducer from './carousel';
 import sortingReducer from './sorting';
-import slides from './slides';
+import slides from './slides'
+import passwordForm from './password-form';
 import currentProduct from './currentProduct';
 import commentsReducer from './commentsReducer';
 
@@ -28,7 +29,7 @@ export default combineReducers({
   carouselReducer,
   sortingReducer,
   slides,
+  passwordForm,
   currentProduct,
   commentsReducer
-  // form
 })

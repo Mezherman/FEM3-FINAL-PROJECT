@@ -3,13 +3,14 @@ import { useSelector, connect } from 'react-redux';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import { Grid, Divider, Collapse, ListItem, List, } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import getOrders from '../../../../services/getOrders';
-import { orders } from '../../../../redux/actions/user';
+import { orders as ordersAction } from '../../../../redux/actions/user';
 import Spinner from '../../../Spinner/spinner';
 import RoutesName from '../../../../routes-list';
 import useStylesOrderItem from './_order-item';
 
-const OrderItem = (props) => {
+const OrderItem = ({ orderAction }) => {
   const { orders } = useSelector((state) => state.user);
   const [loading, setLoading] = useState(true);
 
@@ -17,13 +18,13 @@ const OrderItem = (props) => {
     if (!orders) {
       getOrders()
         .then((response) => {
-          props.orders(response);
+          orderAction(response);
           setLoading(false);
         })
     } else {
       setLoading(false);
     }
-  }, [orders, props]);
+  }, [orders, orderAction]);
 
   const classes = useStylesOrderItem();
   const [open, setOpen] = useState(false);
@@ -94,7 +95,7 @@ const OrderItem = (props) => {
                 container
                 className={classes.orderInfo}
               >
-                <span>Quantity: </span>
+                <span>Item&apos;s quantity: </span>
                 <span>{` ${products.length}`}</span>
               </Grid>
               {open ? <ExpandLess /> : <ExpandMore />}
@@ -150,6 +151,78 @@ const OrderItem = (props) => {
                 </ListItem>
               </List>
             </Collapse>
+            <Divider variant="middle" />
+            <Collapse
+              in={open}
+              timeout="auto"
+              unmountOnExit
+              onClick={handleClick}
+            >
+              <List component="div" disablePadding>
+                <ListItem className={classes.mainBlock} >
+                  <Grid
+                    item
+                    container
+                    xs={12}
+                    justify="space-between"
+                    alignItems="center"
+                    direction="row"
+                    className={classes.productContainer}
+                  >
+                    <Grid
+                      item
+                      container
+                      xs={12}
+                      sm={2}
+                      md={1}
+                      className={classes.imgContainer}
+                    />
+                    <Grid
+                      item
+                      container
+                      xs={12}
+                      sm={3}
+                      md={4}
+                      justify="center"
+                    >
+                      <span>Item-Num: </span>
+                    </Grid>
+                    <Grid
+                      item
+                      container
+                      xs={12}
+                      sm={3}
+                      md={3}
+                      justify="center"
+                      className={classes.textCenter}
+                    >
+                      <span>Product: </span>
+                    </Grid>
+                    <Grid
+                      item
+                      container
+                      xs={12}
+                      sm={1}
+                      md={2}
+                      justify="center"
+                      className={classes.textRight}
+                    >
+                      <span>Price: </span>
+                    </Grid>
+                    <Grid
+                      item
+                      container
+                      xs={12}
+                      sm={1}
+                      md={2}
+                      className={classes.textRight}
+                    >
+                      <span>Amount: </span>
+                    </Grid>
+                  </Grid>
+                </ListItem>
+              </List>
+            </Collapse>
             {products.map((its) => (
               <Collapse
                 in={open}
@@ -194,7 +267,8 @@ const OrderItem = (props) => {
                           md={4}
                           justify="center"
                         >
-                          {`Item-Num. ${its.product.itemNo}`}
+                          {/*{`Item-Num. ${its.product.itemNo}`}*/}
+                          {its.product.itemNo}
                         </Grid>
                         <Grid
                           item
@@ -216,7 +290,8 @@ const OrderItem = (props) => {
                           justify="center"
                           className={`${classes.marginTop} ${classes.fontBold} ${classes.textRight}`}
                         >
-                          {`Price €${its.product.currentPrice}`}
+                          {/*{`Price €${its.product.currentPrice}`}*/}
+                          {`€${its.product.currentPrice}`}
                         </Grid>
                         <Grid
                           item
@@ -226,7 +301,8 @@ const OrderItem = (props) => {
                           md={2}
                           className={`${classes.amoutContainer} ${classes.marginTop} ${classes.textCenter} ${classes.fontBold}`}
                         >
-                          {`Amount ${its.cartQuantity}`}
+                          {/*{`Amount ${its.cartQuantity}`}*/}
+                          {its.cartQuantity}
                         </Grid>
                       </Grid>
                     </ListItem>
@@ -253,7 +329,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  orders: (data) => dispatch(orders(data))
+  orderAction: (data) => dispatch(ordersAction(data))
 });
+
+OrderItem.propTypes = {
+  orderAction: PropTypes.func.isRequired
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderItem);
