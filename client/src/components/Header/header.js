@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import {
   AppBar,
   Toolbar,
@@ -21,8 +21,8 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import StarsIcon from '@material-ui/icons/Stars'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import PersonIcon from '@material-ui/icons/Person'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
+import { Link, Redirect } from 'react-router-dom';
 // import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -44,6 +44,7 @@ import PreviewBlock from '../Preview-block/preview-cart';
 import HeaderNavbar from '../Header-navbar/header-navbar';
 import Search from '../Search/search'
 import useStyles from './_header';
+import logoutAction from '../../redux/actions/logout'
 // import store from '../../index';
 // import connect from 'react-redux'
 
@@ -187,12 +188,6 @@ function Header() {
     setOpen(false);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-
-    window.location.reload(); // window.location.reload()
-  };
-
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
       event.preventDefault();
@@ -209,6 +204,17 @@ function Header() {
 
     prevOpen.current = open;
   }, [open]);
+
+  // LOGOUT
+
+  const dispatch = useDispatch();
+
+  const { logout } = useSelector((state) => state.logout);
+
+  const handleLogout = useCallback(() => {
+    localStorage.removeItem('token');
+    dispatch(logoutAction());
+  }, [dispatch]);
 
   return (
     <>
@@ -452,6 +458,7 @@ function Header() {
       ) : null}
       {renderMobileMenu}
       {renderMenu}
+      {logout && <Redirect />}
     </>
   );
 }
