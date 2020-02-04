@@ -11,8 +11,9 @@ import favoritesReducer from './favorites';
 import loadDataReducer from './load-data';
 import carouselReducer from './carousel';
 import sortingReducer from './sorting';
-import slides from './slides'
-// import form from './form';
+import slides from './slides';
+import currentProduct from './currentProduct';
+import commentsReducer from './commentsReducer';
 
 export default combineReducers({
   cart,
@@ -26,6 +27,8 @@ export default combineReducers({
   isFetchingLoadData: loadDataReducer,
   carouselReducer,
   sortingReducer,
-  slides
+  slides,
+  currentProduct,
+  commentsReducer
   // form
 })

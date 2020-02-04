@@ -5,7 +5,7 @@ import getCategories from '../../services/getCategories';
 import { getCustomer } from '../../services/customer';
 
 const db = (store) => (next) => async (action) => {
-  console.log(action);
+  // console.log(action);
   const storeCart = { ...store.getState().cart };
   const { loggedIn, token } = store.getState().user;
 
