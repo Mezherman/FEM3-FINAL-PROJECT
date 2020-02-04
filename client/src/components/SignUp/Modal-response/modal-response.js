@@ -9,10 +9,10 @@ import {
 import useStyles from './_modal-response';
 
 const ModalResponse = ({
-  success, openModal, handleClose, inModal, classModal, value, submitClass
+  openModal, handleClose, inModal, classModal, value, submitClass
 }) => {
   const classes = useStyles();
-  // if (success) {
+
   return (
     <Modal
       aria-labelledby="transition-modal-title"
@@ -43,8 +43,6 @@ const ModalResponse = ({
       </Fade>
     </Modal>
   )
-  // }
-  // return null
 };
 
 export default ModalResponse;

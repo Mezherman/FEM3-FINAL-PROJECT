@@ -13,6 +13,8 @@ import carouselReducer from './carousel';
 import sortingReducer from './sorting';
 import slides from './slides'
 import passwordForm from './password-form';
+import currentProduct from './currentProduct';
+import commentsReducer from './commentsReducer';
 
 export default combineReducers({
   cart,
@@ -28,4 +30,6 @@ export default combineReducers({
   sortingReducer,
   slides,
   passwordForm,
+  currentProduct,
+  commentsReducer
 })

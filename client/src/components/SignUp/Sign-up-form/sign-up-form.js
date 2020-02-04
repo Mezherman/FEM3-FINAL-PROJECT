@@ -2,21 +2,13 @@ import React, { useState } from 'react';
 import { Field } from 'redux-form';
 
 import {
-  Backdrop,
-  Fade,
   FormControl,
   FormControlLabel,
-  FormHelperText,
-  FormLabel,
   Grid,
   InputAdornment,
-  Modal,
   Radio,
-  RadioGroup,
-  TextField,
   Typography,
   Box,
-  IconButton
 } from '@material-ui/core';
 
 import { PropTypes } from 'prop-types';
@@ -74,7 +66,7 @@ const SignUpForm = () => {
       <FormControl>
         <InputAdornment htmlFor="birthdayDay" className={classes.labelBirthday} position="start">
             Do you fancy a birthday surprise?
-            <ModalBirthdayInfo />
+          <ModalBirthdayInfo />
         </InputAdornment>
       </FormControl>
 
@@ -97,10 +89,11 @@ const SignUpForm = () => {
           label="Password"
           type="password"
           eyeToggle={eyeToggle}
-          togglePasswordMask={togglePasswordMask} />
+          togglePasswordMask={togglePasswordMask}
+        />
       </Box>
       <Box mb={2}>
-        <Field name="telephone" component={renderTextField} classes={classes} label="Phone number" type="tel" />
+        <Field name="telephone" component={renderTextField} classes={classes} label="Phone number" type="tel" placeholder="+380XXX XX XX XX" />
       </Box>
     </Grid>
   )
