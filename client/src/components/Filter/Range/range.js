@@ -45,7 +45,7 @@ function RangeSlider(props) {
   const [value, setValue] = useState([0, max]);
 
   useEffect(() => {
-    combineValues()
+    combineInputs()
   }, [value])
 
   const handleChange = (event, price) => {
@@ -56,22 +56,28 @@ function RangeSlider(props) {
     });
   };
 
-  const combineValues = () => {
-    console.log('->',value)
+  const handleInputMin = (event) => {
+    if (event.target.value > max) {
+      event.target.value = 0
+    }
+    setValue([event.target.value === '' ? '' : Number(event.target.value), value[1]]);
+  };
 
+  const handleInputMax = (event) => {
+    if (event.target.value > max) {
+      event.target.value = max
+    }
+    setValue([value[0], event.target.value === '' ? '' : Number(event.target.value)]);
+  };
+
+  const combineInputs = () => {
     getFilterProducts({
       ...filterResults,
       price: value
     });
   }
 
-  const handleInputMin = (event) => {
-    setValue([event.target.value === '' ? '' : Number(event.target.value), value[1]]);
-  };
-
-  const handleInputMax = (event) => {
-    setValue([value[0], event.target.value === '' ? '' : Number(event.target.value)]);
-  };
+  const error = 'Warning! Your first value should be lower than the second!'
 
   return (
     <>
@@ -83,6 +89,8 @@ function RangeSlider(props) {
         aria-labelledby="range-slider"
       />
       <div className={classes.inputs}>
+        {value[1] < value[0]
+          ? (<div className={classes.error}>{error}</div>) : null}
         <Input
           className={classes.input}
           value={value[0]}

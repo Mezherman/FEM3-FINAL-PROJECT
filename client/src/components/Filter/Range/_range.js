@@ -28,6 +28,13 @@ const useStyles = makeStyles((theme) => ({
   inputs: {
     display: 'flex',
     justifyContent: 'space-between',
+    position: 'relative'
+  },
+  error: {
+    position: 'absolute',
+    color: 'red',
+    bottom: '55px',
+    textAlign: 'justify'
   },
   input: {
     '& input[type=number]::-webkit-inner-spin-button': {
