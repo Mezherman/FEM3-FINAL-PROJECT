@@ -8,11 +8,9 @@ import {
 } from '@material-ui/core';
 import useStyles from './_modal-response';
 
-
 const ModalResponse = ({
   openModal, handleClose, inModal, classModal, value, submitClass
-  }) => {
-
+}) => {
   const classes = useStyles();
 
   return (

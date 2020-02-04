@@ -1,13 +1,18 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const usePdstyles = makeStyles((theme) => ({
+  container: {
+    marginBottom: theme.spacing(10)
+  },
+
   button: {
     marginBottom: theme.spacing(1),
-    // fontSize: '12px',
     cursor: 'pointer',
-    textDecorationLine: 'underline',
-    textDecorationStyle: 'dashed',
-    textUnderlinePosition: 'under',
+    // '&:hover': {
+    //   textDecorationLine: 'underline',
+    //   textDecorationStyle: 'dashed',
+    //   textUnderlinePosition: 'under',
+    // },
   },
   divider: {
     position: 'absolute',
@@ -26,7 +31,6 @@ const usePdstyles = makeStyles((theme) => ({
 
   link: {
     textDecoration: 'none',
-    // color: theme.palette.text.primary,
   },
 
   userData: {
@@ -58,8 +62,36 @@ const usePdstyles = makeStyles((theme) => ({
 
   buttonsContainer: {
     display: 'flex',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     flexDirection: 'row',
+    margin: theme.spacing(1, 0)
+  },
+
+  paperInfoIcon: {
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(0, 0, 1),
+    border: `4px solid ${theme.palette.primary.main}`
+  },
+
+  paperInfoError: {
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(0, 0, 1),
+    border: `4px solid ${theme.palette.error.dark}`
+  },
+
+  cancelSubmit: {
+    display: 'block',
+    // margin: '0 auto',
+    margin: theme.spacing(3, 1, 2),
+    // marginTop: theme.spacing(3),
+    // marginBottom: theme.spacing(2),
+    padding: theme.spacing(1, 1),
+    fontSize: '0.87rem',
+    [theme.breakpoints.up('md')]: {
+      padding: theme.spacing(1, 3),
+    }
   },
 
   emailForm: {
@@ -68,6 +100,14 @@ const usePdstyles = makeStyles((theme) => ({
 
   logout: {
     color: theme.palette.error.dark
+  },
+
+  passwordInputs: {
+    margin: theme.spacing(1, 1, 0)
+  },
+
+  errorText: {
+    color: theme.palette.error.dark,
   },
 }
 ));

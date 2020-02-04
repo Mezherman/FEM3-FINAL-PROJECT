@@ -6,7 +6,6 @@ import MainSlider from '../Main-carousel/mainCarousel'
 
 import Carousels from '../Carousel/carousel';
 // import PagingDots from '../Carousel/pagingDots';
-import PersonalData from '../My-account/edit-personal-data';
 import ProductCardCarousel from '../Product-card-carousel/product-card-carousel';
 // import useStylesCarousel from '../Carousel/_carousel';
 

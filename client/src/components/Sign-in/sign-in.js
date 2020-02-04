@@ -11,8 +11,9 @@ import {
   Typography,
   Container,
   Checkbox,
-  FormControlLabel
+  FormControlLabel, InputAdornment, IconButton
 } from '@material-ui/core';
+import { VisibilityOff, Visibility } from '@material-ui/icons';
 import useStylesSingIn from './_sign-in';
 import RoutesName from '../../routes-list';
 import postLoginData from '../../services/postLoginData'
@@ -77,7 +78,7 @@ function SignIn (props) {
     postLoginData(userData)
       .then((loginResult) => {
         localStorage.setItem('token', `${loginResult.data.token}`);
-        loadAllDataAfterLogin()
+        loadAllDataAfterLogin();
         onClose();
         // localStorage.setItem('L', `${loginResult.data.token}`);
         // const token = localStorage.getItem('token');
@@ -93,6 +94,11 @@ function SignIn (props) {
       });
   }
 
+  const [eyeToggle, setEyeToggle] = useState(true);
+  const togglePasswordMask = () => {
+    setEyeToggle((prev) => (setEyeToggle(!prev)));
+  };
+
   return (
     <Container maxWidth="xs">
       <div className={classes.paper}>
@@ -105,7 +111,7 @@ function SignIn (props) {
         <Typography className={classes.errorText} component="h3" variant="inherit">
           {errorMessage}
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.passwordForm} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -139,10 +145,22 @@ function SignIn (props) {
                 Password
               </FormLabel>
             )}
-            type="password"
+            type={eyeToggle ? 'password' : 'text'}
             id="password"
             autoComplete="current-password"
             onChange={handleOnChangePassword}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={togglePasswordMask}
+                  >
+                    {eyeToggle ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
           />
           {/* <FormControl variant="outlined"> */}
           {/*  <InputLabel ref={labelRef} htmlFor="component-outlined"> */}

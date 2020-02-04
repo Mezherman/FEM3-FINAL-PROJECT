@@ -103,7 +103,7 @@ export default function AddToCart({ open, onModalClose, product }) {
               </Button>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Link to={RoutesName.cart}>
+              <Link to={RoutesName.cart} className={classes.link}>
                 <Button
                   className={classes.btn}
                   size="large"
@@ -112,7 +112,7 @@ export default function AddToCart({ open, onModalClose, product }) {
                   disableElevation
                 >
                   <ShoppingCartOutlinedIcon />
-                  <Box ml={2}>View cart</Box>
+                  <div ml={2}>View cart</div>
                 </Button>
               </Link>
             </Grid>

@@ -78,6 +78,7 @@ function Header() {
   };
 
   const totalCartQuantity = useSelector((state) => state.cart.totalCartQuantity);
+  const totalFavoritesQty = useSelector((state) => state.favoritesReducer.favorites.length);
   const { loggedIn } = useSelector((state) => state.user);
   // console.log('ISLOGGEDIN AAAAAAAAA', loggedIn);
   // const [anchorElLogin, setAnchorElLogin] = useState(null);
@@ -290,7 +291,9 @@ function Header() {
               <MenuItem className={classes.headerMenuItem}>
                 <Link to={RoutesName.favorites}>
                   <IconButton edge="end" className={classes.iconButton}>
-                    <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
+                    <Badge badgeContent={totalFavoritesQty.toString()} color="error">
+                      <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
+                    </Badge>
                   </IconButton>
                   <span className={classes.menuTitle}>Favorites</span>
                 </Link>
@@ -308,7 +311,8 @@ function Header() {
                 ref={loggedIn ? anchorRef : null}
               >
                 <IconButton edge="end" className={classes.iconButton}>
-                  <PersonIcon fontSize="large" className={loggedIn ? classes.iconLoggedIn : classes.iconsStyle} />
+                  <PersonIcon fontSize="large"
+                              className={loggedIn ? classes.iconLoggedIn : classes.iconsStyle} />
                 </IconButton>
                 <span className={classes.menuTitle}>{loggedIn ? 'My Account' : 'Login'}</span>
               </MenuItem>
@@ -328,7 +332,8 @@ function Header() {
                       >
                         <Paper>
                           <ClickAwayListener onClickAway={handleClose}>
-                            <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                            <MenuList autoFocusItem={open} id="menu-list-grow"
+                                      onKeyDown={handleListKeyDown}>
                               <Link to={RoutesName.personalData} className={classes.menuLink}>
                                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                               </Link>

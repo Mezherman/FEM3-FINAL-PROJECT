@@ -11,15 +11,11 @@ import AboutUs from './components/About-us/about-us';
 import Contacts from './components/Contacts/contacts';
 import SignUp from './components/SignUp/sign-up'
 import Delivery from './components/Delivery/delivery';
-import EditPersonalData from './components/My-account/edit-personal-data';
-import PersonalData from './components/My-account/personal-data';
+import PersonalData from './components/My-account/Personal-data/personal-data';
 import LoginModal from './components/Login-modal-window/login-modal-window';
 import Favorites from './components/Favorites/favorites'
 import Checkout from './components/Checkout/checkout';
-import CheckoutTest from './components/Checkout/checkout-test';
 import CheckoutStatus from './components/Checkout/Status/status';
-import PutPersonalData from './components/My-account/put-personal-data'
-import MyForm from './components/My-account/form-mui-valid'
 import CustomerOrders from './components/My-account/Customer-orders/customer-orders';
 
 export default function Routes() {
@@ -73,11 +69,7 @@ export default function Routes() {
                 <Home />
                 <LoginModal
                   isLoggedIn={loggedIn}
-                  // isLoggedIn={()=>{loggedIn(loggedIn)}}
-                  // onSuccessLogin={onSuccessLogin}
                   onModalClose={closeModal}
-                  // onModalClose={ closeModal}
-                  // onModalCloseBack={closeModalFromBack}
                   open={modalIsVisible}
                 />
               </div>
@@ -96,11 +88,7 @@ export default function Routes() {
                 <Home />
                 <LoginModal
                   isLoggedIn={loggedIn}
-                  // isLoggedIn={()=>{loggedIn(loggedIn)}}
-                  // onSuccessLogin={onSuccessLogin}
                   onModalClose={closeModal}
-                  // onModalClose={ closeModal}
-                  // onModalCloseBack={closeModalFromBack}
                   open={modalIsVisible}
                 />
               </div>
@@ -166,23 +154,36 @@ export default function Routes() {
           )
         }}
       />
-      <Route path={RoutesName.favorites} component={Favorites} />
+      <Route
+        path={RoutesName.favorites}
+        render={() => (
+          loggedIn
+            ? (
+              <Favorites />
+            )
+            : (
+              <div>
+                <Home />
+                <LoginModal
+                  isLoggedIn={loggedIn}
+                  onModalClose={closeModal}
+                  open={modalIsVisible}
+                />
+              </div>
+            )
+        )}
+      />
       <Route
         path={`${RoutesName.products}/search`}
         exact
         render={() => <Catalog assortment="cooking" />}
       />
-      <Route path={RoutesName.checkoutSuccess} component={CheckoutStatus} />
-      <Route path={RoutesName.checkoutError} component={CheckoutStatus} />
-      <Route path={RoutesName.checkout} component={Checkout} />
+      <Route path={RoutesName.orderConfirmation} component={CheckoutStatus} />
+      <Route path={RoutesName.checkout} exact component={Checkout} />
       <Route path={RoutesName.cart} component={SummaryCart} />
       <Route path={RoutesName.aboutUs} component={AboutUs} />
       <Route path={RoutesName.delivery} component={Delivery} />
       <Route path={RoutesName.contacts} component={Contacts} />
-      <Route path={RoutesName.editPersonalData} component={EditPersonalData} />
-      {/*<Route path="/edit" component={EditFormWithValidation} />*/}
-      <Route path="/edit-mui" component={MyForm} />
-
       /*in the end*/
       <Route path={RoutesName.home} exact>
         <Home />

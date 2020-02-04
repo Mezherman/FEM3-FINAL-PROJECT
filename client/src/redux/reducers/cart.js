@@ -1,7 +1,5 @@
 const initialState = {
-  products: [
-
-  ],
+  products: [],
   totalCartQuantity: 0,
   totalCartPrice: 0
 };
@@ -19,6 +17,16 @@ export default function cart(state = initialState, action) {
         };
       }
     }
-    default: return { ...state };
+
+    case 'CLEAR_CART': {
+      return {
+        products: [],
+        totalCartQuantity: 0,
+        totalCartPrice: 0
+      };
+    }
+
+    default:
+      return { ...state };
   }
 }

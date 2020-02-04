@@ -1,12 +1,12 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
-import useStyleOrders from './_customer-orders'
 import CollapseOrderItem from './Order-item/order-item';
+import usePdstyles from '../Personal-data/_personal-data'
 
 const CustomerOrders = () => {
-  const classes = useStyleOrders();
+  const pdClasses = usePdstyles();
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" className={pdClasses.container}>
       <h1>Your Orders</h1>
       <CollapseOrderItem />
     </Container>
