@@ -22,7 +22,8 @@ function Filter(props) {
     filterParamsLoaded,
     filterParams,
     filterResults,
-    categoriesReducer
+    categoriesReducer,
+    onClose
   } = props;
 
   const { catalogLocation, catalog } = categoriesReducer;
@@ -51,7 +52,7 @@ function Filter(props) {
     />
   ));
 
-  let valToFilter;
+  let valToFilter = '';
   let valOfBrands = '';
   const valOfCollection = '';
   let valOfColor = '';
@@ -113,7 +114,8 @@ function Filter(props) {
           getFilteredProducts(valToFilter)
             .then((products) => {
               productsLoaded(products)
-            });
+            })
+            .then(onClose)
         }}
       >
         Filter
@@ -126,7 +128,8 @@ function mapStateToProps(state) {
   return {
     filterResults: state.filterReducer.filterResults,
     filterParams: state.filterReducer.filterParams,
-    categoriesReducer: state.categoriesReducer
+    categoriesReducer: state.categoriesReducer,
+    currentCategory: state.categoriesReducer.catalogLocation
   }
 }
 

@@ -34,7 +34,8 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
     brand,
     enabled,
     itemNo,
-    _id: itemId
+    _id: itemId,
+    quantity: quantityAvailable
   } = product;
   const classes = useStyles();
   const theme = useTheme();
@@ -137,9 +138,8 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
 
                   />
                   <div className={classes.disableBlock}>
-
                     <span>Deliverable:</span>
-                    {enabled
+                    {quantityAvailable !== 0
                       ? (
                         <span >
                           <StopIcon className={classes.inStock} />

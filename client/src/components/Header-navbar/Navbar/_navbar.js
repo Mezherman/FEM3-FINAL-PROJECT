@@ -1,6 +1,30 @@
-import { makeStyles } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => createStyles({
+
+  drawer: {
+    [theme.breakpoints.up('sm')]: {
+      width: '80%',
+      flexShrink: 0,
+    },
+  },
+  drawerPaper: {
+    width: '80%',
+  },
+  icon: {
+    marginRight: '10px'
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
+  },
+  nestedMenuItem: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    // padding: '10px',
+  },
   root: {
     textTransform: 'uppercase',
     color: theme.palette.text.primary,
@@ -23,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
   },
   headerMenuListHyperlink: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'start',
     padding: '10px',
     color: theme.palette.text.primary,
     textDecoration: 'none',
@@ -41,7 +68,10 @@ const useStyles = makeStyles((theme) => ({
   category: {
     color: 'red',
     fontWeight: '500',
-  }
-}))
+  },
+  '.MuiDrawer-paper': {
+    width: '80%'
+  },
+}));
 
 export default useStyles

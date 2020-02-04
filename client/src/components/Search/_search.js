@@ -1,40 +1,42 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  wrapper: {
-    position: 'relative',
-  },
-  searchInput: {
+  search: {
     position: 'absolute',
-    // zIndex: '1111',
-    minWidth: '200px',
     top: '113%',
     backgroundColor: 'white',
     width: '100%',
     left: '0',
-    // left: '150px',
   },
   [theme.breakpoints.up('md')]: {
-    searchInput: {
-      position: 'absolute',
-      zIndex: '1111',
-      minWidth: '200px',
-      left: '150px',
-      top: '18%',
-      width: '50%'
+    search: {
+      zIndex: '1',
+      left: '20%',
+      top: '25%',
+      maxWidth: '50%',
+      position: 'absolute'
     },
   },
-  root: {
-    '& .MuiOutlinedInput-root[class*="MuiOutlinedInput-root"]': {
-      paddingLeft: theme.spacing(4),
-    }
+  [theme.breakpoints.up('lg')]: {
+    search: {
+      left: '7%',
+      maxWidth: '660px',
+    },
   },
-
+  inputRoot: {
+    border: '1px solid black',
+    width: '100%',
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 7),
+    width: '100%'
+  },
   searchIcon: {
+    zIndex: '1',
     height: '100%',
     opacity: 0.5,
     position: 'absolute',
-    paddingLeft: theme.spacing(1)
+    marginLeft: theme.spacing(3)
   }
 }));
 
