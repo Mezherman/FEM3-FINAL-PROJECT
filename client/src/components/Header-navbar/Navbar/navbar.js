@@ -206,8 +206,8 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
                 }}
                 className={classes.headerMenuListHyperlink}
               >
-                  <KeyboardArrowLeftIcon className={classes.icon}/>
-                  {subCategory.toUpperCase()}
+                <KeyboardArrowLeftIcon className={classes.icon} />
+                {subCategory.toUpperCase()}
               </MenuItem>
               <Divider />
 
