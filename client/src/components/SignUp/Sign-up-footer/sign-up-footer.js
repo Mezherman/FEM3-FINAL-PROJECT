@@ -12,7 +12,6 @@ import {
   FormHelperText
 } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
-import RoutesName from '../../../routes-list';
 
 import useStyles from './_sign-up-footer';
 import LoginModal from '../../Login-modal-window/login-modal-window';
@@ -57,7 +56,6 @@ const SignUpFooter = () => {
     />
   );
 
-  // if (loggedIn) {
   return (
     <Grid item xs={12} md={11} className={classes.accountContentFooter}>
       <Typography paragraph variant="subtitle2">
@@ -75,58 +73,19 @@ const SignUpFooter = () => {
         Become a myWMF Club member now
       </Button>
       <RouteLink
-        // to={RoutesName.home}
         onClick={handleClick}
         className={classes.linkSignIn}
+        to="/sign-up"
       >
         Already have an account?
         <b> Sign in</b>
       </RouteLink>
       <LoginModal
-        // isLoggedIn={loggedIn}
-        // onSuccessLogin={onSuccessLogin}
         onModalClose={closeModal}
         open={modalIsVisible}
       />
     </Grid>
   )
-  // }
-  // return <Redirect />
-  // return (
-  //   <Grid item xs={12} md={11} className={classes.accountContentFooter}>
-  //     <Typography paragraph variant="subtitle2">
-  //       Secure your welcome bonus!
-  //     </Typography>
-  //     <Typography paragraph variant="body2" align="justify">
-  //       Receive a €10 welcome bonus for your next purchase as well as information and
-  //       special invitations to the VIP sale and events. For this, we need your consent to
-  //       use your data:
-  //     </Typography>
-  //
-  //     <Grid item xs={12}>
-  //       <Field name="agreement" component={renderCheckboxField} />
-  //     </Grid>
-  //
-  //     <Button type="submit" variant="contained" color="primary" className={classes.submit} >
-  //       Become a myWMF Club member now
-  //     </Button>
-  //     <RouteLink
-  //       // to={RoutesName.home}
-  //       onClick={handleClick}
-  //       className={classes.linkSignIn}
-  //     >
-  //       Already have an account?
-  //       <b> Sign in</b>
-  //     </RouteLink>
-  //     <LoginModal
-  //       // isLoggedIn={loggedIn}
-  //       // onSuccessLogin={onSuccessLogin}
-  //       onModalClose={closeModal}
-  //       open={modalIsVisible}
-  //     />
-  //
-  //   </Grid>
-  // )
 };
 
 SignUpFooter.propTypes = {
