@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { MenuItem, useTheme, makeStyles, createStyles, Divider, IconButton, Typography } from '@material-ui/core';
+import { MenuItem, useTheme, Divider } from '@material-ui/core';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
@@ -12,7 +12,6 @@ import HomeIcon from '@material-ui/icons/Home';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
-import CollapsingItem from '../../Product-detail/Product-detail-collapse/collapsing-item';
 import useStyles from './_navbar';
 import RoutesName from '../../../routes-list';
 import store from '../../../index';
