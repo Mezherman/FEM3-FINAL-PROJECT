@@ -1,6 +1,5 @@
 import axios, { useState } from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:5000';
 
 // export default async function login(userData = null) {
 //   if (!userData) {

@@ -10,7 +10,6 @@ import useStylesMainCarousel from './_mainCarousel';
 import getMainSlides from '../../services/getMainSlides';
 import slidesToFetch from '../../redux/actions/slides';
 
-axios.defaults.baseURL = 'http://localhost:5000';
 
 function MainSlider ({ fetchSlides }) {
   const { mainSlides } = useSelector((state) => state.slides);

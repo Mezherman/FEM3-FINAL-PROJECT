@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:5000';
 
 function placeOrderToDB(newOrder) {
   console.log('newOrder =', newOrder);

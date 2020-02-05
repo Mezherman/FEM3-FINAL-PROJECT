@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:5000';
 
 export function getFavoriteProducts() {
   return axios.get('/wishlist')
