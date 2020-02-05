@@ -13,15 +13,13 @@ import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 import { getFilteredProducts } from '../../services/filter';
 import Comment from '../Comment/comment';
 import getCurrentProduct from '../../redux/actions/currentProduct';
+import { getCategory } from '../../services/getCategories';
 
 function ProductPage(props) {
   // console.log('PROPS =', props);
   const { assortment, itemNo, chosenProduct, fetchProduct, productsLoading, setProducts, getChosenProduct } = props;
+  const [topList, setTopList] = useState([]);
   const [productsToShow, setProductsToShow] = useState([]);
-  const cardsToShow = ['896520', '896520', '896520', '896520', '896520', '217355'];
-
-  const cardsToShowString = cardsToShow.toString();
-  // console.log(cardsToShowString);
 
   useEffect(() => {
     if (!chosenProduct) {
@@ -32,6 +30,13 @@ function ProductPage(props) {
   }, [chosenProduct, itemNo, fetchProduct]);
 
   useEffect(() => {
+    getCategory(chosenProduct.categories)
+      .then((response) => setTopList(response.topSellers));
+  }, [assortment]);
+  //
+  const cardsToShowString = topList.toString();
+
+  useEffect(() => {
     getFilteredProducts(`itemNo=${cardsToShowString}`)
       .then((response) => {
         // console.log('resp', response);
@@ -39,6 +44,7 @@ function ProductPage(props) {
       })
   }, [cardsToShowString]);
   // console.log('products slider', productsToShow);
+
   return (
     <>
       {productsLoading

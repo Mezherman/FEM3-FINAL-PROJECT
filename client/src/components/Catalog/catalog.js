@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useSelector } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { Grid, Container, useTheme, SwipeableDrawer, Button, useMediaQuery } from '@material-ui/core';
@@ -19,6 +19,7 @@ import { getCategory } from '../../services/getCategories';
 import { catalogLocation } from '../../redux/actions/categories';
 import { getFilteredProducts } from '../../services/filter';
 import ProductCardCarousel from '../Product-card-carousel/product-card-carousel';
+import BackgroundCatalog from './Background-catalog/backgroundCatalog';
 
 function Catalog({ assortment, fetchProducts, fetchTopProducts, fetchTopProductsList, catalogLocation, productsList }) {
   // console.log('productsList', productsList);
@@ -36,7 +37,6 @@ function Catalog({ assortment, fetchProducts, fetchTopProducts, fetchTopProducts
   //
   useEffect(() => {
     // const cardsToShowString = topList.toString();
-    console.log(cardsToShowString);
     getFilteredProducts(`itemNo=${cardsToShowString}`)
       .then((response) => {
         setProductsToShow(response)
@@ -64,6 +64,7 @@ function Catalog({ assortment, fetchProducts, fetchTopProducts, fetchTopProducts
     <>
       <Container maxWidth="xl">
         <ProductBreadcrumbs assortment={assortment} />
+        {/*<BackgroundCatalog />*/}
         <Grid container spacing={2} className={classes.root}>
           <Grid item sm={12} md={4}>
             {isDesktop
@@ -136,7 +137,7 @@ const mapDispatchToProps = (dispatch) => ({
   //     .catch((err) => dispatch(topProductsListError(err)))
   // },
   // fetchTopProducts: (productsList) => {
-  //   console.log(1);
+  //   console.log(productsList);
   //   dispatch(topProductRequested());
   //   getFilteredProducts(`itemNo=${productsList.toString()}`)
   //     .then((products) => dispatch(topProductLoaded( products )))

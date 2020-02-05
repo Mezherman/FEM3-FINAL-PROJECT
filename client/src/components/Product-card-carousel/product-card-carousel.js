@@ -19,25 +19,25 @@ function ProductCardCarousel(props) {
   };
   const productCardList = (products) => (
     products.map((item) => (
-      <>
+      <div className={classes.wrapper}>
         <ProductCard
           key={item.itemNo}
           product={item}
         />
-      </>
+      </div>
     ))
   )
 
   return (
     <Box className={classes.carousel}>
-      <h2>{label}</h2>
+      <h2 className={classes.title}>{label}</h2>
       <Carousels
       // autoPlay
         wrapAround
         renderBottomCenterControls={null}
         transitionMode="scroll"
         cellSpacing={5}
-        slidesToScroll={2}
+        slidesToScroll={1}
         slidesToShow={slidesToShow[props.width]}
         renderCenterLeftControls={({ previousSlide }) => (
           <Button
