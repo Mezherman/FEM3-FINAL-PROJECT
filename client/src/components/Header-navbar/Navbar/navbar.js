@@ -220,6 +220,19 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
               </MenuItem>
               <Divider />
 
+              <MenuItem
+                onClick={() => {
+                  toggleLastDrawer(false);
+                }}
+              >
+                 <Link
+                  to={`${RoutesName.products}/${subCategory}`}
+                  className={classes.headerMenuListHyperlink}
+                 >
+                  Shop all
+                 </Link>
+              </MenuItem>
+
               {allCategories.filter(
                 (category) => category.parentId === subCategory
               )
@@ -241,7 +254,7 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
                       >
                         {subCategory.name}
                       </Link>
-                      <KeyboardArrowRightIcon />
+                      {/*<KeyboardArrowRightIcon />*/}
                     </MenuItem>
 
                   </>
