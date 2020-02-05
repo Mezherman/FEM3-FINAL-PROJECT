@@ -27,9 +27,6 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
   const [drawerSubCat, drawerSubCatIsOpen] = useState(false);
   const [subCategory, setSubCategory] = useState('');
 
-  console.log('!isDesktop', !isDesktop);
-  console.log('isDesktop', isDesktop);
-
   const toggleDrawerCat = (open) => {
     drawerCatIsOpen(open);
   };
@@ -160,9 +157,9 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
                   toggleDrawerCat(false);
                   toggleDrawer(true);
                 }}
-                className={classes.nestedMenuItem}
+                className={classes.headerMenuListHyperlink}
               >
-                <KeyboardArrowLeftIcon />
+                <KeyboardArrowLeftIcon className={classes.icon} />
                 CATALOG
               </MenuItem>
               <Divider />
@@ -207,16 +204,10 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
                   toggleLastDrawer(false);
                   toggleDrawerCat(true)
                 }}
+                className={classes.headerMenuListHyperlink}
               >
-                {/* <Link */}
-                {/*  to={`${RoutesName.products}/${subCategory}`} */}
-                {/*  className={classes.headerMenuListHyperlink} */}
-                {/* > */}
-                <Typography variant="h5">
-                  <KeyboardArrowLeftIcon />
-                  {subCategory}
-                </Typography>
-                {/* </Link> */}
+                  <KeyboardArrowLeftIcon className={classes.icon}/>
+                  {subCategory.toUpperCase()}
               </MenuItem>
               <Divider />
 
@@ -225,19 +216,18 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
                   toggleLastDrawer(false);
                 }}
               >
-                 <Link
+                <Link
                   to={`${RoutesName.products}/${subCategory}`}
                   className={classes.headerMenuListHyperlink}
-                 >
+                >
                   Shop all
-                 </Link>
+                </Link>
               </MenuItem>
 
               {allCategories.filter(
                 (category) => category.parentId === subCategory
               )
                 .map((subCategory) => (
-                  // console.log(subCategory1)
                   <>
                     <MenuItem
                       key={subCategory.id}
@@ -249,12 +239,11 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
                       <Link
                         to={`${RoutesName.products}/${subCategory.id}`}
                         className={classes.headerMenuListHyperlink}
-
-                        // key={category.id}
+                        key={subCategory.id}
                       >
                         {subCategory.name}
                       </Link>
-                      {/*<KeyboardArrowRightIcon />*/}
+                      {/* <KeyboardArrowRightIcon /> */}
                     </MenuItem>
 
                   </>

@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => createStyles({
   //   },
   // },
   drawerPaper: {
-    width: '100%',
+    width: '80%',
   },
   icon: {
     marginRight: '10px'

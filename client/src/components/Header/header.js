@@ -12,13 +12,10 @@ import {
   // withStyles,
 } from '@material-ui/core'
 
-import Collapse from '@material-ui/core/Collapse';
-
 import { useTheme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu'
 // import SearchIcon from '@material-ui/icons/Search'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
-import StarsIcon from '@material-ui/icons/Stars'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import PersonIcon from '@material-ui/icons/Person'
 import { useSelector } from 'react-redux'
@@ -37,7 +34,6 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
-// import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import LoginModal from '../Login-modal-window/login-modal-window';
 import PreviewBlock from '../Preview-block/preview-cart';

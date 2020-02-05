@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, Divider, Button, SvgIcon } from '@material-ui/core';
+import { PropTypes } from 'prop-types';
 import withWidth from '@material-ui/core/withWidth';
 import ProductCard from '../Product-card/product-card';
 import Carousels from '../Carousel/carousel';
 import useStyles from './_product-card-carousel';
-import { PropTypes } from 'prop-types';
 
 function ProductCardCarousel(props) {
   const { products, label } = props;

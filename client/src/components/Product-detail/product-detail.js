@@ -23,6 +23,7 @@ import useStyles from './_product-detail';
 import AddToFavoriteBtn from '../Add-to-favorites/Add-to-favorite-btn';
 import IncreaseBlock from '../Increase-block/increase-block';
 import { addProductToCart, setProductQuantity } from '../../redux/actions/CartActions';
+import AddToCartButton from '../Add-to-cart-button/add-to-cart-button';
 
 function ProductDetail({ product, favorites, actionAddProductToCart }) {
   const {
@@ -137,37 +138,47 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
                     setQty={setQuantity}
 
                   />
-                  <div className={classes.disableBlock}>
-                    <span>Deliverable:</span>
-                    {quantityAvailable !== 0
-                      ? (
-                        <span >
-                          <StopIcon className={classes.inStock} />
-                    In stock
-                        </span>
-                      )
-                      : (
-                        <span>
-                          <StopIcon />
-                    Out of stock
-                        </span>
-                      )}
-                  </div>
+                  {quantityAvailable !== 0 && (
+                    <div className={classes.disableBlock}>
+                      <span>Availability:</span>
+                      {quantityAvailable < 10
+                        ? (
+                          <span>
+                            <StopIcon className={classes.lowStock} />
+                      Low stock
+                          </span>
+                        )
+                        : (
+                          <span>
+                            <StopIcon className={classes.inStock} />
+                      In stock
+                          </span>
+                        )}
+                    </div>
+                  )}
                   <div className={classes.addToCart}>
-                    <Button
-                      size="large"
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      disableElevation
-                      onClick={() => {
+                    <AddToCartButton
+                      handleClick={() => {
                         actionAddProductToCart(product, quantity);
 
                         setModalVisibility(true)
                       }}
-                    >
-                      <ShoppingCartOutlinedIcon />
-                    </Button>
+                      quantity={quantityAvailable}
+                    />
+                    {/* <Button */}
+                    {/*  size="large" */}
+                    {/*  fullWidth */}
+                    {/*  variant="contained" */}
+                    {/*  color="primary" */}
+                    {/*  disableElevation */}
+                    {/*  onClick={() => { */}
+                    {/*    actionAddProductToCart(product, quantity); */}
+
+                    {/*    setModalVisibility(true) */}
+                    {/*  }} */}
+                    {/* > */}
+                    {/*  <ShoppingCartOutlinedIcon /> */}
+                    {/* </Button> */}
                   </div>
                 </Container>
               </Box>

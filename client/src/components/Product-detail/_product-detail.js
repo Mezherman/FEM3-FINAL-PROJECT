@@ -80,7 +80,11 @@ const useStyles = makeStyles((theme) => ({
   fact: {
     textAlign: 'right',
   },
-
+  lowStock: {
+    position: 'relative',
+    color: theme.palette.error.main,
+    top: '7px'
+  },
   inStock: {
     position: 'relative',
     color: theme.palette.primary.main,
