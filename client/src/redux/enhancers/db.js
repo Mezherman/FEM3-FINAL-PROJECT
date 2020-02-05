@@ -7,7 +7,7 @@ import getCustomer from '../../services/customer';
 const db = (store) => (next) => async (action) => {
   const storeCart = { ...store.getState().cart };
   const { loggedIn, token } = store.getState().user;
-
+  console.log(action);
   switch (action.type) {
     case 'SET_CATALOG_FROM_DB': {
       // console.log('middleware catalog worked');

@@ -12,6 +12,11 @@ const fetchResponse = () => ({
 });
 
 function loadAllData() {
+    return (
+      RequestHelper.fetchEntities(Routes.bookings.all, {}, queryParams)
+        .then(res => dispatch(getBookingsSuccess(res));
+  )
+
   return (dispatch) => Promise.all([
     dispatch(fetchRequest()),
     dispatch(getCatalogFromDB()),
@@ -19,7 +24,7 @@ function loadAllData() {
     dispatch(fetchCustomerData()),
     dispatch(mergeDBWithLocalStorage()),
     dispatch(getFavoritesFromDB()),
-    // dispatch(fetchResponse())
+    dispatch(fetchResponse())
   ])
 }
 
