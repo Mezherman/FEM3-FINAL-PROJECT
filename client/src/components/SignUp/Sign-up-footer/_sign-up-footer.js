@@ -40,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
   linkSignIn: {
     cursor: 'pointer',
     color: theme.palette.secondary.main
+  },
+  link: {
+    textDecoration: 'underline',
+    cursor: 'pointer'
   }
 }));
 

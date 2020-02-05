@@ -1,43 +1,34 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Container } from '@material-ui/core';
+
+import RoutesName from '../../../routes-list';
 
 export default function CheckoutStatus(props) {
-  console.log(props);
-  const orderNo = '123456';
-  const orderMade = false;
+  const { location: { state: { orderDone, orderNo, message } } } = props;
+  // console.log('STATE= ', props.location.state);
+  //
+  // const storeState = useSelector((state) => state);
+  // console.log('STATE =', storeState);
 
   return (
-    <>
-      {orderMade
+    <Container maxWidth="xl">
+      {orderDone
         ? (
-          <>
-            <h1>
-Your order
-              {orderNo}
-              {' '}
-has been successfully placed.
-            </h1>
-            <p>
-Go back to
-              <Link to="/">HOME</Link>
-              {' '}
-page.
-            </p>
-          </>
+          <h2>Your order <strong>№{orderNo}</strong> has been successfully placed. Thank you for
+            your choice!</h2>
         )
         : (
           <>
-            <h1>Your order wasn't placed due to technical problems. Please, try again.</h1>
-            <p>
-Go back to
-              <Link to="/">HOME</Link>
-              {' '}
-page.
-            </p>
+            <h1>Your order wasn't placed. </h1>
+            <p>{message}.</p>
+            <p>Please, try again later.</p>
           </>
-        )}
-
-    </>
+        )
+      }
+      <p>Go back to <Link to={RoutesName.home}>HOME</Link> page.</p>
+      <p>Go back to <Link to={RoutesName.cart}>CART</Link> page.</p>
+    </Container>
   )
 }

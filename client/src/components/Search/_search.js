@@ -1,9 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  wrapper: {
-    position: 'relative',
-  },
   search: {
     position: 'absolute',
     top: '113%',
@@ -22,29 +19,17 @@ const useStyles = makeStyles((theme) => ({
   },
   [theme.breakpoints.up('lg')]: {
     search: {
-      zIndex: '1',
-      // left: '150px',
-      width: 'auto',
-      // position: 'relative'
+      left: '7%',
+      maxWidth: '660px',
     },
   },
   inputRoot: {
     border: '1px solid black',
     width: '100%',
-    [theme.breakpoints.up('lg')]: {
-      width: 'auto'
-    }
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 7),
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('lg')]: {
-      width: 120,
-      '&:focus': {
-        width: 300,
-      },
-    },
+    width: '100%'
   },
   searchIcon: {
     zIndex: '1',

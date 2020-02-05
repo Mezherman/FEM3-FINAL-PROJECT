@@ -44,7 +44,6 @@ import PreviewBlock from '../Preview-block/preview-cart';
 import HeaderNavbar from '../Header-navbar/header-navbar';
 import Search from '../Search/search'
 import useStyles from './_header';
-
 // import store from '../../index';
 // import connect from 'react-redux'
 
@@ -98,12 +97,9 @@ function Header() {
   const [searchIsShown, setSearchIsShow] = useState(false);
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.between('xs', 'md'));
-  const isTablet = useMediaQuery(theme.breakpoints.between('md', 'lg'));
+  const isMobile = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.only('md'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
-  // console.log('Mobile', isMobile);
-  // console.log('Tablet', isTablet);
-  // console.log('Desctop', isDesktop);
 
   const handleChange = () => {
     setPrevBlockIsVisible((prev) => !prev);
@@ -270,13 +266,14 @@ function Header() {
 
             {/* {isMobile && searchIsShown && */}
             {/* <Search />} */}
-            {/* {isTablet && <Search searchIsShown />}*/}
+
             {/* { <div style={{backgroundColor: 'red'}}><Search /></div>} */}
             <ClickAwayListener onClickAway={handleSearchAway}>
               <div>
                 <Box className={classes.iconButtonBox}>
                   {isMobile && <Search searchIsShown={searchIsShown} />}
-                  {isDesktop && <Search searchIsShown={searchIsShown}/> }
+                  {isTablet && <Search searchIsShown />}
+                  {isDesktop && <Search searchIsShown={searchIsShown} /> }
                   <MenuItem
                     className={classes.headerMenuItem}
                   >
@@ -293,55 +290,59 @@ function Header() {
                   </MenuItem>
                   <Divider orientation="vertical" className={classes.dividerStyle} />
 
-                  <MenuItem className={classes.headerMenuItem}>
-                    <Link to={RoutesName.favorites}>
-                      <IconButton edge="end" className={classes.iconButton}>
-                        <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
-                      </IconButton>
-                      <span className={classes.menuTitle}>Favorites</span>
-                    </Link>
-                  </MenuItem>
-                  <Divider orientation="vertical" className={classes.dividerStyle} />
+              <MenuItem className={classes.headerMenuItem}>
+                <Link to={RoutesName.favorites}>
+                  <IconButton edge="end" className={classes.iconButton}>
+                    {/*<Badge badgeContent={totalFavoritesQty.toString()} color="error">*/}
+                      <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
+                    {/*</Badge>*/}
+                  </IconButton>
+                  <span className={classes.menuTitle}>Favorites</span>
+                </Link>
+              </MenuItem>
+              <Divider orientation="vertical" className={classes.dividerStyle} />
 
-                  <MenuItem
-                    className={classes.headerMenuItem}
-                    aria-controls="customized-menu"
-                    aria-haspopup="true"
-                    variant="contained"
-                    onClick={loggedIn ? handleToggle : handleClick}
-                    component=""
-                    href={RoutesName.signIn}
-                    ref={loggedIn ? anchorRef : null}
+              <MenuItem
+                className={classes.headerMenuItem}
+                aria-controls="customized-menu"
+                aria-haspopup="true"
+                variant="contained"
+                onClick={loggedIn ? handleToggle : handleClick}
+                component=""
+                href={RoutesName.signIn}
+                ref={loggedIn ? anchorRef : null}
+              >
+                <IconButton edge="end" className={classes.iconButton}>
+                  <PersonIcon fontSize="large"
+                              className={loggedIn ? classes.iconLoggedIn : classes.iconsStyle} />
+                </IconButton>
+                <span className={classes.menuTitle}>{loggedIn ? 'My Account' : 'Login'}</span>
+              </MenuItem>
+              {loggedIn
+                ? (
+                  <Popper
+                    open={open}
+                    anchorEl={anchorRef.current}
+                    role={undefined}
+                    transition
+                    disablePortal
                   >
-                    <IconButton edge="end" className={classes.iconButton}>
-                      <PersonIcon fontSize="large" className={loggedIn ? classes.iconLoggedIn : classes.iconsStyle} />
-                    </IconButton>
-                    <span className={classes.menuTitle}>{loggedIn ? 'My Account' : 'Login'}</span>
-                  </MenuItem>
-                  {loggedIn
-                    ? (
-                      <Popper
-                        open={open}
-                        anchorEl={anchorRef.current}
-                        role={undefined}
-                        transition
-                        disablePortal
+                    {({ TransitionProps, placement }) => (
+                      <Grow
+                        {...TransitionProps}
+                        style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
                       >
-                        {({ TransitionProps, placement }) => (
-                          <Grow
-                            {...TransitionProps}
-                            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                          >
-                            <Paper>
-                              <ClickAwayListener onClickAway={handleClose}>
-                                <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                  <Link to={RoutesName.personalData} className={classes.menuLink}>
-                                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                  </Link>
-                                  <Link to={RoutesName.myOrders} className={classes.menuLink}>
-                                    <MenuItem onClick={handleClose}>My orders</MenuItem>
-                                  </Link>
-                                  <MenuItem onClick={handleLogout} className={classes.menuLink}>
+                        <Paper>
+                          <ClickAwayListener onClickAway={handleClose}>
+                            <MenuList autoFocusItem={open} id="menu-list-grow"
+                                      onKeyDown={handleListKeyDown}>
+                              <Link to={RoutesName.personalData} className={classes.menuLink}>
+                                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                              </Link>
+                              <Link to={RoutesName.myOrders} className={classes.menuLink}>
+                                <MenuItem onClick={handleClose}>My orders</MenuItem>
+                              </Link>
+                              <MenuItem onClick={handleLogout} className={classes.menuLink}>
                                 Logout
                                   </MenuItem>
                                 </MenuList>

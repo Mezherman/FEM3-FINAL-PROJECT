@@ -15,7 +15,6 @@ import PersonalData from './components/My-account/Personal-data/personal-data';
 import LoginModal from './components/Login-modal-window/login-modal-window';
 import Favorites from './components/Favorites/favorites'
 import Checkout from './components/Checkout/checkout';
-import CheckoutTest from './components/Checkout/checkout-test';
 import CheckoutStatus from './components/Checkout/Status/status';
 import CustomerOrders from './components/My-account/Customer-orders/customer-orders';
 
@@ -70,11 +69,7 @@ export default function Routes() {
                 <Home />
                 <LoginModal
                   isLoggedIn={loggedIn}
-                  // isLoggedIn={()=>{loggedIn(loggedIn)}}
-                  // onSuccessLogin={onSuccessLogin}
                   onModalClose={closeModal}
-                  // onModalClose={ closeModal}
-                  // onModalCloseBack={closeModalFromBack}
                   open={modalIsVisible}
                 />
               </div>
@@ -93,11 +88,7 @@ export default function Routes() {
                 <Home />
                 <LoginModal
                   isLoggedIn={loggedIn}
-                  // isLoggedIn={()=>{loggedIn(loggedIn)}}
-                  // onSuccessLogin={onSuccessLogin}
                   onModalClose={closeModal}
-                  // onModalClose={ closeModal}
-                  // onModalCloseBack={closeModalFromBack}
                   open={modalIsVisible}
                 />
               </div>
@@ -163,15 +154,32 @@ export default function Routes() {
           )
         }}
       />
-      <Route path={RoutesName.favorites} component={Favorites} />
+      <Route
+        path={RoutesName.favorites}
+        render={() => (
+          loggedIn
+            ? (
+              <Favorites />
+            )
+            : (
+              <div>
+                <Home />
+                <LoginModal
+                  isLoggedIn={loggedIn}
+                  onModalClose={closeModal}
+                  open={modalIsVisible}
+                />
+              </div>
+            )
+        )}
+      />
       <Route
         path={`${RoutesName.products}/search`}
         exact
         render={() => <Catalog assortment="cooking" />}
       />
-      <Route path={RoutesName.checkoutSuccess} component={CheckoutStatus} />
-      <Route path={RoutesName.checkoutError} component={CheckoutStatus} />
-      <Route path={RoutesName.checkout} component={Checkout} />
+      <Route path={RoutesName.orderConfirmation} component={CheckoutStatus} />
+      <Route path={RoutesName.checkout} exact component={Checkout} />
       <Route path={RoutesName.cart} component={SummaryCart} />
       <Route path={RoutesName.aboutUs} component={AboutUs} />
       <Route path={RoutesName.delivery} component={Delivery} />

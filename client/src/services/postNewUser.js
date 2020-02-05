@@ -3,7 +3,6 @@ import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:5000';
 
 function postNewUser(newUser, successModal, errorModal) {
-  console.log(1);
   axios
     .post('/customers', newUser)
     .then((response) => {
@@ -13,8 +12,8 @@ function postNewUser(newUser, successModal, errorModal) {
       }
     })
     .catch((error) => {
-      errorModal();
-      // console.log(error.response.data);
+      console.log(error.response.data.message);
+      errorModal(error.response.data.message);
     });
 }
 

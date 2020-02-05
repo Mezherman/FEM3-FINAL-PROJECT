@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { Container } from '@material-ui/core';
+import { Redirect } from 'react-router-dom';
 import Spinner from '../Spinner/spinner';
 
 import { favoritesUpdated } from '../../redux/actions/favorites';
@@ -24,17 +25,18 @@ function Favorites(props) {
     }
   }, [favorites, loggedIn, productsError, productsLoaded, productsRequested]);
 
-  return (
-    <>
+  if (loggedIn) {
+    return (
       <Container maxWidth="xl">
         {
-          productsLoading
-            ? <Spinner />
+          favorites.length === 0
+            ? <h2>NOTHING ADDED TO FAVORITES LIST.</h2>
             : <ProductList products={products} />
         }
       </Container>
-    </>
-  )
+    )
+  }
+  return <Redirect />
 }
 
 const mapStateToProps = (state) =>

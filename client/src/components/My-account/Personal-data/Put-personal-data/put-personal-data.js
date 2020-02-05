@@ -85,8 +85,8 @@ function PutPersonalData (props) {
         <Typography paragraph component="p" variant="subtitle2" className={classes.rightTitle}>
             Please edit the information you want:
         </Typography>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
+        <Grid container spacing={2} direction="column" alignContent="center" >
+          <Grid container item xs={12} sm={6}>
             <Field
               name="firstName"
               component={RenderEditTextField}
@@ -96,7 +96,7 @@ function PutPersonalData (props) {
               type="text"
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid container item xs={12} sm={6}>
             <Field
               name="lastName"
               component={RenderEditTextField}
@@ -106,9 +106,9 @@ function PutPersonalData (props) {
               type="text"
             />
           </Grid>
-        </Grid>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
+        {/*</Grid>*/}
+        {/*<Grid container spacing={2}>*/}
+          <Grid container item xs={12} sm={6}>
             <Field
               name="login"
               component={RenderEditTextField}
@@ -118,7 +118,7 @@ function PutPersonalData (props) {
               type="text"
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid container item xs={12} sm={6}>
             <Field
               name="email"
               component={RenderEditTextField}
@@ -128,20 +128,22 @@ function PutPersonalData (props) {
               type="text"
             />
           </Grid>
-        </Grid>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
+        {/*</Grid>*/}
+        {/*<Grid container spacing={2}>*/}
+          <Grid container item xs={12} sm={6}>
             <Field
               name="telephone"
               component={RenderEditTextField}
+              placeholder="+380XXXXXXXXX"
               defaultValue={telephone}
               classes={classes}
               label="Phone number"
               type="tel"
             />
           </Grid>
+          {/*<Grid item xs={12} sm={6} />*/}
 
-          {birth()}
+          {/*{birth()}*/}
 
         </Grid>
       </Grid>

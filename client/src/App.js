@@ -11,24 +11,25 @@ import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
 import Notification from './components/Notification/notification'
 import ScrollToTopOnMount from './components/Pages-scroll-to-top/Pages-scroll-top-top';
 import Spinner from './components/Spinner/spinner';
-import loadAllData from './redux/actions/load-all-data';
+import { loadAllData, fetchResponse } from './redux/actions/load-all-data';
 
-function App(props) {
+function App() {
   const dispatch = useDispatch();
   const loadData = useCallback(
     () => dispatch(loadAllData()),
     [dispatch]
   );
-  const categories = useSelector((state) => state.categoriesReducer.catalog.mainCategories);
 
-  const isFetchingLoadData = useSelector((state) => state.isFetchingLoadData.isFetching);
   useEffect(() => {
-    loadData();
+    loadData().then(() => dispatch(fetchResponse()));
   }, [loadData]);
+
+  const categories = useSelector((state) => state.categoriesReducer.catalog.mainCategories);
+  const isFetchingLoadData = useSelector((state) => state.isFetchingLoadData.isFetching);
 
   return (
     <>
-      {!categories.length ? (<Spinner />)
+      {isFetchingLoadData ? (<Spinner />)
         : (
           <>
             <Router>
@@ -39,7 +40,8 @@ function App(props) {
               <Notification />
               <Footer />
             </Router>
-            <ScrollTop {...props} />
+            {/*<ScrollTop {...props} />*/}
+            <ScrollTop />
           </>
         )}
     </>
@@ -48,10 +50,10 @@ function App(props) {
 
 export default App;
 
-App.propTypes = {
-  catalogLoading: PropTypes.bool.isRequired,
-  loggedIn: PropTypes.bool.isRequired,
-  fetchCatalog: PropTypes.func.isRequired,
-  login: PropTypes.func.isRequired,
-  mergeCart: PropTypes.func.isRequired
-};
+// App.propTypes = {
+//   catalogLoading: PropTypes.bool.isRequired,
+//   loggedIn: PropTypes.bool.isRequired,
+//   fetchCatalog: PropTypes.func.isRequired,
+//   login: PropTypes.func.isRequired,
+//   mergeCart: PropTypes.func.isRequired
+// };
