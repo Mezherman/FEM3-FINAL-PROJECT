@@ -11,7 +11,6 @@ import ProductCardCarousel from '../Product-card-carousel/product-card-carousel'
 import Spinner from '../Spinner/spinner';
 import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 import { getFilteredProducts } from '../../services/filter';
-import Comment from '../Comment/comment';
 import getCurrentProduct from '../../redux/actions/currentProduct';
 
 function ProductPage(props) {
@@ -95,7 +94,6 @@ function ProductPage(props) {
                 </Grid>
               </div>
               <ProductCardCarousel products={productsToShow} />
-              <Comment />
             </Container>
           </>
         )}
