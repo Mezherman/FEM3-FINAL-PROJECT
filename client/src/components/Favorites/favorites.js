@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
+import { Container } from '@material-ui/core';
 import Spinner from '../Spinner/spinner';
 
 import { favoritesUpdated } from '../../redux/actions/favorites';
@@ -25,11 +26,13 @@ function Favorites(props) {
 
   return (
     <>
-      {
-        productsLoading
-          ? <Spinner />
-          : <ProductList products={products} />
-      }
+      <Container maxWidth="xl">
+        {
+          productsLoading
+            ? <Spinner />
+            : <ProductList products={products} />
+        }
+      </Container>
     </>
   )
 }

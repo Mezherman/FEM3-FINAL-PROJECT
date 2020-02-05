@@ -275,7 +275,7 @@ function Header() {
             <ClickAwayListener onClickAway={handleSearchAway}>
               <div>
                 <Box className={classes.iconButtonBox}>
-                  {/*{isMobile && <Search searchIsShown={searchIsShown} />}*/}
+                  {isMobile && <Search searchIsShown={searchIsShown} />}
                   {isDesktop && <Search searchIsShown={searchIsShown}/> }
                   <MenuItem
                     className={classes.headerMenuItem}
@@ -432,8 +432,8 @@ function Header() {
                           <ShoppingCartOutlinedIcon fontSize="large" className={classes.iconsStyle} />
                         </Badge>
                       </IconButton>
-                    </Link>
                     <span className={classes.menuTitle}>Cart</span>
+                    </Link>
                   </MenuItem>
                 </Box>
               </div>
