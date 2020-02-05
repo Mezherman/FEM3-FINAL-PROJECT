@@ -263,7 +263,6 @@ function Header() {
               toggleDrawer={toggleDrawer}
             />
 
-
             {/* {isMobile && searchIsShown && */}
             {/* <Search />} */}
 
@@ -290,59 +289,64 @@ function Header() {
                   </MenuItem>
                   <Divider orientation="vertical" className={classes.dividerStyle} />
 
-              <MenuItem className={classes.headerMenuItem}>
-                <Link to={RoutesName.favorites}>
-                  <IconButton edge="end" className={classes.iconButton}>
-                    {/*<Badge badgeContent={totalFavoritesQty.toString()} color="error">*/}
-                      <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
-                    {/*</Badge>*/}
-                  </IconButton>
-                  <span className={classes.menuTitle}>Favorites</span>
-                </Link>
-              </MenuItem>
-              <Divider orientation="vertical" className={classes.dividerStyle} />
+                  <MenuItem className={classes.headerMenuItem}>
+                    <Link to={RoutesName.favorites}>
+                      <IconButton edge="end" className={classes.iconButton}>
+                        {/* <Badge badgeContent={totalFavoritesQty.toString()} color="error"> */}
+                        <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
+                        {/* </Badge> */}
+                      </IconButton>
+                      <span className={classes.menuTitle}>Favorites</span>
+                    </Link>
+                  </MenuItem>
+                  <Divider orientation="vertical" className={classes.dividerStyle} />
 
-              <MenuItem
-                className={classes.headerMenuItem}
-                aria-controls="customized-menu"
-                aria-haspopup="true"
-                variant="contained"
-                onClick={loggedIn ? handleToggle : handleClick}
-                component=""
-                href={RoutesName.signIn}
-                ref={loggedIn ? anchorRef : null}
-              >
-                <IconButton edge="end" className={classes.iconButton}>
-                  <PersonIcon fontSize="large"
-                              className={loggedIn ? classes.iconLoggedIn : classes.iconsStyle} />
-                </IconButton>
-                <span className={classes.menuTitle}>{loggedIn ? 'My Account' : 'Login'}</span>
-              </MenuItem>
-              {loggedIn
-                ? (
-                  <Popper
-                    open={open}
-                    anchorEl={anchorRef.current}
-                    role={undefined}
-                    transition
-                    disablePortal
+                  <MenuItem
+                    className={classes.headerMenuItem}
+                    aria-controls="customized-menu"
+                    aria-haspopup="true"
+                    variant="contained"
+                    onClick={loggedIn ? handleToggle : handleClick}
+                    component=""
+                    href={RoutesName.signIn}
+                    ref={loggedIn ? anchorRef : null}
                   >
-                    {({ TransitionProps, placement }) => (
-                      <Grow
-                        {...TransitionProps}
-                        style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                    <IconButton edge="end" className={classes.iconButton}>
+                      <PersonIcon
+                        fontSize="large"
+                        className={loggedIn ? classes.iconLoggedIn : classes.iconsStyle}
+                      />
+                    </IconButton>
+                    <span className={classes.menuTitle}>{loggedIn ? 'My Account' : 'Login'}</span>
+                  </MenuItem>
+                  {loggedIn
+                    ? (
+                      <Popper
+                        open={open}
+                        anchorEl={anchorRef.current}
+                        role={undefined}
+                        transition
+                        disablePortal
                       >
-                        <Paper>
-                          <ClickAwayListener onClickAway={handleClose}>
-                            <MenuList autoFocusItem={open} id="menu-list-grow"
-                                      onKeyDown={handleListKeyDown}>
-                              <Link to={RoutesName.personalData} className={classes.menuLink}>
-                                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                              </Link>
-                              <Link to={RoutesName.myOrders} className={classes.menuLink}>
-                                <MenuItem onClick={handleClose}>My orders</MenuItem>
-                              </Link>
-                              <MenuItem onClick={handleLogout} className={classes.menuLink}>
+                        {({ TransitionProps, placement }) => (
+                          <Grow
+                            {...TransitionProps}
+                            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                          >
+                            <Paper>
+                              <ClickAwayListener onClickAway={handleClose}>
+                                <MenuList
+                                  autoFocusItem={open}
+                                  id="menu-list-grow"
+                                  onKeyDown={handleListKeyDown}
+                                >
+                                  <Link to={RoutesName.personalData} className={classes.menuLink}>
+                                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                                  </Link>
+                                  <Link to={RoutesName.myOrders} className={classes.menuLink}>
+                                    <MenuItem onClick={handleClose}>My orders</MenuItem>
+                                  </Link>
+                                  <MenuItem onClick={handleLogout} className={classes.menuLink}>
                                 Logout
                                   </MenuItem>
                                 </MenuList>
@@ -433,7 +437,7 @@ function Header() {
                           <ShoppingCartOutlinedIcon fontSize="large" className={classes.iconsStyle} />
                         </Badge>
                       </IconButton>
-                    <span className={classes.menuTitle}>Cart</span>
+                      <span className={classes.menuTitle}>Cart</span>
                     </Link>
                   </MenuItem>
                 </Box>

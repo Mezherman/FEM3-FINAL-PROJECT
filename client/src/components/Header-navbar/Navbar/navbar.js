@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { MenuItem, useTheme, makeStyles, createStyles, Divider, IconButton, Typography } from '@material-ui/core';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 import GroupIcon from '@material-ui/icons/Group';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
@@ -26,6 +27,9 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
   const [drawerSubCat, drawerSubCatIsOpen] = useState(false);
   const [subCategory, setSubCategory] = useState('');
 
+  console.log('!isDesktop', !isDesktop);
+  console.log('isDesktop', isDesktop);
+
   const toggleDrawerCat = (open) => {
     drawerCatIsOpen(open);
   };
@@ -33,6 +37,11 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
     setSubCategory(value);
     drawerSubCatIsOpen(open)
   };
+
+  // const backToHome = (open) => {
+  //   setSubCategory(value);
+  //   drawerSubCatIsOpen(open)
+  // };
 
   const toggleLastDrawer = (open) => {
     drawerSubCatIsOpen(open);
@@ -69,6 +78,8 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
                 </Link>
               </MenuItem>
 
+              <Divider />
+
               <MenuItem
                 onClick={() => {
                   toggleDrawerCat(true);
@@ -85,6 +96,8 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
                 <KeyboardArrowRightIcon />
               </MenuItem>
 
+              <Divider />
+
               <MenuItem
                 onClick={() => toggleDrawer(false)}
               >
@@ -96,6 +109,8 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
               ABOUT US
                 </Link>
               </MenuItem>
+
+              <Divider />
 
               <MenuItem
                 onClick={() => toggleDrawer(false)}
@@ -110,6 +125,8 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
                 </Link>
               </MenuItem>
 
+              <Divider />
+
               <MenuItem
                 onClick={() => toggleDrawer(false)}
 
@@ -122,6 +139,8 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
               CONTACTS
                 </Link>
               </MenuItem>
+
+              <Divider />
             </List>
           </Drawer>
 
@@ -136,6 +155,18 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
           >
 
             <List>
+              <MenuItem
+                onClick={() => {
+                  toggleDrawerCat(false);
+                  toggleDrawer(true);
+                }}
+                className={classes.nestedMenuItem}
+              >
+                <KeyboardArrowLeftIcon />
+                CATALOG
+              </MenuItem>
+              <Divider />
+
               {mainCategories.map((category) => (
                 <>
                   <MenuItem
@@ -156,7 +187,6 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
                     </Link>
                     <KeyboardArrowRightIcon />
                   </MenuItem>
-                  <Divider />
                 </>
               ))}
             </List>
@@ -173,19 +203,23 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
 
             <List>
               <MenuItem
-                onClick={() => toggleLastDrawer(false)}
+                onClick={() => {
+                  toggleLastDrawer(false);
+                  toggleDrawerCat(true)
+                }}
               >
-                <Link
-                  to={`${RoutesName.products}/${subCategory}`}
-                  className={classes.headerMenuListHyperlink}
-
-                  // key={category.id}
-                >
-                  <Typography variant="h5">
-                    {subCategory.toUpperCase()[0] + subCategory.slice(1)}
-                  </Typography>
-                </Link>
+                {/* <Link */}
+                {/*  to={`${RoutesName.products}/${subCategory}`} */}
+                {/*  className={classes.headerMenuListHyperlink} */}
+                {/* > */}
+                <Typography variant="h5">
+                  <KeyboardArrowLeftIcon />
+                  {subCategory}
+                </Typography>
+                {/* </Link> */}
               </MenuItem>
+              <Divider />
+
               {allCategories.filter(
                 (category) => category.parentId === subCategory
               )
@@ -209,7 +243,7 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
                       </Link>
                       <KeyboardArrowRightIcon />
                     </MenuItem>
-                    <Divider />
+
                   </>
                 ))}
             </List>
