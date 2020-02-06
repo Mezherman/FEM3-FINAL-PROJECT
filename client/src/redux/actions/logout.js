@@ -1,4 +1,4 @@
-const logoutAction = (data) => ({
+const logoutAction = () => ({
   type: 'LOGOUT_TRUE',
   payload: true
 });

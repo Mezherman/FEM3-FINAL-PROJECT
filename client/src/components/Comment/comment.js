@@ -10,6 +10,7 @@ import { commentsLoaded, commentsRequest, resetCommentsList, sendComment } from 
 import CommentMap from './Comment-map';
 
 import useStyles from './_comment';
+import LoginModal from '../Login-modal-window/login-modal-window';
 
 const Comment = (props) => {
   const {
@@ -25,6 +26,11 @@ const Comment = (props) => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [addCommentDisabled, setAddCommentDisabled] = useState(false);
   const [errorText, setErrorText] = useState(false);
+  const [modalIsVisible, setModalVisibility] = useState(false);
+
+  const closeModal = () => {
+    setModalVisibility(false);
+  };
 
   useEffect(() => {
     if ((id === '') || (id !== currentProduct._id) || !id) {
@@ -39,8 +45,9 @@ const Comment = (props) => {
       setComment((prev) => setComment(!prev));
       setAddCommentDisabled(false);
     } else {
-      setAddCommentDisabled(true);
-      setErrorText(true);
+      // setAddCommentDisabled(true);
+      setModalVisibility(true);
+      // setErrorText(true);
     }
     //
     // userLoggedIn ? setComment((prev) => setComment(!prev)) : setErrorText(true);
@@ -112,11 +119,10 @@ const Comment = (props) => {
     <Box component="div" mt={2} mb={3} align="center">
       <Typography variant="h6" component="h4" align="center" className={classes.title}>{currentProduct.name}</Typography>
       <Button variant="contained" color="primary" disabled={addCommentDisabled} className={classes.commentBtn} onClick={commentHandler}>Add comment</Button>
-      {
-        errorText &&
-          <Typography className={classes.errorLogIn} color="error">You must be logged in to leave a comment</Typography>
-      }
-
+      {/*{*/}
+      {/*  errorText &&*/}
+      {/*    <Typography className={classes.errorLogIn} color="error">You must be logged in to leave a comment</Typography>*/}
+      {/*}*/}
       { addComment && (
         <FormBlock
           handleSubmit={handleSubmit}
@@ -131,6 +137,7 @@ const Comment = (props) => {
         { commentsList &&
           <CommentMap commentsList={commentsList} />}
       </Grid>
+      { !userLoggedIn && <LoginModal onModalClose={closeModal} open={modalIsVisible} /> }
     </Box>
   )
 };
