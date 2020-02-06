@@ -1,6 +1,6 @@
-import React from 'react';
-import { Container } from '@material-ui/core'
+import React from 'react'
 import { Link } from 'react-router-dom'
+import { Container } from '@material-ui/core';
 import RoutesName from '../../routes-list'
 
 export default function NoMatch() {
@@ -8,7 +8,6 @@ export default function NoMatch() {
     <Container maxWidth="xl">
       <div style={{ minHeight: '52vh' }}>
         <h1>We&apos;re sorry, but we can&apos;t find the page you are looking for.</h1>
-        <p>We&apos;re sorry, but we can&apos;t find the page you are looking for.</p>
         <p>How can we help you?</p>
         <ul>
           <li>

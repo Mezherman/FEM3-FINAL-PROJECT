@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   categories_desc: {
     paddingBottom: theme.spacing(3),
-    maxHeight: '120px',
+    maxHeight: '160px',
     overflow: 'hidden',
   },
   categories_description: {

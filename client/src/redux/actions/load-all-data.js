@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { getCatalogFromDB } from './categories'
 import { loginLoaded, fetchCustomerData } from './user'
 import { mergeDBWithLocalStorage } from './CartActions'
@@ -12,6 +13,9 @@ const fetchResponse = () => ({
 });
 
 function loadAllData() {
+  if (process.env.NODE_ENV !== 'production') {
+    axios.defaults.baseURL = 'http://localhost:5000';
+  }
   return (dispatch) => Promise.all([
     dispatch(fetchRequest()),
     dispatch(getCatalogFromDB()),
@@ -19,8 +23,7 @@ function loadAllData() {
     dispatch(fetchCustomerData()),
     dispatch(mergeDBWithLocalStorage()),
     dispatch(getFavoritesFromDB()),
-    // dispatch(fetchResponse())
-  ])
+  ]).then(() => { dispatch(fetchResponse()) })
 }
 
 function loadAllDataAfterLogin() {
@@ -30,8 +33,7 @@ function loadAllDataAfterLogin() {
     dispatch(fetchCustomerData()),
     dispatch(mergeDBWithLocalStorage()),
     dispatch(getFavoritesFromDB()),
-    dispatch(fetchResponse())
-  ])
+  ]).then(() => { dispatch(fetchResponse()) })
 }
 
 export {

@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function IncreaseBlock({ qty, setQty }) {
+export default function IncreaseBlock({ qty, setQty, maxQty }) {
   const classes = useStyles();
   // const [qty, setQty] = useState(1);
 
@@ -60,6 +60,8 @@ export default function IncreaseBlock({ qty, setQty }) {
       setQty('');
     } else if (event.target.value >= 99) {
       setQty(99);
+    } else if (event.target.value >= maxQty) {
+      setQty(maxQty);
     } else if (event.target.value === '0') {
       setQty(1);
     } else {
@@ -97,7 +99,7 @@ export default function IncreaseBlock({ qty, setQty }) {
 
         <Button
           onClick={() => {
-            if (qty >= 99) return;
+            if (qty >= 99 || qty >= maxQty) return;
             setQty(qty + 1)
           }}
         >
