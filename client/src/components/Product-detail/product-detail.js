@@ -59,7 +59,7 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
       <AddToCart
         open={modalIsVisible}
         onModalClose={closeModal}
-        product={{ imageUrls, name, currentPrice, itemId, itemNo }}
+        product={{ imageUrls, name, currentPrice, itemId, itemNo, maxQty: quantityAvailable }}
       />
       <h1 className={classes.title}>{name.toUpperCase()[0] + name.slice(1)}</h1>
       <p className={classes.itemNo}>
@@ -136,7 +136,7 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
                   <IncreaseBlock
                     qty={quantity}
                     setQty={setQuantity}
-
+                    maxQty={quantityAvailable}
                   />
                   {quantityAvailable !== 0 && (
                     <div className={classes.disableBlock}>
