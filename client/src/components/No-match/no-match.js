@@ -1,10 +1,23 @@
-import React from 'react';
-import { Container } from '@material-ui/core'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Container } from '@material-ui/core';
+import RoutesName from '../../routes-list'
 
 export default function NoMatch() {
   return (
-    <Container minWidth="xl">
-      <h1>Page no found</h1>
+    <Container maxWidth="xl">
+      <div style={{ minHeight: '52vh' }}>
+        <h1>We&apos;re sorry, but we can&apos;t find the page you are looking for.</h1>
+        <p>How can we help you?</p>
+        <ul>
+          <li>
+            Go to the
+            <Link to={RoutesName.home}> homepage</Link>
+          </li>
+          <li>Use the search function at the top of the website</li>
+        </ul>
+        <p>Thank you for your understanding!</p>
+      </div>
     </Container>
   );
 }

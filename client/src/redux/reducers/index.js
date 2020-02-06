@@ -15,6 +15,7 @@ import slides from './slides'
 import passwordForm from './password-form';
 import currentProduct from './currentProduct';
 import commentsReducer from './commentsReducer';
+import logout from './logout';
 
 export default combineReducers({
   cart,
@@ -31,5 +32,6 @@ export default combineReducers({
   slides,
   passwordForm,
   currentProduct,
-  commentsReducer
+  commentsReducer,
+  logout
 })

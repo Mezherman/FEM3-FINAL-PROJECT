@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types';
 import { Slider, Input } from '@material-ui/core';
 import { connect } from 'react-redux'
@@ -9,7 +9,7 @@ import { getFilterProducts } from '../../../redux/actions/filter'
 // const Shadow =
 //   '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
 
-const IOSSlider = withStyles((theme) => ({
+const CustomSlider = withStyles((theme) => ({
   root: {
     color: theme.palette.primary.main,
     left: '2%',
@@ -29,41 +29,26 @@ const IOSSlider = withStyles((theme) => ({
     //   },
     // },
   },
-  // active: {},
   valueLabel: {
-    display: 'none'
+    top: -22,
+    '& *': {
+      background: 'transparent',
+      color: '#000',
+    },
   },
-  // track: {
-  //   height: 2,
-  // },
-  // rail: {
-  //   height: 2,
-  //   opacity: 0.5,
-  //   backgroundColor: '#bfbfbf',
-  // },
-  // mark: {
-  //   backgroundColor: '#bfbfbf',
-  //   height: 8,
-  //   width: 1,
-  //   marginTop: -3,
-  // },
-  // markActive: {
-  //   opacity: 1,
-  //   backgroundColor: 'currentColor',
-  // },
 }))(Slider);
 
 function RangeSlider(props) {
   const classes = useStyles();
   const { getFilterProducts, filterResults, max } = props;
 
-  const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(max);
-  const [value, setValue] = useState([minValue, maxValue]);
+  const [value, setValue] = useState([0, max]);
+
+  useEffect(() => {
+    combineInputs()
+  }, [value])
 
   const handleChange = (event, price) => {
-    setMinValue(price[0]);
-    setMaxValue(price[1]);
     setValue(price);
     getFilterProducts({
       ...filterResults,
@@ -72,45 +57,43 @@ function RangeSlider(props) {
   };
 
   const handleInputMin = (event) => {
-    setMinValue(event.target.value === '' ? '' : Number(event.target.value));
-    setValue([minValue, maxValue]);
-    getFilterProducts({
-      ...filterResults,
-      price: value
-    });
+    if (event.target.value > max) {
+      event.target.value = 0
+    }
+    setValue([event.target.value === '' ? '' : Number(event.target.value), value[1]]);
   };
 
   const handleInputMax = (event) => {
-    setMaxValue(event.target.value === '' ? '' : Number(event.target.value));
-    setValue([minValue, maxValue]);
+    if (event.target.value > max) {
+      event.target.value = max
+    }
+    setValue([value[0], event.target.value === '' ? '' : Number(event.target.value)]);
+  };
+
+  const combineInputs = () => {
     getFilterProducts({
       ...filterResults,
       price: value
     });
-  };
+  }
+
+  const error = 'Warning! Your first value should be lower than the second!'
 
   return (
     <>
-      <IOSSlider
+      <CustomSlider
         max={max}
-        valueLabelDisplay="on"
+        valueLabelDisplay="auto"
         value={value}
         onChange={handleChange}
         aria-labelledby="range-slider"
       />
-
-      {/* <Slider */}
-      {/*  className={classes.root} */}
-      {/*  max={max} */}
-      {/*  valueLabelDisplay="on" */}
-      {/*  value={value} */}
-      {/*  onChange={handleChange} */}
-      {/*  aria-labelledby="range-slider" */}
-      {/* /> */}
       <div className={classes.inputs}>
+        {value[1] < value[0]
+          ? (<div className={classes.error}>{error}</div>) : null}
         <Input
           className={classes.input}
-          value={minValue}
+          value={value[0]}
           margin="dense"
           onChange={handleInputMin}
           inputProps={{
@@ -122,7 +105,7 @@ function RangeSlider(props) {
         />
         <Input
           className={classes.input}
-          value={maxValue}
+          value={value[1]}
           margin="dense"
           onChange={handleInputMax}
           inputProps={{

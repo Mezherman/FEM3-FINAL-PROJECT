@@ -10,21 +10,27 @@ import { commentsLoaded, commentsRequest, resetCommentsList, sendComment } from 
 import CommentMap from './Comment-map';
 
 import useStyles from './_comment';
+import LoginModal from '../Login-modal-window/login-modal-window';
 
 const Comment = (props) => {
   const {
-    currentProduct, currentUser, sendNewComment, fetchComments, commentsList, reset
+    currentProduct, currentUser, sendNewComment, fetchComments, commentsList, reset, userLoggedIn
   } = props;
-  // console.log(props);
-  // console.log(currentProduct._id);
   const classes = useStyles();
 
   const defaultText = 'Enter here your comment...';
   const [addComment, setComment] = useState(false);
   const [commentText, setCommentText] = useState(defaultText);
-  // const [date, setDate] = useState('');
   const [addForm, sendForm] = useState(false);
   const [id, setId] = useState('');
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [addCommentDisabled, setAddCommentDisabled] = useState(false);
+  const [errorText, setErrorText] = useState(false);
+  const [modalIsVisible, setModalVisibility] = useState(false);
+
+  const closeModal = () => {
+    setModalVisibility(false);
+  };
 
   useEffect(() => {
     if ((id === '') || (id !== currentProduct._id) || !id) {
@@ -35,8 +41,14 @@ const Comment = (props) => {
   }, [currentProduct._id, fetchComments, id, reset]);
 
   const commentHandler = () => {
-    setComment((prev) => setComment(!prev));
-    // console.log(getCurrentDate());
+    if (userLoggedIn) {
+      setComment((prev) => setComment(!prev));
+      setAddCommentDisabled(false);
+    } else {
+      // setAddCommentDisabled(true);
+      setModalVisibility(true);
+      // setErrorText(true);
+    }
   };
 
   const focusHandler = () => {
@@ -47,6 +59,11 @@ const Comment = (props) => {
 
   const commentTextHandler = (event) => {
     setCommentText(event.target.value);
+    if (event.target.value.length > 1) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
   };
 
   const blurHandler = () => {
@@ -94,8 +111,11 @@ const Comment = (props) => {
   return (
     <Box component="div" mt={2} mb={3} align="center">
       <Typography variant="h6" component="h4" align="center" className={classes.title}>{currentProduct.name}</Typography>
-      <Button variant="contained" color="primary" className={classes.commentBtn} onClick={commentHandler}>Add comment</Button>
-
+      <Button variant="contained" color="primary" disabled={addCommentDisabled} className={classes.commentBtn} onClick={commentHandler}>Add comment</Button>
+      {/*{*/}
+      {/*  errorText &&*/}
+      {/*    <Typography className={classes.errorLogIn} color="error">You must be logged in to leave a comment</Typography>*/}
+      {/*}*/}
       { addComment && (
         <FormBlock
           handleSubmit={handleSubmit}
@@ -103,12 +123,14 @@ const Comment = (props) => {
           focusHandler={focusHandler}
           blurHandler={blurHandler}
           commentTextHandler={commentTextHandler}
+          buttonDisabled={buttonDisabled}
         />
       )}
       <Grid container direction="column-reverse" alignItems="center">
         { commentsList &&
           <CommentMap commentsList={commentsList} />}
       </Grid>
+      { !userLoggedIn && <LoginModal onModalClose={closeModal} open={modalIsVisible} /> }
     </Box>
   )
 };
@@ -117,7 +139,8 @@ const mapStateToProps = (state) => ({
   currentProduct: state.currentProduct.currentProduct,
   currentUser: state.user,
   commentsList: state.commentsReducer.commentsList,
-  productId: state.commentsReducer.productId
+  productId: state.commentsReducer.productId,
+  userLoggedIn: state.user.loggedIn
 });
 
 const mapDispatchToProps = (dispatch) => ({

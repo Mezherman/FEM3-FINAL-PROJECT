@@ -34,8 +34,8 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
     brand,
     enabled,
     itemNo,
-    quantity: maxQty,
     _id: itemId,
+    quantity: quantityAvailable
   } = product;
   const classes = useStyles();
   const theme = useTheme();
@@ -58,7 +58,7 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
       <AddToCart
         open={modalIsVisible}
         onModalClose={closeModal}
-        product={{ imageUrls, name, currentPrice, itemId, itemNo, maxQty }}
+        product={{ imageUrls, name, currentPrice, itemId, itemNo, maxQty: quantityAvailable }}
       />
       <h1 className={classes.title}>{name.toUpperCase()[0] + name.slice(1)}</h1>
       <p className={classes.itemNo}>
@@ -135,12 +135,11 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
                   <IncreaseBlock
                     qty={quantity}
                     setQty={setQuantity}
-                    maxQty={maxQty}
+                    maxQty={quantityAvailable}
                   />
                   <div className={classes.disableBlock}>
-
                     <span>Deliverable:</span>
-                    {enabled
+                    {quantityAvailable !== 0
                       ? (
                         <span >
                           <StopIcon className={classes.inStock} />
@@ -149,7 +148,7 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
                       )
                       : (
                         <span>
-                          <StopIcon />
+                          <StopIcon className={classes.outStock} />
                     Out of stock
                         </span>
                       )}
@@ -209,7 +208,7 @@ const mapStateToProps = (state) => state.favoritesReducer;
 const mapDispatchToProps = (dispatch) => ({
   actionAddProductToCart:
     (productData, quantityVal) => dispatch(addProductToCart(productData, quantityVal)),
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);
 

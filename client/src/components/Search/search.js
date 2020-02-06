@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import SearchIcon from '@material-ui/icons/Search'
 import { withRouter } from 'react-router-dom';
+import InputBase from '@material-ui/core/InputBase';
+import { Collapse, Grow, useTheme } from '@material-ui/core';
+import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
 import useStyles from './_search';
 import search from '../../services/search';
 import getAllProducts from '../../services/getProducts'
 import { productsLoaded } from '../../redux/actions/products'
 
-function Search({ productsLoaded, history }) {
+function Search({ productsLoaded, history, searchIsShown }) {
   const classes = useStyles();
   const [data, setData] = useState([]);
+  const [value, setValue] = useState('');
 
   useEffect(() => {
-    getAllProducts().then((products) => {
-      setData(products);
-    })
+    getAllProducts()
+      .then((products) => {
+        setData(products);
+      })
   }, []);
-
-  const [value, setValue] = useState('');
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -34,36 +35,52 @@ function Search({ productsLoaded, history }) {
     search(searchItem)
       .then((response) => {
         productsLoaded(response);
-      });
+      })
+      .then(() => setValue(''))
   }
+
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+
+  const inputBase = (
+    <InputBase
+      placeholder="Search…"
+      type="search"
+      classes={{
+        root: classes.inputRoot,
+        input: classes.inputInput,
+      }}
+      inputProps={{ 'aria-label': 'search' }}
+      onKeyUp={(event) => {
+        if (event.key === 'Enter') {
+          handleChange(event)
+        }
+      }}
+    />
+  )
 
   return (
     <>
-      <div className={classes.searchInput}>
-        <SearchIcon
-          className={classes.searchIcon}
-        />
-        <Autocomplete
-          size="small"
-          freeSolo
-          options={data.map((option) => option.name)}
-          renderInput={(params) => (
-            <TextField
-              className={classes.root}
-              fullWidth
-              {...params}
-              variant="outlined"
-              margin="none"
-              placeholder="Search..."
-              onKeyUp={(event) => {
-                if (event.keyCode === 13) {
-                  handleChange(event);
-                }
-              }}
+      {isDesktop ? (
+        <Grow in={searchIsShown} >
+          <div className={classes.search}>
+            <SearchIcon
+              className={classes.searchIcon}
             />
-          )}
-        />
-      </div>
+            {inputBase}
+          </div>
+        </Grow>
+      )
+        : (
+          <div className={classes.search}>
+            <SearchIcon
+              className={classes.searchIcon}
+            />
+            <Collapse in={searchIsShown} >
+              {inputBase}
+            </Collapse>
+          </div>
+        )}
     </>
   )
 }

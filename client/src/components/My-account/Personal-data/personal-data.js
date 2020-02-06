@@ -9,7 +9,7 @@ import {
   ListItemText,
   Container,
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
@@ -24,6 +24,8 @@ import { fetchCustomerData } from '../../../redux/actions/user';
 import { invalidPassword, validPassword } from '../../../redux/actions/password-validation';
 import { newNotification } from '../../../redux/actions/notification';
 import { loadAllDataAfterLogin } from '../../../redux/actions/load-all-data';
+import logoutAction from '../../../redux/actions/logout';
+// import logout from '../../../redux/reducers/logout';
 import putPassword from '../../../services/putPassword';
 import CancelSaveButtons from './Put-personal-data/cancel-save-buttons';
 
@@ -33,16 +35,19 @@ export default function PersonalData ({ handleSubmit }) {
 
   const [editForm, setEditForm] = useState(false);
   const [passwordForm, setChangePasswordForm] = useState(false);
+  // const [logout, setLogout] = useState(false);
+  // const [reLoading, setReLoading] = useState(false);
 
   const handleEditForm = () => setEditForm(true);
   const handleChangePassword = () => setChangePasswordForm(true);
   const cancelEditForm = () => setEditForm(false);
   const cancelPasswordForm = () => setChangePasswordForm(false);
+  // const handleReLoad = () => {
+  //   setReLoading(true)
+  //   return window.location.reload();
+  // };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    window.location.reload();
-  };
+  // const redirect = () => <Redirect />;
 
   const dispatch = useDispatch();
 
@@ -62,6 +67,20 @@ export default function PersonalData ({ handleSubmit }) {
     dispatch(newNotification(type, message));
   }, [dispatch]);
 
+  const handleLogout = useCallback(() => {
+    localStorage.removeItem('token');
+    dispatch(logoutAction());
+  }, [dispatch]);
+  // const handleLogout = () => {
+  //   // debugger
+  //   setLogout(true);
+  //
+  //   localStorage.removeItem('token');
+  //   { /* <Redirect to={RoutesNames.home} /> */ }
+  //   // redirect();
+  //   // window.location.reload();
+  // };
+
   const {
     gender,
     firstName,
@@ -71,6 +90,7 @@ export default function PersonalData ({ handleSubmit }) {
     login,
     birthdate
   } = useSelector((state) => state.user.customer);
+  const { logout } = useSelector((state) => state.logout);
 
   const submitEditedUser = (values) => {
     // if (values.birthdayDay || values.birthdayMonth || values.birthdayYear) {
@@ -125,6 +145,11 @@ export default function PersonalData ({ handleSubmit }) {
         console.log(error);
       });
   };
+
+  if (logout) {
+    // handleReLoad();
+    return <Redirect />
+  }
 
   if (editForm) {
     return (
@@ -234,14 +259,16 @@ export default function PersonalData ({ handleSubmit }) {
                   View your orders
                 </Typography>
               </Link>
+              <Link to={RoutesName.home} onClick={handleLogout}>
               <Typography
                 component="a"
                 variant="subtitle1"
                 className={`${pdClasses.button} ${pdClasses.logout}`}
-                onClick={handleLogout}
+                // onClick={handleLogout}
               >
                 Logout
               </Typography>
+              </Link>
             </div>
           </Grid>
         </Grid>

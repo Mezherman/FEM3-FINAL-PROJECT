@@ -5,7 +5,7 @@ import FilterPanel from './Filter-panel/filter-panel'
 import useStyles from './_filter';
 import { getFilteredProducts, getColors, getBrands, getManufacturer } from '../../services/filter'
 import { productsLoaded } from '../../redux/actions/products';
-import { filterParamsLoaded } from '../../redux/actions/filter';
+import { filterParamsLoaded, filterType } from '../../redux/actions/filter';
 import { tempFilterData } from '../../services/filter-temp'
 
 function Filter(props) {
@@ -22,7 +22,9 @@ function Filter(props) {
     filterParamsLoaded,
     filterParams,
     filterResults,
-    categoriesReducer
+    categoriesReducer,
+    onClose,
+    filterType
   } = props;
 
   const { catalogLocation, catalog } = categoriesReducer;
@@ -51,7 +53,7 @@ function Filter(props) {
     />
   ));
 
-  let valToFilter;
+  let valToFilter = '';
   let valOfBrands = '';
   const valOfCollection = '';
   let valOfColor = '';
@@ -94,6 +96,7 @@ function Filter(props) {
     // console.log('ENDS OF VAL', valOfBrands, valOfCollection)
     valToFilter = `categories=${categoryForFilter}&${valOfBrands}&${valOfCollection}&${valOfColor}&${valOfPrice}`
     // console.log('!!!!! ->>>>>', valToFilter);
+    filterType(valToFilter);
     return valToFilter
   }
 
@@ -113,7 +116,8 @@ function Filter(props) {
           getFilteredProducts(valToFilter)
             .then((products) => {
               productsLoaded(products)
-            });
+            })
+            .then(onClose)
         }}
       >
         Filter
@@ -126,13 +130,15 @@ function mapStateToProps(state) {
   return {
     filterResults: state.filterReducer.filterResults,
     filterParams: state.filterReducer.filterParams,
-    categoriesReducer: state.categoriesReducer
+    categoriesReducer: state.categoriesReducer,
+    currentCategory: state.categoriesReducer.catalogLocation
   }
 }
 
 const mapDispatchToProps = {
   productsLoaded,
-  filterParamsLoaded
+  filterParamsLoaded,
+  filterType
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter)
