@@ -16,7 +16,6 @@ import {
   useTheme
 } from '@material-ui/core'
 
-import { useTheme } from '@material-ui/core/styles';
 import Collapse from '@material-ui/core/Collapse';
 import MenuIcon from '@material-ui/icons/Menu'
 // import SearchIcon from '@material-ui/icons/Search'
@@ -28,7 +27,6 @@ import { Link, Redirect } from 'react-router-dom';
 // import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import RoutesName from '../../routes-list';
 
 import './header.scss';
 
