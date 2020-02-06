@@ -1,4 +1,5 @@
 import jwtDecode from 'jwt-decode';
+import axios from 'axios'
 
 const loginLoaded = () => {
   const token = localStorage.getItem('token');
@@ -14,6 +15,12 @@ const loginLoaded = () => {
   const time = new Date().getTime() / 1000;
 
   if (time < exp) {
+    if (!axios.defaults.headers.common.Authorization) {
+      axios.defaults.headers.common.Authorization = token ?? '';
+    }
+    if (process.env.NODE_ENV !== "production") {
+      axios.defaults.baseURL = 'http://localhost:5000';
+    }
     return {
       type: 'FETCH_LOGIN_SUCCESS',
       payload: {

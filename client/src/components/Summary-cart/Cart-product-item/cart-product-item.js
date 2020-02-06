@@ -69,8 +69,7 @@ Item-Nr. :
           </Grid>
         </Hidden>
         <Grid item xs={6} sm={12}>
-          <IncreaseBlock setQty={setQty} qty={cartQuantity} />
-          {/*<QuantitySelector productId={currentProduct._id} onSetProductQuantity={onSetProductQuantity} cartQuantity={cartQuantity} />*/}
+          <IncreaseBlock setQty={setQty} qty={cartQuantity} maxQty={currentProduct.quantity} />
         </Grid>
       </Grid>
       <Grid item container justufy="space-between" sm={2} xs={12}>

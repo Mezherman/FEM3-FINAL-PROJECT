@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
     opacity: '.8'
   },
   comment: {
-    borderTop: '1px solid rgba(0, 0, 0, 0.12)',
     borderRadius: 3,
     display: 'inline-block',
     width: '100%',
@@ -27,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.up('lg')]: {
       width: '70%',
+      borderTop: '1px solid rgba(0, 0, 0, 0.12)'
     },
   },
   commentBody: {

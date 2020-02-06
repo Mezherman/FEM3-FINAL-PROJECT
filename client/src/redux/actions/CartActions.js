@@ -38,3 +38,8 @@ export function clearCart () {
     type: 'CLEAR_CART',
   }
 }
+export function removeCart () {
+  return {
+    type: 'REMOVE_CART',
+  }
+}

@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import { Menu, MenuItem } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
+import { getProductsByItemNo } from '../../services/getProducts';
 
 import useStyles from './_breadcrumbs';
 
@@ -20,7 +21,9 @@ function ProductBreadcrumbs({ assortment, catalog, products }) {
 
   let level = '';
 
-  if (!isNaN(assortment)) {
+  if (assortment === 'search') {
+    level = 'search'
+  } else if (!isNaN(assortment)) {
     level = 'item';
   } else if (mainCategories.find((category) => category.id === assortment)) {
     level = 'category';
@@ -30,23 +33,28 @@ function ProductBreadcrumbs({ assortment, catalog, products }) {
 
   let category = '';
   let subCategory = '';
+  let search = false;
 
   switch (level) {
     case 'item': {
-      const subCategoryId = products.find((product) => product.itemNo === assortment).categories;
+      const subCategoryId = products[0].categories;
       subCategory = allCategories.find((category) => category.id === subCategoryId);
-      // category = mainCategories.find((category) => category.id === subCategory.parentId);
+      category = mainCategories.find((category) => category.id === subCategory.parentId);
       break;
     }
 
     case 'subCategory': {
       subCategory = allCategories.find((category) => category.id === assortment);
-      // category = mainCategories.find((category) => category.id === subCategory.parentId);
+      category = mainCategories.find((category) => category.id === subCategory.parentId);
       break;
     }
 
     case 'category':
       category = allCategories.find((category) => category.id === assortment);
+      break;
+
+    case 'search':
+      search = true
   }
 
   // const hasSubCategory = allCategories.find((category) => category.id === assortment)
@@ -83,6 +91,12 @@ function ProductBreadcrumbs({ assortment, catalog, products }) {
             {subCategory.name}
           </MenuItem>
         </Link>
+      )}
+      {search &&
+      (
+        <MenuItem className={classes.menuItem} component="span">
+          Search
+        </MenuItem>
       )}
       {/* <Typography color="textPrimary">{currentPosition}</Typography> */}
     </Breadcrumbs>

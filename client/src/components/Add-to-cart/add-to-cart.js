@@ -17,7 +17,7 @@ import IncreaseBlock from '../Increase-block/increase-block'
 
 export default function AddToCart({ open, onModalClose, product }) {
   const classes = useStyles();
-  const { imageUrls, name, currentPrice, specialPrice, itemNo, itemId } = product;
+  const { imageUrls, name, currentPrice, specialPrice, itemNo, itemId, maxQty } = product;
 
   //product in state state
   const productsState = useSelector((state) => state.cart.products);
@@ -78,7 +78,7 @@ export default function AddToCart({ open, onModalClose, product }) {
                   </span>
                 </Box>
                 <Box className={classes.qtyPicker}>
-                  <IncreaseBlock setQty={handleQty} qty={stateQuantity} />
+                  <IncreaseBlock setQty={handleQty} qty={stateQuantity} maxQty={maxQty} />
                 </Box>
                 <Box className={classes.total}>
                   <span>

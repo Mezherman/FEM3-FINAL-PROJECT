@@ -8,7 +8,7 @@ import useStyles from './_cart-product-list';
 const CartProductList = React.memo(({ products, actions }) => {
   const list = [];
   products.forEach((product) => {
-    list.push(<CartProductItem key={product.product._id} product={product} onSetProductQuantity={actions.setProductQuantity} onRemoveProduct={actions.removeProductFromCart} />);
+    list.push(<CartProductItem key={product.product._id} product={product} onSetProductQuantity={actions.setProductQuantity} onRemoveProduct={products.length > 1 ? actions.removeProductFromCart : actions.removeCart} />);
   })
   const classes = useStyles();
   return (

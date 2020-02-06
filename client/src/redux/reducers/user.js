@@ -5,16 +5,14 @@ const initialState = {
   loggedIn: false,
   firstName: '',
   lastName: '',
-  customer: {}
+  customer: {},
+  registration: false,
 };
 
 export default function user (state = initialState, action) {
   switch (action.type) {
     case 'FETCH_LOGIN_SUCCESS': {
       const { token } = action.payload;
-      if (!axios.defaults.headers.common.Authorization) {
-        axios.defaults.headers.common.Authorization = token ?? '';
-      }
       return { ...state, ...action.payload };
     }
 
@@ -34,6 +32,18 @@ export default function user (state = initialState, action) {
       return {
         ...state,
         customer: action.payload
+      };
+
+    case 'ENTER_REGISTRATION_PAGE':
+      return {
+        ...state,
+        registration: action.payload
+      };
+
+    case 'LEAVE_REGISTRATION_PAGE':
+      return {
+        ...state,
+        registration: action.payload
       };
 
     case 'FETCH_CUSTOMER_DATA_FAILURE':
