@@ -1,25 +1,5 @@
-import React from 'react'
-// import { useSelector } from 'react-redux';
-
 export default function(values) {
-  // const { invalid } = useSelector((state) => state.passwordForm);
-
   const errors = {};
-  // const requiredFields = [
-  //   'gender',
-  //   'firstName',
-  //   'lastName',
-  //   'email',
-  //   'password',
-  //   'telephone',
-  //   'login',
-  //   'agreement'
-  // ];
-  // requiredFields.forEach((field) => {
-  //   if (!values[field]) {
-  //     errors[field] = 'Required';
-  //   }
-  // });
   if (
     values.email &&
     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
@@ -57,19 +37,31 @@ export default function(values) {
     errors.password = 'Password must be between 7 and 30 characters';
   }
   if (
+    values.password &&
+    !/^[a-zA-Z0-9]+$/i.test(values.password)
+  ) {
+    errors.password = 'Allowed characters for password is a-z, A-Z, 0-9.';
+  }
+  if (
     values.newPassword &&
     !/^[0-9a-zA-Z]{7,30}$/i.test(values.newPassword)
   ) {
     errors.newPassword = 'Password must be between 7 and 30 characters';
+  }
+  if (
+    values.newPassword &&
+    !/^[a-zA-Z0-9]+$/i.test(values.newPassword)
+  ) {
+    errors.newPassword = 'Allowed characters for password is a-z, A-Z, 0-9.';
   }
   if (values.newPassword !== values.confirmNewPassword) {
     errors.confirmNewPassword = 'The passwords are different!';
   }
   if (
     values.telephone &&
-    !/^[0-9-+\s()]{10,18}$/i.test(values.telephone)
+    !/^\+380\d{3}\d{2}\d{2}\d{2}$/i.test(values.telephone)
   ) {
-    errors.telephone = 'Invalid phone number, at least 10 symbols required';
+    errors.telephone = 'That is not a valid phone number. Try +380XXX XX XX XX';
   }
 
   return errors;

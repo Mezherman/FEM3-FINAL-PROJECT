@@ -25,10 +25,7 @@ export default function user (state = initialState, action) {
     case 'FETCH_ORDERS_SUCCESS':
       return {
         ...state,
-        // customer: {
-        //   ...state,
         ...action.payload
-        // },
       };
 
     case 'FETCH_CUSTOMER_DATA_SUCCESS':
