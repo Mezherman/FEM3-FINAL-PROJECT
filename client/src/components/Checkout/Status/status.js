@@ -13,7 +13,7 @@ export default function CheckoutStatus(props) {
   // console.log('STATE =', storeState);
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" style={{minHeight: '52vh'}}>
       {orderDone
         ? (
           <h2>Your order <strong>№{orderNo}</strong> has been successfully placed. Thank you for

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { PropTypes } from 'prop-types';
 
 import { Container, CssBaseline, Divider, Grid, Typography } from '@material-ui/core';
@@ -13,6 +13,7 @@ import ModalResponse from './Modal-response/modal-response';
 import validate from './validate';
 import postNewUser from '../../services/postNewUser';
 import useStyles from './_sign-up';
+import { leaveRegistrationPage }from '../../redux/actions/moving-around-registration';
 
 let SignUp = (props) => {
   const { handleSubmit } = props;
@@ -21,6 +22,10 @@ let SignUp = (props) => {
   const [errorModal, setErrorModal] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const [errorText, setErrorText] = useState('Something go wrong. Try again');
+
+  const dispatch = useDispatch();
+
+  useEffect(() => () => dispatch(leaveRegistrationPage()), [dispatch]);
 
   const initialState = {
     gender: 'Mr',
@@ -82,7 +87,7 @@ let SignUp = (props) => {
       birthdate: birthDayFunc(birthdayDay, birthdayMonth, birthdayYear)
     };
 
-    console.log(newUser);
+    // console.log(newUser);
     postNewUser(newUser, handleOpenSignUpModal, handleOpenSetErrorModal);
   };
   const { loggedIn } = useSelector((state) => state.user);

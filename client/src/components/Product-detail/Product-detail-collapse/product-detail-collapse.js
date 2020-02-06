@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
 import CollapsingItem from './collapsing-item';
 import TableSpecification from '../Table-specification/table-specifications';
+import Comment from '../../Comment/comment';
 
 const useStyles = makeStyles((theme) => createStyles({
   root: {
@@ -43,6 +44,9 @@ export default function ProductDetailCollapse({ data }) {
       </CollapsingItem>
       <CollapsingItem data={myCustomParams} label="Specifications" >
         <TableSpecification data={data} />
+      </CollapsingItem>
+      <CollapsingItem label="Comments" >
+        <Comment />
       </CollapsingItem>
     </List>
   );
