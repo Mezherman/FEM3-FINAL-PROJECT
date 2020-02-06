@@ -14,6 +14,7 @@ import useStyles from './_product-card';
 import AddToCart from '../Add-to-cart/add-to-cart';
 import RoutesName from '../../routes-list';
 import AddToFavoriteBtn from '../Add-to-favorites/Add-to-favorite-btn';
+import AddToCartButton from '../Add-to-cart-button/add-to-cart-button'
 
 function ProductCard({ product, favorites }) {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ function ProductCard({ product, favorites }) {
     () => bindActionCreators(cartActions, dispatch),
     [dispatch]
   );
-  const { imageUrls, name, currentPrice, previousPrice, itemNo, _id: itemId, quantity: maxQty } = product;
+  const { imageUrls, name, currentPrice, previousPrice, itemNo, _id: itemId, quantity} = product;
   const classes = useStyles();
   const [modalIsVisible, setModalVisibility] = useState(false);
   const closeModal = () => {
@@ -33,7 +34,7 @@ function ProductCard({ product, favorites }) {
       <AddToCart
         open={modalIsVisible}
         onModalClose={closeModal}
-        product={{ imageUrls, name, currentPrice, previousPrice, itemNo, itemId, maxQty }}
+        product={{ imageUrls, name, currentPrice, previousPrice, itemNo, itemId, maxQty: quantity }}
       />
 
       <div className={classes.card}>
@@ -80,20 +81,28 @@ Item.No
           </Container>
         </Link>
         <Container maxWidth="sm">
-          <Button
-            size="large"
-            fullWidth
-            variant="contained"
-            color="primary"
-            disableElevation
-            onClick={() => {
+          <AddToCartButton
+            handleClick={() => {
               // console.log('add product', product);
               actions.addProductToCart(product, 1);
               setModalVisibility(true)
             }}
-          >
-            <ShoppingCartOutlinedIcon />
-          </Button>
+            quantity={quantity}
+          />
+          {/* <Button */}
+          {/*  size="large" */}
+          {/*  fullWidth */}
+          {/*  variant="contained" */}
+          {/*  color="primary" */}
+          {/*  disableElevation */}
+          {/*  onClick={() => { */}
+          {/*    // console.log('add product', product); */}
+          {/*    actions.addProductToCart(product, 1); */}
+          {/*    setModalVisibility(true) */}
+          {/*  }} */}
+          {/* > */}
+          {/*  <ShoppingCartOutlinedIcon /> */}
+          {/* </Button> */}
         </Container>
       </div>
     </>
@@ -124,4 +133,3 @@ ProductCard.propTypes = {
 // //   specialPrice: false,
 //   enabled: true
 // };
-

@@ -76,7 +76,7 @@ export default function IncreaseBlock({ qty, setQty, maxQty }) {
     <Box className={classes.wrapper}>
       <div className={classes.qtyPicker}>
         <Button
-          disabled={qty === 1 ? 'true' : false}
+          disabled={qty === 1 ? true : false}
           onClick={() => {
             if (qty <= 1) return;
             setQty(qty - 1)

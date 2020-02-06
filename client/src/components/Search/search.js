@@ -76,7 +76,7 @@ function Search({ productsLoaded, history, searchIsShown }) {
             <SearchIcon
               className={classes.searchIcon}
             />
-            <Collapse in={searchIsShown} >
+            <Collapse in={Boolean(searchIsShown)} >
               {inputBase}
             </Collapse>
           </div>

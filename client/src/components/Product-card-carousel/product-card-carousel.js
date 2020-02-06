@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, Divider, Button, SvgIcon } from '@material-ui/core';
+import { PropTypes } from 'prop-types';
 import withWidth from '@material-ui/core/withWidth';
 import ProductCard from '../Product-card/product-card';
 import Carousels from '../Carousel/carousel';
 import useStyles from './_product-card-carousel';
-import { PropTypes } from 'prop-types';
 
 function ProductCardCarousel(props) {
   const { products, label } = props;
@@ -19,25 +19,24 @@ function ProductCardCarousel(props) {
   };
   const productCardList = (products) => (
     products.map((item) => (
-      <>
+      <div className={classes.wrapper} key={item.itemNo} >
         <ProductCard
-          key={item.itemNo}
           product={item}
         />
-      </>
+      </div>
     ))
   )
 
   return (
     <Box className={classes.carousel}>
-      <h2>{label}</h2>
+      <h2 className={classes.title}>{label}</h2>
       <Carousels
       // autoPlay
         wrapAround
         renderBottomCenterControls={null}
         transitionMode="scroll"
         cellSpacing={5}
-        slidesToScroll={2}
+        slidesToScroll={1}
         slidesToShow={slidesToShow[props.width]}
         renderCenterLeftControls={({ previousSlide }) => (
           <Button

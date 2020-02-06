@@ -27,17 +27,12 @@ import { Link, Redirect } from 'react-router-dom';
 // import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+
 import './header.scss';
 
 import SearchIcon from '@material-ui/icons/Search';
-
 import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-
-// import Grow from '@material-ui/core/Grow';
-// import Paper from '@material-ui/core/Paper';
-// import Popper from '@material-ui/core/Popper';
-// import MenuList from '@material-ui/core/MenuList';
 import LoginModal from '../Login-modal-window/login-modal-window';
 import PreviewBlock from '../Preview-block/preview-cart';
 import HeaderNavbar from '../Header-navbar/header-navbar';
@@ -353,8 +348,8 @@ function Header() {
                           <ShoppingCartOutlinedIcon fontSize="large" className={classes.iconsStyle} />
                         </Badge>
                       </IconButton>
+                      <span className={classes.menuTitle}>Cart</span>
                     </Link>
-                    <span className={classes.menuTitle}>Cart</span>
                   </MenuItem>
                 </Box>
               </div>

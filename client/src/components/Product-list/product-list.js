@@ -14,11 +14,10 @@ function ProductList(props) {
   const classes = useStyles();
   const renderProducts = (productsList) => (
     productsList.map((product) => (
-      <Grid item md={6} lg={4} key={product.itemNo}>
-        <ProductCard
-          product={product}
-        />
-      </Grid>
+      <ProductCard
+        key={product.itemNo}
+        product={product}
+      />
     ))
   );
 
