@@ -82,6 +82,7 @@ function Header() {
 
   const totalCartQuantity = useSelector((state) => state.cart.totalCartQuantity);
   const { loggedIn } = useSelector((state) => state.user);
+  const totalFavoritesQty = useSelector((state) => state.favoritesReducer.favorites.length);
   // console.log('ISLOGGEDIN AAAAAAAAA', loggedIn);
   // const [anchorElLogin, setAnchorElLogin] = useState(null);
 
@@ -293,9 +294,9 @@ function Header() {
               <MenuItem className={classes.headerMenuItem}>
                 <Link to={RoutesName.favorites}>
                   <IconButton edge="end" className={classes.iconButton}>
-                    {/*<Badge badgeContent={totalFavoritesQty.toString()} color="error">*/}
+                    <Badge badgeContent={totalFavoritesQty.toString()} color="error">
                       <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
-                    {/*</Badge>*/}
+                    </Badge>
                   </IconButton>
                   <span className={classes.menuTitle}>Favorites</span>
                 </Link>
