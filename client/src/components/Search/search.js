@@ -72,7 +72,7 @@ function Search({ productsLoaded, history, searchIsShown }) {
             <SearchIcon
               className={classes.searchIcon}
             />
-            <Collapse in={searchIsShown} >
+            <Collapse in={Boolean(searchIsShown)} >
               <InputBase
                 placeholder="Search…"
                 type="search"

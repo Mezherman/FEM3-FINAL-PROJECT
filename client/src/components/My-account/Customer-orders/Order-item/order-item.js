@@ -29,6 +29,8 @@ const OrderItem = ({ orderAction }) => {
   const classes = useStylesOrderItem();
   const [open, setOpen] = useState(false);
 
+
+
   const handleClick = () => {
     setOpen(!open);
   };
@@ -101,7 +103,7 @@ const OrderItem = ({ orderAction }) => {
               {open ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
             <Collapse
-              in={open}
+              in={Boolean(open)}
               timeout="auto"
               unmountOnExit
               onClick={handleClick}
@@ -153,7 +155,7 @@ const OrderItem = ({ orderAction }) => {
             </Collapse>
             <Divider variant="middle" />
             <Collapse
-              in={open}
+              in={Boolean(open)}
               timeout="auto"
               unmountOnExit
               onClick={handleClick}
@@ -225,7 +227,7 @@ const OrderItem = ({ orderAction }) => {
             </Collapse>
             {products.map((its) => (
               <Collapse
-                in={open}
+                in={Boolean(open)}
                 timeout="auto"
                 unmountOnExit
                 key={its.product.itemNo}

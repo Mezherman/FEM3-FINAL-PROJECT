@@ -195,6 +195,8 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   boxLogo: {
+    display: 'flex',
+    alignItems: 'center',
     [theme.breakpoints.up('lg')]: {
       // width: 'calc(100% / 4 - 31px)'
     }

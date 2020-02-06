@@ -19,9 +19,8 @@ function ProductCardCarousel(props) {
   };
   const productCardList = (products) => (
     products.map((item) => (
-      <div className={classes.wrapper}>
+      <div className={classes.wrapper} key={item.itemNo} >
         <ProductCard
-          key={item.itemNo}
           product={item}
         />
       </div>

@@ -48,8 +48,8 @@ function Catalog({ assortment, fetchProducts, fetchTopProducts, fetchTopProducts
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
-  const toggleFilter = () => {
-    setFilterIsOpen((prev) => !prev);
+  const toggleFilter = (open) => {
+    setFilterIsOpen(open);
   };
 
   useEffect(() => {
@@ -83,9 +83,10 @@ function Catalog({ assortment, fetchProducts, fetchTopProducts, fetchTopProducts
                   </Button>
 
                   <SwipeableDrawer
+                    onOpen={() => toggleFilter(true)}
                     anchor="bottom"
                     open={filterIsOpen}
-                    onClose={toggleFilter}
+                    onClose={() => toggleFilter(false)}
                   >
                     <Filter onClose={toggleFilter} />
                   </SwipeableDrawer>
