@@ -42,7 +42,7 @@ export default function TableSpecifications({ data }) {
     setSize,
     material,
     care,
-    sizes,
+    sizes = {},
     buildingMaterial,
     capacity
   } = myCustomParams;

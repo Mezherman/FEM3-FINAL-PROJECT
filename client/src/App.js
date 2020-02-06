@@ -21,7 +21,7 @@ function App() {
   );
 
   useEffect(() => {
-    loadData().then(() => dispatch(fetchResponse()));
+    loadData();
   }, [loadData]);
 
   const categories = useSelector((state) => state.categoriesReducer.catalog.mainCategories);

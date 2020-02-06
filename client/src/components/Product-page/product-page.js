@@ -12,18 +12,14 @@ import Spinner from '../Spinner/spinner';
 import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 import { getFilteredProducts } from '../../services/filter';
 import getCurrentProduct from '../../redux/actions/currentProduct';
+import { getCategory } from '../../services/getCategories';
 
 function ProductPage(props) {
   // console.log('PROPS =', props);
-  const { assortment, itemNo, chosenProduct, fetchProduct, productsLoading, getChosenProduct } = props;
-
-  console.log('chosenProduct =', chosenProduct);
-
+  const { assortment, itemNo, chosenProduct, fetchProduct, productsLoading, setProducts, getChosenProduct } = props;
+  const [topList, setTopList] = useState([]);
   const [productsToShow, setProductsToShow] = useState([]);
-  const cardsToShow = ['896520', '896520', '896520', '896520', '896520', '217355'];
 
-  const cardsToShowString = cardsToShow.toString();
-  // console.log(cardsToShowString);
   useEffect(() => {
     if (!chosenProduct) {
       fetchProduct(itemNo);
@@ -33,6 +29,13 @@ function ProductPage(props) {
   }, [chosenProduct, itemNo, fetchProduct]);
 
   useEffect(() => {
+    getCategory(chosenProduct.categories)
+      .then((response) => setTopList(response.topSellers));
+  }, [assortment]);
+  //
+  const cardsToShowString = topList.toString();
+
+  useEffect(() => {
     getFilteredProducts(`itemNo=${cardsToShowString}`)
       .then((response) => {
         // console.log('resp', response);
@@ -40,6 +43,7 @@ function ProductPage(props) {
       })
   }, [cardsToShowString]);
   // console.log('products slider', productsToShow);
+
   return (
     <>
       {!chosenProduct
@@ -55,7 +59,7 @@ function ProductPage(props) {
                   />
                 </Grid>
               </div>
-              <ProductCardCarousel products={productsToShow} />
+              <ProductCardCarousel products={productsToShow} label="top" />
             </Container>
           </>
         )}

@@ -2,12 +2,12 @@ import { createStyles, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => createStyles({
 
-  drawer: {
-    [theme.breakpoints.up('sm')]: {
-      width: '80%',
-      flexShrink: 0,
-    },
-  },
+  // drawer: {
+  //   [theme.breakpoints.up('xs')]: {
+  //     width: '80%',
+  //     flexShrink: 0,
+  //   },
+  // },
   drawerPaper: {
     width: '80%',
   },
@@ -69,9 +69,9 @@ const useStyles = makeStyles((theme) => createStyles({
     color: 'red',
     fontWeight: '500',
   },
-  '.MuiDrawer-paper': {
-    width: '80%'
-  },
+  // '.MuiDrawer-paper': {
+  //   width: '80%'
+  // },
 }));
 
 export default useStyles
