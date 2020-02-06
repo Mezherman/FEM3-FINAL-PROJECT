@@ -152,7 +152,7 @@ SignUp = reduxForm({
 })(SignUp);
 
 SignUp.propTypes = {
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func
 };
 
 export default SignUp;

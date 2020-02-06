@@ -1,7 +1,8 @@
 const initialState = {
   products: [],
   error: null,
-  productsLoading: true
+  productsLoading: true,
+  sorting: '',
 };
 
 export default function productsReducer(state = initialState, action) {
@@ -26,6 +27,17 @@ export default function productsReducer(state = initialState, action) {
         products: [],
         error: action.payload.error,
         productsLoading: false
+      };
+    case 'SORTING_PRODUCTS':
+      return {
+        ...state,
+        sorting: action.payload.sorting,
+        products: action.payload.products
+      };
+    case 'RESET_SORTING':
+      return {
+        ...state,
+        sorting: ''
       };
 
     default: {
