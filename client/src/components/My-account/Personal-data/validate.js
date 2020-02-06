@@ -1,20 +1,44 @@
 export default function(values) {
   const errors = {};
   if (
+    values.firstName &&
+    !/^[a-zA-Zа-яА-Я]+$/i.test(values.firstName)
+  ) {
+    errors.firstName = 'Allowed characters for First Name is a-z, A-Z, а-я, А-Я.';
+  }
+  if (
+    values.firstName &&
+    !/.{2,25}$/i.test(values.firstName)
+  ) {
+    errors.firstName = 'First Name must be between 2 and 25 characters';
+  }
+  if (
+    values.lastName &&
+    !/^[a-zA-Zа-яА-Я]+$/i.test(values.lastName)
+  ) {
+    errors.lastName = 'Allowed characters for First Name is a-z, A-Z, а-я, А-Я.';
+  }
+  if (
+    values.lastName &&
+    !/.{2,25}$/i.test(values.lastName)
+  ) {
+    errors.lastName = 'Last Name must be between 2 and 25 characters';
+  }
+  if (
     values.email &&
     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
   ) {
-    errors.email = 'Invalid email address';
-  }
-  if (
-    values.birthdayDay &&
-    (values.birthdayDay > 31 || values.birthdayDay < 1)
-  ) {
-    errors.birthdayDay = 'Invalid day';
+    errors.email = 'That is not a valid email.';
   }
   if (
     values.login &&
-    !/^[0-9a-zA-Z]{3,10}$/i.test(values.login)
+    !/^[a-zA-Z0-9]+$/i.test(values.login)
+  ) {
+    errors.login = 'Allowed characters for login is a-z, A-Z, 0-9.';
+  }
+  if (
+    values.login &&
+    !/^.{3,10}$/i.test(values.login)
   ) {
     errors.login = 'Login must be between 3 and 10 characters';
   }
