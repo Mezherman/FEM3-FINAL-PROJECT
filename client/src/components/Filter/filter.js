@@ -106,7 +106,6 @@ function Filter(props) {
     // console.log('ENDS OF VAL', valOfBrands, valOfCollection)
     valToFilter = `categories=${categoryForFilter}&${valOfBrands}&${valOfCollection}&${valOfColor}&${valOfPrice}`
     // console.log('!!!!! ->>>>>', valToFilter);
-    console.log(valToFilter);
     filterType(valToFilter);
     return valToFilter
   };
