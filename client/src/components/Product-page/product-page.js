@@ -46,7 +46,7 @@ function ProductPage(props) {
 
   return (
     <>
-      {productsLoading
+      {!chosenProduct
         ? <Spinner />
         : (
           <>
@@ -73,7 +73,6 @@ const mapStateToProps = (state, { itemNo }) => {
     product.itemNo === itemNo
   ));
 
-  // console.log('chosen prod MSTP =', chosenProduct);
   return {
     chosenProduct,
     productsLoading: state.productsReducer.productsLoading
