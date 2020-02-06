@@ -28,9 +28,16 @@ function resetFilterType() {
   }
 }
 
+function resetFilters() {
+  return {
+    type: 'RESET_FILTERS'
+  }
+}
+
 export {
   getFilterProducts,
   filterParamsLoaded,
   filterType,
-  resetFilterType
+  resetFilterType,
+  resetFilters
 }
