@@ -208,7 +208,7 @@ const mapStateToProps = (state) => state.favoritesReducer;
 const mapDispatchToProps = (dispatch) => ({
   actionAddProductToCart:
     (productData, quantityVal) => dispatch(addProductToCart(productData, quantityVal)),
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);
 

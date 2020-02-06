@@ -25,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
   commentTitle: {
     color: theme.palette.secondary.dark,
     opacity: '.8'
+  },
+  errorLogIn: {
+    color: theme.palette.text.secondary,
+    marginBottom: theme.spacing(2)
   }
 }));
 

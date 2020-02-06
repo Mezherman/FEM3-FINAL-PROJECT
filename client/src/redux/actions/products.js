@@ -15,8 +15,22 @@ const productsError = (error) => ({
   }
 });
 
+const sortingProducts = (products, sortingType) => ({
+  type: 'SORTING_PRODUCTS',
+  payload: {
+    products,
+    sorting: sortingType
+  }
+});
+
+const sortingReset = () => ({
+  type: 'RESET_SORTING'
+});
+
 export {
   productsRequested,
   productsLoaded,
-  productsError
+  productsError,
+  sortingProducts,
+  sortingReset
 }

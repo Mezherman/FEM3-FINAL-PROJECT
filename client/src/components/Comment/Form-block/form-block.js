@@ -3,7 +3,7 @@ import { Box, Button, TextField } from '@material-ui/core';
 
 import useStyles from './_form-block';
 
-const FormBlock = ({handleSubmit, commentText, focusHandler, blurHandler, commentTextHandler}) => {
+const FormBlock = ({handleSubmit, commentText, focusHandler, blurHandler, commentTextHandler, buttonDisabled}) => {
   const classes = useStyles();
 
   return (
@@ -26,6 +26,7 @@ const FormBlock = ({handleSubmit, commentText, focusHandler, blurHandler, commen
           color="primary"
           className={classes.commentBtn}
           type="submit"
+          disabled={buttonDisabled}
         >
           Send comment
         </Button>
