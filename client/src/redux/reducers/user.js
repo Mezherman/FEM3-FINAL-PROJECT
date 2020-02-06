@@ -12,9 +12,6 @@ export default function user (state = initialState, action) {
   switch (action.type) {
     case 'FETCH_LOGIN_SUCCESS': {
       const { token } = action.payload;
-      if (!axios.defaults.headers.common.Authorization) {
-        axios.defaults.headers.common.Authorization = token ?? '';
-      }
       return { ...state, ...action.payload };
     }
 

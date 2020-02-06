@@ -34,7 +34,8 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
     brand,
     enabled,
     itemNo,
-    _id: itemId
+    quantity: maxQty,
+    _id: itemId,
   } = product;
   const classes = useStyles();
   const theme = useTheme();
@@ -57,7 +58,7 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
       <AddToCart
         open={modalIsVisible}
         onModalClose={closeModal}
-        product={{ imageUrls, name, currentPrice, itemId, itemNo }}
+        product={{ imageUrls, name, currentPrice, itemId, itemNo, maxQty }}
       />
       <h1 className={classes.title}>{name.toUpperCase()[0] + name.slice(1)}</h1>
       <p className={classes.itemNo}>
@@ -134,7 +135,7 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
                   <IncreaseBlock
                     qty={quantity}
                     setQty={setQuantity}
-
+                    maxQty={maxQty}
                   />
                   <div className={classes.disableBlock}>
 

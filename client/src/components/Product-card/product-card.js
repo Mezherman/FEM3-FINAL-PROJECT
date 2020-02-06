@@ -21,7 +21,7 @@ function ProductCard({ product, favorites }) {
     () => bindActionCreators(cartActions, dispatch),
     [dispatch]
   );
-  const { imageUrls, name, currentPrice, previousPrice, itemNo, _id: itemId } = product;
+  const { imageUrls, name, currentPrice, previousPrice, itemNo, _id: itemId, quantity: maxQty } = product;
   const classes = useStyles();
   const [modalIsVisible, setModalVisibility] = useState(false);
   const closeModal = () => {
@@ -33,7 +33,7 @@ function ProductCard({ product, favorites }) {
       <AddToCart
         open={modalIsVisible}
         onModalClose={closeModal}
-        product={{ imageUrls, name, currentPrice, previousPrice, itemNo, itemId }}
+        product={{ imageUrls, name, currentPrice, previousPrice, itemNo, itemId, maxQty }}
       />
 
       <div className={classes.card}>
