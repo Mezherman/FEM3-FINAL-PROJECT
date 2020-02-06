@@ -79,6 +79,21 @@ function RangeSlider(props) {
 
   const error = 'Warning! Your first value should be lower than the second!'
 
+  const input = (values, func) => (
+    <Input
+      className={classes.input}
+      value={values}
+      margin="dense"
+      onChange={func}
+      inputProps={{
+        min: 0,
+        max,
+        type: 'number',
+        'aria-labelledby': 'range-slider',
+      }}
+    />
+  )
+
   return (
     <>
       <CustomSlider
@@ -89,32 +104,9 @@ function RangeSlider(props) {
         aria-labelledby="range-slider"
       />
       <div className={classes.inputs}>
-        {value[1] < value[0]
-          ? (<div className={classes.error}>{error}</div>) : null}
-        <Input
-          className={classes.input}
-          value={value[0]}
-          margin="dense"
-          onChange={handleInputMin}
-          inputProps={{
-            min: 0,
-            max,
-            type: 'number',
-            'aria-labelledby': 'range-slider',
-          }}
-        />
-        <Input
-          className={classes.input}
-          value={value[1]}
-          margin="dense"
-          onChange={handleInputMax}
-          inputProps={{
-            min: 0,
-            max,
-            type: 'number',
-            'aria-labelledby': 'range-slider',
-          }}
-        />
+        {(value[1] < value[0]) && <div className={classes.error}>{error}</div>}
+        {input(value[0], handleInputMin)}
+        {input(value[1], handleInputMax)}
       </div>
     </>
   );

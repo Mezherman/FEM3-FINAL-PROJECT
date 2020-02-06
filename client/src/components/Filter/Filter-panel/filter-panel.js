@@ -71,14 +71,8 @@ function FilterPanel(props) {
 
   return (
     <div>
-      <ExpansionPanel
-        className={classes.root}
-        square
-        defaultExpanded={isShowPanel[width]}
-      >
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-        >
+      <ExpansionPanel className={classes.root} square defaultExpanded={isShowPanel[width]}>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>{name}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
@@ -107,7 +101,8 @@ FilterPanel.propTypes = {
   filterResults: PropTypes.objectOf(PropTypes.array).isRequired,
   colors: PropTypes.arrayOf(PropTypes.object).isRequired,
   brands: PropTypes.arrayOf(PropTypes.object).isRequired,
-  getFilterProducts: PropTypes.func.isRequired
+  getFilterProducts: PropTypes.func.isRequired,
+  width: PropTypes.string.isRequired
 };
 
 FilterPanel.defaultProps = {

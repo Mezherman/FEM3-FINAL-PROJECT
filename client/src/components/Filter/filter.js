@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux'
 import FilterPanel from './Filter-panel/filter-panel'
 import useStyles from './_filter';
-import { getFilteredProducts, getColors, getBrands, getManufacturer } from '../../services/filter'
+import { getFilteredProducts, getColors, getBrands } from '../../services/filter'
 import { productsLoaded } from '../../redux/actions/products';
 import { filterParamsLoaded, filterType, resetFilters } from '../../redux/actions/filter';
 import { tempFilterData } from '../../services/filter-temp'
@@ -45,7 +45,6 @@ function Filter(props) {
 
   const filterText = ['Brand', 'Price', 'Color'];
 
-  // console.log('filterParams.colors =', filterParams.colors);
   const filter = filterText.map((name) => (
     <FilterPanel
       max={700}
@@ -70,7 +69,6 @@ function Filter(props) {
   // };
 
   const parseToFilterValue = (obj) => {
-    // console.log('OBJ -> ',obj)
 
     if (obj.brand.length > 0) {
       const brands = 'brand='
@@ -95,21 +93,15 @@ function Filter(props) {
       valOfColor = color.concat(str)
     }
 
-    // const currentCategory = !allCategories.find((category) => category.id === catalogLocation)
-    //   ? {}
-    //   : allCategories.find((category) => category.id === catalogLocation);
-    // console.log('category =', currentCategory);
-    // const parentCategory = currentCategory.parentId !== 'null' ? ${currentCategory.parentId} : '';
     const subCategories = allCategories.filter((category) => category.parentId === catalogLocation);
     const subCategoriesString = subCategories ? subCategories.map((subCategory) => subCategory.id).join(',') : '';
     const categoryForFilter = !subCategoriesString ? catalogLocation : subCategoriesString;
-    // console.log('ENDS OF VAL', valOfBrands, valOfCollection)
+
     valToFilter = `categories=${categoryForFilter}&${valOfBrands}&${valOfCollection}&${valOfColor}&${valOfPrice}`
     // console.log('!!!!! ->>>>>', valToFilter);
     filterType(valToFilter);
     return valToFilter
   };
-
 
   // console.log('filterResults =', filterResults);
   // console.log('filterParams =', filterParams);
