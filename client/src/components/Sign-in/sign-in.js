@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import {
   FormLabel,
   Avatar,
@@ -16,14 +16,16 @@ import {
 import { VisibilityOff, Visibility } from '@material-ui/icons';
 import useStylesSingIn from './_sign-in';
 import RoutesName from '../../routes-list';
-import postLoginData from '../../services/postLoginData'
-import { loadAllDataAfterLogin } from '../../redux/actions/load-all-data'
+import postLoginData from '../../services/postLoginData';
+import { loadAllDataAfterLogin } from '../../redux/actions/load-all-data';
+import { enterRegistrationPage } from '../../redux/actions/moving-around-registration';
 
 function SignIn (props) {
   const [login, setLogin] = useState(null);
   const [password, setPassword] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [length, setLength] = useState(1);
+  const dispatch = useDispatch();
 
   const {
     onClose,
@@ -31,6 +33,11 @@ function SignIn (props) {
     loadAllDataAfterLogin,
   } = props;
   const classes = useStylesSingIn();
+
+  const handleRegistrationRoute = useCallback(() => {
+    onClose();
+    dispatch(enterRegistrationPage())
+  }, [dispatch, onClose]);
 
   // const userData = {
   //   loginOrEmail: 'ivanr',
@@ -195,7 +202,8 @@ function SignIn (props) {
           <Link
             className={classes.text}
             to={RoutesName.signUp}
-            onClick={onClose}
+            // onClick={onClose}
+            onClick={handleRegistrationRoute}
           >
             Don&#8242;t have an account?
             <strong> Sign Up </strong>

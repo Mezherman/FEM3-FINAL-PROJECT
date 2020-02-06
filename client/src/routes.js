@@ -19,26 +19,20 @@ import CheckoutStatus from './components/Checkout/Status/status';
 import CustomerOrders from './components/My-account/Customer-orders/customer-orders';
 
 export default function Routes() {
-  // const history = useHistory();
-  // const user = useSelector((state) => state.user);
-  // const [modalIsVisible, setModalVisibility] = useState(true);
-  // const { loggedIn } = useSelector((state) => state.user);
-  // let closeModal = null;
-  // if(ifloggedIn){
-  //    const closeModal = () => {
-  //     console.log('close modal');
-  //     setModalVisibility(false);
-  //   };
   const { loggedIn } = useSelector((state) => state.user);
   const history = useHistory();
   const [modalIsVisible, setModalVisibility] = useState(!loggedIn);
+  const { registration } = useSelector((state) => state.user);
   const closeModal = () => {
     setModalVisibility(false);
   };
 
   if (!loggedIn && !modalIsVisible) {
-    setModalVisibility(true);
-    history.push(RoutesName.home);
+    if (registration) {
+      setModalVisibility(true);
+    } else {
+      history.push(RoutesName.home);
+    }
   }
 
   return (
