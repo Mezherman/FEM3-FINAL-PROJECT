@@ -42,9 +42,6 @@ const Comment = (props) => {
       setAddCommentDisabled(true);
       setErrorText(true);
     }
-    //
-    // userLoggedIn ? setComment((prev) => setComment(!prev)) : setErrorText(true);
-    // userLoggedIn ? setAddCommentDisabled(false) : setAddCommentDisabled(true);
   };
 
   const focusHandler = () => {
@@ -103,10 +100,6 @@ const Comment = (props) => {
     (number.toString().length === 1) ? (formattedNumber = `0${number}`) : formattedNumber = number;
     return formattedNumber;
   };
-
-  // const loggedInHandler = () => {
-  //   userLoggedIn ? setAddCommentDisabled(false) : setAddCommentDisabled(true);
-  // };
 
   return (
     <Box component="div" mt={2} mb={3} align="center">
