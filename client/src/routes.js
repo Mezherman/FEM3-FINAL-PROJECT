@@ -129,6 +129,15 @@ export default function Routes() {
           return <Catalog assortment={subCategory} />
         }}
       />
+
+      {/*<Route*/}
+      {/*  path={`${RoutesName.products}/search`}*/}
+      {/*  exact*/}
+      {/*  render={() => (*/}
+      {/*    <Catalog assortment="search" />*/}
+      {/*  )}*/}
+      {/*/>*/}
+
       <Route
         path={`${RoutesName.products}/:categoryOrID`}
         render={({ match, location }) => {
@@ -137,7 +146,6 @@ export default function Routes() {
             return <Catalog assortment={categoryOrID} />
           }
           const { pathname: url } = location;
-          // console.log(id);
           // console.log(url);
           return (
             <ProductPage

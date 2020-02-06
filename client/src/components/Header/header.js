@@ -16,7 +16,7 @@ import {
   useTheme
 } from '@material-ui/core'
 
-// import { useTheme } from '@material-ui/core/styles';
+import Collapse from '@material-ui/core/Collapse';
 import MenuIcon from '@material-ui/icons/Menu'
 // import SearchIcon from '@material-ui/icons/Search'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
@@ -59,6 +59,13 @@ function Header() {
 
   const totalCartQuantity = useSelector((state) => state.cart.totalCartQuantity);
   const { loggedIn } = useSelector((state) => state.user);
+  const totalFavoritesQty = useSelector((state) => state.favoritesReducer.favorites.length);
+  // console.log('ISLOGGEDIN AAAAAAAAA', loggedIn);
+  // const [anchorElLogin, setAnchorElLogin] = useState(null);
+
+  // const handleClose = () => {
+  //   setAnchorElLogin(null);
+  // };
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -248,7 +255,7 @@ function Header() {
                 <Box className={classes.iconButtonBox}>
                   {isMobile && <Search searchIsShown={searchIsShown} />}
                   {isTablet && <Search searchIsShown />}
-                  {isDesktop && <Search searchIsShown={searchIsShown} /> }
+                  {isDesktop && <Search searchIsShown={searchIsShown} />}
                   <MenuItem
                     className={classes.headerMenuItem}
                   >
@@ -268,9 +275,9 @@ function Header() {
                   <MenuItem className={classes.headerMenuItem}>
                     <Link to={RoutesName.favorites}>
                       <IconButton edge="end" className={classes.iconButton}>
-                        {/* <Badge badgeContent={totalFavoritesQty.toString()} color="error"> */}
-                        <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
-                        {/* </Badge> */}
+                        <Badge badgeContent={totalFavoritesQty.toString()} color="error">
+                          <FavoriteBorderIcon fontSize="large" className={classes.iconsStyle} />
+                        </Badge>
                       </IconButton>
                       <span className={classes.menuTitle}>Favorites</span>
                     </Link>
