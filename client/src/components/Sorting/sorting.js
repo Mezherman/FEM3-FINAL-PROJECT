@@ -7,73 +7,68 @@ import {
   Select
 } from '@material-ui/core';
 
-import useStyles from './_sorting';
 import { PropTypes } from 'prop-types';
-import sendSortingProducts from '../../redux/actions/sorting';
+import useStyles from './_sorting';
+import { sortingProducts, sortingReset } from '../../redux/actions/products';
+import { resetFilterType } from '../../redux/actions/filter';
 
 const Sorting = (props) => {
-  const { products, sendSorting, currentCategory } = props;
-
+  const {
+    products, currentCategory, sendSortingProducts, sorting, reset, filter, resetFilterType
+  } = props;
   const classes = useStyles();
-
   const inputLabel = useRef(null);
-
-  const [state, setState] = useState({
-    sort: '',
-  });
-
-  const sortedList = products;
   let sortedCategory = '';
+  let filterType = '';
 
   const [labelWidth, setLabelWidth] = useState(0);
 
   useEffect(() => {
     setLabelWidth(inputLabel.current.offsetWidth);
-    getCurrentCategory(currentCategory);
-  }, [currentCategory]);
+    getCurrentCategory();
+    getCurrentFilterType();
+  }, [currentCategory, filter]);
 
-  const handleChange = (name, value) => {
-    setState({
-      ...state,
-      [name]: value,
-    });
+  const getCurrentCategory = () => {
+    if (!sortedCategory && (sortedCategory !== currentCategory)) {
+      reset();
+    }
   };
 
-  const getCurrentCategory = (category) => {
-    if (sortedCategory !== category || sortedCategory !== '') {
-      handleChange('sort', '');
-      sendSorting([], '');
+  const getCurrentFilterType = () => {
+    if (!filterType && (filterType !== filter)) {
+      resetFilterType();
+      reset();
     }
   };
 
   const getSortedList = (event) => {
     const type = event.target.value;
-
-    handleChange('sort', type);
     sortedCategory = currentCategory;
+    filterType = filter;
 
     switch (type) {
       case 'low-to-high':
-        sortedList.sort((a, b) => a.currentPrice - b.currentPrice)
+        products.sort((a, b) => a.currentPrice - b.currentPrice);
         break;
 
       case 'high-to-low':
-        sortedList.sort((a, b) => b.currentPrice - a.currentPrice);
+        products.sort((a, b) => b.currentPrice - a.currentPrice);
         break;
 
       case 'sale-items':
-        sortedList.sort((a) => {
+        products.sort((a) => {
           if (!a.previousPrice) {
             return 1;
           }
           return -1;
-        })
+        });
         break;
 
       default:
-        return sortedList;
+        return products;
     }
-    return sendSorting(sortedList, type);
+    return sendSortingProducts(products, type);
   };
 
   return (
@@ -83,7 +78,8 @@ const Sorting = (props) => {
       </InputLabel>
       <Select
         native
-        value={state.sort}
+        value={sorting}
+        // value={state.sort}
         onChange={getSortedList}
         labelWidth={labelWidth}
         inputProps={{
@@ -102,12 +98,15 @@ const Sorting = (props) => {
 
 const mapStateToProps = (state) => ({
   products: state.productsReducer.products,
-  sortedProducts: state.sortingReducer.sortedProducts,
-  currentCategory: state.categoriesReducer.catalogLocation
+  sorting: state.productsReducer.sorting,
+  currentCategory: state.categoriesReducer.catalogLocation,
+  filter: state.filterReducer.filterType,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  sendSorting: (list, type) => dispatch(sendSortingProducts(list, type))
+  sendSortingProducts: (sortingList, sortingType) => dispatch(sortingProducts(sortingList, sortingType)),
+  reset: () => dispatch(sortingReset()),
+  resetFilterType: () => dispatch(resetFilterType())
 });
 
 Sorting.propTypes = {
