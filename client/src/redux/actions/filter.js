@@ -15,7 +15,22 @@ function filterParamsLoaded(filterTitle, params) {
   }
 }
 
+function filterType(payload) {
+  return {
+    type: 'FILTER_TYPE',
+    payload
+  }
+}
+
+function resetFilterType() {
+  return {
+    type: 'RESET_FILTER_TYPE'
+  }
+}
+
 export {
   getFilterProducts,
-  filterParamsLoaded
+  filterParamsLoaded,
+  filterType,
+  resetFilterType
 }
