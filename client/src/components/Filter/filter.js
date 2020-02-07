@@ -35,6 +35,13 @@ const Filter = (props) => {
   const { allCategories } = catalog;
   const classes = useStyles();
 
+  let valToFilter = '';
+  let valOfBrands = '';
+  const valOfCollection = '';
+  let valOfColor = '';
+  let valOfPrice = '';
+  let filteredCategory = '';
+
   useEffect(() => {
     getColors().then((colors) => {
       filterParamsLoaded('colors', colors);
@@ -42,7 +49,7 @@ const Filter = (props) => {
     getBrands().then((brands) => {
       filterParamsLoaded('brands', brands);
     });
-    // getCurrentCategory();
+    getCurrentCategory();
   }, [filterParamsLoaded, currentCategory]);
 
   const filterText = ['Brand', 'Price', 'Color'];
@@ -57,18 +64,11 @@ const Filter = (props) => {
     />
   ));
 
-  let valToFilter = '';
-  let valOfBrands = '';
-  const valOfCollection = '';
-  let valOfColor = '';
-  let valOfPrice = '';
-  //
-  // const getCurrentCategory = () => {
-  //   // if (!valToFilter && (valToFilter !== currentCategory)) {
-  //   if (!valToFilter && (valToFilter !== currentCategory)) {
-  //     resetFilters();
-  //   }
-  // };
+  const getCurrentCategory = () => {
+    if (!filteredCategory && (filteredCategory !== currentCategory)) {
+      resetFilters();
+    }
+  };
 
   const parseToFilterValue = (obj) => {
     if (obj.brand.length > 0) {
@@ -99,8 +99,8 @@ const Filter = (props) => {
     const categoryForFilter = !subCategoriesString ? catalogLocation : subCategoriesString;
 
     valToFilter = `categories=${categoryForFilter}&${valOfBrands}&${valOfCollection}&${valOfColor}&${valOfPrice}`
-    // console.log('!!!!! ->>>>>', valToFilter);
     filterType(valToFilter);
+    console.log(valToFilter)
     return valToFilter
   };
 

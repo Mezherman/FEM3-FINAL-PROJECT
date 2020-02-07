@@ -6,28 +6,13 @@ import { withStyles } from '@material-ui/core/styles';
 import useStyles from './_range';
 import { getFilterProducts } from '../../../redux/actions/filter'
 
-// const Shadow =
-//   '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
-
 const CustomSlider = withStyles((theme) => ({
   root: {
     color: theme.palette.primary.main,
     left: '2%',
-    // padding: '15px 0',
   },
   thumb: {
-    // height: 28,
-    // width: 28,
     backgroundColor: theme.palette.primary.main,
-    // boxShadow: Shadow,
-    // marginTop: -14,
-    // marginLeft: -14,
-    // '&:focus,&:hover,&$active': {
-    //  boxShadow: '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
-    //   '@media (hover: none)': {
-    //     boxShadow: Shadow,
-    //   },
-    // },
   },
   valueLabel: {
     top: -22,
@@ -56,17 +41,19 @@ const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
   };
 
   const handleInputMin = (event) => {
-    if (event.target.value > max) {
-      event.target.value = 0
+    let inputValue = event.target.value;
+    if (inputValue > max) {
+      inputValue = 0
     }
-    setValue([event.target.value === '' ? '' : Number(event.target.value), value[1]]);
+    setValue([inputValue === '' ? '' : Number(inputValue), value[1]]);
   };
 
   const handleInputMax = (event) => {
-    if (event.target.value > max) {
-      event.target.value = max
+    let inputValue = event.target.value
+    if (inputValue > max) {
+      inputValue = max
     }
-    setValue([value[0], event.target.value === '' ? '' : Number(event.target.value)]);
+    setValue([value[0], inputValue === '' ? '' : Number(inputValue)]);
   };
 
   const combineInputs = () => {
