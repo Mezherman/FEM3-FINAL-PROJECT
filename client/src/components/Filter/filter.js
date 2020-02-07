@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react'
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux'
+import { PropTypes } from 'prop-types';
 import FilterPanel from './Filter-panel/filter-panel'
 import useStyles from './_filter';
 import { getFilteredProducts, getColors, getBrands } from '../../services/filter'
 import { productsLoaded } from '../../redux/actions/products';
 import { filterParamsLoaded, filterType, resetFilters } from '../../redux/actions/filter';
+
 import { tempFilterData } from '../../services/filter-temp'
 
-function Filter(props) {
+const Filter = (props) => {
   // tempFilterData().then((products) => {
   //   const manufacturerSet = new Set();
   //   const withoutBrand = products.filter((product) => manufacturerSet.add(product.manufacturer))
@@ -69,7 +71,6 @@ function Filter(props) {
   // };
 
   const parseToFilterValue = (obj) => {
-
     if (obj.brand.length > 0) {
       const brands = 'brand='
       const items = obj.brand.map((item) => item)
@@ -145,5 +146,17 @@ const mapDispatchToProps = {
   filterType,
   resetFilters
 };
+
+Filter.propTypes = {
+  filterParams: PropTypes.objectOf(PropTypes.array).isRequired,
+  filterResults: PropTypes.objectOf(PropTypes.array).isRequired,
+  currentCategory: PropTypes.objectOf(PropTypes.array).isRequired,
+  categoriesReducer: PropTypes.objectOf(PropTypes.object).isRequired,
+  onClose: PropTypes.func
+}
+
+Filter.defaultProps = {
+  onClose: () => {}
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter)

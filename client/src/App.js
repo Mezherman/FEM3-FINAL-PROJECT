@@ -13,7 +13,7 @@ import ScrollToTopOnMount from './components/Pages-scroll-to-top/Pages-scroll-to
 import Spinner from './components/Spinner/spinner';
 import { loadAllData, fetchResponse } from './redux/actions/load-all-data';
 
-function App() {
+const App = () => {
   const dispatch = useDispatch();
   const loadData = useCallback(
     () => dispatch(loadAllData()),

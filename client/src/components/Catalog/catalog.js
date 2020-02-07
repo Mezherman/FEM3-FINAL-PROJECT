@@ -43,6 +43,7 @@ const Catalog = ({
   }, [assortment, catalogLocation, fetchProducts, fetchTopProducts, fetchTopProductsList]);
 
   const cardsToShowString = topList.toString();
+
   useEffect(() => {
     getFilteredProducts(`itemNo=${cardsToShowString}`)
       .then((response) => {

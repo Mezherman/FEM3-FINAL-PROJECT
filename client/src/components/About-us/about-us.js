@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Divider, Container } from '@material-ui/core';
 import useStyles from './_about-us';
 
-export default function AboutUs() {
+const AboutUs = () => {
   const classes = useStyles();
   return (
     <>
@@ -102,3 +102,5 @@ export default function AboutUs() {
     </>
   )
 }
+
+export default AboutUs;

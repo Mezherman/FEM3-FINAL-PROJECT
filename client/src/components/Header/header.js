@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from 'react'
+import React, { useState, useCallback, useRef, useEffect } from 'react'
 import {
   AppBar,
   Toolbar,
@@ -13,26 +13,25 @@ import {
   Paper,
   Popper,
   MenuList,
+  CssBaseline,
+  ClickAwayListener,
   useTheme
 } from '@material-ui/core'
 
-import Collapse from '@material-ui/core/Collapse';
 import MenuIcon from '@material-ui/icons/Menu'
-// import SearchIcon from '@material-ui/icons/Search'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import PersonIcon from '@material-ui/icons/Person'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom';
-// import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
+// import CssBaseline from '@material-ui/core/CssBaseline';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
-import './header.scss';
+// import './header.scss';
 
 import SearchIcon from '@material-ui/icons/Search';
 import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+// import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import LoginModal from '../Login-modal-window/login-modal-window';
 import PreviewBlock from '../Preview-block/preview-cart';
 import HeaderNavbar from '../Header-navbar/header-navbar';
@@ -168,8 +167,9 @@ function Header() {
   }
 
   // return focus to the button when we transitioned from !open -> open
-  const prevOpen = React.useRef(open);
-  React.useEffect(() => {
+  const prevOpen = useRef(open);
+
+  useEffect(() => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
@@ -188,14 +188,18 @@ function Header() {
     dispatch(logoutAction());
   }, [dispatch]);
 
+  const delivery = (
+    <Box className={classes.delivery}>
+      <Container maxWidth="xl">
+        <p className={classes.deliveryTitle}>Free shipping on all orders over &#8364;100</p>
+      </Container>
+    </Box>
+  )
+
   return (
     <>
       <CssBaseline />
-      <Box className={classes.delivery}>
-        <Container maxWidth="xl">
-          <p className={classes.deliveryTitle}>Free shipping on all orders over &#8364;100</p>
-        </Container>
-      </Box>
+      {delivery}
       <AppBar position="sticky" top="0" color="inherit" elevation={0}>
         <Container maxWidth="xl" disableGutters className={classes.grow}>
           <Toolbar className={classes.justify}>
@@ -240,21 +244,16 @@ function Header() {
               drawer={drawer}
               toggleDrawer={toggleDrawer}
             />
-
-            {/* {isMobile && searchIsShown && */}
-            {/* <Search />} */}
-
-            {/* { <div style={{backgroundColor: 'red'}}><Search /></div>} */}
             <ClickAwayListener onClickAway={handleSearchAway}>
               <div>
                 <Box className={classes.iconButtonBox}>
                   {isMobile && <Search searchIsShown={searchIsShown} />}
                   {isTablet && <Search searchIsShown />}
                   {isDesktop && <Search searchIsShown={searchIsShown} />}
+
                   <MenuItem
                     className={classes.headerMenuItem}
                   >
-
                     <IconButton
                       onClick={toggleSearch}
                       edge="end"
@@ -263,7 +262,6 @@ function Header() {
                       <SearchIcon fontSize="large" className={classes.iconsStyle} />
                       <span className={classes.menuTitle}>Search</span>
                     </IconButton>
-
                   </MenuItem>
                   <Divider orientation="vertical" className={classes.dividerStyle} />
 
@@ -359,12 +357,12 @@ function Header() {
         <Divider />
       </AppBar>
 
-      {prevBlockIsVisible ? (
+      {prevBlockIsVisible && (
         <PreviewBlock
           checked={prevBlockIsVisible}
           onClose={handleChange}
         />
-      ) : null}
+      )}
       {renderMobileMenu}
       {renderMenu}
       {logout && <Redirect />}

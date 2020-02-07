@@ -15,7 +15,7 @@ import RangeSlider from '../Range/range'
 import useStyles from './_filter-panel';
 import { getFilterProducts } from '../../../redux/actions/filter';
 
-function FilterPanel(props) {
+const FilterPanel = (props) => {
   const classes = useStyles();
   const { name, filterResults, getFilterProducts, max, colors, brands, width } = props;
 
@@ -89,10 +89,8 @@ const mapStateToProps = (state) => ({
   filterResults: state.filterReducer.filterResults
 })
 
-function mapDispatchToProps(dispatch) {
-  return {
-    getFilterProducts: (value) => dispatch(getFilterProducts(value))
-  }
+const mapDispatchToProps = {
+  getFilterProducts
 }
 
 FilterPanel.propTypes = {

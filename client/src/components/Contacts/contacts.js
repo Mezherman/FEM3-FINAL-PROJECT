@@ -8,7 +8,7 @@ import Container from '@material-ui/core/Container';
 import Contact from './contact';
 import useStyles from './_contacts';
 
-export default function Contacts() {
+const Contacts = () => {
   const classes = useStyles();
   const telephone = '+38 (044) 123-456-789';
   const mobile = '+38 (050) 123-456-789';
@@ -33,3 +33,5 @@ export default function Contacts() {
     </Container>
   )
 }
+
+export default Contacts;

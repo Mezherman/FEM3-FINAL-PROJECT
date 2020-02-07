@@ -38,9 +38,8 @@ const CustomSlider = withStyles((theme) => ({
   },
 }))(Slider);
 
-function RangeSlider(props) {
+const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
   const classes = useStyles();
-  const { getFilterProducts, filterResults, max } = props;
 
   const [value, setValue] = useState([0, max]);
 
@@ -77,7 +76,7 @@ function RangeSlider(props) {
     });
   }
 
-  const error = 'Warning! Your first value should be lower than the second!'
+  const error = 'Warning! Your first value should be lower than the second!';
 
   const input = (values, func) => (
     <Input
