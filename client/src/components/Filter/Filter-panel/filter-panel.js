@@ -23,7 +23,7 @@ function FilterPanel(props) {
     md: 'true',
     lg: 'true',
     xl: 'true'
-  }
+  };
 
   const handleChange = (event) => {
     let currentRange = [];

@@ -35,12 +35,6 @@ export default function filterReducer(state = initialState, action) {
         filterType: action.payload
       };
 
-    case 'RESET_FILTER_TYPE':
-      return {
-        ...state,
-        filterType: ''
-      };
-
     case 'RESET_FILTERS':
       return {
         ...state,
@@ -48,8 +42,7 @@ export default function filterReducer(state = initialState, action) {
           color: [],
           brand: [],
           price: [0, 700]
-        },
-        filterType: ''
+        }
       };
 
     default:
