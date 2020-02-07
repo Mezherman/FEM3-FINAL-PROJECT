@@ -3,7 +3,6 @@ import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:5000';
 
 function getFilteredProducts(value) {
-  // console.log(value);
   return axios
     .get(`/products/filter?${value}`)
     .then((response) => response.data.products)
@@ -18,13 +17,8 @@ function getBrands() {
   return axios('/filters/brands').then((response) => (response.data))
 }
 
-function getManufacturer() {
-  return axios('/filters/manufacturers').then((respronse) => respronse.data)
-}
-
 export {
   getFilteredProducts,
   getColors,
   getBrands,
-  getManufacturer,
 }
