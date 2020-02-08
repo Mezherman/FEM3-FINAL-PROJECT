@@ -64,42 +64,136 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
       {['HOME', 'CATALOG', 'ABOUT US', 'DELIVERY & PAYMENT'].map((text, index) => {
         if (text === 'CATALOG') {
           return (
+            <>
+              <ListItem
+                onClick={() => {
+                  toggleDrawerCat(true);
+                  toggleDrawer(false);
+                }}
+                className={classes.nestedMenuItem}
+              >
+                <span
+                  className={classes.headerMenuListHyperlink}
+                >
+                  <ListItemIcon className={classes.icon} >{listItemIcon(text)}</ListItemIcon>
+                  <ListItemText primary={text} />
+                </span>
+                <KeyboardArrowRightIcon />
+              </ListItem>
+              <Divider />
+            </>
+          )
+        }
+        return (
+          <>
             <ListItem
               onClick={() => {
-                toggleDrawerCat(true);
                 toggleDrawer(false);
+              // console.log({RoutesName.${text})
               }}
-              className={classes.nestedMenuItem}
             >
-              <span
+              <Link
+                to={RoutesName.path}
                 className={classes.headerMenuListHyperlink}
               >
                 <ListItemIcon className={classes.icon} >{listItemIcon(text)}</ListItemIcon>
                 <ListItemText primary={text} />
-              </span>
-              <KeyboardArrowRightIcon />
+              </Link>
             </ListItem>
-          )
-        }
-        return (
-          <ListItem
-            onClick={() => {
-              toggleDrawer(false);
-              // console.log({RoutesName.${text})
-            }}
-          >
-            <Link
-              to={RoutesName.path}
-              className={classes.headerMenuListHyperlink}
-            >
-              <ListItemIcon className={classes.icon} >{listItemIcon(text)}</ListItemIcon>
-              <ListItemText primary={text} />
-            </Link>
-          </ListItem>
+            <Divider />
+          </>
         )
       })}
     </List>
-  )
+  );
+
+  const renderCatalogMenu = () => (
+    <List>
+      <MenuItem
+        onClick={() => {
+          toggleDrawerCat(false);
+          toggleDrawer(true);
+        }}
+        className={classes.headerMenuListHyperlink}
+      >
+        <KeyboardArrowLeftIcon className={classes.icon} />
+        CATALOG
+      </MenuItem>
+      <Divider />
+
+      {mainCategories.map((category) => (
+        <MenuItem
+          onClick={() => {
+            toggleDrawerSubCat(category.id, true);
+            toggleDrawerCat(false);
+          }}
+          key={category.id}
+          className={classes.nestedMenuItem}
+          label={category.name}
+        >
+          <Link
+            to={`${RoutesName.products}/${category.id}`}
+            key={category.id}
+            className={classes.headerMenuListHyperlink}
+          >
+            {category.name}
+          </Link>
+          <KeyboardArrowRightIcon />
+        </MenuItem>
+      ))}
+    </List>
+  );
+
+  const renderSubCatalogMenu = () => (
+    <List>
+      <MenuItem
+        onClick={() => {
+          toggleLastDrawer(false);
+          toggleDrawerCat(true)
+        }}
+        className={classes.headerMenuListHyperlink}
+      >
+        <KeyboardArrowLeftIcon className={classes.icon} />
+        {subCategory}
+      </MenuItem>
+      <Divider />
+
+      <MenuItem
+        onClick={() => {
+          toggleLastDrawer(false);
+        }}
+      >
+        <Link
+          to={`${RoutesName.products}/${subCategory}`}
+          className={classes.headerMenuListHyperlink}
+        >
+          Shop all
+        </Link>
+      </MenuItem>
+
+      {allCategories.filter(
+        (category) => category.parentId === subCategory
+      )
+        .map((subCategory) => (
+          <MenuItem
+            key={subCategory.id}
+            onClick={() => {
+              // toggleDrawer(false);
+              toggleLastDrawer(false);
+            }}
+          >
+            <Link
+              to={`${RoutesName.products}/${subCategory.id}`}
+              className={classes.headerMenuListHyperlink}
+              key={subCategory.id}
+            >
+              {subCategory.name}
+            </Link>
+            {/* <KeyboardArrowRightIcon /> */}
+          </MenuItem>
+        ))}
+    </List>
+  );
 
   return (
   // mobile
@@ -204,105 +298,23 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
           <Drawer
             open={drawerCat}
             onClose={() => toggleDrawerCat(false)}
+            transitionDuration={500}
             classes={{
               paper: classes.drawerPaper,
             }}
-            transitionDuration={500}
           >
-
-            <List>
-              <MenuItem
-                onClick={() => {
-                  toggleDrawerCat(false);
-                  toggleDrawer(true);
-                }}
-                className={classes.headerMenuListHyperlink}
-              >
-                <KeyboardArrowLeftIcon className={classes.icon} />
-                CATALOG
-              </MenuItem>
-              <Divider />
-
-              {mainCategories.map((category) => (
-                <MenuItem
-                  onClick={() => {
-                    toggleDrawerSubCat(category.id, true);
-                    toggleDrawerCat(false);
-                  }}
-                  key={category.id}
-                  className={classes.nestedMenuItem}
-                  label={category.name}
-                >
-                  <Link
-                    to={`${RoutesName.products}/${category.id}`}
-                    key={category.id}
-                    className={classes.headerMenuListHyperlink}
-                  >
-                    {category.name}
-                  </Link>
-                  <KeyboardArrowRightIcon />
-                </MenuItem>
-              ))}
-            </List>
+            {renderCatalogMenu()}
           </Drawer>
           {/* Subcategory */}
           <Drawer
             open={drawerSubCat}
             onClose={() => toggleDrawerSubCat(false)}
+            transitionDuration={500}
             classes={{
               paper: classes.drawerPaper,
             }}
-            transitionDuration={500}
           >
-
-            <List>
-              <MenuItem
-                onClick={() => {
-                  toggleLastDrawer(false);
-                  toggleDrawerCat(true)
-                }}
-                className={classes.headerMenuListHyperlink}
-              >
-                <KeyboardArrowLeftIcon className={classes.icon} />
-                {subCategory}
-              </MenuItem>
-              <Divider />
-
-              <MenuItem
-                onClick={() => {
-                  toggleLastDrawer(false);
-                }}
-              >
-                <Link
-                  to={`${RoutesName.products}/${subCategory}`}
-                  className={classes.headerMenuListHyperlink}
-                >
-                  Shop all
-                </Link>
-              </MenuItem>
-
-              {allCategories.filter(
-                (category) => category.parentId === subCategory
-              )
-                .map((subCategory) => (
-                  <MenuItem
-                    key={subCategory.id}
-                    onClick={() => {
-                      // toggleDrawer(false);
-                      toggleLastDrawer(false);
-                    }}
-                  >
-                    <Link
-                      to={`${RoutesName.products}/${subCategory.id}`}
-                      className={classes.headerMenuListHyperlink}
-                      key={subCategory.id}
-                    >
-                      {subCategory.name}
-                    </Link>
-                    {/* <KeyboardArrowRightIcon /> */}
-                  </MenuItem>
-                ))}
-            </List>
+            {renderSubCatalogMenu()}
           </Drawer>
         </>
       )}
