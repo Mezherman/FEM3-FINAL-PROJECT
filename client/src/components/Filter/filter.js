@@ -72,11 +72,8 @@ const Filter = (props) => {
 
   const parseToFilterValue = (obj) => {
     if (obj.brand.length > 0) {
-      const brands = 'brand='
-      const items = obj.brand.map((item) => item)
-      const str = items.join(',')
-      brands.concat(str)
-      valOfBrands = brands.concat(str)
+      const brands = `brand=${obj.brand.join(',')}`
+      valOfBrands = brands
     }
 
     if (obj.price.length > 0) {
@@ -87,11 +84,8 @@ const Filter = (props) => {
     }
 
     if (obj.color.length > 0) {
-      const color = 'color='
-      const items = obj.color.map((item) => item)
-      const str = items.join(',')
-      color.concat(str)
-      valOfColor = color.concat(str)
+      const color = `color=${obj.color.join(',')}`
+      valOfColor = color
     }
 
     const subCategories = allCategories.filter((category) => category.parentId === catalogLocation);
@@ -104,8 +98,6 @@ const Filter = (props) => {
     return valToFilter
   };
 
-  // console.log('filterResults =', filterResults);
-  // console.log('filterParams =', filterParams);
   parseToFilterValue(filterResults);
 
   return (
