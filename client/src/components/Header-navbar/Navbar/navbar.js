@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { MenuItem, ListItem, ListItemIcon, ListItemText, useTheme, Divider } from '@material-ui/core';
+import { MenuItem, ListItem, ListItemIcon, ListItemText, useTheme, Divider, SwipeableDrawer } from '@material-ui/core';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
@@ -200,7 +200,7 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
     <>
       {!isDesktop && (
         <>
-          <Drawer
+          <SwipeableDrawer
             open={drawer}
             onClose={() => toggleDrawer(false)}
             transitionDuration={500}
@@ -209,93 +209,10 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
             }}
           >
             {renderMainMenu()}
-
-            {/* <List */}
-            {/*  // className={classes.root} */}
-            {/*  component="nav" */}
-            {/*  aria-labelledby="nested-list-subheader" */}
-
-            {/* > */}
-            {/*  <MenuItem */}
-            {/*    onClick={() => toggleDrawer(false)} */}
-            {/*  > */}
-            {/*    <Link */}
-            {/*      to={RoutesName.home} */}
-            {/*      className={classes.headerMenuListHyperlink} */}
-            {/*    > */}
-            {/*      <HomeIcon className={classes.icon} /> */}
-            {/*      HOME */}
-            {/*    </Link> */}
-            {/*  </MenuItem> */}
-
-            {/*  <Divider /> */}
-
-            {/*  <MenuItem */}
-            {/*    onClick={() => { */}
-            {/*      toggleDrawerCat(true); */}
-            {/*      toggleDrawer(false); */}
-            {/*    }} */}
-            {/*    className={classes.nestedMenuItem} */}
-            {/*  > */}
-            {/*    <span */}
-            {/*      className={classes.headerMenuListHyperlink} */}
-            {/*    > */}
-            {/*      <RestaurantMenuIcon className={classes.icon} /> */}
-            {/*    CATALOG */}
-            {/*    </span> */}
-            {/*    <KeyboardArrowRightIcon /> */}
-            {/*  </MenuItem> */}
-
-            {/*  <Divider /> */}
-
-            {/*  <MenuItem */}
-            {/*    onClick={() => toggleDrawer(false)} */}
-            {/*  > */}
-            {/*    <Link */}
-            {/*      to={RoutesName.aboutUs} */}
-            {/*      className={classes.headerMenuListHyperlink} */}
-            {/*    > */}
-            {/*      <GroupIcon className={classes.icon} /> */}
-            {/*  ABOUT US */}
-            {/*    </Link> */}
-            {/*  </MenuItem> */}
-
-            {/*  <Divider /> */}
-
-            {/*  <MenuItem */}
-            {/*    onClick={() => toggleDrawer(false)} */}
-
-            {/*  > */}
-            {/*    <Link */}
-            {/*      to={RoutesName.delivery} */}
-            {/*      className={classes.headerMenuListHyperlink} */}
-            {/*    > */}
-            {/*      <LocalShippingIcon className={classes.icon} /> */}
-            {/*  DELIVERY & PAYMENT */}
-            {/*    </Link> */}
-            {/*  </MenuItem> */}
-
-            {/*  <Divider /> */}
-
-            {/*  <MenuItem */}
-            {/*    onClick={() => toggleDrawer(false)} */}
-
-            {/*  > */}
-            {/*    <Link */}
-            {/*      to={RoutesName.contacts} */}
-            {/*      className={classes.headerMenuListHyperlink} */}
-            {/*    > */}
-            {/*      <PlaceIcon className={classes.icon} /> */}
-            {/*  CONTACTS */}
-            {/*    </Link> */}
-            {/*  </MenuItem> */}
-
-            {/*  <Divider /> */}
-            {/* </List> */}
-          </Drawer>
+          </SwipeableDrawer>
 
           {/* Category */}
-          <Drawer
+          <SwipeableDrawer
             open={drawerCat}
             onClose={() => toggleDrawerCat(false)}
             transitionDuration={500}
@@ -304,9 +221,9 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
             }}
           >
             {renderCatalogMenu()}
-          </Drawer>
+          </SwipeableDrawer>
           {/* Subcategory */}
-          <Drawer
+          <SwipeableDrawer
             open={drawerSubCat}
             onClose={() => toggleDrawerSubCat(false)}
             transitionDuration={500}
@@ -315,7 +232,7 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
             }}
           >
             {renderSubCatalogMenu()}
-          </Drawer>
+          </SwipeableDrawer>
         </>
       )}
 

@@ -66,7 +66,7 @@ function Catalog({ assortment, fetchProducts, fetchTopProducts, fetchTopProducts
         <ProductBreadcrumbs assortment={assortment} />
         {/*<BackgroundCatalog />*/}
         <Grid container spacing={2} className={classes.root}>
-          <Grid item sm={12} md={4}>
+          <Grid item xs={12} md={4}>
             {isDesktop
               ? (
                 <div className={classes.filterDesktop}>
@@ -94,10 +94,10 @@ function Catalog({ assortment, fetchProducts, fetchTopProducts, fetchTopProducts
               )}
 
           </Grid>
-          <Grid item sm={12} md={8}>
+          <Grid item xs={12} md={8}>
             <ProductList assortment={assortment} />
           </Grid>
-          <Grid item sm={12}>
+          <Grid item xs={12}>
             <ProductCardCarousel
               products={productsToShow}
               label="most popular products"
