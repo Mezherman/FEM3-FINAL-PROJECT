@@ -1,92 +1,30 @@
 import React from 'react';
-import { Container, Grid, Typography, } from '@material-ui/core';
+import { Grid, Typography, } from '@material-ui/core';
 import { Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import useStyles from '../../../SignUp/Sign-up-form/_sign-up-form';
 import RenderEditTextField from '../../../Render-text-field/render-edit-text-field'
-import RenderEditBirthdayField from '../../../Render-birthday-field/render-edit-birthday-field';
 
 function PutPersonalData (props) {
   const {
-    // gender,
     firstName,
     lastName,
     telephone,
     email,
     login,
-    birthdate,
   } = props;
 
   const classes = useStyles();
 
-  const birth = () => {
-    if (birthdate) {
-      const splitedBirthDate = birthdate.split('.');
-      const bDay = splitedBirthDate[0];
-      const bMonth = splitedBirthDate[1];
-      const bYear = splitedBirthDate[2];
-      return (
-        <Grid item xs={12} sm={6}>
-          <Field
-            name="birthdayDay"
-            component={RenderEditBirthdayField}
-            defaultValue={bDay}
-            classes={classes}
-            label="DD"
-          />
-          <Field
-            name="birthdayMonth"
-            component={RenderEditBirthdayField}
-            defaultValue={bMonth}
-            classes={classes}
-            label="MM"
-          />
-          <Field
-            name="birthdayYear"
-            component={RenderEditBirthdayField}
-            defaultValue={bYear}
-            classes={classes}
-            label="YYYY"
-          />
-        </Grid>
-      )
-    }
-    return (
-      <Grid item xs={12} sm={6}>
-        <Field
-          name="birthdayDay"
-          component={RenderEditBirthdayField}
-          defaultValue=""
-          classes={classes}
-          label="DD"
-        />
-        <Field
-          name="birthdayMonth"
-          component={RenderEditBirthdayField}
-          defaultValue=""
-          classes={classes}
-          label="MM"
-        />
-        <Field
-          name="birthdayYear"
-          component={RenderEditBirthdayField}
-          defaultValue=""
-          classes={classes}
-          label="YYYY"
-        />
-      </Grid>
-    )
-  };
-
   return (
-    <Container>
+    <>
       <h2>Edit Form</h2>
-      <Grid item xs={12}>
+      <Grid component="div" item xs={12}>
         <Typography paragraph component="p" variant="subtitle2" className={classes.rightTitle}>
             Please edit the information you want:
         </Typography>
-        <Grid container spacing={2} direction="column" alignContent="center" >
-          <Grid container item xs={12} sm={6}>
+        <Grid component="div" container spacing={2} direction="column" alignContent="center" >
+          <Grid component="div" container item xs={12} sm={6}>
             <Field
               name="firstName"
               component={RenderEditTextField}
@@ -96,7 +34,7 @@ function PutPersonalData (props) {
               type="text"
             />
           </Grid>
-          <Grid container item xs={12} sm={6}>
+          <Grid component="div" container item xs={12} sm={6}>
             <Field
               name="lastName"
               component={RenderEditTextField}
@@ -106,9 +44,7 @@ function PutPersonalData (props) {
               type="text"
             />
           </Grid>
-        {/*</Grid>*/}
-        {/*<Grid container spacing={2}>*/}
-          <Grid container item xs={12} sm={6}>
+          <Grid component="div" container item xs={12} sm={6}>
             <Field
               name="login"
               component={RenderEditTextField}
@@ -118,7 +54,7 @@ function PutPersonalData (props) {
               type="text"
             />
           </Grid>
-          <Grid container item xs={12} sm={6}>
+          <Grid component="div" container item xs={12} sm={6}>
             <Field
               name="email"
               component={RenderEditTextField}
@@ -128,9 +64,7 @@ function PutPersonalData (props) {
               type="text"
             />
           </Grid>
-        {/*</Grid>*/}
-        {/*<Grid container spacing={2}>*/}
-          <Grid container item xs={12} sm={6}>
+          <Grid component="div" container item xs={12} sm={6}>
             <Field
               name="telephone"
               component={RenderEditTextField}
@@ -141,13 +75,9 @@ function PutPersonalData (props) {
               type="tel"
             />
           </Grid>
-          {/*<Grid item xs={12} sm={6} />*/}
-
-          {/*{birth()}*/}
-
         </Grid>
       </Grid>
-    </Container>
+    </>
   )
 }
 
@@ -157,7 +87,6 @@ PutPersonalData.propTypes = {
   telephone: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   login: PropTypes.string.isRequired,
-  birthdate: PropTypes.string.isRequired,
 };
 
 export default PutPersonalData;

@@ -1,8 +1,7 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, connect } from 'react-redux';
-import Button from '@material-ui/core/Button';
+import { Button } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Carousels from '../Carousel/carousel';
 import PagingDots from '../Carousel/pagingDots';
@@ -10,8 +9,6 @@ import useStylesCarousel from '../Carousel/_carousel';
 import useStylesMainCarousel from './_mainCarousel';
 import getMainSlides from '../../services/getMainSlides';
 import slidesToFetch from '../../redux/actions/slides';
-
-axios.defaults.baseURL = 'http://localhost:5000';
 
 function MainSlider ({ fetchSlides }) {
   const { mainSlides } = useSelector((state) => state.slides);
@@ -32,34 +29,14 @@ function MainSlider ({ fetchSlides }) {
       <Carousels
         isProductSlider={false}
         autoPlay
-        // className={mainCarouselClasses.mainCarousel}
         autoplayInterval={2000}
         wrapAround
         slidesToShow={1}
         dragging
-        // renderCenterLeftControls={({ previousSlide }) => (
-        //   {/*<div*/}
-        //   {/*  className={`${mainCarouselClasses.mainArrowsControl} ${mainCarouselClasses.mainArrowPrev}`}*/}
-        //   {/*  onClick={previousSlide}*/}
-        //   {/*>*/}
-        //   {/*  <div*/}
-        //   {/*    className={`${classes.arrowPrevTopBottom} ${mainCarouselClasses.mainArrowPrevTop}`}*/}
-        //   {/*  />*/}
-        //   {/*  <div className={`${classes.arrowPrevTopBottom} ${classes.arrowsTopBottom}`} />*/}
-        //   {/*</div>*/}
-        // )}
-        // renderCenterRightControls={({ nextSlide }) => (
-        //   {/*<div className={`${mainCarouselClasses.mainArrowsControl} ${mainCarouselClasses.mainArrowNext}`} onClick={nextSlide}>*/}
-        //   {/*  <div className={`${classes.arrowNextTop} ${classes.arrowNextTopBottom}`} />*/}
-        //   {/*  <div className={`${classes.arrowNextBottom} ${classes.arrowNextTopBottom}`} />*/}
-        //   {/*</div>*/}
-        // )}
         renderBottomCenterControls={
           ({
             currentSlide, goToSlide, slideCount, slidesToScroll, slidesToShow, cellAlign
-            // eslint-disable-next-line max-len
           }) => (
-            // eslint-disable-next-line no-console,max-len
             <PagingDots
               currentSlide={currentSlide}
               goToSlide={goToSlide}

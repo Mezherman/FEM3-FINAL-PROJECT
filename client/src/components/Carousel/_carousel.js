@@ -15,9 +15,6 @@ const useStylesCarousel = makeStyles((theme) => ({
     [theme.breakpoints.up('xl')]: {
       height: 'calc(100vh - 200px)',
     },
-    // '& div>div>ul>li>img': {
-    //   bottom: 0
-    // },
   },
 
   mainPagingItem: {
@@ -46,44 +43,6 @@ const useStylesCarousel = makeStyles((theme) => ({
       content: '',
     },
   },
-
-  // ulMainPagingItem: {
-  //   position: 'relative',
-  //   top: '45px',
-  //   display: 'flex',
-  //   justifyContent: 'center',
-  //   margin: 0,
-  //   padding: 0,
-  //   listStyleType: 'none',
-  // },
-  //
-  // liMainPagingItem: {
-  //   position: 'relative',
-  //   bottom: '30px',
-  //   display: 'inline-block',
-  //   margin: '0 5px',
-  //   color: theme.palette.text.primary,
-  //   backgroundColor: theme.palette.background.default,
-  //   borderRadius: '8px',
-  //   boxShadow: '0 2px 3px 0 rgba(0, 0, 0, .41)',
-  //   cursor: 'pointer',
-  //   '&.active': {
-  //     backgroundColor: theme.palette.secondary.main,
-  //     '& button': {
-  //       color: 'white'
-  //     },
-  //   },
-  // },
-  //
-  // buttonMainPagingItem: {
-  //   display: 'inline-block',
-  //   padding: '9px 11px',
-  //   background: 'transparent',
-  //   border: 'none',
-  //   outline: 'none',
-  //   cursor: 'pointer',
-  //   opacity: 1,
-  // },
 
   buttonPagingItem: {
     position: 'relative',
@@ -170,7 +129,7 @@ const useStylesCarousel = makeStyles((theme) => ({
 
   arrowPrevTopBottom: {
     position: 'absolute',
-    right: '32px',
+    right: theme.spacing(4),
     width: '26px',
     height: '2px',
     background: theme.palette.text.primary,

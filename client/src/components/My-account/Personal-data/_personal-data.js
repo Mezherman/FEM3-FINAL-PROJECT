@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const usePdstyles = makeStyles((theme) => ({
+const usePersonalDataStyles = makeStyles((theme) => ({
   container: {
     marginBottom: theme.spacing(10)
   },
@@ -8,11 +8,6 @@ const usePdstyles = makeStyles((theme) => ({
   button: {
     marginBottom: theme.spacing(1),
     cursor: 'pointer',
-    // '&:hover': {
-    //   textDecorationLine: 'underline',
-    //   textDecorationStyle: 'dashed',
-    //   textUnderlinePosition: 'under',
-    // },
   },
   divider: {
     position: 'absolute',
@@ -83,10 +78,7 @@ const usePdstyles = makeStyles((theme) => ({
 
   cancelSubmit: {
     display: 'block',
-    // margin: '0 auto',
     margin: theme.spacing(3, 1, 2),
-    // marginTop: theme.spacing(3),
-    // marginBottom: theme.spacing(2),
     padding: theme.spacing(1, 1),
     fontSize: '0.87rem',
     [theme.breakpoints.up('md')]: {
@@ -112,4 +104,4 @@ const usePdstyles = makeStyles((theme) => ({
 }
 ));
 
-export default usePdstyles;
+export default usePersonalDataStyles;

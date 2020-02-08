@@ -10,17 +10,10 @@ import SignIn from '../Sign-in/sign-in';
 export default function LoginModal({ open, onModalClose }) {
   const { loggedIn } = useSelector((state) => state.user);
 
-  if (loggedIn) {
-    return (
-      <Redirect to={RoutesName.home} />
-    );
-  }
   return (
-    <ModalWindow
-      open={open}
-      onModalClose={onModalClose}
-    >
+    <ModalWindow open={open} onModalClose={onModalClose}>
       <SignIn onClose={onModalClose} />
+      {loggedIn && <Redirect to={RoutesName.home} />}
     </ModalWindow>
   )
 }

@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { Field } from 'redux-form';
 import { useSelector } from 'react-redux';
-import { Container, Grid, } from '@material-ui/core';
+import { Grid, } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import useStyles from '../../../SignUp/Sign-up-form/_sign-up-form';
-import usePdstyles from '../_personal-data';
 import renderPasswordField from '../../../Render-password-field/render-password-field';
 import CancelSaveButtons from './cancel-save-buttons';
 
 function ChangePasswordForm ({ cancel }) {
   const { invalid } = useSelector((state) => state.passwordForm);
   const classes = useStyles();
-  const pdClasses = usePdstyles();
 
   const [eyeToggleOld, setEyeToggleOlg] = useState(true);
   const toggleOldPasswordMask = () => {
@@ -28,9 +27,9 @@ function ChangePasswordForm ({ cancel }) {
   };
 
   return (
-    <Container maxWidth="xl">
+    <>
       <h2>Edit Form</h2>
-      <Grid spacing={2} container xs={12} direction="column" alignContent="center">
+      <Grid component="div" spacing={2} container xs={12} direction="column" alignContent="center">
         <Grid container item xs={12} sm={9} md={7} lg={5}>
           <Field
             name="password"
@@ -43,7 +42,7 @@ function ChangePasswordForm ({ cancel }) {
             togglePasswordMask={toggleOldPasswordMask}
           />
         </Grid>
-        <Grid container item xs={12} sm={9} md={7} lg={5}>
+        <Grid component="div" container item xs={12} sm={9} md={7} lg={5}>
           <Field
             name="newPassword"
             component={renderPasswordField}
@@ -54,7 +53,7 @@ function ChangePasswordForm ({ cancel }) {
             togglePasswordMask={toggleNewPasswordMask}
           />
         </Grid>
-        <Grid container item xs={12} sm={9} md={7} lg={5}>
+        <Grid component="div" container item xs={12} sm={9} md={7} lg={5}>
           <Field
             name="confirmNewPassword"
             component={renderPasswordField}
@@ -67,8 +66,12 @@ function ChangePasswordForm ({ cancel }) {
         </Grid>
         <CancelSaveButtons cancel={cancel} />
       </Grid>
-    </Container>
+    </>
   )
 }
 
 export default ChangePasswordForm;
+
+ChangePasswordForm.propTypes = {
+  cancel: PropTypes.func.isRequired
+};

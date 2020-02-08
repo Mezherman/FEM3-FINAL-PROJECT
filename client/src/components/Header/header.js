@@ -16,7 +16,6 @@ import {
   useTheme
 } from '@material-ui/core'
 
-import Collapse from '@material-ui/core/Collapse';
 import MenuIcon from '@material-ui/icons/Menu'
 // import SearchIcon from '@material-ui/icons/Search'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
@@ -28,7 +27,7 @@ import { Link, Redirect } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
-import './header.scss';
+// import './header.scss';
 
 import SearchIcon from '@material-ui/icons/Search';
 import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
@@ -55,12 +54,6 @@ function Header() {
   const totalCartQuantity = useSelector((state) => state.cart.totalCartQuantity);
   const { loggedIn } = useSelector((state) => state.user);
   const totalFavoritesQty = useSelector((state) => state.favoritesReducer.favorites.length);
-  // console.log('ISLOGGEDIN AAAAAAAAA', loggedIn);
-  // const [anchorElLogin, setAnchorElLogin] = useState(null);
-
-  // const handleClose = () => {
-  //   setAnchorElLogin(null);
-  // };
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -297,49 +290,48 @@ function Header() {
                     </IconButton>
                     <span className={classes.menuTitle}>{loggedIn ? 'My Account' : 'Login'}</span>
                   </MenuItem>
-                  {loggedIn
-                    ? (
-                      <Popper
-                        open={open}
-                        anchorEl={anchorRef.current}
-                        role={undefined}
-                        transition
-                        disablePortal
-                      >
-                        {({ TransitionProps, placement }) => (
-                          <Grow
-                            {...TransitionProps}
-                            style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-                          >
-                            <Paper>
-                              <ClickAwayListener onClickAway={handleClose}>
-                                <MenuList
-                                  autoFocusItem={open}
-                                  id="menu-list-grow"
-                                  onKeyDown={handleListKeyDown}
-                                >
-                                  <Link to={RoutesName.personalData} className={classes.menuLink}>
-                                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                  </Link>
-                                  <Link to={RoutesName.myOrders} className={classes.menuLink}>
-                                    <MenuItem onClick={handleClose}>My orders</MenuItem>
-                                  </Link>
-                                  <MenuItem onClick={handleLogout} className={classes.menuLink}>
+                  {loggedIn && (
+                    <Popper
+                      open={open}
+                      anchorEl={anchorRef.current}
+                      role={undefined}
+                      transition
+                      disablePortal
+                    >
+                      {({ TransitionProps, placement }) => (
+                        <Grow
+                          {...TransitionProps}
+                          style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                        >
+                          <Paper>
+                            <ClickAwayListener onClickAway={handleClose}>
+                              <MenuList
+                                autoFocusItem={open}
+                                id="menu-list-grow"
+                                onKeyDown={handleListKeyDown}
+                              >
+                                <Link to={RoutesName.personalData} className={classes.menuLink}>
+                                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                                </Link>
+                                <Link to={RoutesName.myOrders} className={classes.menuLink}>
+                                  <MenuItem onClick={handleClose}>My orders</MenuItem>
+                                </Link>
+                                <MenuItem onClick={handleLogout} className={classes.menuLink}>
                                 Logout
-                                  </MenuItem>
-                                </MenuList>
-                              </ClickAwayListener>
-                            </Paper>
-                          </Grow>
-                        )}
-                      </Popper>
-                    )
-                    : (
-                      <LoginModal
-                        onModalClose={closeModal}
-                        open={modalIsVisible}
-                      />
-                    )}
+                                </MenuItem>
+                              </MenuList>
+                            </ClickAwayListener>
+                          </Paper>
+                        </Grow>
+                      )}
+                    </Popper>
+                  )}
+                  {!loggedIn && (
+                    <LoginModal
+                      onModalClose={closeModal}
+                      open={modalIsVisible}
+                    />
+                  )}
                   <Divider orientation="vertical" className={classes.dividerStyle} />
                   <MenuItem className={classes.headerMenuItem}>
                     <Link to={RoutesName.cart}>
