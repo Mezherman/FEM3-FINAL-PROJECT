@@ -19,13 +19,13 @@ import usePersonalDataStyles from './_personal-data';
 import RoutesName from '../../../routes-list';
 import ChangePasswordForm from './Put-personal-data/put-password';
 import validate from './validate';
-import putUserData from '../../../services/putUserData';
+import putUserData from '../../../services/put-user-data';
 import { fetchCustomerData } from '../../../redux/actions/user';
 import { invalidPassword, validPassword } from '../../../redux/actions/password-validation';
 import { newNotification } from '../../../redux/actions/notification';
 import { loadAllDataAfterLogin } from '../../../redux/actions/load-all-data';
 import logoutAction from '../../../redux/actions/logout';
-import putPassword from '../../../services/putPassword';
+import putPassword from '../../../services/put-password';
 import CancelSaveButtons from './Put-personal-data/cancel-save-buttons';
 
 export default function PersonalData ({ handleSubmit }) {
@@ -115,34 +115,6 @@ export default function PersonalData ({ handleSubmit }) {
       });
   };
 
-  const PersonalDataForm = () => (
-    <form
-      className={`${classes.passwordForm} ${pdClasses.container}`}
-      noValidate={false}
-      onSubmit={handleSubmit(submitEditedUser)}
-    >
-      <PutPersonalData
-        gender={gender}
-        firstName={firstName}
-        lastName={lastName}
-        telephone={telephone}
-        email={email}
-        login={login}
-      />
-      <CancelSaveButtons cancel={cancelEditForm} />
-    </form>
-  );
-
-  const PasswordForm = () => (
-    <form
-      className={`${classes.passwordForm} ${pdClasses.container}`}
-      noValidate={false}
-      onSubmit={handleSubmit(submitEditedUserPassword)}
-    >
-      <ChangePasswordForm cancel={cancelPasswordForm} />
-    </form>
-  );
-
   const CustomerData = () => (
     <Grid component="div" xs={12} sm={7}>
       <List component="div" dense>
@@ -225,12 +197,42 @@ export default function PersonalData ({ handleSubmit }) {
     </Grid>
   );
 
+  if (passwordForm) {
+    return (
+      <form
+        className={`${classes.passwordForm} ${pdClasses.container}`}
+        noValidate={false}
+        onSubmit={handleSubmit(submitEditedUserPassword)}
+      >
+        <ChangePasswordForm cancel={cancelPasswordForm} />
+      </form>
+    )
+  }
+
+  if (personalDataForm) {
+    return (
+      <form
+        className={`${classes.passwordForm} ${pdClasses.container}`}
+        noValidate={false}
+        onSubmit={handleSubmit(submitEditedUser)}
+      >
+        <PutPersonalData
+          gender={gender}
+          firstName={firstName}
+          lastName={lastName}
+          telephone={telephone}
+          email={email}
+          login={login}
+        />
+        <CancelSaveButtons cancel={cancelEditForm} />
+      </form>
+    )
+  }
+
   return (
     <Container maxWidth="xl" className={pdClasses.container}>
-      {!logout && !passwordForm && !personalDataForm && <MainCustomerPage />}
+      {!passwordForm && !personalDataForm && <MainCustomerPage />}
       {logout && <Redirect />}
-      {passwordForm && <PasswordForm />}
-      {personalDataForm && <PersonalDataForm />}
     </Container>
   );
 }
@@ -241,5 +243,8 @@ PersonalData = reduxForm({
 })(PersonalData);
 
 PersonalData.propTypes = {
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func
+};
+PersonalData.defaultProps = {
+  handleSubmit: () => {}
 };

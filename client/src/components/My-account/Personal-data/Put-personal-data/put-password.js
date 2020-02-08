@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Field } from 'redux-form';
 import { useSelector } from 'react-redux';
-import { Grid, } from '@material-ui/core';
+import { Grid, Container } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import useStyles from '../../../SignUp/Sign-up-form/_sign-up-form';
 import renderPasswordField from '../../../Render-password-field/render-password-field';
@@ -27,7 +27,7 @@ function ChangePasswordForm ({ cancel }) {
   };
 
   return (
-    <>
+    <Container>
       <h2>Edit Form</h2>
       <Grid component="div" spacing={2} container xs={12} direction="column" alignContent="center">
         <Grid container item xs={12} sm={9} md={7} lg={5}>
@@ -66,7 +66,7 @@ function ChangePasswordForm ({ cancel }) {
         </Grid>
         <CancelSaveButtons cancel={cancel} />
       </Grid>
-    </>
+    </Container>
   )
 }
 

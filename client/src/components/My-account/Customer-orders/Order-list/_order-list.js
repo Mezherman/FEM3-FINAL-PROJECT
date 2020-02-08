@@ -16,14 +16,13 @@ const useStylesOrderItem = makeStyles((theme) => ({
     },
   },
   mainBlock: {
-    alignItems: 'center',
+    alignItems: 'self-end',
     borderRadius: theme.spacing(1),
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
     fontSize: '0.7rem',
     [theme.breakpoints.up('sm')]: {
-      alignItems: 'baseline',
       flexDirection: 'row',
       fontSize: '0.6rem',
     },

@@ -7,7 +7,7 @@ import Carousels from '../../Carousel/carousel';
 import PagingDots from '../../Carousel/pagingDots';
 import useStylesCarousel from '../../Carousel/_carousel';
 import useStylesMainCarousel from './_mainCarousel';
-import getMainSlides from '../../../services/getMainSlides';
+import getMainSlides from '../../../services/get-main-slides';
 import slidesToFetch from '../../../redux/actions/slides';
 
 function MainSlider ({ fetchSlides }) {

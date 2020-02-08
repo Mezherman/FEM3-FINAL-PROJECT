@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import getOrders from '../../../../services/getOrders';
+import getOrders from '../../../../services/get-orders';
 import { orders as ordersAction } from '../../../../redux/actions/user';
 import Spinner from '../../../Spinner/spinner';
 import Order from '../Order/order';

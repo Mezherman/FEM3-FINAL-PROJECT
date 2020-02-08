@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography, } from '@material-ui/core';
+import { Grid, Typography, Container } from '@material-ui/core';
 import { Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import useStyles from '../../../SignUp/Sign-up-form/_sign-up-form';
@@ -17,7 +17,7 @@ function PutPersonalData (props) {
   const classes = useStyles();
 
   return (
-    <>
+    <Container>
       <h2>Edit Form</h2>
       <Grid component="div" item xs={12}>
         <Typography paragraph component="p" variant="subtitle2" className={classes.rightTitle}>
@@ -77,7 +77,7 @@ function PutPersonalData (props) {
           </Grid>
         </Grid>
       </Grid>
-    </>
+    </Container>
   )
 }
 

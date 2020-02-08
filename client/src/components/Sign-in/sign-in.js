@@ -16,7 +16,7 @@ import {
 import { VisibilityOff, Visibility } from '@material-ui/icons';
 import useStylesSingIn from './_sign-in';
 import RoutesName from '../../routes-list';
-import postLoginData from '../../services/postLoginData';
+import postLoginData from '../../services/post-login-data';
 import { loadAllDataAfterLogin } from '../../redux/actions/load-all-data';
 import { enterRegistrationPage } from '../../redux/actions/moving-around-registration';
 
