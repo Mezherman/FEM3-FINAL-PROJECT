@@ -97,6 +97,9 @@ const useStyles = makeStyles((theme) => ({
   },
   property: {
     fontWeight: 'bold',
+  },
+  increaseWrapper: {
+    padding: '20px 0'
   }
 }));
 

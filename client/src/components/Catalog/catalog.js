@@ -28,7 +28,8 @@ function Catalog({ assortment, fetchProducts, fetchTopProducts, fetchTopProducts
   const [productsToShow, setProductsToShow] = useState([]);
 
   useEffect(() => {
-    getCategory(assortment)
+    const request = assortment === 'search' ? 'cooking' : assortment;
+    getCategory(request)
       .then((response) => setTopList(response.topSellers));
   }, [assortment]);
 
