@@ -1,55 +1,47 @@
 import React from 'react';
 import { Grid, List, ListItem } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import OrderParamsTemplates from './Order-text-templates/order-params-templates';
 
-const OrderCustomerInfo = (
-  { classes, shipping, country, city, address, postal, paymentInfo, email, mobile }
-) => (
-  <List component="div" disablePadding>
-    <ListItem className={classes.mainBlock} button>
-      <Grid
-        item
-        container
-        className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
-      >
-        <span>Shipping: </span>
-        <span>{` ${shipping}`}</span>
-      </Grid>
-      <Grid
-        item
-        container
-        className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
-      >
-        <span>Delivery Address: </span>
-        <span>{` ${country}, ${city}, ${address}, ${postal}`}</span>
-      </Grid>
-      <Grid
-        item
-        container
-        className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
-      >
-        <span>Payment: </span>
-        <span>{` ${paymentInfo}`}</span>
-      </Grid>
-      <Grid
-        item
-        container
-        className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
-      >
-        <span>Email: </span>
-        <span>{` ${email}`}</span>
-      </Grid>
-      <Grid
-        item
-        container
-        className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
-      >
-        <span>Mobile: </span>
-        <span>{` ${mobile}`}</span>
-      </Grid>
-    </ListItem>
-  </List>
-);
+const OrderCustomerInfo = (props) => {
+  const { classes, shipping, country, city, address, postal, paymentInfo, email, mobile } = props;
+  return (
+    <List component="div" disablePadding>
+      <ListItem component="div" className={classes.mainBlock} button>
+        <OrderParamsTemplates
+          name="Shipping: "
+          value={shipping}
+          className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
+          style={{ display: 'none' }}
+        />
+        <OrderParamsTemplates
+          name="Delivery Address: "
+          value={` ${country}, ${city}, ${address}, ${postal}`}
+          className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
+          style={{ display: 'none' }}
+        />
+        <OrderParamsTemplates
+          name="Payment: "
+          value={paymentInfo}
+          className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
+          style={{ display: 'none' }}
+        />
+        <OrderParamsTemplates
+          name="Email: "
+          value={email}
+          className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
+          style={{ display: 'none' }}
+        />
+        <OrderParamsTemplates
+          name="Mobile: "
+          value={mobile}
+          className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
+          style={{ display: 'none' }}
+        />
+      </ListItem>
+    </List>
+  )
+};
 
 export default OrderCustomerInfo;
 
@@ -63,4 +55,6 @@ OrderCustomerInfo.propTypes = {
   paymentInfo: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   mobile: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
 };

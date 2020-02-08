@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, List, ListItem } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import OrderTitlesTemplate from './Order-text-templates/order-titles-template';
 
 const OrderParams = ({ classes }) => (
   <List component="div" disablePadding>
@@ -24,53 +25,38 @@ const OrderParams = ({ classes }) => (
           md={1}
           className={classes.imgContainer}
         />
-        <Grid
-          component="div"
-          item
-          container
+        <OrderTitlesTemplate
+          className={`${classes.textCenter} ${classes.fontBold}`}
           xs={12}
           sm={3}
           md={4}
+          value="Item-Num: "
           justify="center"
+        />
+        <OrderTitlesTemplate
           className={`${classes.textCenter} ${classes.fontBold}`}
-        >
-          <span>Item-Num: </span>
-        </Grid>
-        <Grid
-          component="div"
-          item
-          container
           xs={12}
           sm={3}
           md={3}
+          value="Product: "
           justify="center"
-          className={`${classes.textCenter} ${classes.fontBold}`}
-        >
-          <span>Product: </span>
-        </Grid>
-        <Grid
-          component="div"
-          item
-          container
+        />
+        <OrderTitlesTemplate
+          className={`${classes.textRight} ${classes.fontBold}`}
           xs={12}
           sm={1}
           md={2}
           justify="center"
+          value="Price: "
+        />
+        <OrderTitlesTemplate
           className={`${classes.textRight} ${classes.fontBold}`}
-        >
-          <span>Price: </span>
-        </Grid>
-        <Grid
-          component="div"
-          item
-          container
           xs={12}
           sm={1}
           md={2}
-          className={`${classes.textRight} ${classes.fontBold}`}
-        >
-          <span>Amount: </span>
-        </Grid>
+          justify="center"
+          value="Amount: "
+        />
       </Grid>
     </ListItem>
   </List>

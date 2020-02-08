@@ -90,7 +90,7 @@ const useStylesOrderItem = makeStyles((theme) => ({
     textAlign: 'center',
     width: '70px',
   },
-  amoutContainer: {
+  amountContainer: {
     justifyContent: 'flex-end',
     [theme.breakpoints.down('sm')]: {
       justifyContent: 'center',

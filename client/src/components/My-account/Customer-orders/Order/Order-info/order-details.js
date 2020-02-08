@@ -3,6 +3,7 @@ import { Grid, List, ListItem } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import RoutesName from '../../../../../routes-list';
+import OrderTitlesTemplate from './Order-text-templates/order-titles-template';
 
 const OrderDetails = ({ classes, product, cartQuantity }) => {
   const { itemNo, imageUrls, name, currentPrice } = product;
@@ -28,7 +29,7 @@ const OrderDetails = ({ classes, product, cartQuantity }) => {
               container
               xs={12}
               sm={2}
-              md={1}
+              md={3}
               className={classes.imgContainer}
             >
               <img
@@ -37,52 +38,23 @@ const OrderDetails = ({ classes, product, cartQuantity }) => {
                 alt={name ?? ''}
               />
             </Grid>
-            <Grid
-              component="div"
-              item
-              container
-              xs={12}
-              sm={3}
-              md={4}
-              justify="center"
-            >
-              {itemNo}
-            </Grid>
-            <Grid
-              component="div"
-              item
-              container
-              xs={12}
-              sm={3}
-              md={3}
-              justify="center"
-              className={`${classes.marginTop} ${classes.textCenter} ${classes.title}`}
-            >
-              {name}
-            </Grid>
-            <Grid
-              component="div"
-              item
-              container
+            <OrderTitlesTemplate value={itemNo} xs={12} sm={3} md={2} justify="center" />
+            <OrderTitlesTemplate value={name} xs={12} sm={3} md={3} justify="center" />
+            <OrderTitlesTemplate
+              value={`€${currentPrice}`}
               xs={12}
               sm={1}
               md={2}
+              className={classes.textRight}
               justify="center"
-              className={`${classes.marginTop} ${classes.fontBold} ${classes.textRight}`}
-            >
-              {`€${currentPrice}`}
-            </Grid>
-            <Grid
-              component="div"
-              item
-              container
+            />
+            <OrderTitlesTemplate
+              value={cartQuantity}
               xs={12}
               sm={1}
               md={2}
-              className={`${classes.amoutContainer} ${classes.marginTop} ${classes.textCenter} ${classes.fontBold}`}
-            >
-              {cartQuantity}
-            </Grid>
+              className={classes.amountContainer}
+            />
           </Grid>
         </ListItem>
       </Link>

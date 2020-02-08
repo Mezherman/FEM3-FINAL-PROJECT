@@ -1,60 +1,16 @@
 import React from 'react';
-import { Divider, Grid, ListItem } from '@material-ui/core';
+import { ListItem } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
+import OrderParamsTemplates from './Order-text-templates/order-params-templates';
 
 const OrderTitles = ({ classes, handleClick, orderNo, date, status, totalSum, products, open }) => (
   <ListItem component="div" className={classes.mainBlock} button onClick={handleClick}>
-    <Grid
-      component="div"
-      item
-      container
-      className={`${classes.orderInfo} ${classes.title}`}
-    >
-      <span>Order №:</span>
-      <span>{` ${orderNo}`}</span>
-      <Divider orientation="horizontal" variant="middle" component="div" />
-    </Grid>
-    <Grid
-      component="div"
-      item
-      container
-      className={`${classes.orderInfo} ${classes.title}`}
-    >
-      <span>Date:</span>
-      <span>{` ${date.slice(0, 10)}`}</span>
-      <Divider orientation="horizontal" variant="middle" component="div" />
-    </Grid>
-    <Grid
-      component="div"
-      item
-      container
-      className={`${classes.orderInfo} ${classes.title}`}
-    >
-      <span>Status: </span>
-      <span>{` ${status}`}</span>
-      <Divider orientation="horizontal" variant="middle" component="div" />
-    </Grid>
-    <Grid
-      component="div"
-      item
-      container
-      className={`${classes.orderInfo} ${classes.title}`}
-    >
-      <span>Total Sum:</span>
-      <span>{` €${totalSum}`}</span>
-      <Divider orientation="horizontal" variant="middle" component="div" />
-    </Grid>
-    <Grid
-      component="div"
-      item
-      container
-      className={`${classes.orderInfo} ${classes.title}`}
-    >
-      <span>Item&apos;s quantity: </span>
-      <span>{` ${products.length}`}</span>
-      <Divider orientation="horizontal" variant="middle" component="div" />
-    </Grid>
+    <OrderParamsTemplates name="Order №: " value={orderNo} className={`${classes.orderInfo} ${classes.title}`} />
+    <OrderParamsTemplates name="Date: " value={` ${date.slice(0, 10)}`} className={`${classes.orderInfo} ${classes.title}`} />
+    <OrderParamsTemplates name="Status: " value={status} className={`${classes.orderInfo} ${classes.title}`} />
+    <OrderParamsTemplates name="Total Sum: " value={`€${totalSum}`} className={`${classes.orderInfo} ${classes.title}`} />
+    <OrderParamsTemplates name={'Item\'s quantity: '} value={`${products.length}`} className={`${classes.orderInfo} ${classes.title}`} />
     {open ? <ExpandLess /> : <ExpandMore />}
   </ListItem>
 );

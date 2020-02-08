@@ -13,17 +13,12 @@ const OrderList = () => {
   const handlerNotification = useCallback((type, message) => {
     dispatch(newNotification(type, message));
   }, [dispatch]);
-
   useEffect(() => {
     if (!orders) {
       getOrders()
         .then((response) => {
           dispatch(ordersAction(response));
           setLoading(false);
-        })
-        .catch(() => {
-          setLoading(false);
-          handlerNotification('error', 'Something go wrong. Try it later, please');
         })
     } else {
       setLoading(false);
@@ -33,7 +28,7 @@ const OrderList = () => {
   return (
     <>
       {loading && <Spinner />}
-      {!loading && orders.length > 0 && orders.map((item) => (
+      {!loading && orders.length && orders.map((item) => (
         <Order item={item} />
       ))}
       {!loading && orders.length < 1 && (

@@ -1,68 +1,27 @@
 import React, { useState, useCallback } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import PropTypes from 'prop-types';
-import { connect, useDispatch } from 'react-redux';
-import {
-  FormLabel,
-  Avatar,
-  Button,
-  TextField,
-  Typography,
-  Container,
-  Checkbox,
-  FormControlLabel, InputAdornment, IconButton
-} from '@material-ui/core';
-import { VisibilityOff, Visibility } from '@material-ui/icons';
+import { useDispatch } from 'react-redux';
+import { Avatar, Typography, Container } from '@material-ui/core';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStylesSingIn from './_sign-in';
-import RoutesName from '../../routes-list';
 import postLoginData from '../../services/post-login-data';
 import { loadAllDataAfterLogin } from '../../redux/actions/load-all-data';
 import { enterRegistrationPage } from '../../redux/actions/moving-around-registration';
+import SignInForm from './Sign-in-form/sign-in-form'
 
-function SignIn (props) {
+function SignIn ({ onClose }) {
+  const classes = useStylesSingIn();
+
   const [login, setLogin] = useState(null);
   const [password, setPassword] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [length, setLength] = useState(1);
-  const dispatch = useDispatch();
 
-  const {
-    onClose,
-    user,
-    loadAllDataAfterLogin,
-  } = props;
-  const classes = useStylesSingIn();
+  const dispatch = useDispatch();
 
   const handleRegistrationRoute = useCallback(() => {
     onClose();
     dispatch(enterRegistrationPage())
   }, [dispatch, onClose]);
-
-  // const userData = {
-  //   loginOrEmail: 'ivanr',
-  //   password: '123456789'
-  // };
-  // console.log(handleOnChangeLogin);
-
-  // const [labelWidth, setLabelWidth] = React.useState(0);
-  // const [name, setName] = React.useState('Composed TextField');
-  // const labelRef = React.useRef(null);
-  //
-  // React.useEffect(() => {
-  //   setLabelWidth(labelRef.current.offsetWidth);
-  // }, []);
-  //
-  // const handleChange = (event) => {
-  //   setName(event.target.value);
-  // };
-  //
-
-  const colorChanger = (event) => {
-    if (event.target.value.length > 0) {
-      setLength(event.target.length)
-    }
-  };
 
   const handleOnChangeLogin = (event) => {
     setLogin(event.target.value)
@@ -71,10 +30,6 @@ function SignIn (props) {
   const handleOnChangePassword = (event) => {
     setPassword(event.target.value)
   };
-
-  // if (localStorage.getItem('token')) {
-  //   loginLoaded(localStorage.getItem('token'))
-  // }
 
   function handleClick (event) {
     event.preventDefault();
@@ -85,19 +40,12 @@ function SignIn (props) {
     postLoginData(userData)
       .then((loginResult) => {
         localStorage.setItem('token', `${loginResult.data.token}`);
-        loadAllDataAfterLogin();
+        dispatch(loadAllDataAfterLogin());
         onClose();
-        // localStorage.setItem('L', `${loginResult.data.token}`);
-        // const token = localStorage.getItem('token');
-        // console.log(token)
-
         setErrorMessage(null);
       })
-      .catch((err) => {
+      .catch(() => {
         setErrorMessage('Incorrect password or login');
-        // console.log(err);
-        Promise.reject(err)
-        /* Show error to customer, may be incorrect password or something else */
       });
   }
 
@@ -107,124 +55,28 @@ function SignIn (props) {
   };
 
   return (
-    <Container maxWidth="xs">
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign In
-        </Typography>
-        <Typography className={classes.errorText} component="h3" variant="inherit">
-          {errorMessage}
-        </Typography>
-        <form className={classes.passwordForm} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            // color={length ? 'secondary' : 'primary'}
-            id="email"
-            label={(
-              <FormLabel
-                className={classes.labelText}
-                required
-              >
-                Email Address
-              </FormLabel>
-            )}
-            name="email"
-            autoComplete="email"
-            autoFocus
-            onBlur={handleOnChangeLogin}
-            onChange={colorChanger}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            name="password"
-            label={(
-              <FormLabel
-                className={classes.labelText}
-                required
-              >
-                Password
-              </FormLabel>
-            )}
-            type={eyeToggle ? 'password' : 'text'}
-            id="password"
-            autoComplete="current-password"
-            onChange={handleOnChangePassword}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={togglePasswordMask}
-                  >
-                    {eyeToggle ? <Visibility /> : <VisibilityOff />}
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-          />
-          {/* <FormControl variant="outlined"> */}
-          {/*  <InputLabel ref={labelRef} htmlFor="component-outlined"> */}
-          {/*    Name */}
-          {/*  </InputLabel> */}
-          {/*  <OutlinedInput */}
-          {/*    id="component-outlined" */}
-          {/*    value={name} */}
-          {/*    onChange={handleChange} */}
-          {/*    labelWidth={labelWidth} */}
-          {/*  /> */}
-          {/* </FormControl> */}
-          {/* <FormControl variant="filled"> */}
-          {/*  <InputLabel htmlFor="component-filled">Name</InputLabel> */}
-          {/*  <FilledInput id="component-filled" value={name} onChange={handleChange} /> */}
-          {/* </FormControl> */}
-          {/* <FormControlLabel */}
-          {/* eslint-disable-next-line max-len */}
-          {/*  control={<Checkbox value="remember" color="primary" className={classes.checkBox} />} */}
-          {/*  label="Remember me" */}
-          {/* /> */}
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={handleClick}
-          >
-            Sign In
-          </Button>
-          <Link
-            className={classes.text}
-            to={RoutesName.signUp}
-            // onClick={onClose}
-            onClick={handleRegistrationRoute}
-          >
-            Don&#8242;t have an account?
-            <strong> Sign Up </strong>
-          </Link>
-        </form>
-      </div>
+    <Container maxWidth="xs" className={classes.paper}>
+      <Avatar className={classes.avatar} component="div">
+        <LockOutlinedIcon />
+      </Avatar>
+      <Typography component="h1" variant="h5">Sign In</Typography>
+      <Typography className={classes.errorText} component="h3" variant="inherit">
+        {errorMessage}
+      </Typography>
+      <SignInForm
+        handleClick={handleClick}
+        classes={classes}
+        eyeToggle={eyeToggle}
+        handleOnChangeLogin={handleOnChangeLogin}
+        handleOnChangePassword={handleOnChangePassword}
+        handleRegistrationRoute={handleRegistrationRoute}
+        togglePasswordMask={togglePasswordMask}
+      />
     </Container>
   );
 }
 
-const mapStateToProps = (state) => ({
-  user: state.user
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  loadAllDataAfterLogin: () => {
-    dispatch(loadAllDataAfterLogin())
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default SignIn;
 
 SignIn.propTypes = {
   onClose: PropTypes.func,
