@@ -32,6 +32,7 @@ function Filter(props) {
   const { catalogLocation, catalog } = categoriesReducer;
   const { allCategories } = catalog;
   const classes = useStyles();
+  let filteredCategory = '';
 
   useEffect(() => {
     getColors().then((colors) => {
@@ -40,7 +41,8 @@ function Filter(props) {
     getBrands().then((brands) => {
       filterParamsLoaded('brands', brands);
     });
-    // getCurrentCategory();
+    filterType(valToFilter);
+    getCurrentCategory();
   }, [filterParamsLoaded, currentCategory]);
 
   const filterText = ['Brand', 'Price', 'Color'];
@@ -68,6 +70,12 @@ function Filter(props) {
   //     resetFilters();
   //   }
   // };
+  const getCurrentCategory = () => {
+    if (!filteredCategory && (filteredCategory !== currentCategory)) {
+      console.log('1');
+      resetFilters();
+    }
+  };
 
   const parseToFilterValue = (obj) => {
     // console.log('OBJ -> ',obj)
@@ -105,8 +113,8 @@ function Filter(props) {
     const categoryForFilter = !subCategoriesString ? catalogLocation : subCategoriesString;
     // console.log('ENDS OF VAL', valOfBrands, valOfCollection)
     valToFilter = `categories=${categoryForFilter}&${valOfBrands}&${valOfCollection}&${valOfColor}&${valOfPrice}`
-    // console.log('!!!!! ->>>>>', valToFilter);
-    filterType(valToFilter);
+    console.log('!!!!! ->>>>>', valToFilter);
+    filteredCategory = valToFilter;
     return valToFilter
   };
 
@@ -124,6 +132,7 @@ function Filter(props) {
         variant="contained"
         color="primary"
         onClick={() => {
+          filterType(valToFilter);
           getFilteredProducts(valToFilter)
             .then((products) => {
               productsLoaded(products)

@@ -27,8 +27,8 @@ export default function CheckoutStatus(props) {
           </>
         )
       }
-      <p>Go back to <Link to={RoutesName.home}>HOME</Link> page.</p>
-      <p>Go back to <Link to={RoutesName.cart}>CART</Link> page.</p>
+      {/*<p>Go back to <Link to={RoutesName.home}>HOME</Link> page.</p>*/}
+      {/*<p>Go back to <Link to={RoutesName.cart}>CART</Link> page.</p>*/}
     </Container>
   )
 }
