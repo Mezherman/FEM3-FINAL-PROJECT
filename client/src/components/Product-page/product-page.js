@@ -29,9 +29,11 @@ function ProductPage(props) {
   }, [chosenProduct, itemNo, fetchProduct]);
 
   useEffect(() => {
-    getCategory(chosenProduct.categories)
-      .then((response) => setTopList(response.topSellers));
-  }, [assortment]);
+    if (chosenProduct) {
+      getCategory(chosenProduct.categories)
+        .then((response) => setTopList(response.topSellers));
+    }
+  }, [chosenProduct, assortment]);
   //
   const cardsToShowString = topList.toString();
 
