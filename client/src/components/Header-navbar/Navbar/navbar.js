@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { MenuItem, useTheme, Divider } from '@material-ui/core';
+import { MenuItem, ListItem, ListItemIcon, ListItemText, useTheme, Divider } from '@material-ui/core';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
@@ -34,14 +34,72 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
     drawerSubCatIsOpen(open)
   };
 
-  // const backToHome = (open) => {
-  //   setSubCategory(value);
-  //   drawerSubCatIsOpen(open)
-  // };
-
   const toggleLastDrawer = (open) => {
     drawerSubCatIsOpen(open);
   };
+
+  const listItemIcon = (menuItem) => {
+    switch (menuItem) {
+      case 'HOME': {
+        return (<HomeIcon />)
+      }
+      case 'CATALOG': {
+        return (<RestaurantMenuIcon />)
+      }
+      case 'ABOUT US': {
+        return (<GroupIcon />)
+      }
+      case 'DELIVERY & PAYMENT': {
+        return (<PlaceIcon />)
+      }
+      default: return (<HomeIcon />)
+    }
+  };
+  const renderMainMenu = () => (
+    <List
+      component="nav"
+      aria-labelledby="nested-list-subheader"
+
+    >
+      {['HOME', 'CATALOG', 'ABOUT US', 'DELIVERY & PAYMENT'].map((text, index) => {
+        if (text === 'CATALOG') {
+          return (
+            <ListItem
+              onClick={() => {
+                toggleDrawerCat(true);
+                toggleDrawer(false);
+              }}
+              className={classes.nestedMenuItem}
+            >
+              <span
+                className={classes.headerMenuListHyperlink}
+              >
+                <ListItemIcon className={classes.icon} >{listItemIcon(text)}</ListItemIcon>
+                <ListItemText primary={text} />
+              </span>
+              <KeyboardArrowRightIcon />
+            </ListItem>
+          )
+        }
+        return (
+          <ListItem
+            onClick={() => {
+              toggleDrawer(false);
+              // console.log({RoutesName.${text})
+            }}
+          >
+            <Link
+              to={RoutesName.path}
+              className={classes.headerMenuListHyperlink}
+            >
+              <ListItemIcon className={classes.icon} >{listItemIcon(text)}</ListItemIcon>
+              <ListItemText primary={text} />
+            </Link>
+          </ListItem>
+        )
+      })}
+    </List>
+  )
 
   return (
   // mobile
@@ -56,88 +114,90 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
               paper: classes.drawerPaper,
             }}
           >
-            <List
-              // className={classes.root}
-              component="nav"
-              aria-labelledby="nested-list-subheader"
+            {renderMainMenu()}
 
-            >
-              <MenuItem
-                onClick={() => toggleDrawer(false)}
-              >
-                <Link
-                  to={RoutesName.home}
-                  className={classes.headerMenuListHyperlink}
-                >
-                  <HomeIcon className={classes.icon} />
-                  HOME
-                </Link>
-              </MenuItem>
+            {/* <List */}
+            {/*  // className={classes.root} */}
+            {/*  component="nav" */}
+            {/*  aria-labelledby="nested-list-subheader" */}
 
-              <Divider />
+            {/* > */}
+            {/*  <MenuItem */}
+            {/*    onClick={() => toggleDrawer(false)} */}
+            {/*  > */}
+            {/*    <Link */}
+            {/*      to={RoutesName.home} */}
+            {/*      className={classes.headerMenuListHyperlink} */}
+            {/*    > */}
+            {/*      <HomeIcon className={classes.icon} /> */}
+            {/*      HOME */}
+            {/*    </Link> */}
+            {/*  </MenuItem> */}
 
-              <MenuItem
-                onClick={() => {
-                  toggleDrawerCat(true);
-                  toggleDrawer(false);
-                }}
-                className={classes.nestedMenuItem}
-              >
-                <span
-                  className={classes.headerMenuListHyperlink}
-                >
-                  <RestaurantMenuIcon className={classes.icon} />
-                CATALOG
-                </span>
-                <KeyboardArrowRightIcon />
-              </MenuItem>
+            {/*  <Divider /> */}
 
-              <Divider />
+            {/*  <MenuItem */}
+            {/*    onClick={() => { */}
+            {/*      toggleDrawerCat(true); */}
+            {/*      toggleDrawer(false); */}
+            {/*    }} */}
+            {/*    className={classes.nestedMenuItem} */}
+            {/*  > */}
+            {/*    <span */}
+            {/*      className={classes.headerMenuListHyperlink} */}
+            {/*    > */}
+            {/*      <RestaurantMenuIcon className={classes.icon} /> */}
+            {/*    CATALOG */}
+            {/*    </span> */}
+            {/*    <KeyboardArrowRightIcon /> */}
+            {/*  </MenuItem> */}
 
-              <MenuItem
-                onClick={() => toggleDrawer(false)}
-              >
-                <Link
-                  to={RoutesName.aboutUs}
-                  className={classes.headerMenuListHyperlink}
-                >
-                  <GroupIcon className={classes.icon} />
-              ABOUT US
-                </Link>
-              </MenuItem>
+            {/*  <Divider /> */}
 
-              <Divider />
+            {/*  <MenuItem */}
+            {/*    onClick={() => toggleDrawer(false)} */}
+            {/*  > */}
+            {/*    <Link */}
+            {/*      to={RoutesName.aboutUs} */}
+            {/*      className={classes.headerMenuListHyperlink} */}
+            {/*    > */}
+            {/*      <GroupIcon className={classes.icon} /> */}
+            {/*  ABOUT US */}
+            {/*    </Link> */}
+            {/*  </MenuItem> */}
 
-              <MenuItem
-                onClick={() => toggleDrawer(false)}
+            {/*  <Divider /> */}
 
-              >
-                <Link
-                  to={RoutesName.delivery}
-                  className={classes.headerMenuListHyperlink}
-                >
-                  <LocalShippingIcon className={classes.icon} />
-              DELIVERY & PAYMENT
-                </Link>
-              </MenuItem>
+            {/*  <MenuItem */}
+            {/*    onClick={() => toggleDrawer(false)} */}
 
-              <Divider />
+            {/*  > */}
+            {/*    <Link */}
+            {/*      to={RoutesName.delivery} */}
+            {/*      className={classes.headerMenuListHyperlink} */}
+            {/*    > */}
+            {/*      <LocalShippingIcon className={classes.icon} /> */}
+            {/*  DELIVERY & PAYMENT */}
+            {/*    </Link> */}
+            {/*  </MenuItem> */}
 
-              <MenuItem
-                onClick={() => toggleDrawer(false)}
+            {/*  <Divider /> */}
 
-              >
-                <Link
-                  to={RoutesName.contacts}
-                  className={classes.headerMenuListHyperlink}
-                >
-                  <PlaceIcon className={classes.icon} />
-              CONTACTS
-                </Link>
-              </MenuItem>
+            {/*  <MenuItem */}
+            {/*    onClick={() => toggleDrawer(false)} */}
 
-              <Divider />
-            </List>
+            {/*  > */}
+            {/*    <Link */}
+            {/*      to={RoutesName.contacts} */}
+            {/*      className={classes.headerMenuListHyperlink} */}
+            {/*    > */}
+            {/*      <PlaceIcon className={classes.icon} /> */}
+            {/*  CONTACTS */}
+            {/*    </Link> */}
+            {/*  </MenuItem> */}
+
+            {/*  <Divider /> */}
+            {/* </List> */}
           </Drawer>
 
           {/* Category */}
