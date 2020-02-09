@@ -24,12 +24,13 @@ const Filter = (props) => {
   const { catalogLocation, catalog } = categoriesReducer;
   const { allCategories } = catalog;
   const classes = useStyles();
+  let filteredCategory = '';
 
   let valToFilter = '';
   let valOfBrands = '';
   let valOfColor = '';
   let valOfPrice = '';
-  const filteredCategory = '';
+  // const filteredCategory = '';
 
   useEffect(() => {
     getColors().then((colors) => {
@@ -38,6 +39,7 @@ const Filter = (props) => {
     getBrands().then((brands) => {
       filterParamsLoaded('brands', brands);
     });
+    filterType(valToFilter);
     getCurrentCategory();
   }, [filterParamsLoaded, currentCategory]);
 
@@ -78,6 +80,10 @@ const Filter = (props) => {
 
     valToFilter = `categories=${categoryForFilter}&${valOfBrands}&${valOfColor}&${valOfPrice}`
     filterType(valToFilter);
+    // console.log('ENDS OF VAL', valOfBrands, valOfCollection)
+    // valToFilter = `categories=${categoryForFilter}&${valOfBrands}&${valOfCollection}&${valOfColor}&${valOfPrice}`
+    // console.log('!!!!! ->>>>>', valToFilter);
+    filteredCategory = valToFilter;
     return valToFilter
   };
 
@@ -92,6 +98,7 @@ const Filter = (props) => {
         variant="contained"
         color="primary"
         onClick={() => {
+          filterType(valToFilter);
           getFilteredProducts(valToFilter)
             .then((products) => {
               productsLoaded(products)

@@ -127,17 +127,19 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
                       {currentPrice}
                     </span>
                   </div>
-                  <p className={classes.fact}>
-                    Incl. Tax / Excl.
-                    {' '}
-                    <a href="#">Shipping</a>
-                  </p>
+                  {/*<p className={classes.fact}>*/}
+                  {/*  Incl. Tax / Excl.*/}
+                  {/*  {' '}*/}
+                  {/*  <a href="#">Shipping</a>*/}
+                  {/*</p>*/}
+                  <div className={classes.increaseWrapper}>
+                    <IncreaseBlock
+                      qty={quantity}
+                      setQty={setQuantity}
+                      maxQty={quantityAvailable}
+                    />
+                  </div>
 
-                  <IncreaseBlock
-                    qty={quantity}
-                    setQty={setQuantity}
-                    maxQty={quantityAvailable}
-                  />
                   {quantityAvailable !== 0 && (
                     <div className={classes.disableBlock}>
                       <span>Availability:</span>

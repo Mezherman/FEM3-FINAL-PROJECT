@@ -30,7 +30,8 @@ const Catalog = ({
   const [filterIsOpen, setFilterIsOpen] = useState(false);
 
   useEffect(() => {
-    getCategory(assortment)
+    const request = assortment === 'search' ? 'cooking' : assortment;
+    getCategory(request)
       .then((response) => setTopList(response.topSellers));
   }, [assortment]);
 

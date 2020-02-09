@@ -12,14 +12,17 @@ import useStyles from './_product-list';
 function ProductList(props) {
   const { assortment, products, productsLoading } = props;
   const classes = useStyles();
-  const renderProducts = (productsList) => (
-    productsList.map((product) => (
+  const renderProducts = (productsList) => {
+    // if (productsList.length === 0) {
+    //   return <h2>NO ITEMS FOUND</h2>
+    // }
+    return productsList.map((product) => (
       <ProductCard
         key={product.itemNo}
         product={product}
       />
     ))
-  );
+  };
 
   return (
     <>
@@ -27,7 +30,7 @@ function ProductList(props) {
       <div className={classes.productList}>
         {productsLoading && <Spinner />}
         {!productsLoading &&
-          renderProducts(products)}
+        renderProducts(products)}
       </div>
     </>
   )
