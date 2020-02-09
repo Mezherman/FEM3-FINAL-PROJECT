@@ -3,8 +3,8 @@ import { Collapse, Divider, List } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import useStylesOrderItem from '../Order-list/_order-list';
 import OrderCustomerInfo from './Order-info/order-customer-info';
-import OrderParams from './Order-info/order-params';
 import OrderTitles from './Order-info/order-titles';
+import OrderParams from './Order-info/order-params';
 import OrderDetails from './Order-info/order-details';
 
 const Order = ({ item }) => {
@@ -37,7 +37,7 @@ const Order = ({ item }) => {
       aria-labelledby="nested-list-subheader"
       className={classes.root}
     >
-      <OrderTitles
+      <OrderParams
         classes={classes}
         open={open}
         date={date}
@@ -71,8 +71,9 @@ const Order = ({ item }) => {
         timeout="auto"
         unmountOnExit
         onClick={handleClick}
+        className={classes.hiddenCollapse}
       >
-        <OrderParams classes={classes} />
+        <OrderTitles classes={classes} />
       </Collapse>
       {products.map((its) => (
         <Collapse
@@ -92,5 +93,8 @@ const Order = ({ item }) => {
 export default Order;
 
 Order.propTypes = {
-  item: PropTypes.element.isRequired
+  item: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.number,
+  ]).isRequired,
 };

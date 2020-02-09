@@ -3,7 +3,7 @@ import { Grid, List, ListItem } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import RoutesName from '../../../../../routes-list';
-import OrderTitlesTemplate from './Order-text-templates/order-titles-template';
+import OrderTitlesTemplate from './Order-function-templates/order-titles-template';
 
 const OrderDetails = ({ classes, product, cartQuantity }) => {
   const { itemNo, imageUrls, name, currentPrice } = product;
@@ -29,7 +29,7 @@ const OrderDetails = ({ classes, product, cartQuantity }) => {
               container
               xs={12}
               sm={2}
-              md={3}
+              md={2}
               className={classes.imgContainer}
             >
               <img
@@ -38,22 +38,42 @@ const OrderDetails = ({ classes, product, cartQuantity }) => {
                 alt={name ?? ''}
               />
             </Grid>
-            <OrderTitlesTemplate value={itemNo} xs={12} sm={3} md={2} justify="center" />
-            <OrderTitlesTemplate value={name} xs={12} sm={3} md={3} justify="center" />
             <OrderTitlesTemplate
+              value={itemNo}
+              xs={12}
+              sm={3}
+              md={2}
+              justify="center"
+              name="Item-Num: "
+              spanNameClass={classes.hiddenName}
+            />
+            <OrderTitlesTemplate
+              value={name}
+              xs={12}
+              sm={3}
+              md={4}
+              justify="center"
+              name="Product: "
+              spanNameClass={classes.hiddenName}
+            />
+            <OrderTitlesTemplate
+              name="Price: "
               value={`€${currentPrice}`}
               xs={12}
               sm={1}
               md={2}
               className={classes.textRight}
               justify="center"
+              spanNameClass={classes.hiddenName}
             />
             <OrderTitlesTemplate
+              name="Amount: "
               value={cartQuantity}
               xs={12}
               sm={1}
               md={2}
               className={classes.amountContainer}
+              spanNameClass={classes.hiddenName}
             />
           </Grid>
         </ListItem>
@@ -65,8 +85,11 @@ const OrderDetails = ({ classes, product, cartQuantity }) => {
 export default OrderDetails;
 
 OrderDetails.propTypes = {
-  classes: PropTypes.string.isRequired,
-  cartQuantity: PropTypes.string.isRequired,
+  classes: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+  ]).isRequired,
+  cartQuantity: PropTypes.number.isRequired,
   product: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.number,

@@ -1,18 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import getOrders from '../../../../services/get-orders';
 import { orders as ordersAction } from '../../../../redux/actions/user';
 import Spinner from '../../../Spinner/spinner';
 import Order from '../Order/order';
-import { newNotification } from '../../../../redux/actions/notification';
 
 const OrderList = () => {
   const { orders } = useSelector((state) => state.user);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const handlerNotification = useCallback((type, message) => {
-    dispatch(newNotification(type, message));
-  }, [dispatch]);
   useEffect(() => {
     if (!orders) {
       getOrders()
@@ -23,13 +19,13 @@ const OrderList = () => {
     } else {
       setLoading(false);
     }
-  }, [dispatch, handlerNotification, orders]);
+  }, [dispatch, orders]);
 
   return (
     <>
       {loading && <Spinner />}
       {!loading && orders.length && orders.map((item) => (
-        <Order item={item} />
+        <Order key={item.orderNo} item={item} />
       ))}
       {!loading && orders.length < 1 && (
         <div>

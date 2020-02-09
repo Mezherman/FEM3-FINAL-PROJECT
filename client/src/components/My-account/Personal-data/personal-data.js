@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   Grid,
   Typography,
@@ -100,7 +100,6 @@ export default function PersonalData ({ handleSubmit }) {
   const submitEditedUserPassword = (values) => {
     putPassword({ password: values.password, newPassword: values.newPassword })
       .then((response) => {
-        // console.log(response);
         fetchCustomerData();
         if (response.data.message) {
           handlerNotification('success', 'Password was successfully changed');
@@ -116,18 +115,18 @@ export default function PersonalData ({ handleSubmit }) {
   };
 
   const CustomerData = () => (
-    <Grid component="div" xs={12} sm={7}>
+    <Grid component="div" xs={12} sm={7} item>
       <List component="div" dense>
         {listItem.map(({ text, userData }, index) => {
           const labelId = `checkbox-list-secondary-label-${index}`;
           return (
             <ListItem component="div" key={text} className={pdClasses.userData}>
               <ListItemText id={labelId} primary={text} />
-              <ListItemSecondaryAction>
+              <div>
                 <ListItem component="div" key={userData}>
                   <ListItemText id="2" primary={userData} />
                 </ListItem>
-              </ListItemSecondaryAction>
+              </div>
               <Divider component="div" absolute />
             </ListItem>
           );
@@ -135,6 +134,26 @@ export default function PersonalData ({ handleSubmit }) {
       </List>
     </Grid>
   );
+
+  PersonalData.propTypes = {
+    handleSubmit: PropTypes.func
+  };
+
+  // if (passwordForm) {
+  //   PersonalData.defaultProps = {
+  //     handleSubmit: () => submitEditedUserPassword
+  //   };
+  // }
+  // if (personalDataForm) {
+  //   PersonalData.defaultProps = {
+  //     handleSubmit: () => submitEditedUser()
+  //   };
+  // }
+  // if (!personalDataForm && !passwordForm) {
+  //   PersonalData.defaultProps = {
+  //     handleSubmit: () => {}
+  //   };
+  // }
 
   const MainCustomerPage = () => (
     <Grid
@@ -154,7 +173,7 @@ export default function PersonalData ({ handleSubmit }) {
       >
         <CustomerData />
 
-        <Grid component="div" xs={12} sm={5}>
+        <Grid component="div" xs={12} sm={5} item>
           <div className={pdClasses.linkContainer}>
             <Divider component="div" orientation="vertical" light className={pdClasses.divider} />
             <Typography
@@ -175,7 +194,7 @@ export default function PersonalData ({ handleSubmit }) {
             </Typography>
             <Link to={RoutesName.myOrders} className={pdClasses.link}>
               <Typography
-                component="a"
+                component="div"
                 variant="subtitle1"
                 className={pdClasses.button}
               >
@@ -184,7 +203,7 @@ export default function PersonalData ({ handleSubmit }) {
             </Link>
             <Link to={RoutesName.home} onClick={handleLogout}>
               <Typography
-                component="a"
+                component="div"
                 variant="subtitle1"
                 className={`${pdClasses.button} ${pdClasses.logout}`}
               >
@@ -242,9 +261,6 @@ PersonalData = reduxForm({
   validate,
 })(PersonalData);
 
-PersonalData.propTypes = {
-  handleSubmit: PropTypes.func
-};
-PersonalData.defaultProps = {
-  handleSubmit: () => {}
-};
+// PersonalData.propTypes = {
+//   handleSubmit: PropTypes.func
+// };

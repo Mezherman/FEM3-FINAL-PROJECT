@@ -124,6 +124,18 @@ const useStylesOrderItem = makeStyles((theme) => ({
   moreOrderInfo: {
     fontSize: '1em',
   },
+  hiddenCollapse: {
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    }
+  },
+  hiddenName: {
+    display: 'none',
+    [theme.breakpoints.down('xs')]: {
+      display: 'inline-block',
+      fontWeight: 'bolder',
+    }
+  },
 }));
 
 export default useStylesOrderItem;

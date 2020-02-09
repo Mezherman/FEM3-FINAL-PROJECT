@@ -1,7 +1,7 @@
 import React from 'react';
-import { Grid, List, ListItem } from '@material-ui/core';
+import { List, ListItem } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import OrderParamsTemplates from './Order-text-templates/order-params-templates';
+import OrderParamsTemplates from './Order-function-templates/order-params-templates';
 
 const OrderCustomerInfo = (props) => {
   const { classes, shipping, country, city, address, postal, paymentInfo, email, mobile } = props;
@@ -46,15 +46,19 @@ const OrderCustomerInfo = (props) => {
 export default OrderCustomerInfo;
 
 OrderCustomerInfo.propTypes = {
-  classes: PropTypes.string.isRequired,
+  classes: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+  ]).isRequired,
   shipping: PropTypes.string.isRequired,
-  country: PropTypes.string.isRequired,
+  country: PropTypes.string,
   city: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
   postal: PropTypes.string.isRequired,
   paymentInfo: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   mobile: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+};
+OrderCustomerInfo.defaultProps = {
+  country: 'Ukraine',
 };
