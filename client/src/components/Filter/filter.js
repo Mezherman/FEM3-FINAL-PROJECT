@@ -24,13 +24,11 @@ const Filter = (props) => {
   const { catalogLocation, catalog } = categoriesReducer;
   const { allCategories } = catalog;
   const classes = useStyles();
-  let filteredCategory = '';
 
   let valToFilter = '';
   let valOfBrands = '';
   let valOfColor = '';
   let valOfPrice = '';
-  // const filteredCategory = '';
 
   useEffect(() => {
     getColors().then((colors) => {
@@ -56,7 +54,7 @@ const Filter = (props) => {
   ));
 
   const getCurrentCategory = () => {
-    if (!filteredCategory && (filteredCategory !== currentCategory)) {
+    if (currentCategory) {
       resetFilters();
     }
   };
@@ -80,10 +78,6 @@ const Filter = (props) => {
 
     valToFilter = `categories=${categoryForFilter}&${valOfBrands}&${valOfColor}&${valOfPrice}`
     filterType(valToFilter);
-    // console.log('ENDS OF VAL', valOfBrands, valOfCollection)
-    // valToFilter = `categories=${categoryForFilter}&${valOfBrands}&${valOfCollection}&${valOfColor}&${valOfPrice}`
-    // console.log('!!!!! ->>>>>', valToFilter);
-    filteredCategory = valToFilter;
     return valToFilter
   };
 
@@ -131,7 +125,11 @@ Filter.propTypes = {
   filterResults: PropTypes.objectOf(PropTypes.array).isRequired,
   currentCategory: PropTypes.objectOf(PropTypes.array).isRequired,
   categoriesReducer: PropTypes.objectOf(PropTypes.object).isRequired,
-  onClose: PropTypes.func
+  onClose: PropTypes.func,
+  productsLoaded: PropTypes.func.isRequired,
+  filterParamsLoaded: PropTypes.func.isRequired,
+  filterType: PropTypes.func.isRequired,
+  resetFilters: PropTypes.func.isRequired,
 }
 
 Filter.defaultProps = {
