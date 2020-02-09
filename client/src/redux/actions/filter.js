@@ -22,9 +22,9 @@ function filterType(payload) {
   }
 }
 
-function resetFilterType() {
+function resetFilters() {
   return {
-    type: 'RESET_FILTER_TYPE'
+    type: 'RESET_FILTERS'
   }
 }
 
@@ -32,5 +32,5 @@ export {
   getFilterProducts,
   filterParamsLoaded,
   filterType,
-  resetFilterType
+  resetFilters
 }

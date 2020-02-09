@@ -31,6 +31,7 @@ export default function Routes() {
     if (registration) {
       setModalVisibility(true);
     } else {
+      setModalVisibility(true);
       history.push(RoutesName.home);
     }
   }

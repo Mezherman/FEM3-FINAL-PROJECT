@@ -25,7 +25,6 @@ import { invalidPassword, validPassword } from '../../../redux/actions/password-
 import { newNotification } from '../../../redux/actions/notification';
 import { loadAllDataAfterLogin } from '../../../redux/actions/load-all-data';
 import logoutAction from '../../../redux/actions/logout';
-// import logout from '../../../redux/reducers/logout';
 import putPassword from '../../../services/putPassword';
 import CancelSaveButtons from './Put-personal-data/cancel-save-buttons';
 
@@ -35,19 +34,11 @@ export default function PersonalData ({ handleSubmit }) {
 
   const [editForm, setEditForm] = useState(false);
   const [passwordForm, setChangePasswordForm] = useState(false);
-  // const [logout, setLogout] = useState(false);
-  // const [reLoading, setReLoading] = useState(false);
 
   const handleEditForm = () => setEditForm(true);
   const handleChangePassword = () => setChangePasswordForm(true);
   const cancelEditForm = () => setEditForm(false);
   const cancelPasswordForm = () => setChangePasswordForm(false);
-  // const handleReLoad = () => {
-  //   setReLoading(true)
-  //   return window.location.reload();
-  // };
-
-  // const redirect = () => <Redirect />;
 
   const dispatch = useDispatch();
 
@@ -71,15 +62,6 @@ export default function PersonalData ({ handleSubmit }) {
     localStorage.removeItem('token');
     dispatch(logoutAction());
   }, [dispatch]);
-  // const handleLogout = () => {
-  //   // debugger
-  //   setLogout(true);
-  //
-  //   localStorage.removeItem('token');
-  //   { /* <Redirect to={RoutesNames.home} /> */ }
-  //   // redirect();
-  //   // window.location.reload();
-  // };
 
   const {
     gender,
@@ -93,23 +75,6 @@ export default function PersonalData ({ handleSubmit }) {
   const { logout } = useSelector((state) => state.logout);
 
   const submitEditedUser = (values) => {
-    // if (values.birthdayDay || values.birthdayMonth || values.birthdayYear) {
-    //   putUserData({
-    //     ...values,
-    //     birthdate: `${values.birthdayDay}.${values.birthdayMonth}.${values.birthdayYear}`
-    //   })
-    //     .then((response) => {
-    //       handlerCustomerData();
-    //       // console.log(response);
-    //       fetchCustomerData();
-    //       cancelEditForm();
-    //       setSuccessModal(true)
-    //     })
-    //     .catch((error) => {
-    //       setErrorModal(true);
-    //       // console.log(error);
-    //     });
-    // } else {
     putUserData({
       ...values
     })
@@ -124,7 +89,6 @@ export default function PersonalData ({ handleSubmit }) {
         handlerNotification('error', 'Something go wrong. Try it later, please');
         console.log(error)
       });
-    // }
   };
 
   const submitEditedUserPassword = (values) => {
@@ -188,7 +152,7 @@ export default function PersonalData ({ handleSubmit }) {
     { text: 'Gender:', userData: gender ?? null },
     { text: 'First Name:', userData: firstName ?? null },
     { text: 'Last Name:', userData: lastName ?? null },
-    birthdate ? { text: 'Birthday:', userData: birthdate } : {},
+    // { text: 'Birthday:', userData: birthdate },
     { text: 'Phone number:', userData: telephone ?? null },
     { text: 'Email:', userData: email ?? null },
     { text: 'Login:', userData: login ?? null },
@@ -260,14 +224,14 @@ export default function PersonalData ({ handleSubmit }) {
                 </Typography>
               </Link>
               <Link to={RoutesName.home} onClick={handleLogout}>
-              <Typography
-                component="a"
-                variant="subtitle1"
-                className={`${pdClasses.button} ${pdClasses.logout}`}
+                <Typography
+                  component="a"
+                  variant="subtitle1"
+                  className={`${pdClasses.button} ${pdClasses.logout}`}
                 // onClick={handleLogout}
-              >
+                >
                 Logout
-              </Typography>
+                </Typography>
               </Link>
             </div>
           </Grid>

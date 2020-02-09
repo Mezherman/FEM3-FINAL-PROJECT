@@ -2,7 +2,7 @@ const initialState = {
   filterResults: {
     color: [],
     brand: [],
-    price: [0, 700],
+    price: [0, 700]
   },
   filterParams: {
     colors: [],
@@ -35,10 +35,14 @@ export default function filterReducer(state = initialState, action) {
         filterType: action.payload
       };
 
-    case 'RESET_FILTER_TYPE':
+    case 'RESET_FILTERS':
       return {
         ...state,
-        filterType: ''
+        filterResults: {
+          color: [],
+          brand: [],
+          price: [0, 700]
+        }
       };
 
     default:

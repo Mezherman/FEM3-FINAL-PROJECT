@@ -5,7 +5,7 @@ import FilterPanel from './Filter-panel/filter-panel'
 import useStyles from './_filter';
 import { getFilteredProducts, getColors, getBrands, getManufacturer } from '../../services/filter'
 import { productsLoaded } from '../../redux/actions/products';
-import { filterParamsLoaded, filterType } from '../../redux/actions/filter';
+import { filterParamsLoaded, filterType, resetFilters } from '../../redux/actions/filter';
 import { tempFilterData } from '../../services/filter-temp'
 
 function Filter(props) {
@@ -24,21 +24,26 @@ function Filter(props) {
     filterResults,
     categoriesReducer,
     onClose,
-    filterType
+    filterType,
+    resetFilters,
+    currentCategory
   } = props;
 
   const { catalogLocation, catalog } = categoriesReducer;
   const { allCategories } = catalog;
   const classes = useStyles();
+  let filteredCategory = '';
 
   useEffect(() => {
     getColors().then((colors) => {
       filterParamsLoaded('colors', colors);
-    })
+    });
     getBrands().then((brands) => {
       filterParamsLoaded('brands', brands);
-    })
-  }, [filterParamsLoaded]);
+    });
+    filterType(valToFilter);
+    getCurrentCategory();
+  }, [filterParamsLoaded, currentCategory]);
 
   const filterText = ['Brand', 'Price', 'Color'];
 
@@ -58,8 +63,21 @@ function Filter(props) {
   const valOfCollection = '';
   let valOfColor = '';
   let valOfPrice = '';
+  //
+  // const getCurrentCategory = () => {
+  //   // if (!valToFilter && (valToFilter !== currentCategory)) {
+  //   if (!valToFilter && (valToFilter !== currentCategory)) {
+  //     resetFilters();
+  //   }
+  // };
+  const getCurrentCategory = () => {
+    if (!filteredCategory && (filteredCategory !== currentCategory)) {
+      console.log('1');
+      resetFilters();
+    }
+  };
 
-  function parseToFilterValue(obj) {
+  const parseToFilterValue = (obj) => {
     // console.log('OBJ -> ',obj)
 
     if (obj.brand.length > 0) {
@@ -95,10 +113,11 @@ function Filter(props) {
     const categoryForFilter = !subCategoriesString ? catalogLocation : subCategoriesString;
     // console.log('ENDS OF VAL', valOfBrands, valOfCollection)
     valToFilter = `categories=${categoryForFilter}&${valOfBrands}&${valOfCollection}&${valOfColor}&${valOfPrice}`
-    // console.log('!!!!! ->>>>>', valToFilter);
-    filterType(valToFilter);
+    console.log('!!!!! ->>>>>', valToFilter);
+    filteredCategory = valToFilter;
     return valToFilter
-  }
+  };
+
 
   // console.log('filterResults =', filterResults);
   // console.log('filterParams =', filterParams);
@@ -113,11 +132,13 @@ function Filter(props) {
         variant="contained"
         color="primary"
         onClick={() => {
+          filterType(valToFilter);
           getFilteredProducts(valToFilter)
             .then((products) => {
               productsLoaded(products)
             })
             .then(onClose)
+            .then(resetFilters)
         }}
       >
         Filter
@@ -138,7 +159,8 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   productsLoaded,
   filterParamsLoaded,
-  filterType
+  filterType,
+  resetFilters
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter)
