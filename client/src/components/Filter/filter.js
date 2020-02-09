@@ -97,7 +97,6 @@ const Filter = (props) => {
               productsLoaded(products)
             })
             .then(onClose)
-            .then(resetFilters)
         }}
       >
         Filter

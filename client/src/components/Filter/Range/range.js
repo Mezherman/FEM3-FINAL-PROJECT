@@ -26,7 +26,7 @@ const CustomSlider = withStyles((theme) => ({
 const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
   const classes = useStyles();
 
-  const [value, setValue] = useState([0, max]);
+  const [value, setValue] = useState([filterResults.price[0], filterResults.price[1]]);
 
   useEffect(() => {
     combineInputs()
@@ -45,7 +45,7 @@ const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
     if (inputValue > max) {
       inputValue = 0
     }
-    setValue([inputValue === '' ? '' : Number(inputValue), value[1]]);
+    setValue([inputValue === '' ? '' : Number(inputValue), filterResults.price[1]]);
   };
 
   const handleInputMax = (event) => {
@@ -53,7 +53,7 @@ const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
     if (inputValue > max) {
       inputValue = max
     }
-    setValue([value[0], inputValue === '' ? '' : Number(inputValue)]);
+    setValue([filterResults.price[0], inputValue === '' ? '' : Number(inputValue)]);
   };
 
   const combineInputs = () => {
@@ -85,14 +85,14 @@ const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
       <CustomSlider
         max={max}
         valueLabelDisplay="auto"
-        value={value}
+        value={filterResults.price}
         onChange={handleChange}
         aria-labelledby="range-slider"
       />
       <div className={classes.inputs}>
         {(value[1] < value[0]) && <div className={classes.error}>{error}</div>}
-        {input(value[0], handleInputMin)}
-        {input(value[1], handleInputMax)}
+        {input(filterResults.price[0], handleInputMin)}
+        {input(filterResults.price[1], handleInputMax)}
       </div>
     </>
   );
