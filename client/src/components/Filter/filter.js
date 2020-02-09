@@ -8,17 +8,7 @@ import { getFilteredProducts, getColors, getBrands } from '../../services/filter
 import { productsLoaded } from '../../redux/actions/products';
 import { filterParamsLoaded, filterType, resetFilters } from '../../redux/actions/filter';
 
-import { tempFilterData } from '../../services/filter-temp'
-
 const Filter = (props) => {
-  // tempFilterData().then((products) => {
-  //   const manufacturerSet = new Set();
-  //   const withoutBrand = products.filter((product) => manufacturerSet.add(product.manufacturer))
-  // products.filter(product => manufacturerSet.add(product.manufacturer))
-  // console.log('manufacturerSet =', manufacturerSet);
-  // console.log('withoutBrand =', withoutBrand);
-  // })
-
   const {
     productsLoaded,
     filterParamsLoaded,
@@ -39,7 +29,7 @@ const Filter = (props) => {
   let valOfBrands = '';
   let valOfColor = '';
   let valOfPrice = '';
-  let filteredCategory = '';
+  const filteredCategory = '';
 
   useEffect(() => {
     getColors().then((colors) => {
@@ -75,9 +65,7 @@ const Filter = (props) => {
     }
 
     if (obj.price.length > 0) {
-      const price = '';
-      const items = obj.price.map((item) => item)
-      valOfPrice = price.concat('minPrice=', items[0], '&', 'maxPrice=', items[1])
+      valOfPrice = `minPrice=${obj.price[0]}&maxPrice=${obj.price[1]}`
     }
 
     if (obj.color.length > 0) {
@@ -90,7 +78,6 @@ const Filter = (props) => {
 
     valToFilter = `categories=${categoryForFilter}&${valOfBrands}&${valOfColor}&${valOfPrice}`
     filterType(valToFilter);
-    console.log(valToFilter)
     return valToFilter
   };
 
