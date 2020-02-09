@@ -12,14 +12,11 @@ import { productsLoaded } from '../../redux/actions/products'
 
 const Search = ({ productsLoaded, history, searchIsShown }) => {
   const classes = useStyles();
-  const [data, setData] = useState([]);
   const [value, setValue] = useState('');
 
   useEffect(() => {
     getAllProducts()
-      .then((products) => {
-        setData(products);
-      })
+      .then((products) => products)
   }, []);
 
   const handleChange = (event) => {

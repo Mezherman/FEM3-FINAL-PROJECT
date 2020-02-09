@@ -37,7 +37,6 @@ const Filter = (props) => {
 
   let valToFilter = '';
   let valOfBrands = '';
-  const valOfCollection = '';
   let valOfColor = '';
   let valOfPrice = '';
   let filteredCategory = '';
@@ -72,27 +71,24 @@ const Filter = (props) => {
 
   const parseToFilterValue = (obj) => {
     if (obj.brand.length > 0) {
-      const brands = `brand=${obj.brand.join(',')}`
-      valOfBrands = brands
+      valOfBrands = `brand=${obj.brand.join(',')}`
     }
 
     if (obj.price.length > 0) {
       const price = '';
       const items = obj.price.map((item) => item)
-      const str = price.concat('minPrice=', items[0], '&', 'maxPrice=', items[1])
-      valOfPrice = str
+      valOfPrice = price.concat('minPrice=', items[0], '&', 'maxPrice=', items[1])
     }
 
     if (obj.color.length > 0) {
-      const color = `color=${obj.color.join(',')}`
-      valOfColor = color
+      valOfColor = `color=${obj.color.join(',')}`
     }
 
     const subCategories = allCategories.filter((category) => category.parentId === catalogLocation);
     const subCategoriesString = subCategories ? subCategories.map((subCategory) => subCategory.id).join(',') : '';
     const categoryForFilter = !subCategoriesString ? catalogLocation : subCategoriesString;
 
-    valToFilter = `categories=${categoryForFilter}&${valOfBrands}&${valOfCollection}&${valOfColor}&${valOfPrice}`
+    valToFilter = `categories=${categoryForFilter}&${valOfBrands}&${valOfColor}&${valOfPrice}`
     filterType(valToFilter);
     console.log(valToFilter)
     return valToFilter
@@ -123,14 +119,12 @@ const Filter = (props) => {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    filterResults: state.filterReducer.filterResults,
-    filterParams: state.filterReducer.filterParams,
-    categoriesReducer: state.categoriesReducer,
-    currentCategory: state.categoriesReducer.catalogLocation
-  }
-}
+const mapStateToProps = (state) => ({
+  filterResults: state.filterReducer.filterResults,
+  filterParams: state.filterReducer.filterParams,
+  categoriesReducer: state.categoriesReducer,
+  currentCategory: state.categoriesReducer.catalogLocation
+})
 
 const mapDispatchToProps = {
   productsLoaded,

@@ -98,16 +98,12 @@ const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    filterResults: state.filterReducer.filterResults
-  }
-}
+const mapStateToProps = (state) => ({
+  filterResults: state.filterReducer.filterResults
+})
 
-function mapDispatchToProps(dispatch) {
-  return {
-    getFilterProducts: (priceRange) => dispatch(getFilterProducts(priceRange))
-  }
+const mapDispatchToProps = {
+  getFilterProducts
 }
 
 RangeSlider.propTypes = {
