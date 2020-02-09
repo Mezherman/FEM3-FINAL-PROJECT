@@ -54,6 +54,7 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
       thumbnail: url
     }
   ));
+
   return (
     <Container maxWidth="xl">
       <AddToCart

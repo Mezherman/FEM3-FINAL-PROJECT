@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { createStyles, makeStyles, Container, Badge, IconButton } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import TableSpecification from '../Table-specification/table-specifications';
 import Comment from '../../Comment/comment';

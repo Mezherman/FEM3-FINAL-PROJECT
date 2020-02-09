@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Paper, Box, ClickAwayListener, Divider } from '@material-ui/core';
+import { Paper, Box, Divider } from '@material-ui/core';
 
 import NavBar from './Navbar/navbar';
 import Categories from './Categories/categories';
