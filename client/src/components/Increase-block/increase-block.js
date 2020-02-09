@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, makeStyles, Input } from '@material-ui/core';
+import { Box, IconButton, makeStyles, Input } from '@material-ui/core';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 // import useStyles from '../Add-to-cart/_add-to-cart';
@@ -75,8 +75,8 @@ export default function IncreaseBlock({ qty, setQty, maxQty }) {
   return (
     <Box className={classes.wrapper}>
       <div className={classes.qtyPicker}>
-        <Button
-          disabled={qty === 1 ? true : false}
+        <IconButton
+          disabled={qty === 1 ? Boolean(true) : false}
           onClick={() => {
             if (qty <= 1) return;
             setQty(qty - 1)
@@ -84,7 +84,7 @@ export default function IncreaseBlock({ qty, setQty, maxQty }) {
           disableElevation
         >
           <RemoveIcon />
-        </Button>
+        </IconButton>
 
         <Input
           className={classes.input}
@@ -97,14 +97,14 @@ export default function IncreaseBlock({ qty, setQty, maxQty }) {
           }}
         />
 
-        <Button
+        <IconButton
           onClick={() => {
             if (qty >= 99 || qty >= maxQty) return;
             setQty(qty + 1)
           }}
         >
           <AddIcon />
-        </Button>
+        </IconButton>
       </div>
     </Box>
   )
