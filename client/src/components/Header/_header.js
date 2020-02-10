@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    color: '#000000',
+    color: theme.palette.background.dark,
     fontSize: '27px',
     opacity: '.7',
     [theme.breakpoints.up('lg')]: {
@@ -76,12 +76,12 @@ const useStyles = makeStyles((theme) => ({
   },
   iconsStyle: {
     color: theme.palette.text.primary,
-    fontSize: '26px',
+    fontSize: theme.spacing(3.3),
     opacity: '.7'
   },
   iconLoggedIn: {
     color: theme.palette.primary.main,
-    fontSize: '26px',
+    fontSize: theme.spacing(3.3),
   },
   iconButtonBox: {
     height: '100%',
@@ -144,7 +144,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '20px'
   },
   mainHeaderLogoImg: {
-    width: '80px'
+    width: theme.spacing(10)
   },
   mainBoxLogo: {
     display: 'none',
@@ -164,6 +164,26 @@ const useStyles = makeStyles((theme) => ({
       padding: '12px 15px'
     }
   },
+  wishlistMessege: {
+    fontSize: theme.spacing(3),
+  },
+  logInLink: {
+    textDecoration: 'none',
+    color: theme.palette.error.main,
+    paddingTop: theme.spacing(1),
+    fontWeight: 700,
+    '&:hover': {
+      textDecoration: 'underline'
+    }
+  },
+  toolTipContainer: {
+    fontSize: theme.spacing(2)
+  },
+  iconLove: {
+    color: theme.palette.error.dark,
+    fontSize: theme.spacing(3.3),
+    opacity: '.7'
+  }
 }));
 
 export default useStyles

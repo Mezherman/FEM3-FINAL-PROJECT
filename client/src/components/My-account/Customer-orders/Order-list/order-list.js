@@ -27,7 +27,7 @@ const OrderList = () => {
       {!loading && orders.length && orders.map((item) => (
         <Order key={item.orderNo} item={item} />
       ))}
-      {!loading && orders.length < 1 && (
+      {!loading && !orders.length && (
         <div>
           <p>So far, here is no orders, move on to the catalog and place your order.</p>
           <strong>Best wishes, your WMF</strong>

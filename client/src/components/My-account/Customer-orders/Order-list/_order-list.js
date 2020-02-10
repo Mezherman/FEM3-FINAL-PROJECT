@@ -136,6 +136,9 @@ const useStylesOrderItem = makeStyles((theme) => ({
       fontWeight: 'bolder',
     }
   },
+  productTitle: {
+    paddingLeft: theme.spacing(4)
+  }
 }));
 
 export default useStylesOrderItem;

@@ -13,7 +13,8 @@ const OrderParamsTemplates = ({ name, value, className, style }) => {
       className={className}
     >
       <span>{name}</span>
-      <span>{` ${value}`}</span>
+      {' '}
+      <span>{value}</span>
       <Divider className={classes.hiddenCollapse} style={style} orientation="horizontal" variant="middle" component="div" />
     </Grid>
   )

@@ -23,20 +23,23 @@ const Order = ({ item }) => {
     totalSum
   } = item;
 
+  const { country, city, address, postal } = deliveryAddress;
+
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
     setOpen(!open);
   };
 
-  const { country, city, address, postal } = deliveryAddress;
+  const OrderDetailsInfo = () => products.map((its) => (
+    <Collapse in={open} timeout="auto" unmountOnExit key={its.product.itemNo}>
+      <Divider variant="middle" component="div" />
+      <OrderDetails classes={classes} cartQuantity={its.cartQuantity} product={its.product} />
+    </Collapse>
+  ));
+
   return (
-    <List
-      key={orderNo}
-      component="nav"
-      aria-labelledby="nested-list-subheader"
-      className={classes.root}
-    >
+    <List key={orderNo} component="nav" aria-labelledby="nested-list-subheader" className={classes.root}>
       <OrderParams
         classes={classes}
         open={open}
@@ -47,12 +50,7 @@ const Order = ({ item }) => {
         status={status}
         totalSum={totalSum}
       />
-      <Collapse
-        in={open}
-        timeout="auto"
-        unmountOnExit
-        onClick={handleClick}
-      >
+      <Collapse in={open} timeout="auto" unmountOnExit onClick={handleClick}>
         <OrderCustomerInfo
           classes={classes}
           address={address}
@@ -66,26 +64,10 @@ const Order = ({ item }) => {
         />
         <Divider variant="middle" component="div" />
       </Collapse>
-      <Collapse
-        in={open}
-        timeout="auto"
-        unmountOnExit
-        onClick={handleClick}
-        className={classes.hiddenCollapse}
-      >
+      <Collapse in={open} timeout="auto" unmountOnExit onClick={handleClick} className={classes.hiddenCollapse}>
         <OrderTitles classes={classes} />
       </Collapse>
-      {products.map((its) => (
-        <Collapse
-          in={open}
-          timeout="auto"
-          unmountOnExit
-          key={its.product.itemNo}
-        >
-          <Divider variant="middle" component="div" />
-          <OrderDetails classes={classes} cartQuantity={its.cartQuantity} product={its.product} />
-        </Collapse>
-      ))}
+      <OrderDetailsInfo />
     </List>
   )
 };

@@ -22,6 +22,50 @@ const AccountIcon = (props) => {
     closeModal,
     loggedIn
   } = props;
+
+  const ProfileMenu = () => (
+    <Popper
+      open={open}
+      anchorEl={anchorRef.current}
+      role={undefined}
+      transition
+      disablePortal
+    >
+      {({ TransitionProps, placement }) => (
+        <Grow
+          {...TransitionProps}
+          style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+        >
+          <Paper>
+            <ClickAwayListener onClickAway={handleClose}>
+              <MenuList
+                autoFocusItem={open}
+                id="menu-list-grow"
+                onKeyDown={handleListKeyDown}
+              >
+                <Link to={RoutesName.personalData} className={classes.menuLink}>
+                  <MenuItem component="div" onClick={handleClose}>Profile</MenuItem>
+                </Link>
+                <Link to={RoutesName.myOrders} className={classes.menuLink}>
+                  <MenuItem component="div" onClick={handleClose}>My orders</MenuItem>
+                </Link>
+                <MenuItem component="div" onClick={handleLogout} className={classes.menuLink}>
+                  Logout
+                </MenuItem>
+              </MenuList>
+            </ClickAwayListener>
+          </Paper>
+        </Grow>
+      )}
+    </Popper>
+  );
+
+  const PersonBtn = () => (
+    <IconButton edge="end" className={classes.iconButton}>
+      <PersonIcon fontSize="large" className={loggedIn ? classes.iconLoggedIn : classes.iconsStyle} />
+    </IconButton>
+  );
+
   return (
     <>
       <MenuItem
@@ -34,56 +78,11 @@ const AccountIcon = (props) => {
         href={RoutesName.signIn}
         ref={loggedIn ? anchorRef : null}
       >
-        <IconButton edge="end" className={classes.iconButton}>
-          <PersonIcon
-            fontSize="large"
-            className={loggedIn ? classes.iconLoggedIn : classes.iconsStyle}
-          />
-        </IconButton>
+        <PersonBtn />
         <span className={classes.menuTitle}>{loggedIn ? 'My Account' : 'Login'}</span>
       </MenuItem>
-      {loggedIn && (
-        <Popper
-          open={open}
-          anchorEl={anchorRef.current}
-          role={undefined}
-          transition
-          disablePortal
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
-            >
-              <Paper>
-                <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList
-                    autoFocusItem={open}
-                    id="menu-list-grow"
-                    onKeyDown={handleListKeyDown}
-                  >
-                    <Link to={RoutesName.personalData} className={classes.menuLink}>
-                      <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    </Link>
-                    <Link to={RoutesName.myOrders} className={classes.menuLink}>
-                      <MenuItem onClick={handleClose}>My orders</MenuItem>
-                    </Link>
-                    <MenuItem onClick={handleLogout} className={classes.menuLink}>
-                      Logout
-                    </MenuItem>
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
-      )}
-      {!loggedIn && (
-        <LoginModal
-          onModalClose={closeModal}
-          open={modalIsVisible}
-        />
-      )}
+      {loggedIn && (<ProfileMenu />)}
+      {!loggedIn && (<LoginModal onModalClose={closeModal} open={modalIsVisible} />)}
     </>
   )
 };
