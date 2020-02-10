@@ -1,3 +1,10 @@
+import {
+  ADD_PRODUCT_SUCCESS,
+  REMOVE_PRODUCT_SUCCESS,
+  UPDATE_CART_SUCCESS,
+  CLEAR_CART
+} from '../actions/actionTypes'
+
 const initialState = {
   products: [],
   totalCartQuantity: 0,
@@ -6,9 +13,9 @@ const initialState = {
 
 export default function cart(state = initialState, action) {
   switch (action.type) {
-    case 'ADD_PRODUCT_SUCCESS':
-    case 'REMOVE_PRODUCT_SUCCESS':
-    case 'UPDATE_CART_SUCCESS': {
+    case ADD_PRODUCT_SUCCESS:
+    case REMOVE_PRODUCT_SUCCESS:
+    case UPDATE_CART_SUCCESS: {
       const { newCart } = action.payload;
       if (newCart) {
         return {
@@ -18,7 +25,7 @@ export default function cart(state = initialState, action) {
       }
     }
 
-    case 'CLEAR_CART': {
+    case CLEAR_CART: {
       return {
         products: [],
         totalCartQuantity: 0,

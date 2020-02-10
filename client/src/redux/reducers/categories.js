@@ -1,3 +1,10 @@
+import {
+  FETCH_CATALOG_REQUEST,
+  FETCH_CATALOG_SUCCESS,
+  FETCH_CATALOG_FAILURE,
+  CATALOG_LOCATION
+} from '../actions/actionTypes'
+
 const initialState = {
   catalog: {
     allCategories: [],
@@ -10,7 +17,7 @@ const initialState = {
 
 export default function categoriesReducer(state = initialState, action) {
   switch (action.type) {
-    case 'FETCH_CATALOG_REQUEST':
+    case FETCH_CATALOG_REQUEST:
       return {
         ...state,
         catalog: {},
@@ -18,8 +25,7 @@ export default function categoriesReducer(state = initialState, action) {
         catalogLoading: true
       };
 
-    case 'FETCH_CATALOG_SUCCESS':
-      // console.log('reducer catalog worked');
+    case FETCH_CATALOG_SUCCESS:
       return {
         ...state,
         catalog: action.payload.catalog,
@@ -27,7 +33,7 @@ export default function categoriesReducer(state = initialState, action) {
         catalogLoading: false,
       };
 
-    case 'FETCH_CATALOG_FAILURE':
+    case FETCH_CATALOG_FAILURE:
       return {
         ...state,
         catalog: {},
@@ -35,7 +41,7 @@ export default function categoriesReducer(state = initialState, action) {
         catalogLoading: false
       };
 
-    case 'CATALOG_LOCATION':
+    case CATALOG_LOCATION:
       return {
         ...state,
         catalogLocation: action.payload
