@@ -134,26 +134,6 @@ export default function PersonalData ({ handleSubmit }) {
     </Grid>
   );
 
-  PersonalData.propTypes = {
-    handleSubmit: PropTypes.func
-  };
-
-  // if (passwordForm) {
-  //   PersonalData.defaultProps = {
-  //     handleSubmit: () => submitEditedUserPassword
-  //   };
-  // }
-  // if (personalDataForm) {
-  //   PersonalData.defaultProps = {
-  //     handleSubmit: () => submitEditedUser()
-  //   };
-  // }
-  // if (!personalDataForm && !passwordForm) {
-  //   PersonalData.defaultProps = {
-  //     handleSubmit: () => {}
-  //   };
-  // }
-
   const MainCustomerPage = () => (
     <Grid
       component="div"
@@ -260,6 +240,6 @@ PersonalData = reduxForm({
   validate,
 })(PersonalData);
 
-// PersonalData.propTypes = {
-//   handleSubmit: PropTypes.func
-// };
+PersonalData.propTypes = {
+  handleSubmit: PropTypes.func
+};
