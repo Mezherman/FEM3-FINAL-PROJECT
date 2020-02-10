@@ -17,18 +17,13 @@ import {
 } from '@material-ui/core'
 
 import MenuIcon from '@material-ui/icons/Menu'
-// import SearchIcon from '@material-ui/icons/Search'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import PersonIcon from '@material-ui/icons/Person'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, Redirect } from 'react-router-dom';
-// import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-
-// import './header.scss';
-
 import SearchIcon from '@material-ui/icons/Search';
 import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -215,29 +210,11 @@ function Header() {
                 </IconButton>
               </Link>
             </Box>
-
-            {/* <Box className={classes.mainBoxLogo}> */}
-            {/*  <img */}
-            {/*    src={`${process.env.PUBLIC_URL}/img/header/wmf-group-logo.png`} */}
-            {/*    alt="headerMainLogo" */}
-            {/*    className={classes.mainHeaderLogo} */}
-            {/*  /> */}
-            {/*  <img */}
-            {/*    src={`${process.env.PUBLIC_URL}/img/header/03_wmf-kompass_essen_167x167px.jpg`} */}
-            {/*    alt="headerMainLogo" */}
-            {/*    className={classes.mainHeaderLogoImg} */}
-            {/*  /> */}
-            {/* </Box> */}
-
             <HeaderNavbar
               drawer={drawer}
               toggleDrawer={toggleDrawer}
             />
 
-            {/* {isMobile && searchIsShown && */}
-            {/* <Search />} */}
-
-            {/* { <div style={{backgroundColor: 'red'}}><Search /></div>} */}
             <ClickAwayListener onClickAway={handleSearchAway}>
               <div>
                 <Box className={classes.iconButtonBox}>
@@ -359,7 +336,7 @@ function Header() {
       ) : null}
       {renderMobileMenu}
       {renderMenu}
-      {logout && <Redirect />}
+      {logout && <Redirect to={RoutesName.home} />}
     </>
   );
 }

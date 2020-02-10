@@ -13,7 +13,8 @@ import ModalResponse from './Modal-response/modal-response';
 import validate from './validate';
 import postNewUser from '../../services/postNewUser';
 import useStyles from './_sign-up';
-import { leaveRegistrationPage }from '../../redux/actions/moving-around-registration';
+import { leaveRegistrationPage } from '../../redux/actions/moving-around-registration';
+import RoutesName from '../../routes-list'
 
 let SignUp = (props) => {
   const { handleSubmit } = props;
@@ -93,7 +94,7 @@ let SignUp = (props) => {
   const { loggedIn } = useSelector((state) => state.user);
 
   if (loggedIn) {
-    return <Redirect />
+    return <Redirect to={RoutesName.home} />
   }
 
   return (

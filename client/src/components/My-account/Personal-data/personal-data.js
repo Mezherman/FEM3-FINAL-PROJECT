@@ -3,7 +3,6 @@ import {
   Grid,
   Typography,
   Divider,
-  ListItemSecondaryAction,
   ListItem,
   List,
   ListItemText,
@@ -251,7 +250,7 @@ export default function PersonalData ({ handleSubmit }) {
   return (
     <Container maxWidth="xl" className={pdClasses.container}>
       {!passwordForm && !personalDataForm && <MainCustomerPage />}
-      {logout && <Redirect />}
+      {logout && <Redirect to={RoutesName.home} />}
     </Container>
   );
 }

@@ -93,5 +93,8 @@ function MainSlider ({ fetchSlides }) {
 export default MainSlider;
 
 MainSlider.propTypes = {
-  fetchSlides: PropTypes.func.isRequired,
+  fetchSlides: PropTypes.func,
+};
+MainSlider.defaultProps = {
+  fetchSlides: () => {},
 };

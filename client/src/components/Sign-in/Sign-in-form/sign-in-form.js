@@ -75,7 +75,10 @@ SignInForm.propTypes = {
   handleOnChangeLogin: PropTypes.func.isRequired,
   handleOnChangePassword: PropTypes.func.isRequired,
   handleClick: PropTypes.func.isRequired,
-  classes: PropTypes.string.isRequired,
+  classes: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.object,
+  ]).isRequired,
   handleRegistrationRoute: PropTypes.func.isRequired,
   eyeToggle: PropTypes.bool.isRequired,
 };
