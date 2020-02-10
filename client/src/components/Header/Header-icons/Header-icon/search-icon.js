@@ -2,7 +2,7 @@ import { IconButton, MenuItem } from '@material-ui/core';
 import React from 'react';
 import PropTypes from 'prop-types';
 import SearchIcon from '@material-ui/icons/Search';
-import useStyles from '../_header';
+import useStyles from '../../_header';
 
 const HeaderSearchIcon = ({ toggleSearch }) => {
   const classes = useStyles();

@@ -3,8 +3,8 @@ import { Badge, IconButton, MenuItem } from '@material-ui/core';
 import React from 'react';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { useSelector } from 'react-redux';
-import RoutesName from '../../../routes-list';
-import useStyles from '../_header';
+import RoutesName from '../../../../routes-list';
+import useStyles from '../../_header';
 
 const FavouritesIcon = () => {
   const classes = useStyles();

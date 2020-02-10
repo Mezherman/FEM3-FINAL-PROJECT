@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { Badge, IconButton, MenuItem } from '@material-ui/core';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import RoutesName from '../../../routes-list';
-import useStyles from '../_header';
+import RoutesName from '../../../../routes-list';
+import useStyles from '../../_header';
 
 const CartIcon = () => {
   const classes = useStyles();

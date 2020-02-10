@@ -1,14 +1,6 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import {
-  Grid,
-  Typography,
-  Divider,
-  ListItem,
-  List,
-  ListItemText,
-  Container,
-} from '@material-ui/core';
-import { Link, Redirect } from 'react-router-dom';
+import React, { useState, useCallback } from 'react';
+import { Container } from '@material-ui/core';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
@@ -19,13 +11,13 @@ import RoutesName from '../../../routes-list';
 import ChangePasswordForm from './Put-personal-data/put-password';
 import validate from './validate';
 import putUserData from '../../../services/put-user-data';
-import { fetchCustomerData } from '../../../redux/actions/user';
 import { invalidPassword, validPassword } from '../../../redux/actions/password-validation';
 import { newNotification } from '../../../redux/actions/notification';
+import { fetchCustomerData } from '../../../redux/actions/user';
 import { loadAllDataAfterLogin } from '../../../redux/actions/load-all-data';
-import logoutAction from '../../../redux/actions/logout';
 import putPassword from '../../../services/put-password';
 import CancelSaveButtons from './Put-personal-data/cancel-save-buttons';
+import MainCustomerPage from './Main-customer-page/main-customer-page';
 
 export default function PersonalData ({ handleSubmit }) {
   const pdClasses = usePersonalDataStyles();
@@ -57,11 +49,6 @@ export default function PersonalData ({ handleSubmit }) {
     dispatch(newNotification(type, message));
   }, [dispatch]);
 
-  const handleLogout = useCallback(() => {
-    localStorage.removeItem('token');
-    dispatch(logoutAction());
-  }, [dispatch]);
-
   const {
     gender,
     firstName,
@@ -71,15 +58,6 @@ export default function PersonalData ({ handleSubmit }) {
     login,
   } = useSelector((state) => state.user.customer);
   const { logout } = useSelector((state) => state.logout);
-
-  const listItem = [
-    { text: 'Gender:', userData: gender ?? null },
-    { text: 'First Name:', userData: firstName ?? null },
-    { text: 'Last Name:', userData: lastName ?? null },
-    { text: 'Phone number:', userData: telephone ?? null },
-    { text: 'Email:', userData: email ?? null },
-    { text: 'Login:', userData: login ?? null },
-  ];
 
   const submitEditedUser = (values) => {
     putUserData({
@@ -112,88 +90,6 @@ export default function PersonalData ({ handleSubmit }) {
         handlerNotification('error', 'Something go wrong. Try it later, please');
       });
   };
-
-  const CustomerData = () => (
-    <Grid component="div" xs={12} sm={7} item>
-      <List component="div" dense>
-        {listItem.map(({ text, userData }, index) => {
-          const labelId = `checkbox-list-secondary-label-${index}`;
-          return (
-            <ListItem component="div" key={text} className={pdClasses.userData}>
-              <ListItemText id={labelId} primary={text} />
-              <div>
-                <ListItem component="div" key={userData}>
-                  <ListItemText id="2" primary={userData} />
-                </ListItem>
-              </div>
-              <Divider component="div" absolute />
-            </ListItem>
-          );
-        })}
-      </List>
-    </Grid>
-  );
-
-  const MainCustomerPage = () => (
-    <Grid
-      component="div"
-      item
-      xs={12}
-      container
-      direction="column"
-    >
-      <h1>Personal Details</h1>
-      <Grid
-        component="div"
-        item
-        xs={12}
-        container
-        justify="center"
-      >
-        <CustomerData />
-
-        <Grid component="div" xs={12} sm={5} item>
-          <div className={pdClasses.linkContainer}>
-            <Divider component="div" orientation="vertical" light className={pdClasses.divider} />
-            <Typography
-              component="a"
-              variant="subtitle1"
-              className={pdClasses.button}
-              onClick={handleEditForm}
-            >
-              Edit personal data
-            </Typography>
-            <Typography
-              component="a"
-              variant="subtitle1"
-              className={pdClasses.button}
-              onClick={handleChangePassword}
-            >
-              Change password
-            </Typography>
-            <Link to={RoutesName.myOrders} className={pdClasses.link}>
-              <Typography
-                component="div"
-                variant="subtitle1"
-                className={pdClasses.button}
-              >
-                View your orders
-              </Typography>
-            </Link>
-            <Link to={RoutesName.home} onClick={handleLogout}>
-              <Typography
-                component="div"
-                variant="subtitle1"
-                className={`${pdClasses.button} ${pdClasses.logout}`}
-              >
-                Logout
-              </Typography>
-            </Link>
-          </div>
-        </Grid>
-      </Grid>
-    </Grid>
-  );
 
   if (passwordForm) {
     return (
@@ -229,7 +125,10 @@ export default function PersonalData ({ handleSubmit }) {
 
   return (
     <Container maxWidth="xl" className={pdClasses.container}>
-      {!passwordForm && !personalDataForm && <MainCustomerPage />}
+      <MainCustomerPage
+        handleChangePassword={handleChangePassword}
+        handleEditForm={handleEditForm}
+      />
       {logout && <Redirect to={RoutesName.home} />}
     </Container>
   );

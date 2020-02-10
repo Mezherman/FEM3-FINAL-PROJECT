@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 import PersonIcon from '@material-ui/icons/Person'
 import PropTypes from 'prop-types';
-import LoginModal from '../../Login-modal-window/login-modal-window';
-import RoutesName from '../../../routes-list';
-import useStyles from '../_header';
+import LoginModal from '../../../Login-modal-window/login-modal-window';
+import RoutesName from '../../../../routes-list';
+import useStyles from '../../_header';
 
 const AccountIcon = (props) => {
   const classes = useStyles();

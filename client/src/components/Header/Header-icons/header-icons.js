@@ -10,10 +10,10 @@ import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
 import Search from '../../Search/search';
 import useStyles from '../_header';
 import logoutAction from '../../../redux/actions/logout';
-import AccountIcon from './account-icon';
-import FavouritesIcon from './favourites-icon';
-import CartIcon from './cart-icon';
-import HeaderSearchIcon from './search-icon';
+import AccountIcon from './Header-icon/account-icon';
+import FavouritesIcon from './Header-icon/favourites-icon';
+import CartIcon from './Header-icon/cart-icon';
+import HeaderSearchIcon from './Header-icon/search-icon';
 
 const HeaderIcons = () => {
   const classes = useStyles();

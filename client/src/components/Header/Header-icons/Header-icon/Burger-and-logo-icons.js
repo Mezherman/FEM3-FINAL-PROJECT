@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, IconButton } from '@material-ui/core';
-import MenuIcon from '@material-ui/core/SvgIcon/SvgIcon';
+import MenuIcon from '@material-ui/icons/Menu'
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import RoutesName from '../../../routes-list';
-import useStyles from '../_header';
+import RoutesName from '../../../../routes-list';
+import useStyles from '../../_header';
 
 const BurgerAndLogoIcons = ({ toggleDrawer, mobileMenuId }) => {
   const classes = useStyles();

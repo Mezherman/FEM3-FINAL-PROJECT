@@ -9,7 +9,7 @@ import HeaderNavbar from '../Header-navbar/header-navbar';
 import useStyles from './_header';
 import RoutesName from '../../routes-list';
 import HeaderIcons from './Header-icons/header-icons';
-import BurgerAndLogoIcons from './Header-icons/Burger-and-logo-icons';
+import BurgerAndLogoIcons from './Header-icons/Header-icon/Burger-and-logo-icons';
 
 function Header() {
   const classes = useStyles();
@@ -73,24 +73,32 @@ function Header() {
     </Menu>
   );
 
+  const FreShipingMessage = () => (
+    <Box className={classes.delivery}>
+      <Container maxWidth="xl">
+        <p className={classes.deliveryTitle}>Free shipping on all orders over &#8364;100</p>
+      </Container>
+    </Box>
+  );
+
+  const MainHeaderContent = () => (
+    <AppBar position="sticky" top="0" color="inherit" elevation={0}>
+      <Container maxWidth="xl" disableGutters className={classes.grow}>
+        <Toolbar className={classes.justify}>
+          <BurgerAndLogoIcons mobileMenuId={mobileMenuId} toggleDrawer={toggleDrawer} />
+          <HeaderNavbar drawer={drawer} toggleDrawer={toggleDrawer} />
+          <HeaderIcons />
+        </Toolbar>
+      </Container>
+      <Divider component="div" />
+    </AppBar>
+  );
+
   return (
     <>
       <CssBaseline />
-      <Box className={classes.delivery}>
-        <Container maxWidth="xl">
-          <p className={classes.deliveryTitle}>Free shipping on all orders over &#8364;100</p>
-        </Container>
-      </Box>
-      <AppBar position="sticky" top="0" color="inherit" elevation={0}>
-        <Container maxWidth="xl" disableGutters className={classes.grow}>
-          <Toolbar className={classes.justify}>
-            <BurgerAndLogoIcons mobileMenuId={mobileMenuId} toggleDrawer={toggleDrawer} />
-            <HeaderNavbar drawer={drawer} toggleDrawer={toggleDrawer} />
-            <HeaderIcons />
-          </Toolbar>
-        </Container>
-        <Divider component="div" />
-      </AppBar>
+      <FreShipingMessage />
+      <MainHeaderContent />
       {prevBlockIsVisible && (<PreviewBlock checked={prevBlockIsVisible} onClose={handleChange} />)}
       {renderMobileMenu}
       {renderMenu}
