@@ -12,19 +12,34 @@ const FavouritesIcon = ({ onClick, open, onClose }) => {
   const totalFavoritesQty = useSelector((state) => state.favoritesReducer.favorites.length);
   const { loggedIn } = useSelector((state) => state.user);
 
+  const tooltipBlock = () => (
+    <div className={classes.toolTipContainer}>
+      <h4 className={classes.wishlistMessege}>Wishlist is empty</h4>
+      <p className={classes}>
+        If you want to be able to add goods to your wish list, please
+        {' '}
+        <Link to={RoutesName.favorites} className={classes.logInLink}>Log in.</Link>
+      </p>
+    </div>
+  );
+
+  const IconForLoggedIn = () => (
+    <MenuItem className={classes.headerMenuItem}>
+      <Link to={RoutesName.favorites}>
+        <IconButton edge="end" className={classes.iconButton}>
+          <Badge badgeContent={totalFavoritesQty.toString()} color="error">
+            <FavoriteBorderIcon fontSize="large" className={classes.iconLove} />
+          </Badge>
+        </IconButton>
+        <span className={classes.menuTitle}>Favorites</span>
+      </Link>
+    </MenuItem>
+  );
+
   if (!loggedIn) {
     return (
       <Tooltip
-        title={(
-          <div className={classes.toolTipContainer}>
-            <h4 className={classes.wishlistMessege}>Wishlist is empty</h4>
-            <p className={classes}>
-              If you want to be able to add goods to your wish list, please
-              {' '}
-              <Link to={RoutesName.favorites} className={classes.logInLink}>Log in.</Link>
-            </p>
-          </div>
-        )}
+        title={tooltipBlock()}
         onClick={onClick}
         onClose={onClose}
         disableFocusListener
@@ -35,7 +50,6 @@ const FavouritesIcon = ({ onClick, open, onClose }) => {
         interactive
         arrow
         TransitionComponent={Zoom}
-
       >
         <MenuItem className={classes.headerMenuItem}>
           <IconButton edge="end" className={classes.iconButton}>
@@ -49,18 +63,7 @@ const FavouritesIcon = ({ onClick, open, onClose }) => {
     )
   }
 
-  return (
-    <MenuItem className={classes.headerMenuItem}>
-      <Link to={RoutesName.favorites}>
-        <IconButton edge="end" className={classes.iconButton}>
-          <Badge badgeContent={totalFavoritesQty.toString()} color="error">
-            <FavoriteBorderIcon fontSize="large" className={classes.iconLove} />
-          </Badge>
-        </IconButton>
-        <span className={classes.menuTitle}>Favorites</span>
-      </Link>
-    </MenuItem>
-  )
+  return <IconForLoggedIn />
 };
 
 export default FavouritesIcon;
