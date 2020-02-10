@@ -1,9 +1,10 @@
 import { IconButton, MenuItem } from '@material-ui/core';
 import React from 'react';
 import PropTypes from 'prop-types';
+import SearchIcon from '@material-ui/icons/Search';
 import useStyles from '../_header';
 
-const SearchIcon = ({ toggleSearch }) => {
+const HeaderSearchIcon = ({ toggleSearch }) => {
   const classes = useStyles();
   return (
     <MenuItem className={classes.headerMenuItem}>
@@ -15,8 +16,8 @@ const SearchIcon = ({ toggleSearch }) => {
   )
 };
 
-export default SearchIcon;
+export default HeaderSearchIcon;
 
-SearchIcon.propTypes = {
+HeaderSearchIcon.propTypes = {
   toggleSearch: PropTypes.func.isRequired,
 };

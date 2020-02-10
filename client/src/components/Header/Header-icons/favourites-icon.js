@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
 import { Badge, IconButton, MenuItem } from '@material-ui/core';
 import React from 'react';
-import PropTypes from 'prop-types';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import { useSelector } from 'react-redux';
 import RoutesName from '../../../routes-list';
 import useStyles from '../_header';
 
-const FavouritesIcon = ({ totalFavoritesQty }) => {
+const FavouritesIcon = () => {
   const classes = useStyles();
+  const totalFavoritesQty = useSelector((state) => state.favoritesReducer.favorites.length);
   return (
     <MenuItem className={classes.headerMenuItem}>
       <Link to={RoutesName.favorites}>
@@ -23,11 +24,3 @@ const FavouritesIcon = ({ totalFavoritesQty }) => {
 };
 
 export default FavouritesIcon;
-
-FavouritesIcon.propTypes = {
-  totalFavoritesQty: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.number
-  ]).isRequired,
-};

@@ -2,12 +2,14 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
 import { Link } from 'react-router-dom';
 import { Badge, IconButton, MenuItem } from '@material-ui/core';
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import RoutesName from '../../../routes-list';
 import useStyles from '../_header';
 
-const CartIcon = ({ totalCartQuantity }) => {
+const CartIcon = () => {
   const classes = useStyles();
+  const totalCartQuantity = useSelector((state) => state.cart.totalCartQuantity);
+
   return (
     <MenuItem className={classes.headerMenuItem}>
       <Link to={RoutesName.cart}>
@@ -23,11 +25,3 @@ const CartIcon = ({ totalCartQuantity }) => {
 };
 
 export default CartIcon;
-
-CartIcon.propTypes = {
-  totalCartQuantity: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-    PropTypes.number
-  ]).isRequired,
-};
