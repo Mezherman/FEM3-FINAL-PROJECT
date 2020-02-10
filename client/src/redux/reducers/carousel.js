@@ -7,7 +7,7 @@ import {
   FETCH_TOP_PRODUCTS_FAILURE
 } from '../actions/actionTypes'
 
-const initialState = {
+export const initialState = {
   productsList: [],
   topProducts: [],
   error: null,

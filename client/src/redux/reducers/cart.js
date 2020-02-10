@@ -5,7 +5,7 @@ import {
   CLEAR_CART
 } from '../actions/actionTypes'
 
-const initialState = {
+export const initialState = {
   products: [],
   totalCartQuantity: 0,
   totalCartPrice: 0

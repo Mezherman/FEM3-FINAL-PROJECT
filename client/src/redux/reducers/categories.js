@@ -5,7 +5,7 @@ import {
   CATALOG_LOCATION
 } from '../actions/actionTypes'
 
-const initialState = {
+export const initialState = {
   catalog: {
     allCategories: [],
     mainCategories: [],

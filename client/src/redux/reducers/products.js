@@ -6,7 +6,7 @@ import {
   RESET_SORTING
 } from '../actions/actionTypes'
 
-const initialState = {
+export const initialState = {
   products: [],
   error: null,
   productsLoading: true,
