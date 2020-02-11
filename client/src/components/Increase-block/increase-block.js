@@ -1,55 +1,8 @@
 import React from 'react';
-import { Box, IconButton, makeStyles, Input } from '@material-ui/core';
+import { Box, IconButton, Input } from '@material-ui/core';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
-// import useStyles from '../Add-to-cart/_add-to-cart';
-
-const useStyles = makeStyles((theme) => ({
-  wrapper: {
-    textAlign: 'right',
-    // margin: theme.spacing(3, 0),
-  },
-  qtyPicker: {
-    maxWidth: '70%',
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    [theme.breakpoints.up('sm')]: {
-      maxWidth: '100%',
-    },
-    [theme.breakpoints.up('lg')]: {
-      maxWidth: '70%',
-    }
-  },
-  [theme.breakpoints.up('md')]: {
-    qtyPicker: {
-      // width: '150px'
-    }
-  },
-  qty: {
-    textAlign: 'center',
-    fontSize: '16px',
-    // minWidth: '50px',
-  },
-  input: {
-    '& .MuiInputBase-input': {
-      minWidth: '40px',
-
-      textAlign: 'center',
-    },
-    '& input[type=number]::-webkit-inner-spin-button': {
-      '-webkit-appearance': 'none',
-      margin: 0
-    },
-    '& input[type=number]::-webkit-outer-spin-button': {
-      '-webkit-appearance': 'none',
-      margin: 0
-    },
-    '&.MuiInput-underline::after': {
-      content: 'none'
-    },
-  }
-}));
+import useStyles from './_increase-block';
 
 export default function IncreaseBlock({ qty, setQty, maxQty }) {
   const classes = useStyles();
@@ -73,7 +26,7 @@ export default function IncreaseBlock({ qty, setQty, maxQty }) {
   };
   // console.log(qty);
   return (
-    <Box className={classes.wrapper}>
+    <>
       <div className={classes.qtyPicker}>
         <IconButton
           disabled={qty === 1 ? Boolean(true) : false}
@@ -106,6 +59,6 @@ export default function IncreaseBlock({ qty, setQty, maxQty }) {
           <AddIcon />
         </IconButton>
       </div>
-    </Box>
+    </>
   )
 }

@@ -2,13 +2,16 @@ import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    maxWidth: '250px',
+    maxWidth: '230px',
     paddingBottom: '20px',
-    margin: '0 auto',
+    // margin: '0 auto',
     '&:hover': {
       zIndex: '1',
       boxShadow: '0px 0 1px 0px #aaa, 0px 5px 11px #909090',
       cursor: 'pointer',
+    },
+    [theme.breakpoints.up('lg')]: {
+      maxWidth: '260px',
     }
   },
   iconWrapper: {

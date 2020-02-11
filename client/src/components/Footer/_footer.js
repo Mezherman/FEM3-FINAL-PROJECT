@@ -5,6 +5,10 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 0),
     backgroundColor: theme.palette.secondary.main,
     color: theme.palette.secondary.contrastText,
+    // position: 'absolute',
+    // bottom: '0',
+    // right: '0',
+    // left: '0',
   },
   container: {
     marginTop: theme.spacing(2)
