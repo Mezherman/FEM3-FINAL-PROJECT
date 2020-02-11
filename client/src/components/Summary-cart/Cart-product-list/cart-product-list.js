@@ -24,12 +24,10 @@ const CartProductList = React.memo(({ products, actions }) => {
 export default CartProductList;
 
 CartProductList.propTypes = {
-  products: PropTypes.objectOf(
+  products: PropTypes.arrayOf(
     PropTypes.object,
-    PropTypes.array
   ).isRequired,
   actions: PropTypes.objectOf(
-    PropTypes.object,
-    PropTypes.array
+    PropTypes.func
   ).isRequired,
 }
