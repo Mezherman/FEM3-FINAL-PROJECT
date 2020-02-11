@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   },
   [theme.breakpoints.up('md')]: {
     search: {
-      zIndex: '1',
+      zIndex: '5',
       left: '20%',
       top: '25%',
       maxWidth: '50%',
@@ -21,6 +21,16 @@ const useStyles = makeStyles((theme) => ({
     search: {
       left: '7%',
       maxWidth: '660px',
+      padding: theme.spacing(3, 3, 1, 0),
+      top: '-13%',
+    },
+    searchIcon: {
+      top: '8px'
+    }
+  },
+  [theme.breakpoints.up('xl')]: {
+    search: {
+      maxWidth: '800px',
     },
   },
   inputRoot: {

@@ -1,8 +1,11 @@
-import React from 'react';
+import {
+  OPEN_NEW_NOTIFICATION,
+  ClOSE_NOTIFICATION
+} from './actionTypes'
 
 export function newNotification (type, message, fading = 'true') {
   return {
-    type: 'OPEN_NEW_NOTIFICATION',
+    type: OPEN_NEW_NOTIFICATION,
     payload: {
       type,
       message,
@@ -12,6 +15,6 @@ export function newNotification (type, message, fading = 'true') {
 }
 export function closeNotification () {
   return {
-    type: 'ClOSE_NOTIFICATION',
+    type: ClOSE_NOTIFICATION,
   }
 }

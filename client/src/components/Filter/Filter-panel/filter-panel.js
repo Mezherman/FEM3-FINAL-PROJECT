@@ -15,7 +15,7 @@ import RangeSlider from '../Range/range'
 import useStyles from './_filter-panel';
 import { getFilterProducts } from '../../../redux/actions/filter';
 
-function FilterPanel(props) {
+const FilterPanel = (props) => {
   const classes = useStyles();
   const { name, filterResults, getFilterProducts, max, colors, brands, width } = props;
 
@@ -71,14 +71,8 @@ function FilterPanel(props) {
 
   return (
     <div>
-      <ExpansionPanel
-        className={classes.root}
-        square
-        defaultExpanded={isShowPanel[width]}
-      >
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-        >
+      <ExpansionPanel className={classes.root} square defaultExpanded={isShowPanel[width]}>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>{name}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
@@ -95,10 +89,8 @@ const mapStateToProps = (state) => ({
   filterResults: state.filterReducer.filterResults
 })
 
-function mapDispatchToProps(dispatch) {
-  return {
-    getFilterProducts: (value) => dispatch(getFilterProducts(value))
-  }
+const mapDispatchToProps = {
+  getFilterProducts
 }
 
 FilterPanel.propTypes = {
@@ -107,7 +99,8 @@ FilterPanel.propTypes = {
   filterResults: PropTypes.objectOf(PropTypes.array).isRequired,
   colors: PropTypes.arrayOf(PropTypes.object).isRequired,
   brands: PropTypes.arrayOf(PropTypes.object).isRequired,
-  getFilterProducts: PropTypes.func.isRequired
+  getFilterProducts: PropTypes.func.isRequired,
+  width: PropTypes.string.isRequired
 };
 
 FilterPanel.defaultProps = {

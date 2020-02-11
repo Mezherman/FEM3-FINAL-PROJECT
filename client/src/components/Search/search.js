@@ -2,24 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import SearchIcon from '@material-ui/icons/Search'
 import { withRouter } from 'react-router-dom';
-import InputBase from '@material-ui/core/InputBase';
-import { Collapse, Grow, useTheme } from '@material-ui/core';
+import { Collapse, Grow, useTheme, InputBase } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
+import { PropTypes } from 'prop-types';
 import useStyles from './_search';
 import search from '../../services/search';
 import getAllProducts from '../../services/getProducts'
 import { productsLoaded } from '../../redux/actions/products'
 
-function Search({ productsLoaded, history, searchIsShown }) {
+const Search = ({ productsLoaded, history, searchIsShown }) => {
   const classes = useStyles();
-  const [data, setData] = useState([]);
   const [value, setValue] = useState('');
 
   useEffect(() => {
     getAllProducts()
-      .then((products) => {
-        setData(products);
-      })
+      .then((products) => products)
   }, []);
 
   const handleChange = (event) => {
@@ -42,6 +39,31 @@ function Search({ productsLoaded, history, searchIsShown }) {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
+  const renderSearch = (desktop) => {
+    if (desktop) {
+      return (
+        <Grow in={searchIsShown} >
+          <div className={classes.search}>
+            <SearchIcon
+              className={classes.searchIcon}
+            />
+            {inputBase}
+          </div>
+        </Grow>
+      )
+    }
+    return (
+      <div className={classes.search}>
+        <SearchIcon
+          className={classes.searchIcon}
+        />
+        <Collapse in={Boolean(searchIsShown)} >
+          {inputBase}
+        </Collapse>
+      </div>
+    )
+  }
+
   const inputBase = (
     <InputBase
       placeholder="Search…"
@@ -61,26 +83,7 @@ function Search({ productsLoaded, history, searchIsShown }) {
 
   return (
     <>
-      {isDesktop ? (
-        <Grow in={searchIsShown} >
-          <div className={classes.search}>
-            <SearchIcon
-              className={classes.searchIcon}
-            />
-            {inputBase}
-          </div>
-        </Grow>
-      )
-        : (
-          <div className={classes.search}>
-            <SearchIcon
-              className={classes.searchIcon}
-            />
-            <Collapse in={Boolean(searchIsShown)} >
-              {inputBase}
-            </Collapse>
-          </div>
-        )}
+      {renderSearch(isDesktop)}
     </>
   )
 }
@@ -88,5 +91,9 @@ function Search({ productsLoaded, history, searchIsShown }) {
 const mapDispatchToProps = {
   productsLoaded
 };
+
+Search.propTypes = {
+  searchIsShown: PropTypes.bool.isRequired
+}
 
 export default withRouter(connect(null, mapDispatchToProps)(Search));
