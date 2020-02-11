@@ -29,7 +29,7 @@ function ChangePasswordForm ({ cancel }) {
 
     return (
       <Grid component="div" item spacing={2} container xs={12} direction="column" alignContent="center">
-        <Grid container item xs={12} sm={9} md={7} lg={5} component="div">
+        <Grid container item xs={12} sm={9} md={7} lg={6} component="div">
           <Field
             name="password"
             component={renderPasswordField}
@@ -41,7 +41,7 @@ function ChangePasswordForm ({ cancel }) {
             togglePasswordMask={toggleOldPasswordMask}
           />
         </Grid>
-        <Grid component="div" container item xs={12} sm={9} md={7} lg={5}>
+        <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
           <Field
             name="newPassword"
             component={renderPasswordField}
@@ -52,7 +52,7 @@ function ChangePasswordForm ({ cancel }) {
             togglePasswordMask={toggleNewPasswordMask}
           />
         </Grid>
-        <Grid component="div" container item xs={12} sm={9} md={7} lg={5}>
+        <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
           <Field
             name="confirmNewPassword"
             component={renderPasswordField}

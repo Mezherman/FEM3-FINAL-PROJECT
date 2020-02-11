@@ -68,7 +68,7 @@ function Header() {
     </Menu>
   );
 
-  const FreShipingMessage = () => (
+  const FreeShippingMessage = () => (
     <Box className={classes.delivery}>
       <Container maxWidth="xl">
         <p className={classes.deliveryTitle}>Free shipping on all orders over &#8364;100</p>
@@ -92,7 +92,7 @@ function Header() {
   return (
     <>
       <CssBaseline />
-      <FreShipingMessage />
+      <FreeShippingMessage />
       <MainHeaderContent />
       {renderMobileMenu}
       {renderMenu}
