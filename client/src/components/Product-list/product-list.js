@@ -2,6 +2,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
+import { Controller, Scene } from 'react-scrollmagic';
 
 import ProductCard from '../Product-card/product-card';
 import Spinner from '../Spinner/spinner';
@@ -25,14 +26,18 @@ function ProductList(props) {
   };
 
   return (
-    <>
+    <Controller>
+
       <Sorting />
       <div className={classes.productList}>
-        {productsLoading && <Spinner />}
-        {!productsLoading &&
-        renderProducts(products)}
+        <Scene duration={600} pin triggerElement="#loader">
+          {productsLoading && <Spinner />}
+          {!productsLoading &&
+          renderProducts(products)}
+          <div id='loader'></div>
+        </Scene>
       </div>
-    </>
+    </Controller>
   )
 }
 
