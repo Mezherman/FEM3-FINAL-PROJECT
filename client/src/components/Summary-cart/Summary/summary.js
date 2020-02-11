@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Grid, Button, Hidden, Box } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import SummaryItem from '../Summary-item/summary-item';
+import SummaryItem from './Summary-item/summary-item';
 import RoutesList from '../../../routes-list';
 import useStyles from './_summary';
 
-export default function Summary({ totalCartPrice }) {
+function Summary({ totalCartPrice }) {
   const classes = useStyles();
   return (
     <Box>
@@ -32,4 +33,9 @@ export default function Summary({ totalCartPrice }) {
       </Hidden>
     </Box>
   );
+}
+export default Summary;
+
+Summary.propTypes = {
+  totalCartPrice: PropTypes.number.isRequired
 }

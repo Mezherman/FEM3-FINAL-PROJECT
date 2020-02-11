@@ -8,14 +8,15 @@ import useStyles from './_continue-btn';
 
 export default function ContinueBtn () {
   const classes = useStyles();
-  const categories = useSelector((state) => state.categoriesReducer.catalog.mainCategories);
+  const firstCategory = useSelector((state) => state.categoriesReducer.catalog.mainCategories[0]);
+
   return (
     <Grid container alignItems="center" className={classes.root}>
       <Grid item>
         <ArrowBackIosIcon className={classes.icon} />
       </Grid>
       <Grid item>
-        <Link to={`${RoutesName.products}/${categories[0].id}`} className={classes.link}>
+        <Link to={`${RoutesName.products}/${firstCategory.id}`} className={classes.link}>
           <span className={classes.text}>continue Shopping</span>
         </Link>
       </Grid>

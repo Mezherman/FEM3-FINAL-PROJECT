@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/styles'
 
 const useStyles = makeStyles((theme) => ({
-  categories_btn: {
+  categoriesBtn: {
     width: '100%',
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
     marginTop: theme.spacing(2)
   },
-  categories_title: {
+  categoriesTitle: {
     fontSize: '2.1rem',
     paddingBottom: theme.spacing(5),
     textAlign: 'center',
@@ -18,13 +18,18 @@ const useStyles = makeStyles((theme) => ({
     }
 
   },
-  categories_desc: {
+  categoriesDesc: {
     paddingBottom: theme.spacing(3),
     maxHeight: '160px',
     overflow: 'hidden',
+
   },
-  categories_description: {
+  categoriesDescription: {
     margin: theme.spacing(6, 0, 6, 0),
+    [theme.breakpoints.down('md')]: {
+      margin: 0,
+      paddingTop: theme.spacing(2)
+    }
   },
   p_b_30: {
     paddingBottom: '3rem'
@@ -38,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   link: {
     textDecoration: 'none',
   },
-  categories_item: {
+  categoriesItem: {
     [theme.breakpoints.up('lg')]: {
       marginBottom: '30px',
     }

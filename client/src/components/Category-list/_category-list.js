@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/styles'
 
 const useStyles = makeStyles((theme) => ({
 
-  categories_list: {
+  categoriesList: {
     fontSize: '1.3rem',
     wordSpacing: '2px',
     marginTop: theme.spacing(6),

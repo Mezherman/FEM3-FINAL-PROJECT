@@ -5,7 +5,7 @@ import useHeaderStyles from './_cart-product-list-header';
 
 export default function CartProductListHeader() {
   const classes = useHeaderStyles();
-  // const classes = useStyles();
+
   return (
     <Grid container justify="space-between" className={`${classes.root} ${classes.underline}`}>
       <Grid item lg={3} >
@@ -16,10 +16,10 @@ export default function CartProductListHeader() {
         Price
       </Grid>
       <Grid item lg={2} className={classes.alignCenter}>
-        In stock
+        Q-ty
       </Grid>
       <Grid item lg={2} className={classes.alignRight}>
-        Subtottal
+        Subtotal
       </Grid>
       <Grid item lg={1} />
     </Grid>
