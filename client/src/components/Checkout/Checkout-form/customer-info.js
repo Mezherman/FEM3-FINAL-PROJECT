@@ -68,7 +68,6 @@ export default function CustomerInfo({ customer }) {
               name="comments"
               component={TextArea}
               label="Additional comments..."
-              classes={classes}
             />
           </Grid>
         </Grid>

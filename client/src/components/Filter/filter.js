@@ -94,6 +94,7 @@ const Filter = (props) => {
         className={classes.button}
         size="large"
         variant="contained"
+        disableElevation
         color="primary"
         onClick={() => {
           filterType(valToFilter);

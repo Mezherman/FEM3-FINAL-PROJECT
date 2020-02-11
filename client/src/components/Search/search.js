@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import SearchIcon from '@material-ui/icons/Search';
@@ -66,6 +66,7 @@ const Search = ({ productsLoaded, history, searchIsShown }) => {
     <InputBase
       placeholder="Search…"
       type="search"
+      autoFocus
       classes={{
         root: classes.inputRoot,
         input: classes.inputInput,
