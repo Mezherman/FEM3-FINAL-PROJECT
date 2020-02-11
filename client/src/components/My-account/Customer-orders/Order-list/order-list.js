@@ -10,15 +10,11 @@ const OrderList = () => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (!orders) {
-      getOrders()
-        .then((response) => {
-          dispatch(ordersAction(response));
-          setLoading(false);
-        })
-    } else {
-      setLoading(false);
-    }
+    getOrders()
+      .then((response) => {
+        dispatch(ordersAction(response));
+        setLoading(false);
+      })
   }, [dispatch, orders]);
 
   return (
