@@ -1,37 +1,35 @@
 import React, { useState } from 'react';
 import { Field } from 'redux-form';
 import { useSelector } from 'react-redux';
-import { Container, Grid, } from '@material-ui/core';
+import { Grid, Container } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import useStyles from '../../../SignUp/Sign-up-form/_sign-up-form';
-import usePdstyles from '../_personal-data';
 import renderPasswordField from '../../../Render-password-field/render-password-field';
 import CancelSaveButtons from './cancel-save-buttons';
 
 function ChangePasswordForm ({ cancel }) {
-  const { invalid } = useSelector((state) => state.passwordForm);
-  const classes = useStyles();
-  const pdClasses = usePdstyles();
+  const MainContent = () => {
+    const { invalid } = useSelector((state) => state.passwordForm);
+    const classes = useStyles();
 
-  const [eyeToggleOld, setEyeToggleOlg] = useState(true);
-  const toggleOldPasswordMask = () => {
-    setEyeToggleOlg((prev) => (setEyeToggleOlg(!prev)));
-  };
+    const [eyeToggleOld, setEyeToggleOld] = useState(true);
+    const toggleOldPasswordMask = () => {
+      setEyeToggleOld((prev) => (setEyeToggleOld(!prev)));
+    };
 
-  const [eyeToggleNew, setEyeToggleNew] = useState(true);
-  const toggleNewPasswordMask = () => {
-    setEyeToggleNew((prev) => (setEyeToggleNew(!prev)));
-  };
+    const [eyeToggleNew, setEyeToggleNew] = useState(true);
+    const toggleNewPasswordMask = () => {
+      setEyeToggleNew((prev) => (setEyeToggleNew(!prev)));
+    };
 
-  const [eyeToggleConfirm, setEyeToggleConfirm] = useState(true);
-  const toggleConfirmPasswordMask = () => {
-    setEyeToggleConfirm((prev) => (setEyeToggleConfirm(!prev)));
-  };
+    const [eyeToggleConfirm, setEyeToggleConfirm] = useState(true);
+    const toggleConfirmPasswordMask = () => {
+      setEyeToggleConfirm((prev) => (setEyeToggleConfirm(!prev)));
+    };
 
-  return (
-    <Container maxWidth="xl">
-      <h2>Edit Form</h2>
-      <Grid spacing={2} container xs={12} direction="column" alignContent="center">
-        <Grid container item xs={12} sm={9} md={7} lg={5}>
+    return (
+      <Grid component="div" item spacing={2} container xs={12} direction="column" alignContent="center">
+        <Grid container item xs={12} sm={9} md={7} lg={5} component="div">
           <Field
             name="password"
             component={renderPasswordField}
@@ -43,7 +41,7 @@ function ChangePasswordForm ({ cancel }) {
             togglePasswordMask={toggleOldPasswordMask}
           />
         </Grid>
-        <Grid container item xs={12} sm={9} md={7} lg={5}>
+        <Grid component="div" container item xs={12} sm={9} md={7} lg={5}>
           <Field
             name="newPassword"
             component={renderPasswordField}
@@ -54,7 +52,7 @@ function ChangePasswordForm ({ cancel }) {
             togglePasswordMask={toggleNewPasswordMask}
           />
         </Grid>
-        <Grid container item xs={12} sm={9} md={7} lg={5}>
+        <Grid component="div" container item xs={12} sm={9} md={7} lg={5}>
           <Field
             name="confirmNewPassword"
             component={renderPasswordField}
@@ -67,8 +65,19 @@ function ChangePasswordForm ({ cancel }) {
         </Grid>
         <CancelSaveButtons cancel={cancel} />
       </Grid>
+    )
+  };
+
+  return (
+    <Container>
+      <h2>Edit Form</h2>
+      <MainContent />
     </Container>
   )
 }
 
 export default ChangePasswordForm;
+
+ChangePasswordForm.propTypes = {
+  cancel: PropTypes.func.isRequired
+};

@@ -32,7 +32,10 @@
       "beforeClosing": "allow"
     }],
     "react/state-in-constructor": [2, "never"],
-    "react/jsx-props-no-spreading": 0
+    "react/jsx-props-no-spreading": 0,
+    "no-shadow": 0,
+    "no-underscore-dangle": 0,
+    "import/no-cycle": [2, { "maxDepth": 1 }]
   },
   "settings": {
     "react": {

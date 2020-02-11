@@ -14,76 +14,94 @@ import { getCategory } from '../../services/getCategories';
 import { catalogLocation } from '../../redux/actions/categories';
 import { getFilteredProducts } from '../../services/filter';
 import ProductCardCarousel from '../Product-card-carousel/product-card-carousel';
+import BackgroundCatalog from './Background-catalog/backgroundCatalog';
 
-function Catalog({ assortment, fetchProducts, catalogLocation }) {
+const Catalog = ({
+  assortment,
+  fetchProducts,
+  fetchTopProducts,
+  fetchTopProductsList,
+  catalogLocation,
+  productsList
+}) => {
   const classes = useStyles();
   const [topList, setTopList] = useState([]);
   const [productsToShow, setProductsToShow] = useState([]);
-
-  // useEffect(() => {
-  //   getCategory(assortment)
-  //     .then((response) => setTopList(response.topSellers))
-  // }, [assortment]);
-  //
-  // useEffect(() => {
-  //   const cardsToShowString = topList.toString();
-  //   getFilteredProducts(`itemNo=${cardsToShowString}`)
-  //     .then((response) => {
-  //       setProductsToShow(response)
-  //     })
-  // }, [topList]);
-
   const [filterIsOpen, setFilterIsOpen] = useState(false);
 
-  const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
-
-  const toggleFilter = () => {
-    setFilterIsOpen((prev) => !prev);
-  };
+  useEffect(() => {
+    const request = assortment === 'search' ? 'cooking' : assortment;
+    getCategory(request)
+      .then((response) => setTopList(response.topSellers));
+  }, [assortment]);
 
   useEffect(() => {
     // console.log(123456);
     catalogLocation(assortment);
+    // fetchTopProductsList(assortment);
+    // fetchTopProducts(productsList);
     fetchProducts(assortment);
-  }, [assortment, catalogLocation, fetchProducts]);
+  }, [assortment, catalogLocation, fetchProducts, fetchTopProducts, fetchTopProductsList]);
+
+  const cardsToShowString = topList.toString();
+
+  useEffect(() => {
+    getFilteredProducts(`itemNo=${cardsToShowString}`)
+      .then((response) => {
+        setProductsToShow(response)
+      })
+  }, [cardsToShowString, topList]);
+
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+
+  const toggleFilter = (open) => {
+    setFilterIsOpen(open);
+  };
+
+  const filterRender = (desktop) => {
+    if (desktop) {
+      return (
+        <div className={classes.filterDesktop}>
+          <Filter />
+        </div>
+      )
+    }
+    return (
+      <div className={classes.filterMobile}>
+        <Button
+          onClick={toggleFilter}
+          className={classes.button}
+        >
+            Open Filter
+        </Button>
+
+        <SwipeableDrawer
+          onOpen={() => toggleFilter(true)}
+          anchor="bottom"
+          open={filterIsOpen}
+          onClose={() => toggleFilter(false)}
+        >
+          <Filter onClose={toggleFilter} />
+        </SwipeableDrawer>
+      </div>
+
+    )
+  }
 
   return (
     <>
       <Container maxWidth="xl">
         <ProductBreadcrumbs assortment={assortment} />
+        {/* <BackgroundCatalog /> */}
         <Grid container spacing={2} className={classes.root}>
           <Grid item sm={12} md={4}>
-            {isDesktop
-              ? (
-                <div className={classes.filterDesktop}>
-                  <Filter />
-                </div>
-              )
-              : (
-                <div className={classes.filterMobile}>
-                  <Button
-                    onClick={toggleFilter}
-                    className={classes.button}
-                  >
-                  Open Filter
-                  </Button>
-
-                  <SwipeableDrawer
-                    anchor="bottom"
-                    open={filterIsOpen}
-                    onClose={toggleFilter}
-                  >
-                    <Filter onClose={toggleFilter} />
-                  </SwipeableDrawer>
-                </div>
-              )}
-
+            {filterRender(isDesktop)}
           </Grid>
-          <Grid item sm={12} md={8}>
+          <Grid item xs={12} md={8}>
             <ProductList assortment={assortment} />
           </Grid>
-          <Grid item sm={12}>
+          <Grid item xs={12}>
             <ProductCardCarousel
               products={productsToShow}
               label="most popular products"
@@ -97,7 +115,10 @@ function Catalog({ assortment, fetchProducts, catalogLocation }) {
 
 const mapStateToProps = (state) => ({
   catalog: state.categoriesReducer.catalog,
-  fetchProducts: state.productsReducer.fetchProducts
+  fetchProducts: state.productsReducer.fetchProducts,
+  // fetchTopProductsList: state.carouselReducer.fetchTopProductsList,
+  // fetchTopProducts: state.carouselReducer.fetchTopProducts,
+  // productsList: state.carouselReducer.productsList
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -114,6 +135,19 @@ const mapDispatchToProps = (dispatch) => ({
         })
     }
   },
+  // fetchTopProductsList: (assortment) => {
+  //   dispatch(topProductListRequested());
+  //   getCategory(assortment)
+  //     .then((productsList) => dispatch(topProductListLoaded(productsList)))
+  //     .catch((err) => dispatch(topProductsListError(err)))
+  // },
+  // fetchTopProducts: (productsList) => {
+  //   console.log(productsList);
+  //   dispatch(topProductRequested());
+  //   getFilteredProducts(`itemNo=${productsList.toString()}`)
+  //     .then((products) => dispatch(topProductLoaded( products )))
+  //     .catch((err) => dispatch(topProductsError(err)))
+  // },
   catalogLocation: (assortment) => dispatch(catalogLocation(assortment)),
 });
 

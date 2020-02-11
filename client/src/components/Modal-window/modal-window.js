@@ -13,14 +13,7 @@ export default function ModalWindow(props) {
   };
 
   return (
-    <div
-      onKeyUp={(event) => {
-        console.log(event);
-        if (event.key === 'Escape') {
-          handleClose()
-        }
-      }}
-    >
+    <div>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

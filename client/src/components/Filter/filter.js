@@ -1,22 +1,14 @@
 import React, { useEffect } from 'react'
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux'
+import { PropTypes } from 'prop-types';
 import FilterPanel from './Filter-panel/filter-panel'
 import useStyles from './_filter';
-import { getFilteredProducts, getColors, getBrands, getManufacturer } from '../../services/filter'
+import { getFilteredProducts, getColors, getBrands } from '../../services/filter'
 import { productsLoaded } from '../../redux/actions/products';
-import { filterParamsLoaded, filterType } from '../../redux/actions/filter';
-import { tempFilterData } from '../../services/filter-temp'
+import { filterParamsLoaded, filterType, resetFilters } from '../../redux/actions/filter';
 
-function Filter(props) {
-  // tempFilterData().then((products) => {
-  //   const manufacturerSet = new Set();
-  //   const withoutBrand = products.filter((product) => manufacturerSet.add(product.manufacturer))
-  // products.filter(product => manufacturerSet.add(product.manufacturer))
-  // console.log('manufacturerSet =', manufacturerSet);
-  // console.log('withoutBrand =', withoutBrand);
-  // })
-
+const Filter = (props) => {
   const {
     productsLoaded,
     filterParamsLoaded,
@@ -24,25 +16,33 @@ function Filter(props) {
     filterResults,
     categoriesReducer,
     onClose,
-    filterType
+    filterType,
+    resetFilters,
+    currentCategory
   } = props;
 
   const { catalogLocation, catalog } = categoriesReducer;
   const { allCategories } = catalog;
   const classes = useStyles();
 
+  let valToFilter = '';
+  let valOfBrands = '';
+  let valOfColor = '';
+  let valOfPrice = '';
+
   useEffect(() => {
     getColors().then((colors) => {
       filterParamsLoaded('colors', colors);
-    })
+    });
     getBrands().then((brands) => {
       filterParamsLoaded('brands', brands);
-    })
-  }, [filterParamsLoaded]);
+    });
+    filterType(valToFilter);
+    getCurrentCategory();
+  }, [filterParamsLoaded, currentCategory]);
 
   const filterText = ['Brand', 'Price', 'Color'];
 
-  // console.log('filterParams.colors =', filterParams.colors);
   const filter = filterText.map((name) => (
     <FilterPanel
       max={700}
@@ -53,55 +53,34 @@ function Filter(props) {
     />
   ));
 
-  let valToFilter = '';
-  let valOfBrands = '';
-  const valOfCollection = '';
-  let valOfColor = '';
-  let valOfPrice = '';
+  const getCurrentCategory = () => {
+    if (currentCategory) {
+      resetFilters();
+    }
+  };
 
-  function parseToFilterValue(obj) {
-    // console.log('OBJ -> ',obj)
-
+  const parseToFilterValue = (obj) => {
     if (obj.brand.length > 0) {
-      const brands = 'brand='
-      const items = obj.brand.map((item) => item)
-      const str = items.join(',')
-      brands.concat(str)
-      valOfBrands = brands.concat(str)
+      valOfBrands = `brand=${obj.brand.join(',')}`
     }
 
     if (obj.price.length > 0) {
-      const price = '';
-      const items = obj.price.map((item) => item)
-      const str = price.concat('minPrice=', items[0], '&', 'maxPrice=', items[1])
-      valOfPrice = str
+      valOfPrice = `minPrice=${obj.price[0]}&maxPrice=${obj.price[1]}`
     }
 
     if (obj.color.length > 0) {
-      const color = 'color='
-      const items = obj.color.map((item) => item)
-      const str = items.join(',')
-      color.concat(str)
-      valOfColor = color.concat(str)
+      valOfColor = `color=${obj.color.join(',')}`
     }
 
-    // const currentCategory = !allCategories.find((category) => category.id === catalogLocation)
-    //   ? {}
-    //   : allCategories.find((category) => category.id === catalogLocation);
-    // console.log('category =', currentCategory);
-    // const parentCategory = currentCategory.parentId !== 'null' ? ${currentCategory.parentId} : '';
     const subCategories = allCategories.filter((category) => category.parentId === catalogLocation);
     const subCategoriesString = subCategories ? subCategories.map((subCategory) => subCategory.id).join(',') : '';
     const categoryForFilter = !subCategoriesString ? catalogLocation : subCategoriesString;
-    // console.log('ENDS OF VAL', valOfBrands, valOfCollection)
-    valToFilter = `categories=${categoryForFilter}&${valOfBrands}&${valOfCollection}&${valOfColor}&${valOfPrice}`
-    // console.log('!!!!! ->>>>>', valToFilter);
+
+    valToFilter = `categories=${categoryForFilter}&${valOfBrands}&${valOfColor}&${valOfPrice}`
     filterType(valToFilter);
     return valToFilter
-  }
+  };
 
-  // console.log('filterResults =', filterResults);
-  // console.log('filterParams =', filterParams);
   parseToFilterValue(filterResults);
 
   return (
@@ -113,6 +92,7 @@ function Filter(props) {
         variant="contained"
         color="primary"
         onClick={() => {
+          filterType(valToFilter);
           getFilteredProducts(valToFilter)
             .then((products) => {
               productsLoaded(products)
@@ -126,19 +106,34 @@ function Filter(props) {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    filterResults: state.filterReducer.filterResults,
-    filterParams: state.filterReducer.filterParams,
-    categoriesReducer: state.categoriesReducer,
-    currentCategory: state.categoriesReducer.catalogLocation
-  }
-}
+const mapStateToProps = (state) => ({
+  filterResults: state.filterReducer.filterResults,
+  filterParams: state.filterReducer.filterParams,
+  categoriesReducer: state.categoriesReducer,
+  currentCategory: state.categoriesReducer.catalogLocation
+})
 
 const mapDispatchToProps = {
   productsLoaded,
   filterParamsLoaded,
-  filterType
+  filterType,
+  resetFilters
 };
+
+Filter.propTypes = {
+  filterParams: PropTypes.objectOf(PropTypes.array).isRequired,
+  filterResults: PropTypes.objectOf(PropTypes.array).isRequired,
+  currentCategory: PropTypes.objectOf(PropTypes.array).isRequired,
+  categoriesReducer: PropTypes.objectOf(PropTypes.object).isRequired,
+  onClose: PropTypes.func,
+  productsLoaded: PropTypes.func.isRequired,
+  filterParamsLoaded: PropTypes.func.isRequired,
+  filterType: PropTypes.func.isRequired,
+  resetFilters: PropTypes.func.isRequired,
+}
+
+Filter.defaultProps = {
+  onClose: () => {}
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter)

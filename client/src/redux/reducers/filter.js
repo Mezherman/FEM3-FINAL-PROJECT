@@ -1,8 +1,10 @@
-const initialState = {
+import { GET_FILTER_PRODUCTS, FETCH_FILTER_PARAMS_SUCCESS, FILTER_TYPE, RESET_FILTERS } from '../actions/actionTypes'
+
+export const initialState = {
   filterResults: {
     color: [],
     brand: [],
-    price: [0, 700],
+    price: [0, 700]
   },
   filterParams: {
     colors: [],
@@ -13,14 +15,14 @@ const initialState = {
 
 export default function filterReducer(state = initialState, action) {
   switch (action.type) {
-    case 'GET_FILTER_PRODUCTS': {
+    case GET_FILTER_PRODUCTS: {
       return {
         ...state,
         filterResults: action.payload
       };
     }
 
-    case 'FETCH_FILTER_PARAMS_SUCCESS':
+    case FETCH_FILTER_PARAMS_SUCCESS:
       return {
         ...state,
         filterParams: {
@@ -29,16 +31,20 @@ export default function filterReducer(state = initialState, action) {
         }
       };
 
-    case 'FILTER_TYPE':
+    case FILTER_TYPE:
       return {
         ...state,
         filterType: action.payload
       };
 
-    case 'RESET_FILTER_TYPE':
+    case RESET_FILTERS:
       return {
         ...state,
-        filterType: ''
+        filterResults: {
+          color: [],
+          brand: [],
+          price: [0, 700]
+        }
       };
 
     default:

@@ -1,15 +1,7 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'block',
-    width: '100%',
-    textAlign: 'center',
-    marginTop: theme.spacing(8),
-  }
-}));
+import useStyles from './_spinner';
 
 export default function Spinner() {
   const classes = useStyles();

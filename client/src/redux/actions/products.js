@@ -1,14 +1,22 @@
+import {
+  FETCH_PRODUCTS_REQUEST,
+  FETCH_PRODUCTS_SUCCESS,
+  FETCH_PRODUCTS_FAILURE,
+  SORTING_PRODUCTS,
+  RESET_SORTING
+} from './actionTypes'
+
 const productsRequested = () => ({
-  type: 'FETCH_PRODUCTS_REQUEST'
+  type: FETCH_PRODUCTS_REQUEST
 });
 
 const productsLoaded = (products) => ({
-  type: 'FETCH_PRODUCTS_SUCCESS',
+  type: FETCH_PRODUCTS_SUCCESS,
   payload: { products }
 });
 
 const productsError = (error) => ({
-  type: 'FETCH_PRODUCTS_FAILURE',
+  type: FETCH_PRODUCTS_FAILURE,
   payload: {
     products: [],
     error
@@ -16,7 +24,7 @@ const productsError = (error) => ({
 });
 
 const sortingProducts = (products, sortingType) => ({
-  type: 'SORTING_PRODUCTS',
+  type: SORTING_PRODUCTS,
   payload: {
     products,
     sorting: sortingType
@@ -24,7 +32,7 @@ const sortingProducts = (products, sortingType) => ({
 });
 
 const sortingReset = () => ({
-  type: 'RESET_SORTING'
+  type: RESET_SORTING
 });
 
 export {

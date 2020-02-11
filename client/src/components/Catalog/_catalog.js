@@ -8,22 +8,18 @@ const useStyles = makeStyles((theme) => ({
   },
   filterMobile: {
     position: 'fixed',
-    bottom: '0',
+    bottom: 0,
     zIndex: 5,
-    left: 0,
     backgroundColor: theme.palette.background.primary,
     width: '100%',
-    textAlign: 'center',
-    height: '60px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
+    left: 0,
+    padding: theme.spacing(2, 2, 1),
   },
   button: {
     backgroundColor: theme.palette.primary.main,
-    color: theme.palette.secondary.contrastText
-  },
-
+    color: theme.palette.secondary.contrastText,
+    width: '100%'
+  }
 }));
 
 export default useStyles;

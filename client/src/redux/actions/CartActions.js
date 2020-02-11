@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function addProductToCart (product, quantity) {
   return {
     type: 'ADD_PRODUCT',
