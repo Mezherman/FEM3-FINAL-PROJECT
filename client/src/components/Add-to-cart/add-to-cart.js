@@ -126,7 +126,7 @@ export default function AddToCart({ open, onModalClose, product }) {
         <Divider />
         <div className={classes.footer}>
           <article>
-            Free delivery from &#8372;1000 | Free returns | Quick delivery with DHL
+            Free delivery from &#8372;100 | Free returns | Quick delivery with DHL
           </article>
         </div>
       </>

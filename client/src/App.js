@@ -44,8 +44,8 @@ const App = () => {
           <ScrollTop />
         </>
       )}
-      </>
+    </>
   )
-}
+};
 
 export default App;

@@ -1,8 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
 import 'typeface-roboto';
-import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
 import { bindActionCreators } from 'redux'
