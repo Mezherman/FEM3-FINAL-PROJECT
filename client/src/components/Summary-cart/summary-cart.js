@@ -6,7 +6,7 @@ import Summary from './Summary/summary';
 import * as cartActions from '../../redux/actions/CartActions'
 import CartProductList from './Cart-product-list/cart-product-list';
 import EmptyCart from './Empty-cart/empty-cart'
-import CartProductListHeader from './Cart-product-list-header/cart-product-list-header'
+import CartProductListHeader from './Cart-product-list/Cart-product-list-header/cart-product-list-header'
 import HelpPanel from './Help-panel/help-panel'
 import useStyles from './_summary-cart';
 import ContinueBtn from './Continue-btn/continue-btn';
@@ -19,14 +19,19 @@ function SummaryCart() {
     () => bindActionCreators(cartActions, dispatch),
     [dispatch]
   )
+  const bottomBlock = (
+    <>
+      <HelpPanel />
+      <ContinueBtn />
+    </>
+  );
 
   let mainContainer = (
     <Grid container spacing={4} alignItems="flex-start" className={classes.root}>
       <Grid item container sm={9} xs={12}>
         <CartProductList products={cart.products} actions={actions} />
         <Grid item xs={12}>
-          <HelpPanel />
-          <ContinueBtn />
+          {bottomBlock}
         </Grid>
       </Grid>
       <Grid item sm={3} xs={12} className={`${classes.summary} ${classes.sticky}`}>
@@ -39,16 +44,15 @@ function SummaryCart() {
     mainContainer = (
       <Box>
         <EmptyCart />
-        <HelpPanel />
-        <ContinueBtn />
+        {bottomBlock}
       </Box>
     );
   }
+
   return (
     <Container maxWidth="xl">
       <h1>Your Shopping Cart</h1>
       {mainContainer}
-
     </Container>
   );
 }

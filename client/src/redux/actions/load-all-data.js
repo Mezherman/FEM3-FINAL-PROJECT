@@ -3,13 +3,14 @@ import { getCatalogFromDB } from './categories'
 import { loginLoaded, fetchCustomerData } from './user'
 import { mergeDBWithLocalStorage } from './CartActions'
 import { getFavoritesFromDB } from './favorites'
+import { FETCH_LOAD_REQUEST, FETCH_LOAD_RESPONSE } from './actionTypes'
 
 const fetchRequest = () => ({
-  type: 'FETCH_LOAD_REQUEST'
+  type: FETCH_LOAD_REQUEST
 });
 
 const fetchResponse = () => ({
-  type: 'FETCH_LOAD_RESPONSE'
+  type: FETCH_LOAD_RESPONSE
 });
 
 function loadAllData() {
@@ -39,5 +40,6 @@ function loadAllDataAfterLogin() {
 export {
   loadAllData,
   loadAllDataAfterLogin,
-  fetchResponse
+  fetchResponse,
+  fetchRequest
 }

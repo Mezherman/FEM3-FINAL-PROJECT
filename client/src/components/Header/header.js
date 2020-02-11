@@ -100,6 +100,7 @@ function Header() {
       <FreShipingMessage />
       <MainHeaderContent />
       {prevBlockIsVisible && (<PreviewBlock checked={prevBlockIsVisible} onClose={handleChange} />)}
+      {prevBlockIsVisible && (<PreviewBlock checked={prevBlockIsVisible} onClose={handleChange} />)}
       {renderMobileMenu}
       {renderMenu}
       {logout && <Redirect to={RoutesName.home} />}

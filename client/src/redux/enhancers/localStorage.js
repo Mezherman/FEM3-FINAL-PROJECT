@@ -24,7 +24,11 @@ const localStorage = (store) => (next) => (action) => {
         window.localStorage.setItem('cart', JSON.stringify(newCart));
         return next({ ...action, type: `${action.type}_SUCCESS`, payload: { newCart } });
       }
-
+      case 'REMOVE_CART': {
+        return next({
+          type: 'CLEAR_CART',
+        });
+      }
       default: return next(action);
     }
   }
