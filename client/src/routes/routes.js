@@ -68,6 +68,14 @@ export default function Routes() {
         modalIsVisible={modalIsVisible}
         component={() => <CustomerOrders isLoggedIn={loggedIn} />}
       />
+      <ProtectedRoute
+        exact
+        path={RoutesName.favorites}
+        loggedIn={loggedIn}
+        closeModal={closeModal}
+        modalIsVisible={modalIsVisible}
+        component={Favorites}
+      />
 
       <Route
         path={`${RoutesName.products}/:category/:subCategory`}
@@ -98,25 +106,6 @@ export default function Routes() {
             />
           )
         }}
-      />
-      <Route
-        path={RoutesName.favorites}
-        render={() => (
-          loggedIn
-            ? (
-              <Favorites />
-            )
-            : (
-              <div>
-                <Home />
-                <LoginModal
-                  isLoggedIn={loggedIn}
-                  onModalClose={closeModal}
-                  open={modalIsVisible}
-                />
-              </div>
-            )
-        )}
       />
       <Route
         path={`${RoutesName.products}/search`}
