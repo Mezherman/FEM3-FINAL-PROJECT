@@ -109,14 +109,13 @@ const useStylesOrderItem = makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       fontSize: '1.5rem',
     },
-    '& div': {
-      fontSize: '0.7em',
-    },
   },
   orderInfo: {
     textAlign: 'center',
     flexDirection: 'column',
     [theme.breakpoints.down('xs')]: {
+      fontSize: '1.5em',
+      alignItems: 'baseline',
       flexDirection: 'row',
       justifyContent: 'center',
     },

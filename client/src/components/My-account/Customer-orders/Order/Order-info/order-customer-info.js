@@ -19,7 +19,8 @@ const OrderCustomerInfo = (props) => {
       <OrderParamsTemplates
         name={name}
         value={value}
-        className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
+        classContainer={classes.orderInfo}
+        classTitle={`${classes.title} ${classes.moreOrderInfo}`}
         style={{ display: 'none' }}
       />
     )

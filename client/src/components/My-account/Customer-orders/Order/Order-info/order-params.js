@@ -19,7 +19,8 @@ const OrderParams = ({ classes, handleClick, orderNo, date, status, totalSum, pr
       <OrderParamsTemplates
         name={name}
         value={value}
-        className={`${classes.orderInfo} ${classes.title}`}
+        classContainer={classes.orderInfo}
+        classTitle={classes.title}
       />
     )
   });

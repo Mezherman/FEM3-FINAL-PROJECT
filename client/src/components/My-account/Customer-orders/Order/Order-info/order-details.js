@@ -54,6 +54,7 @@ const OrderDetails = ({ classes, product, cartQuantity }) => {
               md={4}
               justify="center"
               name="Product: "
+              className={classes.textCenter}
               spanNameClass={classes.hiddenName}
             />
             <OrderTitlesTemplate

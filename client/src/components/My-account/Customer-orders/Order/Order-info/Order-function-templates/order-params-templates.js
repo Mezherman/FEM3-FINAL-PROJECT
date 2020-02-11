@@ -3,17 +3,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useStylesOrderItem from '../../../Order-list/_order-list'
 
-const OrderParamsTemplates = ({ name, value, className, style }) => {
+const OrderParamsTemplates = ({ name, value, classContainer, classTitle, style }) => {
   const classes = useStylesOrderItem();
   return (
     <Grid
       component="div"
       item
       container
-      className={className}
+      className={classContainer}
     >
-      <span>{name}</span>
-      {' '}
+      <span className={classTitle}>{name}</span>
+      &nbsp;
       <span>{value}</span>
       <Divider className={classes.hiddenCollapse} style={style} orientation="horizontal" variant="middle" component="div" />
     </Grid>
