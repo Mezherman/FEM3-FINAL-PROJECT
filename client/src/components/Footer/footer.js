@@ -1,8 +1,10 @@
 import React from 'react';
+
 import { Grid, Container } from '@material-ui/core';
-import useStyles from './_footer';
 import MainText from './Main-text/main-text'
 import FooterNavbar from './Footer-navbar/footer-navbar'
+
+import useStyles from './_footer';
 
 const Footer = () => {
   const classes = useStyles();

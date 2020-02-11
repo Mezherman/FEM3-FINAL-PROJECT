@@ -23,8 +23,6 @@ const Filter = (props) => {
     currentCategory
   } = props;
 
-  // console.log(currentCategory);
-
   const { catalogLocation, catalog } = categoriesReducer;
   const { allCategories } = catalog;
   const classes = useStyles();

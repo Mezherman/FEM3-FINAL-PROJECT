@@ -1,6 +1,7 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import { Grid } from '@material-ui/core';
+
 import useStyles from './_contact';
 
 const Contact = ({ icon, children }) => {
