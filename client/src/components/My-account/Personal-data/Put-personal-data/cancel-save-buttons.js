@@ -1,11 +1,10 @@
 import { Button } from '@material-ui/core';
 import React from 'react';
-// import useStyles from '../../../SignUp/Sign-up-form/_sign-up-form';
-import usePdstyles from '../_personal-data';
+import PropTypes from 'prop-types';
+import usePersonalDataStyles from '../_personal-data';
 
-const CancelSaveButtons = ({ cancel }) => {
-  // const classes = useStyles();
-  const pdClasses = usePdstyles();
+const CancelSaveButtons = ({ cancel, type, submit }) => {
+  const pdClasses = usePersonalDataStyles();
   return (
     <div className={pdClasses.buttonsContainer}>
       <Button
@@ -17,6 +16,8 @@ const CancelSaveButtons = ({ cancel }) => {
         CANCEL
       </Button>
       <Button
+        // onSubmit={submit}
+        // onSubmit={submit}
         type="submit"
         variant="contained"
         color="primary"
@@ -29,3 +30,7 @@ const CancelSaveButtons = ({ cancel }) => {
 };
 
 export default CancelSaveButtons;
+
+CancelSaveButtons.propTypes = {
+  cancel: PropTypes.func.isRequired
+};

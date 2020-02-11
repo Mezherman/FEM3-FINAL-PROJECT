@@ -16,14 +16,13 @@ const useStylesOrderItem = makeStyles((theme) => ({
     },
   },
   mainBlock: {
-    alignItems: 'center',
+    alignItems: 'self-end',
     borderRadius: theme.spacing(1),
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
     fontSize: '0.7rem',
     [theme.breakpoints.up('sm')]: {
-      alignItems: 'baseline',
       flexDirection: 'row',
       fontSize: '0.6rem',
     },
@@ -91,7 +90,7 @@ const useStylesOrderItem = makeStyles((theme) => ({
     textAlign: 'center',
     width: '70px',
   },
-  amoutContainer: {
+  amountContainer: {
     justifyContent: 'flex-end',
     [theme.breakpoints.down('sm')]: {
       justifyContent: 'center',
@@ -124,6 +123,18 @@ const useStylesOrderItem = makeStyles((theme) => ({
   },
   moreOrderInfo: {
     fontSize: '1em',
+  },
+  hiddenCollapse: {
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    }
+  },
+  hiddenName: {
+    display: 'none',
+    [theme.breakpoints.down('xs')]: {
+      display: 'inline-block',
+      fontWeight: 'bolder',
+    }
   },
 }));
 

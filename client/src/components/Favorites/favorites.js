@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Container } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
 import Spinner from '../Spinner/spinner';
+import RoutesName from '../../routes-list'
 
 import { favoritesUpdated } from '../../redux/actions/favorites';
 import { productsRequested, productsLoaded, productsError } from '../../redux/actions/products';
@@ -36,7 +37,7 @@ function Favorites(props) {
       </Container>
     )
   }
-  return <Redirect />
+  return <Redirect to={RoutesName.home} />
 }
 
 const mapStateToProps = (state) =>

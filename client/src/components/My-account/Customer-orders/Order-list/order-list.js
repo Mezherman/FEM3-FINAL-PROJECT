@@ -1,55 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import getOrders from '../../../../services/getOrders';
+import { useSelector, useDispatch } from 'react-redux';
+import getOrders from '../../../../services/get-orders';
 import { orders as ordersAction } from '../../../../redux/actions/user';
 import Spinner from '../../../Spinner/spinner';
 import Order from '../Order/order';
 
-const OrderList = ({ orderAction }) => {
+const OrderList = () => {
   const { orders } = useSelector((state) => state.user);
   const [loading, setLoading] = useState(true);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     if (!orders) {
       getOrders()
         .then((response) => {
-          orderAction(response);
+          dispatch(ordersAction(response));
           setLoading(false);
         })
     } else {
       setLoading(false);
     }
-  }, [orders, orderAction]);
+  }, [dispatch, orders]);
 
   return (
     <>
       {loading && <Spinner />}
-      {!loading && orders.length > 0
-        ? orders.map((item) => (
-          <Order item={item} />
-        ))
-        : (
-          <p>
-            So far, here is no orders, move on to the catalog and place your order.
-            <br />
-            <strong>Best wishes, your WMF</strong>
-          </p>
-        )}
+      {!loading && orders.length && orders.map((item) => (
+        <Order key={item.orderNo} item={item} />
+      ))}
+      {!loading && orders.length < 1 && (
+        <div>
+          <p>So far, here is no orders, move on to the catalog and place your order.</p>
+          <strong>Best wishes, your WMF</strong>
+        </div>
+      )}
     </>
   )
 };
 
-const mapStateToProps = (state) => ({
-  ordersItems: state.user.orders
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  orderAction: (data) => dispatch(ordersAction(data))
-});
-
-OrderList.propTypes = {
-  orderAction: PropTypes.func.isRequired
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(OrderList);
+export default OrderList;

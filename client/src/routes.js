@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
-import { Route, Switch, Redirect, useHistory } from 'react-router-dom'
+import { Route, Switch, useHistory } from 'react-router-dom'
 import Home from './components/Home/home';
 import Catalog from './components/Catalog/catalog'
 import ProductPage from './components/Product-page/product-page'
@@ -36,68 +36,32 @@ export default function Routes() {
     }
   }
 
+  const loginForPrivatPages = () => (
+    <div>
+      <Home />
+      <LoginModal
+        isLoggedIn={loggedIn}
+        onModalClose={closeModal}
+        open={modalIsVisible}
+      />
+    </div>
+  );
+
   return (
     <Switch>
       <Route path={RoutesName.signUp} component={SignUp} />
       <Route
         path={RoutesName.login}
-        render={() => (
-          <div>
-            <Home />
-            <LoginModal
-              isLoggedIn={loggedIn}
-              onModalClose={closeModal}
-              open={modalIsVisible}
-            />
-          </div>
-        )}
+        render={loginForPrivatPages}
       />
       <Route
         path={RoutesName.personalData}
-        render={() => (
-          loggedIn
-            ? (
-              <PersonalData isLoggedIn={loggedIn} />
-            )
-            : (
-              <div>
-                <Home />
-                <LoginModal
-                  isLoggedIn={loggedIn}
-                  onModalClose={closeModal}
-                  open={modalIsVisible}
-                />
-              </div>
-            )
-        )}
+        render={() => (loggedIn ? <PersonalData isLoggedIn={loggedIn} /> : loginForPrivatPages())}
       />
       <Route
         path={RoutesName.myOrders}
-        render={() => (
-          loggedIn
-            ? (
-              <CustomerOrders isLoggedIn={loggedIn} />
-            )
-            : (
-              <div>
-                <Home />
-                <LoginModal
-                  isLoggedIn={loggedIn}
-                  onModalClose={closeModal}
-                  open={modalIsVisible}
-                />
-              </div>
-            )
-        )}
+        render={() => (loggedIn ? <CustomerOrders isLoggedIn={loggedIn} /> : loginForPrivatPages())}
       />
-
-      {/* <Route */}
-      {/*  path={RoutesName.products} */}
-      {/*  exact */}
-      {/*  render={() => { */}
-      {/*    return <Catalog category='all' /> */}
-      {/*  }} */}
-      {/* /> */}
       <Route
         path={`${RoutesName.products}/cooking/:subCategory`}
         exact
@@ -130,15 +94,6 @@ export default function Routes() {
           return <Catalog assortment={subCategory} />
         }}
       />
-
-      {/*<Route*/}
-      {/*  path={`${RoutesName.products}/search`}*/}
-      {/*  exact*/}
-      {/*  render={() => (*/}
-      {/*    <Catalog assortment="search" />*/}
-      {/*  )}*/}
-      {/*/>*/}
-
       <Route
         path={`${RoutesName.products}/:categoryOrID`}
         render={({ match, location }) => {
@@ -159,22 +114,7 @@ export default function Routes() {
       />
       <Route
         path={RoutesName.favorites}
-        render={() => (
-          loggedIn
-            ? (
-              <Favorites />
-            )
-            : (
-              <div>
-                <Home />
-                <LoginModal
-                  isLoggedIn={loggedIn}
-                  onModalClose={closeModal}
-                  open={modalIsVisible}
-                />
-              </div>
-            )
-        )}
+        render={() => (loggedIn ? <Favorites /> : loginForPrivatPages())}
       />
       <Route
         path={`${RoutesName.products}/search`}

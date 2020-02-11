@@ -21,7 +21,6 @@ export const initialState = {
 export default function user (state = initialState, action) {
   switch (action.type) {
     case FETCH_LOGIN_SUCCESS: {
-      const { token } = action.payload;
       return { ...state, ...action.payload };
     }
 
