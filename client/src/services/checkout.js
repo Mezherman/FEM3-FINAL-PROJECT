@@ -3,11 +3,11 @@ import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:5000';
 
 function placeOrderToDB(newOrder) {
-  console.log('ORDER IN SERVICES =', newOrder);
+  // console.log('ORDER IN SERVICES =', newOrder);
   return axios
     .post('/orders', newOrder)
     .then((response) => {
-      console.log('OK =', response);
+      // console.log('OK =', response);
       if (response.data.productAvailibilityInfo) {
         return {
           orderIsPlaced: false,

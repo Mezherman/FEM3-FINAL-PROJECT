@@ -1,39 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux'
-import SearchIcon from '@material-ui/icons/Search'
+import { PropTypes } from 'prop-types';
+import { connect } from 'react-redux';
+import SearchIcon from '@material-ui/icons/Search';
 import { withRouter } from 'react-router-dom';
 import { Collapse, Grow, useTheme, InputBase } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
-import { PropTypes } from 'prop-types';
-import useStyles from './_search';
+
 import search from '../../services/search';
-import getAllProducts from '../../services/getProducts'
-import { productsLoaded } from '../../redux/actions/products'
+import getAllProducts from '../../services/getProducts';
+import { productsLoaded } from '../../redux/actions/products';
+
+import useStyles from './_search';
 
 const Search = ({ productsLoaded, history, searchIsShown }) => {
   const classes = useStyles();
-  const [value, setValue] = useState('');
+  const [searchedValue, setSearchedValue] = useState('');
 
-  useEffect(() => {
-    getAllProducts()
-      .then((products) => products)
-  }, []);
+  // useEffect(() => {
+  //   getAllProducts()
+  //     .then((products) => products)
+  // }, []);
 
   const handleChange = (event) => {
-    setValue(event.target.value);
+    setSearchedValue(event.target.value);
     history.push('/products/search')
   };
 
-  const searchItem = {
-    query: value
-  };
-
-  if (value) {
-    search(searchItem)
-      .then((response) => {
-        productsLoaded(response);
+  if (searchedValue) {
+    search(searchedValue)
+      .then((searchedProducts) => {
+        productsLoaded(searchedProducts);
       })
-      .then(() => setValue(''))
   }
 
   const theme = useTheme();
@@ -52,6 +49,7 @@ const Search = ({ productsLoaded, history, searchIsShown }) => {
         </Grow>
       )
     }
+
     return (
       <div className={classes.search}>
         <SearchIcon
@@ -62,7 +60,7 @@ const Search = ({ productsLoaded, history, searchIsShown }) => {
         </Collapse>
       </div>
     )
-  }
+  };
 
   const inputBase = (
     <InputBase
@@ -79,14 +77,14 @@ const Search = ({ productsLoaded, history, searchIsShown }) => {
         }
       }}
     />
-  )
+  );
 
   return (
     <>
       {renderSearch(isDesktop)}
     </>
   )
-}
+};
 
 const mapDispatchToProps = {
   productsLoaded
@@ -94,6 +92,6 @@ const mapDispatchToProps = {
 
 Search.propTypes = {
   searchIsShown: PropTypes.bool.isRequired
-}
+};
 
 export default withRouter(connect(null, mapDispatchToProps)(Search));

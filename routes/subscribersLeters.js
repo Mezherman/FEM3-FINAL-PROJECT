@@ -9,13 +9,14 @@ const tranporter = nodemailer.createTransport(
     }
   }
 );
+
 module.exports = app=>{
   app.post('/user-mails', async(req,res)=>{
-    try{
+    try {
       const userEmail = req.body.mail;
       await tranporter.sendMail(letter(userEmail));
-    }catch (e) {
-      console.log(e)
+    } catch (e) {
+      // console.log(e)
     }
   })
 };

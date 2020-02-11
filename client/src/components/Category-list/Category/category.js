@@ -50,8 +50,14 @@ export default withWidth()(Category);
 
 Category.propTypes = {
   data: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.boolean, PropTypes.object, PropTypes.array])
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.bool,
+      PropTypes.object,
+      PropTypes.array,
+      PropTypes.number
+    ])
   ).isRequired,
   index: PropTypes.number.isRequired,
   width: PropTypes.string.isRequired
-}
+};

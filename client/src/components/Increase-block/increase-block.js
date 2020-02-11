@@ -34,7 +34,6 @@ export default function IncreaseBlock({ qty, setQty, maxQty }) {
             if (qty <= 1) return;
             setQty(qty - 1)
           }}
-          disableElevation
         >
           <RemoveIcon />
         </IconButton>
