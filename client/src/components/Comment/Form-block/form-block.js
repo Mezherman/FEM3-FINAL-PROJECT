@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Button, TextField } from '@material-ui/core';
 
 import useStyles from './_form-block';
+import {PropTypes} from "prop-types";
 
 const FormBlock = ({handleSubmit, commentText, focusHandler, blurHandler, commentTextHandler, buttonDisabled}) => {
   const classes = useStyles();
@@ -13,7 +14,6 @@ const FormBlock = ({handleSubmit, commentText, focusHandler, blurHandler, commen
           id="outlined-multiline-static"
           multiline
           rows="4"
-          defaultValue="Enter here your comment..."
           value={commentText}
           variant="outlined"
           className={classes.field}
@@ -33,6 +33,15 @@ const FormBlock = ({handleSubmit, commentText, focusHandler, blurHandler, commen
       </Box>
     </form>
   )
+};
+
+FormBlock.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  commentText: PropTypes.string.isRequired,
+  focusHandler: PropTypes.bool.isRequired,
+  blurHandler: PropTypes.bool.isRequired,
+  commentTextHandler: PropTypes.string.isRequired,
+  buttonDisabled: PropTypes.bool.isRequired
 };
 
 export default FormBlock;

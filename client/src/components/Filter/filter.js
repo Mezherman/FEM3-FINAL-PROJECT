@@ -77,7 +77,6 @@ const Filter = (props) => {
     const categoryForFilter = !subCategoriesString ? catalogLocation : subCategoriesString;
 
     valToFilter = `categories=${categoryForFilter}&${valOfBrands}&${valOfColor}&${valOfPrice}`
-    filterType(valToFilter);
     return valToFilter
   };
 

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect, useSelector } from 'react-redux';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import { createStyles, makeStyles, Container, Badge, IconButton } from '@material-ui/core';
 import PropTypes from 'prop-types';
+
 import TableSpecification from '../Table-specification/table-specifications';
 import Comment from '../../Comment/comment';
-import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => createStyles({
   root: {
@@ -33,11 +34,14 @@ const useStyles = makeStyles((theme) => createStyles({
 }),);
 
 export default function ProductDetailTab({ data }) {
-  const { myCustomParams } = data;
+  const { myCustomParams, _id } = data;
   const { productDescription, productHighlights } = myCustomParams;
-  const commentsQuantity = useSelector((state) => state.commentsReducer.commentsList.length);
-
   const classes = useStyles();
+  const commentsLength = useSelector((state) => state.commentsReducer.commentsList.length.toString());
+
+  useEffect(() => {
+    console.log(commentsLength);
+  }, [commentsLength]);
   return (
     <>
       <Tabs>
@@ -45,12 +49,10 @@ export default function ProductDetailTab({ data }) {
           <Tab><h4>Highlights</h4></Tab>
           <Tab><h4>Product Description</h4></Tab>
           <Tab><h4>Specifications</h4></Tab>
-          <Tab><h4>Comments</h4>
-            {/*<Badge badgeContent={commentsQuantity.toString()} color="error" className={classes.badge}>*/}
-            {/*  <h4>*/}
-            {/*    Comments*/}
-            {/*  </h4>*/}
-            {/*</Badge>*/}
+          <Tab>
+            <Badge badgeContent={commentsLength} color="error" className={classes.badge}>
+              <h4>Comments</h4>
+            </Badge>
           </Tab>
         </TabList>
 
