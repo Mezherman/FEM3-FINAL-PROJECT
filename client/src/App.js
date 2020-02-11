@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import 'typeface-roboto';
 
-import Routes from './routes';
+import Routes from './routes/routes';
 import Header from './components/Header/header'
 import Footer from './components/Footer/footer'
 import ScrollTop, { ScrollToAnchor } from './components/Scroll-top/scroll-top';
