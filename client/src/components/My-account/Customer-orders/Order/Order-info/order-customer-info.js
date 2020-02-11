@@ -5,39 +5,30 @@ import OrderParamsTemplates from './Order-function-templates/order-params-templa
 
 const OrderCustomerInfo = (props) => {
   const { classes, shipping, country, city, address, postal, paymentInfo, email, mobile } = props;
+  const params = [
+    { name: 'Shipping: ', value: shipping },
+    { name: 'Delivery Address: ', value: ` ${country}, ${city}, ${address}, ${postal}` },
+    { name: 'Payment: ', value: paymentInfo },
+    { name: 'Email: ', value: email },
+    { name: 'Mobile: ', value: mobile },
+  ];
+
+  const Params = () => params.map((param) => {
+    const { name, value } = param;
+    return (
+      <OrderParamsTemplates
+        name={name}
+        value={value}
+        className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
+        style={{ display: 'none' }}
+      />
+    )
+  });
+
   return (
     <List component="div" disablePadding>
       <ListItem component="div" className={classes.mainBlock} button>
-        <OrderParamsTemplates
-          name="Shipping: "
-          value={shipping}
-          className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
-          style={{ display: 'none' }}
-        />
-        <OrderParamsTemplates
-          name="Delivery Address: "
-          value={` ${country}, ${city}, ${address}, ${postal}`}
-          className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
-          style={{ display: 'none' }}
-        />
-        <OrderParamsTemplates
-          name="Payment: "
-          value={paymentInfo}
-          className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
-          style={{ display: 'none' }}
-        />
-        <OrderParamsTemplates
-          name="Email: "
-          value={email}
-          className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
-          style={{ display: 'none' }}
-        />
-        <OrderParamsTemplates
-          name="Mobile: "
-          value={mobile}
-          className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
-          style={{ display: 'none' }}
-        />
+        <Params />
       </ListItem>
     </List>
   )

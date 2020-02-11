@@ -3,26 +3,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import usePersonalDataStyles from '../_personal-data';
 
-const CancelSaveButtons = ({ cancel, type, submit }) => {
+const CancelSaveButtons = ({ cancel }) => {
   const pdClasses = usePersonalDataStyles();
+  const classesBtn = `${pdClasses.cancelSubmit} ${pdClasses.button}`;
   return (
     <div className={pdClasses.buttonsContainer}>
-      <Button
-        variant="contained"
-        color="secondary"
-        className={`${pdClasses.cancelSubmit} ${pdClasses.button}`}
-        onClick={cancel}
-      >
+      <Button variant="contained" color="secondary" className={classesBtn} onClick={cancel}>
         CANCEL
       </Button>
-      <Button
-        // onSubmit={submit}
-        // onSubmit={submit}
-        type="submit"
-        variant="contained"
-        color="primary"
-        className={`${pdClasses.cancelSubmit} ${pdClasses.button}`}
-      >
+      <Button type="submit" variant="contained" color="primary" className={classesBtn}>
         SAVE
       </Button>
     </div>

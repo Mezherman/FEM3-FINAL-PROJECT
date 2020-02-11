@@ -55,30 +55,35 @@ const MainCustomerPage = ({ handleEditForm, handleChangePassword }) => {
       </List>
     </Grid>
   );
+
+  const ProfileMenu = () => (
+    <Grid component="div" xs={12} sm={5} item >
+      <div className={pdClasses.linkContainer}>
+        <Divider component="div" orientation="vertical" light className={pdClasses.divider} />
+        <Typography component="a" variant="subtitle1" className={pdClasses.button} onClick={handleEditForm}>
+          Edit personal data
+        </Typography>
+        <Typography component="a" variant="subtitle1" className={pdClasses.button} onClick={handleChangePassword}>
+          Change password
+        </Typography>
+        <Link to={RoutesName.myOrders} className={pdClasses.link}>
+          <Typography component="div" variant="subtitle1" className={pdClasses.button}>
+            View your orders
+          </Typography>
+        </Link>
+        <Typography onClick={handleLogout} component="div" variant="subtitle1" className={`${pdClasses.button} ${pdClasses.logout}`}>
+          Logout
+        </Typography>
+      </div>
+    </Grid>
+  );
+
   return (
     <Grid component="div" item xs={12} container direction="column">
       <h1>Personal Details</h1>
       <Grid component="div" item xs={12} container justify="center">
         <CustomerData />
-        <Grid component="div" xs={12} sm={5} item >
-          <div className={pdClasses.linkContainer}>
-            <Divider component="div" orientation="vertical" light className={pdClasses.divider} />
-            <Typography component="a" variant="subtitle1" className={pdClasses.button} onClick={handleEditForm}>
-            Edit personal data
-            </Typography>
-            <Typography component="a" variant="subtitle1" className={pdClasses.button} onClick={handleChangePassword}>
-            Change password
-            </Typography>
-            <Link to={RoutesName.myOrders} className={pdClasses.link}>
-              <Typography component="div" variant="subtitle1" className={pdClasses.button}>
-              View your orders
-              </Typography>
-            </Link>
-            <Typography onClick={handleLogout} component="div" variant="subtitle1" className={`${pdClasses.button} ${pdClasses.logout}`}>
-              Logout
-            </Typography>
-          </div>
-        </Grid>
+        <ProfileMenu />
       </Grid>
     </Grid>
   )

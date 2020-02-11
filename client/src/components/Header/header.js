@@ -4,12 +4,11 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import PreviewBlock from '../Preview-block/preview-cart';
 import HeaderNavbar from '../Header-navbar/header-navbar';
 import useStyles from './_header';
 import RoutesName from '../../routes-list';
 import HeaderIcons from './Header-icons/header-icons';
-import BurgerAndLogoIcons from './Header-icons/Header-icon/Burger-and-logo-icons';
+import MenuLogoIcons from './Header-icons/Header-icon/menu-and-logo-icons';
 
 function Header() {
   const classes = useStyles();
@@ -18,12 +17,8 @@ function Header() {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-  const [prevBlockIsVisible, setPrevBlockIsVisible] = useState(false);
   const [drawer, setDrawer] = useState(false);
 
-  const handleChange = () => {
-    setPrevBlockIsVisible((prev) => !prev);
-  };
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget)
   };
@@ -85,7 +80,7 @@ function Header() {
     <AppBar position="sticky" top="0" color="inherit" elevation={0}>
       <Container maxWidth="xl" disableGutters className={classes.grow}>
         <Toolbar className={classes.justify}>
-          <BurgerAndLogoIcons mobileMenuId={mobileMenuId} toggleDrawer={toggleDrawer} />
+          <MenuLogoIcons mobileMenuId={mobileMenuId} toggleDrawer={toggleDrawer} />
           <HeaderNavbar drawer={drawer} toggleDrawer={toggleDrawer} />
           <HeaderIcons />
         </Toolbar>
@@ -99,8 +94,6 @@ function Header() {
       <CssBaseline />
       <FreShipingMessage />
       <MainHeaderContent />
-      {prevBlockIsVisible && (<PreviewBlock checked={prevBlockIsVisible} onClose={handleChange} />)}
-      {prevBlockIsVisible && (<PreviewBlock checked={prevBlockIsVisible} onClose={handleChange} />)}
       {renderMobileMenu}
       {renderMenu}
       {logout && <Redirect to={RoutesName.home} />}

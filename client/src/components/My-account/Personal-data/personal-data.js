@@ -70,7 +70,7 @@ export default function PersonalData ({ handleSubmit }) {
         cancelEditForm();
       })
       .catch(() => {
-        handlerNotification('error', 'Something go wrong. Try it later, please');
+        handlerNotification('error', 'Something went wrong, please try again later');
       });
   };
 
@@ -87,7 +87,7 @@ export default function PersonalData ({ handleSubmit }) {
         }
       })
       .catch(() => {
-        handlerNotification('error', 'Something go wrong. Try it later, please');
+        handlerNotification('error', 'Something went wrong, please try again later');
       });
   };
 

@@ -4,16 +4,33 @@ import PropTypes from 'prop-types';
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 import OrderParamsTemplates from './Order-function-templates/order-params-templates';
 
-const OrderParams = ({ classes, handleClick, orderNo, date, status, totalSum, products, open }) => (
-  <ListItem component="div" className={classes.mainBlock} button onClick={handleClick}>
-    <OrderParamsTemplates name="Order №: " value={orderNo} className={`${classes.orderInfo} ${classes.title}`} />
-    <OrderParamsTemplates name="Date: " value={` ${date.slice(0, 10)}`} className={`${classes.orderInfo} ${classes.title}`} />
-    <OrderParamsTemplates name="Status: " value={status} className={`${classes.orderInfo} ${classes.title}`} />
-    <OrderParamsTemplates name="Total Sum: " value={`€${totalSum}`} className={`${classes.orderInfo} ${classes.title}`} />
-    <OrderParamsTemplates name={'Item\'s quantity: '} value={`${products.length}`} className={`${classes.orderInfo} ${classes.title}`} />
-    {open ? <ExpandLess /> : <ExpandMore />}
-  </ListItem>
-);
+const OrderParams = ({ classes, handleClick, orderNo, date, status, totalSum, products, open }) => {
+  const params = [
+    { name: 'Order №: ', value: orderNo },
+    { name: 'Date: ', value: ` ${date.slice(0, 10)}` },
+    { name: 'Status: ', value: status },
+    { name: 'Total Sum: ', value: `€${totalSum}` },
+    { name: 'Item\'s quantity: ', value: `${products.length}` },
+  ];
+
+  const Params = () => params.map((param) => {
+    const { name, value } = param;
+    return (
+      <OrderParamsTemplates
+        name={name}
+        value={value}
+        className={`${classes.orderInfo} ${classes.title}`}
+      />
+    )
+  });
+
+  return (
+    <ListItem component="div" className={classes.mainBlock} button onClick={handleClick}>
+      <Params />
+      {open ? <ExpandLess /> : <ExpandMore />}
+    </ListItem>
+  )
+};
 
 export default OrderParams;
 
