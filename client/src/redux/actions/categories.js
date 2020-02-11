@@ -1,8 +1,7 @@
-const getCatalogFromDB = () =>
-  // console.log('action catalog worked');
-  ({
-    type: 'SET_CATALOG_FROM_DB'
-  });
+const getCatalogFromDB = () => ({
+  type: 'SET_CATALOG_FROM_DB'
+});
+
 const catalogRequested = () => ({
   type: 'FETCH_CATALOG_REQUEST'
 });

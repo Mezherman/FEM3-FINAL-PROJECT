@@ -85,10 +85,8 @@ function Search({ productsLoaded, history, searchIsShown }) {
   )
 }
 
-const mapStateToProps = () => {};
-
 const mapDispatchToProps = {
   productsLoaded
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));
+export default withRouter(connect(null, mapDispatchToProps)(Search));

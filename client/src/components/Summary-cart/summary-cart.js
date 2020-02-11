@@ -44,6 +44,7 @@ function SummaryCart() {
       </Box>
     );
   }
+
   return (
     <Container maxWidth="xl">
       <h1>Your Shopping Cart</h1>

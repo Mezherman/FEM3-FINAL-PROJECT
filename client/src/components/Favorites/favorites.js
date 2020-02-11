@@ -1,24 +1,27 @@
 import React, { useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { Container } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
-import Spinner from '../Spinner/spinner';
+import { Container } from '@material-ui/core';
 
+import ProductList from '../Product-list/product-list';
 import { favoritesUpdated } from '../../redux/actions/favorites';
 import { productsRequested, productsLoaded, productsError } from '../../redux/actions/products';
 
-import ProductList from '../Product-list/product-list';
-
 function Favorites(props) {
-  const { productsLoading, productsLoaded, productsRequested, productsError, products, loggedIn, favorites } = props;
-  // console.log('PROPS =', props);
-  // console.log('loggedIn =', loggedIn);
+  const {
+    productsLoading,
+    productsLoaded,
+    productsRequested,
+    productsError,
+    products,
+    loggedIn,
+    favorites
+  } = props;
 
   useEffect(() => {
     productsRequested();
     if (loggedIn) {
-      // console.log('FAVORITES =', favorites);
       productsLoaded(favorites)
     } else {
       productsError()
@@ -31,21 +34,21 @@ function Favorites(props) {
         {
           favorites.length === 0
             ? <h2>NOTHING ADDED TO FAVORITES LIST.</h2>
-            : <ProductList products={products} />
+            : !productsLoading && <ProductList products={products} />
         }
       </Container>
     )
   }
+
   return <Redirect />
 }
 
-const mapStateToProps = (state) =>
-  // console.log('STATE =', state);
-  ({
-    productsLoading: state.productsReducer.productsLoading,
-    loggedIn: state.user.loggedIn,
-    favorites: state.favoritesReducer.favorites
-  });
+const mapStateToProps = (state) => ({
+  productsLoading: state.productsReducer.productsLoading,
+  loggedIn: state.user.loggedIn,
+  favorites: state.favoritesReducer.favorites
+});
+
 const mapDispatchToProps = {
   productsRequested,
   productsLoaded,
@@ -55,9 +58,16 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Favorites)
 
-// ProductList.propTypes = {
-//   assortment: PropTypes.string.isRequired,
-//   products: PropTypes.arrayOf(PropTypes.object).isRequired,
-//   productsLoading: PropTypes.bool.isRequired,
-//   fetchProducts: PropTypes.func.isRequired
-// };
+Favorites.propTypes = {
+  productsLoading: PropTypes.bool.isRequired,
+  productsLoaded: PropTypes.func.isRequired,
+  productsRequested: PropTypes.func.isRequired,
+  productsError: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
+  favorites: PropTypes.arrayOf(PropTypes.object).isRequired,
+  products: PropTypes.arrayOf(PropTypes.object),
+};
+
+Favorites.defaultProps = {
+  products: []
+};

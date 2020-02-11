@@ -8,16 +8,20 @@ function CategoryList({ mainCategories }) {
   // console.log('PROPS =', props);
   const classes = useStyles();
 
+  const Categories = ({ categories }) => (
+    categories.map((category, index) => (
+      <Category
+        key={category.name}
+        data={category}
+        name={category.name}
+        index={index}
+      />
+    ))
+  );
+
   return (
     <section className={classes.categories_list}>
-      {mainCategories && mainCategories.map((category, index) => (
-        <Category
-          key={category.name}
-          data={category}
-          name={category.name}
-          index={index}
-        />
-      ))}
+      {mainCategories && <Categories categories={mainCategories} />}
     </section>
   )
 }

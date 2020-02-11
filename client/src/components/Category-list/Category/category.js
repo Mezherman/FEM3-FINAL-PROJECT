@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid/Grid'
 import { Button, Typography } from '@material-ui/core'
 import withWidth from '@material-ui/core/withWidth/withWidth'
 import useStyles from './styles'
-import ProductCarusel from '../Product-carusel/product-carusel'
 import ImgGrid from '../Image-grid/image-grid'
 import RoutesName from '../../../routes-list';
 
@@ -33,7 +32,6 @@ function Category (props) {
             Learn more
         </Button>
       </Link>
-      {/* {data.products && data.products.length > 0 ? (<ProductCarusel products={data.products} />) : '' } */}
     </Grid>
   );
 

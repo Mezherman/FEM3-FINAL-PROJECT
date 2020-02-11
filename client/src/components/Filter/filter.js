@@ -113,7 +113,7 @@ function Filter(props) {
     const categoryForFilter = !subCategoriesString ? catalogLocation : subCategoriesString;
     // console.log('ENDS OF VAL', valOfBrands, valOfCollection)
     valToFilter = `categories=${categoryForFilter}&${valOfBrands}&${valOfCollection}&${valOfColor}&${valOfPrice}`
-    console.log('!!!!! ->>>>>', valToFilter);
+    // console.log('!!!!! ->>>>>', valToFilter);
     filteredCategory = valToFilter;
     return valToFilter
   };
