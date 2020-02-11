@@ -20,7 +20,7 @@ function DialogModal({ onCloseDialogWithStatus, isOpen, message }) {
       aria-describedby="alert-dialog-slide-description"
     >
       <DialogContent>
-        <DialogContentText id="alert-dialog-slide-description" color="text.primary">
+        <DialogContentText id="alert-dialog-slide-description" color="secondary">
           {message}
         </DialogContentText>
       </DialogContent>
