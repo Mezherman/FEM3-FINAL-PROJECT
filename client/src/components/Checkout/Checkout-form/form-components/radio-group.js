@@ -1,18 +1,16 @@
 import React from 'react';
-import { FormHelperText, FormLabel, RadioGroup } from '@material-ui/core';
+import { PropTypes } from 'prop-types';
+import { FormHelperText, RadioGroup } from '@material-ui/core';
+
 import useStyles from './_form-components';
 
 const RenderRadioGroup = (props) => {
-  // console.log(props);
   const classes = useStyles();
   const { input, meta: { touched, error }, children } = props;
-  // console.log(error);
-  // console.log(rest);
   return (
     <>
       <RadioGroup
         {...input}
-        // value={input.value}
         aria-label={input.name}
         className={classes[input.name]}
         name={input.name}
@@ -29,3 +27,16 @@ const RenderRadioGroup = (props) => {
 };
 
 export default RenderRadioGroup;
+
+RenderRadioGroup.propTypes = {
+  input: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string]).isRequired,
+  meta: PropTypes.oneOfType([PropTypes.object, PropTypes.bool, PropTypes.string]).isRequired,
+  touched: PropTypes.bool,
+  error: PropTypes.objectOf(PropTypes.string),
+  children: PropTypes.node.isRequired
+};
+
+RenderRadioGroup.defaultProps = {
+  error: {},
+  touched: false,
+};
