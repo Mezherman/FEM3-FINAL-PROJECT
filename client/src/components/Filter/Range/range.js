@@ -6,28 +6,13 @@ import { withStyles } from '@material-ui/core/styles';
 import useStyles from './_range';
 import { getFilterProducts } from '../../../redux/actions/filter'
 
-// const Shadow =
-//   '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.13),0 0 0 1px rgba(0,0,0,0.02)';
-
 const CustomSlider = withStyles((theme) => ({
   root: {
     color: theme.palette.primary.main,
     left: '2%',
-    // padding: '15px 0',
   },
   thumb: {
-    // height: 28,
-    // width: 28,
     backgroundColor: theme.palette.primary.main,
-    // boxShadow: Shadow,
-    // marginTop: -14,
-    // marginLeft: -14,
-    // '&:focus,&:hover,&$active': {
-    //  boxShadow: '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
-    //   '@media (hover: none)': {
-    //     boxShadow: Shadow,
-    //   },
-    // },
   },
   valueLabel: {
     top: -22,
@@ -38,11 +23,10 @@ const CustomSlider = withStyles((theme) => ({
   },
 }))(Slider);
 
-function RangeSlider(props) {
+const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
   const classes = useStyles();
-  const { getFilterProducts, filterResults, max } = props;
 
-  const [value, setValue] = useState([0, max]);
+  const [value, setValue] = useState([filterResults.price[0], filterResults.price[1]]);
 
   useEffect(() => {
     combineInputs()
@@ -57,17 +41,19 @@ function RangeSlider(props) {
   };
 
   const handleInputMin = (event) => {
-    if (event.target.value > max) {
-      event.target.value = 0
+    let inputValue = event.target.value;
+    if (inputValue > max) {
+      inputValue = 0
     }
-    setValue([event.target.value === '' ? '' : Number(event.target.value), value[1]]);
+    setValue([inputValue === '' ? '' : Number(inputValue), filterResults.price[1]]);
   };
 
   const handleInputMax = (event) => {
-    if (event.target.value > max) {
-      event.target.value = max
+    let inputValue = event.target.value
+    if (inputValue > max) {
+      inputValue = max
     }
-    setValue([value[0], event.target.value === '' ? '' : Number(event.target.value)]);
+    setValue([filterResults.price[0], inputValue === '' ? '' : Number(inputValue)]);
   };
 
   const combineInputs = () => {
@@ -77,59 +63,47 @@ function RangeSlider(props) {
     });
   }
 
-  const error = 'Warning! Your first value should be lower than the second!'
+  const error = 'Warning! Your first value should be lower than the second!';
+
+  const input = (values, func) => (
+    <Input
+      className={classes.input}
+      value={values}
+      margin="dense"
+      onChange={func}
+      inputProps={{
+        min: 0,
+        max,
+        type: 'number',
+        'aria-labelledby': 'range-slider',
+      }}
+    />
+  )
 
   return (
     <>
       <CustomSlider
         max={max}
         valueLabelDisplay="auto"
-        value={value}
+        value={filterResults.price}
         onChange={handleChange}
         aria-labelledby="range-slider"
       />
       <div className={classes.inputs}>
-        {value[1] < value[0]
-          ? (<div className={classes.error}>{error}</div>) : null}
-        <Input
-          className={classes.input}
-          value={value[0]}
-          margin="dense"
-          onChange={handleInputMin}
-          inputProps={{
-            min: 0,
-            max,
-            type: 'number',
-            'aria-labelledby': 'range-slider',
-          }}
-        />
-        <Input
-          className={classes.input}
-          value={value[1]}
-          margin="dense"
-          onChange={handleInputMax}
-          inputProps={{
-            min: 0,
-            max,
-            type: 'number',
-            'aria-labelledby': 'range-slider',
-          }}
-        />
+        {(value[1] < value[0]) && <div className={classes.error}>{error}</div>}
+        {input(filterResults.price[0], handleInputMin)}
+        {input(filterResults.price[1], handleInputMax)}
       </div>
     </>
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    filterResults: state.filterReducer.filterResults
-  }
-}
+const mapStateToProps = (state) => ({
+  filterResults: state.filterReducer.filterResults
+})
 
-function mapDispatchToProps(dispatch) {
-  return {
-    getFilterProducts: (priceRange) => dispatch(getFilterProducts(priceRange))
-  }
+const mapDispatchToProps = {
+  getFilterProducts
 }
 
 RangeSlider.propTypes = {
