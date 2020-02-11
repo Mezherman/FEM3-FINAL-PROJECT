@@ -1,12 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Carousel from 'nuka-carousel';
 import PropTypes from 'prop-types';
 
-import './сarousel.scss';
-
 export default function Carousels (props) {
-  const [slideIndexNumber, setSlideIndex] = useState(0);
-
   const {
     autoPlay,
     autoplayInterval,
@@ -20,7 +16,7 @@ export default function Carousels (props) {
     renderCenterLeftControls,
     renderCenterRightControls,
     renderBottomCenterControls,
-    className
+    className,
   } = props;
 
   return (
@@ -31,8 +27,6 @@ export default function Carousels (props) {
       cellSpacing={cellSpacing}
       slidesToScroll={slidesToScroll}
       slidesToShow={slidesToShow}
-      // slideIndex={console.log(slideIndexNumber)}
-      afterSlide={(slideIndex) => setSlideIndex({ slideIndex })}
       transitionMode={transitionMode}
       dragging={dragging}
       className={className}
@@ -62,7 +56,6 @@ Carousels.propTypes = {
 };
 
 Carousels.defaultProps = {
-  renderBottomCenterControls: () => {},
   children: <div />,
   autoPlay: false,
   transitionMode: 'fade',
@@ -72,30 +65,7 @@ Carousels.defaultProps = {
   className: '',
   slidesToScroll: 'auto',
   cellSpacing: 2,
-  // renderCenterLeftControls ({ previousSlide }) {
-  //   return (
-  //     <div
-  //       className="arrow-prev"
-  //       onClick={previousSlide}
-  //     >
-  //       <div className="arrow-prev-top" />
-  //       <div className="arrow-prev-bottom" />
-  //     </div>
-  //   )
-  // },
-
+  renderBottomCenterControls: () => {},
   renderCenterLeftControls: () => {},
-
-  // renderCenterRightControls ({ nextSlide }) {
-  //   return (
-  //     <div
-  //       className="arrow-next"
-  //       onClick={nextSlide}
-  //     >
-  //       <div className="arrow-next-top" />
-  //       <div className="arrow-next-bottom" />
-  //     </div>
-  //   )
-  // }
   renderCenterRightControls: () => {}
 };

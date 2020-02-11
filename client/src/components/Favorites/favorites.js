@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import Spinner from '../Spinner/spinner';
+import RoutesName from '../../routes-list'
 import { Container } from '@material-ui/core';
 
 import ProductList from '../Product-list/product-list';
@@ -40,7 +42,7 @@ function Favorites(props) {
     )
   }
 
-  return <Redirect />
+  return <Redirect to={RoutesName.home} />
 }
 
 const mapStateToProps = (state) => ({
