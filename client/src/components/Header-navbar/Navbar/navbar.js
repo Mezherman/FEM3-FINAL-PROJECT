@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { MenuItem, useTheme, Divider } from '@material-ui/core';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
@@ -19,8 +19,7 @@ import store from '../../../index';
 export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, toggleDrawer }) {
   const classes = useStyles();
   const theme = useTheme();
-  const { mainCategories } = store.getState().categoriesReducer.catalog;
-  const { allCategories } = store.getState().categoriesReducer.catalog;
+  const { mainCategories, allCategories } = store.getState().categoriesReducer.catalog;
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
   const [drawerCat, drawerCatIsOpen] = useState(false);
   const [drawerSubCat, drawerSubCatIsOpen] = useState(false);
@@ -60,7 +59,6 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
               // className={classes.root}
               component="nav"
               aria-labelledby="nested-list-subheader"
-
             >
               <MenuItem
                 onClick={() => toggleDrawer(false)}

@@ -1,27 +1,23 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import PropTypes from 'prop-types';
+import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
-import { Grid, IconButton, Divider, Button, Box, Paper } from '@material-ui/core';
+import { Grid, IconButton, Divider, Button, Box } from '@material-ui/core';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import CloseIcon from '@material-ui/icons/Close';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
-import RoutesName from '../../routes-list';
 
+import RoutesName from '../../routes-list';
 import ModalWindow from '../Modal-window/modal-window';
+import { setProductQuantity } from '../../redux/actions/CartActions'
+import IncreaseBlock from '../Increase-block/increase-block'
 
 import useStyles from './_add-to-cart';
-import { addProductToCart, setProductQuantity } from '../../redux/actions/CartActions'
-import IncreaseBlock from '../Increase-block/increase-block'
 
 export default function AddToCart({ open, onModalClose, product }) {
   const classes = useStyles();
-  const { imageUrls, name, currentPrice, specialPrice, itemNo, itemId, maxQty } = product;
-
-  //product in state state
-  const productsState = useSelector((state) => state.cart.products);
   const dispatch = useDispatch();
+  const productsState = useSelector((state) => state.cart.products);
+  const { imageUrls, name, currentPrice, specialPrice, itemNo, itemId, maxQty } = product;
   const actionSetProductQuantityInCart = useCallback(
     (productData, quantityVal) => dispatch(setProductQuantity(productData, quantityVal)),
     [dispatch]
@@ -33,13 +29,22 @@ export default function AddToCart({ open, onModalClose, product }) {
 
   const handleQty = (newQty) => {
     actionSetProductQuantityInCart(product.itemId, newQty)
-  }
+  };
 
   const finalPrice = !specialPrice ? currentPrice : specialPrice;
 
   useEffect(() => {
     setTotalPrice(stateQuantity * finalPrice)
   }, [stateQuantity, finalPrice]);
+
+  useEffect(() => {
+    document.onkeyup = (event) => {
+      if (event.key === 'Escape') {
+        onModalClose()
+      }
+    }
+  }, [onModalClose]);
+
   return (
     <ModalWindow
       open={open}

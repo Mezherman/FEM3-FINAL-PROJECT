@@ -10,7 +10,30 @@ import useStyles from './_checkout-form';
 export default function OrderConfirmation() {
   const classes = useStyles();
   const { products, totalCartPrice } = useSelector((state) => state.cart);
-  // console.log('products=', products);
+
+  const productsList = (products) => (
+    products.map((product) => {
+      const { cartQuantity, product: { name, currentPrice, itemNo } } = product;
+      return (
+        <div className={classes.confirmationHeader} key={itemNo}>
+          <Typography component="span">
+            {cartQuantity}
+            x&nbsp;
+            {name.toUpperCase()[0] + name.slice(1)}
+            <Typography component="p">
+              (Item.No&nbsp;
+              {itemNo}
+              )
+            </Typography>
+          </Typography>
+          <Typography>
+            &#8364;
+            {currentPrice * cartQuantity}
+          </Typography>
+        </div>
+      )
+    })
+  );
 
   return (
     <>
@@ -20,21 +43,14 @@ export default function OrderConfirmation() {
         <span>SUM</span>
       </div>
       <Divider />
-      {products.map((product) => {
-        const { cartQuantity, product: { name, currentPrice, itemNo } } = product;
-        return (
-          <div className={classes.confirmationHeader}>
-            <Typography>{cartQuantity}x {name.toUpperCase()[0] + name.slice(1)}
-              <Typography>(Item.No {itemNo})</Typography>
-            </Typography>
-            <Typography>&#8364;{currentPrice * cartQuantity}</Typography>
-          </div>
-        )
-      })}
+      {productsList(products)}
       <Divider />
       <Box className={classes.confirmationHeader}>
         <strong>TOTAL</strong>
-        <strong>&#8364;{totalCartPrice}</strong>
+        <strong>
+          &#8364;
+          {totalCartPrice}
+        </strong>
       </Box>
       <Divider />
       <Field name="agreement" component={RenderCheckboxField} />

@@ -1,7 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Container } from '@material-ui/core'
+import { Container } from '@material-ui/core';
+
 import Category from './Category/category';
+
 import useStyles from './_category-list';
 
 function CategoryList() {

@@ -1,96 +1,82 @@
 import React from 'react';
-import { Grid, Typography, FormControlLabel, Radio } from '@material-ui/core';
+import { PropTypes } from 'prop-types';
 import { Field } from 'redux-form';
+import { Grid, Typography } from '@material-ui/core';
 
 import RenderTextField from './form-components/text-field';
 import RenderRadioGroup from './form-components/radio-group';
 import TextArea from './form-components/text-area';
+import RadioCheckboxField from './form-components/radio-checkbox-field';
 
 import useStyles from './_checkout-form';
 
 export default function CustomerInfo({ customer }) {
-  // console.log(customer);
   const classes = useStyles();
+
+  const gender = () => (
+    <Field name="gender" component={RenderRadioGroup}>
+      <RadioCheckboxField name="gender" value="Mr" label="Mr" />
+      <RadioCheckboxField name="gender" value="Mrs" label="Mrs" />
+    </Field>
+  );
+
+  const textField = (name, label) => (
+    <Field
+      name={name}
+      component={RenderTextField}
+      classes={classes}
+      defaultValue={customer[name] || ''}
+      label={label}
+    />
+  );
 
   return (
     <>
       <Grid>
         <Typography className={classes.blockTitle}>1. CUSTOMER INFO</Typography>
-        <Field name="gender" component={RenderRadioGroup}>
-          <FormControlLabel
-            className={classes.root}
-            value="Mr"
-            label="Mr"
-            name="gender"
-            control={<Radio className={classes.radioLabel} />}
-          />
-          <FormControlLabel
-            className={classes.root}
-            value="Mrs"
-            label="Mrs"
-            name="gender"
-            control={<Radio className={classes.radioLabel} />}
-          />
-        </Field>
+        {gender()}
         <Grid container spacing={2}>
           <Grid item xs={12} lg={6}>
-            <Field
-              name="firstName"
-              component={RenderTextField}
-              classes={classes}
-              defaultValue={customer.firstName}
-              label="First Name"
-            />
+            {textField('firstName', 'First Name')}
           </Grid>
           <Grid item xs={12} lg={6}>
-            <Field
-              name="lastName"
-              component={RenderTextField}
-              classes={classes}
-              defaultValue={customer.lastName}
-              label="Last Name"
-            />
+            {textField('lastName', 'Last Name')}
+          </Grid>
+          <Grid item xs={12}>
+            {textField('email', 'Email')}
+          </Grid>
+          <Grid item xs={12}>
+            {textField('telephone', 'Telephone')}
+          </Grid>
+          <Grid item xs={12}>
+            {textField('street', 'Street')}
+          </Grid>
+          <Grid item xs={12} lg={6}>
+            {textField('house', 'House')}
+          </Grid>
+          <Grid item xs={12} lg={6}>
+            {textField('flat', 'Flat')}
+          </Grid>
+          <Grid item xs={12} lg={6}>
+            {textField('postalCode', 'Postal code')}
+          </Grid>
+          <Grid item xs={12} lg={6}>
+            {textField('city', 'City')}
           </Grid>
           <Grid item xs={12}>
             <Field
-              name="email"
-              component={RenderTextField}
-              classes={classes}
-              defaultValue={customer.email}
-              label="Email"
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Field
-              name="mobile"
-              component={RenderTextField}
-              classes={classes}
-              defaultValue={customer.telephone}
-              label="Mobile"
-            />
-          </Grid>
-          <Grid item xs={12} lg={8}>
-            <Field name="street" component={RenderTextField} classes={classes} label="Street" />
-          </Grid>
-          <Grid item xs={12} lg={4}>
-            <Field name="flat" component={RenderTextField} classes={classes} label="Flat" />
-          </Grid>
-          <Grid item xs={12} lg={6}>
-            <Field
-              name="postalCode"
-              component={RenderTextField}
-              label="Postal code"
+              name="comments"
+              component={TextArea}
+              label="Additional comments..."
               classes={classes}
             />
-          </Grid>
-          <Grid item xs={12} lg={6}>
-            <Field name="city" component={RenderTextField} label="City" classes={classes} />
-          </Grid>
-          <Grid item xs={12}>
-            <Field name="comments" component={TextArea} label="Additional comments..." classes={classes} />
           </Grid>
         </Grid>
       </Grid>
     </>
   )
 }
+
+CustomerInfo.propTypes = {
+  customer: PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.object]).isRequired
+};

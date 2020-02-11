@@ -1,12 +1,13 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Grid from '@material-ui/core/Grid/Grid'
-import withWidth from '@material-ui/core/withWidth/withWidth'
-import { Button, Typography } from '@material-ui/core'
-import useStyles from './_category'
-import ImgGrid from '../Image-grid/image-grid'
+import Grid from '@material-ui/core/Grid/Grid';
+import withWidth from '@material-ui/core/withWidth/withWidth';
+import { Button, Typography } from '@material-ui/core';
+import ImgGrid from '../Image-grid/image-grid';
 import RoutesName from '../../../routes-list';
+
+import useStyles from './_category';
 
 function Category ({ data, index, width }) {
   const classes = useStyles();

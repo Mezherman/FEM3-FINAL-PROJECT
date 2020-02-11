@@ -1,6 +1,6 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import RoutesName from '../../../routes-list';
@@ -10,12 +10,21 @@ import useStyles from '../_header-navbar';
 
 function Categories(props) {
   const classes = useStyles();
-  const { chosenCategory, mainCategories, toggleSubCategories, toggleCatalog, catalogLocation } = props;
+  const {
+    chosenCategory,
+    mainCategories,
+    toggleSubCategories,
+    toggleCatalog,
+    catalogLocation
+  } = props;
+
   const categoryList = mainCategories.map((category) => {
-    const classNames = `js_catalog-list-item ${classes.catalogListItem} 
-      ${category.id === chosenCategory
-      ? classes.categoryHover
-      : ''}`;
+    const classNames = `
+    js_catalog-list-item 
+    ${classes.catalogListItem} 
+    ${category.id === chosenCategory ? classes.categoryHover : ''}
+    `;
+
     return (
       <Link
         to={`${RoutesName.products}/${category.id}`}
@@ -42,18 +51,18 @@ function Categories(props) {
   )
 }
 
-const mapStateToProps = (state) => {};
 const mapDispatchToProps = {
   catalogLocation
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Categories)
+export default connect(null, mapDispatchToProps)(Categories)
 
 Categories.propTypes = {
   chosenCategory: PropTypes.string,
   toggleSubCategories: PropTypes.func.isRequired,
   toggleCatalog: PropTypes.func.isRequired,
   mainCategories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  catalogLocation: PropTypes.string.isRequired
 };
 
 Categories.defaultProps = {
