@@ -1,11 +1,17 @@
 import jwtDecode from 'jwt-decode';
 import axios from 'axios'
+import {
+  FETCH_LOGIN_ERROR,
+  FETCH_LOGIN_SUCCESS,
+  SET_CUSTOMER_DATA_FROM_DB,
+  FETCH_ORDERS_SUCCESS
+} from './actionTypes'
 
 const loginLoaded = () => {
   const token = localStorage.getItem('token');
   if (!token) {
     return {
-      type: 'FETCH_LOGIN_ERROR',
+      type: FETCH_LOGIN_ERROR,
     }
   }
 
@@ -22,7 +28,7 @@ const loginLoaded = () => {
       axios.defaults.baseURL = 'http://localhost:5000';
     }
     return {
-      type: 'FETCH_LOGIN_SUCCESS',
+      type: FETCH_LOGIN_SUCCESS,
       payload: {
         loggedIn: true,
         token,
@@ -33,16 +39,16 @@ const loginLoaded = () => {
   }
 
   return {
-    type: 'FETCH_LOGIN_ERROR',
+    type: FETCH_LOGIN_ERROR,
   }
 };
 
 const fetchCustomerData = () => ({
-  type: 'SET_CUSTOMER_DATA_FROM_DB'
+  type: SET_CUSTOMER_DATA_FROM_DB
 });
 
 const orders = (data) => ({
-  type: 'FETCH_ORDERS_SUCCESS',
+  type: FETCH_ORDERS_SUCCESS,
   payload: {
     orders: data
   }

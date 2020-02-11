@@ -11,7 +11,7 @@ import ProductCardCarousel from '../Product-card-carousel/product-card-carousel'
 import Spinner from '../Spinner/spinner';
 import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 import { getFilteredProducts } from '../../services/filter';
-import getCurrentProduct from '../../redux/actions/currentProduct';
+import getCurrentProduct from '../../redux/actions/current-product';
 import { getCategory } from '../../services/getCategories';
 
 function ProductPage(props) {
