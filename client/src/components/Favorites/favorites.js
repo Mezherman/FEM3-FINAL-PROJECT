@@ -32,7 +32,7 @@ function Favorites(props) {
     return (
       <Container maxWidth="xl">
         {
-          favorites.length === 0
+          !favorites.length
             ? <h2>NOTHING ADDED TO FAVORITES LIST.</h2>
             : !productsLoading && <ProductList products={products} />
         }

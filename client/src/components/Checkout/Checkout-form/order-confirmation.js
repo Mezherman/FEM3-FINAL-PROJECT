@@ -18,12 +18,10 @@ export default function OrderConfirmation() {
         <div className={classes.confirmationHeader} key={itemNo}>
           <Typography component="span">
             {cartQuantity}
-            x
-            {' '}
+            x&nbsp;
             {name.toUpperCase()[0] + name.slice(1)}
             <Typography component="p">
-              (Item.No
-              {' '}
+              (Item.No&nbsp;
               {itemNo}
               )
             </Typography>

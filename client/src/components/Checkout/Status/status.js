@@ -8,33 +8,37 @@ export default function CheckoutStatus(props) {
   const classes = useStyles();
   const { location: { state: { orderDone, orderNo, message } } } = props;
 
+  const statusMessageSuccess = (
+    <>
+      <h2>
+        Your order&nbsp;
+        <strong>
+          №
+          {orderNo}
+          &nbsp;
+        </strong>
+        has been successfully placed.
+      </h2>
+      <p className={classes.statusText}>Thank you for your choice!</p>
+    </>
+  );
+
+  const statusMessageFailure = (
+    <>
+      <h2>Your order wasn&apos;t placed. </h2>
+      <p className={classes.statusText}>
+        {message}
+        .
+      </p>
+      <p className={classes.statusText}>Please, try again later.</p>
+    </>
+  );
+
+  const statusMessage = orderDone ? statusMessageSuccess : statusMessageFailure;
+
   return (
     <Container maxWidth="xl" style={{ minHeight: '52vh' }}>
-      {orderDone && (
-        <>
-          <h2>
-            Your order
-            {' '}
-            <strong>
-              №
-              {orderNo}
-            </strong>
-            {' '}
-            has been successfully placed.
-          </h2>
-          <p className={classes.statusText}>Thank you for your choice!</p>
-        </>
-      )}
-      {!orderDone && (
-        <>
-          <h2>Your order wasn&apos;t placed. </h2>
-          <p className={classes.statusText}>
-            {message}
-            .
-          </p>
-          <p className={classes.statusText}>Please, try again later.</p>
-        </>
-      )}
+      {statusMessage}
     </Container>
   )
 }
