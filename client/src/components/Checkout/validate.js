@@ -1,13 +1,13 @@
 const validate = (values) => {
-  // console.log(values);
   const errors = {};
   const requiredFields = [
     'gender',
     'firstName',
     'lastName',
     'email',
-    'mobile',
+    'telephone',
     'street',
+    'house',
     'flat',
     'postalCode',
     'city',
@@ -30,24 +30,28 @@ const validate = (values) => {
     errors.email = 'Invalid email address';
   }
 
-  if (values.mobile && !/^[0-9-+\s()]{10,18}$/i.test(values.mobile)) {
-    errors.mobile = 'Invalid phone number, must be between 10 and 18 characters';
-  }
-
-  if (values.flat && !/^[0-9a-zA-Z]{1,5}$/i.test(values.flat)) {
-    errors.flat = 'invalid flat number'
-  }
-
-  if (values.city && !/^[A-Za-z]/i.test(values.city)) {
-    errors.city = 'invalid city name'
+  if (values.telephone && !/^[0-9-+\s()]{10,18}$/i.test(values.telephone)) {
+    errors.telephone = 'Invalid phone number, must be between 10 and 18 characters';
   }
 
   if (values.street && !/^[A-Za-z]/i.test(values.street)) {
     errors.street = 'invalid street name'
   }
 
+  if (values.house && !/^[0-9a-zA-Z]{1,5}$/i.test(values.house)) {
+    errors.house = 'invalid flat number'
+  }
+
+  if (values.flat && !/^[0-9a-zA-Z]{1,5}$/i.test(values.flat)) {
+    errors.flat = 'invalid flat number'
+  }
+
   if (values.postalCode && !/^[0-9]/i.test(values.postalCode)) {
     errors.postalCode = 'invalid postal code'
+  }
+
+  if (values.city && !/^[A-Za-z]/i.test(values.city)) {
+    errors.city = 'invalid city name'
   }
 
   if (!values.paymentMethod) {

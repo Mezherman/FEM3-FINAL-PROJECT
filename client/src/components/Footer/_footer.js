@@ -13,24 +13,6 @@ const useStyles = makeStyles((theme) => ({
   container: {
     marginTop: theme.spacing(2)
   },
-  title: {
-    margin: 0
-  },
-  text: {
-    margin: 0
-  },
-  img: {
-    paddingRight: theme.spacing(2),
-    width: '80px'
-  },
-  links: {
-    color: theme.palette.secondary.contrastText,
-    '&:hover': {
-      textDecoration: 'underline',
-      cursor: 'pointer',
-    },
-    textDecoration: 'none'
-  }
 }));
 
 export default useStyles;

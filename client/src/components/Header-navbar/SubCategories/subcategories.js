@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import RoutesName from '../../../routes-list';
@@ -17,7 +17,11 @@ export default function SubCategories({ allCategories, chosenCategory, toggleCat
       onClick={toggleCatalog}
     >
       <div className={classes.subCategoryItemContent}>
-        <img className={classes.subCategoryItemImg} src={`/img/products/${chosenCategory}/${subCategory.id}/${subCategory.id}.png`} alt={`img: ${subCategory.name}`} />
+        <img
+          className={classes.subCategoryItemImg}
+          src={`/img/products/${chosenCategory}/${subCategory.id}/${subCategory.id}.png`}
+          alt={`img: ${subCategory.name}`}
+        />
         {subCategory.name}
       </div>
     </Link>
@@ -32,6 +36,10 @@ export default function SubCategories({ allCategories, chosenCategory, toggleCat
 
 SubCategories.propTypes = {
   allCategories: PropTypes.arrayOf(PropTypes.object).isRequired,
-  chosenCategory: PropTypes.string.isRequired,
+  chosenCategory: PropTypes.string,
   toggleCatalog: PropTypes.func.isRequired,
+};
+
+SubCategories.defaultProps = {
+  chosenCategory: null
 };

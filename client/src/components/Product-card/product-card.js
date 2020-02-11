@@ -4,7 +4,7 @@ import 'typeface-roboto';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
 import { bindActionCreators } from 'redux'
-import { connect, useDispatch } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import * as cartActions from '../../redux/actions/CartActions';
 
@@ -26,6 +26,7 @@ function ProductCard({ product, favorites }) {
   const closeModal = () => {
     setModalVisibility(false)
   };
+  const { loggedIn } = useSelector((state) => state.user);
 
   return (
     <>
@@ -42,10 +43,7 @@ function ProductCard({ product, favorites }) {
 Item.No
             {itemNo}
           </span>
-          <AddToFavoriteBtn
-            favorites={favorites}
-            itemId={itemId}
-          />
+          {loggedIn && <AddToFavoriteBtn favorites={favorites} itemId={itemId} />}
         </div>
 
         <Link

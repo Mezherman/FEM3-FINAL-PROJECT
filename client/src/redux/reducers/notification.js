@@ -1,4 +1,6 @@
-const initialState = {
+import { OPEN_NEW_NOTIFICATION, ClOSE_NOTIFICATION } from '../actions/actionTypes'
+
+export const initialState = {
   type: 'error',
   message: '',
   fading: true,
@@ -7,8 +9,7 @@ const initialState = {
 
 export default function notification(state = initialState, action) {
   switch (action.type) {
-    case 'OPEN_NEW_NOTIFICATION': {
-      // console.log(action);
+    case OPEN_NEW_NOTIFICATION: {
       return {
         ...state,
         type: action.payload.type,
@@ -17,7 +18,7 @@ export default function notification(state = initialState, action) {
         open: true
       };
     }
-    case 'ClOSE_NOTIFICATION': {
+    case ClOSE_NOTIFICATION: {
       return {
         ...state,
         open: false

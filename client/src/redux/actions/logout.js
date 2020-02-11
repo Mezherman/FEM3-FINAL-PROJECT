@@ -1,5 +1,7 @@
+import { LOGOUT_TRUE } from './actionTypes'
+
 const logoutAction = () => ({
-  type: 'LOGOUT_TRUE',
+  type: LOGOUT_TRUE,
   payload: true
 });
 

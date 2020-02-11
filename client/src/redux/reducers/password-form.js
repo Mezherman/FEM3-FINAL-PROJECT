@@ -5,7 +5,6 @@ const initialState = {
 export default function passwordForm (state = initialState, action) {
   switch (action.type) {
     case 'INVALID_PASSWORD_TRUE': {
-      // console.log(action);
       return {
         ...state,
         ...action.payload

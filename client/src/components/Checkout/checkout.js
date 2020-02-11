@@ -1,54 +1,47 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, Container, Grid, Typography, Box } from '@material-ui/core';
 import { reduxForm } from 'redux-form';
+import { Container, Grid, Box } from '@material-ui/core';
 
 import CustomerInfo from './Checkout-form/customer-info';
 import DeliveryPaymentInfo from './Checkout-form/delivery-payment-info';
 import OrderConfirmation from './Checkout-form/order-confirmation';
+import FormButton from './Checkout-form/form-components/form-button';
 import validate from './validate';
+import Spinner from '../Spinner/spinner';
 import RoutesName from '../../routes-list';
-
 import { placeOrderToDB } from '../../services/checkout';
 import { deleteCartFromDB } from '../../services/cart';
 import { clearCart } from '../../redux/actions/CartActions';
 
 import useStyles from './_checkout';
-import Spinner from '../Spinner/spinner';
 
 let Checkout = (props) => {
-  // console.log('PROPS IN CHECKOUT =', props);
   const classes = useStyles();
-  const { history, handleSubmit, user, cart, clearCart, isFetchingLoadData } = props;
-
-  // console.log('isFetchingLoadData =', isFetchingLoadData);
-
-  const customer = user.loggedIn ? user.customer : '';
+  const { history, handleSubmit, user: { customer }, cart, clearCart, isFetchingLoadData } = props;
 
   const createOrder = (order) => {
-    // console.log(order);
     const interimOrder = {
       deliveryAddress: {
-        country: order.country,
+        country: 'Ukraine',
         city: order.city,
-        address: `${order.street}, ${order.house}`,
+        address: `${order.street} ${order.house}, f.${order.flat}`,
         postal: order.postalCode
       },
       shipping: order.delivery,
       paymentInfo: order.paymentMethod,
       status: 'not shipped',
       email: order.email,
-      mobile: order.mobile,
-      comments: order.comments,
+      mobile: order.telephone,
+      comments: order.comments || '',
       letterSubject: 'Thank you for your order!',
       letterHtml:
         '<h1>Your order is placed. OrderNo is XXXXXXXXXX.</h1><p>{Other details about order in' +
         ' your HTML}</p>'
     };
 
-    // console.log('CUSTOMER =', customer);
-
-    if (customer) {
+    if (customer._id) {
       return {
         ...interimOrder,
         customerId: `${customer._id}`
@@ -62,26 +55,16 @@ let Checkout = (props) => {
   };
 
   const submitNewOrder = (order) => {
-    // console.log('order =', order);
-
     const newOrder = createOrder(order);
-    // console.log('NEW ORDER =', newOrder);
 
     placeOrderToDB(newOrder)
       .then((response) => {
-        // console.log('RESP =', response);
         if (response.orderIsPlaced) {
-          console.log('order successfully placed');
           const { orderNo, customerId } = response.placedOrder;
-
-          // console.log('customerId =', customerId);
 
           if (customerId) {
             deleteCartFromDB()
-              .then((response) => {
-                // console.log('OK =', response);
-                clearCart();
-              })
+              .then(() => clearCart())
               .catch((error) => console.log('ERROR =', error));
           } else {
             window.localStorage.setItem('cart', '');
@@ -93,7 +76,6 @@ let Checkout = (props) => {
             orderNo
           });
         } else {
-          console.log('order wasn\'t placed');
           history.push(RoutesName.orderConfirmation, {
             orderDone: false,
             message: response.message
@@ -101,74 +83,57 @@ let Checkout = (props) => {
         }
       })
       .catch((error) => {
-        console.log('ERROR =', error);
-        history.push(RoutesName.orderConfirmation, { orderDone: false });
+        history.push(RoutesName.orderConfirmation, {
+          orderDone: false,
+          error
+        });
       });
   };
 
   return (
     <>
-      {isFetchingLoadData
-        ? <Spinner />
-        : (
-          <Container component="div" maxWidth="xl" disableGutters>
-            <form
-              className={classes.form}
-              noValidate={false}
-              onSubmit={handleSubmit(submitNewOrder)}
-            >
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={6} md={4}>
-                  <CustomerInfo customer={customer} />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4}>
-                  <DeliveryPaymentInfo />
-                </Grid>
-                <Grid item xs={12} md={4}>
-                  <OrderConfirmation />
-                  <Box className={classes.btnWrapper}>
-                    <Button
-                      type="submit"
-                      size="large"
-                      variant="contained"
-                      color="primary"
-                      disableElevation
-                      className={classes.btn}
-                      onClick={() => {
-                        console.log('order sent to DB');
-                      }}
-                    >
-                      PLACE ORDER
-                    </Button>
-                    <Button
-                      size="large"
-                      variant="contained"
-                      color="secondary"
-                      disableElevation
-                      className={classes.btn}
-                      onClick={() => history.push(RoutesName.cart)}
-                    >
-                      BACK TO CART
-                    </Button>
-                  </Box>
-                </Grid>
+      {isFetchingLoadData && <Spinner />}
+      {!isFetchingLoadData &&
+      (
+        <Container component="div" maxWidth="xl" disableGutters>
+          <form
+            className={classes.form}
+            noValidate={false}
+            onSubmit={handleSubmit(submitNewOrder)}
+          >
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={6} md={4}>
+                <CustomerInfo customer={customer} />
               </Grid>
-            </form>
-          </Container>
-        )}
+              <Grid item xs={12} sm={6} md={4}>
+                <DeliveryPaymentInfo />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <OrderConfirmation />
+                <Box className={classes.btnWrapper}>
+                  <FormButton color="primary" type="submit" btnText="PLACE ORDER" />
+                  <FormButton
+                    type="button"
+                    color="secondary"
+                    btnText="BACK TO CART"
+                    onClick={() => history.push(RoutesName.cart)}
+                  />
+                </Box>
+              </Grid>
+            </Grid>
+          </form>
+        </Container>
+      )}
     </>
   )
 };
 
-const mapStateToProps = (state) => {
-  // console.log('STATE =', state);
-  return {
-    cart: state.cart,
-    user: state.user,
-    isFetchingLoadData: state.isFetchingLoadData.isFetching,
-    initialValues: state.user
-  }
-};
+const mapStateToProps = (state) => ({
+  cart: state.cart,
+  user: state.user,
+  isFetchingLoadData: state.isFetchingLoadData.isFetching,
+  initialValues: state.user
+});
 
 const mapDispatchToProps = {
   clearCart
@@ -176,8 +141,29 @@ const mapDispatchToProps = {
 
 Checkout = reduxForm({
   form: 'checkout',
-  values: { firstName: 'Petya' },
   validate,
 })(Checkout);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
+
+Checkout.propTypes = {
+  history: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.func
+  ]).isRequired,
+  handleSubmit: PropTypes.func,
+  user: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.bool
+  ]).isRequired,
+  cart: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+    PropTypes.number
+  ]).isRequired,
+  clearCart: PropTypes.func.isRequired,
+  isFetchingLoadData: PropTypes.bool.isRequired,
+};
