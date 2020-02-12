@@ -71,7 +71,7 @@ const FilterPanel = (props) => {
 
   return (
     <div>
-      <ExpansionPanel className={classes.root} square defaultExpanded={isShowPanel[width]}>
+      <ExpansionPanel className={classes.root} square defaultExpanded={Boolean(isShowPanel[width])}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>{name}</Typography>
         </ExpansionPanelSummary>
@@ -83,15 +83,15 @@ const FilterPanel = (props) => {
       </ExpansionPanel>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   filterResults: state.filterReducer.filterResults
-})
+});
 
 const mapDispatchToProps = {
   getFilterProducts
-}
+};
 
 FilterPanel.propTypes = {
   name: PropTypes.string.isRequired,
@@ -107,6 +107,6 @@ FilterPanel.defaultProps = {
   max: null,
 };
 
-const filterPanel = withWidth()(FilterPanel)
+const filterPanel = withWidth()(FilterPanel);
 
 export default connect(mapStateToProps, mapDispatchToProps)(filterPanel)

@@ -62,7 +62,7 @@ Categories.propTypes = {
   toggleSubCategories: PropTypes.func.isRequired,
   toggleCatalog: PropTypes.func.isRequired,
   mainCategories: PropTypes.arrayOf(PropTypes.object).isRequired,
-  catalogLocation: PropTypes.string.isRequired
+  catalogLocation: PropTypes.func.isRequired
 };
 
 Categories.defaultProps = {

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-
 import {
   FormControl,
   InputLabel,
@@ -8,9 +8,9 @@ import {
   Grid
 } from '@material-ui/core';
 
-import { PropTypes } from 'prop-types';
-import useStyles from './_sorting';
 import { sortingProducts, sortingReset } from '../../redux/actions/products';
+
+import useStyles from './_sorting';
 
 const Sorting = (props) => {
   const {

@@ -17,6 +17,7 @@ const OrderCustomerInfo = (props) => {
     const { name, value } = param;
     return (
       <OrderParamsTemplates
+        key={name}
         name={name}
         value={value}
         className={`${classes.orderInfo} ${classes.moreOrderInfo}`}

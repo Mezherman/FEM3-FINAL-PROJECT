@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
-import Button from '@material-ui/core/Button';
-import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types';
+import { connect } from 'react-redux'
+
+import Button from '@material-ui/core/Button';
 import FilterPanel from './Filter-panel/filter-panel'
-import useStyles from './_filter';
 import { getFilteredProducts, getColors, getBrands } from '../../services/filter'
 import { productsLoaded } from '../../redux/actions/products';
 import { filterParamsLoaded, filterType, resetFilters } from '../../redux/actions/filter';
+
+import useStyles from './_filter';
 
 const Filter = (props) => {
   const {
@@ -20,6 +22,8 @@ const Filter = (props) => {
     resetFilters,
     currentCategory
   } = props;
+
+  // console.log(currentCategory);
 
   const { catalogLocation, catalog } = categoriesReducer;
   const { allCategories } = catalog;
@@ -104,14 +108,14 @@ const Filter = (props) => {
       </Button>
     </>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   filterResults: state.filterReducer.filterResults,
   filterParams: state.filterReducer.filterParams,
   categoriesReducer: state.categoriesReducer,
   currentCategory: state.categoriesReducer.catalogLocation
-})
+});
 
 const mapDispatchToProps = {
   productsLoaded,
@@ -123,17 +127,22 @@ const mapDispatchToProps = {
 Filter.propTypes = {
   filterParams: PropTypes.objectOf(PropTypes.array).isRequired,
   filterResults: PropTypes.objectOf(PropTypes.array).isRequired,
-  currentCategory: PropTypes.objectOf(PropTypes.array).isRequired,
-  categoriesReducer: PropTypes.objectOf(PropTypes.object).isRequired,
+  currentCategory: PropTypes.string.isRequired,
+  categoriesReducer: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.bool,
+    PropTypes.func
+  ]).isRequired,
   onClose: PropTypes.func,
   productsLoaded: PropTypes.func.isRequired,
   filterParamsLoaded: PropTypes.func.isRequired,
   filterType: PropTypes.func.isRequired,
   resetFilters: PropTypes.func.isRequired,
-}
+};
 
 Filter.defaultProps = {
-  onClose: () => {}
-}
+  onClose: () => {
+  }
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter)

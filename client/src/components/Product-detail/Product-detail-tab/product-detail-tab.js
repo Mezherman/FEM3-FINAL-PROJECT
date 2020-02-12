@@ -1,36 +1,13 @@
 import React from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
-import { createStyles, makeStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+
 import TableSpecification from '../Table-specification/table-specifications';
 import Comment from '../../Comment/comment';
-import { useSelector } from 'react-redux';
 
-const useStyles = makeStyles((theme) => createStyles({
-  root: {
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
-  },
-  highlights: {
-    fontSize: '1rem',
-    textAlign: 'justify',
-    lineHeight: '2',
-    paddingBottom: theme.spacing(3)
-  },
-  description: {
-    fontSize: '1rem',
-    textAlign: 'justify',
-    lineHeight: '2',
-    paddingBottom: theme.spacing(3)
-  },
-  badge: {
-    '& .MuiBadge-anchorOriginTopRightRectangle': {
-      top: 12,
-      right: 2
-    }
-  }
-}),);
+import 'react-tabs/style/react-tabs.css';
+import useStyles from './_product-detail-tab';
 
 export default function ProductDetailTab({ data }) {
   const { myCustomParams } = data;
@@ -77,5 +54,12 @@ export default function ProductDetailTab({ data }) {
 }
 
 ProductDetailTab.propTypes = {
-  data: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.boolean, PropTypes.symbol])).isRequired,
+  data: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.symbol,
+    PropTypes.array,
+    PropTypes.number,
+    PropTypes.object
+  ])).isRequired,
 };

@@ -95,7 +95,7 @@ let Checkout = (props) => {
       {isFetchingLoadData && <Spinner />}
       {!isFetchingLoadData &&
       (
-        <Container component="div" maxWidth="xl" disableGutters>
+        <Container component="div" maxWidth="xl">
           <form
             className={classes.form}
             noValidate={false}
