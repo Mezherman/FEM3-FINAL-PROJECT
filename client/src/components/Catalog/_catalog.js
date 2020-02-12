@@ -14,11 +14,15 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     left: 0,
     padding: theme.spacing(2, 2, 1),
+
   },
   button: {
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.secondary.contrastText,
-    width: '100%'
+    width: '100%',
+    '&:hover': {
+      backgroundColor: theme.palette.primary.dark,
+    }
   }
 }));
 

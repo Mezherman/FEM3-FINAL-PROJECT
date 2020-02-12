@@ -88,7 +88,7 @@ const HeaderIcons = () => {
       <Box className={classes.iconButtonBox}>
         {isMobile && <Search searchIsShown={searchIsShown} />}
         {isTablet && <Search searchIsShown />}
-        {isDesktop && <Search searchIsShown={searchIsShown} />}
+        {isDesktop && searchIsShown && <Search searchIsShown={searchIsShown} />}
         <HeaderSearchIcon onClick={handleTooltipClose} toggleSearch={toggleSearch} />
         <Divider component="div" orientation="vertical" className={classes.dividerStyle} />
         <FavouritesIcon

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import { PropTypes } from 'prop-types';
-import { connect } from 'react-redux';
-import SearchIcon from '@material-ui/icons/Search';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import SearchIcon from '@material-ui/icons/Search';
 import { Collapse, Grow, useTheme, InputBase } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
-
 import search from '../../services/search';
 import getAllProducts from '../../services/getProducts';
 import { productsLoaded } from '../../redux/actions/products';
@@ -66,6 +66,7 @@ const Search = ({ productsLoaded, history, searchIsShown }) => {
     <InputBase
       placeholder="Search…"
       type="search"
+      autoFocus
       classes={{
         root: classes.inputRoot,
         input: classes.inputInput,
@@ -91,7 +92,9 @@ const mapDispatchToProps = {
 };
 
 Search.propTypes = {
-  searchIsShown: PropTypes.bool.isRequired
+  searchIsShown: PropTypes.bool.isRequired,
+  productsLoaded: PropTypes.func.isRequired,
+  history: PropTypes.oneOfType([PropTypes.object]).isRequired,
 };
 
 export default withRouter(connect(null, mapDispatchToProps)(Search));
