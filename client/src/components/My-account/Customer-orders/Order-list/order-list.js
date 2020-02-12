@@ -9,13 +9,14 @@ const OrderList = () => {
   const { orders } = useSelector((state) => state.user);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+
   useEffect(() => {
     getOrders()
       .then((response) => {
         dispatch(ordersAction(response));
         setLoading(false);
       })
-  }, [dispatch]);
+  }, []);
 
   return (
     <>

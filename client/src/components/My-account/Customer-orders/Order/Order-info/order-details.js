@@ -21,7 +21,7 @@ const OrderDetails = ({ classes, product, cartQuantity }) => {
             xs={12}
             justify="space-between"
             alignItems="center"
-            className={classes.productContainer}
+            className={classes.orderContainer}
           >
             <Grid
               component="div"

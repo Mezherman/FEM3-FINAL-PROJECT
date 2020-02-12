@@ -24,13 +24,13 @@ const useStylesOrderItem = makeStyles((theme) => ({
     fontSize: '0.7rem',
     [theme.breakpoints.up('sm')]: {
       flexDirection: 'row',
-      fontSize: '0.6rem',
+      fontSize: '0.663rem',
     },
     [theme.breakpoints.up('md')]: {
-      fontSize: '0.9rem',
+      fontSize: '1.1rem',
     },
     [theme.breakpoints.up('lg')]: {
-      fontSize: '1.1rem',
+      fontSize: '1.3rem',
     },
 
     '&:hover': {
@@ -102,13 +102,16 @@ const useStylesOrderItem = makeStyles((theme) => ({
     },
   },
   productContainer: {
-    fontSize: '1rem',
-    [theme.breakpoints.up('md')]: {
-      fontSize: '1.2rem',
+    fontSize: '1em',
+  },
+  orderContainer: {
+    fontSize: '1.2em',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '0.8em',
     },
-    [theme.breakpoints.up('lg')]: {
-      fontSize: '1.5rem',
-    },
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '1.2em',
+    }
   },
   orderInfo: {
     textAlign: 'center',

@@ -13,10 +13,11 @@ const OrderCustomerInfo = (props) => {
     { name: 'Mobile: ', value: mobile },
   ];
 
-  const Params = () => params.map((param) => {
+  const paramsList = () => params.map((param) => {
     const { name, value } = param;
     return (
       <OrderParamsTemplates
+        key={name + value}
         name={name}
         value={value}
         classContainer={classes.orderInfo}
@@ -29,7 +30,7 @@ const OrderCustomerInfo = (props) => {
   return (
     <List component="div" disablePadding>
       <ListItem component="div" className={classes.mainBlock} button>
-        <Params />
+        {paramsList()}
       </ListItem>
     </List>
   )
