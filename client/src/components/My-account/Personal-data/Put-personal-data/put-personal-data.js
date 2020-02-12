@@ -24,7 +24,7 @@ function PutPersonalData (props) {
           Please edit the information you want:
         </Typography>
         <Grid component="div" container spacing={2} direction="column" alignContent="center" >
-          <Grid component="div" container item xs={12} sm={6}>
+          <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
             <Field
               name="firstName"
               component={RenderEditTextField}
@@ -34,7 +34,7 @@ function PutPersonalData (props) {
               type="text"
             />
           </Grid>
-          <Grid component="div" container item xs={12} sm={6}>
+          <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
             <Field
               name="lastName"
               component={RenderEditTextField}
@@ -44,7 +44,7 @@ function PutPersonalData (props) {
               type="text"
             />
           </Grid>
-          <Grid component="div" container item xs={12} sm={6}>
+          <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
             <Field
               name="login"
               component={RenderEditTextField}
@@ -54,7 +54,7 @@ function PutPersonalData (props) {
               type="text"
             />
           </Grid>
-          <Grid component="div" container item xs={12} sm={6}>
+          <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
             <Field
               name="email"
               component={RenderEditTextField}
@@ -64,7 +64,7 @@ function PutPersonalData (props) {
               type="text"
             />
           </Grid>
-          <Grid component="div" container item xs={12} sm={6}>
+          <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
             <Field
               name="telephone"
               component={RenderEditTextField}

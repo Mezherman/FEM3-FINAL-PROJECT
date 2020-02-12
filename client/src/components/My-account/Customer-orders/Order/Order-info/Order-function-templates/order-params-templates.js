@@ -25,13 +25,15 @@ export default OrderParamsTemplates;
 OrderParamsTemplates.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  className: PropTypes.string,
+  classContainer: PropTypes.string,
+  classTitle: PropTypes.string,
   style: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.string,
   ]),
 };
 OrderParamsTemplates.defaultProps = {
-  className: '',
+  classContainer: '',
+  classTitle: '',
   style: {},
 };

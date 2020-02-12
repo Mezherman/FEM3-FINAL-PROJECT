@@ -109,7 +109,10 @@ const useStylesOrderItem = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: '0.8em',
     },
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
+      fontSize: '1em',
+    },
+    [theme.breakpoints.up('lg')]: {
       fontSize: '1.2em',
     }
   },
