@@ -16,75 +16,67 @@ function PutPersonalData (props) {
 
   const classes = useStyles();
 
-  const Fields = () => (
-    <Grid component="div" container spacing={2} direction="column" alignContent="center" >
-      <Grid component="div" container item xs={12} sm={6}>
-        <Field
-          name="firstName"
-          component={RenderEditTextField}
-          defaultValue={firstName}
-          classes={classes}
-          label="First Name"
-          type="text"
-        />
-      </Grid>
-      <Grid component="div" container item xs={12} sm={6}>
-        <Field
-          name="lastName"
-          component={RenderEditTextField}
-          defaultValue={lastName}
-          classes={classes}
-          label="Last Name"
-          type="text"
-        />
-      </Grid>
-      <Grid component="div" container item xs={12} sm={6}>
-        <Field
-          name="login"
-          component={RenderEditTextField}
-          defaultValue={login}
-          classes={classes}
-          label="Login"
-          type="text"
-        />
-      </Grid>
-      <Grid component="div" container item xs={12} sm={6}>
-        <Field
-          name="email"
-          component={RenderEditTextField}
-          defaultValue={email}
-          classes={classes}
-          label="Email"
-          type="text"
-        />
-      </Grid>
-      <Grid component="div" container item xs={12} sm={6}>
-        <Field
-          name="telephone"
-          component={RenderEditTextField}
-          placeholder="+380XXXXXXXXX"
-          defaultValue={telephone}
-          classes={classes}
-          label="Phone number"
-          type="tel"
-        />
-      </Grid>
-    </Grid>
-  );
-
-  const MainContent = () => (
-    <Grid component="div" item xs={12}>
-      <Typography paragraph component="p" variant="subtitle2" className={classes.rightTitle}>
-        Please edit the information you want:
-      </Typography>
-      <Fields />
-    </Grid>
-  );
-
   return (
     <Container>
       <h2>Edit Form</h2>
-      <MainContent />
+      <Grid component="div" item xs={12}>
+        <Typography paragraph component="p" variant="subtitle2" className={classes.rightTitle}>
+          Please edit the information you want:
+        </Typography>
+        <Grid component="div" container spacing={2} direction="column" alignContent="center" >
+          <Grid component="div" container item xs={12} sm={6}>
+            <Field
+              name="firstName"
+              component={RenderEditTextField}
+              defaultValue={firstName}
+              classes={classes}
+              label="First Name"
+              type="text"
+            />
+          </Grid>
+          <Grid component="div" container item xs={12} sm={6}>
+            <Field
+              name="lastName"
+              component={RenderEditTextField}
+              defaultValue={lastName}
+              classes={classes}
+              label="Last Name"
+              type="text"
+            />
+          </Grid>
+          <Grid component="div" container item xs={12} sm={6}>
+            <Field
+              name="login"
+              component={RenderEditTextField}
+              defaultValue={login}
+              classes={classes}
+              label="Login"
+              type="text"
+            />
+          </Grid>
+          <Grid component="div" container item xs={12} sm={6}>
+            <Field
+              name="email"
+              component={RenderEditTextField}
+              defaultValue={email}
+              classes={classes}
+              label="Email"
+              type="text"
+            />
+          </Grid>
+          <Grid component="div" container item xs={12} sm={6}>
+            <Field
+              name="telephone"
+              component={RenderEditTextField}
+              placeholder="+380XXXXXXXXX"
+              defaultValue={telephone}
+              classes={classes}
+              label="Phone number"
+              type="tel"
+            />
+          </Grid>
+        </Grid>
+      </Grid>
     </Container>
   )
 }
