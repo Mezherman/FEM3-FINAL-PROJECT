@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     '& .MuiCheckbox-colorSecondary.Mui-checked': {
       color: theme.palette.primary.main
     },
-    '&.MuiFormLabel-root': {
+    '& .MuiFormLabel-root': {
       color: theme.palette.secondary.dark
     },
     '&.MuiFormLabel-root.Mui-error ': {

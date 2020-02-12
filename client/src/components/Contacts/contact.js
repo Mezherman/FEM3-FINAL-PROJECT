@@ -1,11 +1,11 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import { Grid } from '@material-ui/core';
+
 import useStyles from './_contact';
 
-export default function Contact(props) {
+const Contact = ({ icon, children }) => {
   const classes = useStyles();
-  const { icon, children } = props;
   return (
     <>
       <Grid container alignItems="center" spacing={1}>
@@ -27,3 +27,5 @@ Contact.defaultProps = {
   icon: null,
   children: null
 };
+
+export default Contact;

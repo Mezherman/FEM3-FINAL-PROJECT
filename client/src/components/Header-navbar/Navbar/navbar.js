@@ -1,8 +1,17 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
+import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
-import { MenuItem, ListItem, ListItemIcon, ListItemText, useTheme, Divider, Drawer } from '@material-ui/core';
+import {
+  MenuItem,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  useTheme,
+  Divider,
+  Drawer
+} from '@material-ui/core';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
@@ -14,7 +23,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import List from '@material-ui/core/List';
 import useStyles from './_navbar';
 import RoutesName from '../../../routes-list';
-import store from '../../../index';
 
 export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, toggleDrawer }) {
   const StyledMenuItem = withStyles((theme) => ({
@@ -28,10 +36,10 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
       },
     },
   }))(MenuItem);
+
   const classes = useStyles();
   const theme = useTheme();
-  const { mainCategories } = store.getState().categoriesReducer.catalog;
-  const { allCategories } = store.getState().categoriesReducer.catalog;
+  const { mainCategories, allCategories } = useSelector((state) => state.categoriesReducer.catalog);
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
   const [drawerCat, drawerCatIsOpen] = useState(false);
   const [drawerSubCat, drawerSubCatIsOpen] = useState(false);
@@ -66,7 +74,8 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
       case 'CONTACTS': {
         return (<PlaceIcon />)
       }
-      default: return (<HomeIcon />)
+      default:
+        return (<HomeIcon />)
     }
   };
   const link = {
@@ -85,46 +94,43 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
       {['HOME', 'CATALOG', 'ABOUT US', 'DELIVERY & PAYMENT', 'CONTACTS'].map((text) => {
         if (text === 'CATALOG') {
           return (
-            // <>
-            <ListItem
-              onClick={() => {
-                toggleDrawerCat(true);
-                toggleDrawer(false);
-              }}
-              className={classes.nestedMenuItem}
-              key={text}
-            >
-              <span
-                className={classes.headerMenuListHyperlink}
+            <Fragment key={text}>
+              <ListItem
+                onClick={() => {
+                  toggleDrawerCat(true);
+                  toggleDrawer(false);
+                }}
+                className={classes.nestedMenuItem}
               >
-                <ListItemIcon className={classes.icon} >{listItemIcon(text)}</ListItemIcon>
-                <ListItemText primary={text} />
-              </span>
-              <KeyboardArrowRightIcon />
-            </ListItem>
-          // <Divider />
-            // </>
+                <span className={classes.headerMenuListHyperlink}>
+                  <ListItemIcon className={classes.icon}>{listItemIcon(text)}</ListItemIcon>
+                  <ListItemText primary={text} />
+                </span>
+                <KeyboardArrowRightIcon />
+              </ListItem>
+              <Divider />
+            </Fragment>
           )
         }
+
         return (
-          <>
+          <Fragment key={text}>
             <ListItem
               onClick={() => {
                 toggleDrawer(false);
-              // console.log({RoutesName.${text})
+                // console.log({RoutesName.${text})
               }}
-              key={text}
             >
               <Link
                 to={link[text]}
                 className={classes.headerMenuListHyperlink}
               >
-                <ListItemIcon className={classes.icon} >{listItemIcon(text)}</ListItemIcon>
+                <ListItemIcon className={classes.icon}>{listItemIcon(text)}</ListItemIcon>
                 <ListItemText primary={text} />
               </Link>
             </ListItem>
             <Divider />
-          </>
+          </Fragment>
         )
       })}
     </List>
@@ -248,7 +254,7 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
   );
 
   return (
-  // mobile
+    // mobile
     <>
       {!isDesktop && (
         <>

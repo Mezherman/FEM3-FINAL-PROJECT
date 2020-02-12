@@ -4,7 +4,7 @@ import 'typeface-roboto';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
 import { bindActionCreators } from 'redux'
-import { connect, useDispatch } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import * as cartActions from '../../redux/actions/CartActions';
 
@@ -14,15 +14,21 @@ import RoutesName from '../../routes-list';
 import AddToFavoriteBtn from '../Add-to-favorites/Add-to-favorite-btn';
 import AddToCartButton from '../Add-to-cart-button/add-to-cart-button'
 
-function ProductCard({ product, favorites }) {
+function ProductCard({ product }) {
+  const classes = useStyles();
   const dispatch = useDispatch();
+
   const actions = useMemo(
     () => bindActionCreators(cartActions, dispatch),
     [dispatch]
   );
-  const { imageUrls, name, currentPrice, previousPrice, itemNo, _id: itemId, quantity} = product;
-  const classes = useStyles();
+
+  const { imageUrls, name, currentPrice, previousPrice, itemNo, _id: itemId, quantity } = product;
+  const { loggedIn } = useSelector((state) => state.user);
+  const { favorites } = useSelector((state) => state.favoritesReducer);
+
   const [modalIsVisible, setModalVisibility] = useState(false);
+
   const closeModal = () => {
     setModalVisibility(false)
   };
@@ -42,10 +48,7 @@ function ProductCard({ product, favorites }) {
 Item.No
             {itemNo}
           </span>
-          <AddToFavoriteBtn
-            favorites={favorites}
-            itemId={itemId}
-          />
+          {loggedIn && <AddToFavoriteBtn favorites={favorites} itemId={itemId} />}
         </div>
 
         <Link
@@ -106,9 +109,8 @@ Item.No
     </>
   )
 }
-const mapStateToProps = (state) =>
-  // console.log('state', state);
-  state.favoritesReducer
+
+const mapStateToProps = (state) => state.favoritesReducer;
 
 export default connect(mapStateToProps)(ProductCard);
 
@@ -118,9 +120,11 @@ ProductCard.propTypes = {
     PropTypes.oneOfType([
       PropTypes.array,
       PropTypes.string,
-      PropTypes.number])
+      PropTypes.number,
+      PropTypes.bool,
+      PropTypes.object
+    ])
   ).isRequired,
-  favorites: PropTypes.array.isRequired,
   // name: PropTypes.string.isRequired,
   // imageUrls: PropTypes.array.isRequired,
   // currentPrice: PropTypes.string.isRequired,

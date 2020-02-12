@@ -1,21 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Typography from '@material-ui/core/Typography'
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
-import FormControl from '@material-ui/core/FormControl'
-import FormGroup from '@material-ui/core/FormGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
 import { connect } from 'react-redux'
-import withWidth from '@material-ui/core/withWidth'
+
+import {
+  ExpansionPanel,
+  ExpansionPanelSummary,
+  Typography,
+  ExpansionPanelDetails,
+  FormControl,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  withWidth
+} from '@material-ui/core'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import RangeSlider from '../Range/range'
-import useStyles from './_filter-panel';
 import { getFilterProducts } from '../../../redux/actions/filter';
 
-function FilterPanel(props) {
+import useStyles from './_filter-panel';
+
+const FilterPanel = (props) => {
   const classes = useStyles();
   const { name, filterResults, getFilterProducts, max, colors, brands, width } = props;
 
@@ -71,14 +75,8 @@ function FilterPanel(props) {
 
   return (
     <div>
-      <ExpansionPanel
-        className={classes.root}
-        square
-        defaultExpanded={isShowPanel[width]}
-      >
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-        >
+      <ExpansionPanel className={classes.root} square defaultExpanded={Boolean(isShowPanel[width])}>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>{name}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
@@ -89,17 +87,15 @@ function FilterPanel(props) {
       </ExpansionPanel>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   filterResults: state.filterReducer.filterResults
-})
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    getFilterProducts: (value) => dispatch(getFilterProducts(value))
-  }
-}
+const mapDispatchToProps = {
+  getFilterProducts
+};
 
 FilterPanel.propTypes = {
   name: PropTypes.string.isRequired,
@@ -107,13 +103,14 @@ FilterPanel.propTypes = {
   filterResults: PropTypes.objectOf(PropTypes.array).isRequired,
   colors: PropTypes.arrayOf(PropTypes.object).isRequired,
   brands: PropTypes.arrayOf(PropTypes.object).isRequired,
-  getFilterProducts: PropTypes.func.isRequired
+  getFilterProducts: PropTypes.func.isRequired,
+  width: PropTypes.string.isRequired
 };
 
 FilterPanel.defaultProps = {
   max: null,
 };
 
-const filterPanel = withWidth()(FilterPanel)
+const filterPanel = withWidth()(FilterPanel);
 
 export default connect(mapStateToProps, mapDispatchToProps)(filterPanel)

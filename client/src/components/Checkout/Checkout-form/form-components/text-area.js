@@ -1,17 +1,18 @@
 import React from 'react';
 import { TextField } from '@material-ui/core';
+import { PropTypes } from 'prop-types';
+import useStyles from '../_checkout-form'
 
 const TextArea = (props) => {
-  // console.log(props);
+  const classes = useStyles();
   const {
-    input: { onBlur, onChange, value, name },
-    meta: { touched, error },
+    input: { onChange, name },
     label
   } = props;
   return (
     <TextField
       name={name}
-      // className={classes.textArea}
+      className={classes.root}
       label={label}
       multiline
       fullWidth
@@ -23,3 +24,16 @@ const TextArea = (props) => {
 };
 
 export default TextArea;
+
+TextArea.propTypes = {
+  input: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string]).isRequired,
+  onChange: PropTypes.func,
+  name: PropTypes.string,
+  label: PropTypes.string.isRequired,
+
+};
+
+TextArea.defaultProps = {
+  name: '',
+  onChange: () => {}
+};

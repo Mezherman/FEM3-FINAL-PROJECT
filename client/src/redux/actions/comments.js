@@ -3,7 +3,7 @@ import {
   GET_PRODUCT_COMMENTS,
   POST_COMMENTS_REQUEST,
   RESET_COMMENTS_LIST
-} from '../reducers/commentsReducer';
+} from './actionTypes';
 
 export function sendComment(comment) {
   return {

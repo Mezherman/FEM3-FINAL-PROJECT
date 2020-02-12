@@ -1,6 +1,4 @@
 import { makeStyles } from '@material-ui/core';
-// import Menu from '@material-ui/core/Menu';
-// import React from 'react';
 
 const useStylesSingIn = makeStyles((theme) => ({
   paper: {
@@ -24,16 +22,6 @@ const useStylesSingIn = makeStyles((theme) => ({
   checkBox: {
     color: theme.palette.primary.main,
   },
-  // secondForm: {
-  //   width: '100%', // Fix IE 11 issue.
-  //   marginTop: theme.spacing(1),
-  //   '& div>label': {
-  //     color: theme.palette.error.dark,
-  //   },
-  //   '& label>span>span': {
-  //     color: theme.palette.primary.main,
-  //   },
-  // },
   submit: {
     margin: theme.spacing(2, 0, 2),
   },
@@ -50,24 +38,3 @@ const useStylesSingIn = makeStyles((theme) => ({
 }));
 
 export default useStylesSingIn;
-
-// export const StyledMenu = withStyles({
-//   paper: {
-//     border: '1px solid #d3d4d5',
-//   },
-// })((props) => (
-//   <Menu
-//     elevation={0}
-//     getContentAnchorEl={null}
-//     anchorOrigin={{
-//       vertical: 'bottom',
-//       horizontal: 'center',
-//     }}
-//     transformOrigin={{
-//       vertical: 'top',
-//       horizontal: 'center',
-//     }}
-//     /* eslint-disable-next-line react/jsx-props-no-spreading */
-//     {...props}
-//   />
-// ));

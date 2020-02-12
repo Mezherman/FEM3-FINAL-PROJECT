@@ -1,51 +1,72 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux'
-import SearchIcon from '@material-ui/icons/Search'
+import React, { useEffect, useState } from 'react'
+import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import InputBase from '@material-ui/core/InputBase';
-import { Collapse, Grow, useTheme } from '@material-ui/core';
+import { connect } from 'react-redux';
+
+import SearchIcon from '@material-ui/icons/Search';
+import { Collapse, Grow, useTheme, InputBase } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
-import useStyles from './_search';
 import search from '../../services/search';
-import getAllProducts from '../../services/getProducts'
-import { productsLoaded } from '../../redux/actions/products'
+import getAllProducts from '../../services/getProducts';
+import { productsLoaded } from '../../redux/actions/products';
 
-function Search({ productsLoaded, history, searchIsShown }) {
+import useStyles from './_search';
+
+const Search = ({ productsLoaded, history, searchIsShown }) => {
   const classes = useStyles();
-  const [data, setData] = useState([]);
-  const [value, setValue] = useState('');
+  const [searchedValue, setSearchedValue] = useState('');
 
-  useEffect(() => {
-    getAllProducts()
-      .then((products) => {
-        setData(products);
-      })
-  }, []);
+  // useEffect(() => {
+  //   getAllProducts()
+  //     .then((products) => products)
+  // }, []);
 
   const handleChange = (event) => {
-    setValue(event.target.value);
+    setSearchedValue(event.target.value);
     history.push('/products/search')
   };
 
-  const searchItem = {
-    query: value
-  };
-
-  if (value) {
-    search(searchItem)
-      .then((response) => {
-        productsLoaded(response);
+  if (searchedValue) {
+    search(searchedValue)
+      .then((searchedProducts) => {
+        productsLoaded(searchedProducts);
       })
-      .then(() => setValue(''))
   }
 
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
+  const renderSearch = (desktop) => {
+    if (desktop) {
+      return (
+        <Grow in={searchIsShown} >
+          <div className={classes.search}>
+            <SearchIcon
+              className={classes.searchIcon}
+            />
+            {inputBase}
+          </div>
+        </Grow>
+      )
+    }
+
+    return (
+      <div className={classes.search}>
+        <SearchIcon
+          className={classes.searchIcon}
+        />
+        <Collapse in={Boolean(searchIsShown)} >
+          {inputBase}
+        </Collapse>
+      </div>
+    )
+  };
+
   const inputBase = (
     <InputBase
       placeholder="Search…"
       type="search"
+      autoFocus
       classes={{
         root: classes.inputRoot,
         input: classes.inputInput,
@@ -57,38 +78,23 @@ function Search({ productsLoaded, history, searchIsShown }) {
         }
       }}
     />
-  )
+  );
 
   return (
     <>
-      {isDesktop ? (
-        <Grow in={searchIsShown} >
-          <div className={classes.search}>
-            <SearchIcon
-              className={classes.searchIcon}
-            />
-            {inputBase}
-          </div>
-        </Grow>
-      )
-        : (
-          <div className={classes.search}>
-            <SearchIcon
-              className={classes.searchIcon}
-            />
-            <Collapse in={Boolean(searchIsShown)} >
-              {inputBase}
-            </Collapse>
-          </div>
-        )}
+      {renderSearch(isDesktop)}
     </>
   )
-}
-
-const mapStateToProps = () => {};
+};
 
 const mapDispatchToProps = {
   productsLoaded
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));
+Search.propTypes = {
+  searchIsShown: PropTypes.bool.isRequired,
+  productsLoaded: PropTypes.func.isRequired,
+  history: PropTypes.oneOfType([PropTypes.object]).isRequired,
+};
+
+export default withRouter(connect(null, mapDispatchToProps)(Search));

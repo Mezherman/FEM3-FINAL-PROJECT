@@ -19,8 +19,6 @@ export default function CollapsingItem(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
-  console.log(typeof open);
-
   const handleClick = () => {
     setOpen(!open);
   };
