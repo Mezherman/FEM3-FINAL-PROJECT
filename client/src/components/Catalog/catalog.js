@@ -79,7 +79,7 @@ const Catalog = ({
         <SwipeableDrawer
           onOpen={() => toggleFilter(true)}
           anchor="bottom"
-          open={filterIsOpen}
+          open={Boolean(filterIsOpen)}
           onClose={() => toggleFilter(false)}
         >
           <Filter onClose={toggleFilter} />
@@ -98,10 +98,10 @@ const Catalog = ({
           <Grid item sm={12} md={4}>
             {filterRender(isDesktop)}
           </Grid>
-          <Grid item sm={12} md={8}>
+          <Grid item xs={12} md={8}>
             <ProductList assortment={assortment} />
           </Grid>
-          <Grid item sm={12}>
+          <Grid item xs={12}>
             <ProductCardCarousel
               products={productsToShow}
               label="most popular products"

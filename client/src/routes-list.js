@@ -13,7 +13,9 @@ const RoutesName = {
   personalData: '/personal-data',
   favorites: '/favorites',
   myOrders: '/orders',
-  search: '/search'
+  search: '/search',
+  adminHome: '/admin',
+  forbidden: '/forbidden',
 };
 
 export default RoutesName;

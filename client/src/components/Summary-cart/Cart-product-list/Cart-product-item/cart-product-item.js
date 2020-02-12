@@ -116,7 +116,7 @@ export default function CartProductItem({ product, onSetProductQuantity, onRemov
 
 CartProductItem.propTypes = {
   product: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.boolean, PropTypes.symbol])
+    PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.symbol])
   ).isRequired,
   onSetProductQuantity: PropTypes.func.isRequired,
   onRemoveProduct: PropTypes.func.isRequired

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types';
-import { Slider, Input } from '@material-ui/core';
 import { connect } from 'react-redux'
+
+import { Slider, Input } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import useStyles from './_range';
 import { getFilterProducts } from '../../../redux/actions/filter'
+
+import useStyles from './_range';
 
 const CustomSlider = withStyles((theme) => ({
   root: {

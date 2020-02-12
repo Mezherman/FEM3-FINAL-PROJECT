@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Divider, Button, SvgIcon } from '@material-ui/core';
+import { Box, Divider, IconButton, SvgIcon } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 import withWidth from '@material-ui/core/withWidth';
 import ProductCard from '../Product-card/product-card';
@@ -7,7 +7,7 @@ import Carousels from '../Carousel/carousel';
 import useStyles from './_product-card-carousel';
 
 function ProductCardCarousel(props) {
-  const { products, label } = props;
+  const { products, label, width } = props;
   const classes = useStyles();
 
   const slidesToShow = {
@@ -25,11 +25,10 @@ function ProductCardCarousel(props) {
         />
       </div>
     ))
-  )
+  );
 
-  return (
-    <Box className={classes.carousel}>
-      <h2 className={classes.title}>{label}</h2>
+  const renderCarousel = () => (
+    <>
       <Carousels
       // autoPlay
         wrapAround
@@ -37,27 +36,34 @@ function ProductCardCarousel(props) {
         transitionMode="scroll"
         cellSpacing={5}
         slidesToScroll={1}
-        slidesToShow={slidesToShow[props.width]}
+        slidesToShow={slidesToShow[width]}
         renderCenterLeftControls={({ previousSlide }) => (
-          <Button
+          <IconButton
 
             onClick={previousSlide}
           >
             <SvgIcon>
               <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd"><path d="M20 .755l-14.374 11.245 14.374 11.219-.619.781-15.381-12 15.391-12 .609.755z" /></svg>
             </SvgIcon>
-          </Button>
+          </IconButton>
         )}
         renderCenterRightControls={({ nextSlide }) => (
-          <Button onClick={nextSlide}>
+          <IconButton onClick={nextSlide}>
             <SvgIcon>
               <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd"><path d="M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z" /></svg>
             </SvgIcon>
-          </Button>
+          </IconButton>
         )}
       >
         {productCardList(products)}
       </Carousels>
+    </>
+  );
+  
+  return (
+    <Box className={classes.carousel}>
+      <h2 className={classes.title}>{label}</h2>
+      {renderCarousel()}
       <Divider />
     </Box>
   );
@@ -65,6 +71,7 @@ function ProductCardCarousel(props) {
 
 ProductCardCarousel.propTypes = {
   label: PropTypes.string.isRequired,
+  width: PropTypes.string.isRequired,
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 

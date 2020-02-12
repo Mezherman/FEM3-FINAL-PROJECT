@@ -8,30 +8,8 @@ import PropTypes from 'prop-types';
 import TableSpecification from '../Table-specification/table-specifications';
 import Comment from '../../Comment/comment';
 
-const useStyles = makeStyles((theme) => createStyles({
-  root: {
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
-  },
-  highlights: {
-    fontSize: '1rem',
-    textAlign: 'justify',
-    lineHeight: '2',
-    paddingBottom: theme.spacing(3)
-  },
-  description: {
-    fontSize: '1rem',
-    textAlign: 'justify',
-    lineHeight: '2',
-    paddingBottom: theme.spacing(3)
-  },
-  badge: {
-    '& .MuiBadge-anchorOriginTopRightRectangle': {
-      top: 12,
-      right: 2
-    }
-  }
-}),);
+import 'react-tabs/style/react-tabs.css';
+import useStyles from './_product-detail-tab';
 
 export default function ProductDetailTab({ data }) {
   const { myCustomParams, _id } = data;
@@ -40,7 +18,6 @@ export default function ProductDetailTab({ data }) {
   const commentsLength = useSelector((state) => state.commentsReducer.commentsList.length.toString());
 
   useEffect(() => {
-    console.log(commentsLength);
   }, [commentsLength]);
   return (
     <>
@@ -79,5 +56,12 @@ export default function ProductDetailTab({ data }) {
 }
 
 ProductDetailTab.propTypes = {
-  data: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.boolean, PropTypes.symbol])).isRequired,
+  data: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.symbol,
+    PropTypes.array,
+    PropTypes.number,
+    PropTypes.object
+  ])).isRequired,
 };

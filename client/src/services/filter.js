@@ -6,7 +6,7 @@ function getFilteredProducts(value) {
   return axios
     .get(`/products/filter?${value}`)
     .then((response) => response.data.products)
-    .catch((error) => console.log(error))
+    .catch((error) => error)
 }
 
 function getColors() {

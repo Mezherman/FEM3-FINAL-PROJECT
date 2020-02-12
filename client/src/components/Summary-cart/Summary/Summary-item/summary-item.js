@@ -20,10 +20,11 @@ export default SummaryItem;
 
 SummaryItem.propTypes = {
   title: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   type: PropTypes.string
 }
 
 SummaryItem.defaultProps = {
+  value: '',
   type: 'item'
 }

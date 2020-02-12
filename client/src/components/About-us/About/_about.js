@@ -3,7 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   wrapper: {
     backgroundImage: `url(${process.env.PUBLIC_URL}/img/wmf_about.jpg)`,
-    backgroundAttachment: 'fixed'
+    backgroundAttachment: 'fixed',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover'
   },
   container: {
     position: 'relative',

@@ -1,23 +1,21 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import { FormLabel, TextField } from '@material-ui/core';
 import useStyles from '../_checkout-form';
 
 const RenderTextField = (props) => {
   const classes = useStyles();
-  // console.log(props);
+
   const {
     input: { onBlur, onChange, value },
     name,
     meta: { touched, error },
     label,
     defaultValue,
-    type
   } = props;
-  // console.log('VALUE in PROPS=', value);
-  // console.log('REST in PROPS=', rest);
+
   return (
     <TextField
-      type={type}
       name={name}
       variant="outlined"
       fullWidth
@@ -34,3 +32,25 @@ const RenderTextField = (props) => {
 };
 
 export default RenderTextField;
+
+RenderTextField.propTypes = {
+  input: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string]).isRequired,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
+  value: PropTypes.string,
+  name: PropTypes.string,
+  meta: PropTypes.oneOfType([PropTypes.object, PropTypes.bool, PropTypes.string]).isRequired,
+  touched: PropTypes.bool,
+  error: PropTypes.objectOf(PropTypes.string),
+  label: PropTypes.string.isRequired,
+  defaultValue: PropTypes.string.isRequired
+};
+
+RenderTextField.defaultProps = {
+  error: {},
+  touched: false,
+  name: '',
+  value: '',
+  onBlur: () => {},
+  onChange: () => {}
+};

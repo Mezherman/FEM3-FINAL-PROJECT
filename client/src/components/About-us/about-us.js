@@ -1,6 +1,8 @@
 import React from 'react';
 import { Divider, Container } from '@material-ui/core';
+
 import useStyles from './_about-us';
+
 import About from './About/about'
 import Video from './Video/video'
 import Brands from './Brands/brands'
