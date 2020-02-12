@@ -3,8 +3,8 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import TelegramIcon from '@material-ui/icons/Telegram';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
-import { Divider } from '@material-ui/core';
-import Container from '@material-ui/core/Container';
+import { Divider, Container } from '@material-ui/core';
+
 import Contact from './contact';
 import useStyles from './_contacts';
 

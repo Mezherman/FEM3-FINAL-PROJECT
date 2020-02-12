@@ -1,8 +1,10 @@
-import React from 'react'
-import { Divider, Grid } from '@material-ui/core'
-import { Link } from 'react-router-dom'
-import RoutesName from '../../../routes-list'
-import useStyles from './_main-text'
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+import { Divider, Grid } from '@material-ui/core';
+import RoutesName from '../../../routes-list';
+
+import useStyles from './_main-text';
 
 const MainText = () => {
   const classes = useStyles();

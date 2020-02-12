@@ -1,8 +1,9 @@
-import React from 'react'
-import { Grid } from '@material-ui/core'
-import FooterCompanyLink from './Footer-links/company'
-import FooterAccountLink from './Footer-links/account'
-import FooterContactsLink from './Footer-links/contacts'
+import React from 'react';
+
+import { Grid } from '@material-ui/core';
+import FooterCompanyLink from './Footer-links/company';
+import FooterAccountLink from './Footer-links/account';
+import FooterContactsLink from './Footer-links/contacts';
 
 const FooterNavbar = () => (
   <Grid xs={12} md={7} item>

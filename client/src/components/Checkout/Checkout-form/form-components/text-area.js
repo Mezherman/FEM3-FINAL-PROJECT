@@ -1,8 +1,10 @@
 import React from 'react';
 import { TextField } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
+import useStyles from '../_checkout-form'
 
 const TextArea = (props) => {
+  const classes = useStyles();
   const {
     input: { onChange, name },
     label
@@ -10,7 +12,7 @@ const TextArea = (props) => {
   return (
     <TextField
       name={name}
-      // className={classes.textArea}
+      className={classes.root}
       label={label}
       multiline
       fullWidth

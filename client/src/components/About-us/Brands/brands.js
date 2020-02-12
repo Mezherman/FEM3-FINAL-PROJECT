@@ -1,12 +1,11 @@
-import { Divider } from '@material-ui/core'
 import React from 'react'
+import { Divider } from '@material-ui/core'
 
-const Brands = () => {
-  return (
-    <>
-      <h3>Brands and companies</h3>
-      <Divider />
-      <p>
+const Brands = () => (
+  <>
+    <h3>Brands and companies</h3>
+    <Divider />
+    <p>
         Some WMF stainless products produced in Germany after World War II are
         called &#8243;Fraser&#8242;s
         WMF&#8242; because they were distributed in the United States by Fraser&#8242;s Ltd. of
@@ -18,15 +17,14 @@ const Brands = () => {
         Fraser in 2005, Fraser&#8242;s ceased to exist, and WMF products are now distributed in
         the U.S.
         by WMF Americas Group of North Carolina.
-      </p>
-      <p>
+    </p>
+    <p>
         Since 1998 the German cooking pan manufacturer Silit also belongs to the WMF Group. Silit
         is still marketed as an independent brand. In 2002, the range of products is rounded off
         by
         the acquisition of Kaiser Backformen.
-      </p>
-    </>
-  )
-}
+    </p>
+  </>
+)
 
 export default Brands;

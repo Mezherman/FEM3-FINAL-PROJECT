@@ -23,8 +23,6 @@ const Filter = (props) => {
     currentCategory
   } = props;
 
-  // console.log(currentCategory);
-
   const { catalogLocation, catalog } = categoriesReducer;
   const { allCategories } = catalog;
   const classes = useStyles();
@@ -94,6 +92,7 @@ const Filter = (props) => {
         className={classes.button}
         size="large"
         variant="contained"
+        disableElevation
         color="primary"
         onClick={() => {
           filterType(valToFilter);
