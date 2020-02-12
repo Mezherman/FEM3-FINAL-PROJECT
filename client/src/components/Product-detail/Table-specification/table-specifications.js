@@ -102,6 +102,9 @@ TableSpecifications.propTypes = {
     PropTypes.oneOfType([
       PropTypes.array,
       PropTypes.string,
-      PropTypes.boolean])
+      PropTypes.bool,
+      PropTypes.number,
+      PropTypes.object
+    ])
   ).isRequired,
 };

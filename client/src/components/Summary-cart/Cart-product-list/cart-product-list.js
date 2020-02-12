@@ -9,8 +9,13 @@ const CartProductList = React.memo(({ products, actions }) => {
   const classes = useStyles();
   const list = [];
   products.forEach((product) => {
-    list.push(<CartProductItem key={product.product._id} product={product} onSetProductQuantity={actions.setProductQuantity} onRemoveProduct={products.length > 1 ? actions.removeProductFromCart : actions.removeCart} />);
-  })
+    list.push(<CartProductItem
+      key={product.product._id}
+      product={product}
+      onSetProductQuantity={actions.setProductQuantity}
+      onRemoveProduct={products.length > 1 ? actions.removeProductFromCart : actions.removeCart}
+    />);
+  });
 
   return (
     <Box className={classes.root}>
@@ -20,16 +25,15 @@ const CartProductList = React.memo(({ products, actions }) => {
       {list}
     </Box>
   );
-})
+});
+
 export default CartProductList;
 
 CartProductList.propTypes = {
-  products: PropTypes.objectOf(
+  products: PropTypes.arrayOf(
     PropTypes.object,
-    PropTypes.array
   ).isRequired,
   actions: PropTypes.objectOf(
-    PropTypes.object,
-    PropTypes.array
+    PropTypes.func
   ).isRequired,
-}
+};

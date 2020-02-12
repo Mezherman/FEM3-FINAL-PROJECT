@@ -95,7 +95,7 @@ let Checkout = (props) => {
       {isFetchingLoadData && <Spinner />}
       {!isFetchingLoadData &&
       (
-        <Container component="div" maxWidth="xl" disableGutters>
+        <Container component="div" maxWidth="xl">
           <form
             className={classes.form}
             noValidate={false}
@@ -153,7 +153,7 @@ Checkout.propTypes = {
     PropTypes.number,
     PropTypes.func
   ]).isRequired,
-  handleSubmit: PropTypes.func,
+  handleSubmit: PropTypes.func.isRequired,
   user: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.string,

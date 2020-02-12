@@ -53,7 +53,11 @@ export default function ProductDetailCollapse({ data }) {
 }
 
 ProductDetailCollapse.propTypes = {
-  data: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.boolean])).isRequired,
+  data: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.bool,
+  ]).isRequired,
   myCustomParams: PropTypes.objectOf(PropTypes.string),
   // productDescription: PropTypes.arrayOf(PropTypes.string).isRequired,
   // productHighlights: PropTypes.arrayOf(PropTypes.string).isRequired,

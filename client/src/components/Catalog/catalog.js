@@ -79,7 +79,7 @@ const Catalog = ({
         <SwipeableDrawer
           onOpen={() => toggleFilter(true)}
           anchor="bottom"
-          open={filterIsOpen}
+          open={Boolean(filterIsOpen)}
           onClose={() => toggleFilter(false)}
         >
           <Filter onClose={toggleFilter} />
