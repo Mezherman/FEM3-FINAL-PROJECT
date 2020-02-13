@@ -1,10 +1,12 @@
 import React from 'react';
 import { Box, Button, TextField } from '@material-ui/core';
 
+import { PropTypes } from 'prop-types';
 import useStyles from './_form-block';
-import {PropTypes} from "prop-types";
 
-const FormBlock = ({handleSubmit, commentText, focusHandler, blurHandler, commentTextHandler, buttonDisabled}) => {
+const FormBlock = ({
+  handleSubmit, commentText, focusHandler, blurHandler, commentTextHandler, buttonDisabled, cancelHandler
+}) => {
   const classes = useStyles();
 
   return (
@@ -21,15 +23,26 @@ const FormBlock = ({handleSubmit, commentText, focusHandler, blurHandler, commen
           onBlur={blurHandler}
           onChange={commentTextHandler}
         />
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.commentBtn}
-          type="submit"
-          disabled={buttonDisabled}
-        >
-          Send comment
-        </Button>
+        <Box>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.commentBtn}
+            type="submit"
+            disabled={buttonDisabled}
+          >
+            Send comment
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            className={`${classes.commentBtn} ${classes.cancelBtn}`}
+            type="submit"
+            onClick={cancelHandler}
+          >
+            Cancel
+          </Button>
+        </Box>
       </Box>
     </form>
   )
@@ -38,10 +51,11 @@ const FormBlock = ({handleSubmit, commentText, focusHandler, blurHandler, commen
 FormBlock.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   commentText: PropTypes.string.isRequired,
-  focusHandler: PropTypes.bool.isRequired,
-  blurHandler: PropTypes.bool.isRequired,
-  commentTextHandler: PropTypes.string.isRequired,
-  buttonDisabled: PropTypes.bool.isRequired
+  focusHandler: PropTypes.func.isRequired,
+  blurHandler: PropTypes.func.isRequired,
+  commentTextHandler: PropTypes.func.isRequired,
+  buttonDisabled: PropTypes.bool.isRequired,
+  cancelHandler: PropTypes.func.isRequired
 };
 
 export default FormBlock;

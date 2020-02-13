@@ -7,18 +7,14 @@ import PropTypes from 'prop-types';
 
 import TableSpecification from '../Table-specification/table-specifications';
 import Comment from '../../Comment/comment';
-
-import 'react-tabs/style/react-tabs.css';
 import useStyles from './_product-detail-tab';
 
 export default function ProductDetailTab({ data }) {
-  const { myCustomParams, _id } = data;
+  const { myCustomParams } = data;
   const { productDescription, productHighlights } = myCustomParams;
   const classes = useStyles();
   const commentsLength = useSelector((state) => state.commentsReducer.commentsList.length.toString());
 
-  useEffect(() => {
-  }, [commentsLength]);
   return (
     <>
       <Tabs>
