@@ -8,7 +8,7 @@ import useStyles from '../../_header';
 
 const MenuLogoIcons = ({ toggleDrawer, mobileMenuId }) => {
   const classes = useStyles();
-  const BurgerMenu = () => (
+  const burgerMenu = () => (
     <IconButton
       onClick={() => toggleDrawer(true)}
       edge="start"
@@ -21,7 +21,7 @@ const MenuLogoIcons = ({ toggleDrawer, mobileMenuId }) => {
     </IconButton>
   );
 
-  const LogoIcon = () => (
+  const logoIcon = () => (
     <Link to={RoutesName.home}>
       <IconButton edge="start" className={classes.logoIcon}>
         <img
@@ -35,8 +35,8 @@ const MenuLogoIcons = ({ toggleDrawer, mobileMenuId }) => {
 
   return (
     <Box className={classes.boxLogo}>
-      <BurgerMenu />
-      <LogoIcon />
+      {burgerMenu()}
+      {logoIcon()}
     </Box>
   )
 };

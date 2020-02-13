@@ -83,15 +83,6 @@ const HeaderIcons = () => {
     prevOpen.current = open;
   }, [open]);
 
-  // useEffect(() => () => {
-  //   console.log('UNMOUNT');
-  //   setSearchIsShow(false);
-  //   setOpen(false);
-  //   setModalVisibility(false);
-  //   setOpenTooltip(false);
-  //   // anchorRef.current
-  // }, []);
-
   return (
     <ClickAwayListener onClickAway={handleSearchAway}>
       <Box className={classes.iconButtonBox}>

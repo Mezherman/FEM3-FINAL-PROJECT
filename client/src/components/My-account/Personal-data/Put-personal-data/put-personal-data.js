@@ -3,80 +3,80 @@ import { Grid, Typography, Container } from '@material-ui/core';
 import { Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import useStyles from '../../../SignUp/Sign-up-form/_sign-up-form';
-import RenderEditTextField from '../../../Render-text-field/render-edit-text-field'
+import renderEditTextField from '../../../Render-text-field/render-edit-text-field'
 
-function PutPersonalData (props) {
-  const {
-    firstName,
-    lastName,
-    telephone,
-    email,
-    login,
-  } = props;
-
+function PutPersonalData ({ firstName, lastName, telephone, email, login }) {
   const classes = useStyles();
+
+  const textFields = () => (
+    <Grid component="div" container spacing={2} direction="column" alignContent="center" >
+      <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
+        <Field
+          name="firstName"
+          component={renderEditTextField}
+          defaultValue={firstName}
+          classes={classes}
+          label="First Name"
+          type="text"
+        />
+      </Grid>
+      <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
+        <Field
+          name="lastName"
+          component={renderEditTextField}
+          defaultValue={lastName}
+          classes={classes}
+          label="Last Name"
+          type="text"
+        />
+      </Grid>
+      <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
+        <Field
+          name="login"
+          component={renderEditTextField}
+          defaultValue={login}
+          classes={classes}
+          label="Login"
+          type="text"
+        />
+      </Grid>
+      <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
+        <Field
+          name="email"
+          component={renderEditTextField}
+          defaultValue={email}
+          classes={classes}
+          label="Email"
+          type="text"
+        />
+      </Grid>
+      <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
+        <Field
+          name="telephone"
+          component={renderEditTextField}
+          placeholder="+380XXXXXXXXX"
+          defaultValue={telephone}
+          classes={classes}
+          label="Phone number"
+          type="tel"
+        />
+      </Grid>
+    </Grid>
+  );
+
+  const mainContent = () => (
+    <Grid component="div" item xs={12}>
+      <Typography paragraph component="p" variant="subtitle2" className={classes.rightTitle}>
+        Please edit the information you want:
+      </Typography>
+      {textFields()}
+    </Grid>
+  );
 
   return (
     <Container>
       <h2>Edit Form</h2>
-      <Grid component="div" item xs={12}>
-        <Typography paragraph component="p" variant="subtitle2" className={classes.rightTitle}>
-          Please edit the information you want:
-        </Typography>
-        <Grid component="div" container spacing={2} direction="column" alignContent="center" >
-          <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
-            <Field
-              name="firstName"
-              component={RenderEditTextField}
-              defaultValue={firstName}
-              classes={classes}
-              label="First Name"
-              type="text"
-            />
-          </Grid>
-          <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
-            <Field
-              name="lastName"
-              component={RenderEditTextField}
-              defaultValue={lastName}
-              classes={classes}
-              label="Last Name"
-              type="text"
-            />
-          </Grid>
-          <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
-            <Field
-              name="login"
-              component={RenderEditTextField}
-              defaultValue={login}
-              classes={classes}
-              label="Login"
-              type="text"
-            />
-          </Grid>
-          <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
-            <Field
-              name="email"
-              component={RenderEditTextField}
-              defaultValue={email}
-              classes={classes}
-              label="Email"
-              type="text"
-            />
-          </Grid>
-          <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
-            <Field
-              name="telephone"
-              component={RenderEditTextField}
-              placeholder="+380XXXXXXXXX"
-              defaultValue={telephone}
-              classes={classes}
-              label="Phone number"
-              type="tel"
-            />
-          </Grid>
-        </Grid>
-      </Grid>
+      {mainContent()}
     </Container>
   )
 }

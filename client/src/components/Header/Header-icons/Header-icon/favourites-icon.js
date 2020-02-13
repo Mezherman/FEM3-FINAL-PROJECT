@@ -23,7 +23,7 @@ const FavouritesIcon = ({ onClick, open, onClose }) => {
     </div>
   );
 
-  const IconForLoggedIn = () => (
+  const iconForLoggedIn = () => (
     <MenuItem className={classes.headerMenuItem}>
       <Link to={RoutesName.favorites}>
         <IconButton edge="end" className={classes.iconButton}>
@@ -63,7 +63,7 @@ const FavouritesIcon = ({ onClick, open, onClose }) => {
     )
   }
 
-  return <IconForLoggedIn />
+  return iconForLoggedIn()
 };
 
 export default FavouritesIcon;

@@ -16,7 +16,7 @@ const OrderList = () => {
         dispatch(ordersAction(response));
         setLoading(false);
       })
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

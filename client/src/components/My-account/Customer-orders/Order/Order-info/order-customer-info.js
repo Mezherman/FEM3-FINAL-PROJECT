@@ -22,7 +22,7 @@ const OrderCustomerInfo = (props) => {
         value={value}
         classContainer={classes.orderInfo}
         classTitle={`${classes.title} ${classes.moreOrderInfo}`}
-        style={{ display: 'none' }}
+        classDivider={classes.classDivider}
       />
     )
   });

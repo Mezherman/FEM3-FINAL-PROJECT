@@ -143,6 +143,9 @@ const useStylesOrderItem = makeStyles((theme) => ({
   },
   productTitle: {
     paddingLeft: theme.spacing(4)
+  },
+  classDivider: {
+    display: 'none',
   }
 }));
 
