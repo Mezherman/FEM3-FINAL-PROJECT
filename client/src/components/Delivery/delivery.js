@@ -23,8 +23,9 @@ export default function Delivery() {
             <h2>What countries does WMF deliver to?</h2>
           We currently deliver to the following countries:
             <ul>
-              <li>Germany</li>
               <li>Austria</li>
+              <li>Germany</li>
+              <li>Ukraine</li>
             </ul>
             <Divider />
           </Grid>
