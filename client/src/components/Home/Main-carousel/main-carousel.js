@@ -18,6 +18,9 @@ function MainSlider ({ fetchSlides }) {
 
   const dispatch = useDispatch();
 
+  const addBackgroundImg = (src) => ({
+    backgroundImage: `url(${src})`
+  });
   useEffect(() => {
     if (mainSlides.length < 1) {
       getMainSlides()
@@ -30,23 +33,26 @@ function MainSlider ({ fetchSlides }) {
     const { imageUrl, title, description, route, _id } = item;
     return (
       <Link to={route} key={_id}>
-        <img
-          src={imageUrl}
-          className={mainCarouselClasses.img}
-          alt="Special proposition for customers"
-        />
-        <div className={mainCarouselClasses.textBlock}>
-          <h3 className={mainCarouselClasses.title}>{title}</h3>
-          <p className={mainCarouselClasses.description}>{description}</p>
-          <Button
-            size="large"
-            className={mainCarouselClasses.showMore}
-            variant="contained"
-            color="secondary"
-            disableElevation
-          >
-            Show more
-          </Button>
+        {/*<img*/}
+        {/*  src={imageUrl}*/}
+        {/*  className={mainCarouselClasses.img}*/}
+        {/*  alt="Special proposition for customers"*/}
+        {/*/>*/}
+        <div className={mainCarouselClasses.background} style={addBackgroundImg(imageUrl)} >
+          <div className={mainCarouselClasses.textBlock} >
+            <h3 className={mainCarouselClasses.title}>{title}</h3>
+            <p className={mainCarouselClasses.description}>{description}</p>
+            <Button
+              size="large"
+              className={mainCarouselClasses.showMore}
+              variant="contained"
+              color="secondary"
+              disableElevation
+            >
+              Show more
+            </Button>
+          </div>
+
         </div>
       </Link>
     )
@@ -58,7 +64,7 @@ function MainSlider ({ fetchSlides }) {
         <div className={classes.carouselContainer}>
           <Carousels
             isProductSlider={false}
-            autoPlay
+            // autoPlay
             autoplayInterval={2000}
             wrapAround
             slidesToShow={1}

@@ -8,7 +8,7 @@ import useStyles from '../../_header';
 
 const MenuLogoIcons = ({ toggleDrawer, mobileMenuId }) => {
   const classes = useStyles();
-  const BurgerMenu = () => (
+  const burgerMenu = () => (
     <IconButton
       onClick={() => toggleDrawer(true)}
       edge="start"
@@ -35,7 +35,7 @@ const MenuLogoIcons = ({ toggleDrawer, mobileMenuId }) => {
 
   return (
     <Box className={classes.boxLogo}>
-      <BurgerMenu />
+      {burgerMenu()}
       <LogoIcon />
     </Box>
   )

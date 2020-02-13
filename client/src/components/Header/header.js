@@ -76,7 +76,7 @@ function Header() {
     </Box>
   );
 
-  const MainHeaderContent = () => (
+  const mainHeaderContent = () => (
     <AppBar position="sticky" top="0" color="inherit" elevation={0}>
       <Container maxWidth="xl" disableGutters className={classes.grow}>
         <Toolbar className={classes.justify}>
@@ -93,7 +93,7 @@ function Header() {
     <>
       <CssBaseline />
       <FreShipingMessage />
-      <MainHeaderContent />
+      {mainHeaderContent()}
       {renderMobileMenu}
       {renderMenu}
       {logout && <Redirect to={RoutesName.home} />}
