@@ -8,70 +8,42 @@ import {
   Grid
 } from '@material-ui/core';
 
-import { sortingProducts, sortingReset } from '../../redux/actions/products';
+import { filterSort } from '../../redux/actions/filter';
 
 import useStyles from './_sorting';
 
 const Sorting = (props) => {
   const {
-    products, currentCategory, sendSortingProducts, sorting, reset, filter
+    filterSort, sort
   } = props;
   const classes = useStyles();
   const inputLabel = useRef(null);
-  let sortedCategory = '';
-  let filterType = '';
 
   const [labelWidth, setLabelWidth] = useState(0);
+  let sortVal = sort.sortValue < 0 ? '-' : '' ;
+  sortVal += sort.sortName;
 
   useEffect(() => {
     setLabelWidth(inputLabel.current.offsetWidth);
-    getCurrentCategory();
-    getCurrentFilterType();
-  }, [currentCategory, filter]);
-
-  const getCurrentCategory = () => {
-    if (!sortedCategory && (sortedCategory !== currentCategory)) {
-      reset();
-    }
-  };
-
-  const getCurrentFilterType = () => {
-    if (!filterType && (filterType !== filter)) {
-      // resetFilterType();
-      filterType = filter;
-      reset();
-    }
-  };
+  }, []);
 
   const getSortedList = (event) => {
     const type = event.target.value;
-    sortedCategory = currentCategory;
-    filterType = filter;
 
-    switch (type) {
-      case 'low-to-high':
-        products.sort((a, b) => a.currentPrice - b.currentPrice);
-        break;
-
-      case 'high-to-low':
-        products.sort((a, b) => b.currentPrice - a.currentPrice);
-        break;
-
-      case 'sale-items':
-        products.sort((a) => {
-          if (!a.previousPrice) {
-            return 1;
-          }
-          return -1;
-        });
-        break;
-
-      default:
-        return products;
+    const splitting = type.split('-');
+    if (splitting.length == 1) {
+      filterSort({
+        sortName: splitting[0],
+        sortValue: 1
+      });
+    } else {
+      filterSort({
+        sortName: splitting[1],
+        sortValue: -1
+      });
     }
-    return sendSortingProducts(products, type);
   };
-
+  console.log(sortVal);
   return (
     <Grid container justify="flex-end">
       <FormControl variant="outlined" className={classes.formControl}>
@@ -80,35 +52,29 @@ const Sorting = (props) => {
         </InputLabel>
         <Select
           native
-          value={sorting}
+          value={sortVal}
           onChange={getSortedList}
           labelWidth={labelWidth}
           inputProps={{
-            name: 'sorting',
+            name: 'sort',
             id: 'outlined-sorting-filter',
             className: classes.input
           }}
         >
           <option value="" />
-          <option value="low-to-high">Price: low to high</option>
-          <option value="high-to-low">Price: high to low</option>
-          <option value="sale-items">Sale items first</option>
+          <option value="currentPrice">Price: low to high</option>
+          <option value="-currentPrice">Price: high to low</option>
+          <option value="-previousPrice">Sale items first</option>
         </Select>
       </FormControl>
     </Grid>
   )
 };
 
-const mapStateToProps = (state) => ({
-  products: state.productsReducer.products,
-  sorting: state.productsReducer.sorting,
-  currentCategory: state.categoriesReducer.catalogLocation,
-  filter: state.filterReducer.filterType,
-});
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
-  sendSortingProducts: (sortingList, sortingType) => dispatch(sortingProducts(sortingList, sortingType)),
-  reset: () => dispatch(sortingReset()),
+  filterSort: (sortValue) => dispatch(filterSort(sortValue)),
 });
 
 Sorting.propTypes = {

@@ -46,16 +46,15 @@ const FilterPanel = (props) => {
     } else {
       currentRange.push(event.target.value)
     }
-
     newFilters = {
       ...filterResults,
-      [name.toLowerCase()]: currentRange
+      [name.toLowerCase()]: currentRange,
     };
 
     getFilterProducts(newFilters);
   };
 
-  const panelFilters = (item) => (
+  const panelFilters = (item, values) => (
     <FormControl component="fieldset">
       <FormGroup aria-label="position" column="true">
         {item.map((el) => (
@@ -63,7 +62,7 @@ const FilterPanel = (props) => {
             style={{ color: `${el.cssValue}` }}
             key={el.name}
             value={el.name}
-            control={<Checkbox style={{ color: `${el.cssValue}` }} />}
+            control={<Checkbox checked={values.includes(el.name)} style={{ color: `${el.cssValue}` }} />}
             label={el.name}
             name={el.name}
             onChange={handleChange}
@@ -72,7 +71,6 @@ const FilterPanel = (props) => {
       </FormGroup>
     </FormControl>
   );
-
   return (
     <div>
       <ExpansionPanel className={classes.root} square defaultExpanded={Boolean(isShowPanel[width])}>
@@ -80,8 +78,8 @@ const FilterPanel = (props) => {
           <Typography>{name}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          {name === 'Color' && panelFilters(colors)}
-          {name === 'Brand' && panelFilters(brands)}
+          {name === 'Color' && panelFilters(colors, filterResults.color)}
+          {name === 'Brand' && panelFilters(brands, filterResults.brand)}
           {name === 'Price' && <RangeSlider max={max} />}
         </ExpansionPanelDetails>
       </ExpansionPanel>

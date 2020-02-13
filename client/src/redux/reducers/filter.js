@@ -1,4 +1,11 @@
-import { GET_FILTER_PRODUCTS, FETCH_FILTER_PARAMS_SUCCESS, FILTER_TYPE, RESET_FILTERS } from '../actions/actionTypes'
+import {
+  GET_FILTER_PRODUCTS,
+  FETCH_FILTER_PARAMS_SUCCESS,
+  FILTER_TYPE,
+  FILTER_SORT,
+  RESET_FILTERS,
+  FILTER_INCREASE_PAGE
+} from '../actions/actionTypes'
 
 export const initialState = {
   filterResults: {
@@ -10,6 +17,14 @@ export const initialState = {
     colors: [],
     brands: [],
   },
+  filterPages: {
+    perPage: 6,
+    startPage: 1
+  },
+  sort: {
+    sortName: '',
+    sortValue: ''
+  },
   filterType: ''
 };
 
@@ -18,7 +33,11 @@ export default function filterReducer(state = initialState, action) {
     case GET_FILTER_PRODUCTS: {
       return {
         ...state,
-        filterResults: action.payload
+        filterResults: action.payload,
+        filterPages: {
+          perPage: 6,
+          startPage: 1
+        },
       };
     }
 
@@ -37,6 +56,17 @@ export default function filterReducer(state = initialState, action) {
         filterType: action.payload
       };
 
+    case FILTER_SORT:
+      return {
+        ...state,
+        sort: action.payload
+      };
+    case FILTER_INCREASE_PAGE:
+      return {
+        ...state,
+        filterPages: { ...state.filterPages, perPage: state.filterPages.perPage + 6 }
+      };
+
     case RESET_FILTERS:
       return {
         ...state,
@@ -44,6 +74,14 @@ export default function filterReducer(state = initialState, action) {
           color: [],
           brand: [],
           price: [0, 700]
+        },
+        filterPages: {
+          perPage: 6,
+          startPage: 1
+        },
+        sort: {
+          sortName: '',
+          sortValue: ''
         }
       };
 

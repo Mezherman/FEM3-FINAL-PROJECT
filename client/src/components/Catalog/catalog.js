@@ -1,48 +1,62 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux'
 import { Grid, Container, useTheme, SwipeableDrawer, Button, useMediaQuery } from '@material-ui/core';
 
 import Filter from '../Filter/filter';
 import ProductList from '../Product-list/product-list';
 import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
+import Sorting from '../Sorting/sorting';
 
 import useStyles from './_catalog';
 import { productsError, productsLoaded, productsRequested } from '../../redux/actions/products';
 import getAllProducts, { getProductsByCategory } from '../../services/getProducts';
 import { getCategory } from '../../services/getCategories';
 import { catalogLocation } from '../../redux/actions/categories';
-import { getFilteredProducts } from '../../services/filter';
+import { getFilteredProducts, getInfinityFilteredProducts, parseToFilterValue } from '../../services/filter';
 import ProductCardCarousel from '../Product-card-carousel/product-card-carousel';
+import { filterType, resetFilters } from '../../redux/actions/filter';
+
 import BackgroundCatalog from './Background-catalog/backgroundCatalog';
 
-const Catalog = ({
-  assortment,
-  fetchProducts,
-  fetchTopProducts,
-  fetchTopProductsList,
-  catalogLocation,
-  productsList
-}) => {
+const Catalog = (props) => {
+  const {
+    assortment,
+    fetchProducts,
+    setCatalogLocation,
+    productsList,
+    catalogLocation,
+    catalog,
+    filter,
+    // products,
+    filterType,
+    productsLoaded,
+    resetFilters
+  } = props;
+  const { filterResults, filterPages, sort, filterType: queryString } = filter;
   const classes = useStyles();
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+
   const [topList, setTopList] = useState([]);
   const [productsToShow, setProductsToShow] = useState([]);
   const [filterIsOpen, setFilterIsOpen] = useState(false);
+  const [productsResult, setProducts] = useState({ products: [], length: 0 });
+  const { allCategories } = catalog;
 
+  const getCurrentCategory = () => {
+    if (catalogLocation !== assortment) {
+      resetFilters();
+    }
+  };
+  getCurrentCategory();
   useEffect(() => {
-    const request = assortment === 'search' ? 'cooking' : assortment;
-    getCategory(request)
+    getCategory(assortment)
       .then((response) => setTopList(response.topSellers));
-  }, [assortment]);
 
-  useEffect(() => {
-    // console.log(123456);
-    catalogLocation(assortment);
-    // fetchTopProductsList(assortment);
-    // fetchTopProducts(productsList);
-    fetchProducts(assortment);
-  }, [assortment, catalogLocation, fetchProducts, fetchTopProducts, fetchTopProductsList]);
-
+    setCatalogLocation(assortment);
+    filterHandle();
+  }, [assortment, sort, filterPages]);
   const cardsToShowString = topList.toString();
 
   useEffect(() => {
@@ -52,8 +66,16 @@ const Catalog = ({
       })
   }, [cardsToShowString, topList]);
 
-  const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+  const filterHandle = () => {
+    const valToFilter = parseToFilterValue(filterResults, sort, filterPages, allCategories, assortment);
+    console.log(valToFilter);
+    getInfinityFilteredProducts(valToFilter)
+      .then((newPoducts) => {
+        console.log(newPoducts);
+        setProducts(newPoducts);
+      })
+      .then(toggleFilter(false));
+  }
 
   const toggleFilter = (open) => {
     setFilterIsOpen(open);
@@ -63,7 +85,7 @@ const Catalog = ({
     if (desktop) {
       return (
         <div className={classes.filterDesktop}>
-          <Filter />
+          <Filter filterHandle={filterHandle} />
         </div>
       )
     }
@@ -82,24 +104,24 @@ const Catalog = ({
           open={Boolean(filterIsOpen)}
           onClose={() => toggleFilter(false)}
         >
-          <Filter onClose={toggleFilter} />
+          <Filter onClose={toggleFilter} filterHandle={filterHandle} />
         </SwipeableDrawer>
       </div>
 
     )
   }
-
+  console.log(productsResult);
   return (
     <>
       <Container maxWidth="xl">
         <ProductBreadcrumbs assortment={assortment} />
-        {/* <BackgroundCatalog /> */}
         <Grid container spacing={2} className={classes.root}>
           <Grid item sm={12} md={4}>
             {filterRender(isDesktop)}
           </Grid>
           <Grid item xs={12} md={8}>
-            <ProductList assortment={assortment} />
+            <Sorting sort={sort} />
+            <ProductList assortment={assortment} productsResult={productsResult} />
           </Grid>
           <Grid item xs={12}>
             <ProductCardCarousel
@@ -115,40 +137,14 @@ const Catalog = ({
 
 const mapStateToProps = (state) => ({
   catalog: state.categoriesReducer.catalog,
-  fetchProducts: state.productsReducer.fetchProducts,
-  // fetchTopProductsList: state.carouselReducer.fetchTopProductsList,
-  // fetchTopProducts: state.carouselReducer.fetchTopProducts,
-  // productsList: state.carouselReducer.productsList
+  catalogLocation: state.categoriesReducer.catalogLocation,
+  filter: state.filterReducer,
+  products: state.productsReducer.products,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchProducts: (assortment) => {
-    dispatch(productsRequested());
-    if (assortment === 'all') {
-      getAllProducts()
-        .then((products) => dispatch(productsLoaded(products)))
-        .catch((err) => dispatch(productsError(err)));
-    } else {
-      getProductsByCategory(assortment)
-        .then((products) => {
-          dispatch(productsLoaded(products));
-        })
-    }
-  },
-  // fetchTopProductsList: (assortment) => {
-  //   dispatch(topProductListRequested());
-  //   getCategory(assortment)
-  //     .then((productsList) => dispatch(topProductListLoaded(productsList)))
-  //     .catch((err) => dispatch(topProductsListError(err)))
-  // },
-  // fetchTopProducts: (productsList) => {
-  //   console.log(productsList);
-  //   dispatch(topProductRequested());
-  //   getFilteredProducts(`itemNo=${productsList.toString()}`)
-  //     .then((products) => dispatch(topProductLoaded( products )))
-  //     .catch((err) => dispatch(topProductsError(err)))
-  // },
-  catalogLocation: (assortment) => dispatch(catalogLocation(assortment)),
+  resetFilters: () => dispatch(resetFilters()),
+  setCatalogLocation: (assortment) => dispatch(catalogLocation(assortment)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Catalog)
