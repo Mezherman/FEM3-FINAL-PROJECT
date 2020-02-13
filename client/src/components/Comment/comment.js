@@ -103,15 +103,17 @@ const Comment = (props) => {
 
   const getCurrentDate = () => {
     const today = new Date();
-    const hours = getFormattedDate(today.getHours());
-    const minutes = getFormattedDate(today.getMinutes());
-    const day = getFormattedDate(today.getDate());
-    const month = getFormattedDate(today.getMonth());
+    const hours = formatDate(today.getHours());
+    const minutes = formatDate(today.getMinutes());
+    const day = formatDate(today.getDate());
+    const month = formatDate(today.getMonth());
     const year = today.getFullYear();
     return `${hours}:${minutes} ${day}/${month}/${year}`;
+    // const { getHours, getMinutes, getDate, getMonth, getFullYear } = new Date();
+    // return `${formatDate(getHours)}:${formatDate(getMinutes)} ${formatDate(getDate)}/${formatDate(getMonth())}/${getFullYear()}`;
   };
 
-  const getFormattedDate = (number) => {
+  const formatDate = (number) => {
     let formattedNumber;
     (number.toString().length === 1) ? (formattedNumber = `0${number}`) : formattedNumber = number;
     return formattedNumber;
