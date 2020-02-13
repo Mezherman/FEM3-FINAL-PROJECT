@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-
 import ProductCard from '../Product-card/product-card';
 import Spinner from '../Spinner/spinner';
 import Sorting from '../Sorting/sorting';
@@ -24,8 +23,7 @@ export default function ProductList() {
       <Sorting />
       <div className={classes.productList}>
         {productsLoading && <Spinner />}
-        {!productsLoading &&
-        renderProducts(products)}
+        {!productsLoading && renderProducts(products)}
       </div>
     </>
   )

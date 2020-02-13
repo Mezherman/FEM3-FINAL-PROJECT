@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
-import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import ProtectedRoute from './protectedRoute';
 import AdminRoute from './adminRoute';
 import Home from '../components/Home/home';
@@ -58,7 +58,7 @@ export default function Routes() {
         loggedIn={loggedIn}
         closeModal={closeModal}
         modalIsVisible={modalIsVisible}
-        component={() => <PersonalData isLoggedIn={loggedIn} />}
+        component={PersonalData}
       />
       <ProtectedRoute
         exact
@@ -66,7 +66,7 @@ export default function Routes() {
         loggedIn={loggedIn}
         closeModal={closeModal}
         modalIsVisible={modalIsVisible}
-        component={() => <CustomerOrders isLoggedIn={loggedIn} />}
+        component={CustomerOrders}
       />
       <ProtectedRoute
         exact
