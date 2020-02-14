@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
-import { connect } from 'react-redux'
-import { Grid, Container, useTheme, SwipeableDrawer, Button, useMediaQuery } from '@material-ui/core';
+import { connect } from 'react-redux';
+import {
+  Grid,
+  Container,
+  useTheme,
+  SwipeableDrawer,
+  Button,
+  useMediaQuery
+} from '@material-ui/core';
 
 import Filter from '../Filter/filter';
 import ProductList from '../Product-list/product-list';
@@ -13,14 +20,19 @@ import { productsError, productsLoaded, productsRequested } from '../../redux/ac
 import getAllProducts, { getProductsByCategory } from '../../services/getProducts';
 import { getCategory } from '../../services/getCategories';
 import { catalogLocation } from '../../redux/actions/categories';
-import { getFilteredProducts, getInfinityFilteredProducts, parseToFilterValue } from '../../services/filter';
+import {
+  getFilteredProducts,
+  getInfinityFilteredProducts,
+  parseToFilterValue
+} from '../../services/filter';
 import ProductCardCarousel from '../Product-card-carousel/product-card-carousel';
 import { filterType, resetFilters } from '../../redux/actions/filter';
 
 import BackgroundCatalog from './Background-catalog/backgroundCatalog';
-import search from '../../services/search';
+import getSearchedProducts from '../../services/search';
 
 const Catalog = (props) => {
+  const classes = useStyles();
   const {
     assortment,
     fetchProducts,
@@ -32,17 +44,18 @@ const Catalog = (props) => {
     // products,
     filterType,
     productsLoaded,
-    resetFilters
+    resetFilters,
+    searchedValue
   } = props;
   const { filterResults, filterPages, sort, filterType: queryString } = filter;
-  const classes = useStyles();
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
   const [topList, setTopList] = useState([]);
   const [productsToShow, setProductsToShow] = useState([]);
-  const [filterIsOpen, setFilterIsOpen] = useState(false);
+  const [filterIsOpenMobile, setFilterIsOpenMobile] = useState(false);
   const [productsResult, setProducts] = useState({ products: [], length: 0 });
+  // const [searchedResult, setSearchedResult] = useState([]);
   const { allCategories } = catalog;
 
   const getCurrentCategory = () => {
@@ -50,14 +63,19 @@ const Catalog = (props) => {
       resetFilters();
     }
   };
+
   getCurrentCategory();
+
   useEffect(() => {
-    getCategory(assortment)
+    const request = assortment === 'search' ? 'cooking' : assortment;
+    // console.log(request);
+    getCategory(request)
       .then((response) => setTopList(response.topSellers));
 
     setCatalogLocation(assortment);
-    filterHandle();
-  }, [assortment, sort, filterPages]);
+    handleProductsRequest();
+  }, [assortment, sort, filterPages, searchedValue]);
+
   const cardsToShowString = topList.toString();
 
   useEffect(() => {
@@ -67,50 +85,74 @@ const Catalog = (props) => {
       })
   }, [cardsToShowString, topList]);
 
-  const filterHandle = () => {
-    const valToFilter = parseToFilterValue(filterResults, sort, filterPages, allCategories, assortment);
-    console.log(valToFilter);
-    getInfinityFilteredProducts(valToFilter)
-      .then((newPoducts) => {
-        console.log(newPoducts);
-        setProducts(newPoducts);
-      })
-      .then(toggleFilter(false));
-  }
+  const handleProductsRequest = async () => {
+    let searchedResult = [];
+    if (assortment === 'search') {
+      await getSearchedProducts(searchedValue)
+        .then((products) => {
+          searchedResult = products.map((product) => product.itemNo);
+          setProducts({
+            products,
+            productsQuantity: products.length
+          });
+        })
+    }
+    // console.log('searchedResult =', searchedResult);
 
-  const toggleFilter = (open) => {
-    setFilterIsOpen(open);
+    const valToFilter = parseToFilterValue(
+      searchedResult,
+      filterResults,
+      sort,
+      filterPages,
+      allCategories,
+      assortment
+    );
+    console.log('valToFilter =', valToFilter);
+
+    getInfinityFilteredProducts(valToFilter)
+      .then((products) => {
+        console.log('in infinity =', products);
+        setProducts(products);
+      });
+
+    toggleFilterMobile(false);
+  };
+
+  const toggleFilterMobile = (open) => {
+    setFilterIsOpenMobile(open);
   };
 
   const filterRender = (desktop) => {
     if (desktop) {
       return (
         <div className={classes.filterDesktop}>
-          <Filter filterHandle={filterHandle} />
+          <Filter filterHandle={handleProductsRequest} />
         </div>
       )
     }
+
     return (
       <div className={classes.filterMobile}>
         <Button
-          onClick={toggleFilter}
+          onClick={toggleFilterMobile}
           className={classes.button}
         >
           Open Filter
         </Button>
 
         <SwipeableDrawer
-          onOpen={() => toggleFilter(true)}
+          onOpen={() => toggleFilterMobile(true)}
           anchor="bottom"
-          open={Boolean(filterIsOpen)}
-          onClose={() => toggleFilter(false)}
+          open={Boolean(filterIsOpenMobile)}
+          onClose={() => toggleFilterMobile(false)}
         >
-          <Filter onClose={toggleFilter} filterHandle={filterHandle} />
+          <Filter onClose={toggleFilterMobile} filterHandle={handleProductsRequest} />
         </SwipeableDrawer>
       </div>
-
     )
-  }
+  };
+
+  // console.log(productsResult);
 
   return (
     <>
@@ -122,7 +164,7 @@ const Catalog = (props) => {
           </Grid>
           <Grid item xs={12} md={8}>
             <Sorting sort={sort} />
-            <ProductList assortment={assortment} productsResult={productsResult} />
+            <ProductList productsResult={productsResult} />
           </Grid>
           <Grid item xs={12}>
             <ProductCardCarousel
@@ -141,6 +183,7 @@ const mapStateToProps = (state) => ({
   catalogLocation: state.categoriesReducer.catalogLocation,
   filter: state.filterReducer,
   products: state.productsReducer.products,
+  searchedValue: state.searchReducer.searchedValue
 });
 
 const mapDispatchToProps = (dispatch) => ({
