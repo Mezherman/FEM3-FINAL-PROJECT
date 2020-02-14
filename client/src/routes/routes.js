@@ -89,11 +89,6 @@ export default function Routes() {
         }}
       />
       <Route
-        path={`${RoutesName.products}/search`}
-        exact
-        render={() => <Catalog assortment="search" />}
-      />
-      <Route
         path={`${RoutesName.products}/:categoryOrID`}
         render={({ match, location }) => {
           const { categoryOrID } = match.params;

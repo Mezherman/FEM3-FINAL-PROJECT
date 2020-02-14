@@ -23,7 +23,8 @@ function getColors() {
 function getBrands() {
   return axios('/filters/brands').then((response) => (response.data))
 }
-const parseToFilterValue = (obj, sort = '', pages, allCategories, catalogLocation) => {
+
+const parseToFilterValue = (itemNoArr, filterResults, sort = '', pages, allCategories, catalogLocation) => {
   let valOfBrands = '';
   let valOfPrice = '';
   let valOfColor = '';
@@ -31,23 +32,27 @@ const parseToFilterValue = (obj, sort = '', pages, allCategories, catalogLocatio
   const valOfStartPage = `startPage=${pages.startPage}`;
   const valOfSort = sort.sortName ? `&sortName=${sort.sortName}&sortValue=${sort.sortValue}` : '';
 
-  if (obj.brand.length > 0) {
-    valOfBrands = `brand=${obj.brand.join(',')}`
+  if (filterResults.brand.length > 0) {
+    valOfBrands = `brand=${filterResults.brand.join(',')}`
   }
 
-  if (obj.price.length > 0) {
-    valOfPrice = `minPrice=${obj.price[0]}&maxPrice=${obj.price[1]}`
+  if (filterResults.price.length > 0) {
+    valOfPrice = `minPrice=${filterResults.price[0]}&maxPrice=${filterResults.price[1]}`
   }
 
-  if (obj.color.length > 0) {
-    valOfColor = `color=${obj.color.join(',')}`
+  if (filterResults.color.length > 0) {
+    valOfColor = `color=${filterResults.color.join(',')}`
   }
 
+  const itemsToString = itemNoArr.join(',');
+  const itemsForFilter = itemsToString ? `itemNo=${itemsToString}` : '';
   const subCategories = allCategories.filter((category) => category.parentId === catalogLocation);
   const subCategoriesString = subCategories ? subCategories.map((subCategory) => subCategory.id).join(',') : '';
-  const categoryForFilter = !subCategoriesString ? catalogLocation : subCategoriesString;
+  const categoryString = !subCategoriesString ? catalogLocation : subCategoriesString;
+  const categoryForFilter = categoryString !== 'search' ? `categories=${categoryString}` : '';
 
-  const valToFilter = `categories=${categoryForFilter}&${valOfBrands}&${valOfColor}&${valOfPrice}&${valOfPerPage}&${valOfStartPage}${valOfSort}`
+  const valToFilter = `${categoryForFilter}&${itemsForFilter}&${valOfBrands}&${valOfColor}&${valOfPrice}&${valOfPerPage}&${valOfStartPage}${valOfSort}`
+  // console.log('Filter string = ', valToFilter);
   return valToFilter
 };
 

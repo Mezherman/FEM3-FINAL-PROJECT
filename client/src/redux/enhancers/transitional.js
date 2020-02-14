@@ -4,7 +4,7 @@ import * as ServicesCart from '../../services/cart';
 const _ = require('lodash');
 
 const transitional = (store) => (next) => (action) => {
-  console.log(action);
+  // console.log(action);
   const storeCart = store.getState().cart;
   const cartFromState = _.cloneDeep(storeCart);
   switch (action.type) {

@@ -61,6 +61,7 @@ export default function filterReducer(state = initialState, action) {
         ...state,
         sort: action.payload
       };
+
     case FILTER_INCREASE_PAGE:
       return {
         ...state,
