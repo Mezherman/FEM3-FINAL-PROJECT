@@ -33,11 +33,6 @@ function MainSlider ({ fetchSlides }) {
     const { imageUrl, title, description, route, _id } = item;
     return (
       <Link to={route} key={_id}>
-        {/*<img*/}
-        {/*  src={imageUrl}*/}
-        {/*  className={mainCarouselClasses.img}*/}
-        {/*  alt="Special proposition for customers"*/}
-        {/*/>*/}
         <div className={mainCarouselClasses.background} style={addBackgroundImg(imageUrl)} >
           <div className={mainCarouselClasses.textBlock} >
             <h3 className={mainCarouselClasses.title}>{title}</h3>
@@ -52,7 +47,6 @@ function MainSlider ({ fetchSlides }) {
               Show more
             </Button>
           </div>
-
         </div>
       </Link>
     )

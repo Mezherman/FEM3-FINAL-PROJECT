@@ -90,20 +90,6 @@ Item.No
             }}
             quantity={quantity}
           />
-          {/* <Button */}
-          {/*  size="large" */}
-          {/*  fullWidth */}
-          {/*  variant="contained" */}
-          {/*  color="primary" */}
-          {/*  disableElevation */}
-          {/*  onClick={() => { */}
-          {/*    // console.log('add product', product); */}
-          {/*    actions.addProductToCart(product, 1); */}
-          {/*    setModalVisibility(true) */}
-          {/*  }} */}
-          {/* > */}
-          {/*  <ShoppingCartOutlinedIcon /> */}
-          {/* </Button> */}
         </Container>
       </div>
     </>
