@@ -49,7 +49,7 @@ export default function Routes() {
         loggedIn={loggedIn}
         closeModal={closeModal}
         modalIsVisible={modalIsVisible}
-        component={() => <Profile isLoggedIn={loggedIn} />}
+        component={Profile}
       />
       <ProtectedRoute
         exact
