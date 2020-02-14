@@ -4,21 +4,21 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import PutPersonalData from './Put-personal-data/put-personal-data';
-import useStyles from '../../SignUp/Sign-up-form/_sign-up-form';
-import usePersonalDataStyles from './_personal-data';
-import RoutesName from '../../../routes-list';
-import ChangePasswordForm from './Put-personal-data/put-password';
-import validate from './validate';
-import putUserData from '../../../services/put-user-data';
-import { invalidPassword, validPassword } from '../../../redux/actions/password-validation';
-import { newNotification } from '../../../redux/actions/notification';
-import { loadAllDataAfterLogin } from '../../../redux/actions/load-all-data';
-import putPassword from '../../../services/put-password';
-import CancelSaveButtons from './Put-personal-data/cancel-save-buttons';
-import MainCustomerPage from './Main-customer-page/main-customer-page';
+import PutPersonalData from '../../components/My-account/Profile/Put-personal-data/put-personal-data';
+import useStyles from '../../components/Sign-up/Sign-up-form/_sign-up-form';
+import usePersonalDataStyles from './_profile';
+import RoutesName from '../../routes-list';
+import ChangePasswordForm from '../../components/My-account/Profile/Put-personal-data/put-password';
+import validate from '../../components/My-account/Profile/validate';
+import putUserData from '../../services/put-user-data';
+import { invalidPassword, validPassword } from '../../redux/actions/password-validation';
+import { newNotification } from '../../redux/actions/notification';
+import { loadAllDataAfterLogin } from '../../redux/actions/load-all-data';
+import putPassword from '../../services/put-password';
+import CancelSaveButtons from '../../components/My-account/Profile/Put-personal-data/cancel-save-buttons';
+import MainCustomerPage from '../../components/My-account/Profile/Main-customer-page/main-customer-page';
 
-export default function PersonalData ({ handleSubmit }) {
+export default function Profile ({ handleSubmit }) {
   const pdClasses = usePersonalDataStyles();
   const classes = useStyles();
 
@@ -131,11 +131,11 @@ export default function PersonalData ({ handleSubmit }) {
   );
 }
 
-PersonalData = reduxForm({
+Profile = reduxForm({
   form: 'put',
   validate,
-})(PersonalData);
+})(Profile);
 
-PersonalData.propTypes = {
+Profile.propTypes = {
   handleSubmit: PropTypes.func
 };

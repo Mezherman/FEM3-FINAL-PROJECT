@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import RoutesName from '../../../../routes-list';
-import usePersonalDataStyles from '../_personal-data'
+import usePersonalDataStyles from '../../../../pages/profile/_profile'
 import logoutAction from '../../../../redux/actions/logout';
 
 const MainCustomerPage = ({ handleEditForm, handleChangePassword }) => {

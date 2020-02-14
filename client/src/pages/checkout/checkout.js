@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { Container, Grid, Box } from '@material-ui/core';
 
-import CustomerInfo from './Checkout-form/customer-info';
-import DeliveryPaymentInfo from './Checkout-form/delivery-payment-info';
-import OrderConfirmation from './Checkout-form/order-confirmation';
-import FormButton from './Checkout-form/form-components/form-button';
-import validate from './validate';
-import Spinner from '../Spinner/spinner';
+import CustomerInfo from '../../components/Checkout/Checkout-form/customer-info';
+import DeliveryPaymentInfo from '../../components/Checkout/Checkout-form/delivery-payment-info';
+import OrderConfirmation from '../../components/Checkout/Checkout-form/order-confirmation';
+import FormButton from '../../components/Checkout/Checkout-form/form-components/form-button';
+import validate from '../../components/Checkout/validate';
+import Spinner from '../../components/Spinner/spinner';
 import RoutesName from '../../routes-list';
 import { placeOrderToDB } from '../../services/checkout';
 import { deleteCartFromDB } from '../../services/cart';

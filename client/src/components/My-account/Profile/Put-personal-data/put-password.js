@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 import { useSelector } from 'react-redux';
 import { Grid, Container } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import useStyles from '../../../SignUp/Sign-up-form/_sign-up-form';
+import useStyles from '../../../Sign-up/Sign-up-form/_sign-up-form';
 import renderPasswordField from '../../../Render-password-field/render-password-field';
 import CancelSaveButtons from './cancel-save-buttons';
 

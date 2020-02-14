@@ -6,7 +6,6 @@ const RoutesName = {
   orderConfirmation: '/checkout/confirmation',
   login: '/login',
   signUp: '/sign-up',
-  signIn: '/login',
   aboutUs: '/about',
   contacts: '/contacts',
   delivery: '/delivery',

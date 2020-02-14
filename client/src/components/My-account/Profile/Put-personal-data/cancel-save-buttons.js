@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import React from 'react';
 import PropTypes from 'prop-types';
-import usePersonalDataStyles from '../_personal-data';
+import usePersonalDataStyles from '../../../../pages/profile/_profile';
 
 const CancelSaveButtons = ({ cancel }) => {
   const pdClasses = usePersonalDataStyles();

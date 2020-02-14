@@ -4,7 +4,7 @@ import { Checkbox, FormControlLabel, FormHelperText, FormLabel } from '@material
 
 import ModalInfoWindow from '../../../Info-window/info-window';
 
-import useStyles from '../../../SignUp/Sign-up-footer/_sign-up-footer';
+import useStyles from '../../../Sign-up/Sign-up-footer/_sign-up-footer';
 
 const RenderCheckboxField = ({ input, name, meta: { touched, error } }) => {
   const classes = useStyles();

@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import Spinner from '../Spinner/spinner';
+import Spinner from '../../components/Spinner/spinner';
 import RoutesName from '../../routes-list'
 import { Container } from '@material-ui/core';
 
-import ProductList from '../Product-list/product-list';
+import ProductList from '../../components/Product-list/product-list';
 import { favoritesUpdated } from '../../redux/actions/favorites';
 import { productsRequested, productsLoaded, productsError } from '../../redux/actions/products';
 

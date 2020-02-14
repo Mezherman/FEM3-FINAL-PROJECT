@@ -3,10 +3,10 @@ import { Divider, Container } from '@material-ui/core';
 
 import useStyles from './_about-us';
 
-import About from './About/about'
-import Video from './Video/video'
-import Brands from './Brands/brands'
-import Awards from './Awards/awards'
+import About from '../../components/About-us/About/about'
+import Video from '../../components/About-us/Video/video'
+import Brands from '../../components/About-us/Brands/brands'
+import Awards from '../../components/About-us/Awards/awards'
 
 const AboutUs = () => {
   const classes = useStyles();

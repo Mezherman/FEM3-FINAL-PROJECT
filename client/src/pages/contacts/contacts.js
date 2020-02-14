@@ -5,7 +5,7 @@ import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
 import { Divider, Container } from '@material-ui/core';
 
-import Contact from './contact';
+import Contact from '../../components/Contacts/contact';
 import useStyles from './_contacts';
 
 const Contacts = () => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Button } from '@material-ui/core';
 
-import useStyles from '../../_checkout';
+import useStyles from '../../../../pages/checkout/_checkout';
 
 const FormButton = ({ color, btnText, type, onClick }) => {
   const classes = useStyles();
