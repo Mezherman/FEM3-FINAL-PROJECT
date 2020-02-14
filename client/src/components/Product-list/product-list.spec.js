@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme';
-import { connect, Provider } from 'react-redux'
+import { Provider } from 'react-redux'
 
 import ProductList from './product-list'
 import configureStore from '../../redux/store/configureStore'
