@@ -11,7 +11,7 @@ const CommentBlock = ({ currentUser, date, commentText }) => {
     <Box className={classes.comment} mb={2}>
       <Typography variant="subtitle2">
         {currentUser.firstName}
-        {' '}
+        &nbsp;
         {currentUser.lastName}
       </Typography>
       <Typography variant="caption" paragraph className={classes.commentTitle}>{date}</Typography>

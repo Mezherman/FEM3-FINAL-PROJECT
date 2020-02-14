@@ -9,17 +9,14 @@ const OrderList = () => {
   const { orders } = useSelector((state) => state.user);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    if (!orders) {
-      getOrders()
-        .then((response) => {
-          dispatch(ordersAction(response));
-          setLoading(false);
-        })
-    } else {
-      setLoading(false);
-    }
-  }, [dispatch, orders]);
+    getOrders()
+      .then((response) => {
+        dispatch(ordersAction(response));
+        setLoading(false);
+      })
+  }, [dispatch]);
 
   return (
     <>

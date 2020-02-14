@@ -35,7 +35,7 @@ const MainCustomerPage = ({ handleEditForm, handleChangePassword }) => {
     { text: 'Login:', userData: login ?? null },
   ];
 
-  const CustomerData = () => (
+  const customerData = () => (
     <Grid component="div" xs={12} sm={7} item>
       <List component="div" dense>
         {listItem.map(({ text, userData }, index) => {
@@ -56,7 +56,7 @@ const MainCustomerPage = ({ handleEditForm, handleChangePassword }) => {
     </Grid>
   );
 
-  const ProfileMenu = () => (
+  const profileMenu = () => (
     <Grid component="div" xs={12} sm={5} item >
       <div className={pdClasses.linkContainer}>
         <Divider component="div" orientation="vertical" light className={pdClasses.divider} />
@@ -82,8 +82,8 @@ const MainCustomerPage = ({ handleEditForm, handleChangePassword }) => {
     <Grid component="div" item xs={12} container direction="column">
       <h1>Personal Details</h1>
       <Grid component="div" item xs={12} container justify="center">
-        <CustomerData />
-        <ProfileMenu />
+        {customerData()}
+        {profileMenu()}
       </Grid>
     </Grid>
   )

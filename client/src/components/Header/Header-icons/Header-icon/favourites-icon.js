@@ -17,13 +17,13 @@ const FavouritesIcon = ({ onClick, open, onClose }) => {
       <h4 className={classes.wishlistMessege}>Wishlist is empty</h4>
       <p className={classes}>
         If you want to be able to add goods to your wish list, please
-        {' '}
+        &nbsp;
         <Link to={RoutesName.favorites} className={classes.logInLink}>Log in.</Link>
       </p>
     </div>
   );
 
-  const IconForLoggedIn = () => (
+  const iconForLoggedIn = () => (
     <MenuItem className={classes.headerMenuItem}>
       <Link to={RoutesName.favorites}>
         <IconButton edge="end" className={classes.iconButton}>
@@ -63,7 +63,7 @@ const FavouritesIcon = ({ onClick, open, onClose }) => {
     )
   }
 
-  return <IconForLoggedIn />
+  return iconForLoggedIn()
 };
 
 export default FavouritesIcon;
