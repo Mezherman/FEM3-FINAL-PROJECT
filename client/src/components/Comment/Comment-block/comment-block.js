@@ -1,9 +1,10 @@
 import React from 'react';
 import { Box, Typography } from '@material-ui/core';
 
+import { PropTypes } from 'prop-types';
 import useStyles from './_comment-block';
 
-const CommentBlock = ({currentUser, date, commentText}) => {
+const CommentBlock = ({ currentUser, date, commentText }) => {
   const classes = useStyles();
 
   return (
@@ -17,6 +18,12 @@ const CommentBlock = ({currentUser, date, commentText}) => {
       <Typography variant="body1" align="justify" className={classes.commentBody}>{commentText}</Typography>
     </Box>
   )
+};
+
+CommentBlock.propTypes = {
+  currentUser: PropTypes.oneOfType(PropTypes.object).isRequired,
+  date: PropTypes.string.isRequired,
+  commentText: PropTypes.string.isRequired,
 };
 
 export default CommentBlock;

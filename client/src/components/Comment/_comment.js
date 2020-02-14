@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     textTransform: 'uppercase',
     fontSize: '1rem',
+    marginBottom: 10
   },
   field: {
     width: '100%',
@@ -29,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
   errorLogIn: {
     color: theme.palette.text.secondary,
     marginBottom: theme.spacing(2)
+  },
+  error: {
+    color: theme.palette.text.secondary
   }
 }));
 
