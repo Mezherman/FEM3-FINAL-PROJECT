@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import { Grid, Container, useTheme, SwipeableDrawer, Button, useMediaQuery } from '@material-ui/core';
+import {
+  Grid,
+  Container,
+  useTheme,
+  SwipeableDrawer,
+  Button,
+  useMediaQuery
+} from '@material-ui/core';
 
 import Filter from '../Filter/filter';
 import ProductList from '../Product-list/product-list';
@@ -15,16 +22,20 @@ import { catalogLocation } from '../../redux/actions/categories';
 import { getFilteredProducts } from '../../services/filter';
 import ProductCardCarousel from '../Product-card-carousel/product-card-carousel';
 import BackgroundCatalog from './Background-catalog/backgroundCatalog';
+import search from '../../services/search';
 
-const Catalog = ({
-  assortment,
-  fetchProducts,
-  fetchTopProducts,
-  fetchTopProductsList,
-  catalogLocation,
-  productsList
-}) => {
+const Catalog = (props) => {
   const classes = useStyles();
+  const {
+    assortment,
+    fetchProducts,
+    fetchTopProducts,
+    fetchTopProductsList,
+    catalogLocation,
+    productsList,
+    searchedValue,
+    fetchSearchedProducts
+  } = props;
   const [topList, setTopList] = useState([]);
   const [productsToShow, setProductsToShow] = useState([]);
   const [filterIsOpen, setFilterIsOpen] = useState(false);
@@ -36,12 +47,14 @@ const Catalog = ({
   }, [assortment]);
 
   useEffect(() => {
-    // console.log(123456);
     catalogLocation(assortment);
-    // fetchTopProductsList(assortment);
-    // fetchTopProducts(productsList);
+    console.log('Searched val =', searchedValue);
+    if (searchedValue) {
+      fetchSearchedProducts(searchedValue);
+      return
+    }
     fetchProducts(assortment);
-  }, [assortment, catalogLocation, fetchProducts, fetchTopProducts, fetchTopProductsList]);
+  }, [assortment, catalogLocation, fetchProducts, fetchTopProducts, fetchTopProductsList, searchedValue]);
 
   const cardsToShowString = topList.toString();
 
@@ -73,7 +86,7 @@ const Catalog = ({
           onClick={toggleFilter}
           className={classes.button}
         >
-            Open Filter
+          Open Filter
         </Button>
 
         <SwipeableDrawer
@@ -111,43 +124,35 @@ const Catalog = ({
       </Container>
     </>
   )
-}
+};
 
 const mapStateToProps = (state) => ({
   catalog: state.categoriesReducer.catalog,
-  fetchProducts: state.productsReducer.fetchProducts,
-  // fetchTopProductsList: state.carouselReducer.fetchTopProductsList,
-  // fetchTopProducts: state.carouselReducer.fetchTopProducts,
-  // productsList: state.carouselReducer.productsList
+  // fetchProducts: state.productsReducer.fetchProducts,
+  searchedValue: state.searchReducer ? state.searchReducer.searchedValue : '',
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchProducts: (assortment) => {
+  fetchProducts: (assortment, searchedValue) => {
     dispatch(productsRequested());
-    if (assortment === 'all') {
-      getAllProducts()
-        .then((products) => dispatch(productsLoaded(products)))
-        .catch((err) => dispatch(productsError(err)));
-    } else {
-      getProductsByCategory(assortment)
-        .then((products) => {
-          dispatch(productsLoaded(products));
-        })
-    }
+    getProductsByCategory(assortment)
+      .then((products) => {
+        dispatch(productsLoaded(products));
+      })
   },
-  // fetchTopProductsList: (assortment) => {
-  //   dispatch(topProductListRequested());
-  //   getCategory(assortment)
-  //     .then((productsList) => dispatch(topProductListLoaded(productsList)))
-  //     .catch((err) => dispatch(topProductsListError(err)))
-  // },
-  // fetchTopProducts: (productsList) => {
-  //   console.log(productsList);
-  //   dispatch(topProductRequested());
-  //   getFilteredProducts(`itemNo=${productsList.toString()}`)
-  //     .then((products) => dispatch(topProductLoaded( products )))
-  //     .catch((err) => dispatch(topProductsError(err)))
-  // },
+  fetchSearchedProducts: (searchedValue) => {
+    console.log('Searched val =', searchedValue);
+    // dispatch(productsRequested());
+    search(searchedValue)
+      .then((searchedProducts) => {
+        console.log('WORKS');
+        dispatch(productsLoaded(searchedProducts));
+      })
+      .catch((err) => {
+        console.log('DOESNT WORK');
+        dispatch(productsError(err))
+      });
+  },
   catalogLocation: (assortment) => dispatch(catalogLocation(assortment)),
 });
 

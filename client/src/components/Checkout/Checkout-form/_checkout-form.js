@@ -8,9 +8,6 @@ const useStyles = makeStyles((theme) => ({
     '& .MuiRadio-colorSecondary.Mui-checked': {
       color: theme.palette.primary.main
     },
-    '&.MuiFormControlLabel-root': {
-      textAlign: 'justify'
-    },
     '& .MuiCheckbox-colorSecondary.Mui-checked': {
       color: theme.palette.primary.main
     },
@@ -42,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     margin: '5px 0',
     fontSize: '18px'
+  },
+  terms: {
+    padding: theme.spacing(2, 0)
   }
 }));
 

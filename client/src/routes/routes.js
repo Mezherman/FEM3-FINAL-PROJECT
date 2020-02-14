@@ -88,7 +88,11 @@ export default function Routes() {
           return <Catalog assortment={subCategory} />
         }}
       />
-
+      <Route
+        path={`${RoutesName.products}/search`}
+        exact
+        render={() => <Catalog assortment="search" />}
+      />
       <Route
         path={`${RoutesName.products}/:categoryOrID`}
         render={({ match, location }) => {
@@ -106,11 +110,6 @@ export default function Routes() {
             />
           )
         }}
-      />
-      <Route
-        path={`${RoutesName.products}/search`}
-        exact
-        render={() => <Catalog assortment="cooking" />}
       />
       <Route path={RoutesName.orderConfirmation} component={CheckoutStatus} />
       <Route path={RoutesName.checkout} exact component={Checkout} />

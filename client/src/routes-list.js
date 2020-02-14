@@ -14,8 +14,8 @@ const RoutesName = {
   favorites: '/favorites',
   myOrders: '/orders',
   search: '/search',
-  adminHome: '/admin',
   forbidden: '/forbidden',
+  adminHome: '/admin',
 };
 
 export default RoutesName;

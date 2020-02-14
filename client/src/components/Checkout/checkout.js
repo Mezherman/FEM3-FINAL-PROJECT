@@ -132,7 +132,7 @@ const mapStateToProps = (state) => ({
   cart: state.cart,
   user: state.user,
   isFetchingLoadData: state.isFetchingLoadData.isFetching,
-  initialValues: state.user
+  initialValues: state.user.customer
 });
 
 const mapDispatchToProps = {
