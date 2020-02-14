@@ -8,7 +8,7 @@ export default function ProtectedRoute (props) {
     <Route
       {...rest}
       render={(props) => (loggedIn ? <Component {...props} /> : (
-          <Login close={closeModal} visible={modalIsVisible} />
+        <Login close={closeModal} visible={modalIsVisible} />
       ))}
     />
   )
