@@ -13,15 +13,16 @@ const OrderCustomerInfo = (props) => {
     { name: 'Mobile: ', value: mobile },
   ];
 
-  const Params = () => params.map((param) => {
+  const paramsList = () => params.map((param) => {
     const { name, value } = param;
     return (
       <OrderParamsTemplates
-        key={name}
+        key={name + value}
         name={name}
         value={value}
-        className={`${classes.orderInfo} ${classes.moreOrderInfo}`}
-        style={{ display: 'none' }}
+        classContainer={classes.orderInfo}
+        classTitle={`${classes.title} ${classes.moreOrderInfo}`}
+        classDivider={classes.classDivider}
       />
     )
   });
@@ -29,7 +30,7 @@ const OrderCustomerInfo = (props) => {
   return (
     <List component="div" disablePadding>
       <ListItem component="div" className={classes.mainBlock} button>
-        <Params />
+        {paramsList()}
       </ListItem>
     </List>
   )

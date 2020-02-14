@@ -13,21 +13,22 @@ const OrderParams = ({ classes, handleClick, orderNo, date, status, totalSum, pr
     { name: 'Item\'s quantity: ', value: `${products.length}` },
   ];
 
-  const Params = () => params.map((param) => {
+  const paramsList = () => params.map((param) => {
     const { name, value } = param;
     return (
       <OrderParamsTemplates
-        key={name}
+        key={name + value}
         name={name}
         value={value}
-        className={`${classes.orderInfo} ${classes.title}`}
+        classContainer={classes.orderInfo}
+        classTitle={classes.title}
       />
     )
   });
 
   return (
     <ListItem component="div" className={classes.mainBlock} button onClick={handleClick}>
-      <Params />
+      {paramsList()}
       {open ? <ExpandLess /> : <ExpandMore />}
     </ListItem>
   )

@@ -6,7 +6,7 @@ import OrderTitlesTemplate from './Order-function-templates/order-titles-templat
 const OrderTitles = ({ classes }) => {
   const centerBold = `${classes.textCenter} ${classes.fontBold}`;
   const rightBold = `${classes.textRight} ${classes.fontBold}`;
-  const Params = () => (
+  const params = () => (
     <Grid
       component="div"
       item
@@ -64,7 +64,7 @@ const OrderTitles = ({ classes }) => {
   return (
     <List component="div" disablePadding>
       <ListItem component="div" className={classes.mainBlock}>
-        <Params />
+        {params()}
       </ListItem>
     </List>
   )

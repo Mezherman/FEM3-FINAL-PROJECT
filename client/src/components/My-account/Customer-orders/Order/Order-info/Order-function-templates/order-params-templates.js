@@ -3,19 +3,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useStylesOrderItem from '../../../Order-list/_order-list'
 
-const OrderParamsTemplates = ({ name, value, className, style }) => {
+const OrderParamsTemplates = ({ name, value, classContainer, classTitle, classDivider }) => {
   const classes = useStylesOrderItem();
   return (
-    <Grid
-      component="div"
-      item
-      container
-      className={className}
-    >
-      <span>{name}</span>
-      {' '}
+    <Grid component="div" item container className={classContainer}>
+      <span className={classTitle}>{name}</span>
+      &nbsp;
       <span>{value}</span>
-      <Divider className={classes.hiddenCollapse} style={style} orientation="horizontal" variant="middle" component="div" />
+      <Divider
+        className={`${classes.hiddenCollapse} ${classDivider}`}
+        orientation="horizontal"
+        variant="middle"
+        component="div"
+      />
     </Grid>
   )
 };
@@ -25,13 +25,12 @@ export default OrderParamsTemplates;
 OrderParamsTemplates.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  className: PropTypes.string,
-  style: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.string,
-  ]),
+  classContainer: PropTypes.string,
+  classTitle: PropTypes.string,
+  classDivider: PropTypes.string
 };
 OrderParamsTemplates.defaultProps = {
-  className: '',
-  style: {},
+  classContainer: '',
+  classTitle: '',
+  classDivider: '',
 };
