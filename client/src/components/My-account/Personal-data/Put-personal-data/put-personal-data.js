@@ -3,65 +3,57 @@ import { Grid, Typography, Container } from '@material-ui/core';
 import { Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import useStyles from '../../../SignUp/Sign-up-form/_sign-up-form';
-import RenderEditTextField from '../../../Render-text-field/render-edit-text-field'
+import renderEditTextField from '../../../Render-text-field/render-edit-text-field'
 
-function PutPersonalData (props) {
-  const {
-    firstName,
-    lastName,
-    telephone,
-    email,
-    login,
-  } = props;
-
+function PutPersonalData ({ firstName, lastName, telephone, email, login }) {
   const classes = useStyles();
 
-  const Fields = () => (
+  const textFields = () => (
     <Grid component="div" container spacing={2} direction="column" alignContent="center" >
-      <Grid component="div" container item xs={12} sm={6}>
+      <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
         <Field
           name="firstName"
-          component={RenderEditTextField}
+          component={renderEditTextField}
           defaultValue={firstName}
           classes={classes}
           label="First Name"
           type="text"
         />
       </Grid>
-      <Grid component="div" container item xs={12} sm={6}>
+      <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
         <Field
           name="lastName"
-          component={RenderEditTextField}
+          component={renderEditTextField}
           defaultValue={lastName}
           classes={classes}
           label="Last Name"
           type="text"
         />
       </Grid>
-      <Grid component="div" container item xs={12} sm={6}>
+      <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
         <Field
           name="login"
-          component={RenderEditTextField}
+          component={renderEditTextField}
           defaultValue={login}
           classes={classes}
           label="Login"
           type="text"
         />
       </Grid>
-      <Grid component="div" container item xs={12} sm={6}>
+      <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
         <Field
           name="email"
-          component={RenderEditTextField}
+          component={renderEditTextField}
           defaultValue={email}
           classes={classes}
           label="Email"
           type="text"
         />
       </Grid>
-      <Grid component="div" container item xs={12} sm={6}>
+      <Grid component="div" container item xs={12} sm={9} md={7} lg={6}>
         <Field
           name="telephone"
-          component={RenderEditTextField}
+          component={renderEditTextField}
           placeholder="+380XXXXXXXXX"
           defaultValue={telephone}
           classes={classes}
@@ -72,19 +64,19 @@ function PutPersonalData (props) {
     </Grid>
   );
 
-  const MainContent = () => (
+  const mainContent = () => (
     <Grid component="div" item xs={12}>
       <Typography paragraph component="p" variant="subtitle2" className={classes.rightTitle}>
         Please edit the information you want:
       </Typography>
-      <Fields />
+      {textFields()}
     </Grid>
   );
 
   return (
     <Container>
       <h2>Edit Form</h2>
-      <MainContent />
+      {mainContent()}
     </Container>
   )
 }

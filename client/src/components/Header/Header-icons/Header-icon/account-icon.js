@@ -23,7 +23,7 @@ const AccountIcon = (props) => {
     loggedIn
   } = props;
 
-  const ProfileMenu = () => (
+  const profileMenu = () => (
     <Popper
       open={open}
       anchorEl={anchorRef.current}
@@ -60,7 +60,7 @@ const AccountIcon = (props) => {
     </Popper>
   );
 
-  const PersonBtn = () => (
+  const personBtn = () => (
     <IconButton edge="end" className={classes.iconButton}>
       <PersonIcon fontSize="large" className={loggedIn ? classes.iconLoggedIn : classes.iconsStyle} />
     </IconButton>
@@ -78,10 +78,10 @@ const AccountIcon = (props) => {
         href={RoutesName.signIn}
         ref={loggedIn ? anchorRef : null}
       >
-        <PersonBtn />
+        {personBtn()}
         <span className={classes.menuTitle}>{loggedIn ? 'My Account' : 'Login'}</span>
       </MenuItem>
-      {loggedIn && (<ProfileMenu />)}
+      {loggedIn && profileMenu()}
       {!loggedIn && (<LoginModal onModalClose={closeModal} open={modalIsVisible} />)}
     </>
   )

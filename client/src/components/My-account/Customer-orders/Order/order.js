@@ -31,7 +31,7 @@ const Order = ({ item }) => {
     setOpen(!open);
   };
 
-  const OrderDetailsInfo = () => products.map((its) => (
+  const orderDetailsInfo = () => products.map((its) => (
     <Collapse in={open} timeout="auto" unmountOnExit key={its.product.itemNo}>
       <Divider variant="middle" component="div" />
       <OrderDetails classes={classes} cartQuantity={its.cartQuantity} product={its.product} />
@@ -67,7 +67,7 @@ const Order = ({ item }) => {
       <Collapse in={open} timeout="auto" unmountOnExit onClick={handleClick} className={classes.hiddenCollapse}>
         <OrderTitles classes={classes} />
       </Collapse>
-      <OrderDetailsInfo />
+      {orderDetailsInfo()}
     </List>
   )
 };

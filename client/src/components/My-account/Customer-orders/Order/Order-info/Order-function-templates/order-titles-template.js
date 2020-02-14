@@ -14,7 +14,7 @@ const OrderTitlesTemplate = ({ name, value, xs, sm, md, justify, className, span
     className={className}
   >
     <span className={spanNameClass}>{name}</span>
-    {value}
+    <span>{value}</span>
   </Grid>
 );
 

@@ -13,7 +13,6 @@ import validate from './validate';
 import putUserData from '../../../services/put-user-data';
 import { invalidPassword, validPassword } from '../../../redux/actions/password-validation';
 import { newNotification } from '../../../redux/actions/notification';
-import { fetchCustomerData } from '../../../redux/actions/user';
 import { loadAllDataAfterLogin } from '../../../redux/actions/load-all-data';
 import putPassword from '../../../services/put-password';
 import CancelSaveButtons from './Put-personal-data/cancel-save-buttons';
@@ -65,8 +64,7 @@ export default function PersonalData ({ handleSubmit }) {
     })
       .then(() => {
         handlerNotification('success', 'Personal data was successfully changed');
-        handlerCustomerData();
-        fetchCustomerData();
+        setTimeout(handlerCustomerData, 0);
         cancelEditForm();
       })
       .catch(() => {
@@ -77,7 +75,6 @@ export default function PersonalData ({ handleSubmit }) {
   const submitEditedUserPassword = (values) => {
     putPassword({ password: values.password, newPassword: values.newPassword })
       .then((response) => {
-        fetchCustomerData();
         if (response.data.message) {
           handlerNotification('success', 'Password was successfully changed');
           setChangePasswordForm(false);

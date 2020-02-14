@@ -37,7 +37,6 @@ const Sorting = (props) => {
 
   const getCurrentFilterType = () => {
     if (!filterType && (filterType !== filter)) {
-      // resetFilterType();
       filterType = filter;
       reset();
     }
