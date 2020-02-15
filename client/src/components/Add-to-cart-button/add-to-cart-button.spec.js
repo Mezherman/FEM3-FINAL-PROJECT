@@ -1,24 +1,39 @@
 import React from 'react'
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import AddToCartButton from './add-to-cart-button'
 
 describe('AddToCartButton component', () => {
-  it('should render correctly component', () => {
-    const renderedComponent = shallow(<AddToCartButton quantity={2} handleClick={() => {}} />);
-    console.log(renderedComponent.debug())
 
-    // expect(renderedComponent.find('h2').text()).toEqual('About us');
-    // expect(renderedComponent.find('About')).toHaveLength(1);
-    // expect(renderedComponent.find('Video')).toHaveLength(1);
-    // expect(renderedComponent.find('Brands')).toHaveLength(1);
-    // expect(renderedComponent.find('Awards')).toHaveLength(1);
+  it('should render correctly component if quantity > 0', () => {
+    const props = {
+      quantity: 5,
+      handleClick: jest.fn()
+    };
+    const wrapper = mount(<AddToCartButton {...props} />);
+
+    expect(wrapper.prop('quantity')).toEqual(5);
+    expect(wrapper.find(ShoppingCartOutlinedIcon)).toHaveLength(1);
   });
 
-  // it('About component', () => {
-  //   const renderedComponent = shallow(<About />);
-  //
-  //   expect(renderedComponent.find('h3').text()).toEqual('WMF brings pleasure into your life');
-  //   expect(renderedComponent.find('p')).toHaveLength(2);
-  // })
+  it('should render correctly component if quantity = 0', () => {
+    const props = {
+      quantity: 0,
+      handleClick: jest.fn()
+    };
+    const wrapper = shallow(<AddToCartButton {...props} />);
 
+    expect(wrapper.find('span').text()).toEqual('Out of stock');
+  });
+
+  it('should render component with handleClick func', () => {
+    const props = {
+      quantity: 2,
+      handleClick: jest.fn()
+    };
+    const wrapper = shallow(<AddToCartButton {...props} />);
+
+    wrapper.simulate('click');
+    expect(props.handleClick).toBeCalled();
+  });
 });

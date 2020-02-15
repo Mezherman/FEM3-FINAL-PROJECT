@@ -8,39 +8,39 @@ import Video from './Video/video'
 
 describe('AboutUs component', () => {
   it('should render correctly component', () => {
-    const renderedComponent = shallow(<AboutUs />);
+    const wrapper = shallow(<AboutUs />);
 
-    expect(renderedComponent.find('h2').text()).toEqual('About us');
-    expect(renderedComponent.find('About')).toHaveLength(1);
-    expect(renderedComponent.find('Video')).toHaveLength(1);
-    expect(renderedComponent.find('Brands')).toHaveLength(1);
-    expect(renderedComponent.find('Awards')).toHaveLength(1);
+    expect(wrapper.find('h2').text()).toEqual('About us');
+    expect(wrapper.find('About')).toHaveLength(1);
+    expect(wrapper.find('Video')).toHaveLength(1);
+    expect(wrapper.find('Brands')).toHaveLength(1);
+    expect(wrapper.find('Awards')).toHaveLength(1);
   });
 
   it('About component', () => {
-    const renderedComponent = shallow(<About />);
+    const wrapper = shallow(<About />);
 
-    expect(renderedComponent.find('h3').text()).toEqual('WMF brings pleasure into your life');
-    expect(renderedComponent.find('p')).toHaveLength(2);
+    expect(wrapper.find('h3').text()).toEqual('WMF brings pleasure into your life');
+    expect(wrapper.find('p')).toHaveLength(2);
   })
 
   it('Awards component', () => {
-    const renderedComponent = shallow(<Awards />);
+    const wrapper = shallow(<Awards />);
 
-    expect(renderedComponent.find('h3').text()).toEqual('WMF Design – Winner of multiple awards');
-    expect(renderedComponent.contains(<img src="/img/about/awards.jpg" alt="Our rewards" className="makeStyles-img-8" />)).toEqual(true);
-    expect(renderedComponent.find('p')).toHaveLength(1);
+    expect(wrapper.find('h3').text()).toEqual('WMF Design – Winner of multiple awards');
+    expect(wrapper.contains(<img src="/img/about/awards.jpg" alt="Our rewards" className="makeStyles-img-8" />)).toEqual(true);
+    expect(wrapper.find('p')).toHaveLength(1);
   })
 
   it('Brands component', () => {
-    const renderedComponent = shallow(<Brands />)
-    expect(renderedComponent.find('h3').text()).toEqual('Brands and companies');
-    expect(renderedComponent.find('p')).toHaveLength(2);
+    const wrapper = shallow(<Brands />)
+    expect(wrapper.find('h3').text()).toEqual('Brands and companies');
+    expect(wrapper.find('p')).toHaveLength(2);
   })
 
   it('Video component', () => {
-    const renderedComponent = shallow(<Video />)
-    expect(renderedComponent.contains(
+    const wrapper = shallow(<Video />)
+    expect(wrapper.contains(
       <video className="makeStyles-video-9" controls poster="/img/wmf.jpg">
         <source src="/video.mp4" />
         <track kind="captions" />

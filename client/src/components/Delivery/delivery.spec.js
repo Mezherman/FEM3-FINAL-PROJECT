@@ -4,9 +4,9 @@ import Delivery from './delivery'
 
 describe('Delivery component', () => {
   it('should render correctly component', () => {
-    const renderedComponent = shallow(<Delivery />);
+    const wrapper = shallow(<Delivery />);
 
-    expect(renderedComponent.find('h2')).toHaveLength(3);
-    expect(renderedComponent.find('p')).toHaveLength(2);
+    expect(wrapper.find('h2')).toHaveLength(3);
+    expect(wrapper.find('p')).toHaveLength(2);
   });
 });
