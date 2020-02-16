@@ -8,6 +8,16 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     left: '0',
   },
+  searchIcon: {
+    zIndex: '1',
+    height: '100%',
+    width: '50px',
+    padding: '5px',
+    opacity: 1,
+    cursor: 'pointer',
+    position: 'absolute',
+    // marginLeft: theme.spacing(3)
+  },
   [theme.breakpoints.up('md')]: {
     search: {
       zIndex: '5',
@@ -25,7 +35,10 @@ const useStyles = makeStyles((theme) => ({
       top: '-13%',
     },
     searchIcon: {
-      top: '8px'
+      bottom: '15px',
+      padding: 0,
+      height: '1em'
+      // height: 0
     }
   },
   [theme.breakpoints.up('xl')]: {
@@ -41,13 +54,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1, 1, 1, 7),
     width: '100%'
   },
-  searchIcon: {
-    zIndex: '1',
-    height: '100%',
-    opacity: 0.5,
-    position: 'absolute',
-    marginLeft: theme.spacing(3)
-  }
+
 }));
 
 export default useStyles
