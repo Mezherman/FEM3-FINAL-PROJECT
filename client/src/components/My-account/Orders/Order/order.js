@@ -12,7 +12,7 @@ const Order = ({ item }) => {
 
   const {
     products,
-    deliveryAddress,
+    deliveryAddress: { country, city, address, postal },
     paymentInfo,
     shipping,
     email,
@@ -22,8 +22,6 @@ const Order = ({ item }) => {
     date,
     totalSum
   } = item;
-
-  const { country, city, address, postal } = deliveryAddress;
 
   const [open, setOpen] = useState(false);
 
