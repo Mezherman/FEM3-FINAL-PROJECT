@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
     opacity: 1,
     cursor: 'pointer',
     position: 'absolute',
-    // marginLeft: theme.spacing(3)
   },
   [theme.breakpoints.up('md')]: {
     search: {
@@ -38,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
       bottom: '15px',
       padding: 0,
       height: '1em'
-      // height: 0
     }
   },
   [theme.breakpoints.up('xl')]: {
@@ -53,8 +51,7 @@ const useStyles = makeStyles((theme) => ({
   inputInput: {
     padding: theme.spacing(1, 1, 1, 7),
     width: '100%'
-  },
-
+  }
 }));
 
 export default useStyles

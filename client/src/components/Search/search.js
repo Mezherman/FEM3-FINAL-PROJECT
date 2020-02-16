@@ -34,18 +34,17 @@ const Search = ({ productsLoaded, history, searchIsShown }) => {
   }
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
-  const renderSearch = (mobile, desktop) => {
-    if (mobile || desktop) {
+  const renderSearch = (desktop) => {
+    if (desktop) {
       return (
         <Grow in={searchIsShown} >
           <div className={classes.search}>
             <SearchIcon
               className={classes.searchIcon}
             />
-            {inputBase(true)}
+            {inputBase}
           </div>
         </Grow>
       )
@@ -57,17 +56,17 @@ const Search = ({ productsLoaded, history, searchIsShown }) => {
           className={classes.searchIcon}
         />
         <Collapse in={Boolean(searchIsShown)} >
-          {inputBase(false)}
+          {inputBase}
         </Collapse>
       </div>
     )
   };
 
-  const inputBase = (autoFocus) => (
+  const inputBase = (
     <InputBase
       placeholder="Search…"
       type="search"
-      autoFocus={autoFocus}
+      autoFocus
       classes={{
         root: classes.inputRoot,
         input: classes.inputInput,
@@ -83,7 +82,7 @@ const Search = ({ productsLoaded, history, searchIsShown }) => {
 
   return (
     <>
-      {renderSearch(isMobile, isDesktop)}
+      {renderSearch(isDesktop)}
     </>
   )
 };

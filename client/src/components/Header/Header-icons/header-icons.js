@@ -15,7 +15,9 @@ const HeaderIcons = () => {
   const classes = useStyles();
   const theme = useTheme();
 
+  const isMobile = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
   const isTablet = useMediaQuery(theme.breakpoints.only('md'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
   const [searchIsShown, setSearchIsShow] = useState(false);
   const [open, setOpen] = useState(false);
@@ -84,9 +86,9 @@ const HeaderIcons = () => {
   return (
     <ClickAwayListener onClickAway={handleSearchAway}>
       <Box className={classes.iconButtonBox}>
-        {searchIsShown && <Search searchIsShown={searchIsShown} />}
+        {isMobile && searchIsShown && <Search searchIsShown={searchIsShown} />}
         {isTablet && <Search searchIsShown />}
-        {searchIsShown && <Search searchIsShown={searchIsShown} />}
+        {isDesktop && searchIsShown && <Search searchIsShown={searchIsShown} />}
         <HeaderSearchIcon onClick={handleTooltipClose} toggleSearch={toggleSearch} />
         <Divider component="div" orientation="vertical" className={classes.dividerStyle} />
         <FavouritesIcon
