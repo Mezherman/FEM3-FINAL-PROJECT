@@ -30,7 +30,7 @@ const useStylesOrderItem = makeStyles((theme) => ({
       fontSize: '1.1rem',
     },
     [theme.breakpoints.up('lg')]: {
-      fontSize: '1.3rem',
+      fontSize: '1.2rem',
     },
 
     '&:hover': {
@@ -110,10 +110,10 @@ const useStylesOrderItem = makeStyles((theme) => ({
       fontSize: '0.8em',
     },
     [theme.breakpoints.up('md')]: {
-      fontSize: '1em',
+      fontSize: '1.1em',
     },
     [theme.breakpoints.up('lg')]: {
-      fontSize: '1.2em',
+      fontSize: '1.3em',
     }
   },
   orderInfo: {
@@ -146,7 +146,12 @@ const useStylesOrderItem = makeStyles((theme) => ({
   },
   classDivider: {
     display: 'none',
-  }
+  },
+  space: {
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    }
+  },
 }));
 
 export default useStylesOrderItem;

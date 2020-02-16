@@ -9,10 +9,7 @@ const OrderDetails = ({ classes, product, cartQuantity }) => {
   const { itemNo, imageUrls, name, currentPrice } = product;
   return (
     <List component="div" disablePadding>
-      <Link
-        className={classes.link}
-        to={`${RoutesName.products}/${itemNo}`}
-      >
+      <Link className={classes.link} to={`${RoutesName.products}/${itemNo}`}>
         <ListItem component="div" button className={classes.nested}>
           <Grid
             component="div"

@@ -7,8 +7,8 @@ const OrderParamsTemplates = ({ name, value, classContainer, classTitle, classDi
   const classes = useStylesOrderItem();
   return (
     <Grid component="div" item container className={classContainer}>
-      <span className={classTitle}>{name}</span>
-      &nbsp;
+      <span className={`${classes.title} ${classTitle}`}>{name}</span>
+      <span className={classes.space}>&nbsp;</span>
       <span>{value}</span>
       <Divider
         className={`${classes.hiddenCollapse} ${classDivider}`}
