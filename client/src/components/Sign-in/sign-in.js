@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { Avatar, Typography, Container } from '@material-ui/core';
@@ -15,6 +15,7 @@ function SignIn ({ onClose }) {
   const [login, setLogin] = useState(null);
   const [password, setPassword] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [eyeToggle, setEyeToggle] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -31,7 +32,11 @@ function SignIn ({ onClose }) {
     setPassword(event.target.value)
   };
 
-  function handleClick (event) {
+  const togglePasswordMask = () => {
+    setEyeToggle((prev) => (setEyeToggle(!prev)));
+  };
+
+  const handleClick = (event) => {
     event.preventDefault();
     const userData = {
       loginOrEmail: login,
@@ -40,19 +45,23 @@ function SignIn ({ onClose }) {
     postLoginData(userData)
       .then((loginResult) => {
         localStorage.setItem('token', `${loginResult.data.token}`);
-        dispatch(loadAllDataAfterLogin());
-        onClose();
+        setTimeout(() => {
+          onClose();
+          dispatch(loadAllDataAfterLogin());
+        }, 0);
         setErrorMessage(null);
       })
       .catch(() => {
         setErrorMessage('Incorrect password or login');
       });
-  }
-
-  const [eyeToggle, setEyeToggle] = useState(true);
-  const togglePasswordMask = () => {
-    setEyeToggle((prev) => (setEyeToggle(!prev)));
   };
+
+  useEffect(() => () => {
+    setLogin(null);
+    setErrorMessage(null);
+    setEyeToggle(true);
+    setPassword(null);
+  }, []);
 
   return (
     <Container maxWidth="xs" className={classes.paper}>

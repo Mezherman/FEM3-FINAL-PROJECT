@@ -2,21 +2,23 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Container } from '@material-ui/core';
 import RoutesName from '../../routes-list'
+import useNoMatchStyles from './_no-match';
+import FormButton from '../Checkout/Checkout-form/form-components/form-button';
 
-export default function NoMatch() {
+export default function NoMatch () {
+  const classes = useNoMatchStyles();
   return (
     <Container maxWidth="xl">
-      <div style={{ minHeight: '52vh' }}>
-        <h1>We&apos;re sorry, but we can&apos;t find the page you are looking for.</h1>
-        <p>How can we help you?</p>
-        <ul>
-          <li>
-            Go to the
-            <Link to={RoutesName.home}> homepage</Link>
-          </li>
-          <li>Use the search function at the top of the website</li>
-        </ul>
-        <p>Thank you for your understanding!</p>
+      <div className={classes.container}>
+        <div className={classes.noFoundBlock}>
+          <div className={classes.errorText}>
+            <h1 className={classes.errorTitle}>Oops!</h1>
+            <h2 className={classes.secondErrorTitle}>404 - The Page can&apos;t be found</h2>
+          </div>
+          <Link to={RoutesName.home} className={classes.link}>
+            <FormButton btnText="GO TO HOMEPAGE" color="primary" type="button" />
+          </Link>
+        </div>
       </div>
     </Container>
   );
