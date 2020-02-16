@@ -46,8 +46,11 @@ describe('DeliveryPaymentInfo component', () => {
   it('should render correctly component', () => {
     const wrapper = shallow(<DeliveryPaymentInfo />);
 
-    expect(wrapper.find('RadioCheckboxField')).toHaveLength(4)
-    expect(wrapper.find(Typography)).toHaveLength(2)
+    expect(wrapper.find('RadioCheckboxField')).toHaveLength(4);
+    expect(wrapper.find(Typography)).toHaveLength(2);
+
+    const texts = wrapper.find(Typography).map((node) => node.text());
+    expect(texts).toEqual(['2. PAYMENT METHODS', '3. DELIVERY OPTIONS']);
   });
 })
 
@@ -58,6 +61,10 @@ describe('CustomerInfo component', () => {
     }
     const wrapper = shallow(<CustomerInfo {...props} />);
 
-    expect(wrapper.find('Field')).toHaveLength(11)
+    expect(wrapper.find('Field')).toHaveLength(11);
+
+    wrapper.find('Field').forEach((node) => {
+      expect(node.simulate('change', { target: { value: 'My new value' } }));
+    });
   });
 })
