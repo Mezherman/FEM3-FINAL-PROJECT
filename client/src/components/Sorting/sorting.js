@@ -37,7 +37,6 @@ const Sorting = (props) => {
 
   const getCurrentFilterType = () => {
     if (!filterType && (filterType !== filter)) {
-      // resetFilterType();
       filterType = filter;
       reset();
     }
@@ -113,7 +112,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 Sorting.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
-  sendSorting: PropTypes.func.isRequired,
   currentCategory: PropTypes.string.isRequired,
 };
 

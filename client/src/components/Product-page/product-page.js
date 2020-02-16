@@ -13,10 +13,12 @@ import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 import { getFilteredProducts } from '../../services/filter';
 import getCurrentProduct from '../../redux/actions/current-product';
 import { getCategory } from '../../services/getCategories';
+import getCommentsOfProducts from '../../services/getCommentsOfProduct';
+import { commentsLoaded, commentsRequest } from '../../redux/actions/comments';
 
 function ProductPage(props) {
   // console.log('PROPS =', props);
-  const { assortment, itemNo, chosenProduct, fetchProduct, productsLoading, setProducts, getChosenProduct } = props;
+  const { assortment, itemNo, chosenProduct, fetchProduct, productsLoading, setProducts, getChosenProduct, fetchComments } = props;
   const [topList, setTopList] = useState([]);
   const [productsToShow, setProductsToShow] = useState([]);
 
@@ -25,8 +27,10 @@ function ProductPage(props) {
       fetchProduct(itemNo);
     } else {
       getChosenProduct(chosenProduct);
+      // console.log(chosenProduct);
+      fetchComments(chosenProduct._id);
     }
-  }, [chosenProduct, itemNo, fetchProduct]);
+  }, [chosenProduct, itemNo, fetchProduct, getChosenProduct]);
 
   useEffect(() => {
     if (chosenProduct) {
@@ -89,7 +93,14 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(productsLoaded([response.data]));
       })
   },
-  getChosenProduct: (product) => dispatch(getCurrentProduct(product))
+  getChosenProduct: (product) => dispatch(getCurrentProduct(product)),
+  fetchComments: (productId) => {
+    dispatch(commentsRequest(productId));
+    getCommentsOfProducts(productId)
+      .then((comments) => {
+        dispatch(commentsLoaded(comments))
+      }).catch((error) => console.log(error));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);

@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 
 import CommentBlock from './Comment-block/comment-block';
 
@@ -16,5 +17,9 @@ const CommentMap = ({ commentsList }) => (
     }
   </>
 );
+
+CommentMap.propTypes = {
+  commentsList: PropTypes.oneOfType([PropTypes.array]).isRequired
+};
 
 export default CommentMap;
