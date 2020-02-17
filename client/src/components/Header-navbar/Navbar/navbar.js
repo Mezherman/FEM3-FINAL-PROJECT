@@ -32,7 +32,7 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
       '&:hover': {
         borderLeft: `1px solid ${theme.palette.background.primary}`,
         borderRight: `1px solid ${theme.palette.background.primary}`,
-        fontWeight: 600,
+        // fontWeight: 600,
         backgroundColor: 'transparent',
       },
     },
