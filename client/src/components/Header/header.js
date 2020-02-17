@@ -37,7 +37,7 @@ function Header() {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const menuId = 'primary-search-account-menu';
-  const renderMenu = () => (
+  const renderMenu = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -50,7 +50,7 @@ function Header() {
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = () => (
+  const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -68,7 +68,7 @@ function Header() {
     </Menu>
   );
 
-  const freeShippingMessage = () => (
+  const freeShippingMessage = (
     <Box className={classes.delivery}>
       <Container maxWidth="xl">
         <p className={classes.deliveryTitle}>Free shipping on all orders over &#8364;100</p>
@@ -76,7 +76,7 @@ function Header() {
     </Box>
   );
 
-  const mainHeaderContent = () => (
+  const mainHeaderContent = (
     <AppBar position="sticky" top="0" color="inherit" elevation={0}>
       <Container maxWidth="xl" disableGutters className={classes.grow}>
         <Toolbar className={classes.justify}>
@@ -92,11 +92,11 @@ function Header() {
   return (
     <>
       <CssBaseline />
-      {freeShippingMessage()}
-      {mainHeaderContent()}
-      {renderMobileMenu()}
-      {renderMenu()}
-      {logout && <Redirect to={RoutesName.home} />}
+      {freeShippingMessage}
+      {mainHeaderContent}
+      {renderMobileMenu}
+      {renderMenu}
+      {/*{logout && <Redirect to={RoutesName.home} />}*/}
     </>
   );
 }

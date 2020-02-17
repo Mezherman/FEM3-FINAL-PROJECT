@@ -1,14 +1,23 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+
+import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductCard from '../Product-card/product-card';
+import { filterIncreasePage } from '../../redux/actions/filter';
 import Spinner from '../Spinner/spinner';
-import Sorting from '../Sorting/sorting';
 
 import useStyles from './_product-list';
+import { invalidPassword } from '../../redux/actions/password-validation'
 
-export default function ProductList() {
-  const { products, productsLoading } = useSelector((state) => state.productsReducer);
+export default function ProductList(props) {
+  // console.log('PROPS =', props);
+  const { productsResult: { products, productsQuantity = 0 } } = props;
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const loadMoreProducts = useCallback(() => {
+    dispatch(filterIncreasePage());
+  }, [dispatch]);
+
   const renderProducts = (productsList) => (
     productsList.map((product) => (
       <ProductCard
@@ -19,12 +28,14 @@ export default function ProductList() {
   );
 
   return (
-    <>
-      <Sorting />
-      <div className={classes.productList}>
-        {productsLoading && <Spinner />}
-        {!productsLoading && renderProducts(products)}
-      </div>
-    </>
+    <InfiniteScroll
+      dataLength={productsQuantity}
+      next={loadMoreProducts}
+      hasMore={products.length < productsQuantity}
+      loader={<Spinner />}
+      className={classes.productList}
+    >
+      {renderProducts(products)}
+    </InfiniteScroll>
   )
 }
