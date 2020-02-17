@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none'
   },
   qtyPicker: {
-    width: '100px',
+    // width: '100px',
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -58,18 +58,21 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'rgba(240,235,84,0.72)',
     textAlign: 'center',
     borderRadius: '4px',
-    fontSize: '18px'
+    fontSize: '16px'
   },
   total: {
     minWidth: '20%',
-    fontSize: '20px',
+    fontSize: '16px',
     textAlign: 'center'
   },
   pricingBlock: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: theme.spacing(2, 0),
+    padding: theme.spacing(0),
+    [theme.breakpoints.up('md')]: {
+      padding: theme.spacing(2, 0),
+    },
   }
 }));
 
