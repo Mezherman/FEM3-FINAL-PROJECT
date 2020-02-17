@@ -103,7 +103,7 @@ export default function Routes() {
       <Route path={RoutesName.aboutUs} component={AboutUs} />
       <Route path={RoutesName.delivery} component={Delivery} />
       <Route path={RoutesName.contacts} component={Contacts} />
-      <Route path={RoutesName.payment} component={PaymentForm} />
+      {/*<Route path={RoutesName.payment} component={PaymentForm} />*/}
       <AdminRoute
         exact
         path={RoutesName.adminHome}
