@@ -96,7 +96,7 @@ function Header() {
       {mainHeaderContent}
       {renderMobileMenu}
       {renderMenu}
-      {logout && <Redirect to={RoutesName.home} />}
+      {/*{logout && <Redirect to={RoutesName.home} />}*/}
     </>
   );
 }

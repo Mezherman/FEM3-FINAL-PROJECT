@@ -10,7 +10,7 @@ import useStyles from './_product-list';
 import { invalidPassword } from '../../redux/actions/password-validation'
 
 export default function ProductList(props) {
-  console.log('PROPS =', props);
+  // console.log('PROPS =', props);
   const { productsResult: { products, productsQuantity = 0 } } = props;
   const classes = useStyles();
   const dispatch = useDispatch();

@@ -107,11 +107,11 @@ const Catalog = (props) => {
       allCategories,
       assortment
     );
-    console.log('valToFilter =', valToFilter);
+    // console.log('valToFilter =', valToFilter);
 
     getInfinityFilteredProducts(valToFilter)
       .then((products) => {
-        console.log('in infinity =', products);
+        // console.log('in infinity =', products);
         setProducts(products);
       });
 

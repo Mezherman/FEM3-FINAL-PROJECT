@@ -153,7 +153,7 @@ Checkout.propTypes = {
     PropTypes.number,
     PropTypes.func
   ]).isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func,
   user: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.string,
