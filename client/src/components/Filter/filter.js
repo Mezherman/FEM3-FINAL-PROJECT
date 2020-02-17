@@ -1,21 +1,21 @@
 import React, { useEffect } from 'react'
 import { PropTypes } from 'prop-types';
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 
 import Button from '@material-ui/core/Button';
 import FilterPanel from './Filter-panel/filter-panel'
-import { getFilteredProducts, getColors, getBrands } from '../../services/filter'
-import { productsLoaded } from '../../redux/actions/products';
-import { filterParamsLoaded, filterType, resetFilters } from '../../redux/actions/filter';
+import { getColors, getBrands } from '../../services/filter'
+import { filterParamsLoaded } from '../../redux/actions/filter';
 
 import useStyles from './_filter';
 
 const Filter = (props) => {
   const {
     filterParamsLoaded,
-    filterParams,
     filterHandle,
   } = props;
+
+  const filterParams = useSelector((state) => state.filterReducer.filterParams);
 
   const classes = useStyles();
 
@@ -57,18 +57,13 @@ const Filter = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  filterParams: state.filterReducer.filterParams,
-});
-
 const mapDispatchToProps = {
   filterParamsLoaded,
 };
 
 Filter.propTypes = {
-  filterParams: PropTypes.objectOf(PropTypes.array).isRequired,
   filterHandle: PropTypes.func.isRequired,
   filterParamsLoaded: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter)
+export default connect(null, mapDispatchToProps)(Filter)
