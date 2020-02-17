@@ -54,7 +54,7 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
     <>
       <h1 className={classes.title}>{name.toUpperCase()[0] + name.slice(1)}</h1>
       <p className={classes.itemNo}>
-        Item.No&nbsp;
+        Item No.&nbsp;
         {itemNo}
       </p>
     </>

@@ -45,7 +45,7 @@ function ProductCard({ product }) {
         <Divider />
         <div className={classes.iconWrapper}>
           <span className={classes.itemNo}>
-Item.No
+Item No.&nbsp;
             {itemNo}
           </span>
           {loggedIn && <AddToFavoriteBtn favorites={favorites} itemId={itemId} />}
