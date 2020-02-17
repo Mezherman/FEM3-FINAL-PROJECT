@@ -6,8 +6,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import useStylesSingIn from './_sign-in';
 import postLoginData from '../../services/post-login-data';
 import { loadAllDataAfterLogin } from '../../redux/actions/load-all-data';
+import axios from 'axios';
 import { enterRegistrationPage } from '../../redux/actions/moving-around-registration';
-import SignInForm from './Sign-in-form/sign-in-form'
+import SignInForm from './Sign-in-form/sign-in-form';
 
 function SignIn ({ onClose }) {
   const classes = useStylesSingIn();
@@ -42,13 +43,16 @@ function SignIn ({ onClose }) {
       loginOrEmail: login,
       password
     };
+
     postLoginData(userData)
       .then((loginResult) => {
+        dispatch(loadAllDataAfterLogin());
+        // dispatch(loggedIn());
         localStorage.setItem('token', `${loginResult.data.token}`);
-        setTimeout(() => {
-          onClose();
-          dispatch(loadAllDataAfterLogin());
-        }, 0);
+        // setTimeout(() => {
+        // onClose();
+        // dispatch(loadAllDataAfterLogin());
+        // }, 0);
         setErrorMessage(null);
       })
       .catch(() => {
@@ -56,11 +60,19 @@ function SignIn ({ onClose }) {
       });
   };
 
+  // useEffect(() => () => {
+  //   setLogin(null);
+  //   setErrorMessage(null);
+  //   setEyeToggle(true);
+  //   setPassword(null);
+  //   source.cancel();
+  // }, []);
+
+  const source = axios.CancelToken.source();
+
   useEffect(() => () => {
-    setLogin(null);
-    setErrorMessage(null);
-    setEyeToggle(true);
-    setPassword(null);
+    console.log('UNMOUNT');
+    source.cancel();
   }, []);
 
   return (

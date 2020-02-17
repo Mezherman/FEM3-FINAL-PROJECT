@@ -24,6 +24,7 @@ import Login from '../pages/login/login';
 
 export default function Routes() {
   const { loggedIn, customer } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state);
   const mainCategory = useSelector((state) => state.categoriesReducer.catalog.mainCategories);
   const history = useHistory();
   const [modalIsVisible, setModalVisibility] = useState(!loggedIn);
@@ -32,6 +33,10 @@ export default function Routes() {
   };
 
   if (!loggedIn && !modalIsVisible) {
+    console.log('IFFFFF');
+    console.log(loggedIn);
+    console.log(user);
+    debugger;
     setModalVisibility(true);
     history.push(RoutesName.home);
   }
