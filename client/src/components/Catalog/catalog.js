@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect, useSelector } from 'react-redux'
 import { Grid, Container, useTheme, SwipeableDrawer, Button, useMediaQuery } from '@material-ui/core';
@@ -9,7 +9,7 @@ import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 import Sorting from '../Sorting/sorting';
 
 import useStyles from './_catalog';
-import { productsError, productsLoaded, productsRequested } from '../../redux/actions/products';
+import { productsError, productsLoaded, moreProductsLoaded, productsRequested } from '../../redux/actions/products';
 import getAllProducts, { getProductsByCategory } from '../../services/getProducts';
 import { getCategory } from '../../services/getCategories';
 import { catalogLocation } from '../../redux/actions/categories';
@@ -22,16 +22,11 @@ import BackgroundCatalog from './Background-catalog/backgroundCatalog';
 const Catalog = (props) => {
   const {
     assortment,
-    fetchProducts,
-    setCatalogLocation,
-    productsList,
-    catalogLocation,
     catalog,
     filter,
-    // products,
-    filterType,
     productsLoaded,
-    resetFilters
+    moreProductsLoaded,
+    products
   } = props;
   const { filterResults, filterPages, sort, filterType: queryString } = filter;
   const classes = useStyles();
@@ -41,22 +36,8 @@ const Catalog = (props) => {
   const [topList, setTopList] = useState([]);
   const [productsToShow, setProductsToShow] = useState([]);
   const [filterIsOpen, setFilterIsOpen] = useState(false);
-  const [productsResult, setProducts] = useState({ products: [], length: 0 });
   const { allCategories } = catalog;
 
-  const getCurrentCategory = () => {
-    if (catalogLocation !== assortment) {
-      resetFilters();
-    }
-  };
-  getCurrentCategory();
-  useEffect(() => {
-    getCategory(assortment)
-      .then((response) => setTopList(response.topSellers));
-
-    setCatalogLocation(assortment);
-    filterHandle();
-  }, [assortment, sort, filterPages]);
   const cardsToShowString = topList.toString();
 
   useEffect(() => {
@@ -66,16 +47,29 @@ const Catalog = (props) => {
       })
   }, [cardsToShowString, topList]);
 
+  useEffect(() => {
+    getCategory(assortment)
+      .then((response) => setTopList(response.topSellers));
+    filterHandle();
+  }, [sort, filterResults, filterPages]);
+
   const filterHandle = () => {
-    const valToFilter = parseToFilterValue(filterResults, sort, filterPages, allCategories, assortment);
-    console.log(valToFilter);
+    const valToFilter = parseToFilterValue(
+      filterResults,
+      sort,
+      filterPages,
+      allCategories,
+      assortment
+    );
     getInfinityFilteredProducts(valToFilter)
       .then((newPoducts) => {
-        console.log(newPoducts);
-        setProducts(newPoducts);
-      })
-      .then(toggleFilter(false));
-  }
+        if (filterPages.startPage > 1) {
+          moreProductsLoaded(newPoducts);
+        } else {
+          productsLoaded(newPoducts);
+        }
+      });
+  };
 
   const toggleFilter = (open) => {
     setFilterIsOpen(open);
@@ -104,13 +98,12 @@ const Catalog = (props) => {
           open={Boolean(filterIsOpen)}
           onClose={() => toggleFilter(false)}
         >
-          <Filter onClose={toggleFilter} filterHandle={filterHandle} />
+          <Filter toggleFilter={toggleFilter} />
         </SwipeableDrawer>
       </div>
 
     )
   }
-  console.log(productsResult);
   return (
     <>
       <Container maxWidth="xl">
@@ -121,7 +114,7 @@ const Catalog = (props) => {
           </Grid>
           <Grid item xs={12} md={8}>
             <Sorting sort={sort} />
-            <ProductList assortment={assortment} productsResult={productsResult} />
+            <ProductList assortment={assortment} productsResult={products} />
           </Grid>
           <Grid item xs={12}>
             <ProductCardCarousel
@@ -137,7 +130,6 @@ const Catalog = (props) => {
 
 const mapStateToProps = (state) => ({
   catalog: state.categoriesReducer.catalog,
-  catalogLocation: state.categoriesReducer.catalogLocation,
   filter: state.filterReducer,
   products: state.productsReducer.products,
 });
@@ -145,10 +137,24 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   resetFilters: () => dispatch(resetFilters()),
   setCatalogLocation: (assortment) => dispatch(catalogLocation(assortment)),
+  productsLoaded: (products) => dispatch(productsLoaded(products)),
+  moreProductsLoaded: (products) => dispatch(moreProductsLoaded(products)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Catalog)
 
 Catalog.propTypes = {
-  assortment: PropTypes.string.isRequired
+  assortment: PropTypes.string.isRequired,
+  catalog: PropTypes.objectOf(
+    PropTypes.object
+  ).isRequired,
+  filter: PropTypes.objectOf(
+    PropTypes.object
+  ).isRequired,
+  products: PropTypes.objectOf([
+    PropTypes.array,
+    PropTypes.number,
+  ]).isRequired,
+  productsLoaded: PropTypes.func.isRequired,
+  moreProductsLoaded: PropTypes.func.isRequired,
 };

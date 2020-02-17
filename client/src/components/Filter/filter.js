@@ -14,7 +14,7 @@ const Filter = (props) => {
   const {
     filterParamsLoaded,
     filterParams,
-    filterHandle,
+    toggleFilter
   } = props;
 
   const classes = useStyles();
@@ -49,7 +49,7 @@ const Filter = (props) => {
         variant="contained"
         disableElevation
         color="primary"
-        onClick={filterHandle}
+        onClick={() => toggleFilter(false)}
       >
         Filter
       </Button>

@@ -1,13 +1,17 @@
 import {
   FETCH_PRODUCTS_REQUEST,
   FETCH_PRODUCTS_SUCCESS,
+  FETCH_MORE_PRODUCTS_SUCCESS,
   FETCH_PRODUCTS_FAILURE,
   SORTING_PRODUCTS,
   RESET_SORTING
 } from '../actions/actionTypes'
 
 export const initialState = {
-  products: [],
+  products: {
+    products: [],
+    productsQuantity: 0
+  },
   error: null,
   productsLoading: true,
   sorting: '',
@@ -26,6 +30,13 @@ export default function productsReducer(state = initialState, action) {
       return {
         ...state,
         products: action.payload.products,
+        error: null,
+        productsLoading: false
+      };
+    case FETCH_MORE_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        products: { ...state.products, products: [...state.products.products, ...action.payload.products.products] },
         error: null,
         productsLoading: false
       };

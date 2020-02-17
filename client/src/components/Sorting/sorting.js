@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   FormControl,
@@ -20,7 +20,7 @@ const Sorting = (props) => {
   const inputLabel = useRef(null);
 
   const [labelWidth, setLabelWidth] = useState(0);
-  let sortVal = sort.sortValue < 0 ? '-' : '' ;
+  let sortVal = sort.sortValue < 0 ? '-' : '';
   sortVal += sort.sortName;
 
   useEffect(() => {
@@ -43,7 +43,6 @@ const Sorting = (props) => {
       });
     }
   };
-  console.log(sortVal);
   return (
     <Grid container justify="flex-end">
       <FormControl variant="outlined" className={classes.formControl}>
@@ -78,9 +77,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Sorting.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.object).isRequired,
-  sendSorting: PropTypes.func.isRequired,
-  currentCategory: PropTypes.string.isRequired,
+  sort: PropTypes.objectOf(PropTypes.string).isRequired,
+  filterSort: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sorting);
