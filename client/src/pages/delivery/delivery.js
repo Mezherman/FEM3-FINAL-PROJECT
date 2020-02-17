@@ -4,7 +4,7 @@ import { Grid, Divider, Container } from '@material-ui/core';
 export default function Delivery() {
   return (
     <>
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" style={{minHeight: '55vh'}}>
         <Grid container>
           <Grid item>
             <h2>Where is my parcel?</h2>
@@ -23,8 +23,9 @@ export default function Delivery() {
             <h2>What countries does WMF deliver to?</h2>
           We currently deliver to the following countries:
             <ul>
-              <li>Germany</li>
               <li>Austria</li>
+              <li>Germany</li>
+              <li>Ukraine</li>
             </ul>
             <Divider />
           </Grid>

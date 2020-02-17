@@ -86,7 +86,7 @@ const HeaderIcons = () => {
   return (
     <ClickAwayListener onClickAway={handleSearchAway}>
       <Box className={classes.iconButtonBox}>
-        {isMobile && <Search searchIsShown={searchIsShown} />}
+        {isMobile && searchIsShown && <Search searchIsShown={searchIsShown} />}
         {isTablet && <Search searchIsShown />}
         {isDesktop && searchIsShown && <Search searchIsShown={searchIsShown} />}
         <HeaderSearchIcon onClick={handleTooltipClose} toggleSearch={toggleSearch} />
