@@ -88,7 +88,6 @@ const Catalog = ({
 
     )
   }
-
   return (
     <>
       <Container maxWidth="xl">

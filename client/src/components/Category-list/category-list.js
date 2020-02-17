@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Container } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 import Category from './Category/category';
 
@@ -22,9 +22,9 @@ function CategoryList() {
   }
 
   return (
-    <Container maxWidth="xl" className={classes.categoriesList}>
+    <Box className={classes.categoriesList}>
       {categoryList}
-    </Container>
+    </Box>
   )
 }
 
