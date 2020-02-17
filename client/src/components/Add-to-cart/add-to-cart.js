@@ -82,9 +82,9 @@ export default function AddToCart({ open, onModalClose, product }) {
                     {finalPrice}
                   </span>
                 </Box>
-                <Box className={classes.qtyPicker}>
+                {/*<Box className={classes.qtyPicker}>*/}
                   <IncreaseBlock setQty={handleQty} qty={stateQuantity} maxQty={maxQty} />
-                </Box>
+                {/*</Box>*/}
                 <Box className={classes.total}>
                   <span>
                     &#8364;

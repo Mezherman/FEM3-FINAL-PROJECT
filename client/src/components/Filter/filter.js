@@ -12,25 +12,12 @@ import useStyles from './_filter';
 
 const Filter = (props) => {
   const {
-    productsLoaded,
     filterParamsLoaded,
     filterParams,
-    filterResults,
-    categoriesReducer,
-    onClose,
-    filterType,
-    resetFilters,
-    currentCategory
+    filterHandle,
   } = props;
 
-  const { catalogLocation, catalog } = categoriesReducer;
-  const { allCategories } = catalog;
   const classes = useStyles();
-
-  let valToFilter = '';
-  let valOfBrands = '';
-  let valOfColor = '';
-  let valOfPrice = '';
 
   useEffect(() => {
     getColors().then((colors) => {
@@ -39,9 +26,7 @@ const Filter = (props) => {
     getBrands().then((brands) => {
       filterParamsLoaded('brands', brands);
     });
-    filterType(valToFilter);
-    getCurrentCategory();
-  }, [filterParamsLoaded, currentCategory]);
+  }, [filterParamsLoaded]);
 
   const filterText = ['Brand', 'Price', 'Color'];
 
@@ -55,35 +40,6 @@ const Filter = (props) => {
     />
   ));
 
-  const getCurrentCategory = () => {
-    if (currentCategory) {
-      resetFilters();
-    }
-  };
-
-  const parseToFilterValue = (obj) => {
-    if (obj.brand.length > 0) {
-      valOfBrands = `brand=${obj.brand.join(',')}`
-    }
-
-    if (obj.price.length > 0) {
-      valOfPrice = `minPrice=${obj.price[0]}&maxPrice=${obj.price[1]}`
-    }
-
-    if (obj.color.length > 0) {
-      valOfColor = `color=${obj.color.join(',')}`
-    }
-
-    const subCategories = allCategories.filter((category) => category.parentId === catalogLocation);
-    const subCategoriesString = subCategories ? subCategories.map((subCategory) => subCategory.id).join(',') : '';
-    const categoryForFilter = !subCategoriesString ? catalogLocation : subCategoriesString;
-
-    valToFilter = `categories=${categoryForFilter}&${valOfBrands}&${valOfColor}&${valOfPrice}`
-    return valToFilter
-  };
-
-  parseToFilterValue(filterResults);
-
   return (
     <>
       {filter}
@@ -93,14 +49,7 @@ const Filter = (props) => {
         variant="contained"
         disableElevation
         color="primary"
-        onClick={() => {
-          filterType(valToFilter);
-          getFilteredProducts(valToFilter)
-            .then((products) => {
-              productsLoaded(products)
-            })
-            .then(onClose)
-        }}
+        onClick={filterHandle}
       >
         Filter
       </Button>
@@ -109,38 +58,17 @@ const Filter = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  filterResults: state.filterReducer.filterResults,
   filterParams: state.filterReducer.filterParams,
-  categoriesReducer: state.categoriesReducer,
-  currentCategory: state.categoriesReducer.catalogLocation
 });
 
 const mapDispatchToProps = {
-  productsLoaded,
   filterParamsLoaded,
-  filterType,
-  resetFilters
 };
 
 Filter.propTypes = {
   filterParams: PropTypes.objectOf(PropTypes.array).isRequired,
-  filterResults: PropTypes.objectOf(PropTypes.array).isRequired,
-  currentCategory: PropTypes.string.isRequired,
-  categoriesReducer: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.bool,
-    PropTypes.func
-  ]).isRequired,
-  onClose: PropTypes.func,
-  productsLoaded: PropTypes.func.isRequired,
+  filterHandle: PropTypes.func.isRequired,
   filterParamsLoaded: PropTypes.func.isRequired,
-  filterType: PropTypes.func.isRequired,
-  resetFilters: PropTypes.func.isRequired,
-};
-
-Filter.defaultProps = {
-  onClose: () => {
-  }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter)

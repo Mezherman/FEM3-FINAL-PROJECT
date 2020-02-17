@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => createStyles({
     fontSize: '16px'
   },
   menuItem: {
-    color: 'red',
+    boxSizing: 'border-box',
   },
   category: {
     color: 'red',

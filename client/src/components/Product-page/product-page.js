@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
-import { Container, Box } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import { getProductsByItemNo } from '../../services/getProducts';
 import ProductDetail from '../Product-detail/product-detail';
 import { productsRequested, productsLoaded } from '../../redux/actions/products';
@@ -30,7 +30,7 @@ function ProductPage(props) {
       // console.log(chosenProduct);
       fetchComments(chosenProduct._id);
     }
-  }, [chosenProduct, itemNo, fetchProduct, getChosenProduct]);
+  }, [chosenProduct, itemNo, fetchProduct, getChosenProduct, fetchComments]);
 
   useEffect(() => {
     if (chosenProduct) {
@@ -65,7 +65,10 @@ function ProductPage(props) {
                   />
                 </Grid>
               </div>
-              <ProductCardCarousel products={productsToShow} label="top" />
+              <ProductCardCarousel
+                products={productsToShow}
+                label="Most Popular Products"
+              />
             </Container>
           </>
         )}

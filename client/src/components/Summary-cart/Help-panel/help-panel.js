@@ -21,10 +21,10 @@ export default function HelpPanel() {
       </ExpansionPanelSummary>
       <ExpansionPanelDetails className={classes.detail}>
         <Typography className={classes.bold}>
-          Service Consumer
+          Customer Service
         </Typography>
         <Typography className={classes.bold}>
-          +49 (0) 7331 – 256 256
+          +38 (044) 000 – 00 - 00
         </Typography>
         <Typography>
           Mo-Fr: 08:00 - 18:00

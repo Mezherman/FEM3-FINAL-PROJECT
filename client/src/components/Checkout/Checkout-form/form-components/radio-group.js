@@ -6,14 +6,15 @@ import useStyles from './_form-components';
 
 const RenderRadioGroup = (props) => {
   const classes = useStyles();
-  const { input, meta: { touched, error }, children } = props;
+  const { input, meta: { touched, error }, children, gender } = props;
+
   return (
     <>
       <RadioGroup
-        {...input}
         aria-label={input.name}
         className={classes[input.name]}
         name={input.name}
+        defaultValue={gender || ''}
         onChange={(event, value) => input.onChange(value)}
       >
         {children}
@@ -33,10 +34,12 @@ RenderRadioGroup.propTypes = {
   meta: PropTypes.oneOfType([PropTypes.object, PropTypes.bool, PropTypes.string]).isRequired,
   touched: PropTypes.bool,
   error: PropTypes.objectOf(PropTypes.string),
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  gender: PropTypes.string
 };
 
 RenderRadioGroup.defaultProps = {
   error: {},
   touched: false,
+  gender: ''
 };

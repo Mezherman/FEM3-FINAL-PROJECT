@@ -15,6 +15,7 @@ const RoutesName = {
   search: '/search',
   adminHome: '/admin',
   forbidden: '/forbidden',
+  payment: '/payment'
 };
 
 export default RoutesName;
