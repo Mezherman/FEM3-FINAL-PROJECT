@@ -35,7 +35,7 @@ const Comment = (props) => {
   const closeModal = () => {
     setModalVisibility(false);
   };
-  
+
   const getComments = useCallback(() => {
     fetchComments(thisId);
     getCommentsOfProducts(thisId)
@@ -178,10 +178,10 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Comment.propTypes = {
-  currentProduct: PropTypes.oneOfType(PropTypes.obj).isRequired,
+  currentProduct: PropTypes.oneOfType([PropTypes.object]).isRequired,
   sendNewComment: PropTypes.func.isRequired,
   fetchComments: PropTypes.func.isRequired,
-  commentsList: PropTypes.oneOfType(PropTypes.array).isRequired,
+  commentsList: PropTypes.oneOfType([PropTypes.array]).isRequired,
   userLoggedIn: PropTypes.bool.isRequired,
   loaded: PropTypes.func.isRequired
 };

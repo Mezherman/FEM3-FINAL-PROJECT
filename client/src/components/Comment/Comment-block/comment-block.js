@@ -21,7 +21,7 @@ const CommentBlock = ({ currentUser, date, commentText }) => {
 };
 
 CommentBlock.propTypes = {
-  currentUser: PropTypes.oneOfType(PropTypes.object).isRequired,
+  currentUser: PropTypes.oneOfType([PropTypes.object]).isRequired,
   date: PropTypes.string.isRequired,
   commentText: PropTypes.string.isRequired,
 };

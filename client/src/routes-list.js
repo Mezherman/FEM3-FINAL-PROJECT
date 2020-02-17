@@ -6,7 +6,6 @@ const RoutesName = {
   orderConfirmation: '/checkout/confirmation',
   login: '/login',
   signUp: '/sign-up',
-  signIn: '/login',
   aboutUs: '/about',
   contacts: '/contacts',
   delivery: '/delivery',
@@ -16,6 +15,7 @@ const RoutesName = {
   search: '/search',
   adminHome: '/admin',
   forbidden: '/forbidden',
+  payment: '/payment'
 };
 
 export default RoutesName;
