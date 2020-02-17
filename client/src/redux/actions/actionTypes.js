@@ -49,10 +49,6 @@ export const RESET_FILTERS = 'RESET_FILTERS'
 export const FETCH_LOAD_REQUEST = 'FETCH_LOAD_REQUEST'
 export const FETCH_LOAD_RESPONSE = 'FETCH_LOAD_RESPONSE'
 
-// logout
-
-export const LOGOUT_TRUE = 'LOGOUT_TRUE'
-
 // notification
 
 export const OPEN_NEW_NOTIFICATION = 'OPEN_NEW_NOTIFICATION'

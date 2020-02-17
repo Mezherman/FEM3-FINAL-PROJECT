@@ -1,19 +1,15 @@
 import React, { useState } from 'react'
 import { AppBar, Toolbar, Menu, MenuItem, Box, Container, Divider } from '@material-ui/core'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
-import { useSelector } from 'react-redux'
-import { Redirect } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import HeaderNavbar from '../Header-navbar/header-navbar';
 import useStyles from './_header';
-import RoutesName from '../../routes-list';
 import HeaderIcons from './Header-icons/header-icons';
 import MenuLogoIcons from './Header-icons/Header-icon/menu-and-logo-icons';
 
 function Header() {
   const classes = useStyles();
 
-  const { logout } = useSelector((state) => state.logout);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
@@ -96,7 +92,6 @@ function Header() {
       {mainHeaderContent()}
       {renderMobileMenu()}
       {renderMenu()}
-      {logout && <Redirect to={RoutesName.home} />}
     </>
   );
 }

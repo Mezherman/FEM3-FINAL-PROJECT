@@ -1,21 +1,18 @@
 import React, { useCallback } from 'react';
 import { Divider, Grid, List, ListItem, ListItemText, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import RoutesName from '../../../../routes-list';
 import usePersonalDataStyles from '../../../../pages/profile/_profile'
-import logoutAction from '../../../../redux/actions/logout';
 
 const MainCustomerPage = ({ handleEditForm, handleChangePassword }) => {
   const pdClasses = usePersonalDataStyles();
 
-  const dispatch = useDispatch();
-
   const handleLogout = useCallback(() => {
     localStorage.removeItem('token');
-    dispatch(logoutAction());
-  }, [dispatch]);
+    window.location.reload()
+  }, []);
 
   const {
     gender,
@@ -35,23 +32,25 @@ const MainCustomerPage = ({ handleEditForm, handleChangePassword }) => {
     { text: 'Login:', userData: login ?? null },
   ];
 
+  const userData = () => listItem.map(({ text, userData }, index) => {
+    const labelId = `checkbox-list-secondary-label-${index}`;
+    return (
+      <ListItem component="div" key={text} className={pdClasses.userData}>
+        <ListItemText id={labelId} primary={text} />
+        <div>
+          <ListItem component="div" key={userData}>
+            <ListItemText id="2" primary={userData} />
+          </ListItem>
+        </div>
+        <Divider component="div" absolute />
+      </ListItem>
+    );
+  });
+
   const customerData = () => (
     <Grid component="div" xs={12} sm={7} item>
       <List component="div" dense>
-        {listItem.map(({ text, userData }, index) => {
-          const labelId = `checkbox-list-secondary-label-${index}`;
-          return (
-            <ListItem component="div" key={text} className={pdClasses.userData}>
-              <ListItemText id={labelId} primary={text} />
-              <div>
-                <ListItem component="div" key={userData}>
-                  <ListItemText id="2" primary={userData} />
-                </ListItem>
-              </div>
-              <Divider component="div" absolute />
-            </ListItem>
-          );
-        })}
+        {userData()}
       </List>
     </Grid>
   );

@@ -2,9 +2,8 @@ import React, { useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import Spinner from '../../components/Spinner/spinner';
-import RoutesName from '../../routes-list'
 import { Container } from '@material-ui/core';
+import RoutesName from '../../routes-list'
 
 import ProductList from '../../components/Product-list/product-list';
 import { favoritesUpdated } from '../../redux/actions/favorites';

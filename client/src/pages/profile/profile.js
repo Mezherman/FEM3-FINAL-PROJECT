@@ -1,13 +1,11 @@
 import React, { useState, useCallback } from 'react';
 import { Container } from '@material-ui/core';
-import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import PutPersonalData from '../../components/My-account/Profile/Put-personal-data/put-personal-data';
 import useStyles from '../../components/Sign-up/Sign-up-form/_sign-up-form';
 import usePersonalDataStyles from './_profile';
-import RoutesName from '../../routes-list';
 import ChangePasswordForm from '../../components/My-account/Profile/Put-personal-data/put-password';
 import validate from '../../components/My-account/Profile/validate';
 import putUserData from '../../services/put-user-data';
@@ -48,15 +46,7 @@ export default function Profile ({ handleSubmit }) {
     dispatch(newNotification(type, message));
   }, [dispatch]);
 
-  const {
-    gender,
-    firstName,
-    lastName,
-    telephone,
-    email,
-    login,
-  } = useSelector((state) => state.user.customer);
-  const { logout } = useSelector((state) => state.logout);
+  const { firstName, lastName, telephone, email, login } = useSelector((s) => s.user.customer);
 
   const submitEditedUser = (values) => {
     putUserData({
@@ -108,7 +98,6 @@ export default function Profile ({ handleSubmit }) {
         onSubmit={handleSubmit(submitEditedUser)}
       >
         <PutPersonalData
-          gender={gender}
           firstName={firstName}
           lastName={lastName}
           telephone={telephone}
@@ -126,7 +115,6 @@ export default function Profile ({ handleSubmit }) {
         handleChangePassword={handleChangePassword}
         handleEditForm={handleEditForm}
       />
-      {logout && <Redirect to={RoutesName.home} />}
     </Container>
   );
 }

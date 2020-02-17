@@ -16,7 +16,7 @@ export default function SignInForm (props) {
     handleRegistrationRoute
   } = props;
   return (
-    <form className={classes.passwordForm} noValidate>
+    <form className={classes.passwordForm} noValidate onSubmit={(event) => handleClick(event)}>
       <TextField
         variant="outlined"
         margin="normal"
@@ -52,14 +52,7 @@ export default function SignInForm (props) {
           )
         }}
       />
-      <Button
-        type="submit"
-        fullWidth
-        variant="contained"
-        color="primary"
-        className={classes.submit}
-        onClick={handleClick}
-      >
+      <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
         Sign In
       </Button>
       <Link className={classes.text} to={RoutesName.signUp} onClick={handleRegistrationRoute}>
