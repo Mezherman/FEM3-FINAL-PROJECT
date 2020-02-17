@@ -218,10 +218,16 @@ export default styled.div`
         }
     }
     @media (min-width: 768px) {
-        display: block;
+        flex-direction: row;
+        & > input {
+          display: inline-block;
+        }
         & > input:first-child {
             margin-bottom: 0;
             margin-right: 2px;
+        }
+        & > input:last-child {
+            margin-left: 5px;
         }
     }
   }

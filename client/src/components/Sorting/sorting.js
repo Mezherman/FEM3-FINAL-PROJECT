@@ -106,13 +106,18 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  sendSortingProducts: (sortingList, sortingType) => dispatch(sortingProducts(sortingList, sortingType)),
+  sendSortingProducts:
+    (sortingList, sortingType) => dispatch(sortingProducts(sortingList, sortingType)),
   reset: () => dispatch(sortingReset()),
 });
 
 Sorting.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  products: PropTypes.arrayOf([PropTypes.object]).isRequired,
   currentCategory: PropTypes.string.isRequired,
+  sendSortingProducts: PropTypes.func.isRequired,
+  sorting: PropTypes.string.isRequired,
+  reset: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sorting);

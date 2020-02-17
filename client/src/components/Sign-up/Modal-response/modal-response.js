@@ -6,6 +6,7 @@ import {
   Button,
   Backdrop
 } from '@material-ui/core';
+import { PropTypes } from 'prop-types'
 import useStyles from './_modal-response';
 
 const ModalResponse = ({
@@ -44,5 +45,12 @@ const ModalResponse = ({
     </Modal>
   )
 };
+//
+// ModalResponse.PropTypes = {
+//   // openModal, handleClose, inModal, classModal, value, submitClass
+//   openModal: PropTypes.func.isRequired,
+//   name: PropTypes.string.isRequired,
+//   meta: PropTypes.arrayOf([PropTypes.object]).isRequired
+// };
 
 export default ModalResponse;

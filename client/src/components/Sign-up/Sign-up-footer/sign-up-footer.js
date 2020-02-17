@@ -67,7 +67,7 @@ const SignUpFooter = () => {
         use your data:
       </Typography>
       <Grid item xs={12}>
-        <Field name="agreement" component={renderCheckboxField}/>
+        <Field name="agreement" component={renderCheckboxField} />
       </Grid>
       <Button type="submit" variant="contained" color="primary" className={classes.submit}>
         Become a myWMF Club member now
@@ -89,9 +89,9 @@ const SignUpFooter = () => {
 };
 
 SignUpFooter.propTypes = {
-  input: PropTypes.node,
-  name: PropTypes.string,
-  meta: PropTypes.object
+  input: PropTypes.node.isRequired,
+  name: PropTypes.string.isRequired,
+  meta: PropTypes.arrayOf([PropTypes.object]).isRequired
 };
 
 export default SignUpFooter;

@@ -16,7 +16,7 @@ import useStyles from './_sign-up';
 import { leaveRegistrationPage } from '../../redux/actions/moving-around-registration';
 import RoutesName from '../../routes-list'
 
-let SignUp = (props) => {
+function SignUp (props) {
   const { handleSubmit } = props;
   const classes = useStyles();
   const [signUpModal, setSignUpModal] = useState(false);
@@ -67,7 +67,9 @@ let SignUp = (props) => {
   };
 
   const birthDayFunc = (birthdayDay, birthdayMonth, birthdayYear) => {
-    let day, month, year;
+    let day;
+    let month;
+    let year;
 
     !birthdayDay ? (day = 'XX') : day = birthdayDay;
     !birthdayMonth ? (month = 'XX') : month = birthdayMonth;
@@ -111,7 +113,11 @@ let SignUp = (props) => {
           Your registration for the myWMF Customer Club
         </Typography>
 
-        <form className={classes.passwordForm} noValidate={false} onSubmit={handleSubmit(submitNewUser)}>
+        <form
+          className={classes.passwordForm}
+          noValidate={false}
+          onSubmit={handleSubmit(submitNewUser)}
+        >
           <Grid
             container
             spacing={3}
@@ -158,7 +164,7 @@ SignUp = reduxForm({
 })(SignUp);
 
 SignUp.propTypes = {
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func.isRequired
 };
 
 export default SignUp;

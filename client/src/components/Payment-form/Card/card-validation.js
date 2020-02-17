@@ -1,10 +1,10 @@
 import Payment from 'payment';
 
-function clearNumber(value = '') {
+function clearNumber (value = '') {
   return value.replace(/\D+/g, '');
 }
 
-export function formatCreditCardNumber(value) {
+export function formatCreditCardNumber (value) {
   if (!value) {
     return value
   }
