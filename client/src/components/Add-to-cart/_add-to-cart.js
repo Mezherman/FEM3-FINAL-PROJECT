@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     display: 'flex',
     justifyContent: 'space-between',
-    padding: '10px 0',
+    // padding: '10px 0',
     fontSize: '20px'
   },
   header: {
