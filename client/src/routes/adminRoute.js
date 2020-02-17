@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import Home from '../components/Home/home';
+import Home from '../pages/home/home';
 import LoginModal from '../components/Login-modal-window/login-modal-window';
 import RoutesName from '../routes-list';
 
