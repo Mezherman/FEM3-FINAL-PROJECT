@@ -29,7 +29,7 @@ let SignUp = (props) => {
   useEffect(() => () => dispatch(leaveRegistrationPage()), [dispatch]);
 
   const initialState = {
-    gender: 'Mr',
+    gender: 'Male',
     firstName: '',
     lastName: '',
     login: '',
