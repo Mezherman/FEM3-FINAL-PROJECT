@@ -20,12 +20,11 @@ const Contact = ({ icon, children }) => {
 
 Contact.propTypes = {
   icon: PropTypes.element,
-  children: PropTypes.node
+  children: PropTypes.node.isRequired
 };
 
 Contact.defaultProps = {
   icon: null,
-  children: null
 };
 
 export default Contact;

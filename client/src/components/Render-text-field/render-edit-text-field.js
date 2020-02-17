@@ -1,6 +1,6 @@
 import { FormLabel, TextField } from '@material-ui/core';
 import React from 'react';
-import useStyles from '../SignUp/Sign-up-form/_sign-up-form';
+import useStyles from '../Sign-up/Sign-up-form/_sign-up-form';
 
 const RenderEditTextField = ({
   placeholder,

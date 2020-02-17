@@ -112,7 +112,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 Sorting.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
-  sendSorting: PropTypes.func.isRequired,
   currentCategory: PropTypes.string.isRequired,
 };
 

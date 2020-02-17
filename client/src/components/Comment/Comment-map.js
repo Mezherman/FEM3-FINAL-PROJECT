@@ -19,7 +19,7 @@ const CommentMap = ({ commentsList }) => (
 );
 
 CommentMap.propTypes = {
-  commentsList: PropTypes.oneOfType(PropTypes.array).isRequired
+  commentsList: PropTypes.oneOfType([PropTypes.array]).isRequired
 };
 
 export default CommentMap;
