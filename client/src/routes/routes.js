@@ -19,8 +19,9 @@ import Favorites from '../components/Favorites/favorites'
 import Checkout from '../components/Checkout/checkout';
 import CheckoutStatus from '../components/Checkout/Status/status';
 import CustomerOrders from '../components/My-account/Customer-orders/customer-orders';
-import Forbidden from '../components/Forbidden/forbidden'
-import AdminHome from '../components/Admin/Home/home'
+import Forbidden from '../components/Forbidden/forbidden';
+import AdminHome from '../components/Admin/Home/home';
+import PaymentForm from "../components/Payment-form/payment-form";
 
 export default function Routes() {
   const { loggedIn, customer } = useSelector((state) => state.user);
@@ -118,6 +119,7 @@ export default function Routes() {
       <Route path={RoutesName.aboutUs} component={AboutUs} />
       <Route path={RoutesName.delivery} component={Delivery} />
       <Route path={RoutesName.contacts} component={Contacts} />
+      <Route path={RoutesName.payment} component={PaymentForm} />
       <AdminRoute
         exact
         path={RoutesName.adminHome}
