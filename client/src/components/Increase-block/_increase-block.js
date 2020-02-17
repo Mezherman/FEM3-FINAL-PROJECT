@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
   //   // margin: theme.spacing(3, 0),
   // },
   qtyPicker: {
-    maxWidth: '70%',
+    // maxWidth: '60%',
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'space-between',
