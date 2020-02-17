@@ -14,6 +14,6 @@ const FooterNavbar = () => (
     </Grid>
     <p>&copy; 2020 all rights reserved</p>
   </Grid>
-)
+);
 
 export default FooterNavbar

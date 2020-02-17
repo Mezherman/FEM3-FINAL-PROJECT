@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 import SearchIcon from '@material-ui/icons/Search';
 import { Collapse, Grow, useTheme, InputBase } from '@material-ui/core';
@@ -9,13 +9,14 @@ import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
 import search from '../../services/search';
 import getAllProducts from '../../services/getProducts';
 import { productsLoaded } from '../../redux/actions/products';
+import storeSearchedValue from '../../redux/actions/search';
 
 import useStyles from './_search';
 
 const Search = ({ productsLoaded, history, searchIsShown }) => {
   const classes = useStyles();
   const [searchedValue, setSearchedValue] = useState('');
-
+  const dispatch = useDispatch();
   // useEffect(() => {
   //   getAllProducts()
   //     .then((products) => products)
@@ -27,10 +28,12 @@ const Search = ({ productsLoaded, history, searchIsShown }) => {
   };
 
   if (searchedValue) {
-    search(searchedValue)
-      .then((searchedProducts) => {
-        productsLoaded(searchedProducts);
-      })
+    dispatch(storeSearchedValue(searchedValue));
+    // search(searchedValue)
+    //   .then((searchedProducts) => {
+    //     console.log('searchedProducts =', searchedProducts);
+    //     productsLoaded(searchedProducts);
+    //   })
   }
 
   const theme = useTheme();

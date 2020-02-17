@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     width: '150px'
   },
   marginTop: {
-    marginTop: '6px',
+    marginTop: '16px',
   },
   title: {
     textTransform: 'capitalize',
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
   },
   deleteBtn: {
-    marginTop: '6px',
+    marginTop: '16px',
     '&:hover': {
       color: theme.palette.secondary.dark,
       cursor: 'pointer'

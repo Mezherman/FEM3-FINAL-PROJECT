@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 import { Typography, Divider, Box } from '@material-ui/core';
 
-import RenderCheckboxField from './form-components/checkbox-field';
+import RenderCheckboxField from './form-components/terms-field';
 
 import useStyles from './_checkout-form';
 

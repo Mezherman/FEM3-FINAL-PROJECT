@@ -11,7 +11,7 @@ export default function ImgGrid({ src }) {
   });
 
   return (
-    <Grid item sm={12} md={6} lg={9} container alignItems="stretch">
+    <Grid item xs={12} md={6} lg={9} container alignItems="stretch">
       <div className={classes.categoriesImg} style={addBackgroundImg(src)} />
     </Grid>
   )

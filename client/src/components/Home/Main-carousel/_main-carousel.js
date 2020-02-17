@@ -1,7 +1,12 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStylesMainCarousel = makeStyles((theme) => ({
-
+  background: {
+    height: 'calc(100vh - 130px)',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  },
   itemContainer: {
     position: 'relative',
   },
@@ -26,13 +31,13 @@ const useStylesMainCarousel = makeStyles((theme) => ({
   },
 
   textBlock: {
-    [theme.breakpoints.up('xs')]: {
-      top: '6%',
-      maxWidth: '194px',
-      fontSize: '0.19rem',
-      right: 39,
-      padding: '2px',
-    },
+    // [theme.breakpoints.up('xs')]: {
+    //   top: '30%',
+    //   maxWidth: '194px',
+    //   fontSize: '0.19rem',
+    //   right: 39,
+    //   padding: '2px',
+    // },
     [theme.breakpoints.up('sm')]: {
       top: '12%',
       maxWidth: '400px',
@@ -42,23 +47,25 @@ const useStylesMainCarousel = makeStyles((theme) => ({
       top: '25%',
       maxWidth: '450px',
       fontSize: '0.32rem',
-      padding: theme.spacing(1),
+      padding: theme.spacing(2),
     },
     [theme.breakpoints.up('lg')]: {
       top: '20%',
       maxWidth: '550px',
       fontSize: '0.39rem',
+      right: 150,
       padding: theme.spacing(3),
     },
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    top: '6%',
+    textAlign: 'justify',
+    top: '30%',
     fontSize: '0.19rem',
-    right: 39,
-    padding: '2px',
-    borderRadius: theme.spacing(1),
-    maxWidth: '700px',
+    right: 40,
+    padding: theme.spacing(1),
+    // borderRadius: theme.spacing(1),
+    maxWidth: '200px',
     color: theme.palette.text.primary,
     position: 'absolute',
     backgroundColor: theme.palette.background.carousel,

@@ -2,19 +2,19 @@ import { makeStyles } from '@material-ui/core';
 
 const useStylesCarousel = makeStyles((theme) => ({
   carouselContainer: {
-    height: 'calc(100vh - 364px)',
-    [theme.breakpoints.up('sm')]: {
-      height: 'calc(100vh - 284px)',
-    },
-    [theme.breakpoints.up('md')]: {
-      height: 'calc(100vh - 170px)',
-    },
-    [theme.breakpoints.up('lg')]: {
-      height: 'calc(100vh - 100px)',
-    },
-    [theme.breakpoints.up('xl')]: {
-      height: 'calc(100vh - 200px)',
-    },
+    // height: 'calc(100vh - 364px)',
+    // [theme.breakpoints.up('sm')]: {
+    //   height: 'calc(100vh - 284px)',
+    // },
+    // [theme.breakpoints.up('md')]: {
+    //   height: 'calc(100vh - 170px)',
+    // },
+    // [theme.breakpoints.up('lg')]: {
+    //   height: 'calc(100vh - 100px)',
+    // },
+    // [theme.breakpoints.up('xl')]: {
+    //   height: 'calc(100vh - 200px)',
+    // },
   },
 
   mainPagingItem: {

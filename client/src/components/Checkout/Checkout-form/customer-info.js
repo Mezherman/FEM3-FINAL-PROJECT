@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { Field } from 'redux-form';
 import { Grid, Typography } from '@material-ui/core';
@@ -13,13 +14,17 @@ import useStyles from './_checkout-form';
 export default function CustomerInfo({ customer }) {
   const classes = useStyles();
 
-  const gender = () => (
-    <Field name="gender" component={RenderRadioGroup}>
-      <RadioCheckboxField name="gender" value="Mr" label="Mr" />
-      <RadioCheckboxField name="gender" value="Mrs" label="Mrs" />
+  const { gender } = useSelector((state) => state.user.customer);
+  // console.log('gender =', gender);
+
+  const genderRadioGroup = (
+    <Field name="gender" component={RenderRadioGroup} gender={gender}>
+      <RadioCheckboxField name="gender" value="male" label="Male" gender={gender} />
+      <RadioCheckboxField name="gender" value="female" label="Female" gender={gender} />
     </Field>
   );
 
+  console.log('CUSTOMER =', customer);
   const textField = (name, label) => (
     <Field
       name={name}
@@ -34,7 +39,7 @@ export default function CustomerInfo({ customer }) {
     <>
       <Grid>
         <Typography className={classes.blockTitle}>1. CUSTOMER INFO</Typography>
-        {gender()}
+        {genderRadioGroup}
         <Grid container spacing={2}>
           <Grid item xs={12} lg={6}>
             {textField('firstName', 'First Name')}
