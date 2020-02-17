@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import PutPersonalData from '../../components/My-account/Profile/Put-personal-data/put-personal-data';
 import useStyles from '../../components/Sign-up/Sign-up-form/_sign-up-form';
-import usePersonalDataStyles from './_profile';
+import useProfileStyles from './_profile';
 import ChangePasswordForm from '../../components/My-account/Profile/Put-personal-data/put-password';
 import validate from '../../components/My-account/Profile/validate';
 import putUserData from '../../services/put-user-data';
@@ -17,7 +17,7 @@ import CancelSaveButtons from '../../components/My-account/Profile/Put-personal-
 import MainCustomerPage from '../../components/My-account/Profile/Main-customer-page/main-customer-page';
 
 export default function Profile ({ handleSubmit }) {
-  const pdClasses = usePersonalDataStyles();
+  const profileClasses = useProfileStyles();
   const classes = useStyles();
 
   const [personalDataForm, setEditForm] = useState(false);
@@ -81,7 +81,7 @@ export default function Profile ({ handleSubmit }) {
   if (passwordForm) {
     return (
       <form
-        className={`${classes.passwordForm} ${pdClasses.container}`}
+        className={`${classes.passwordForm} ${profileClasses.container}`}
         noValidate={false}
         onSubmit={handleSubmit(submitEditedUserPassword)}
       >
@@ -93,7 +93,7 @@ export default function Profile ({ handleSubmit }) {
   if (personalDataForm) {
     return (
       <form
-        className={`${classes.passwordForm} ${pdClasses.container}`}
+        className={`${classes.passwordForm} ${profileClasses.container}`}
         noValidate={false}
         onSubmit={handleSubmit(submitEditedUser)}
       >
@@ -110,7 +110,7 @@ export default function Profile ({ handleSubmit }) {
   }
 
   return (
-    <Container maxWidth="xl" className={pdClasses.container}>
+    <Container maxWidth="xl" className={profileClasses.container}>
       <MainCustomerPage
         handleChangePassword={handleChangePassword}
         handleEditForm={handleEditForm}

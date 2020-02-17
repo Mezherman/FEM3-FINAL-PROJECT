@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import RoutesName from '../../../../routes-list';
-import usePersonalDataStyles from '../../../../pages/profile/_profile'
+import useProfileStyles from '../../../../pages/profile/_profile'
 
 const MainCustomerPage = ({ handleEditForm, handleChangePassword }) => {
-  const pdClasses = usePersonalDataStyles();
+  const profileClasses = useProfileStyles();
 
   const handleLogout = useCallback(() => {
     localStorage.removeItem('token');
@@ -35,7 +35,7 @@ const MainCustomerPage = ({ handleEditForm, handleChangePassword }) => {
   const userData = () => listItem.map(({ text, userData }, index) => {
     const labelId = `checkbox-list-secondary-label-${index}`;
     return (
-      <ListItem component="div" key={text} className={pdClasses.userData}>
+      <ListItem component="div" key={text} className={profileClasses.userData}>
         <ListItemText id={labelId} primary={text} />
         <div>
           <ListItem component="div" key={userData}>
@@ -57,20 +57,20 @@ const MainCustomerPage = ({ handleEditForm, handleChangePassword }) => {
 
   const profileMenu = () => (
     <Grid component="div" xs={12} sm={5} item >
-      <div className={pdClasses.linkContainer}>
-        <Divider component="div" orientation="vertical" light className={pdClasses.divider} />
-        <Typography component="a" variant="subtitle1" className={pdClasses.button} onClick={handleEditForm}>
+      <div className={profileClasses.linkContainer}>
+        <Divider component="div" orientation="vertical" light className={profileClasses.divider} />
+        <Typography component="a" variant="subtitle1" className={profileClasses.button} onClick={handleEditForm}>
           Edit personal data
         </Typography>
-        <Typography component="a" variant="subtitle1" className={pdClasses.button} onClick={handleChangePassword}>
+        <Typography component="a" variant="subtitle1" className={profileClasses.button} onClick={handleChangePassword}>
           Change password
         </Typography>
-        <Link to={RoutesName.myOrders} className={pdClasses.link}>
-          <Typography component="div" variant="subtitle1" className={pdClasses.button}>
+        <Link to={RoutesName.myOrders} className={profileClasses.link}>
+          <Typography component="div" variant="subtitle1" className={profileClasses.button}>
             View your orders
           </Typography>
         </Link>
-        <Typography onClick={handleLogout} component="div" variant="subtitle1" className={`${pdClasses.button} ${pdClasses.logout}`}>
+        <Typography onClick={handleLogout} component="div" variant="subtitle1" className={`${profileClasses.button} ${profileClasses.logout}`}>
           Logout
         </Typography>
       </div>

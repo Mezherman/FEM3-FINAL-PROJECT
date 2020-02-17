@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import ProtectedRoute from './protectedRoute';
 import AdminRoute from './adminRoute';
 import Home from '../pages/home/home';
@@ -25,8 +25,8 @@ import PaymentForm from '../components/Payment-form/payment-form';
 
 export default function Routes() {
   const { loggedIn, customer } = useSelector((state) => state.user);
+  const [protectedClosing, setProtectedClosing] = useState(false);
   const mainCategory = useSelector((state) => state.categoriesReducer.catalog.mainCategories);
-  const history = useHistory();
   const [modalIsVisible, setModalVisibility] = useState(!loggedIn);
   const closeModal = () => {
     setModalVisibility(false);
@@ -34,8 +34,10 @@ export default function Routes() {
 
   if (!loggedIn && !modalIsVisible) {
     setModalVisibility(true);
-    history.push(RoutesName.home);
+    setProtectedClosing(true)
   }
+
+  useEffect(() => () => setProtectedClosing(false));
 
   return (
     <Switch>
@@ -44,6 +46,7 @@ export default function Routes() {
         path={RoutesName.login}
         render={() => <Login visible={modalIsVisible} close={closeModal} />}
       />
+      {protectedClosing && <Redirect to={RoutesName.home} />}
       <ProtectedRoute
         exact
         path={RoutesName.personalData}

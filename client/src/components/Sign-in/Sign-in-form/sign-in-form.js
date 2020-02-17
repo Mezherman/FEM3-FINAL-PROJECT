@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, FormLabel, IconButton, InputAdornment, TextField } from '@material-ui/core';
+import { Input, FormLabel, IconButton, InputAdornment, TextField } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -16,7 +16,7 @@ export default function SignInForm (props) {
     handleRegistrationRoute
   } = props;
   return (
-    <form className={classes.passwordForm} noValidate onSubmit={(event) => handleClick(event)}>
+    <form className={classes.passwordForm} noValidate onSubmit={handleClick}>
       <TextField
         variant="outlined"
         margin="normal"
@@ -52,9 +52,7 @@ export default function SignInForm (props) {
           )
         }}
       />
-      <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-        Sign In
-      </Button>
+      <Input value="Sign In" fullWidth disableUnderline color="primary" type="submit" className={classes.submit} />
       <Link className={classes.text} to={RoutesName.signUp} onClick={handleRegistrationRoute}>
         Don&#8242;t have an account?
         <strong> Sign Up </strong>
