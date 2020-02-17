@@ -21,7 +21,7 @@ import ModalBirthdayInfo from '../Modal-birthday-info/modal-birthday-info';
 import useStyles from './_sign-up-form';
 
 const SignUpForm = () => {
-  const [gender, setGender] = useState('Mr');
+  const [gender, setGender] = useState('Male');
   const [eyeToggle, setEyeToggle] = useState(true);
 
   const togglePasswordMask = () => {
@@ -38,12 +38,12 @@ const SignUpForm = () => {
 
       <Field name="gender" component={renderRadioGroup} classes={classes} setGender={setGender} gender={gender} >
         <FormControlLabel
-          className={classes.root} value="Mr" label="Mr" name="gender"
+          className={classes.root} value="male" label="Male" name="gender"
           control={
             <Radio className={classes.radioLabel} />
           }
         />
-        <FormControlLabel className={classes.root} value="Mrs" label="Mrs" name="gender"
+        <FormControlLabel className={classes.root} value="female" label="Female" name="gender"
           control={
             <Radio className={classes.radioLabel} />
           }
@@ -219,10 +219,10 @@ export default SignUpForm;
 //         </Typography>
 //
 //         <Field name="gender" component={renderRadioGroup} >
-//           <FormControlLabel className={classes.root} value="Mr" label="Mr" name="gender"
+//           <FormControlLabel className={classes.root} value="male" label="Male" name="gender"
 //               control={<Radio className={classes.radioLabel} />}
 //           />
-//           <FormControlLabel className={classes.root} value="Mrs" label="Mrs" name="gender"
+//           <FormControlLabel className={classes.root} value="male" label="Female" name="gender"
 //               control={<Radio className={classes.radioLabel} />}
 //           />
 //         </Field>

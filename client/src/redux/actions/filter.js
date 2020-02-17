@@ -2,6 +2,8 @@ import {
   GET_FILTER_PRODUCTS,
   FETCH_FILTER_PARAMS_SUCCESS,
   FILTER_TYPE,
+  FILTER_SORT,
+  FILTER_INCREASE_PAGE,
   RESET_FILTERS
 } from './actionTypes'
 
@@ -28,6 +30,17 @@ function filterType(payload) {
     payload
   }
 }
+function filterSort (payload) {
+  return {
+    type: FILTER_SORT,
+    payload
+  }
+}
+function filterIncreasePage () {
+  return {
+    type: FILTER_INCREASE_PAGE
+  }
+}
 
 function resetFilters() {
   return {
@@ -39,5 +52,7 @@ export {
   getFilterProducts,
   filterParamsLoaded,
   filterType,
+  filterSort,
+  filterIncreasePage,
   resetFilters
 }

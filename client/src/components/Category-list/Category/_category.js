@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
   categoriesItem: {
     [theme.breakpoints.up('lg')]: {
-      marginBottom: '30px',
+      marginBottom: theme.spacing(1),
     }
   }
 }));

@@ -17,7 +17,7 @@ export default function ContinueBtn () {
       </Grid>
       <Grid item>
         <Link to={`${RoutesName.products}/${firstCategory.id}`} className={classes.link}>
-          <span className={classes.text}>continue Shopping</span>
+          <span className={classes.text}>Continue Shopping</span>
         </Link>
       </Grid>
     </Grid>

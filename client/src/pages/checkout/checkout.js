@@ -132,7 +132,7 @@ const mapStateToProps = (state) => ({
   cart: state.cart,
   user: state.user,
   isFetchingLoadData: state.isFetchingLoadData.isFetching,
-  initialValues: state.user
+  initialValues: state.user.customer
 });
 
 const mapDispatchToProps = {
@@ -153,7 +153,7 @@ Checkout.propTypes = {
     PropTypes.number,
     PropTypes.func
   ]).isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func,
   user: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.string,

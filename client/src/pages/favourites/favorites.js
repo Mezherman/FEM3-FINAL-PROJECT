@@ -1,74 +1,19 @@
-import React, { useEffect } from 'react';
-import { PropTypes } from 'prop-types';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Container } from '@material-ui/core';
-import RoutesName from '../../routes-list'
 
 import ProductList from '../../components/Product-list/product-list';
-import { favoritesUpdated } from '../../redux/actions/favorites';
-import { productsRequested, productsLoaded, productsError } from '../../redux/actions/products';
 
-function Favorites(props) {
-  const {
-    productsLoading,
-    productsLoaded,
-    productsRequested,
-    productsError,
-    products,
-    loggedIn,
-    favorites
-  } = props;
+export default function Favorites() {
+  const { favorites } = useSelector((state) => state.favoritesReducer);
 
-  useEffect(() => {
-    productsRequested();
-    if (loggedIn) {
-      productsLoaded(favorites)
-    } else {
-      productsError()
-    }
-  }, [favorites, loggedIn, productsError, productsLoaded, productsRequested]);
-
-  if (loggedIn) {
-    return (
-      <Container maxWidth="xl" style={{minHeight: '52vh'}}>
-        {
-          !favorites.length
-            ? <h2>NOTHING ADDED TO FAVORITES LIST.</h2>
-            : !productsLoading && <ProductList products={products} />
-        }
-      </Container>
-    )
-  }
-
-  return <Redirect to={RoutesName.home} />
+  return (
+    <Container maxWidth="xl" style={{ minHeight: '52vh' }}>
+      {
+        !favorites.length
+          ? <h2>NOTHING ADDED TO FAVORITES.</h2>
+          : <ProductList productsResult={{ products: favorites, length: favorites.length }} />
+      }
+    </Container>
+  )
 }
-
-const mapStateToProps = (state) => ({
-  productsLoading: state.productsReducer.productsLoading,
-  loggedIn: state.user.loggedIn,
-  favorites: state.favoritesReducer.favorites
-});
-
-const mapDispatchToProps = {
-  productsRequested,
-  productsLoaded,
-  productsError,
-  favoritesUpdated
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Favorites)
-
-Favorites.propTypes = {
-  productsLoading: PropTypes.bool.isRequired,
-  productsLoaded: PropTypes.func.isRequired,
-  productsRequested: PropTypes.func.isRequired,
-  productsError: PropTypes.func.isRequired,
-  loggedIn: PropTypes.bool.isRequired,
-  favorites: PropTypes.arrayOf(PropTypes.object).isRequired,
-  products: PropTypes.arrayOf(PropTypes.object),
-};
-
-Favorites.defaultProps = {
-  products: []
-};

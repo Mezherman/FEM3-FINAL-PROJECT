@@ -21,6 +21,7 @@ import Orders from '../pages/orders/orders';
 import Forbidden from '../pages/forbidden/forbidden'
 import AdminHome from '../components/Admin/Home/home'
 import Login from '../pages/login/login';
+import PaymentForm from '../components/Payment-form/payment-form';
 
 export default function Routes() {
   const { loggedIn, customer } = useSelector((state) => state.user);
@@ -79,7 +80,6 @@ export default function Routes() {
           return <Catalog assortment={subCategory} />
         }}
       />
-
       <Route
         path={`${RoutesName.products}/:categoryOrID`}
         render={({ match, location }) => {
@@ -97,17 +97,13 @@ export default function Routes() {
           )
         }}
       />
-      <Route
-        path={`${RoutesName.products}/search`}
-        exact
-        render={() => <Catalog assortment="cooking" />}
-      />
       <Route path={RoutesName.orderConfirmation} component={CheckoutStatus} />
       <Route path={RoutesName.checkout} exact component={Checkout} />
       <Route path={RoutesName.cart} component={Cart} />
       <Route path={RoutesName.aboutUs} component={AboutUs} />
       <Route path={RoutesName.delivery} component={Delivery} />
       <Route path={RoutesName.contacts} component={Contacts} />
+      {/*<Route path={RoutesName.payment} component={PaymentForm} />*/}
       <AdminRoute
         exact
         path={RoutesName.adminHome}
