@@ -75,7 +75,6 @@ const AccountIcon = (props) => {
         variant="contained"
         onClick={loggedIn ? handleToggle : handleClick}
         component=""
-        href={RoutesName.signIn}
         ref={loggedIn ? anchorRef : null}
       >
         {personBtn()}

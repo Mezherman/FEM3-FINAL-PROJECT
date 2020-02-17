@@ -14,7 +14,7 @@ const FooterAccountLink = () => {
         <h2 className={classes.title}>Account</h2>
         <Divider />
         <Link to={RoutesName.signUp} className={classes.links}>Sign up</Link>
-        <Link to={RoutesName.signIn} className={classes.links}>Sign in</Link>
+        <Link to={RoutesName.login} className={classes.links}>Sign in</Link>
         <Link to={RoutesName.cart} className={classes.links}>Shopping cart</Link>
       </Grid>
     </Grid>
