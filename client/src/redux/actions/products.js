@@ -13,12 +13,12 @@ const productsRequested = () => ({
 
 const productsLoaded = (products) => ({
   type: FETCH_PRODUCTS_SUCCESS,
-  payload: { products }
+  payload: products
 });
 
 const moreProductsLoaded = (products) => ({
   type: FETCH_MORE_PRODUCTS_SUCCESS,
-  payload: { products }
+  payload: products
 });
 
 const productsError = (error) => ({

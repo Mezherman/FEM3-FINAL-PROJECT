@@ -24,6 +24,17 @@ const useStylesSingIn = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(2, 0, 2),
+    display: 'flex',
+    justifyContent: 'center',
+    borderRadius: theme.spacing(0.5),
+    padding: theme.spacing(0.8),
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.background.default,
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    '&:hover': {
+      opacity: '.85',
+    }
   },
   text: {
     color: theme.palette.secondary.dark,

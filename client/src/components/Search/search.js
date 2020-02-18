@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router-dom';
 
@@ -7,32 +7,21 @@ import SearchIcon from '@material-ui/icons/Search';
 import { Collapse, Grow, useTheme, InputBase } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
 import search from '../../services/search';
-import getAllProducts from '../../services/getProducts';
-import { productsLoaded } from '../../redux/actions/products';
 import storeSearchedValue from '../../redux/actions/search';
 
 import useStyles from './_search';
 
-const Search = ({ productsLoaded, history, searchIsShown }) => {
+const Search = ({ history, searchIsShown }) => {
   const classes = useStyles();
   const [searchedValue, setSearchedValue] = useState('');
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   getAllProducts()
-  //     .then((products) => products)
-  // }, []);
 
   const handleChange = (event) => {
     setSearchedValue(event.target.value);
     history.push('/products/search')
   };
 
-    dispatch(storeSearchedValue(searchedValue));
-    // search(searchedValue)
-    //   .then((searchedProducts) => {
-    //     console.log('searchedProducts =', searchedProducts);
-    //     productsLoaded(searchedProducts);
-    //   })
+  dispatch(storeSearchedValue(searchedValue));
 
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
@@ -88,14 +77,9 @@ const Search = ({ productsLoaded, history, searchIsShown }) => {
   )
 };
 
-const mapDispatchToProps = {
-  productsLoaded
-};
-
 Search.propTypes = {
   searchIsShown: PropTypes.bool.isRequired,
-  productsLoaded: PropTypes.func.isRequired,
   history: PropTypes.oneOfType([PropTypes.object]).isRequired,
 };
 
-export default withRouter(connect(null, mapDispatchToProps)(Search));
+export default withRouter(Search);

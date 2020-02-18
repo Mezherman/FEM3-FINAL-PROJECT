@@ -31,15 +31,17 @@ const parseToFilterValue = (itemNoArr, filterResults, sort = '', pages, allCateg
     itemNo: 1
   };
 
+  let sortVal = {};
   if (sort.sortName) {
-    defaultSort[sort.sortName] = sort.sortValue;
+    sortVal[sort.sortName] = sort.sortValue;
   }
+  sortVal = { ...sortVal, ...defaultSort };
   let valOfBrands = '';
   let valOfPrice = '';
   let valOfColor = '';
   const valOfPerPage = `perPage=${pages.perPage}`;
   const valOfStartPage = `startPage=${pages.startPage}`;
-  const valOfSort = `&sort=${JSON.stringify(defaultSort)}`;
+  const valOfSort = `&sort=${JSON.stringify(sortVal)}`;
 
   if (filterResults.brand.length > 0) {
     valOfBrands = `brand=${filterResults.brand.join(',')}`

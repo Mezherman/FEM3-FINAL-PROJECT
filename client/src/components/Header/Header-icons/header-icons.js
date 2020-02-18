@@ -1,11 +1,10 @@
 import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { Box, Divider, useTheme } from '@material-ui/core';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
 import Search from '../../Search/search';
 import useStyles from '../_header';
-import logoutAction from '../../../redux/actions/logout';
 import AccountIcon from './Header-icon/account-icon';
 import FavouritesIcon from './Header-icon/favourites-icon';
 import CartIcon from './Header-icon/cart-icon';
@@ -27,8 +26,6 @@ const HeaderIcons = () => {
   const totalCartQuantity = useSelector((state) => state.cart.totalCartQuantity);
   const { loggedIn } = useSelector((state) => state.user);
   const totalFavoritesQty = useSelector((state) => state.favoritesReducer.favorites.length);
-
-  const dispatch = useDispatch();
 
   const closeModal = () => {
     setModalVisibility(false);
@@ -68,9 +65,10 @@ const HeaderIcons = () => {
   }
 
   const handleLogout = useCallback(() => {
+    setOpen(false);
     localStorage.removeItem('token');
-    dispatch(logoutAction());
-  }, [dispatch]);
+    window.location.reload()
+  }, []);
 
   const anchorRef = useRef(null);
 
@@ -83,13 +81,20 @@ const HeaderIcons = () => {
     prevOpen.current = open;
   }, [open]);
 
+  useEffect(() => () => {
+    setModalVisibility(false);
+    setOpen(false);
+    setOpenTooltip(false);
+    setSearchIsShow(false);
+  }, []);
+
   return (
     <ClickAwayListener onClickAway={handleSearchAway}>
       <Box className={classes.iconButtonBox}>
         {isMobile && searchIsShown && <Search searchIsShown={searchIsShown} />}
         {isTablet && <Search searchIsShown />}
         {isDesktop && searchIsShown && <Search searchIsShown={searchIsShown} />}
-        <HeaderSearchIcon onClick={handleTooltipClose} toggleSearch={toggleSearch} />
+        {!isTablet && <HeaderSearchIcon onClick={handleTooltipClose} toggleSearch={toggleSearch} />}
         <Divider component="div" orientation="vertical" className={classes.dividerStyle} />
         <FavouritesIcon
           open={openTooltip}

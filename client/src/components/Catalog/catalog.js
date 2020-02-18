@@ -37,7 +37,7 @@ const Catalog = (props) => {
     filter,
     productsLoaded,
     moreProductsLoaded,
-    products,
+    productsStore,
     searchedValue
   } = props;
   const { filterResults, filterPages, sort } = filter;
@@ -48,7 +48,6 @@ const Catalog = (props) => {
   const [productsToShow, setProductsToShow] = useState([]);
   const [filterIsOpenMobile, setFilterIsOpenMobile] = useState(false);
   const { allCategories } = catalog;
-
   const handleProductsRequest = async () => {
     let searchedResult = [];
     if (assortment === 'search' && searchedValue) {
@@ -123,7 +122,16 @@ const Catalog = (props) => {
           open={Boolean(filterIsOpenMobile)}
           onClose={() => toggleFilterMobile(false)}
         >
-          <Filter toggleFilter={toggleFilterMobile} />
+
+          <Filter />
+          <div className={classes.filterButton}>
+            <Button
+              className={classes.button}
+              onClick={() => toggleFilterMobile(false)}
+            >
+              Close filter
+            </Button>
+          </div>
         </SwipeableDrawer>
       </div>
     )
@@ -138,7 +146,7 @@ const Catalog = (props) => {
           </Grid>
           <Grid item xs={12} md={8}>
             <Sorting sort={sort} />
-            <ProductList productsResult={products} />
+            <ProductList products={productsStore.products} productsQuantity={productsStore.productsQuantity} />
           </Grid>
           <Grid item xs={12}>
             <ProductCardCarousel
@@ -155,7 +163,7 @@ const Catalog = (props) => {
 const mapStateToProps = (state) => ({
   catalog: state.categoriesReducer.catalog,
   filter: state.filterReducer,
-  products: state.productsReducer.products,
+  productsStore: state.productsReducer,
   searchedValue: state.searchReducer.searchedValue
 });
 
@@ -184,7 +192,7 @@ Catalog.propTypes = {
     PropTypes.object,
     PropTypes.string
   ])).isRequired,
-  products: PropTypes.objectOf(PropTypes.oneOfType([
+  productsStore: PropTypes.objectOf(PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array,
     PropTypes.number,

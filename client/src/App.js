@@ -25,14 +25,11 @@ const App = () => {
 
   const isFetchingLoadData = useSelector((state) => state.isFetchingLoadData.isFetching);
 
-  const { logout } = useSelector((state) => state.logout);
-  if (logout) setTimeout(() => window.location.reload(), 0);
-
   return (
     <>
       {isFetchingLoadData && (<Spinner />) }
       {!isFetchingLoadData && (
-        <>
+        <div style={{position: 'relative', 'padding-bottom': 'calc(100vh - 182px)'}}>
           <Router>
             <ScrollToTopOnMount />
             <Header />
@@ -42,7 +39,7 @@ const App = () => {
             <Footer />
           </Router>
           <ScrollTop />
-        </>
+        </div>
       )}
     </>
   )

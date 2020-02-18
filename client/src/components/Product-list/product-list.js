@@ -8,8 +8,7 @@ import Spinner from '../Spinner/spinner';
 
 import useStyles from './_product-list';
 
-export default function ProductList(props) {
-  const { productsResult: { products = [], productsQuantity = 0 } } = props;
+export default function ProductList({ products = [], productsQuantity = 0 }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const loadMoreProducts = useCallback(() => {
@@ -41,8 +40,10 @@ export default function ProductList(props) {
 }
 
 ProductList.propTypes = {
-  productsResult: PropTypes.objectOf(PropTypes.oneOfType([
+  products: PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.object,
     PropTypes.array,
-    PropTypes.number
-  ])).isRequired
+    PropTypes.number,
+  ])).isRequired,
+  productsQuantity: PropTypes.number.isRequired
 }

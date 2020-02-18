@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const usePersonalDataStyles = makeStyles((theme) => ({
+const useProfileStyles = makeStyles((theme) => ({
   container: {
     marginBottom: theme.spacing(10)
   },
@@ -104,4 +104,4 @@ const usePersonalDataStyles = makeStyles((theme) => ({
 }
 ));
 
-export default usePersonalDataStyles;
+export default useProfileStyles;

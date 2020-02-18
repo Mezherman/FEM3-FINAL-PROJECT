@@ -122,9 +122,6 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
     textAlign: 'center',
     color: theme.palette.text.primary,
-    '&:hover': {
-      textDecoration: 'underline'
-    }
   },
   menuTitle: {
     display: 'none',
