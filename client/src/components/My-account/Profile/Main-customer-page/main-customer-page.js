@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import RoutesName from '../../../../routes-list';
-import useProfileStyles from '../../../../pages/profile/_profile'
+import useProfileStyles from '../_profile'
 
 const MainCustomerPage = ({ handleEditForm, handleChangePassword }) => {
   const profileClasses = useProfileStyles();

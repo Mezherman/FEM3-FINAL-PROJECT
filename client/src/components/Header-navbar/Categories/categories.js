@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import RoutesName from '../../../routes-list';
 import { catalogLocation } from '../../../redux/actions/categories';
+import { resetFilters } from '../../../redux/actions/filter';
 
 import useStyles from '../_header-navbar';
 
@@ -15,7 +16,8 @@ function Categories(props) {
     mainCategories,
     toggleSubCategories,
     toggleCatalog,
-    catalogLocation
+    catalogLocation,
+    resetFilters
   } = props;
 
   const categoryList = mainCategories.map((category) => {
@@ -32,6 +34,8 @@ function Categories(props) {
         id={category.id}
         className={classNames}
         onClick={(event) => {
+          console.log('click link')
+          resetFilters();
           catalogLocation(event.target.textContent.toLowerCase());
           toggleCatalog()
         }}
@@ -52,7 +56,8 @@ function Categories(props) {
 }
 
 const mapDispatchToProps = {
-  catalogLocation
+  catalogLocation,
+  resetFilters
 };
 
 export default connect(null, mapDispatchToProps)(Categories)
@@ -62,7 +67,8 @@ Categories.propTypes = {
   toggleSubCategories: PropTypes.func.isRequired,
   toggleCatalog: PropTypes.func.isRequired,
   mainCategories: PropTypes.arrayOf(PropTypes.object).isRequired,
-  catalogLocation: PropTypes.func.isRequired
+  catalogLocation: PropTypes.func.isRequired,
+  resetFilters: PropTypes.func.isRequired
 };
 
 Categories.defaultProps = {

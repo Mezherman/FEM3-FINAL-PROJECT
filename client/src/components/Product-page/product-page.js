@@ -30,7 +30,7 @@ function ProductPage(props) {
       // console.log(chosenProduct);
       fetchComments(chosenProduct._id);
     }
-  }, [chosenProduct, itemNo, fetchProduct, getChosenProduct, fetchComments]);
+  }, [itemNo, getChosenProduct, fetchComments]);
 
   useEffect(() => {
     if (chosenProduct) {
@@ -77,10 +77,11 @@ function ProductPage(props) {
 }
 
 const mapStateToProps = (state, { itemNo }) => {
-  // console.log('STATE =', state);
-  const chosenProduct = state.productsReducer.products.find((product) => (
-    product.itemNo === itemNo
-  ));
+  const chosenProduct = state.productsReducer.products
+    ? state.productsReducer.products.find((product) => (
+      product.itemNo === itemNo
+    ))
+    : null ;
 
   return {
     chosenProduct,
@@ -93,7 +94,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(productsRequested());
     getProductsByItemNo(itemNo)
       .then((response) => {
-        dispatch(productsLoaded([response.data]));
+        dispatch(productsLoaded({ products: [response.data] }));
       })
   },
   getChosenProduct: (product) => dispatch(getCurrentProduct(product)),

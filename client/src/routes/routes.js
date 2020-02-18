@@ -3,24 +3,25 @@ import { useSelector } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import ProtectedRoute from './protectedRoute';
 import AdminRoute from './adminRoute';
-import Home from '../pages/home/home';
+import AboutUsPage from '../pages/about-us/about-us';
+import HomePage from '../pages/home/home';
 import Catalog from '../components/Catalog/catalog'
 import ProductPage from '../components/Product-page/product-page'
 import NoMatch from '../components/No-match/no-match'
-import Cart from '../pages/cart/cart'
+import CartPage from '../pages/cart/cart'
 import RoutesName from '../routes-list';
-import AboutUs from '../pages/about-us/about-us';
-import Contacts from '../pages/contacts/contacts';
-import SignUp from '../pages/registration/sign-up'
-import Delivery from '../pages/delivery/delivery';
-import Profile from '../pages/profile/profile';
-import Favorites from '../pages/favourites/favorites'
-import Checkout from '../pages/checkout/checkout';
+// import AboutUsPage from '../pages/about-us/about-us';
+import ContactsPage from '../pages/contacts/contacts';
+import SignUpPage from '../pages/sign-up/sign-up'
+import DeliveryPage from '../pages/delivery/delivery';
+import ProfilePage from '../pages/profile/profile';
+import FavoritesPage from '../pages/favorites/favorites'
+import CheckoutPage from '../pages/checkout/checkout';
 import CheckoutStatus from '../components/Checkout/Status/status';
-import Orders from '../pages/orders/orders';
-import Forbidden from '../pages/forbidden/forbidden'
+import OrdersPage from '../pages/orders/orders';
+import ForbiddenPage from '../pages/forbidden/forbidden'
 import AdminHome from '../components/Admin/Home/home'
-import Login from '../pages/login/login';
+import Login from '../components/Login/login';
 import PaymentForm from '../components/Payment-form/payment-form';
 
 export default function Routes() {
@@ -41,7 +42,7 @@ export default function Routes() {
 
   return (
     <Switch>
-      <Route path={RoutesName.signUp} component={SignUp} />
+      <Route path={RoutesName.signUp} component={SignUpPage} />
       <Route
         path={RoutesName.login}
         render={() => <Login visible={modalIsVisible} close={closeModal} />}
@@ -53,7 +54,7 @@ export default function Routes() {
         loggedIn={loggedIn}
         closeModal={closeModal}
         modalIsVisible={modalIsVisible}
-        component={Profile}
+        component={ProfilePage}
       />
       <ProtectedRoute
         exact
@@ -61,7 +62,7 @@ export default function Routes() {
         loggedIn={loggedIn}
         closeModal={closeModal}
         modalIsVisible={modalIsVisible}
-        component={Orders}
+        component={OrdersPage}
       />
       <ProtectedRoute
         exact
@@ -69,7 +70,7 @@ export default function Routes() {
         loggedIn={loggedIn}
         closeModal={closeModal}
         modalIsVisible={modalIsVisible}
-        component={Favorites}
+        component={FavoritesPage}
       />
 
       <Route
@@ -88,6 +89,9 @@ export default function Routes() {
         render={({ match, location }) => {
           const { categoryOrID } = match.params;
           if (isNaN(categoryOrID)) {
+            if (!mainCategory.find((el) => el.id === categoryOrID) && categoryOrID !== 'search') {
+              return <NoMatch />
+            }
             return <Catalog assortment={categoryOrID} />
           }
           const { pathname: url } = location;
@@ -101,11 +105,11 @@ export default function Routes() {
         }}
       />
       <Route path={RoutesName.orderConfirmation} component={CheckoutStatus} />
-      <Route path={RoutesName.checkout} exact component={Checkout} />
-      <Route path={RoutesName.cart} component={Cart} />
-      <Route path={RoutesName.aboutUs} component={AboutUs} />
-      <Route path={RoutesName.delivery} component={Delivery} />
-      <Route path={RoutesName.contacts} component={Contacts} />
+      <Route path={RoutesName.checkout} exact component={CheckoutPage} />
+      <Route path={RoutesName.cart} component={CartPage} />
+      <Route path={RoutesName.aboutUs} component={AboutUsPage} />
+      <Route path={RoutesName.delivery} component={DeliveryPage} />
+      <Route path={RoutesName.contacts} component={ContactsPage} />
       {/*<Route path={RoutesName.payment} component={PaymentForm} />*/}
       <AdminRoute
         exact
@@ -117,10 +121,10 @@ export default function Routes() {
         component={AdminHome}
       />
       <Route path={RoutesName.home} exact>
-        <Home />
+        <HomePage />
       </Route>
       <Route path={RoutesName.forbidden} exact>
-        <Forbidden />
+        <ForbiddenPage />
       </Route>
       <Route path="*">
         <NoMatch />

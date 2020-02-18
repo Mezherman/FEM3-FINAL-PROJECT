@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import Home from '../home/home';
-import LoginModal from '../../components/Login-modal-window/login-modal-window';
+import HomePage from '../../pages/home/home';
+import LoginModal from '../Login-modal-window/login-modal-window';
 
 const Login = ({ close, visible }) => (
   <>
-    <Home />
+    <HomePage />
     <LoginModal onModalClose={close} open={visible} />
   </>
 );

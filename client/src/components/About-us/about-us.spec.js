@@ -1,10 +1,10 @@
 import React from 'react'
 import { shallow } from 'enzyme';
 import AboutUs from './about-us'
-import Brands from '../../components/About-us/Brands/brands'
-import About from '../../components/About-us/About/about'
-import Awards from '../../components/About-us/Awards/awards'
-import Video from '../../components/About-us/Video/video'
+import Brands from './Brands/brands'
+import About from './About/about'
+import Awards from './Awards/awards'
+import Video from './Video/video'
 
 describe('AboutUs component', () => {
   it('should render correctly component', () => {

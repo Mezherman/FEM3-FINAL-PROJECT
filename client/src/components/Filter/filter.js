@@ -1,26 +1,26 @@
-import React, { useEffect } from 'react'
-import { PropTypes } from 'prop-types';
-import { connect, useSelector } from 'react-redux'
+import React, { useEffect, useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
 import FilterPanel from './Filter-panel/filter-panel'
 import { getColors, getBrands } from '../../services/filter'
 import { filterParamsLoaded } from '../../redux/actions/filter';
 
-const Filter = (props) => {
-  const {
-    filterParamsLoaded,
-  } = props;
-
+const Filter = () => {
   const filterParams = useSelector((state) => state.filterReducer.filterParams);
+  const dispatch = useDispatch();
+  const filterParamsLoadedFunc = useCallback(
+    (type, data) => dispatch(filterParamsLoaded(type, data)),
+    [dispatch]
+  );
 
   useEffect(() => {
     getColors().then((colors) => {
-      filterParamsLoaded('colors', colors);
+      filterParamsLoadedFunc('colors', colors);
     });
     getBrands().then((brands) => {
-      filterParamsLoaded('brands', brands);
+      filterParamsLoadedFunc('brands', brands);
     });
-  }, [filterParamsLoaded]);
+  }, []);
 
   const filterText = ['Brand', 'Price', 'Color'];
 
@@ -41,12 +41,4 @@ const Filter = (props) => {
   );
 };
 
-const mapDispatchToProps = {
-  filterParamsLoaded,
-};
-
-Filter.propTypes = {
-  filterParamsLoaded: PropTypes.func.isRequired,
-};
-
-export default connect(null, mapDispatchToProps)(Filter)
+export default Filter;

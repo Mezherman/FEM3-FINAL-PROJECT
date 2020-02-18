@@ -1,6 +1,7 @@
 import {
   FETCH_PRODUCTS_REQUEST,
   FETCH_PRODUCTS_SUCCESS,
+  FETCH_MORE_PRODUCTS_SUCCESS,
   FETCH_PRODUCTS_FAILURE,
   SORTING_PRODUCTS,
   RESET_SORTING
@@ -12,7 +13,12 @@ const productsRequested = () => ({
 
 const productsLoaded = (products) => ({
   type: FETCH_PRODUCTS_SUCCESS,
-  payload: { products }
+  payload: products
+});
+
+const moreProductsLoaded = (products) => ({
+  type: FETCH_MORE_PRODUCTS_SUCCESS,
+  payload: products
 });
 
 const productsError = (error) => ({
@@ -38,6 +44,7 @@ const sortingReset = () => ({
 export {
   productsRequested,
   productsLoaded,
+  moreProductsLoaded,
   productsError,
   sortingProducts,
   sortingReset

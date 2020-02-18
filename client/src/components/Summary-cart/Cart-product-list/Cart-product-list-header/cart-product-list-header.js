@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Grid } from '@material-ui/core';
 import useHeaderStyles from './_cart-product-list-header';
 
