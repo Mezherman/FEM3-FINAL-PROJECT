@@ -1,16 +1,8 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Container } from '@material-ui/core';
-import RoutesName from '../../routes-list'
+import React from 'react';
+import Forbidden from '../../components/Forbidden/forbidden';
 
-export default function Forbidden() {
+export default function ForbiddenPage() {
   return (
-    <Container maxWidth="xl">
-      <div style={{ minHeight: '52vh' }}>
-        <h1>You do not have access to this page</h1>
-        <p>Go to the</p>
-        <Link to={RoutesName.home}> homepage</Link>
-      </div>
-    </Container>
-  );
+    <Forbidden />
+  )
 }

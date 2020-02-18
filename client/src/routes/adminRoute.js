@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import RoutesName from '../routes-list';
-import Login from '../pages/login/login';
+import Login from '../components/Login/login';
 
 export default function AdminRoute({ component: Component, loggedIn, customer, closeModal, modalIsVisible, ...rest }) {
   if (!loggedIn) {

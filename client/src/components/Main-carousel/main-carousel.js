@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import Carousels from '../../Carousel/carousel';
-import PagingDots from '../../Carousel/pagingDots';
-import useStylesCarousel from '../../Carousel/_carousel';
+import Carousels from '../Carousel/carousel';
+import PagingDots from '../Carousel/pagingDots';
+import useStylesCarousel from '../Carousel/_carousel';
 import useStylesMainCarousel from './_main-carousel';
-import getMainSlides from '../../../services/get-main-slides';
-import slidesToFetch from '../../../redux/actions/slides';
+import getMainSlides from '../../services/get-main-slides';
+import slidesToFetch from '../../redux/actions/slides';
 
 function MainSlider ({ fetchSlides }) {
   const { mainSlides } = useSelector((state) => state.slides);
