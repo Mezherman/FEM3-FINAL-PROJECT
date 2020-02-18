@@ -85,7 +85,7 @@ const Catalog = (props) => {
     handleProductsRequest();
   }, [assortment, sort, filterResults, filterPages, searchedValue]);
 
-  const cardsToShowString = topList.toString();
+  const cardsToShowString = topList.length ? topList.toString() : '';
 
   useEffect(() => {
     getFilteredProducts(`itemNo=${cardsToShowString}`)
@@ -146,7 +146,10 @@ const Catalog = (props) => {
           </Grid>
           <Grid item xs={12} md={8}>
             <Sorting sort={sort} />
-            <ProductList products={productsStore.products} productsQuantity={productsStore.productsQuantity} />
+            <ProductList
+              products={productsStore.products}
+              productsQuantity={productsStore.productsQuantity}
+            />
           </Grid>
           <Grid item xs={12}>
             <ProductCardCarousel
@@ -196,6 +199,8 @@ Catalog.propTypes = {
     PropTypes.object,
     PropTypes.array,
     PropTypes.number,
+    PropTypes.bool,
+    PropTypes.string,
   ])).isRequired,
   productsLoaded: PropTypes.func.isRequired,
   moreProductsLoaded: PropTypes.func.isRequired,
