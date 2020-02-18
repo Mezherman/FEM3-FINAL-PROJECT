@@ -80,13 +80,13 @@ const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
 
   const error = 'Warning! Your first value should be lower than the second!';
 
-  const input = (inputValue, setInputValue, setDefocusInput) => (
+  const input = (inputValue, setInputValue, setBlurInput) => (
     <Input
       className={classes.input}
       value={inputValue}
       margin="dense"
       onChange={setInputValue}
-      onBlur={setDefocusInput}
+      onBlur={setBlurInput}
       inputProps={{
         min: 0,
         max,
