@@ -4,7 +4,7 @@ import {
 } from './moving-around-registration'
 import * as t from './actionTypes'
 
-describe('moving-around-registration actions', () => {
+describe('moving-around-sign-up actions', () => {
   it('enterRegistrationPage()', () => {
     const expectedAction = {
       type: t.ENTER_REGISTRATION_PAGE,
