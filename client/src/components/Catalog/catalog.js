@@ -85,14 +85,14 @@ const Catalog = (props) => {
     handleProductsRequest();
   }, [assortment, sort, filterResults, filterPages, searchedValue]);
 
-  const cardsToShowString = topList ? topList.toString() : '';
-
-  useEffect(() => {
-    getFilteredProducts(`itemNo=${cardsToShowString}`)
-      .then((response) => {
-        setProductsToShow(response)
-      })
-  }, [cardsToShowString, topList]);
+  // const cardsToShowString = topList ? topList.toString() : '';
+  //
+  // useEffect(() => {
+  //   getFilteredProducts(`itemNo=${cardsToShowString}`)
+  //     .then((response) => {
+  //       setProductsToShow(response)
+  //     })
+  // }, [cardsToShowString, topList]);
 
   const toggleFilterMobile = (open) => {
     setFilterIsOpenMobile(open);
