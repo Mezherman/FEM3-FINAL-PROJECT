@@ -21,9 +21,7 @@ const Search = ({ history, searchIsShown }) => {
     history.push('/products/search')
   };
 
-  if (searchedValue) {
-    dispatch(storeSearchedValue(searchedValue));
-  }
+  dispatch(storeSearchedValue(searchedValue));
 
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));

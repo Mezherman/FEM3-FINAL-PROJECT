@@ -29,7 +29,6 @@ export default function ProductBreadcrumbs({ assortment }) {
   let category = '';
   let subCategory = '';
   let search = false;
-
   switch (level) {
     case 'item': {
       const subCategoryId = products[0].categories;

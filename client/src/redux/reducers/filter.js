@@ -64,7 +64,7 @@ export default function filterReducer(state = initialState, action) {
     case FILTER_INCREASE_PAGE:
       return {
         ...state,
-        filterPages: { ...state.filterPages, perPage: state.filterPages.perPage + 6 }
+        filterPages: { ...state.filterPages, startPage: state.filterPages.startPage + 1 }
       };
 
     case RESET_FILTERS:
