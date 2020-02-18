@@ -141,16 +141,14 @@ const Catalog = (props) => {
           onClose={() => toggleFilterMobile(false)}
         >
           <Filter />
-          <Button
-            className={classes.button}
-            size="large"
-            variant="contained"
-            disableElevation
-            color="primary"
-            onClick={() => toggleFilterMobile(false)}
-          >
-            Close filter
-          </Button>
+          <div className={classes.filterButton}>
+            <Button
+              className={classes.button}
+              onClick={() => toggleFilterMobile(false)}
+            >
+              Close filter
+            </Button>
+          </div>
         </SwipeableDrawer>
       </div>
     )

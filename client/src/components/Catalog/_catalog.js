@@ -14,7 +14,10 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     left: 0,
     padding: theme.spacing(2, 2, 1),
-
+  },
+  filterButton: {
+    backgroundColor: theme.palette.background.primary,
+    padding: theme.spacing(2, 2, 1),
   },
   button: {
     backgroundColor: theme.palette.primary.main,
