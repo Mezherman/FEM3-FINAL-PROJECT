@@ -25,9 +25,6 @@ const App = () => {
 
   const isFetchingLoadData = useSelector((state) => state.isFetchingLoadData.isFetching);
 
-  const { logout } = useSelector((state) => state.logout);
-  if (logout) setTimeout(() => window.location.reload(), 0);
-
   return (
     <>
       {isFetchingLoadData && (<Spinner />) }

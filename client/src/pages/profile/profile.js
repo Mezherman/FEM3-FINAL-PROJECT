@@ -1,13 +1,11 @@
 import React, { useState, useCallback } from 'react';
 import { Container } from '@material-ui/core';
-import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import PutPersonalData from '../../components/My-account/Profile/Put-personal-data/put-personal-data';
 import useStyles from '../../components/Sign-up/Sign-up-form/_sign-up-form';
-import usePersonalDataStyles from './_profile';
-import RoutesName from '../../routes-list';
+import useProfileStyles from './_profile';
 import ChangePasswordForm from '../../components/My-account/Profile/Put-personal-data/put-password';
 import validate from '../../components/My-account/Profile/validate';
 import putUserData from '../../services/put-user-data';
@@ -19,7 +17,7 @@ import CancelSaveButtons from '../../components/My-account/Profile/Put-personal-
 import MainCustomerPage from '../../components/My-account/Profile/Main-customer-page/main-customer-page';
 
 export default function Profile ({ handleSubmit }) {
-  const pdClasses = usePersonalDataStyles();
+  const profileClasses = useProfileStyles();
   const classes = useStyles();
 
   const [personalDataForm, setEditForm] = useState(false);
@@ -48,15 +46,7 @@ export default function Profile ({ handleSubmit }) {
     dispatch(newNotification(type, message));
   }, [dispatch]);
 
-  const {
-    gender,
-    firstName,
-    lastName,
-    telephone,
-    email,
-    login,
-  } = useSelector((state) => state.user.customer);
-  const { logout } = useSelector((state) => state.logout);
+  const { firstName, lastName, telephone, email, login } = useSelector((s) => s.user.customer);
 
   const submitEditedUser = (values) => {
     putUserData({
@@ -91,7 +81,7 @@ export default function Profile ({ handleSubmit }) {
   if (passwordForm) {
     return (
       <form
-        className={`${classes.passwordForm} ${pdClasses.container}`}
+        className={`${classes.passwordForm} ${profileClasses.container}`}
         noValidate={false}
         onSubmit={handleSubmit(submitEditedUserPassword)}
       >
@@ -103,12 +93,11 @@ export default function Profile ({ handleSubmit }) {
   if (personalDataForm) {
     return (
       <form
-        className={`${classes.passwordForm} ${pdClasses.container}`}
+        className={`${classes.passwordForm} ${profileClasses.container}`}
         noValidate={false}
         onSubmit={handleSubmit(submitEditedUser)}
       >
         <PutPersonalData
-          gender={gender}
           firstName={firstName}
           lastName={lastName}
           telephone={telephone}
@@ -121,12 +110,11 @@ export default function Profile ({ handleSubmit }) {
   }
 
   return (
-    <Container maxWidth="xl" className={pdClasses.container}>
+    <Container maxWidth="xl" className={profileClasses.container}>
       <MainCustomerPage
         handleChangePassword={handleChangePassword}
         handleEditForm={handleEditForm}
       />
-      {logout && <Redirect to={RoutesName.home} />}
     </Container>
   );
 }
