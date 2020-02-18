@@ -10,7 +10,8 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold'
   },
   menuItem: {
-    borderRadius: '10px'
+    borderRadius: '10px',
+    color: theme.palette.text.primary,
   }
 }));
 
