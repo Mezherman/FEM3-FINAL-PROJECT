@@ -27,6 +27,7 @@ import RoutesName from '../../../routes-list';
 export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, toggleDrawer }) {
   const StyledMenuItem = withStyles((theme) => ({
     root: {
+      border: '1px solid transparent',
       transition: 'fontWeight 6s',
       '&:hover': {
         borderLeft: `1px solid ${theme.palette.background.primary}`,

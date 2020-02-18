@@ -6,11 +6,6 @@ import {
   SORTING_PRODUCTS,
   RESET_SORTING
 } from './actionTypes'
-import { getCatalogFromDB } from './categories'
-import { fetchCustomerData, loginLoaded } from './user'
-import { mergeDBWithLocalStorage } from './CartActions'
-import { getFavoritesFromDB } from './favorites'
-import { fetchRequest, fetchResponse } from './load-all-data'
 
 const productsRequested = () => ({
   type: FETCH_PRODUCTS_REQUEST

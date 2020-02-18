@@ -68,7 +68,7 @@ function Header() {
     </Menu>
   );
 
-  const FreShipingMessage = () => (
+  const freeShippingMessage = (
     <Box className={classes.delivery}>
       <Container maxWidth="xl">
         <p className={classes.deliveryTitle}>Free shipping on all orders over &#8364;100</p>
@@ -76,7 +76,7 @@ function Header() {
     </Box>
   );
 
-  const MainHeaderContent = () => (
+  const mainHeaderContent = (
     <AppBar position="sticky" top="0" color="inherit" elevation={0}>
       <Container maxWidth="xl" disableGutters className={classes.grow}>
         <Toolbar className={classes.justify}>
@@ -92,11 +92,11 @@ function Header() {
   return (
     <>
       <CssBaseline />
-      <FreShipingMessage />
-      <MainHeaderContent />
+      {freeShippingMessage}
+      {mainHeaderContent}
       {renderMobileMenu}
       {renderMenu}
-      {logout && <Redirect to={RoutesName.home} />}
+      {/*{logout && <Redirect to={RoutesName.home} />}*/}
     </>
   );
 }

@@ -54,8 +54,7 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
     <>
       <h1 className={classes.title}>{name.toUpperCase()[0] + name.slice(1)}</h1>
       <p className={classes.itemNo}>
-      Item.No
-        {' '}
+        Item No.&nbsp;
         {itemNo}
       </p>
     </>
@@ -88,8 +87,7 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
           {brand}
         </li>
         <li>
-          Collection:
-          {' '}
+          Collection:&nbsp;
           {myCustomParams.collection}
         </li>
         <li>
@@ -98,7 +96,7 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
       </ul>
     </Box>
   );
-  
+
   const renderQuantity = () => {
     if (quantityAvailable !== 0) {
       return (
@@ -178,7 +176,7 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
       </Container>
     </Box>
   );
-  
+
   const renderProductDetail = () => (
     <>
       {renderTitle()}
@@ -219,7 +217,7 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
       </Grid>
     </>
   );
-  
+
   return (
     <Container maxWidth="xl">
       <AddToCart

@@ -43,7 +43,7 @@ export default function CartProductItem({ product, onSetProductQuantity, onRemov
     <>
       <p className={`${classes.marginTop} ${classes.title}`}>{currentProduct.name}</p>
       <p className={classes.itemNum}>
-          Item-Nr. :
+          Item No.&nbsp;
         {currentProduct.itemNo}
       </p>
     </>
@@ -116,7 +116,7 @@ export default function CartProductItem({ product, onSetProductQuantity, onRemov
 
 CartProductItem.propTypes = {
   product: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.symbol])
+    PropTypes.any
   ).isRequired,
   onSetProductQuantity: PropTypes.func.isRequired,
   onRemoveProduct: PropTypes.func.isRequired

@@ -9,7 +9,10 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     textTransform: 'capitalize',
-  }
+  },
+  leftArrow: {
+   top: '40%',
+  },
 }));
 
 export default useStyles;

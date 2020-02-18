@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 
+import { useMediaQuery, useTheme } from '@material-ui/core'
 import Button from '@material-ui/core/Button';
 import FilterPanel from './Filter-panel/filter-panel'
-import { getFilteredProducts, getColors, getBrands } from '../../services/filter'
-import { productsLoaded } from '../../redux/actions/products';
-import { filterParamsLoaded, filterType, resetFilters } from '../../redux/actions/filter';
+import { getColors, getBrands } from '../../services/filter'
+import { filterParamsLoaded } from '../../redux/actions/filter';
 
 import useStyles from './_filter';
 
@@ -39,10 +39,9 @@ const Filter = (props) => {
       brands={filterParams.brands}
     />
   ));
-
-  return (
-    <>
-      {filter}
+  const theme = useTheme();
+  const closeBtn = useMediaQuery(theme.breakpoints.up('md')) ? ''
+    : (
       <Button
         className={classes.button}
         size="large"
@@ -51,8 +50,13 @@ const Filter = (props) => {
         color="primary"
         onClick={() => toggleFilter(false)}
       >
-        Filter
+      Filter
       </Button>
+    );
+  return (
+    <>
+      {filter}
+      {closeBtn}
     </>
   );
 };
@@ -67,8 +71,11 @@ const mapDispatchToProps = {
 
 Filter.propTypes = {
   filterParams: PropTypes.objectOf(PropTypes.array).isRequired,
-  filterHandle: PropTypes.func.isRequired,
   filterParamsLoaded: PropTypes.func.isRequired,
+  toggleFilter: PropTypes.func,
+};
+Filter.defaultProps = {
+  toggleFilter: null,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter)

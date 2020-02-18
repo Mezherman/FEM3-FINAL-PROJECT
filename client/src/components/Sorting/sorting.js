@@ -43,6 +43,7 @@ const Sorting = (props) => {
       });
     }
   };
+
   return (
     <Grid container justify="flex-end">
       <FormControl variant="outlined" className={classes.formControl}>

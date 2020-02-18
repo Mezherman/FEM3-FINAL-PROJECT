@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
-import { Container, Box } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import { getProductsByItemNo } from '../../services/getProducts';
 import ProductDetail from '../Product-detail/product-detail';
 import { productsRequested, productsLoaded } from '../../redux/actions/products';
@@ -13,10 +13,12 @@ import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 import { getFilteredProducts } from '../../services/filter';
 import getCurrentProduct from '../../redux/actions/current-product';
 import { getCategory } from '../../services/getCategories';
+import getCommentsOfProducts from '../../services/getCommentsOfProduct';
+import { commentsLoaded, commentsRequest } from '../../redux/actions/comments';
 
 function ProductPage(props) {
   // console.log('PROPS =', props);
-  const { assortment, itemNo, chosenProduct, fetchProduct, productsLoading, setProducts, getChosenProduct } = props;
+  const { assortment, itemNo, chosenProduct, fetchProduct, productsLoading, setProducts, getChosenProduct, fetchComments } = props;
   const [topList, setTopList] = useState([]);
   const [productsToShow, setProductsToShow] = useState([]);
 
@@ -25,8 +27,10 @@ function ProductPage(props) {
       fetchProduct(itemNo);
     } else {
       getChosenProduct(chosenProduct);
+      // console.log(chosenProduct);
+      fetchComments(chosenProduct._id);
     }
-  }, [chosenProduct, itemNo, fetchProduct]);
+  }, [chosenProduct, itemNo, fetchProduct, getChosenProduct, fetchComments]);
 
   useEffect(() => {
     if (chosenProduct) {
@@ -61,7 +65,10 @@ function ProductPage(props) {
                   />
                 </Grid>
               </div>
-              <ProductCardCarousel products={productsToShow} label="top" />
+              <ProductCardCarousel
+                products={productsToShow}
+                label="Most Popular Products"
+              />
             </Container>
           </>
         )}
@@ -89,7 +96,14 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(productsLoaded([response.data]));
       })
   },
-  getChosenProduct: (product) => dispatch(getCurrentProduct(product))
+  getChosenProduct: (product) => dispatch(getCurrentProduct(product)),
+  fetchComments: (productId) => {
+    dispatch(commentsRequest(productId));
+    getCommentsOfProducts(productId)
+      .then((comments) => {
+        dispatch(commentsLoaded(comments))
+      }).catch((error) => console.log(error));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);

@@ -7,11 +7,9 @@ import { filterIncreasePage } from '../../redux/actions/filter';
 import Spinner from '../Spinner/spinner';
 
 import useStyles from './_product-list';
-import { invalidPassword } from '../../redux/actions/password-validation'
 
 export default function ProductList(props) {
-  const { products = [], productsQuantity = 0 } = props.productsResult;
-
+  const { productsResult: { products = [], productsQuantity = 0 } } = props;
   const classes = useStyles();
   const dispatch = useDispatch();
   const loadMoreProducts = useCallback(() => {
@@ -43,7 +41,8 @@ export default function ProductList(props) {
 }
 
 ProductList.propTypes = {
-  productsResult: PropTypes.objectOf(
-    PropTypes.object,
-  ).isRequired
+  productsResult: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.number
+  ])).isRequired
 }
