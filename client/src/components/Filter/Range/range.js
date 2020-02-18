@@ -20,7 +20,7 @@ const CustomSlider = withStyles((theme) => ({
     top: -22,
     '& *': {
       background: 'transparent',
-      color: '#000',
+      color: theme.palette.background.dark,
     },
   },
 }))(Slider);
@@ -34,7 +34,7 @@ const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
     combineInputs()
   }, [value])
 
-  const handleChange = (event, price) => {
+  const handleRangeChange = (event, price) => {
     setValue(price);
     getFilterProducts({
       ...filterResults,
@@ -47,7 +47,7 @@ const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
     if (inputValue > max) {
       inputValue = 0
     }
-    setValue([inputValue === '' ? '' : Number(inputValue), filterResults.price[1]]);
+    setValue([inputValue === '' ? '' : Number(Math.abs(inputValue)), filterResults.price[1]]);
   };
 
   const handleInputMax = (event) => {
@@ -55,7 +55,7 @@ const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
     if (inputValue > max) {
       inputValue = max
     }
-    setValue([filterResults.price[0], inputValue === '' ? '' : Number(inputValue)]);
+    setValue([filterResults.price[0], inputValue === '' ? '' : Number(Math.abs(inputValue))]);
   };
 
   const combineInputs = () => {
@@ -65,14 +65,28 @@ const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
     });
   }
 
+  const handleBlurMin = () => {
+    if (filterResults.price[0] === '') {
+      const minPrice = 0
+      setValue([minPrice, filterResults.price[1]])
+    }
+  }
+
+  const handleBlurMax = () => {
+    if (filterResults.price[1] === '') {
+      setValue([filterResults.price[0], max])
+    }
+  }
+
   const error = 'Warning! Your first value should be lower than the second!';
 
-  const input = (values, func) => (
+  const input = (inputValue, setInputValue, setBlurInput) => (
     <Input
       className={classes.input}
-      value={values}
+      value={inputValue}
       margin="dense"
-      onChange={func}
+      onChange={setInputValue}
+      onBlur={setBlurInput}
       inputProps={{
         min: 0,
         max,
@@ -88,13 +102,13 @@ const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
         max={max}
         valueLabelDisplay="auto"
         value={filterResults.price}
-        onChange={handleChange}
+        onChange={handleRangeChange}
         aria-labelledby="range-slider"
       />
       <div className={classes.inputs}>
         {(value[1] < value[0]) && <div className={classes.error}>{error}</div>}
-        {input(filterResults.price[0], handleInputMin)}
-        {input(filterResults.price[1], handleInputMax)}
+        {input(filterResults.price[0], handleInputMin, handleBlurMin)}
+        {input(filterResults.price[1], handleInputMax, handleBlurMax)}
       </div>
     </>
   );

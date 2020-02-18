@@ -68,7 +68,6 @@ const Catalog = (props) => {
 
   useEffect(() => {
     const request = assortment === 'search' ? 'cooking' : assortment;
-    // console.log(request);
     getCategory(request)
       .then((response) => setTopList(response.topSellers));
 
@@ -97,7 +96,6 @@ const Catalog = (props) => {
           });
         })
     }
-    // console.log('searchedResult =', searchedResult);
 
     const valToFilter = parseToFilterValue(
       searchedResult,
@@ -107,15 +105,11 @@ const Catalog = (props) => {
       allCategories,
       assortment
     );
-    // console.log('valToFilter =', valToFilter);
 
     getInfinityFilteredProducts(valToFilter)
       .then((products) => {
-        // console.log('in infinity =', products);
         setProducts(products);
       });
-
-    toggleFilterMobile(false);
   };
 
   const toggleFilterMobile = (open) => {
@@ -146,13 +140,19 @@ const Catalog = (props) => {
           open={Boolean(filterIsOpenMobile)}
           onClose={() => toggleFilterMobile(false)}
         >
-          <Filter onClose={toggleFilterMobile} filterHandle={handleProductsRequest} />
+          <Filter />
+          <div className={classes.filterButton}>
+            <Button
+              className={classes.button}
+              onClick={() => toggleFilterMobile(false)}
+            >
+              Close filter
+            </Button>
+          </div>
         </SwipeableDrawer>
       </div>
     )
   };
-
-  // console.log(productsResult);
 
   return (
     <>
