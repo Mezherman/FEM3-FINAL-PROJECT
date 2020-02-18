@@ -28,13 +28,19 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
   const StyledMenuItem = withStyles((theme) => ({
     root: {
       border: '1px solid transparent',
-      transition: 'fontWeight 6s',
+      transition: 'fontWeight 0.4s ease',
       '&:hover': {
         borderLeft: `1px solid ${theme.palette.background.primary}`,
         borderRight: `1px solid ${theme.palette.background.primary}`,
-        // fontWeight: 600,
+        fontWeight: 600,
         backgroundColor: 'transparent',
       },
+      '& a': {
+        transition: 'transform 0.4s ease',
+        '&:hover': {
+          transform: 'translateY(-5px)'
+        }
+      }
     },
   }))(MenuItem);
 

@@ -22,10 +22,13 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between'
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
     color: theme.palette.background.dark,
     fontSize: '27px',
     opacity: '.7',
+    [theme.breakpoints.up('sm')]: {
+      marginRight: theme.spacing(2),
+    },
     [theme.breakpoints.up('lg')]: {
       display: 'none',
     }
@@ -180,7 +183,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.spacing(2)
   },
   iconLove: {
-    color: theme.palette.error.dark,
+    color: theme.palette.text.primary,
     fontSize: theme.spacing(3.3),
     opacity: '.7'
   }
