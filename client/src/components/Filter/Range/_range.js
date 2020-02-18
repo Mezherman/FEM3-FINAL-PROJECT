@@ -4,7 +4,7 @@ const useStyles = makeStyles({
   inputs: {
     display: 'flex',
     justifyContent: 'space-between',
-    position: 'relative'
+    position: 'relative',
   },
   error: {
     position: 'absolute',
