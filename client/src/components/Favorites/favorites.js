@@ -9,7 +9,6 @@ export default function Favorites() {
 
   return (
     <Container maxWidth="xl">
-    {/*<Container maxWidth="xl" style={{ minHeight: '52vh' }}>*/}
       {
         !favorites.length
           ? <h2>NOTHING ADDED TO FAVORITES.</h2>

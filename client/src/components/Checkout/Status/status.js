@@ -38,7 +38,6 @@ export default function CheckoutStatus(props) {
 
   return (
     <Container maxWidth="xl">
-    {/*<Container maxWidth="xl" style={{ minHeight: '52vh' }}>*/}
       {statusMessage}
     </Container>
   )
