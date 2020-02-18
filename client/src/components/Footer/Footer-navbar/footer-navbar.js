@@ -8,9 +8,9 @@ import FooterContactsLink from './Footer-links/contacts';
 const FooterNavbar = () => (
   <Grid xs={12} md={7} item>
     <Grid container justify="center" spacing={4}>
+      <FooterContactsLink />
       <FooterCompanyLink />
       <FooterAccountLink />
-      <FooterContactsLink />
     </Grid>
     <p>&copy; 2020 all rights reserved</p>
   </Grid>

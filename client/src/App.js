@@ -32,7 +32,7 @@ const App = () => {
     <>
       {isFetchingLoadData && (<Spinner />) }
       {!isFetchingLoadData && (
-        <>
+        <div style={{position: 'relative', 'padding-bottom': 'calc(100vh - 300px)'}}>
           <Router>
             <ScrollToTopOnMount />
             <Header />
@@ -42,7 +42,7 @@ const App = () => {
             <Footer />
           </Router>
           <ScrollTop />
-        </>
+        </div>
       )}
     </>
   )

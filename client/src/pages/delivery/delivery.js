@@ -4,7 +4,8 @@ import { Grid, Divider, Container } from '@material-ui/core';
 export default function Delivery() {
   return (
     <>
-      <Container maxWidth="xl" style={{minHeight: '55vh'}}>
+      {/*<Container maxWidth="xl" style={{minHeight: '55vh'}}>*/}
+      <Container maxWidth="xl">
         <Grid container>
           <Grid item>
             <h2>Where is my parcel?</h2>
