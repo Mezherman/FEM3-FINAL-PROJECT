@@ -85,7 +85,7 @@ const Catalog = (props) => {
     handleProductsRequest();
   }, [assortment, sort, filterResults, filterPages, searchedValue]);
 
-  const cardsToShowString = topList.length ? topList.toString() : '';
+  const cardsToShowString = topList ? topList.toString() : '';
 
   useEffect(() => {
     getFilteredProducts(`itemNo=${cardsToShowString}`)
