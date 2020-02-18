@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   inputInput: {
-    padding: theme.spacing(1, 1, 1, 7),
+    padding: theme.spacing(1, 1, 1, 6),
     width: '100%'
   }
 }));

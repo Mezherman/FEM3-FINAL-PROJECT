@@ -8,7 +8,8 @@ export default function Favorites() {
   const { favorites } = useSelector((state) => state.favoritesReducer);
 
   return (
-    <Container maxWidth="xl" style={{ minHeight: '52vh' }}>
+    <Container maxWidth="xl">
+    {/*<Container maxWidth="xl" style={{ minHeight: '52vh' }}>*/}
       {
         !favorites.length
           ? <h2>NOTHING ADDED TO FAVORITES.</h2>

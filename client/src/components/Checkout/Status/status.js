@@ -37,7 +37,8 @@ export default function CheckoutStatus(props) {
   const statusMessage = orderDone ? statusMessageSuccess : statusMessageFailure;
 
   return (
-    <Container maxWidth="xl" style={{ minHeight: '52vh' }}>
+    <Container maxWidth="xl">
+    {/*<Container maxWidth="xl" style={{ minHeight: '52vh' }}>*/}
       {statusMessage}
     </Container>
   )
