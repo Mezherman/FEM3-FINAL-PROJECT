@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme) => createStyles({
     padding: '10px',
     color: theme.palette.text.primary,
     textDecoration: 'none',
+    textTransform: 'capitalize',
     '&:hover': {
       color: theme.palette.secondary.dark
     }
