@@ -81,18 +81,24 @@ const Catalog = (props) => {
   useEffect(() => {
     const request = assortment === 'search' ? 'cooking' : assortment;
     getCategory(request)
-      .then((response) => setTopList(response.topSellers));
+      .then((response) => {
+        if (response.topSellers) {
+          setTopList(response.topSellers);
+        }
+      });
     handleProductsRequest();
   }, [assortment, sort, filterResults, filterPages, searchedValue]);
 
-  // const cardsToShowString = topList ? topList.toString() : '';
-  //
-  // useEffect(() => {
-  //   getFilteredProducts(`itemNo=${cardsToShowString}`)
-  //     .then((response) => {
-  //       setProductsToShow(response)
-  //     })
-  // }, [cardsToShowString, topList]);
+  const cardsToShowString = topList.toString();
+
+  useEffect(() => {
+    if (cardsToShowString) {
+      getFilteredProducts(`itemNo=${cardsToShowString}`)
+        .then((response) => {
+          setProductsToShow(response)
+        })
+    }
+  }, [cardsToShowString, topList]);
 
   const toggleFilterMobile = (open) => {
     setFilterIsOpenMobile(open);
