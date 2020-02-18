@@ -8,7 +8,7 @@ export default function Spinner() {
 
   return (
     <div className={classes.root}>
-      <CircularProgress size="8em" />
+      <CircularProgress size="6em" />
     </div>
   );
 }

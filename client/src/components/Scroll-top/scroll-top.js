@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Zoom from '@material-ui/core/Zoom';
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/Button';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import { SvgIcon } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
   scroll_btn: {
     padding: theme.spacing(1),
-    borderRadius: theme.spacing(1),
+    borderRadius: '50%',
     minWidth: 55,
     border: '1px solid white',
   }
@@ -48,9 +49,9 @@ function ScrollTop(props) {
   return (
     <Zoom in={trigger}>
       <div onClick={handleClick} role="presentation" className={classes.root}>
-        <Button variant="contained" color="secondary" size="medium" aria-label="scroll back to top" className={classes.scroll_btn}>
+        <IconButton variant="contained" color="secondary" size="medium" aria-label="scroll back to top" className={classes.scroll_btn}>
           <KeyboardArrowUpIcon className={classes.scroll_icon} />
-        </Button>
+        </IconButton>
       </div>
     </Zoom>
   );

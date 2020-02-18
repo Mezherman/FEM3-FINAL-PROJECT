@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme';
 import Contacts from './contacts'
-import Contact from '../../components/Contacts/contact'
+import Contact from './contact'
 
 describe('Contacts component', () => {
   it('should render correctly component', () => {

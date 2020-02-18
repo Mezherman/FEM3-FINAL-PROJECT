@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Container } from '@material-ui/core';
 
-import ProductList from '../../components/Product-list/product-list';
+import ProductList from '../Product-list/product-list';
 
 export default function Favorites() {
   const { favorites } = useSelector((state) => state.favoritesReducer);

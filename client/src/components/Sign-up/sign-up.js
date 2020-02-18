@@ -6,11 +6,11 @@ import { PropTypes } from 'prop-types';
 
 import { Container, CssBaseline, Divider, Grid, Typography } from '@material-ui/core';
 
-import SignUpInfo from '../../components/Sign-up/Sign-up-info/signUp-info';
-import SignUpForm from '../../components/Sign-up/Sign-up-form/sign-up-form';
-import SignUpFooter from '../../components/Sign-up/Sign-up-footer/sign-up-footer';
-import ModalResponse from '../../components/Sign-up/Modal-response/modal-response';
-import validate from '../../components/Sign-up/validate';
+import SignUpInfo from './Sign-up-info/signUp-info';
+import SignUpForm from './Sign-up-form/sign-up-form';
+import SignUpFooter from './Sign-up-footer/sign-up-footer';
+import ModalResponse from './Modal-response/modal-response';
+import validate from './validate';
 import postNewUser from '../../services/postNewUser';
 import useStyles from './_sign-up';
 import { leaveRegistrationPage } from '../../redux/actions/moving-around-registration';

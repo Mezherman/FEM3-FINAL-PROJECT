@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import React from 'react';
 import PropTypes from 'prop-types';
-import useProfileStyles from '../../../../pages/profile/_profile';
+import useProfileStyles from '../_profile';
 
 const CancelSaveButtons = ({ cancel }) => {
   const profileClasses = useProfileStyles();

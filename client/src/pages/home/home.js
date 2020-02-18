@@ -1,11 +1,10 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
+import MainSlider from '../../components/Main-carousel/main-carousel';
 import CategoryList from '../../components/Category-list/category-list';
-import MainSlider from '../../components/Home/Main-carousel/main-carousel'
-
 import Carousels from '../../components/Carousel/carousel';
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
       <MainSlider />
@@ -20,5 +19,5 @@ export default function Home() {
         />
       </Container>
     </>
-  );
+  )
 }
