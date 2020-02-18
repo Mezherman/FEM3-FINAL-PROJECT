@@ -8,5 +8,7 @@ import db from '../enhancers/db';
 import localStorage from '../enhancers/localStorage';
 
 export default function configureStore() {
-  return createStore(rootReducer, composeWithDevTools(applyMiddleware(transitional, db, localStorage, thunk)));
+  return createStore(
+    rootReducer, composeWithDevTools(applyMiddleware(transitional, db, localStorage, thunk))
+  );
 }

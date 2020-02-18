@@ -1,21 +1,32 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import RoutesName from '../../../routes-list';
 import { catalogLocation } from '../../../redux/actions/categories';
+import { resetFilters } from '../../../redux/actions/filter';
 
 import useStyles from '../_header-navbar';
 
 function Categories(props) {
   const classes = useStyles();
-  const { chosenCategory, mainCategories, toggleSubCategories, toggleCatalog, catalogLocation } = props;
+  const {
+    chosenCategory,
+    mainCategories,
+    toggleSubCategories,
+    toggleCatalog,
+    catalogLocation,
+    resetFilters
+  } = props;
+
   const categoryList = mainCategories.map((category) => {
-    const classNames = `js_catalog-list-item ${classes.catalogListItem} 
-      ${category.id === chosenCategory
-      ? classes.categoryHover
-      : ''}`;
+    const classNames = `
+    js_catalog-list-item 
+    ${classes.catalogListItem} 
+    ${category.id === chosenCategory ? classes.categoryHover : ''}
+    `;
+
     return (
       <Link
         to={`${RoutesName.products}/${category.id}`}
@@ -23,6 +34,8 @@ function Categories(props) {
         id={category.id}
         className={classNames}
         onClick={(event) => {
+          console.log('click link')
+          resetFilters();
           catalogLocation(event.target.textContent.toLowerCase());
           toggleCatalog()
         }}
@@ -42,18 +55,20 @@ function Categories(props) {
   )
 }
 
-const mapStateToProps = (state) => {};
 const mapDispatchToProps = {
-  catalogLocation
+  catalogLocation,
+  resetFilters
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Categories)
+export default connect(null, mapDispatchToProps)(Categories)
 
 Categories.propTypes = {
   chosenCategory: PropTypes.string,
   toggleSubCategories: PropTypes.func.isRequired,
   toggleCatalog: PropTypes.func.isRequired,
   mainCategories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  catalogLocation: PropTypes.func.isRequired,
+  resetFilters: PropTypes.func.isRequired
 };
 
 Categories.defaultProps = {

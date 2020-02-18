@@ -4,7 +4,11 @@ const useStyles = makeStyles((theme) => ({
   productList: {
     display: 'flex',
     flexWrap: 'wrap',
-    paddingBottom: theme.spacing(5)
+    paddingBottom: theme.spacing(5),
+    justifyContent: 'center',
+    [theme.breakpoints.up('md')]: {
+      justifyContent: 'start',
+    },
   }
 }));
 

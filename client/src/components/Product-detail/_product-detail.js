@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'inlineBlock',
     paddingBottom: theme.spacing(2),
     color: theme.palette.text.secondary,
-    fontWeight: '700',
+    fontWeight: '500',
     fontSize: '32px',
     textAlign: 'right',
     verticalAlign: 'bottom',
@@ -80,7 +80,11 @@ const useStyles = makeStyles((theme) => ({
   fact: {
     textAlign: 'right',
   },
-
+  lowStock: {
+    position: 'relative',
+    color: theme.palette.error.main,
+    top: '7px'
+  },
   inStock: {
     position: 'relative',
     color: theme.palette.primary.main,
@@ -93,6 +97,9 @@ const useStyles = makeStyles((theme) => ({
   },
   property: {
     fontWeight: 'bold',
+  },
+  increaseWrapper: {
+    padding: '20px 0'
   }
 }));
 

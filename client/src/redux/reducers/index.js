@@ -10,9 +10,11 @@ import notification from './notification';
 import favoritesReducer from './favorites';
 import loadDataReducer from './load-data';
 import carouselReducer from './carousel';
-import sortingReducer from './sorting';
 import slides from './slides'
-// import form from './form';
+import passwordForm from './password-form';
+import currentProduct from './currentProduct';
+import comments from './comments';
+import searchReducer from './search';
 
 export default combineReducers({
   cart,
@@ -25,7 +27,9 @@ export default combineReducers({
   favoritesReducer,
   isFetchingLoadData: loadDataReducer,
   carouselReducer,
-  sortingReducer,
-  slides
-  // form
+  slides,
+  passwordForm,
+  currentProduct,
+  commentsReducer: comments,
+  searchReducer
 })

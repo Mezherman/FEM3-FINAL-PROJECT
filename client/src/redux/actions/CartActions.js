@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function addProductToCart (product, quantity) {
   return {
     type: 'ADD_PRODUCT',
@@ -30,5 +28,16 @@ export function setProductQuantity (productId, quantity) {
 export function mergeDBWithLocalStorage () {
   return {
     type: 'MERGE_CART',
+  }
+}
+
+export function clearCart () {
+  return {
+    type: 'CLEAR_CART',
+  }
+}
+export function removeCart () {
+  return {
+    type: 'REMOVE_CART',
   }
 }

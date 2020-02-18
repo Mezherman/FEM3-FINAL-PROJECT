@@ -1,33 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect, useSelector } from 'react-redux';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { createStyles, makeStyles, Container } from '@material-ui/core';
+import { createStyles, makeStyles, Container, Badge, IconButton } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import TableSpecification from '../Table-specification/table-specifications';
 
-const useStyles = makeStyles((theme) => createStyles({
-  root: {
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
-  },
-  highlights: {
-    fontSize: '1rem',
-    textAlign: 'justify',
-    lineHeight: '2',
-    paddingBottom: theme.spacing(3)
-  },
-  description: {
-    fontSize: '1rem',
-    textAlign: 'justify',
-    lineHeight: '2',
-    paddingBottom: theme.spacing(3)
-  },
-}),);
+import TableSpecification from '../Table-specification/table-specifications';
+import Comment from '../../Comment/comment';
+import useStyles from './_product-detail-tab';
 
 export default function ProductDetailTab({ data }) {
   const { myCustomParams } = data;
   const { productDescription, productHighlights } = myCustomParams;
   const classes = useStyles();
+  const commentsLength = useSelector((state) => state.commentsReducer.commentsList.length.toString());
+
   return (
     <>
       <Tabs>
@@ -35,6 +22,11 @@ export default function ProductDetailTab({ data }) {
           <Tab><h4>Highlights</h4></Tab>
           <Tab><h4>Product Description</h4></Tab>
           <Tab><h4>Specifications</h4></Tab>
+          <Tab>
+            <Badge badgeContent={commentsLength} color="error" className={classes.badge}>
+              <h4>Comments</h4>
+            </Badge>
+          </Tab>
         </TabList>
 
         <TabPanel>
@@ -50,11 +42,22 @@ export default function ProductDetailTab({ data }) {
         <TabPanel>
           <TableSpecification data={data} />
         </TabPanel>
+        <TabPanel>
+          <Comment />
+        </TabPanel>
+
       </Tabs>
     </>
   )
 }
 
 ProductDetailTab.propTypes = {
-  data: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.boolean, PropTypes.symbol])).isRequired,
+  data: PropTypes.objectOf(PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool,
+    PropTypes.symbol,
+    PropTypes.array,
+    PropTypes.number,
+    PropTypes.object
+  ])).isRequired,
 };

@@ -1,13 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  rightTitle: {
-    fontStyle: 'italic',
-  },
-  radioGender: {
-    flexDirection: 'row',
-    justifyContent: 'center'
-  },
   radioLabel: {
     color: theme.palette.secondary.dark,
   },
@@ -15,20 +8,17 @@ const useStyles = makeStyles((theme) => ({
     '& .MuiRadio-colorSecondary.Mui-checked': {
       color: theme.palette.primary.main
     },
-    '&.MuiFormControlLabel-root': {
-      textAlign: 'justify'
-    },
     '& .MuiCheckbox-colorSecondary.Mui-checked': {
       color: theme.palette.primary.main
     },
-    '&.MuiFormLabel-root': {
+    '& .MuiFormLabel-root': {
       color: theme.palette.secondary.dark
     },
     '&.MuiFormLabel-root.Mui-error ': {
       color: theme.palette.error.dark
     },
     '& .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline': {
-      borderColor: theme.palette.error.dark
+      borderColor: theme.palette.error.dark,
     },
     '& .MuiFormHelperText-root.Mui-error ': {
       color: theme.palette.error.dark
@@ -37,69 +27,21 @@ const useStyles = makeStyles((theme) => ({
   labelText: {
     color: theme.palette.secondary.dark
   },
-  labelBirthday: {
-    margin: theme.spacing(3, 0, 2, 0),
-    fontStyle: 'italic'
+  blockTitle: {
+    backgroundColor: theme.palette.background.dark,
+    color: theme.palette.primary.contrastText,
+    padding: '10px 20px',
+    marginBottom: '10px'
   },
-  infoIcon: {
-    marginLeft: '10px',
-    color: theme.palette.primary.main,
-    cursor: 'pointer',
-    '&:hover': {
-      color: theme.palette.primary.dark
-    }
-  },
-  modalInfoIcon: {
+  confirmationHeader: {
     display: 'flex',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    justifyContent: 'center',
-    width: 250,
-    margin: '0 auto',
-    [theme.breakpoints.up('md')]: {
-      width: 350
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: 450
-    }
+    margin: '5px 0',
+    fontSize: '18px'
   },
-  paperInfoIcon: {
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(0, 0, 1),
-  },
-  modalInfoTitle: {
-    position: 'relative',
-    margin: 0,
-    padding: theme.spacing(2, 3),
-    backgroundColor: '#dad7ce',
-    fontSize: 20,
-    fontWeight: 'normal'
-  },
-  modalInfoClose: {
-    position: 'absolute',
-    right: 15,
-    fontSize: '1.8rem',
-    opacity: '0.8',
-    cursor: 'pointer'
-  },
-  modalInfoText: {
-    padding: theme.spacing(2, 3),
-    textAlign: 'justify'
-  },
-  inputBirthDay: {
-    width: '50%',
-    textAlign: 'center',
-
-    '&:not(:last-child)': {
-      width: '25%',
-      paddingRight: '15px',
-    }
-  },
-  helperBirth: {
-    display: 'block',
-    margin: 0,
-    textAlign: 'center',
-    color: theme.palette.primary.dark
+  terms: {
+    padding: theme.spacing(2, 0)
   }
 }));
 

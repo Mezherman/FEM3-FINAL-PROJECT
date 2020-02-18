@@ -1,7 +1,7 @@
 import axios from 'axios';
 import getCategories from './getCategories';
 
-axios.defaults.baseURL = 'http://localhost:5000';
+// axios.defaults.baseURL = 'http://localhost:5000';
 
 export default function getAllProducts() {
   return axios
@@ -36,9 +36,10 @@ export async function getProductsByCategory(categoryName) {
 export function getProductsByItemNo(itemNo) {
   return axios
     .get(`/products/${itemNo}`)
-    .then((product) =>
+    .then((product) => {
       // console.log('getProductsByitemNo = ', product);
-      product)
+      return product
+    })
     .catch((err) => {
       console.log('ERROR = ', err);
     });
