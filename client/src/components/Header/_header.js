@@ -1,4 +1,4 @@
-import { fade, makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -22,10 +22,13 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between'
   },
   menuButton: {
-    marginRight: theme.spacing(2),
-    color: '#000000',
+    marginRight: theme.spacing(1),
+    color: theme.palette.background.dark,
     fontSize: '27px',
     opacity: '.7',
+    [theme.breakpoints.up('sm')]: {
+      marginRight: theme.spacing(2),
+    },
     [theme.breakpoints.up('lg')]: {
       display: 'none',
     }
@@ -37,40 +40,6 @@ const useStyles = makeStyles((theme) => ({
       display: 'block'
     }
   },
-  // search: {
-  //   position: 'relative',
-  //   borderRadius: theme.shape.borderRadius,
-  //   backgroundColor: fade(theme.palette.common.white, 0.15),
-  //   '&:hover': {
-  //     backgroundColor: fade(theme.palette.common.white, 0.25),
-  //   },
-  //   marginRight: theme.spacing(2),
-  //   marginLeft: theme.spacing(2),
-  //   marginBottom: theme.spacing(2),
-  //   width: '90%',
-  //   [theme.breakpoints.up('sm')]: {
-  //     marginLeft: theme.spacing(3),
-  //     width: 'auto'
-  //   },
-  //   [theme.breakpoints.up('md')]: {
-  //     marginTop: theme.spacing(2),
-  //     marginLeft: theme.spacing(3),
-  //     width: 'auto'
-  //   },
-  //   border: '1px solid #666666',
-  //   opacity: '0.4'
-  // },
-  // searchIcon: {
-  //   width: theme.spacing(5),
-  //   height: '100%',
-  //   position: 'absolute',
-  //   right: '0',
-  //   pointerEvents: 'none',
-  //   display: 'flex',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
-  //   opacity: '.7'
-  // },
   sectionDesktop: {
     display: 'none',
     [theme.breakpoints.up('md')]: {
@@ -107,22 +76,16 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: 'transparent'
     }
-    // '&:last-child > button': {
-    //   marginRight: '0'
-    // }
   },
   iconsStyle: {
-    // color: theme.palette.secondary.main,
     color: theme.palette.text.primary,
-    fontSize: '26px',
+    fontSize: theme.spacing(3.3),
     opacity: '.7'
   },
-
   iconLoggedIn: {
     color: theme.palette.primary.main,
-    fontSize: '26px',
+    fontSize: theme.spacing(3.3),
   },
-
   iconButtonBox: {
     height: '100%',
     display: 'flex',
@@ -151,7 +114,6 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column'
       }
     },
-
   },
   dividerStyle: {
     [theme.breakpoints.up('lg')]: {
@@ -163,9 +125,6 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
     textAlign: 'center',
     color: theme.palette.text.primary,
-    '&:hover': {
-      textDecoration: 'underline'
-    }
   },
   menuTitle: {
     display: 'none',
@@ -185,7 +144,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '20px'
   },
   mainHeaderLogoImg: {
-    width: '80px'
+    width: theme.spacing(10)
   },
   mainBoxLogo: {
     display: 'none',
@@ -195,8 +154,9 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   boxLogo: {
+    display: 'flex',
+    alignItems: 'center',
     [theme.breakpoints.up('lg')]: {
-      // width: 'calc(100% / 4 - 31px)'
     }
   },
   logoIcon: {
@@ -204,10 +164,26 @@ const useStyles = makeStyles((theme) => ({
       padding: '12px 15px'
     }
   },
-  // linkDecoration: {
-  //   color: theme.palette.,
-  //   textDecoration: 'none',
-  // },
-}))
+  wishlistMessege: {
+    fontSize: theme.spacing(3),
+  },
+  logInLink: {
+    textDecoration: 'none',
+    color: theme.palette.error.main,
+    paddingTop: theme.spacing(1),
+    fontWeight: 700,
+    '&:hover': {
+      textDecoration: 'underline'
+    }
+  },
+  toolTipContainer: {
+    fontSize: theme.spacing(2)
+  },
+  iconLove: {
+    color: theme.palette.text.primary,
+    fontSize: theme.spacing(3.3),
+    opacity: '.7'
+  }
+}));
 
 export default useStyles

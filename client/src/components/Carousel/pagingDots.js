@@ -1,7 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+function getDotIndexes (slideCountOwn, slidesToScrollOwn, slidesToShowOwn, cellAlignOwn) {
+  const dotIndexes = [];
+  let lastDotIndex = slideCountOwn - slidesToShowOwn;
+
+  switch (cellAlignOwn) {
+    case 'center':
+    case 'right':
+      lastDotIndex += slidesToShowOwn - 1;
+      break;
+    default:
+  }
+
+  if (lastDotIndex < 0) {
+    return [0];
+  }
+
+  for (let i = 0; i < lastDotIndex; i += slidesToScrollOwn) {
+    dotIndexes.push(i);
+  }
+
+  dotIndexes.push(lastDotIndex);
+  return dotIndexes;
+}
+
 export default function PagingDots (props) {
+
   const {
     currentSlide,
     goToSlide,
@@ -12,33 +37,8 @@ export default function PagingDots (props) {
     classItems,
     buttonItems,
     ulPagingItem,
-    // ulMainPagingItem,
-    // mainCarousel,
   } = props;
-  // eslint-disable-next-line no-shadow
-  function getDotIndexes (slideCount, slidesToScroll, slidesToShow, cellAlign) {
-    const dotIndexes = [];
-    let lastDotIndex = slideCount - slidesToShow;
 
-    switch (cellAlign) {
-      case 'center':
-      case 'right':
-        lastDotIndex += slidesToShow - 1;
-        break;
-      default:
-    }
-
-    if (lastDotIndex < 0) {
-      return [0];
-    }
-
-    for (let i = 0; i < lastDotIndex; i += slidesToScroll) {
-      dotIndexes.push(i);
-    }
-
-    dotIndexes.push(lastDotIndex);
-    return dotIndexes;
-  }
   const indexes = getDotIndexes(slideCount, slidesToScroll, slidesToShow, cellAlign);
   return (
     <ul className={ulPagingItem}>
@@ -69,15 +69,10 @@ PagingDots.propTypes = {
   currentSlide: PropTypes.number.isRequired,
   goToSlide: PropTypes.func.isRequired,
   classItems: PropTypes.string.isRequired,
-  // classItemsActive: PropTypes.string.isRequired,
   ulPagingItem: PropTypes.string.isRequired,
-  // ulMainPagingItem: PropTypes.string.isRequired,
   buttonItems: PropTypes.string,
-  // mainCarousel: PropTypes.bool,
 };
 
 PagingDots.defaultProps = {
   buttonItems: '',
-
-  // mainCarousel: false
 };

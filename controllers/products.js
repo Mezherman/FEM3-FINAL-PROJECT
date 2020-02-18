@@ -140,8 +140,8 @@ exports.getProductsFilterParams = async (req, res, next) => {
   const mongooseQuery = filterParser(req.query);
   const perPage = Number(req.query.perPage);
   const startPage = Number(req.query.startPage);
-  const sort = req.query.sort;
-
+  const sort = req.query.sort ? JSON.parse(req.query.sort) : '';
+  console.log(mongooseQuery);
   try {
     const products = await Product.find(mongooseQuery)
       .skip(startPage * perPage - perPage)

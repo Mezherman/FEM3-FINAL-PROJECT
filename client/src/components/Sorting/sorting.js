@@ -1,119 +1,85 @@
 import React, { useRef, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import {
   FormControl,
   InputLabel,
-  Select
+  Select,
+  Grid
 } from '@material-ui/core';
 
+import { filterSort } from '../../redux/actions/filter';
+
 import useStyles from './_sorting';
-import { PropTypes } from 'prop-types';
-import sendSortingProducts from '../../redux/actions/sorting';
 
 const Sorting = (props) => {
-  const { products, sendSorting, currentCategory } = props;
-
+  const {
+    filterSort, sort
+  } = props;
   const classes = useStyles();
-
   const inputLabel = useRef(null);
 
-  const [state, setState] = useState({
-    sort: '',
-  });
-
-  const sortedList = products;
-  let sortedCategory = '';
-
   const [labelWidth, setLabelWidth] = useState(0);
+  let sortVal = sort.sortValue < 0 ? '-' : '';
+  sortVal += sort.sortName;
 
   useEffect(() => {
     setLabelWidth(inputLabel.current.offsetWidth);
-    getCurrentCategory(currentCategory);
-  }, [currentCategory]);
-
-  const handleChange = (name, value) => {
-    setState({
-      ...state,
-      [name]: value,
-    });
-  };
-
-  const getCurrentCategory = (category) => {
-    if (sortedCategory !== category || sortedCategory !== '') {
-      handleChange('sort', '');
-      sendSorting([], '');
-    }
-  }
+  }, []);
 
   const getSortedList = (event) => {
     const type = event.target.value;
 
-    handleChange('sort', type);
-    sortedCategory = currentCategory;
-
-    switch (type) {
-      case 'low-to-high':
-        sortedList.sort((a, b) => a.currentPrice - b.currentPrice)
-        break;
-
-      case 'high-to-low':
-        sortedList.sort((a, b) => b.currentPrice - a.currentPrice);
-        break;
-
-      case 'sale-items':
-        sortedList.sort((a) => {
-          if (!a.previousPrice) {
-            return 1;
-          }
-          return -1;
-        })
-        break;
-
-      default:
-        return sortedList;
+    const splitting = type.split('-');
+    if (splitting.length == 1) {
+      filterSort({
+        sortName: splitting[0],
+        sortValue: 1
+      });
+    } else {
+      filterSort({
+        sortName: splitting[1],
+        sortValue: -1
+      });
     }
-    return sendSorting(sortedList, type);
   };
 
   return (
-    <FormControl variant="outlined" className={classes.formControl}>
-      <InputLabel ref={inputLabel} htmlFor="outlined-sorting-filter" className={classes.root}>
-                Sorting by:
-      </InputLabel>
-      <Select
-        native
-        value={state.sort}
-        onChange={getSortedList}
-        labelWidth={labelWidth}
-        inputProps={{
-          name: 'sorting',
-          id: 'outlined-sorting-filter',
-        }}
-      >
-        <option value="" />
-        <option value="low-to-high">Price: low to high</option>
-        <option value="high-to-low">Price: high to low</option>
-        <option value="sale-items">Sale items first</option>
-      </Select>
-    </FormControl>
+    <Grid container justify="flex-end">
+      <FormControl variant="outlined" className={classes.formControl}>
+        <InputLabel ref={inputLabel} htmlFor="outlined-sorting-filter" className={classes.label}>
+          Sorting by:
+        </InputLabel>
+        <Select
+          native
+          value={sortVal}
+          onChange={getSortedList}
+          labelWidth={labelWidth}
+          inputProps={{
+            name: 'sort',
+            id: 'outlined-sorting-filter',
+            className: classes.input
+          }}
+        >
+          <option value="" />
+          <option value="currentPrice">Price: low to high</option>
+          <option value="-currentPrice">Price: high to low</option>
+          <option value="-previousPrice">Sale items first</option>
+        </Select>
+      </FormControl>
+    </Grid>
   )
 };
 
-const mapStateToProps = (state) => ({
-  products: state.productsReducer.products,
-  sortedProducts: state.sortingReducer.sortedProducts,
-  currentCategory: state.categoriesReducer.catalogLocation
-});
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
-  sendSorting: (list, type) => dispatch(sendSortingProducts(list, type))
+  filterSort: (sortValue) => dispatch(filterSort(sortValue)),
 });
 
 Sorting.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.object).isRequired,
-  sendSorting: PropTypes.func.isRequired,
-  currentCategory: PropTypes.string.isRequired,
+  sort: PropTypes.objectOf(PropTypes.string).isRequired,
+  filterSort: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sorting);

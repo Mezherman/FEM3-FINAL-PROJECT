@@ -1,4 +1,4 @@
-import { SORT_CARDS } from '../reducers/sorting';
+import { SORT_CARDS } from './actionTypes';
 
 function sendSortingProducts(sortedProducts, type) {
   return {

@@ -1,40 +1,56 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  wrapper: {
-    position: 'relative',
-  },
-  searchInput: {
+  search: {
     position: 'absolute',
-    // zIndex: '1111',
-    minWidth: '200px',
     top: '113%',
     backgroundColor: 'white',
     width: '100%',
     left: '0',
-    // left: '150px',
+  },
+  searchIcon: {
+    zIndex: '1',
+    height: '100%',
+    width: '50px',
+    padding: '5px',
+    opacity: 1,
+    cursor: 'pointer',
+    position: 'absolute',
   },
   [theme.breakpoints.up('md')]: {
-    searchInput: {
-      position: 'absolute',
-      zIndex: '1111',
-      minWidth: '200px',
-      left: '150px',
-      top: '18%',
-      width: '50%'
+    search: {
+      zIndex: '5',
+      left: '20%',
+      top: '25%',
+      maxWidth: '50%',
+      position: 'absolute'
     },
   },
-  root: {
-    '& .MuiOutlinedInput-root[class*="MuiOutlinedInput-root"]': {
-      paddingLeft: theme.spacing(4),
+  [theme.breakpoints.up('lg')]: {
+    search: {
+      left: '7%',
+      maxWidth: '660px',
+      padding: theme.spacing(3, 3, 1, 0),
+      top: '-13%',
+    },
+    searchIcon: {
+      bottom: '15px',
+      padding: 0,
+      height: '1em'
     }
   },
-
-  searchIcon: {
-    height: '100%',
-    opacity: 0.5,
-    position: 'absolute',
-    paddingLeft: theme.spacing(1)
+  [theme.breakpoints.up('xl')]: {
+    search: {
+      maxWidth: '800px',
+    },
+  },
+  inputRoot: {
+    border: '1px solid black',
+    width: '100%',
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 6),
+    width: '100%'
   }
 }));
 

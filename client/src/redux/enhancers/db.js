@@ -2,18 +2,14 @@ import React from 'react';
 import * as ServicesCart from '../../services/cart';
 import { getFavoriteProducts } from '../../services/favorites';
 import getCategories from '../../services/getCategories';
-import { getCustomer } from '../../services/customer';
+import getCustomer from '../../services/customer';
 
 const db = (store) => (next) => async (action) => {
-  console.log(action);
   const storeCart = { ...store.getState().cart };
   const { loggedIn, token } = store.getState().user;
-
   switch (action.type) {
     case 'SET_CATALOG_FROM_DB': {
-      // console.log('middleware catalog worked');
       const catalog = await getCategories();
-      console.log('CATALOG =', catalog);
       return next({
         type: 'FETCH_CATALOG_SUCCESS',
         payload: {
@@ -28,7 +24,6 @@ const db = (store) => (next) => async (action) => {
   }
 
   if (loggedIn && token) {
-    // console.log('ACTION =', action);
     const { cart } = { ...action.payload };
     switch (action.type) {
       case 'ADD_PRODUCT': {
@@ -121,10 +116,22 @@ const db = (store) => (next) => async (action) => {
           payload: { ...action.payload, newCart }
         });
       }
+      case 'REMOVE_CART': {
+        const newCart = await ServicesCart.deleteCartFromDB();
+        if (!newCart) {
+          return next({
+            ...action,
+            type: 'OPEN_NEW_NOTIFICATION',
+            payload: { type: 'error', message: 'Can not remove cart' }
+          });
+        }
+        return next({
+          type: 'CLEAR_CART',
+        });
+      }
 
       case 'SET_FAVORITES_FROM_DB': {
         const favorites = await getFavoriteProducts();
-        // console.log(favorites);
         return favorites
           ? next({
             type: 'UPDATE_FAVORITES_SUCCESS',

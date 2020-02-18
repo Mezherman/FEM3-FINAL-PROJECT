@@ -1,26 +1,23 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import PropTypes from 'prop-types';
+import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
-import { Grid, IconButton, Divider, Button, Box, Paper } from '@material-ui/core';
+import { Grid, IconButton, Divider, Button, Box } from '@material-ui/core';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import CloseIcon from '@material-ui/icons/Close';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
-import RoutesName from '../../routes-list';
 
+import RoutesName from '../../routes-list';
 import ModalWindow from '../Modal-window/modal-window';
+import { setProductQuantity } from '../../redux/actions/CartActions'
+import IncreaseBlock from '../Increase-block/increase-block'
 
 import useStyles from './_add-to-cart';
-import { addProductToCart, setProductQuantity } from '../../redux/actions/CartActions'
 
 export default function AddToCart({ open, onModalClose, product }) {
   const classes = useStyles();
-  const { imageUrls, name, currentPrice, specialPrice, itemNo, itemId } = product;
-
-  //product in state state
-  const productsState = useSelector((state) => state.cart.products);
   const dispatch = useDispatch();
+  const productsState = useSelector((state) => state.cart.products);
+  const { imageUrls, name, currentPrice, specialPrice, itemNo, itemId, maxQty } = product;
   const actionSetProductQuantityInCart = useCallback(
     (productData, quantityVal) => dispatch(setProductQuantity(productData, quantityVal)),
     [dispatch]
@@ -32,13 +29,21 @@ export default function AddToCart({ open, onModalClose, product }) {
 
   const handleQty = (newQty) => {
     actionSetProductQuantityInCart(product.itemId, newQty)
-  }
+  };
 
   const finalPrice = !specialPrice ? currentPrice : specialPrice;
 
   useEffect(() => {
     setTotalPrice(stateQuantity * finalPrice)
   }, [stateQuantity, finalPrice]);
+
+  useEffect(() => {
+    document.onkeyup = (event) => {
+      if (event.key === 'Escape') {
+        onModalClose()
+      }
+    }
+  }, [onModalClose]);
 
   return (
     <ModalWindow
@@ -77,20 +82,9 @@ export default function AddToCart({ open, onModalClose, product }) {
                     {finalPrice}
                   </span>
                 </Box>
-                <Paper className={classes.qtyPicker}>
-                  <RemoveIcon
-                    className={classes.sign}
-                    onClick={() => {
-                      if (stateQuantity === 1) return;
-                      handleQty(stateQuantity - 1);
-                    }}
-                  />
-                  <Box className={classes.qty}>{stateQuantity}</Box>
-                  <AddIcon
-                    className={classes.sign}
-                    onClick={() => { handleQty(stateQuantity + 1) }}
-                  />
-                </Paper>
+                {/*<Box className={classes.qtyPicker}>*/}
+                  <IncreaseBlock setQty={handleQty} qty={stateQuantity} maxQty={maxQty} />
+                {/*</Box>*/}
                 <Box className={classes.total}>
                   <span>
                     &#8364;
@@ -114,7 +108,7 @@ export default function AddToCart({ open, onModalClose, product }) {
               </Button>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Link to={RoutesName.cart}>
+              <Link to={RoutesName.cart} className={classes.link}>
                 <Button
                   className={classes.btn}
                   size="large"
@@ -123,7 +117,7 @@ export default function AddToCart({ open, onModalClose, product }) {
                   disableElevation
                 >
                   <ShoppingCartOutlinedIcon />
-                  <Box ml={2}>View cart</Box>
+                  <div ml={2}>View cart</div>
                 </Button>
               </Link>
             </Grid>
@@ -132,7 +126,7 @@ export default function AddToCart({ open, onModalClose, product }) {
         <Divider />
         <div className={classes.footer}>
           <article>
-            Free delivery from &#8372;1000 | Free returns | Quick delivery with DHL
+            Free delivery from &#8372;100 | Free returns | Quick delivery with DHL
           </article>
         </div>
       </>

@@ -1,6 +1,4 @@
-import axios from 'axios';
 import enhancerAxios from './enhancer-axios';
-
 
 export function getCart() {
   return enhancerAxios('/cart', { method: 'get' });
@@ -15,7 +13,7 @@ export function updateCart(updatedCart) {
 export function deleteProductFromCart(productId) {
   return enhancerAxios(`/cart/${productId}`, { method: 'delete' });
 }
-export function deleteCart() {
+export function deleteCartFromDB() {
   return enhancerAxios('/cart', { method: 'delete' });
 }
 

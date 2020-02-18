@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 export function getFavoriteProducts() {
   return axios.get('/wishlist')
     .then((response) => response.data)

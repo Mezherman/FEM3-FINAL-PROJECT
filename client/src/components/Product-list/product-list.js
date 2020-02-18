@@ -1,62 +1,49 @@
-import React from 'react';
-import { PropTypes } from 'prop-types';
-import { connect } from 'react-redux';
-import Grid from '@material-ui/core/Grid';
-
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductCard from '../Product-card/product-card';
+import { filterIncreasePage } from '../../redux/actions/filter';
 import Spinner from '../Spinner/spinner';
-import Sorting from '../Sorting/sorting';
 
 import useStyles from './_product-list';
 
-function ProductList(props) {
-  const { assortment, products, productsLoading, sortedProducts } = props;
+export default function ProductList({ products = [], productsQuantity = 0 }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const loadMoreProducts = useCallback(() => {
+    setTimeout(() => {
+      dispatch(filterIncreasePage());
+    }, 2000);
+  }, [dispatch]);
+
   const renderProducts = (productsList) => (
     productsList.map((product) => (
-      <Grid item md={6} lg={4} key={product.itemNo}>
-        <ProductCard
-          product={product}
-        />
-      </Grid>
+      <ProductCard
+        key={product.itemNo}
+        product={product}
+      />
     ))
   );
 
   return (
-    <>
-      <Sorting />
-      <div className={classes.productList}>
-        {productsLoading && <Spinner />}
-        {!productsLoading &&
-        (sortedProducts.length > 0) ? renderProducts(sortedProducts) : renderProducts(products)}
-      </div>
-    </>
-  //   <div className={classes.productList}>
-  //     {productsLoading && <Spinner />}
-  //     {!productsLoading &&
-  //     products.map((product) => (
-  //       <Grid item md={6} lg={4} key={product.itemNo}>
-  //         <ProductCard
-  //           product={product}
-  //         />
-  //       </Grid>
-  //     ))}
-  //   </div>
+    <InfiniteScroll
+      dataLength={products.length}
+      next={loadMoreProducts}
+      hasMore={productsQuantity > products.length}
+      loader={<Spinner />}
+      className={classes.productList}
+    >
+      {renderProducts(products)}
+    </InfiniteScroll>
   )
 }
 
-const mapStateToProps = (state) => ({
-  products: state.productsReducer.products,
-  sortedProducts: state.sortingReducer.sortedProducts,
-  sortingType: state.sortingReducer.type
-});
-
-export default connect(mapStateToProps)(ProductList)
-
 ProductList.propTypes = {
-  assortment: PropTypes.string.isRequired,
-  products: PropTypes.arrayOf(PropTypes.object).isRequired,
-  productsLoading: PropTypes.bool.isRequired,
-  fetchProducts: PropTypes.func.isRequired,
-  sortedProducts: PropTypes.arrayOf(PropTypes.object).isRequired
-};
+  products: PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+    PropTypes.number,
+  ])).isRequired,
+  productsQuantity: PropTypes.number.isRequired
+}

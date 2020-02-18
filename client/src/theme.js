@@ -12,19 +12,16 @@ const theme = createMuiTheme({
   },
   palette: {
     primary: {
-      // light: '#333',
       main: '#71b430',
       dark: '#588c25',
       contrastText: '#fff',
     },
     secondary: {
-      // light: '#ff7961',
       main: '#333',
       dark: '#666',
       contrastText: '#fff',
     },
     error: {
-      // light: '#333',
       main: '#F9B700',
       dark: '#e00000',
       contrastText: '#fff',
@@ -37,7 +34,8 @@ const theme = createMuiTheme({
       default: '#fff',
       primary: '#e2e2e2',
       secondary: '#f1f2f3',
-      carousel: 'rgba(255, 255, 255, .6)'
+      carousel: 'rgba(255, 255, 255, .6)',
+      dark: '#000'
     },
   },
   typography: {

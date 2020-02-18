@@ -11,7 +11,10 @@ export default function getCategories() {
 
 function getCategory(id) {
   return axios.get(`catalog/${id}`)
-    .then((response) => response.data)
+    .then((response) => {
+      // console.log(response.data.topSellers)
+      return response.data
+    })
     .catch((err) => {
       console.log('ERROR = ', err);
     });

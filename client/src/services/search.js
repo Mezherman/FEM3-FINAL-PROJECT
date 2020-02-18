@@ -1,9 +1,12 @@
 import axios from 'axios';
 
+export default function getSearchedProducts(searchedValue) {
+  const searchItem = {
+    query: searchedValue
+  };
 
-export default function search(value) {
   return axios
-    .post('/products/search', value)
+    .post('/products/search', searchItem)
     .then((response) => response.data)
     .catch((error) => error)
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Paper, Box, ClickAwayListener, Divider } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+import { Paper, Box, Divider } from '@material-ui/core';
 
 import NavBar from './Navbar/navbar';
 import Categories from './Categories/categories';
@@ -10,7 +10,6 @@ import SubCategories from './SubCategories/subcategories';
 import useStyles from './_header-navbar';
 
 function HeaderNavbar(props) {
-  // console.log('props =', props);
   const classes = useStyles();
   const [features, setFeatures] = useState({
     categoriesVisible: false,
@@ -19,10 +18,10 @@ function HeaderNavbar(props) {
   });
   const { categoriesVisible, subCategoriesVisible, chosenCategory } = features;
 
-  const { catalog, drawer, toggleDrawer } = props;
+  const { drawer, toggleDrawer } = props;
+  const { catalog } = useSelector((state) => state.categoriesReducer);
   const { mainCategories, allCategories } = catalog;
 
-  // console.log('cat =', catalog);
   const toggleCatalog = () => {
     categoriesVisible
       ? hideCatalog()
@@ -56,6 +55,23 @@ function HeaderNavbar(props) {
     })
   };
 
+  const categoriesList = (
+    <Categories
+      chosenCategory={chosenCategory}
+      mainCategories={mainCategories}
+      toggleSubCategories={toggleSubCategories}
+      toggleCatalog={toggleCatalog}
+    />
+  );
+
+  const subCategoriesList = (
+    <SubCategories
+      chosenCategory={chosenCategory}
+      allCategories={allCategories}
+      toggleCatalog={toggleCatalog}
+    />
+  );
+
   return (
     <>
       <div className={classes.headerMenuWrapper}>
@@ -70,23 +86,8 @@ function HeaderNavbar(props) {
             onMouseLeave={hideCatalog}
           >
             <Paper className={classes.headerMenuCatalog}>
-              {categoriesVisible &&
-              (
-                <Categories
-                  chosenCategory={chosenCategory}
-                  mainCategories={mainCategories}
-                  toggleSubCategories={toggleSubCategories}
-                  toggleCatalog={toggleCatalog}
-                />
-              )}
-              {subCategoriesVisible &&
-              (
-                <SubCategories
-                  chosenCategory={chosenCategory}
-                  allCategories={allCategories}
-                  toggleCatalog={toggleCatalog}
-                />
-              )}
+              {categoriesVisible && categoriesList}
+              {subCategoriesVisible && subCategoriesList}
             </Paper>
           </Box>
         </NavBar>
@@ -96,17 +97,9 @@ function HeaderNavbar(props) {
   )
 }
 
-const mapStateToProps = (state) =>
-  // console.log('STATE =', state);
-  ({
-    catalog: state.categoriesReducer.catalog,
-  });
-export default connect(mapStateToProps)(HeaderNavbar);
+export default HeaderNavbar;
 
 HeaderNavbar.propTypes = {
   toggleDrawer: PropTypes.func.isRequired,
-  drawer: PropTypes.bool.isRequired,
-  catalog: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.object, PropTypes.array, PropTypes.bool])
-  ).isRequired
+  drawer: PropTypes.bool.isRequired
 };

@@ -1,43 +1,49 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { PropTypes } from 'prop-types'
+import { Container } from '@material-ui/core';
+
+import useStyles from './_status';
 
 export default function CheckoutStatus(props) {
-  console.log(props);
-  const orderNo = '123456';
-  const orderMade = false;
+  const classes = useStyles();
+  const { location: { state: { orderDone, orderNo, message } } } = props;
+
+  const statusMessageSuccess = (
+    <>
+      <h2>
+        Your order&nbsp;
+        <strong>
+          №
+          {orderNo}
+          &nbsp;
+        </strong>
+        has been successfully placed.
+      </h2>
+      <p className={classes.statusText}>Thank you for your choice!</p>
+    </>
+  );
+
+  const statusMessageFailure = (
+    <>
+      <h2>Your order wasn&apos;t placed. </h2>
+      <p className={classes.statusText}>
+        {message}
+        .
+      </p>
+      <p className={classes.statusText}>Please, try again later.</p>
+    </>
+  );
+
+  const statusMessage = orderDone ? statusMessageSuccess : statusMessageFailure;
 
   return (
-    <>
-      {orderMade
-        ? (
-          <>
-            <h1>
-Your order
-              {orderNo}
-              {' '}
-has been successfully placed.
-            </h1>
-            <p>
-Go back to
-              <Link to="/">HOME</Link>
-              {' '}
-page.
-            </p>
-          </>
-        )
-        : (
-          <>
-            <h1>Your order wasn't placed due to technical problems. Please, try again.</h1>
-            <p>
-Go back to
-              <Link to="/">HOME</Link>
-              {' '}
-page.
-            </p>
-          </>
-        )}
-
-    </>
+    <Container maxWidth="xl">
+    {/*<Container maxWidth="xl" style={{ minHeight: '52vh' }}>*/}
+      {statusMessage}
+    </Container>
   )
 }
+
+CheckoutStatus.propTypes = {
+  location: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
+};

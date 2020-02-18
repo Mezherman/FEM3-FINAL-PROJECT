@@ -6,7 +6,7 @@ import {
 
 const renderBirthdayField = ({
   input, label, name, value, meta: { touched, error }, classes, ...custom
-  }) => (
+}) => (
   <TextField
     error={!!(touched && error)}
     name={name}

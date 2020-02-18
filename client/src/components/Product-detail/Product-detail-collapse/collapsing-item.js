@@ -25,18 +25,18 @@ export default function CollapsingItem(props) {
 
   return (
     <>
-      <ListItem disablePadding button onClick={handleClick}>
+      <ListItem button onClick={handleClick}>
         <ListItemText primary={label} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse
-        in={open}
+        in={Boolean(open)}
         timeout="auto"
         unmountOnExit
         transition="height 800ms cubic-bezier(0.4, 0, 0.2, 1)"
       >
-        <List component="div" disablePadding>
-          <ListItem disablePadding className={classes.nested}>
+        <List component="div" >
+          <ListItem className={classes.nested}>
             <ListItemText >
               {children}
             </ListItemText>

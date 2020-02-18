@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     // minWidth: '60%',
-    maxWidth: '70%',
+    maxWidth: '80%',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     outline: 'none'

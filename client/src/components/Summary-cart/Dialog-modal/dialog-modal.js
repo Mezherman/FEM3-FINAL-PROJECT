@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,7 +9,7 @@ import Slide from '@material-ui/core/Slide';
 
 const Transition = React.forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
-export default function DialogModal({ onCloseDialogWithStatus, isOpen }) {
+function DialogModal({ onCloseDialogWithStatus, isOpen, message }) {
   return (
     <Dialog
       open={isOpen}
@@ -20,23 +20,30 @@ export default function DialogModal({ onCloseDialogWithStatus, isOpen }) {
       aria-describedby="alert-dialog-slide-description"
     >
       <DialogContent>
-        <DialogContentText id="alert-dialog-slide-description" color="text.primary">
-          Delete product from shopping cart?
+        <DialogContentText id="alert-dialog-slide-description" color="secondary">
+          {message}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button variant="contained" onClick={() => { onCloseDialogWithStatus(false) } } color="secondary">
+        <Button variant="contained" onClick={() => { onCloseDialogWithStatus(false) }} color="secondary">
           Disagree
         </Button>
-        <Button variant="contained" onClick={() => { onCloseDialogWithStatus(true) } } color="primary">
+        <Button variant="contained" onClick={() => { onCloseDialogWithStatus(true) }} color="primary">
           Agree
         </Button>
       </DialogActions>
     </Dialog>
   );
 }
+export default DialogModal;
 
-DialogModal.PropType = {
+DialogModal.propTypes = {
   onCloseDialogWithStatus: PropTypes.func.isRequired,
   isOpen: PropTypes.bool,
+  message: PropTypes.string,
+}
+
+DialogModal.defaultProps = {
+  isOpen: false,
+  message: 'Delete product from shopping cart?'
 }

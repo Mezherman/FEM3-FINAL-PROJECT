@@ -1,9 +1,6 @@
 import axios from 'axios';
 
-
 const tempFilterData = () => axios('/products')
   .then((response) => response.data);
 
-export {
-  tempFilterData
-}
+export default tempFilterData
