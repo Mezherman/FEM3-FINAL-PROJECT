@@ -1,24 +1,8 @@
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import PropTypes from 'prop-types';
-import SvgIcon from '@material-ui/core/SvgIcon/SvgIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import React from 'react';
-import { createStyles, makeStyles } from '@material-ui/core';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    minWidth: '28px',
-    color: theme.palette.primary.main,
-  },
-  text: {
-    fontSize: '13px',
-  },
-  li: {
-    paddingTop: theme.spacing(0),
-  },
-
-}),);
+import PropTypes from 'prop-types';
+import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import SvgIcon from '@material-ui/core/SvgIcon/SvgIcon';
+import useStyles from './_feature-item';
 
 export default function FeatureItem ({ label }) {
   const classes = useStyles();
@@ -33,6 +17,7 @@ export default function FeatureItem ({ label }) {
     </ListItem>
   )
 }
+
 FeatureItem.propTypes = {
   label: PropTypes.string.isRequired
 };

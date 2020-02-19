@@ -14,20 +14,23 @@ import Filter from '../Filter/filter';
 import ProductList from '../Product-list/product-list';
 import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 import Sorting from '../Sorting/sorting';
+import { resetFilters } from '../../redux/actions/filter';
 
-import useStyles from './_catalog';
-import { productsLoaded, moreProductsLoaded } from '../../redux/actions/products';
-import { getCategory } from '../../services/getCategories';
-import { catalogLocation } from '../../redux/actions/categories';
+import {
+  productsRequested,
+  productsLoaded,
+  moreProductsLoaded
+} from '../../redux/actions/products';
+import { getCategory } from '../../services/get-categories';
 import {
   getFilteredProducts,
   getInfinityFilteredProducts,
   parseToFilterValue
 } from '../../services/filter';
 import ProductCardCarousel from '../Product-card-carousel/product-card-carousel';
-import { resetFilters } from '../../redux/actions/filter';
-
 import getSearchedProducts from '../../services/search';
+
+import useStyles from './_catalog';
 
 const Catalog = (props) => {
   const classes = useStyles();
@@ -38,8 +41,13 @@ const Catalog = (props) => {
     productsLoaded,
     moreProductsLoaded,
     productsStore,
-    searchedValue
+    searchedValue,
+    resetFilters,
+    productsRequested
   } = props;
+
+  const { productsLoading, products, productsQuantity } = productsStore;
+
   const { filterResults, filterPages, sort } = filter;
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
@@ -48,6 +56,7 @@ const Catalog = (props) => {
   const [productsToShow, setProductsToShow] = useState([]);
   const [filterIsOpenMobile, setFilterIsOpenMobile] = useState(false);
   const { allCategories } = catalog;
+
   const handleProductsRequest = async () => {
     let searchedResult = [];
     if (assortment === 'search' && searchedValue) {
@@ -57,9 +66,10 @@ const Catalog = (props) => {
             productsLoaded({ products: [], productsQuantity: 0 });
           }
           searchedResult = products.map((product) => product.itemNo);
-        })
+        });
       if (!searchedResult.length) return;
     }
+
     const valToFilter = parseToFilterValue(
       searchedResult,
       filterResults,
@@ -68,31 +78,39 @@ const Catalog = (props) => {
       allCategories,
       assortment
     );
+
     getInfinityFilteredProducts(valToFilter)
-      .then((newPoducts) => {
+      .then((newProducts) => {
         if (filterPages.startPage > 1) {
-          moreProductsLoaded(newPoducts);
+          moreProductsLoaded(newProducts);
         } else {
-          productsLoaded(newPoducts);
+          productsLoaded(newProducts);
         }
       });
   };
 
   useEffect(() => {
+    productsRequested();
     const request = assortment === 'search' ? 'cooking' : assortment;
     getCategory(request)
-      .then((response) => setTopList(response.topSellers));
+      .then((response) => {
+        if (response.topSellers) {
+          setTopList(response.topSellers)
+        }
+      });
+
     handleProductsRequest();
   }, [assortment, sort, filterResults, filterPages, searchedValue]);
 
-  const cardsToShowString = topList.toString();
-
   useEffect(() => {
-    getFilteredProducts(`itemNo=${cardsToShowString}`)
-      .then((response) => {
-        setProductsToShow(response)
-      })
-  }, [cardsToShowString, topList]);
+    const cardsToShowString = topList.toString();
+    if (cardsToShowString) {
+      getFilteredProducts(`itemNo=${cardsToShowString}`)
+        .then((response) => {
+          setProductsToShow(response)
+        })
+    }
+  }, [topList]);
 
   const toggleFilterMobile = (open) => {
     setFilterIsOpenMobile(open);
@@ -136,6 +154,7 @@ const Catalog = (props) => {
       </div>
     )
   };
+
   return (
     <>
       <Container maxWidth="xl">
@@ -146,13 +165,20 @@ const Catalog = (props) => {
           </Grid>
           <Grid item xs={12} md={8}>
             <Sorting sort={sort} />
-            <ProductList products={productsStore.products} productsQuantity={productsStore.productsQuantity} />
+            {!productsLoading && (
+              <ProductList
+                products={products}
+                productsQuantity={productsQuantity}
+              />
+            )}
           </Grid>
           <Grid item xs={12}>
-            <ProductCardCarousel
-              products={productsToShow}
-              label="most popular products"
-            />
+            {productsToShow && (
+              <ProductCardCarousel
+                products={productsToShow}
+                label="most popular products"
+              />
+            )}
           </Grid>
         </Grid>
       </Container>
@@ -169,9 +195,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   resetFilters: () => dispatch(resetFilters()),
-  setCatalogLocation: (assortment) => dispatch(catalogLocation(assortment)),
+  productsRequested: () => dispatch(productsRequested()),
   productsLoaded: (products) => dispatch(productsLoaded(products)),
-  moreProductsLoaded: (products) => dispatch(moreProductsLoaded(products)),
+  moreProductsLoaded: (products) => dispatch(moreProductsLoaded(products))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Catalog)
@@ -196,6 +222,8 @@ Catalog.propTypes = {
     PropTypes.object,
     PropTypes.array,
     PropTypes.number,
+    PropTypes.bool,
+    PropTypes.string
   ])).isRequired,
   productsLoaded: PropTypes.func.isRequired,
   moreProductsLoaded: PropTypes.func.isRequired,
@@ -203,4 +231,4 @@ Catalog.propTypes = {
 
 Catalog.defaultProps = {
   searchedValue: ''
-}
+};

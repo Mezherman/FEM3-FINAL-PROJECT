@@ -1,10 +1,8 @@
 import axios from 'axios';
 
-// axios.defaults.baseURL = 'http://localhost:5000';
-
-function placeOrderToDB(newOrder) {
+export default function placeOrderToDB(newOrder) {
   return axios
-    .post('/orders', newOrder)
+    .post('/api/orders', newOrder)
     .then((response) => {
       if (response.data.productAvailibilityInfo) {
         return {
@@ -20,11 +18,8 @@ function placeOrderToDB(newOrder) {
       }
     })
     .catch((error) => {
-      console.log('ERROR =', error);
+      alert(error.response.message);
       return error
     })
 }
 
-export {
-  placeOrderToDB
-}

@@ -60,7 +60,7 @@ export default function AddToCart({ open, onModalClose, product }) {
         <Divider />
         <div className={classes.body}>
           <Grid container spacing={4} justify="center">
-            <Grid item sm={6} md={4}>
+            <Grid item sm={6} md={4} className={classes.containerImg}>
               <img className={classes.img} src={imageUrls[0]} alt={name} />
             </Grid>
             <Grid item sm={12} md={8}>
@@ -82,9 +82,7 @@ export default function AddToCart({ open, onModalClose, product }) {
                     {finalPrice}
                   </span>
                 </Box>
-                {/*<Box className={classes.qtyPicker}>*/}
-                  <IncreaseBlock setQty={handleQty} qty={stateQuantity} maxQty={maxQty} />
-                {/*</Box>*/}
+                <IncreaseBlock setQty={handleQty} qty={stateQuantity} maxQty={maxQty} />
                 <Box className={classes.total}>
                   <span>
                     &#8364;
@@ -137,7 +135,6 @@ export default function AddToCart({ open, onModalClose, product }) {
 AddToCart.propTypes = {
   open: PropTypes.bool.isRequired,
   onModalClose: PropTypes.func.isRequired,
-  quantity: PropTypes.number,
   product:
   PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.number])

@@ -1,8 +1,8 @@
 import React from 'react';
 import Checkout from '../../components/Checkout/checkout';
 
-export default function CheckoutPage() {
+export default function CheckoutPage({ history }) {
   return (
-    <Checkout />
+    <Checkout history={history} />
   )
 }

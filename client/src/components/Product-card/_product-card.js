@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   card: {
     maxWidth: '230px',
+    margin: '0 auto',
     paddingBottom: '20px',
     // margin: '0 auto',
     '&:hover': {
@@ -13,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       maxWidth: '260px',
     }
+  },
+  itemNo: {
+    paddingLeft: theme.spacing(1),
   },
   iconWrapper: {
     display: 'flex',

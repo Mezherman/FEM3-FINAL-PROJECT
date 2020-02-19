@@ -4,9 +4,17 @@ import { Box, Button, TextField } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 import useStyles from './_form-block';
 
-const FormBlock = ({
-  handleSubmit, commentText, focusHandler, blurHandler, commentTextHandler, buttonDisabled, cancelHandler
-}) => {
+const FormBlock = (props) => {
+  const {
+    handleSubmit,
+    commentText,
+    focusHandler,
+    blurHandler,
+    commentTextHandler,
+    buttonDisabled,
+    cancelHandler
+  } = props;
+
   const classes = useStyles();
 
   return (

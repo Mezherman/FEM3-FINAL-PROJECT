@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { Container } from '@material-ui/core';
-import { getProductsByItemNo } from '../../services/getProducts';
+import getProductsByItemNo from '../../services/get-products';
 import ProductDetail from '../Product-detail/product-detail';
 import { productsRequested, productsLoaded } from '../../redux/actions/products';
 import ProductCardCarousel from '../Product-card-carousel/product-card-carousel';
@@ -12,13 +12,12 @@ import Spinner from '../Spinner/spinner';
 import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 import { getFilteredProducts } from '../../services/filter';
 import getCurrentProduct from '../../redux/actions/current-product';
-import { getCategory } from '../../services/getCategories';
-import getCommentsOfProducts from '../../services/getCommentsOfProduct';
+import { getCategory } from '../../services/get-categories';
+import getCommentsOfProducts from '../../services/get-comments-of-product';
 import { commentsLoaded, commentsRequest } from '../../redux/actions/comments';
 
 function ProductPage(props) {
-  // console.log('PROPS =', props);
-  const { assortment, itemNo, chosenProduct, fetchProduct, productsLoading, setProducts, getChosenProduct, fetchComments } = props;
+  const { assortment, itemNo, chosenProduct, fetchProduct, getChosenProduct, fetchComments } = props;
   const [topList, setTopList] = useState([]);
   const [productsToShow, setProductsToShow] = useState([]);
 
@@ -27,7 +26,6 @@ function ProductPage(props) {
       fetchProduct(itemNo);
     } else {
       getChosenProduct(chosenProduct);
-      // console.log(chosenProduct);
       fetchComments(chosenProduct._id);
     }
   }, [itemNo, getChosenProduct, fetchComments]);
@@ -35,20 +33,21 @@ function ProductPage(props) {
   useEffect(() => {
     if (chosenProduct) {
       getCategory(chosenProduct.categories)
-        .then((response) => setTopList(response.topSellers));
+        .then((response) => {
+          if (response.topSellers) {
+            setTopList(response.topSellers)
+          }
+        });
     }
   }, [chosenProduct, assortment]);
-  //
-  const cardsToShowString = topList.toString();
 
   useEffect(() => {
+    const cardsToShowString = topList.toString();
     getFilteredProducts(`itemNo=${cardsToShowString}`)
       .then((response) => {
-        // console.log('resp', response);
         setProductsToShow(response)
       })
-  }, [cardsToShowString]);
-  // console.log('products slider', productsToShow);
+  }, [topList]);
 
   return (
     <>
@@ -81,7 +80,7 @@ const mapStateToProps = (state, { itemNo }) => {
     ? state.productsReducer.products.find((product) => (
       product.itemNo === itemNo
     ))
-    : null ;
+    : null;
 
   return {
     chosenProduct,

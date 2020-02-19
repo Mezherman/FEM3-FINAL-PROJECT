@@ -2,9 +2,9 @@ import axios from 'axios';
 
 function getCommentsOfProducts(productId) {
   return axios
-    .get(`/comments/product/${productId}`)
+    .get(`/api/comments/product/${productId}`)
     .then((comments) => comments.data)
-    .catch((err) => console.log(err.response.data));
+    .catch((err) => alert(err.response.data));
 }
 
 export default getCommentsOfProducts;

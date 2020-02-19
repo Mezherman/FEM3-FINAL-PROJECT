@@ -12,11 +12,12 @@ function AddToCartButton({ handleClick, quantity }) {
       color="primary"
       disableElevation
       onClick={handleClick}
-      disabled={quantity === 0 ? true : false}
+      disabled={!quantity}
     >
-      {quantity === 0
-        ? <span>Out of stock</span>
-        : <ShoppingCartOutlinedIcon />
+      {
+        quantity === 0
+          ? <span>Out of stock</span>
+          : <ShoppingCartOutlinedIcon />
       }
     </Button>
   )

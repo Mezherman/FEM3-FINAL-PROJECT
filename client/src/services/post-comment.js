@@ -2,9 +2,9 @@ import axios from 'axios';
 
 function postNewComment(newComment) {
   return axios
-    .post('/comments', newComment)
+    .post('/api/comments', newComment)
     .then((response) => response)
-    .catch((err) => console.log(err.response.data));
+    .catch((err) => alert(err.response.data));
 }
 
 export default postNewComment;

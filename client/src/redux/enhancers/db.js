@@ -1,7 +1,7 @@
 import React from 'react';
 import * as ServicesCart from '../../services/cart';
 import { getFavoriteProducts } from '../../services/favorites';
-import getCategories from '../../services/getCategories';
+import getCategories from '../../services/get-categories';
 import getCustomer from '../../services/customer';
 
 const db = (store) => (next) => async (action) => {

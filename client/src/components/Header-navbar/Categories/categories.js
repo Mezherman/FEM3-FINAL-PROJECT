@@ -34,7 +34,6 @@ function Categories(props) {
         id={category.id}
         className={classNames}
         onClick={(event) => {
-          console.log('click link')
           resetFilters();
           catalogLocation(event.target.textContent.toLowerCase());
           toggleCatalog()

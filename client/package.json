@@ -58,15 +58,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "npm run stylelint-build && npm run eslint && react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "start-js": "react-scripts start",
     "eject": "react-scgiripts eject",
-    "lint": "eslint ./src",
-    "eslint": "eslint src/**/*.js",
-    "stylelint-dev": "stylelint src/**/*.scss --cache --cache-location ./.stylelintcache; exit 0",
-    "stylelint-build": "stylelint src/**/*.scss",
-    "stylelint-fix-sass": "stylelint --fix src/**/*.scss",
     "watch-sass-js": "npm-watch"
   },
   "watch": {

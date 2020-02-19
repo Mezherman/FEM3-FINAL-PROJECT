@@ -10,7 +10,6 @@ import MenuLogoIcons from './Header-icons/Header-icon/menu-and-logo-icons';
 function Header() {
   const classes = useStyles();
 
-
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const [drawer, setDrawer] = useState(false);
@@ -67,7 +66,7 @@ function Header() {
   const freeShippingMessage = (
     <Box className={classes.delivery}>
       <Container maxWidth="xl">
-        <p className={classes.deliveryTitle}>Free shipping on all orders over &#8364;100</p>
+        <p className={classes.deliveryTitle}>Free shipping on all orders over &#8364;49</p>
       </Container>
     </Box>
   );
