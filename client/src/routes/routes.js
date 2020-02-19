@@ -87,11 +87,14 @@ export default function Routes() {
       <Route
         path={`${RoutesName.products}/:categoryOrID`}
         render={({ match, location }) => {
+          console.log(1);
           const { categoryOrID } = match.params;
           if (isNaN(categoryOrID)) {
+            console.log(2);
             if (!mainCategory.find((el) => el.id === categoryOrID) && categoryOrID !== 'search') {
               return <NoMatch />
             }
+            console.log(3);
             return <Catalog assortment={categoryOrID} />
           }
           const { pathname: url } = location;
