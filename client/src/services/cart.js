@@ -1,7 +1,4 @@
-import axios from 'axios';
 import enhancerAxios from './enhancer-axios';
-
-// axios.defaults.baseURL = 'http://localhost:5000';
 
 export function getCart() {
   return enhancerAxios('/cart', { method: 'get' });
