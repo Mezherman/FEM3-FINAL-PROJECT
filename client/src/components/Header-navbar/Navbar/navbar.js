@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -23,8 +23,11 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import List from '@material-ui/core/List';
 import useStyles from './_navbar';
 import RoutesName from '../../../routes-list';
+import { resetFilters } from '../../../redux/actions/filter';
 
 export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, toggleDrawer }) {
+  const dispatch = useDispatch();
+
   const StyledMenuItem = withStyles((theme) => ({
     root: {
       border: '1px solid transparent',
@@ -50,19 +53,21 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
   const [drawerCat, drawerCatIsOpen] = useState(false);
   const [drawerSubCat, drawerSubCatIsOpen] = useState(false);
-  const [subCategory, setSubCategory] = useState('');
+  const [currentCategory, setCurrentCategory] = useState('');
 
   const toggleDrawerCat = (open) => {
     drawerCatIsOpen(open);
   };
+
   const toggleDrawerSubCat = (value, open) => {
-    setSubCategory(value);
+    setCurrentCategory(value);
     drawerSubCatIsOpen(open)
   };
 
   const toggleLastDrawer = (open) => {
     drawerSubCatIsOpen(open);
   };
+
   const menuItems = [
     {
       title: 'HOME',
@@ -179,6 +184,7 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
       {mainCategories.map((category) => (
         <MenuItem
           onClick={() => {
+            dispatch(resetFilters());
             toggleDrawerSubCat(category.id, true);
             toggleDrawerCat(false);
           }}
@@ -209,7 +215,7 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
         className={classes.headerMenuListHyperlink}
       >
         <KeyboardArrowLeftIcon className={classes.icon} />
-        {subCategory}
+        {currentCategory}
       </MenuItem>
       <Divider />
 
@@ -219,7 +225,7 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
         }}
       >
         <Link
-          to={`${RoutesName.products}/${subCategory}`}
+          to={`${RoutesName.products}/${currentCategory}`}
           className={classes.headerMenuListHyperlink}
         >
           Shop all
@@ -227,17 +233,18 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
       </MenuItem>
 
       {allCategories.filter(
-        (category) => category.parentId === subCategory
+        (category) => category.parentId === currentCategory
       )
         .map((subCategory) => (
           <MenuItem
             key={subCategory.id}
             onClick={() => {
+              dispatch(resetFilters());
               toggleLastDrawer(false);
             }}
           >
             <Link
-              to={`${RoutesName.products}/${subCategory.id}`}
+              to={`${RoutesName.products}/${currentCategory}/${subCategory.id}`}
               className={classes.headerMenuListHyperlink}
               key={subCategory.id}
             >
