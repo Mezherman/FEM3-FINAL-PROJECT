@@ -2,7 +2,7 @@ import axios from 'axios';
 
 function postNewComment(newComment) {
   return axios
-    .post('/comments', newComment)
+    .post('/api/comments', newComment)
     .then((response) => response)
     .catch((err) => alert(err.response.data));
 }

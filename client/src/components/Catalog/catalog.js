@@ -40,6 +40,8 @@ const Catalog = (props) => {
     searchedValue
   } = props;
 
+  console.log('assortment =', assortment);
+
   const { filterResults, filterPages, sort } = filter;
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
@@ -86,23 +88,22 @@ const Catalog = (props) => {
     getCategory(request)
       .then((response) => {
         if (response.topSellers) {
-          setTopList(response.topSellers);
+          setTopList(response.topSellers)
         }
       });
 
     handleProductsRequest();
   }, [assortment, sort, filterResults, filterPages, searchedValue]);
 
-  const cardsToShowString = topList.toString();
-
   useEffect(() => {
+    const cardsToShowString = topList.toString();
     if (cardsToShowString) {
       getFilteredProducts(`itemNo=${cardsToShowString}`)
         .then((response) => {
           setProductsToShow(response)
         })
     }
-  }, [cardsToShowString, topList]);
+  }, [topList]);
 
   const toggleFilterMobile = (open) => {
     setFilterIsOpenMobile(open);
@@ -163,10 +164,12 @@ const Catalog = (props) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <ProductCardCarousel
-              products={productsToShow}
-              label="most popular products"
-            />
+            {productsToShow && (
+              <ProductCardCarousel
+                products={productsToShow}
+                label="most popular products"
+              />
+            )}
           </Grid>
         </Grid>
       </Container>

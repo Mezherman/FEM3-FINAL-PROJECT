@@ -2,24 +2,24 @@ import axios from 'axios';
 
 function getFilteredProducts(value) {
   return axios
-    .get(`/products/filter?${value}`)
+    .get(`/api/products/filter?${value}`)
     .then((response) => response.data.products)
     .catch((error) => error)
 }
 
 function getInfinityFilteredProducts(value) {
   return axios
-    .get(`/products/filter?${value}`)
+    .get(`/api/products/filter?${value}`)
     .then((response) => response.data)
     .catch((error) => error)
 }
 
 function getColors() {
-  return axios('/colors').then((response) => (response.data))
+  return axios('/api/colors').then((response) => (response.data))
 }
 
 function getBrands() {
-  return axios('/filters/brands').then((response) => (response.data))
+  return axios('/api/filters/brands').then((response) => (response.data))
 }
 
 const parseToFilterValue = (itemNoArr, filterResults, sort = '', pages, allCategories, catalogLocation) => {

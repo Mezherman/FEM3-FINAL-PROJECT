@@ -1,20 +1,20 @@
 import enhancerAxios from './enhancer-axios';
 
 export function getCart() {
-  return enhancerAxios('/cart', { method: 'get' });
+  return enhancerAxios('/api/cart', { method: 'get' });
 }
 
 export function addProductToCart(productId) {
-  return enhancerAxios(`/cart/${productId}`, { method: 'put' });
+  return enhancerAxios(`/api/cart/${productId}`, { method: 'put' });
 }
 export function updateCart(updatedCart) {
-  return enhancerAxios('/cart', { method: 'put' }, updatedCart);
+  return enhancerAxios('/api/cart', { method: 'put' }, updatedCart);
 }
 export function deleteProductFromCart(productId) {
-  return enhancerAxios(`/cart/${productId}`, { method: 'delete' });
+  return enhancerAxios(`/api/cart/${productId}`, { method: 'delete' });
 }
 export function deleteCartFromDB() {
-  return enhancerAxios('/cart', { method: 'delete' });
+  return enhancerAxios('/api/cart', { method: 'delete' });
 }
 
 export function getCartQuantity (products) {
