@@ -20,9 +20,9 @@ describe('Breadcrumbs component', () => {
     const props = {
       route: 'someText',
       text: '123'
-    }
+    };
+
     const wrapper = shallow(<BreadcrumbsItem {...props} />);
-    console.log(wrapper.debug())
     expect(wrapper.find(MenuItem)).toHaveLength(1);
     expect(wrapper.find(Link)).toHaveLength(1);
   });
@@ -31,9 +31,9 @@ describe('Breadcrumbs component', () => {
     const props = {
       route: '',
       text: ''
-    }
+    };
+
     const wrapper = mount(<BrowserRouter><BreadcrumbsItem {...props} /></BrowserRouter>);
-    console.log(wrapper.debug())
 
     wrapper.setProps({ route: 'test', text: '12' })
     expect(wrapper.prop('text')).toEqual('12')

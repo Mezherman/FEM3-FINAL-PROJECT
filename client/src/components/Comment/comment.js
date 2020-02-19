@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { Box, Button, Grid, Typography } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 import FormBlock from './Form-block/form-block';
-import postNewComment from '../../services/postComment';
-import getCommentsOfProducts from '../../services/getCommentsOfProduct';
+import postNewComment from '../../services/post-comment';
+import getCommentsOfProducts from '../../services/get-comments-of-product';
 import {
   commentsLoaded,
   commentsRequest,
@@ -61,7 +61,9 @@ const Comment = (props) => {
 
   const commentTextHandler = (event) => {
     setCommentText(event.target.value);
-    (event.target.value.length && !findSpaces(event.target.value)) ? setButtonDisabled(false) : setButtonDisabled(true);
+    (event.target.value.length && !findSpaces(event.target.value))
+      ? setButtonDisabled(false)
+      : setButtonDisabled(true);
   };
 
   const blurHandler = () => {
@@ -70,17 +72,6 @@ const Comment = (props) => {
     }
   };
 
-  // const deleteComment = (commentId) => {
-  //   axios
-  //     .delete(`/comments/${commentId}`)
-  //     .then(result => {
-  //       console.log(result);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // };
-  // deleteComment();
   const handleSubmit = (event) => {
     event.preventDefault();
     setComment(false);
@@ -109,8 +100,6 @@ const Comment = (props) => {
     const month = formatDate(today.getMonth());
     const year = today.getFullYear();
     return `${hours}:${minutes} ${day}/${month}/${year}`;
-    // const { getHours, getMinutes, getDate, getMonth, getFullYear } = new Date();
-    // return `${formatDate(getHours)}:${formatDate(getMinutes)} ${formatDate(getDate)}/${formatDate(getMonth())}/${getFullYear()}`;
   };
 
   const formatDate = (number) => {
@@ -128,8 +117,15 @@ const Comment = (props) => {
 
   return (
     <Box component="div" mt={2} mb={3} align="center">
-      <Typography variant="h6" component="h4" align="center" className={classes.title}>{name}</Typography>
-      { btnAddComment && (
+      <Typography
+        variant="h6"
+        component="h4"
+        align="center"
+        className={classes.title}
+      >
+        {name}
+      </Typography>
+      {btnAddComment && (
         <Button
           variant="contained"
           color="primary"
@@ -137,13 +133,21 @@ const Comment = (props) => {
           className={classes.commentBtn}
           onClick={commentHandler}
         >
-        Add comment
+          Add comment
         </Button>
       )}
-      { isError &&
-        <Typography variant="body1" component="p" align="center" className={classes.error}>{isError}</Typography>}
+      {isError && (
+        <Typography
+          variant="body1"
+          component="p"
+          align="center"
+          className={classes.error}
+        >
+          {isError}
+        </Typography>
+      )}
 
-      { addComment && (
+      {addComment && (
         <FormBlock
           handleSubmit={handleSubmit}
           commentText={commentText}
@@ -155,10 +159,10 @@ const Comment = (props) => {
         />
       )}
       <Grid container direction="column-reverse" alignItems="center">
-        { commentsList &&
+        {commentsList &&
         <CommentMap commentsList={commentsList} />}
       </Grid>
-      { !userLoggedIn && <LoginModal onModalClose={closeModal} open={modalIsVisible} /> }
+      {!userLoggedIn && <LoginModal onModalClose={closeModal} open={modalIsVisible} />}
     </Box>
   )
 };

@@ -24,4 +24,9 @@ RadioCheckboxField.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
+  gender: PropTypes.string
+};
+
+RadioCheckboxField.defaultProps = {
+  gender: ''
 };

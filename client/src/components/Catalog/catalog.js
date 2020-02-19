@@ -17,8 +17,7 @@ import Sorting from '../Sorting/sorting';
 
 import useStyles from './_catalog';
 import { productsLoaded, moreProductsLoaded } from '../../redux/actions/products';
-import { getCategory } from '../../services/getCategories';
-import { catalogLocation } from '../../redux/actions/categories';
+import { getCategory } from '../../services/get-categories';
 import {
   getFilteredProducts,
   getInfinityFilteredProducts,
@@ -40,6 +39,7 @@ const Catalog = (props) => {
     productsStore,
     searchedValue
   } = props;
+
   const { filterResults, filterPages, sort } = filter;
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
@@ -48,6 +48,7 @@ const Catalog = (props) => {
   const [productsToShow, setProductsToShow] = useState([]);
   const [filterIsOpenMobile, setFilterIsOpenMobile] = useState(false);
   const { allCategories } = catalog;
+
   const handleProductsRequest = async () => {
     let searchedResult = [];
     if (assortment === 'search' && searchedValue) {
@@ -57,9 +58,10 @@ const Catalog = (props) => {
             productsLoaded({ products: [], productsQuantity: 0 });
           }
           searchedResult = products.map((product) => product.itemNo);
-        })
+        });
       if (!searchedResult.length) return;
     }
+
     const valToFilter = parseToFilterValue(
       searchedResult,
       filterResults,
@@ -68,12 +70,13 @@ const Catalog = (props) => {
       allCategories,
       assortment
     );
+
     getInfinityFilteredProducts(valToFilter)
-      .then((newPoducts) => {
+      .then((newProducts) => {
         if (filterPages.startPage > 1) {
-          moreProductsLoaded(newPoducts);
+          moreProductsLoaded(newProducts);
         } else {
-          productsLoaded(newPoducts);
+          productsLoaded(newProducts);
         }
       });
   };
@@ -86,6 +89,7 @@ const Catalog = (props) => {
           setTopList(response.topSellers);
         }
       });
+
     handleProductsRequest();
   }, [assortment, sort, filterResults, filterPages, searchedValue]);
 
@@ -142,6 +146,7 @@ const Catalog = (props) => {
       </div>
     )
   };
+
   return (
     <>
       <Container maxWidth="xl">
@@ -178,7 +183,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   resetFilters: () => dispatch(resetFilters()),
-  setCatalogLocation: (assortment) => dispatch(catalogLocation(assortment)),
   productsLoaded: (products) => dispatch(productsLoaded(products)),
   moreProductsLoaded: (products) => dispatch(moreProductsLoaded(products)),
 });
@@ -206,7 +210,7 @@ Catalog.propTypes = {
     PropTypes.array,
     PropTypes.number,
     PropTypes.bool,
-    PropTypes.string,
+    PropTypes.string
   ])).isRequired,
   productsLoaded: PropTypes.func.isRequired,
   moreProductsLoaded: PropTypes.func.isRequired,
@@ -214,4 +218,4 @@ Catalog.propTypes = {
 
 Catalog.defaultProps = {
   searchedValue: ''
-}
+};

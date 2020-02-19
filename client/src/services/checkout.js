@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-function placeOrderToDB(newOrder) {
+export default function placeOrderToDB(newOrder) {
   return axios
     .post('/orders', newOrder)
     .then((response) => {
@@ -18,11 +18,8 @@ function placeOrderToDB(newOrder) {
       }
     })
     .catch((error) => {
-      console.log('ERROR =', error);
+      alert(error.response.message);
       return error
     })
 }
 
-export {
-  placeOrderToDB
-}

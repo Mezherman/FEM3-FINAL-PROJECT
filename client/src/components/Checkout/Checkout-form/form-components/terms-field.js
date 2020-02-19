@@ -15,7 +15,7 @@ const RenderCheckboxField = ({ input, name, meta: { touched, error } }) => {
       &nbsp;
       <ModalInfoWindow
         infoTitle="General Terms and Conditions"
-        infoText="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias architecto consequatur, corporis culpa cupiditate eligendi explicabo harum illum ipsa laboriosam minus molestiae nulla numquam quas recusandae reiciendis sapiente sit! Beatae."
+        infoText="General Terms and Conditions text..................................."
       >
         <span className={classes.link}>General Terms and Conditions</span>
       </ModalInfoWindow>
@@ -24,9 +24,9 @@ const RenderCheckboxField = ({ input, name, meta: { touched, error } }) => {
       &nbsp;
       <ModalInfoWindow
         infoTitle="Instructions on the right of withdrawal"
-        infoText="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias architecto consequatur, corporis culpa cupiditate eligendi explicabo harum illum ipsa laboriosam minus molestiae nulla numquam quas recusandae reiciendis sapiente sit! Beatae."
+        infoText="Instructions on the right of withdrawal text.................................."
       >
-        <span className={classes.link}> Instructions on the right of withdrawal.</span>
+        <span className={classes.link}>Instructions on the right of withdrawal.</span>
       </ModalInfoWindow>
       {
         touched && error &&
