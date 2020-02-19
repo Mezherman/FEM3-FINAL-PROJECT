@@ -1,45 +1,13 @@
 import React from 'react';
-import { createStyles, makeStyles, useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import ImageGallery from 'react-image-gallery';
+import PropTypes from 'prop-types';
 import SvgIcon from '@material-ui/core/SvgIcon/SvgIcon';
 import IconButton from '@material-ui/core/IconButton';
+import ImageGallery from 'react-image-gallery';
+import useStyles from './_product-detail-carousel'
 
-const useStyles = makeStyles((theme) => createStyles({
-  buttonLeft: {
-    // padding: '50px 10px',
-    // right: '0',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    zIndex: '1',
-    left: '-14%',
-    position: 'absolute'
-  },
-  buttonRight: {
-    // padding: '50px 10px',
-    // right: '0',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    zIndex: '1',
-    left: '95%',
-    position: 'absolute'
-  },
-  fullScreen: {
-    position: 'absolute',
-    bottom: '0',
-    right: '0',
-    color: theme.palette.text.primary,
-    '& active': {
-      color: 'white'
-    }
-  },
-}))
-
-const ProductDetailCarousel = ({ images, srcSet }) => {
-  const theme = useTheme();
+const ProductDetailCarousel = ({ images }) => {
   const classes = useStyles();
 
-  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   return (
     <ImageGallery
       renderLeftNav={(onClick, disabled) => (
@@ -89,9 +57,12 @@ const ProductDetailCarousel = ({ images, srcSet }) => {
       showThumbnails
       showPlayButton={false}
       disableThumbnailScroll
-      srcSet={srcSet}
     />
   )
 };
 
 export default ProductDetailCarousel;
+
+ProductDetailCarousel.propTypes = {
+  images: PropTypes.oneOfType([PropTypes.array]).isRequired
+};

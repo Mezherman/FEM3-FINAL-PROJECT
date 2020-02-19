@@ -7,13 +7,13 @@ import Grid from '@material-ui/core/Grid';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Box } from '@material-ui/core';
-import './carousel-react.scss';
+import './Product-carousel/carousel-react.scss';
 import StopIcon from '@material-ui/icons/Stop';
 
 import ProductDetailCollapse from './Product-detail-collapse/product-detail-collapse';
 import AddToCart from '../Add-to-cart/add-to-cart';
-import ProductDetailCarousel from './carousel-react'
-import FeatureItem from './feature-item';
+import ProductDetailCarousel from './Product-carousel/product-detail-carousel'
+import FeatureItem from './Feature-item/feature-item';
 import ProductDetailTab from './Product-detail-tab/product-detail-tab';
 
 import useStyles from './_product-detail';
