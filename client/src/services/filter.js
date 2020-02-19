@@ -14,7 +14,7 @@ function getInfinityFilteredProducts(value) {
     .catch((error) => error)
 }
 
-function getColors() {ucts
+function getColors() {
   return axios('/colors').then((response) => (response.data))
 }
 
