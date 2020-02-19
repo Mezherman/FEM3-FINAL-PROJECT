@@ -32,14 +32,53 @@ function ProductCard({ product }) {
   const closeModal = () => {
     setModalVisibility(false)
   };
+  
   const cardHeader = () => (
     <div className={classes.iconWrapper}>
-      <span className={classes.itemNo}>
-Item No.&nbsp;
-        {itemNo}
-      </span>
+{/*      <span className={classes.itemNo}>*/}
+{/*Item No.&nbsp;*/}
+{/*        {itemNo}*/}
+{/*      </span>*/}
       {loggedIn && <AddToFavoriteBtn favorites={favorites} itemId={itemId} />}
     </div>
+  );
+  
+  const price = () => (
+    <div className={classes.priceBox}>
+      {previousPrice && (
+        <span className={classes.oldPrice}>
+                        &#8364;
+          {previousPrice}
+        </span>
+      )}
+      <span
+        className={previousPrice ? classes.specialPrice : classes.regularPrice}
+      >
+                      &#8364;
+        {currentPrice}
+      </span>
+    </div>
+  );
+  
+  const image = () => (
+    <div className={classes.imgWrapper}>
+      <img
+        src={imageUrls[0]}
+        className={classes.img}
+        alt={name}
+      />
+    </div>
+  );
+  const cardFooter = () => (
+    <Container maxWidth="sm">
+      <AddToCartButton
+        handleClick={() => {
+          actions.addProductToCart(product, 1);
+          setModalVisibility(true)
+        }}
+        quantity={quantity}
+      />
+    </Container>
   );
 
   return (
@@ -52,48 +91,19 @@ Item No.&nbsp;
 
       <div className={classes.card}>
         <Divider />
-       {cardHeader()}
-
+        {cardHeader()}
         <Link
           to={`${RoutesName.products}/${itemNo}`}
           className={classes.link}
         >
           <Container maxWidth="sm">
-            <div className={classes.imgWrapper}>
-              <img
-                src={imageUrls[0]}
-                className={classes.img}
-                alt={name}
-              />
-            </div>
+            {image()}
             <Divider variant="middle" />
             <h3 className={classes.title}>{name.toUpperCase()[0] + name.slice(1)}</h3>
-            <div className={classes.priceBox}>
-              {previousPrice && (
-                <span className={classes.oldPrice}>
-                        &#8364;
-                  {previousPrice}
-                </span>
-              )}
-              <span
-                className={previousPrice ? classes.specialPrice : classes.regularPrice}
-              >
-                      &#8364;
-                {currentPrice}
-              </span>
-            </div>
+            {price()}
           </Container>
         </Link>
-        <Container maxWidth="sm">
-          <AddToCartButton
-            handleClick={() => {
-              // console.log('add product', product);
-              actions.addProductToCart(product, 1);
-              setModalVisibility(true)
-            }}
-            quantity={quantity}
-          />
-        </Container>
+        {cardFooter()}
       </div>
     </>
   )
