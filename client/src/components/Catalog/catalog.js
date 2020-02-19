@@ -167,6 +167,7 @@ const Catalog = (props) => {
             <Sorting sort={sort} />
             {!productsLoading && (
               <ProductList
+                assortment={assortment}
                 products={products}
                 productsQuantity={productsQuantity}
               />

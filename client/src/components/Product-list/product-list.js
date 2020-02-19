@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductCard from '../Product-card/product-card';
@@ -8,7 +8,7 @@ import Spinner from '../Spinner/spinner';
 
 import useStyles from './_product-list';
 
-export default function ProductList({ products = [], productsQuantity = 0 }) {
+export default function ProductList({ products = [], productsQuantity = 0, assortment }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const loadMoreProducts = useCallback(() => {
@@ -16,6 +16,11 @@ export default function ProductList({ products = [], productsQuantity = 0 }) {
       dispatch(filterIncreasePage());
     }, 2000);
   }, [dispatch]);
+
+  const searchedValue = useSelector((state) => state.searchReducer.searchedValue);
+
+  const test = assortment === 'Search' ? <h2>Sorry, we can&#39;t find results for your parameters {searchedValue} </h2> :
+    <h2>Sorry, we can&#39;t find results for your parameters </h2>
 
   const renderProducts = (productsList) => (
     productsList.map((product) => (
@@ -34,7 +39,8 @@ export default function ProductList({ products = [], productsQuantity = 0 }) {
       loader={<Spinner />}
       className={classes.productList}
     >
-      {renderProducts(products)}
+      {products.length ? renderProducts(products) : test}
+
     </InfiniteScroll>
   )
 }
