@@ -17,8 +17,7 @@ import getCommentsOfProducts from '../../services/get-comments-of-product';
 import { commentsLoaded, commentsRequest } from '../../redux/actions/comments';
 
 function ProductPage(props) {
-  // console.log('PROPS =', props);
-  const { assortment, itemNo, chosenProduct, fetchProduct, productsLoading, setProducts, getChosenProduct, fetchComments } = props;
+  const { assortment, itemNo, chosenProduct, fetchProduct, getChosenProduct, fetchComments } = props;
   const [topList, setTopList] = useState([]);
   const [productsToShow, setProductsToShow] = useState([]);
 
@@ -27,7 +26,6 @@ function ProductPage(props) {
       fetchProduct(itemNo);
     } else {
       getChosenProduct(chosenProduct);
-      // console.log(chosenProduct);
       fetchComments(chosenProduct._id);
     }
   }, [itemNo, getChosenProduct, fetchComments]);
@@ -38,17 +36,14 @@ function ProductPage(props) {
         .then((response) => setTopList(response.topSellers));
     }
   }, [chosenProduct, assortment]);
-  //
-  const cardsToShowString = topList.toString();
 
   useEffect(() => {
+    const cardsToShowString = topList.toString();
     getFilteredProducts(`itemNo=${cardsToShowString}`)
       .then((response) => {
-        // console.log('resp', response);
         setProductsToShow(response)
       })
-  }, [cardsToShowString]);
-  // console.log('products slider', productsToShow);
+  }, [topList]);
 
   return (
     <>
