@@ -117,13 +117,11 @@ exports.getProducts = (req, res, next) => {
 };
 
 exports.getProductById = (req, res, next) => {
-  console.log(12345);
   Product.findOne({
     itemNo: req.params.itemNo
   })
     .then(product => {
       if (!product) {
-        console.log(6798);
         res.status(400).json({
           message: `Product with itemNo ${req.params.itemNo} is not found`
         });

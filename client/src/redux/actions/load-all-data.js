@@ -14,9 +14,9 @@ const fetchResponse = () => ({
 });
 
 function loadAllData() {
-  // if (process.env.NODE_ENV !== 'production') {
-  //   axios.defaults.baseURL = 'http://localhost:5000';
-  // }
+  if (process.env.NODE_ENV !== 'production') {
+    axios.defaults.baseURL = 'http://localhost:5000';
+  }
   return (dispatch) => Promise.all([
     dispatch(fetchRequest()),
     dispatch(getCatalogFromDB()),

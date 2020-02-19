@@ -55,7 +55,7 @@ require("./config/passport")(passport);
 app.use("/configs", globalConfigs);
 app.use("/customers", customers);
 app.use("/catalog", catalog);
-app.use("/products", products);
+app.use("/api/products", products);
 app.use("/colors", colors);
 app.use("/sizes", sizes);
 app.use("/filters", filters);

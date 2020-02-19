@@ -24,9 +24,9 @@ const loginLoaded = () => {
     if (!axios.defaults.headers.common.Authorization) {
       axios.defaults.headers.common.Authorization = token ?? '';
     }
-    // if (process.env.NODE_ENV !== 'production') {
-    //   axios.defaults.baseURL = 'http://localhost:5000';
-    // }
+    if (process.env.NODE_ENV !== 'production') {
+      axios.defaults.baseURL = 'http://localhost:5000';
+    }
     return {
       type: FETCH_LOGIN_SUCCESS,
       payload: {
