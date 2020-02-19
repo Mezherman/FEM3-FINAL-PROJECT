@@ -84,7 +84,10 @@ const Catalog = (props) => {
   useEffect(() => {
     const request = assortment === 'search' ? 'cooking' : assortment;
     getCategory(request)
-      .then((response) => setTopList(response.topSellers));
+      .then((response) => {
+        console.log('in code =', response);
+        return setTopList(response.topSellers)
+      });
 
     handleProductsRequest();
   }, [assortment, sort, filterResults, filterPages, searchedValue]);
