@@ -77,6 +77,7 @@ export default function Routes() {
         path={`${RoutesName.products}/:category/:subCategory`}
         exact
         render={({ match }) => {
+          console.log(123);
           const { category, subCategory } = match.params;
           if (!mainCategory.find((el) => el.id === category)) {
             return <NoMatch />
@@ -94,7 +95,7 @@ export default function Routes() {
             if (!mainCategory.find((el) => el.id === categoryOrID) && categoryOrID !== 'search') {
               return <NoMatch />
             }
-            console.log(3);
+            console.log(categoryOrID);
             return <Catalog assortment={categoryOrID} />
           }
           const { pathname: url } = location;
