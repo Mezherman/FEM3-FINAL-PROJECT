@@ -32,6 +32,15 @@ function ProductCard({ product }) {
   const closeModal = () => {
     setModalVisibility(false)
   };
+  const cardHeader = () => (
+    <div className={classes.iconWrapper}>
+      <span className={classes.itemNo}>
+Item No.&nbsp;
+        {itemNo}
+      </span>
+      {loggedIn && <AddToFavoriteBtn favorites={favorites} itemId={itemId} />}
+    </div>
+  );
 
   return (
     <>
@@ -43,13 +52,7 @@ function ProductCard({ product }) {
 
       <div className={classes.card}>
         <Divider />
-        <div className={classes.iconWrapper}>
-          <span className={classes.itemNo}>
-Item No.&nbsp;
-            {itemNo}
-          </span>
-          {loggedIn && <AddToFavoriteBtn favorites={favorites} itemId={itemId} />}
-        </div>
+       {cardHeader()}
 
         <Link
           to={`${RoutesName.products}/${itemNo}`}

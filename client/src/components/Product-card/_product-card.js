@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: '260px',
     }
   },
+  itemNo: {
+    paddingLeft: theme.spacing(1),
+  },
   iconWrapper: {
     display: 'flex',
     justifyContent: 'space-between',

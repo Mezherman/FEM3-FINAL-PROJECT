@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core';
 
 const useStylesSingIn = makeStyles((theme) => ({
   paper: {
-    margin: theme.spacing(1),
+    padding: theme.spacing(2),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
