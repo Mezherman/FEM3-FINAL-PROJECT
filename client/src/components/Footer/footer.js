@@ -10,7 +10,10 @@ const Footer = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.footerWrapper} style={{position: 'absolute', bottom: 0, left: 0, right: 0}}>
+    <div
+      className={classes.footerWrapper}
+      style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}
+    >
       <Container maxWidth="xl">
         <Grid container justify="space-between" spacing={2} className={classes.container}>
           <MainText />

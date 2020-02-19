@@ -1,11 +1,9 @@
 import React from 'react'
 import { shallow } from 'enzyme';
-import CheckoutStatus from './Status/status'
-import DeliveryPaymentInfo from './Checkout-form/delivery-payment-info'
 import { Typography } from '@material-ui/core';
 
-
-import RadioCheckboxField from './Checkout-form/form-components/radio-checkbox-field'
+import CheckoutStatus from './Status/status'
+import DeliveryPaymentInfo from './Checkout-form/delivery-payment-info'
 import CustomerInfo from './Checkout-form/customer-info'
 
 describe('CheckoutStatus component', () => {
@@ -58,7 +56,8 @@ describe('CustomerInfo component', () => {
   it('should render correctly component', () => {
     const props = {
       customer: 'test'
-    }
+    };
+
     const wrapper = shallow(<CustomerInfo {...props} />);
 
     expect(wrapper.find('Field')).toHaveLength(11);
@@ -67,4 +66,4 @@ describe('CustomerInfo component', () => {
       expect(node.simulate('change', { target: { value: 'My new value' } }));
     });
   });
-})
+});

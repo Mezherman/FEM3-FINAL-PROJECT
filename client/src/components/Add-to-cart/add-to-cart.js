@@ -82,9 +82,7 @@ export default function AddToCart({ open, onModalClose, product }) {
                     {finalPrice}
                   </span>
                 </Box>
-                {/*<Box className={classes.qtyPicker}>*/}
-                  <IncreaseBlock setQty={handleQty} qty={stateQuantity} maxQty={maxQty} />
-                {/*</Box>*/}
+                <IncreaseBlock setQty={handleQty} qty={stateQuantity} maxQty={maxQty} />
                 <Box className={classes.total}>
                   <span>
                     &#8364;
@@ -137,7 +135,6 @@ export default function AddToCart({ open, onModalClose, product }) {
 AddToCart.propTypes = {
   open: PropTypes.bool.isRequired,
   onModalClose: PropTypes.func.isRequired,
-  quantity: PropTypes.number,
   product:
   PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.array, PropTypes.string, PropTypes.number])

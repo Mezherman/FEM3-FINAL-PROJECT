@@ -26,7 +26,6 @@ function getDotIndexes (slideCountOwn, slidesToScrollOwn, slidesToShowOwn, cellA
 }
 
 export default function PagingDots (props) {
-
   const {
     currentSlide,
     goToSlide,

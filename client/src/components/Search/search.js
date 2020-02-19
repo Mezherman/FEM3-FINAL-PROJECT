@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router-dom';
-
 import SearchIcon from '@material-ui/icons/Search';
 import { Collapse, Grow, useTheme, InputBase } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery/useMediaQuery';
-import search from '../../services/search';
+
 import storeSearchedValue from '../../redux/actions/search';
 
 import useStyles from './_search';
