@@ -88,7 +88,7 @@ export default function Routes() {
       <Route
         path={`${RoutesName.products}/:categoryOrID`}
         render={({ match, location }) => {
-          console.log(1);
+          console.log(match);
           const { categoryOrID } = match.params;
           if (isNaN(categoryOrID)) {
             console.log(2);
