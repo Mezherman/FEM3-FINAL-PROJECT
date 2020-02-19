@@ -85,6 +85,11 @@ const Catalog = (props) => {
     const request = assortment === 'search' ? 'cooking' : assortment;
     getCategory(request)
       .then((response) => setTopList(response.topSellers));
+      .then((response) => {
+        if (response.topSellers) {
+          setTopList(response.topSellers);
+        }
+      });
 
     handleProductsRequest();
   }, [assortment, sort, filterResults, filterPages, searchedValue]);
@@ -92,10 +97,12 @@ const Catalog = (props) => {
   const cardsToShowString = topList.toString();
 
   useEffect(() => {
-    getFilteredProducts(`itemNo=${cardsToShowString}`)
-      .then((response) => {
-        setProductsToShow(response)
-      })
+    if (cardsToShowString) {
+      getFilteredProducts(`itemNo=${cardsToShowString}`)
+        .then((response) => {
+          setProductsToShow(response)
+        })
+    }
   }, [cardsToShowString, topList]);
 
   const toggleFilterMobile = (open) => {
