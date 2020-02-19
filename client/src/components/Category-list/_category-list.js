@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     wordSpacing: '2px',
     // marginTop: theme.spacing(6),
     marginBottom: theme.spacing(6),
-    marginTop: '150px'
+    marginTop: '100px'
   },
 
 }));
