@@ -74,25 +74,32 @@ export default function CartProductItem({ product, onSetProductQuantity, onRemov
   return (
     <Grid item container sm={12} justify="space-between" className={`${classes.root} ${headerClasses.underline}`}>
       <Grid container item md={3} sm={12} className={classes.img_block}>
-        <Grid item sm={12}>
+        <Grid item xs={12}>
           {productImage}
         </Grid>
       </Grid>
-      <Grid item md={3} sm={12}>
+
+      <Grid item md={3} xs={11}>
         {productDesc}
+
       </Grid>
-      <Grid item container justufy="space-between" md={1} sm={12}>
+      <Grid item md={1} xs={1} className={headerClasses.alignCenter}>
+        <DeleteIcon color="secondary" className={classes.deleteBtn} onClick={() => { handleDialogOpen() }} />
+      </Grid>
+
+      <DialogModal onCloseDialogWithStatus={onCloseDialogWithStatus} isOpen={isDialogOpen} />
+      <Grid item container justufy="space-between" md={1} xs={12}>
         {mobileProductPriceTitle}
-        <Grid item md={12} sm={6} className={headerClasses.alignRight}>
+        <Grid item md={12} xs={6} className={headerClasses.alignRight}>
           <p className={`${classes.marginTop} ${classes.price} ${headerClasses.alignRight}`}>
             €
             {currentProduct.currentPrice}
           </p>
         </Grid>
       </Grid>
-      <Grid item container md={2} sm={12} >
+      <Grid item container md={2} xs={12} >
         {mobileProductAmountTitle}
-        <Grid item sm={6} md={12}>
+        <Grid item xs={6} md={12}>
           <IncreaseBlock setQty={setQty} qty={cartQuantity} maxQty={currentProduct.quantity} />
         </Grid>
       </Grid>
@@ -105,10 +112,10 @@ export default function CartProductItem({ product, onSetProductQuantity, onRemov
           </p>
         </Grid>
       </Grid>
-      <Grid item md={1} xs={12} className={headerClasses.alignCenter}>
-        <DeleteIcon color="secondary" className={classes.deleteBtn} onClick={() => { handleDialogOpen() }} />
-      </Grid>
-      <DialogModal onCloseDialogWithStatus={onCloseDialogWithStatus} isOpen={isDialogOpen} />
+      {/*<Grid item md={1} xs={12} className={headerClasses.alignCenter}>*/}
+      {/*  <DeleteIcon color="secondary" className={classes.deleteBtn} onClick={() => { handleDialogOpen() }} />*/}
+      {/*</Grid>*/}
+      {/*<DialogModal onCloseDialogWithStatus={onCloseDialogWithStatus} isOpen={isDialogOpen} />*/}
     </Grid>
 
   );

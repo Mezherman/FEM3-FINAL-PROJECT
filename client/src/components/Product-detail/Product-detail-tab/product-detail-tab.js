@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { connect, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { createStyles, makeStyles, Container, Badge, IconButton } from '@material-ui/core';
+import { Badge } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 import TableSpecification from '../Table-specification/table-specifications';
@@ -13,7 +13,9 @@ export default function ProductDetailTab({ data }) {
   const { myCustomParams } = data;
   const { productDescription, productHighlights } = myCustomParams;
   const classes = useStyles();
-  const commentsLength = useSelector((state) => state.commentsReducer.commentsList.length.toString());
+  const commentsLength = useSelector(
+    (state) => state.commentsReducer.commentsList.length.toString()
+  );
 
   return (
     <>
@@ -23,9 +25,10 @@ export default function ProductDetailTab({ data }) {
           <Tab><h4>Product Description</h4></Tab>
           <Tab><h4>Specifications</h4></Tab>
           <Tab>
-            <Badge badgeContent={commentsLength} color="error" className={classes.badge}>
-              <h4>Comments</h4>
-            </Badge>
+            <h4>
+Comments
+              <Badge badgeContent={commentsLength} color="error" className={classes.badge} />
+            </h4>
           </Tab>
         </TabList>
 
