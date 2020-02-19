@@ -26,7 +26,7 @@ const Contacts = () => {
   ))
 
   return (
-    <Container maxWidth="xl" className={classes.minHeight}>
+    <Container maxWidth="xl">
       <h2>Consultations and order by phone:</h2>
       <Divider />
       <div className={classes.container}>
