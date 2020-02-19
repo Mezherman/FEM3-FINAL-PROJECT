@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     right: '0',
     left: '0',
-    [theme.breakpoints.up('xl')]: {
+    [theme.breakpoints.up('sm')]: {
       bottom: 0
     }
 

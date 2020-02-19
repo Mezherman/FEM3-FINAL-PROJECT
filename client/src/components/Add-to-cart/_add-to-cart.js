@@ -1,28 +1,46 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
+  containerImg: {
+    textAlign: 'center',
+    [theme.breakpoints.up('md')]: {
+      textAlign: 'left'
+    }
+  },
   img: {
-    width: '100%'
+    width: '50%',
+    [theme.breakpoints.up('md')]: {
+      width: '100%'
+    }
   },
   title: {
     display: 'flex',
     justifyContent: 'space-between',
     // padding: '10px 0',
-    fontSize: '20px'
+    fontSize: '16px'
   },
   header: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: theme.spacing(0.5, 2),
+    padding: theme.spacing(0, 2),
+    [theme.breakpoints.up('md')]: {
+      padding: theme.spacing(0.5, 2),
+    },
     fontWeight: 'bold'
   },
   body: {
-    padding: theme.spacing(1, 2),
+    padding: theme.spacing(0.5, 2),
+    [theme.breakpoints.up('md')]: {
+      padding: theme.spacing(1, 2),
+    },
   },
   footer: {
     textAlign: 'center',
-    padding: theme.spacing(2, 2),
+    padding: theme.spacing(0, 2),
+    [theme.breakpoints.up('md')]: {
+      padding: theme.spacing(2, 2),
+    },
   },
   btn: {
     width: '100%'

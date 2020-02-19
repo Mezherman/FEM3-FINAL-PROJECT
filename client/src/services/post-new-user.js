@@ -2,7 +2,7 @@ import axios from 'axios';
 
 function postNewUser(newUser, successModal, errorModal) {
   axios
-    .post('/customers', newUser)
+    .post('/api/customers', newUser)
     .then((response) => {
       if (response.statusText === 'OK') {
         successModal();
