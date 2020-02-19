@@ -10,5 +10,5 @@ export default function getSearchedProducts(searchedValue) {
   return axios
     .post('/products/search', searchItem)
     .then((response) => response.data)
-    .catch((error) => error)
+    .catch((error) => alert(error.response.message))
 }

@@ -19,7 +19,9 @@ export default function CheckoutStatus(props) {
         </strong>
         has been successfully placed.
       </h2>
-      <p className={classes.statusText}>Thank you for your choice!</p>
+      <p>It is already on its way to you!</p>
+      <img src="/img/delivery-car.png" alt="delivery-car" />
+      <p>Thank you for your choice!</p>
     </>
   );
 
@@ -38,7 +40,6 @@ export default function CheckoutStatus(props) {
 
   return (
     <Container maxWidth="xl">
-    {/*<Container maxWidth="xl" style={{ minHeight: '52vh' }}>*/}
       {statusMessage}
     </Container>
   )
