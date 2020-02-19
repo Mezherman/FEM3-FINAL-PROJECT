@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import { PropTypes } from 'prop-types';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
   MenuItem,
@@ -63,6 +63,28 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
   const toggleLastDrawer = (open) => {
     drawerSubCatIsOpen(open);
   };
+  const menuItems = [
+    {
+      title: 'HOME',
+      route: RoutesName.home
+    },
+    {
+      title: 'CATALOG',
+      route: ''
+    },
+    {
+      title: 'ABOUT US',
+      route: RoutesName.aboutUs
+    },
+    {
+      title: 'DELIVERY & PAYMENT',
+      route: RoutesName.delivery
+    },
+    {
+      title: 'CONTACTS',
+      route: RoutesName.contacts
+    },
+  ];
 
   const listItemIcon = (menuItem) => {
     switch (menuItem) {
@@ -85,12 +107,6 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
         return (<HomeIcon />)
     }
   };
-  const link = {
-    HOME: RoutesName.home,
-    'ABOUT US': RoutesName.aboutUs,
-    'DELIVERY & PAYMENT': RoutesName.delivery,
-    CONTACTS: RoutesName.contacts,
-  };
 
   const renderMainMenu = () => (
     <List
@@ -98,10 +114,10 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
       aria-labelledby="nested-list-subheader"
 
     >
-      {['HOME', 'CATALOG', 'ABOUT US', 'DELIVERY & PAYMENT', 'CONTACTS'].map((text) => {
-        if (text === 'CATALOG') {
+      {menuItems.map((menuItem) => {
+        if (menuItem.title === 'CATALOG') {
           return (
-            <Fragment key={text}>
+            <Fragment key={menuItem.title}>
               <ListItem
                 onClick={() => {
                   toggleDrawerCat(true);
@@ -110,8 +126,12 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
                 className={classes.nestedMenuItem}
               >
                 <span className={classes.headerMenuListHyperlink}>
-                  <ListItemIcon className={classes.icon}>{listItemIcon(text)}</ListItemIcon>
-                  <ListItemText primary={text} />
+                  <ListItemIcon
+                    className={classes.icon}
+                  >
+                    {listItemIcon(menuItem.title)}
+                  </ListItemIcon>
+                  <ListItemText primary={menuItem.title} />
                 </span>
                 <KeyboardArrowRightIcon />
               </ListItem>
@@ -121,19 +141,18 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
         }
 
         return (
-          <Fragment key={text}>
+          <Fragment key={menuItem.title}>
             <ListItem
               onClick={() => {
                 toggleDrawer(false);
-                // console.log({RoutesName.${text})
               }}
             >
               <Link
-                to={link[text]}
+                to={menuItem.route}
                 className={classes.headerMenuListHyperlink}
               >
-                <ListItemIcon className={classes.icon}>{listItemIcon(text)}</ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemIcon className={classes.icon}>{listItemIcon(menuItem.title)}</ListItemIcon>
+                <ListItemText primary={menuItem.title} />
               </Link>
             </ListItem>
             <Divider />
@@ -214,7 +233,6 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
           <MenuItem
             key={subCategory.id}
             onClick={() => {
-              // toggleDrawer(false);
               toggleLastDrawer(false);
             }}
           >
@@ -225,7 +243,6 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
             >
               {subCategory.name}
             </Link>
-            {/* <KeyboardArrowRightIcon /> */}
           </MenuItem>
         ))}
     </List>
@@ -233,26 +250,28 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
 
   const renderDesktopMenu = () => (
     <>
-      {['CATALOG', 'ABOUT US', 'DELIVERY & PAYMENT', 'CONTACTS'].map((menuItem) => {
-        if (menuItem === 'CATALOG') {
+      {menuItems.map((menuItem) => {
+        if (menuItem.title === 'CATALOG') {
           return (
             <StyledMenuItem
               className={`js_header-menu-list-item ${classes.headerMenuListItem}`}
               onMouseLeave={hideCatalog}
               onClick={toggleCatalog}
-              key={menuItem}
+              key={menuItem.title}
             >
-              {menuItem}
+              {menuItem.title}
             </StyledMenuItem>
           )
+        } if (menuItem.title === 'HOME') {
+          return null
         }
         return (
           <StyledMenuItem
             className={classes.menuItem}
-            key={menuItem}
+            key={menuItem.title}
           >
-            <Link to={link[menuItem]} className={classes.headerMenuListHyperlink}>
-              {menuItem}
+            <Link to={menuItem.route} className={classes.headerMenuListHyperlink}>
+              {menuItem.title}
             </Link>
           </StyledMenuItem>
         )

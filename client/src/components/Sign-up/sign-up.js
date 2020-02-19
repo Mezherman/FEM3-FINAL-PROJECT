@@ -98,7 +98,7 @@ let SignUp = (props) => {
   }
 
   return (
-    <Container component="div" disableGutters>
+    <Container maxWidth="xl" component="div" >
       <CssBaseline />
       {redirect && renderRedirect()}
       <div className={classes.paper}>
