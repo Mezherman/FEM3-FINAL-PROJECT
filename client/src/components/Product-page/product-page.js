@@ -33,7 +33,11 @@ function ProductPage(props) {
   useEffect(() => {
     if (chosenProduct) {
       getCategory(chosenProduct.categories)
-        .then((response) => setTopList(response.topSellers));
+        .then((response) => {
+          if (response.topSellers) {
+            setTopList(response.topSellers)
+          }
+        });
     }
   }, [chosenProduct, assortment]);
 
@@ -76,7 +80,7 @@ const mapStateToProps = (state, { itemNo }) => {
     ? state.productsReducer.products.find((product) => (
       product.itemNo === itemNo
     ))
-    : null ;
+    : null;
 
   return {
     chosenProduct,
