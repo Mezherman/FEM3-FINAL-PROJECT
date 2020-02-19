@@ -117,6 +117,7 @@ exports.getProducts = (req, res, next) => {
 };
 
 exports.getProductById = (req, res, next) => {
+  console.log(12345);
   Product.findOne({
     itemNo: req.params.itemNo
   })

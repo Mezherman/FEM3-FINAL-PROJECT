@@ -17,6 +17,7 @@ import getCommentsOfProducts from '../../services/get-comments-of-product';
 import { commentsLoaded, commentsRequest } from '../../redux/actions/comments';
 
 function ProductPage(props) {
+  console.log(99999.);
   const { assortment, itemNo, chosenProduct, fetchProduct, getChosenProduct, fetchComments } = props;
   const [topList, setTopList] = useState([]);
   const [productsToShow, setProductsToShow] = useState([]);
