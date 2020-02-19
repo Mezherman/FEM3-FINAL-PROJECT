@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     paddingBottom: theme.spacing(5),
     justifyContent: 'center',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('sm')]: {
       justifyContent: 'start',
     },
   }
