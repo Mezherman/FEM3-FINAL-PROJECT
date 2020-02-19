@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default function placeOrderToDB(newOrder) {
   return axios
-    .post('/orders', newOrder)
+    .post('/api/orders', newOrder)
     .then((response) => {
       if (response.data.productAvailibilityInfo) {
         return {

@@ -7,6 +7,7 @@ import useStyles from './_breadcrumbs';
 
 const BreadcrumbsHome = () => {
   const classes = useStyles();
+
   return (
     <Link to="/" className={classes.item}>
       <MenuItem className={classes.menuItem} component="span">

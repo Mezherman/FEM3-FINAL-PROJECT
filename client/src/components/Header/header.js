@@ -66,7 +66,7 @@ function Header() {
   const freeShippingMessage = (
     <Box className={classes.delivery}>
       <Container maxWidth="xl">
-        <p className={classes.deliveryTitle}>Free shipping on all orders over &#8364;100</p>
+        <p className={classes.deliveryTitle}>Free shipping on all orders over &#8364;49</p>
       </Container>
     </Box>
   );

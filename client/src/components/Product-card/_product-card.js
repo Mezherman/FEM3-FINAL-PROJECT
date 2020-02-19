@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
   card: {
     maxWidth: '230px',
+    margin: '0 auto',
     paddingBottom: '20px',
     // margin: '0 auto',
     '&:hover': {
