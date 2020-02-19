@@ -23,9 +23,10 @@ export default function ProductDetailTab({ data }) {
           <Tab><h4>Product Description</h4></Tab>
           <Tab><h4>Specifications</h4></Tab>
           <Tab>
-            <Badge badgeContent={commentsLength} color="error" className={classes.badge}>
-              <h4>Comments</h4>
-            </Badge>
+            <h4>
+Comments
+              <Badge badgeContent={commentsLength} color="error" className={classes.badge} />
+            </h4>
           </Tab>
         </TabList>
 

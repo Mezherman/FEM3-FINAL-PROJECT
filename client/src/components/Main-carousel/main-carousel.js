@@ -58,11 +58,11 @@ function MainSlider ({ fetchSlides }) {
         <div className={classes.carouselContainer}>
           <Carousels
             isProductSlider={false}
-            // autoPlay
+            autoPlay
             autoplayInterval={2000}
             wrapAround
             slidesToShow={1}
-            dragging
+            // dragging
             renderBottomCenterControls={
               ({
                 currentSlide, goToSlide, slideCount, slidesToScroll, slidesToShow, cellAlign
