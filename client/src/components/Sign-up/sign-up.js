@@ -11,7 +11,7 @@ import SignUpForm from './Sign-up-form/sign-up-form';
 import SignUpFooter from './Sign-up-footer/sign-up-footer';
 import ModalResponse from './Modal-response/modal-response';
 import validate from './validate';
-import postNewUser from '../../services/postNewUser';
+import postNewUser from '../../services/post-new-user';
 import useStyles from './_sign-up';
 import { leaveRegistrationPage } from '../../redux/actions/moving-around-registration';
 import RoutesName from '../../routes-list'
@@ -88,7 +88,6 @@ let SignUp = (props) => {
       birthdate: birthDayFunc(birthdayDay, birthdayMonth, birthdayYear)
     };
 
-    // console.log(newUser);
     postNewUser(newUser, handleOpenSignUpModal, handleOpenSetErrorModal);
   };
   const { loggedIn } = useSelector((state) => state.user);
@@ -111,7 +110,11 @@ let SignUp = (props) => {
           Your registration for the myWMF Customer Club
         </Typography>
 
-        <form className={classes.passwordForm} noValidate={false} onSubmit={handleSubmit(submitNewUser)}>
+        <form
+          className={classes.passwordForm}
+          noValidate={false}
+          onSubmit={handleSubmit(submitNewUser)}
+        >
           <Grid
             container
             spacing={3}
@@ -127,7 +130,7 @@ let SignUp = (props) => {
           </Grid>
         </form>
 
-        { signUpModal && (
+        {signUpModal && (
           <ModalResponse
             openModal={signUpModal}
             handleClose={handleCloseSignUpModal}
@@ -137,7 +140,7 @@ let SignUp = (props) => {
             submitClass={classes.submit}
           />
         )}
-        { errorModal && (
+        {errorModal && (
           <ModalResponse
             openModal={errorModal}
             handleClose={handleCloseSetErrorModal}

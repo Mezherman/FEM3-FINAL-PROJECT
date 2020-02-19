@@ -50,7 +50,7 @@ function Cart() {
   }
 
   return (
-    <Container maxWidth="xl" style={{minHeight: '52vh'}}>
+    <Container maxWidth="xl">
       <h1>Your Shopping Cart</h1>
       {mainContainer}
     </Container>

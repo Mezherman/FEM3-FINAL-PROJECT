@@ -1,21 +1,20 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-
+import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import ProductCard from '../Product-card/product-card';
 import { filterIncreasePage } from '../../redux/actions/filter';
 import Spinner from '../Spinner/spinner';
 
 import useStyles from './_product-list';
-import { invalidPassword } from '../../redux/actions/password-validation'
 
-export default function ProductList(props) {
-  // console.log('PROPS =', props);
-  const { productsResult: { products, productsQuantity = 0 } } = props;
+export default function ProductList({ products = [], productsQuantity = 0 }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const loadMoreProducts = useCallback(() => {
-    dispatch(filterIncreasePage());
+    setTimeout(() => {
+      dispatch(filterIncreasePage());
+    }, 2000);
   }, [dispatch]);
 
   const renderProducts = (productsList) => (
@@ -29,13 +28,22 @@ export default function ProductList(props) {
 
   return (
     <InfiniteScroll
-      dataLength={productsQuantity}
+      dataLength={products.length}
       next={loadMoreProducts}
-      hasMore={products.length < productsQuantity}
+      hasMore={productsQuantity > products.length}
       loader={<Spinner />}
       className={classes.productList}
     >
       {renderProducts(products)}
     </InfiniteScroll>
   )
+}
+
+ProductList.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+    PropTypes.number,
+  ])).isRequired,
+  productsQuantity: PropTypes.number.isRequired
 }

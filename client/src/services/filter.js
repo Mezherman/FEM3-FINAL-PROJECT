@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-// axios.defaults.baseURL = 'http://localhost:5000';
-
 function getFilteredProducts(value) {
   return axios
     .get(`/products/filter?${value}`)
@@ -25,12 +23,25 @@ function getBrands() {
 }
 
 const parseToFilterValue = (itemNoArr, filterResults, sort = '', pages, allCategories, catalogLocation) => {
+
+  const defaultSort = {
+    quantity: -1,
+    itemNo: 1
+  };
+
+  let sortVal = {};
+  if (sort.sortName) {
+    sortVal[sort.sortName] = sort.sortValue;
+  }
+
+  sortVal = { ...sortVal, ...defaultSort };
+
   let valOfBrands = '';
   let valOfPrice = '';
   let valOfColor = '';
   const valOfPerPage = `perPage=${pages.perPage}`;
   const valOfStartPage = `startPage=${pages.startPage}`;
-  const valOfSort = sort.sortName ? `&sortName=${sort.sortName}&sortValue=${sort.sortValue}` : '';
+  const valOfSort = `&sort=${JSON.stringify(sortVal)}`;
 
   if (filterResults.brand.length > 0) {
     valOfBrands = `brand=${filterResults.brand.join(',')}`
@@ -45,14 +56,17 @@ const parseToFilterValue = (itemNoArr, filterResults, sort = '', pages, allCateg
   }
 
   const itemsToString = itemNoArr.join(',');
-  const itemsForFilter = itemsToString ? `itemNo=${itemsToString}` : '';
+  const itemsForFilter = itemsToString ? `&itemNo=${itemsToString}` : '';
   const subCategories = allCategories.filter((category) => category.parentId === catalogLocation);
-  const subCategoriesString = subCategories ? subCategories.map((subCategory) => subCategory.id).join(',') : '';
+  const subCategoriesString = subCategories
+    ? subCategories.map((subCategory) => subCategory.id).join(',')
+    : '';
   const categoryString = !subCategoriesString ? catalogLocation : subCategoriesString;
   const categoryForFilter = categoryString !== 'search' ? `categories=${categoryString}` : '';
 
-  const valToFilter = `${categoryForFilter}&${itemsForFilter}&${valOfBrands}&${valOfColor}&${valOfPrice}&${valOfPerPage}&${valOfStartPage}${valOfSort}`
-  // console.log('Filter string = ', valToFilter);
+  const valToFilter =
+    `${categoryForFilter}${itemsForFilter}&${valOfBrands}&${valOfColor}&${valOfPrice}&${valOfPerPage}&${valOfStartPage}${valOfSort}`;
+
   return valToFilter
 };
 

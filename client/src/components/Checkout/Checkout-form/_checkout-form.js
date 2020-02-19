@@ -42,6 +42,15 @@ const useStyles = makeStyles((theme) => ({
   },
   terms: {
     padding: theme.spacing(2, 0)
+  },
+  cardIconWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  cardIcon: {
+    height: '24px',
+    padding: '0px 5px'
   }
 }));
 

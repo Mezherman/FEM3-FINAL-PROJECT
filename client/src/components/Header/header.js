@@ -10,7 +10,6 @@ import MenuLogoIcons from './Header-icons/Header-icon/menu-and-logo-icons';
 function Header() {
   const classes = useStyles();
 
-
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const [drawer, setDrawer] = useState(false);

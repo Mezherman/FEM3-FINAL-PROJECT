@@ -25,6 +25,7 @@ const localStorage = (store) => (next) => (action) => {
         return next({ ...action, type: `${action.type}_SUCCESS`, payload: { newCart } });
       }
       case 'REMOVE_CART': {
+        window.localStorage.removeItem('cart');
         return next({
           type: 'CLEAR_CART',
         });

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { Container } from '@material-ui/core';
-import { getProductsByItemNo } from '../../services/getProducts';
+import getProductsByItemNo from '../../services/get-products';
 import ProductDetail from '../Product-detail/product-detail';
 import { productsRequested, productsLoaded } from '../../redux/actions/products';
 import ProductCardCarousel from '../Product-card-carousel/product-card-carousel';
@@ -12,8 +12,8 @@ import Spinner from '../Spinner/spinner';
 import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 import { getFilteredProducts } from '../../services/filter';
 import getCurrentProduct from '../../redux/actions/current-product';
-import { getCategory } from '../../services/getCategories';
-import getCommentsOfProducts from '../../services/getCommentsOfProduct';
+import { getCategory } from '../../services/get-categories';
+import getCommentsOfProducts from '../../services/get-comments-of-product';
 import { commentsLoaded, commentsRequest } from '../../redux/actions/comments';
 
 function ProductPage(props) {
@@ -30,7 +30,7 @@ function ProductPage(props) {
       // console.log(chosenProduct);
       fetchComments(chosenProduct._id);
     }
-  }, [chosenProduct, itemNo, fetchProduct, getChosenProduct, fetchComments]);
+  }, [itemNo, getChosenProduct, fetchComments]);
 
   useEffect(() => {
     if (chosenProduct) {
@@ -77,10 +77,11 @@ function ProductPage(props) {
 }
 
 const mapStateToProps = (state, { itemNo }) => {
-  // console.log('STATE =', state);
-  const chosenProduct = state.productsReducer.products.find((product) => (
-    product.itemNo === itemNo
-  ));
+  const chosenProduct = state.productsReducer.products
+    ? state.productsReducer.products.find((product) => (
+      product.itemNo === itemNo
+    ))
+    : null ;
 
   return {
     chosenProduct,
@@ -93,7 +94,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(productsRequested());
     getProductsByItemNo(itemNo)
       .then((response) => {
-        dispatch(productsLoaded([response.data]));
+        dispatch(productsLoaded({ products: [response.data] }));
       })
   },
   getChosenProduct: (product) => dispatch(getCurrentProduct(product)),

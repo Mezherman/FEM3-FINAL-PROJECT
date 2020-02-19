@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PropTypes } from 'prop-types';
 import { FormLabel, TextField } from '@material-ui/core';
+
 import useStyles from '../_checkout-form';
 
 const RenderTextField = (props) => {
@@ -12,10 +13,7 @@ const RenderTextField = (props) => {
     meta: { touched, error },
     label,
     defaultValue,
-    type = ''
   } = props;
-
-  const [fieldValue, setFieldValue] = useState('TEST');
 
   return (
     <TextField
@@ -27,11 +25,8 @@ const RenderTextField = (props) => {
       helperText={touched && error}
       className={classes.root}
       onBlur={onBlur}
-      // onChange={(event) => setFieldValue(event.target.value)}
       onChange={(event) => onChange(event.target.value)}
-      // value={fieldValue}
       defaultValue={!touched ? defaultValue : value}
-      // defaultValue={fieldValue}
       label={(<FormLabel className={classes.root} required>{label}</FormLabel>)}
     />
   )

@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   [theme.breakpoints.up('lg')]: {
     search: {
       left: '7%',
-      maxWidth: '660px',
+      maxWidth: '58%',
       padding: theme.spacing(3, 3, 1, 0),
       top: '-13%',
     },

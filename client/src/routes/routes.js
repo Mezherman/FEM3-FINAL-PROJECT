@@ -89,6 +89,9 @@ export default function Routes() {
         render={({ match, location }) => {
           const { categoryOrID } = match.params;
           if (isNaN(categoryOrID)) {
+            if (!mainCategory.find((el) => el.id === categoryOrID) && categoryOrID !== 'search') {
+              return <NoMatch />
+            }
             return <Catalog assortment={categoryOrID} />
           }
           const { pathname: url } = location;

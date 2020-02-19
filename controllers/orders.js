@@ -65,7 +65,10 @@ exports.placeOrder = async (req, res, next) => {
     } else {
       const subscriberMail = req.body.email;
       const letterSubject = req.body.letterSubject;
-      const letterHtml = req.body.letterHtml;
+      const letterHtml =
+        `<h1>Your order №${order.orderNo} is placed. </h1>
+        <p>Looking forward to see you again soon. In case of any questions - we are happy to help!</p>
+        <p>Sincerely, your WMF team.</p>`;
 
       const { errors, isValid } = validateOrderForm(req.body);
 
@@ -96,16 +99,7 @@ exports.placeOrder = async (req, res, next) => {
 
       newOrder
         .save()
-        .then(async order => {
-          // const mailResult = await sendMail(
-          //   subscriberMail,
-          //   letterSubject,
-          //   letterHtml,
-          //   res
-          // );
-
-          const mailResult = 'to be created';
-
+        .then(order => {
           order.products.map(({ product: { _id }, cartQuantity: orderedQty }) => {
             Product.findOne({ _id: _id })
               .then(product => {
@@ -152,8 +146,14 @@ exports.placeOrder = async (req, res, next) => {
               });
           });
 
-          res.json({ order, mailResult });
+          res.json({ order });
         })
+        .then(() => sendMail(
+          subscriberMail,
+          letterSubject,
+          letterHtml,
+          res
+        ))
         .catch(err =>
           res.status(400).json({
             message: `Error happened on server: "${err}" `
@@ -245,14 +245,12 @@ exports.updateOrder = (req, res, next) => {
       )
         .populate('customerId')
         .then(async order => {
-          // const mailResult = await sendMail(
-          //   subscriberMail,
-          //   letterSubject,
-          //   letterHtml,
-          //   res
-          // );
-
-          const mailResult = 'to be created';
+          const mailResult = await sendMail(
+            subscriberMail,
+            letterSubject,
+            letterHtml,
+            res
+          );
 
           res.json({ order, mailResult });
         })
@@ -304,14 +302,12 @@ exports.cancelOrder = (req, res, next) => {
       )
         .populate('customerId')
         .then(async order => {
-          // const mailResult = await sendMail(
-          //   subscriberMail,
-          //   letterSubject,
-          //   letterHtml,
-          //   res
-          // );
-
-          const mailResult = 'to be created';
+          const mailResult = await sendMail(
+            subscriberMail,
+            letterSubject,
+            letterHtml,
+            res
+          );
 
           res.json({ order, mailResult });
         })

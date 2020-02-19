@@ -70,8 +70,13 @@ app.use("/comments", comments);
 app.use("/shipping-methods", shippingMethods);
 app.use("/payment-methods", paymentMethods);
 app.use("/partners", partners);
-app.use("/", mainRoute);
+// app.use("/", mainRoute);
 
+app.use(express.static(path.resolve(__dirname, 'client/build')));
+
+app.get('*', function(request, response) {
+  response.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
+});
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {
   // Set static folder

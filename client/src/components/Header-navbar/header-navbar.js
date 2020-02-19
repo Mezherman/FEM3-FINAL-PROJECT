@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Paper, Box, Divider } from '@material-ui/core';
@@ -16,6 +16,7 @@ function HeaderNavbar(props) {
     subCategoriesVisible: false,
     chosenCategory: null,
   });
+
   const { categoriesVisible, subCategoriesVisible, chosenCategory } = features;
 
   const { drawer, toggleDrawer } = props;
