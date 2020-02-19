@@ -8,14 +8,8 @@ export default function getCategories() {
 
 function getCategory(id) {
   return axios.get(`catalog/${id}`)
-    .then((response) => {
-      console.log('in services =', response);
-      return response.data
-    })
-    .catch((err) => {
-      console.log('in services error =', err);
-      alert(err.response.message)
-    })
+    .then((response) => response.data)
+    .catch((err) => alert(err.response.message))
 }
 
 export {

@@ -85,8 +85,9 @@ const Catalog = (props) => {
     const request = assortment === 'search' ? 'cooking' : assortment;
     getCategory(request)
       .then((response) => {
-        console.log('in code =', response);
-        return setTopList(response.topSellers)
+        if (response.topSellers) {
+          setTopList(response.topSellers)
+        }
       });
 
     handleProductsRequest();
