@@ -15,11 +15,11 @@ function getInfinityFilteredProducts(value) {
 }
 
 function getColors() {
-  return axios('/colors').then((response) => (response.data))
+  return axios('/api/colors').then((response) => (response.data))
 }
 
 function getBrands() {
-  return axios('/filters/brands').then((response) => (response.data))
+  return axios('/api/filters/brands').then((response) => (response.data))
 }
 
 const parseToFilterValue = (itemNoArr, filterResults, sort = '', pages, allCategories, catalogLocation) => {
