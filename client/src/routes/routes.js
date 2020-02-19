@@ -99,6 +99,7 @@ export default function Routes() {
             return <Catalog assortment={categoryOrID} />
           }
           const { pathname: url } = location;
+          console.log('before ProductPage =', categoryOrID);
           return (
             <ProductPage
               itemNo={categoryOrID}

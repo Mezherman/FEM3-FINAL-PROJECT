@@ -123,6 +123,7 @@ exports.getProductById = (req, res, next) => {
   })
     .then(product => {
       if (!product) {
+        console.log(6798);
         res.status(400).json({
           message: `Product with itemNo ${req.params.itemNo} is not found`
         });
