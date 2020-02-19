@@ -40,6 +40,8 @@ const Catalog = (props) => {
     searchedValue
   } = props;
 
+  console.log('assortment =', assortment);
+
   const { filterResults, filterPages, sort } = filter;
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
