@@ -2,19 +2,19 @@ import axios from 'axios';
 
 function getFilteredProducts(value) {
   return axios
-    .get(`/products/filter?${value}`)
+    .get(`/api/products/filter?${value}`)
     .then((response) => response.data.products)
     .catch((error) => error)
 }
 
 function getInfinityFilteredProducts(value) {
   return axios
-    .get(`/products/filter?${value}`)
+    .get(`/api/products/filter?${value}`)
     .then((response) => response.data)
     .catch((error) => error)
 }
 
-function getColors() {
+function getColors() {ucts
   return axios('/colors').then((response) => (response.data))
 }
 
