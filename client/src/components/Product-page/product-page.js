@@ -18,8 +18,6 @@ import { commentsLoaded, commentsRequest } from '../../redux/actions/comments';
 
 function ProductPage(props) {
   const { assortment, itemNo, chosenProduct, fetchProduct, getChosenProduct, fetchComments } = props;
-  console.log('assort =', assortment);
-  console.log('itemNo =', itemNo);
   const [topList, setTopList] = useState([]);
   const [productsToShow, setProductsToShow] = useState([]);
 

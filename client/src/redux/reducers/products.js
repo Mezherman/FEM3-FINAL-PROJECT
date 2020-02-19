@@ -20,7 +20,6 @@ export default function productsReducer(state = initialState, action) {
     case FETCH_PRODUCTS_REQUEST:
       return {
         ...state,
-        products: [],
         error: null,
         productsLoading: true
       };
