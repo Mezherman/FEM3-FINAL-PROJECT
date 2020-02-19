@@ -22,7 +22,6 @@ import OrdersPage from '../pages/orders/orders';
 import ForbiddenPage from '../pages/forbidden/forbidden'
 import AdminHome from '../components/Admin/Home/home'
 import Login from '../components/Login/login';
-import PaymentForm from '../components/Payment-form/payment-form';
 
 export default function Routes() {
   const { loggedIn, customer } = useSelector((state) => state.user);
@@ -110,7 +109,6 @@ export default function Routes() {
       <Route path={RoutesName.aboutUs} component={AboutUsPage} />
       <Route path={RoutesName.delivery} component={DeliveryPage} />
       <Route path={RoutesName.contacts} component={ContactsPage} />
-      {/*<Route path={RoutesName.payment} component={PaymentForm} />*/}
       <AdminRoute
         exact
         path={RoutesName.adminHome}

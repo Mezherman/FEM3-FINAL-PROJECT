@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   Backdrop,
   Fade,
-  Modal
+  Modal,
+  Box
 } from '@material-ui/core';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+
 import CloseIcon from '@material-ui/icons/Close';
 
 import useStyles from './_info-window';
 
-const ModalInfoWindow = ({infoTitle, infoText, children}) => {
+const ModalInfoWindow = ({ infoTitle, infoText, children }) => {
   const [openInfo, setOpenInfo] = useState(false);
   const handleOpenInfo = () => {
     setOpenInfo(true);
@@ -22,10 +24,9 @@ const ModalInfoWindow = ({infoTitle, infoText, children}) => {
 
   return (
     <>
-      {/*<InfoOutlinedIcon fontSize="small" className={classes.infoIcon} type="button" onClick={handleOpenInfo} />*/}
-      <span onClick={handleOpenInfo}>
+      <Box onClick={handleOpenInfo} component="span">
         {children}
-      </span>
+      </Box>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -59,3 +60,9 @@ const ModalInfoWindow = ({infoTitle, infoText, children}) => {
 };
 
 export default ModalInfoWindow;
+
+ModalInfoWindow.propTypes = {
+  infoTitle: PropTypes.string.isRequired,
+  infoText: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired
+}

@@ -14,7 +14,6 @@ import Filter from '../Filter/filter';
 import ProductList from '../Product-list/product-list';
 import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 import Sorting from '../Sorting/sorting';
-import { resetFilters } from '../../redux/actions/filter';
 
 import {
   productsRequested,
@@ -42,7 +41,6 @@ const Catalog = (props) => {
     moreProductsLoaded,
     productsStore,
     searchedValue,
-    resetFilters,
     productsRequested
   } = props;
 
@@ -194,7 +192,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  resetFilters: () => dispatch(resetFilters()),
   productsRequested: () => dispatch(productsRequested()),
   productsLoaded: (products) => dispatch(productsLoaded(products)),
   moreProductsLoaded: (products) => dispatch(moreProductsLoaded(products))
@@ -225,8 +222,9 @@ Catalog.propTypes = {
     PropTypes.bool,
     PropTypes.string
   ])).isRequired,
+  productsRequested: PropTypes.func.isRequired,
   productsLoaded: PropTypes.func.isRequired,
-  moreProductsLoaded: PropTypes.func.isRequired,
+  moreProductsLoaded: PropTypes.func.isRequired
 };
 
 Catalog.defaultProps = {

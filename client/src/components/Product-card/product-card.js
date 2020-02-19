@@ -35,10 +35,6 @@ function ProductCard({ product }) {
   
   const cardHeader = () => (
     <div className={classes.iconWrapper}>
-{/*      <span className={classes.itemNo}>*/}
-{/*Item No.&nbsp;*/}
-{/*        {itemNo}*/}
-{/*      </span>*/}
       {loggedIn && <AddToFavoriteBtn favorites={favorites} itemId={itemId} />}
     </div>
   );
