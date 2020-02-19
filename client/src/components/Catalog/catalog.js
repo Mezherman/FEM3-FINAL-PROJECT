@@ -14,9 +14,13 @@ import Filter from '../Filter/filter';
 import ProductList from '../Product-list/product-list';
 import ProductBreadcrumbs from '../Breadcrumbs/breadcrumbs';
 import Sorting from '../Sorting/sorting';
+import { resetFilters } from '../../redux/actions/filter';
 
-import useStyles from './_catalog';
-import { productsLoaded, moreProductsLoaded } from '../../redux/actions/products';
+import {
+  productsRequested,
+  productsLoaded,
+  moreProductsLoaded
+} from '../../redux/actions/products';
 import { getCategory } from '../../services/get-categories';
 import {
   getFilteredProducts,
@@ -24,9 +28,9 @@ import {
   parseToFilterValue
 } from '../../services/filter';
 import ProductCardCarousel from '../Product-card-carousel/product-card-carousel';
-import { resetFilters } from '../../redux/actions/filter';
-
 import getSearchedProducts from '../../services/search';
+
+import useStyles from './_catalog';
 
 const Catalog = (props) => {
   const classes = useStyles();
@@ -37,8 +41,12 @@ const Catalog = (props) => {
     productsLoaded,
     moreProductsLoaded,
     productsStore,
-    searchedValue
+    searchedValue,
+    resetFilters,
+    productsRequested
   } = props;
+
+  const { productsLoading, products, productsQuantity } = productsStore;
 
   const { filterResults, filterPages, sort } = filter;
   const theme = useTheme();
@@ -82,6 +90,7 @@ const Catalog = (props) => {
   };
 
   useEffect(() => {
+    productsRequested();
     const request = assortment === 'search' ? 'cooking' : assortment;
     getCategory(request)
       .then((response) => {
@@ -156,10 +165,12 @@ const Catalog = (props) => {
           </Grid>
           <Grid item xs={12} md={8}>
             <Sorting sort={sort} />
-            <ProductList
-              products={productsStore.products}
-              productsQuantity={productsStore.productsQuantity}
-            />
+            {!productsLoading && (
+              <ProductList
+                products={products}
+                productsQuantity={productsQuantity}
+              />
+            )}
           </Grid>
           <Grid item xs={12}>
             {productsToShow && (
@@ -184,8 +195,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   resetFilters: () => dispatch(resetFilters()),
+  productsRequested: () => dispatch(productsRequested()),
   productsLoaded: (products) => dispatch(productsLoaded(products)),
-  moreProductsLoaded: (products) => dispatch(moreProductsLoaded(products)),
+  moreProductsLoaded: (products) => dispatch(moreProductsLoaded(products))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Catalog)
