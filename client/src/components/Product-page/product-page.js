@@ -18,6 +18,8 @@ import { commentsLoaded, commentsRequest } from '../../redux/actions/comments';
 
 function ProductPage(props) {
   const { assortment, itemNo, chosenProduct, fetchProduct, getChosenProduct, fetchComments } = props;
+  console.log('assort =', assortment);
+  console.log('itemNo =', itemNo);
   const [topList, setTopList] = useState([]);
   const [productsToShow, setProductsToShow] = useState([]);
 
@@ -33,7 +35,11 @@ function ProductPage(props) {
   useEffect(() => {
     if (chosenProduct) {
       getCategory(chosenProduct.categories)
-        .then((response) => setTopList(response.topSellers));
+        .then((response) => {
+          if (response.topSellers) {
+            setTopList(response.topSellers)
+          }
+        });
     }
   }, [chosenProduct, assortment]);
 
@@ -76,7 +82,7 @@ const mapStateToProps = (state, { itemNo }) => {
     ? state.productsReducer.products.find((product) => (
       product.itemNo === itemNo
     ))
-    : null ;
+    : null;
 
   return {
     chosenProduct,

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export default function getProductsByItemNo(itemNo) {
   return axios
-    .get(`/products/${itemNo}`)
+    .get(`/api/products/${itemNo}`)
     .then((product) => product)
     .catch((err) => alert(err.response.message));
 }
