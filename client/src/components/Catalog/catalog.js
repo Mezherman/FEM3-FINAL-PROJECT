@@ -84,25 +84,20 @@ const Catalog = (props) => {
   useEffect(() => {
     const request = assortment === 'search' ? 'cooking' : assortment;
     getCategory(request)
-      .then((response) => {
-        if (response.topSellers) {
-          setTopList(response.topSellers);
-        }
-      });
+      .then((response) => setTopList(response.topSellers));
 
     handleProductsRequest();
   }, [assortment, sort, filterResults, filterPages, searchedValue]);
 
-  const cardsToShowString = topList.toString();
-
   useEffect(() => {
+    const cardsToShowString = topList.toString();
     if (cardsToShowString) {
       getFilteredProducts(`itemNo=${cardsToShowString}`)
         .then((response) => {
           setProductsToShow(response)
         })
     }
-  }, [cardsToShowString, topList]);
+  }, [topList]);
 
   const toggleFilterMobile = (open) => {
     setFilterIsOpenMobile(open);
@@ -163,10 +158,12 @@ const Catalog = (props) => {
             />
           </Grid>
           <Grid item xs={12}>
-            <ProductCardCarousel
-              products={productsToShow}
-              label="most popular products"
-            />
+            {productsToShow && (
+              <ProductCardCarousel
+                products={productsToShow}
+                label="most popular products"
+              />
+            )}
           </Grid>
         </Grid>
       </Container>
