@@ -77,7 +77,6 @@ export default function Routes() {
         path={`${RoutesName.products}/:category/:subCategory`}
         exact
         render={({ match }) => {
-          console.log(123);
           const { category, subCategory } = match.params;
           if (!mainCategory.find((el) => el.id === category)) {
             return <NoMatch />
@@ -88,18 +87,14 @@ export default function Routes() {
       <Route
         path={`${RoutesName.products}/:categoryOrID`}
         render={({ match, location }) => {
-          console.log(match);
           const { categoryOrID } = match.params;
           if (isNaN(categoryOrID)) {
-            console.log(2);
             if (!mainCategory.find((el) => el.id === categoryOrID) && categoryOrID !== 'search') {
               return <NoMatch />
             }
-            console.log(categoryOrID);
             return <Catalog assortment={categoryOrID} />
           }
           const { pathname: url } = location;
-          console.log('before ProductPage =', categoryOrID);
           return (
             <ProductPage
               itemNo={categoryOrID}
