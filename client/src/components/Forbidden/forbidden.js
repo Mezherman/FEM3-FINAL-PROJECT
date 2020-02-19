@@ -6,11 +6,9 @@ import RoutesName from '../../routes-list'
 export default function Forbidden() {
   return (
     <Container maxWidth="xl">
-      <div style={{ minHeight: '52vh' }}>
-        <h1>You do not have access to this page</h1>
-        <p>Go to the</p>
-        <Link to={RoutesName.home}> homepage</Link>
-      </div>
+      <h1>You do not have access to this page</h1>
+      <p>Go to the</p>
+      <Link to={RoutesName.home}> homepage</Link>
     </Container>
   );
 }
