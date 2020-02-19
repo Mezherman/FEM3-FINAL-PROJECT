@@ -35,7 +35,9 @@ const parseToFilterValue = (itemNoArr, filterResults, sort = '', pages, allCateg
   if (sort.sortName) {
     sortVal[sort.sortName] = sort.sortValue;
   }
+
   sortVal = { ...sortVal, ...defaultSort };
+
   let valOfBrands = '';
   let valOfPrice = '';
   let valOfColor = '';
@@ -58,12 +60,15 @@ const parseToFilterValue = (itemNoArr, filterResults, sort = '', pages, allCateg
   const itemsToString = itemNoArr.join(',');
   const itemsForFilter = itemsToString ? `&itemNo=${itemsToString}` : '';
   const subCategories = allCategories.filter((category) => category.parentId === catalogLocation);
-  const subCategoriesString = subCategories ? subCategories.map((subCategory) => subCategory.id).join(',') : '';
+  const subCategoriesString = subCategories
+    ? subCategories.map((subCategory) => subCategory.id).join(',')
+    : '';
   const categoryString = !subCategoriesString ? catalogLocation : subCategoriesString;
   const categoryForFilter = categoryString !== 'search' ? `categories=${categoryString}` : '';
 
-  const valToFilter = `${categoryForFilter}${itemsForFilter}&${valOfBrands}&${valOfColor}&${valOfPrice}&${valOfPerPage}&${valOfStartPage}${valOfSort}`
-  // console.log('Filter string = ', valToFilter);
+  const valToFilter =
+    `${categoryForFilter}${itemsForFilter}&${valOfBrands}&${valOfColor}&${valOfPrice}&${valOfPerPage}&${valOfStartPage}${valOfSort}`;
+
   return valToFilter
 };
 

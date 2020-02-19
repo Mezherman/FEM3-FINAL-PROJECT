@@ -12,7 +12,7 @@ export default function Favorites() {
       {
         !favorites.length
           ? <h2>NOTHING ADDED TO FAVORITES.</h2>
-          : <ProductList productsResult={{ products: favorites, length: favorites.length }} />
+          : <ProductList products={favorites} productsQuantity={favorites.length} />
       }
     </Container>
   )

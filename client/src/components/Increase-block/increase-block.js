@@ -1,12 +1,12 @@
 import React from 'react';
-import { Box, IconButton, Input } from '@material-ui/core';
+import { PropTypes } from 'prop-types';
+import { IconButton, Input } from '@material-ui/core';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import useStyles from './_increase-block';
 
 export default function IncreaseBlock({ qty, setQty, maxQty }) {
   const classes = useStyles();
-  // const [qty, setQty] = useState(1);
 
   const handleChange = (event) => {
     if (event.target.value === '') {
@@ -20,11 +20,8 @@ export default function IncreaseBlock({ qty, setQty, maxQty }) {
     } else {
       setQty(Number(Math.abs(event.target.value)))
     }
-    // setQty (event.target.value === '' ? '' : );
-    // setQty(event.target.value === '' ? '' : Math.abs(event.target.value));
-    //
   };
-  // console.log(qty);
+
   return (
     <>
       <div className={classes.qtyPicker}>
@@ -61,3 +58,9 @@ export default function IncreaseBlock({ qty, setQty, maxQty }) {
     </>
   )
 }
+
+IncreaseBlock.propTypes = {
+  qty: PropTypes.number.isRequired,
+  setQty: PropTypes.func.isRequired,
+  maxQty: PropTypes.number.isRequired
+};

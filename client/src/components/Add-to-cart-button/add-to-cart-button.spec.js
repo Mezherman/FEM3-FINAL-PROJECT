@@ -4,7 +4,6 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import AddToCartButton from './add-to-cart-button'
 
 describe('AddToCartButton component', () => {
-
   it('should render correctly component if quantity > 0', () => {
     const props = {
       quantity: 5,

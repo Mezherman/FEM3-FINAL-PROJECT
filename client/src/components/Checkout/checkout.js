@@ -11,7 +11,7 @@ import FormButton from './Checkout-form/form-components/form-button';
 import validate from './validate';
 import Spinner from '../Spinner/spinner';
 import RoutesName from '../../routes-list';
-import { placeOrderToDB } from '../../services/checkout';
+import placeOrderToDB from '../../services/checkout';
 import { deleteCartFromDB } from '../../services/cart';
 import { clearCart } from '../../redux/actions/CartActions';
 
@@ -37,8 +37,9 @@ let Checkout = (props) => {
       comments: order.comments || '',
       letterSubject: 'Thank you for your order!',
       letterHtml:
-        '<h1>Your order is placed. OrderNo is XXXXXXXXXX.</h1><p>{Other details about order in' +
-        ' your HTML}</p>'
+        `<h1>Your order №XXXXXXXX is placed. </h1>
+        <p>Looking forward to see you again soon. In case of any questions - we are happy to help!</p>
+        <p>Sincerely, your WMF team.</p>`
     };
 
     if (customer._id) {
@@ -65,7 +66,7 @@ let Checkout = (props) => {
           if (customerId) {
             deleteCartFromDB()
               .then(() => clearCart())
-              .catch((error) => console.log('ERROR =', error));
+              .catch((error) => alert(error.response.message));
           } else {
             window.localStorage.setItem('cart', '');
             clearCart();
@@ -153,6 +154,7 @@ Checkout.propTypes = {
     PropTypes.number,
     PropTypes.func
   ]).isRequired,
+  // eslint-disable-next-line
   handleSubmit: PropTypes.func,
   user: PropTypes.oneOfType([
     PropTypes.object,

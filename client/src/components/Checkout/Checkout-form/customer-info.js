@@ -15,7 +15,6 @@ export default function CustomerInfo({ customer }) {
   const classes = useStyles();
 
   const { gender } = useSelector((state) => state.user.customer);
-  // console.log('gender =', gender);
 
   const genderRadioGroup = (
     <Field name="gender" component={RenderRadioGroup} gender={gender}>
@@ -24,7 +23,6 @@ export default function CustomerInfo({ customer }) {
     </Field>
   );
 
-  console.log('CUSTOMER =', customer);
   const textField = (name, label) => (
     <Field
       name={name}
