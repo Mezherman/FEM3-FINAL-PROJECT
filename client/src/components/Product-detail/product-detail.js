@@ -22,7 +22,7 @@ import IncreaseBlock from '../Increase-block/increase-block';
 import { addProductToCart } from '../../redux/actions/CartActions';
 import AddToCartButton from '../Add-to-cart-button/add-to-cart-button';
 
-function ProductDetail({ product, favorites, actionAddProductToCart }) {
+function ProductDetail({ loggedIn, product, favorites, actionAddProductToCart }) {
   const {
     imageUrls,
     name,
@@ -133,14 +133,17 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
       </Grid>
     </Grid>
   );
+
   const renderProductMediaAre = () => (
     <>
-      <Box display="flex" justifyContent="flex-end">
-        <AddToFavoriteBtn
-          favorites={favorites}
-          itemId={itemId}
-        />
-      </Box>
+      {loggedIn && (
+        <Box display="flex" justifyContent="flex-end">
+          <AddToFavoriteBtn
+            favorites={favorites}
+            itemId={itemId}
+          />
+        </Box>
+      )}
       <Container>
         <ProductDetailCarousel
           images={images}
@@ -204,11 +207,11 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
       </Grid>
       {!isDesktop && <Divider />}
       <Grid container>
-        <Grid item xs={12} >
+        <Grid item xs={12}>
           <h3
             className={classes.sectionTitle}
           >
-        Product details
+            Product details
           </h3>
           {isDesktop && <ProductDetailTab data={product} />}
           {!isDesktop && <ProductDetailCollapse data={product} />}
@@ -229,7 +232,12 @@ function ProductDetail({ product, favorites, actionAddProductToCart }) {
     </Container>
   );
 }
-const mapStateToProps = (state) => state.favoritesReducer;
+
+const mapStateToProps = (state) => ({
+  favorites: state.favoritesReducer.favorites,
+  loggedIn: state.user.loggedIn
+});
+
 const mapDispatchToProps = (dispatch) => ({
   actionAddProductToCart:
     (productData, quantityVal) => dispatch(addProductToCart(productData, quantityVal)),
