@@ -120,14 +120,5 @@ ProductCard.propTypes = {
       PropTypes.bool,
       PropTypes.object
     ])
-  ).isRequired,
-  // name: PropTypes.string.isRequired,
-  // imageUrls: PropTypes.array.isRequired,
-  // currentPrice: PropTypes.string.isRequired,
-  // specialPrice: PropTypes.string,
+  ).isRequired
 };
-
-// ProductCard.defaultProps = {
-// //   specialPrice: false,
-//   enabled: true
-// };

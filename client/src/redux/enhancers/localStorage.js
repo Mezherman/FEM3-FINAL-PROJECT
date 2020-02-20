@@ -4,7 +4,6 @@ const localStorage = (store) => (next) => (action) => {
   const { loggedIn, token } = store.getState().user;
   if (!loggedIn || !token) {
     switch (action.type) {
-      // cart
       case 'SET_CART_FROM_LOCAL': {
         const products = action.payload.localStorageProducts;
         const newCart = {

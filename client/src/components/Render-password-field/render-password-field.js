@@ -29,11 +29,11 @@ const renderPasswordField = (props) => {
       error={!!(touched && error)}
       helperText={touched && error}
       {...input}
-      className={invalid ? classes.invalidPassword : classes.root}
+      className={classes.root}
       label={
         (
           <FormLabel
-            className={invalid ? classes.invalidPassword : classes.root}
+            className={classes.root}
             required
           >
             {label}

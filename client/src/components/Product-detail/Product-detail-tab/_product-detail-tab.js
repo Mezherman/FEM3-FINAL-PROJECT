@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => createStyles({
   badge: {
     '& .MuiBadge-anchorOriginTopRightRectangle': {
       top: -12,
-      // right: 2
     }
   }
 }));

@@ -31,13 +31,6 @@ const useStylesMainCarousel = makeStyles((theme) => ({
   },
 
   textBlock: {
-    // [theme.breakpoints.up('xs')]: {
-    //   top: '30%',
-    //   maxWidth: '194px',
-    //   fontSize: '0.19rem',
-    //   right: 39,
-    //   padding: '2px',
-    // },
     [theme.breakpoints.up('sm')]: {
       top: '12%',
       maxWidth: '400px',
@@ -64,7 +57,6 @@ const useStylesMainCarousel = makeStyles((theme) => ({
     fontSize: '0.19rem',
     right: 40,
     padding: theme.spacing(1),
-    // borderRadius: theme.spacing(1),
     maxWidth: '200px',
     color: theme.palette.text.primary,
     position: 'absolute',
@@ -146,7 +138,7 @@ const useStylesMainCarousel = makeStyles((theme) => ({
   },
   displayCarousel: {
     display: 'none',
-    [theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.up('xl')]: {
       display: 'block',
     }
   },
