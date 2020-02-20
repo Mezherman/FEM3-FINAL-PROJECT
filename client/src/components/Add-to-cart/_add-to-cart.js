@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     display: 'flex',
     justifyContent: 'space-between',
-    // padding: '10px 0',
     fontSize: '16px'
   },
   header: {
@@ -49,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none'
   },
   qtyPicker: {
-    // width: '100px',
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'space-between',

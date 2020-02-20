@@ -154,7 +154,6 @@ Checkout.propTypes = {
     PropTypes.number,
     PropTypes.func
   ]).isRequired,
-  // eslint-disable-next-line
   handleSubmit: PropTypes.func,
   user: PropTypes.oneOfType([
     PropTypes.object,

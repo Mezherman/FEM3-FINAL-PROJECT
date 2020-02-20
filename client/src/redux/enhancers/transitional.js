@@ -6,7 +6,6 @@ const transitional = (store) => (next) => (action) => {
   const storeCart = store.getState().cart;
   const cartFromState = _.cloneDeep(storeCart);
   switch (action.type) {
-    // cart
     case 'ADD_PRODUCT': {
       const { product } = action.payload;
       const productQuantity = action.payload.quantity ?? 1;
@@ -14,7 +13,6 @@ const transitional = (store) => (next) => (action) => {
         return next({ ...action, type: 'ADD_PRODUCT_FAIL' });
       }
       const productIndex = ServicesCart.findProductById(cartFromState.products, product._id);
-      // set quantity
       if (productIndex < 0) {
         cartFromState.products.push({
           product,

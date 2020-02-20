@@ -87,6 +87,7 @@ const Comment = (props) => {
       .then((response) => {
         if (response.statusText === 'OK') {
           getComments();
+          setBthAddComment(true);
         }
       })
       .catch((error) => setIsError(error.message));

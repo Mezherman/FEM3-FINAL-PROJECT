@@ -54,9 +54,26 @@ const Catalog = (props) => {
   const [productsToShow, setProductsToShow] = useState([]);
   const [filterIsOpenMobile, setFilterIsOpenMobile] = useState(false);
   const { allCategories } = catalog;
-
+  const [searchedError, setSearchError] = useState('');
+  const searchErrorMsg = (
+    <h2>
+      Sorry, we can&#39;t find results for your parameters&nbsp;
+      { searchedValue
+        ? (
+          <>
+          &#34;
+            {searchedValue}
+          &#34;
+          </>
+        )
+        : ''}
+    </h2>
+  );
   const handleProductsRequest = async () => {
     let searchedResult = [];
+    if (searchedError) {
+      setSearchError('');
+    }
     if (assortment === 'search' && searchedValue) {
       await getSearchedProducts(searchedValue)
         .then((products) => {
@@ -65,9 +82,11 @@ const Catalog = (props) => {
           }
           searchedResult = products.map((product) => product.itemNo);
         });
-      if (!searchedResult.length) return;
+      if (!searchedResult.length) {
+        setSearchError(searchErrorMsg);
+        return;
+      }
     }
-
     const valToFilter = parseToFilterValue(
       searchedResult,
       filterResults,
@@ -80,6 +99,8 @@ const Catalog = (props) => {
       .then((newProducts) => {
         if (filterPages.startPage > 1) {
           moreProductsLoaded(newProducts);
+        } else if (!newProducts.products.length) {
+          setSearchError(searchErrorMsg);
         } else {
           productsLoaded(newProducts);
         }
@@ -162,10 +183,12 @@ const Catalog = (props) => {
           </Grid>
           <Grid item xs={12} md={8}>
             <Sorting sort={sort} />
-            <ProductList
-              products={products}
-              productsQuantity={productsQuantity}
-            />
+            {searchedError || (
+              <ProductList
+                products={products}
+                productsQuantity={productsQuantity}
+              />
+            )}
           </Grid>
           <Grid item xs={12}>
             {productsToShow && (
@@ -197,7 +220,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(Catalog)
 
 Catalog.propTypes = {
-  assortment: PropTypes.string.isRequired,
+  assortment: PropTypes.string,
   searchedValue: PropTypes.string,
   catalog: PropTypes.objectOf(PropTypes.oneOfType([
     PropTypes.string,
@@ -225,5 +248,6 @@ Catalog.propTypes = {
 };
 
 Catalog.defaultProps = {
-  searchedValue: ''
+  searchedValue: '',
+  assortment: ''
 };

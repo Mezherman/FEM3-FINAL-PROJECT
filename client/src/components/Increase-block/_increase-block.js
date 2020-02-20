@@ -1,12 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  // wrapper: {
-  //   textAlign: 'right',
-  //   // margin: theme.spacing(3, 0),
-  // },
   qtyPicker: {
-    // maxWidth: '60%',
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -19,13 +14,11 @@ const useStyles = makeStyles((theme) => ({
   },
   [theme.breakpoints.up('md')]: {
     qtyPicker: {
-      // width: '150px'
     }
   },
   qty: {
     textAlign: 'center',
     fontSize: '16px',
-    // minWidth: '50px',
   },
   input: {
     '& .MuiInputBase-input': {
