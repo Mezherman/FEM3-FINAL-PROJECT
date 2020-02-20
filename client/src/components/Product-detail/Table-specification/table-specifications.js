@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 1000
   },
   row: {
-      backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.palette.background.default,
     transition: theme.transitions.duration,
     '&:hover': {
       backgroundColor: theme.palette.background.primary,
@@ -33,7 +33,6 @@ function createData(name, data) {
 }
 
 export default function TableSpecifications({ data }) {
-  // console.log('TAble', data);
   const classes = useStyles();
   const { itemNo, brand, color, manufacturerCountry, myCustomParams } = data;
   const {
@@ -85,7 +84,7 @@ export default function TableSpecifications({ data }) {
                     >
                       {row.data}
                     </TableCell>
-                  ) : null }
+                  ) : null}
                 </TableRow>
               ))}
             </TableBody>

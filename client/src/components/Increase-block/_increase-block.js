@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     '& .MuiInputBase-input': {
-      minWidth: '40px',
+      maxWidth: '50px',
 
       textAlign: 'center',
     },

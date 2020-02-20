@@ -5,12 +5,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
   MenuItem,
-  ListItem,
   ListItemIcon,
-  ListItemText,
   useTheme,
   Divider,
-  Drawer
+  Drawer,
+  Typography
 } from '@material-ui/core';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
@@ -123,7 +122,7 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
         if (menuItem.title === 'CATALOG') {
           return (
             <Fragment key={menuItem.title}>
-              <ListItem
+              <MenuItem
                 onClick={() => {
                   toggleDrawerCat(true);
                   toggleDrawer(false);
@@ -136,10 +135,10 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
                   >
                     {listItemIcon(menuItem.title)}
                   </ListItemIcon>
-                  <ListItemText primary={menuItem.title} />
+                  <Typography variant="inherit">{menuItem.title}</Typography>
                 </span>
                 <KeyboardArrowRightIcon />
-              </ListItem>
+              </MenuItem>
               <Divider />
             </Fragment>
           )
@@ -147,7 +146,7 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
 
         return (
           <Fragment key={menuItem.title}>
-            <ListItem
+            <MenuItem
               onClick={() => {
                 toggleDrawer(false);
               }}
@@ -157,9 +156,9 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
                 className={classes.headerMenuListHyperlink}
               >
                 <ListItemIcon className={classes.icon}>{listItemIcon(menuItem.title)}</ListItemIcon>
-                <ListItemText primary={menuItem.title} />
+                <Typography variant="inherit">{menuItem.title}</Typography>
               </Link>
-            </ListItem>
+            </MenuItem>
             <Divider />
           </Fragment>
         )

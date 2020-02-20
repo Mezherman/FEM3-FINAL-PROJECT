@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       display: 'inline',
       backgroundColor: 'rgba(0, 0, 0, 0.2)',
-      height: 588,
+      height: 528,
       alignSelf: 'flex-end'
     }
   },

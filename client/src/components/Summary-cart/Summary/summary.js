@@ -10,7 +10,7 @@ function Summary({ totalCartPrice }) {
   const classes = useStyles();
   return (
     <Box>
-      <Hidden xsDown>
+      <Hidden smDown>
         <SummaryItem title="Summary" type="title" />
         <SummaryItem title="Grand Total" value={`€${totalCartPrice}`} type="total" />
         <Grid container justify="center">
@@ -21,7 +21,7 @@ function Summary({ totalCartPrice }) {
           </Link>
         </Grid>
       </Hidden>
-      <Hidden smUp>
+      <Hidden mdUp>
         <SummaryItem title="Grand Total" value={`€${totalCartPrice}`} type="total" />
         <Grid container justify="center">
           <Link to={RoutesList.checkout} className={classes.link}>
@@ -38,4 +38,4 @@ export default Summary;
 
 Summary.propTypes = {
   totalCartPrice: PropTypes.number.isRequired
-}
+};

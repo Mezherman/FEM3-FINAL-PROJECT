@@ -2,8 +2,10 @@ import React from 'react';
 import { Grid, Typography, Container } from '@material-ui/core';
 import { Field } from 'redux-form';
 import PropTypes from 'prop-types';
-import useStyles from '../../../Sign-up/Sign-up-form/_sign-up-form';
+
 import renderEditTextField from '../../../Render-text-field/render-edit-text-field'
+
+import useStyles from '../../../Sign-up/Sign-up-form/_sign-up-form';
 
 function PutPersonalData ({ firstName, lastName, telephone, email, login }) {
   const classes = useStyles();

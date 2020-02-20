@@ -35,10 +35,6 @@ function ProductCard({ product }) {
   
   const cardHeader = () => (
     <div className={classes.iconWrapper}>
-{/*      <span className={classes.itemNo}>*/}
-{/*Item No.&nbsp;*/}
-{/*        {itemNo}*/}
-{/*      </span>*/}
       {loggedIn && <AddToFavoriteBtn favorites={favorites} itemId={itemId} />}
     </div>
   );
@@ -88,22 +84,23 @@ function ProductCard({ product }) {
         onModalClose={closeModal}
         product={{ imageUrls, name, currentPrice, previousPrice, itemNo, itemId, maxQty: quantity }}
       />
-
-      <div className={classes.card}>
-        <Divider />
-        {cardHeader()}
-        <Link
-          to={`${RoutesName.products}/${itemNo}`}
-          className={classes.link}
-        >
-          <Container maxWidth="sm">
-            {image()}
-            <Divider variant="middle" />
-            <h3 className={classes.title}>{name.toUpperCase()[0] + name.slice(1)}</h3>
-            {price()}
-          </Container>
-        </Link>
-        {cardFooter()}
+      <div className={classes.wrapper}>
+        <div className={classes.card}>
+          <Divider />
+          {cardHeader()}
+          <Link
+            to={`${RoutesName.products}/${itemNo}`}
+            className={classes.link}
+          >
+            <Container maxWidth="sm">
+              {image()}
+              <Divider variant="middle" />
+              <h3 className={classes.title}>{name.toUpperCase()[0] + name.slice(1)}</h3>
+              {price()}
+            </Container>
+          </Link>
+          {cardFooter()}
+        </div>
       </div>
     </>
   )

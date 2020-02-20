@@ -34,7 +34,10 @@ const useStylesSingIn = makeStyles((theme) => ({
     cursor: 'pointer',
     '&:hover': {
       opacity: '.85',
-    }
+    },
+    '& input': {
+      cursor: 'pointer',
+    },
   },
   text: {
     color: theme.palette.secondary.dark,
@@ -45,6 +48,11 @@ const useStylesSingIn = makeStyles((theme) => ({
   errorText: {
     color: theme.palette.error.dark,
   },
+  closeBtn: {
+    display: 'flex',
+    alignSelf: 'flex-end',
+    position: 'absolute'
+  }
 
 }));
 

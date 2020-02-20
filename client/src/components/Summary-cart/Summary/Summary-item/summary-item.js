@@ -7,10 +7,10 @@ function SummaryItem({ title, value, type }) {
   const classes = useStyles();
   return (
     <Grid container justify="space-between" className={`${classes.root} ${classes[type]}`}>
-      <Grid item sm={9}>
+      <Grid item xs={9} sm={6}>
         {title}
       </Grid>
-      <Grid item sm={3}>
+      <Grid item xs={3} sm={6} className={classes.alignRight}>
         {value}
       </Grid>
     </Grid>
@@ -22,9 +22,9 @@ SummaryItem.propTypes = {
   title: PropTypes.string.isRequired,
   value: PropTypes.string,
   type: PropTypes.string
-}
+};
 
 SummaryItem.defaultProps = {
   value: '',
   type: 'item'
-}
+};

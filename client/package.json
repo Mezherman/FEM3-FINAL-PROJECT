@@ -62,7 +62,8 @@
     "test": "react-scripts test",
     "start-js": "react-scripts start",
     "eject": "react-scgiripts eject",
-    "watch-sass-js": "npm-watch"
+    "watch-sass-js": "npm-watch",
+    "lint": "eslint ./src"
   },
   "watch": {
     "stylelint-dev": {
