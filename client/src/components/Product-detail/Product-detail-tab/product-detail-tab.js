@@ -9,8 +9,8 @@ import TableSpecification from '../Table-specification/table-specifications';
 import Comment from '../../Comment/comment';
 import useStyles from './_product-detail-tab';
 
-export default function ProductDetailTab({ data }) {
-  const { myCustomParams } = data;
+export default function ProductDetailTab({ currentProduct }) {
+  const { myCustomParams } = currentProduct;
   const { productDescription, productHighlights } = myCustomParams;
   const classes = useStyles();
   const commentsLength = useSelector(
@@ -26,7 +26,7 @@ export default function ProductDetailTab({ data }) {
           <Tab><h4>Specifications</h4></Tab>
           <Tab>
             <h4>
-Comments
+              Comments
               <Badge badgeContent={commentsLength} color="error" className={classes.badge} />
             </h4>
           </Tab>
@@ -43,10 +43,10 @@ Comments
           </div>
         </TabPanel>
         <TabPanel>
-          <TableSpecification data={data} />
+          <TableSpecification data={currentProduct} />
         </TabPanel>
         <TabPanel>
-          <Comment />
+          <Comment currentProduct={currentProduct} />
         </TabPanel>
 
       </Tabs>
@@ -55,7 +55,7 @@ Comments
 }
 
 ProductDetailTab.propTypes = {
-  data: PropTypes.objectOf(PropTypes.oneOfType([
+  currentProduct: PropTypes.objectOf(PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.bool,
     PropTypes.symbol,
