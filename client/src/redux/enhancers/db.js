@@ -1,11 +1,10 @@
-import React from 'react';
 import * as ServicesCart from '../../services/cart';
 import { getFavoriteProducts } from '../../services/favorites';
 import getCategories from '../../services/get-categories';
 import getCustomer from '../../services/customer';
 
 const db = (store) => (next) => async (action) => {
-  const storeCart = { ...store.getState().cart };
+  // const storeCart = { ...store.getState().cart };
   const { loggedIn, token } = store.getState().user;
   switch (action.type) {
     case 'SET_CATALOG_FROM_DB': {

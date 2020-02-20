@@ -1,4 +1,3 @@
-import React from 'react';
 import * as ServicesCart from '../../services/cart';
 
 const localStorage = (store) => (next) => (action) => {

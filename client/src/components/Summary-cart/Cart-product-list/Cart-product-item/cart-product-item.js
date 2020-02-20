@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Grid, Hidden } from '@material-ui/core';
@@ -16,18 +16,21 @@ export default function CartProductItem({ product, onSetProductQuantity, onRemov
   const subTotalProduct = currentProduct.currentPrice * cartQuantity;
 
   const [isDialogOpen, setDialogOpen] = useState(false);
+
   const handleDialogOpen = () => {
     setDialogOpen(true);
-  }
+  };
+
   const onCloseDialogWithStatus = (status) => {
     if (status) {
       onRemoveProduct(currentProduct._id);
     }
     setDialogOpen(false);
-  }
+  };
+
   const setQty = (qty) => {
     onSetProductQuantity(currentProduct._id, qty)
-  }
+  };
 
   const productImage = (
     <Link to={`${RoutesName.products}/${currentProduct.itemNo}`}>
@@ -112,12 +115,7 @@ export default function CartProductItem({ product, onSetProductQuantity, onRemov
           </p>
         </Grid>
       </Grid>
-      {/*<Grid item md={1} xs={12} className={headerClasses.alignCenter}>*/}
-      {/*  <DeleteIcon color="secondary" className={classes.deleteBtn} onClick={() => { handleDialogOpen() }} />*/}
-      {/*</Grid>*/}
-      {/*<DialogModal onCloseDialogWithStatus={onCloseDialogWithStatus} isOpen={isDialogOpen} />*/}
     </Grid>
-
   );
 }
 
@@ -127,4 +125,4 @@ CartProductItem.propTypes = {
   ).isRequired,
   onSetProductQuantity: PropTypes.func.isRequired,
   onRemoveProduct: PropTypes.func.isRequired
-}
+};

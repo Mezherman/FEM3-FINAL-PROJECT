@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { bindActionCreators } from 'redux'
 import { useDispatch, useSelector } from 'react-redux';
 import { Grid, Container, Box } from '@material-ui/core';
@@ -6,7 +6,6 @@ import Summary from './Summary/summary';
 import * as cartActions from '../../redux/actions/CartActions'
 import CartProductList from './Cart-product-list/cart-product-list';
 import EmptyCart from './Empty-cart/empty-cart'
-import CartProductListHeader from './Cart-product-list/Cart-product-list-header/cart-product-list-header'
 import HelpPanel from './Help-panel/help-panel'
 import useStyles from './_cart';
 import ContinueBtn from './Continue-btn/continue-btn';

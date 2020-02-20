@@ -38,4 +38,4 @@ export default Summary;
 
 Summary.propTypes = {
   totalCartPrice: PropTypes.number.isRequired
-}
+};
