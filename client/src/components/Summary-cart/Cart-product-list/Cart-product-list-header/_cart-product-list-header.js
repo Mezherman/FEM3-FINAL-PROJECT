@@ -5,6 +5,12 @@ const useHeaderStyles = makeStyles((theme) => ({
     padding: '20px 0 10px',
     fontSize: '1.1rem',
   },
+  alignFlexible: {
+    textAlign: 'right',
+    [theme.breakpoints.up('md')]: {
+      textAlign: 'center'
+    }
+  },
   alignCenter: {
     textAlign: 'center'
   },
