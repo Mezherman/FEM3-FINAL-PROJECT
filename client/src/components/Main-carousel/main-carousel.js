@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@material-ui/core';
@@ -32,23 +32,25 @@ function MainSlider ({ fetchSlides }) {
   const carouselContent = () => mainSlides.map((item) => {
     const { imageUrl, title, description, route, _id } = item;
     return (
-      <Link to={route} key={_id}>
+      <Fragment key={_id}>
         <div className={mainCarouselClasses.background} style={addBackgroundImg(imageUrl)} >
           <div className={mainCarouselClasses.textBlock} >
             <h3 className={mainCarouselClasses.title}>{title}</h3>
             <p className={mainCarouselClasses.description}>{description}</p>
-            <Button
-              size="large"
-              className={mainCarouselClasses.showMore}
-              variant="contained"
-              color="secondary"
-              disableElevation
-            >
+            <Link to={route} >
+              <Button
+                size="large"
+                className={mainCarouselClasses.showMore}
+                variant="contained"
+                color="secondary"
+                disableElevation
+              >
               Show more
-            </Button>
+              </Button>
+            </Link>
           </div>
         </div>
-      </Link>
+      </Fragment>
     )
   });
 
