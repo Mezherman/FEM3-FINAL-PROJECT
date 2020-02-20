@@ -52,7 +52,7 @@ ModalResponse.propTypes = {
   openModal: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
   inModal: PropTypes.bool.isRequired,
-  classModal: PropTypes.bool.isRequired,
+  classModal: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  submitClass: PropTypes.bool.isRequired
+  submitClass: PropTypes.string.isRequired
 };
