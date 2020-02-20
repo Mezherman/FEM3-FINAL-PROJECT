@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import SearchIcon from '@material-ui/icons/Search';
@@ -12,15 +12,14 @@ import useStyles from './_search';
 
 const Search = ({ history, searchIsShown }) => {
   const classes = useStyles();
-  const [searchedValue, setSearchedValue] = useState('');
   const dispatch = useDispatch();
+  const { searchedValue } = useSelector((state) => state.searchReducer);
+  const [searchInput, setSearchInput] = useState('');
 
   const handleChange = (event) => {
-    setSearchedValue(event.target.value);
+    dispatch(storeSearchedValue(event.target.value));
     history.push('/products/search')
   };
-
-  dispatch(storeSearchedValue(searchedValue));
 
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
@@ -55,6 +54,10 @@ const Search = ({ history, searchIsShown }) => {
     <InputBase
       placeholder="Search…"
       type="search"
+      value={searchInput}
+      onChange={(event) => {
+        setSearchInput(event.target.value)
+      }}
       autoFocus
       classes={{
         root: classes.inputRoot,

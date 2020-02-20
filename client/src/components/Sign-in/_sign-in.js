@@ -34,7 +34,10 @@ const useStylesSingIn = makeStyles((theme) => ({
     cursor: 'pointer',
     '&:hover': {
       opacity: '.85',
-    }
+    },
+    '& input': {
+      cursor: 'pointer',
+    },
   },
   text: {
     color: theme.palette.secondary.dark,
