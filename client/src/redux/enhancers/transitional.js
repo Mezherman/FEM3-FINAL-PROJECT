@@ -65,7 +65,7 @@ const transitional = (store) => (next) => (action) => {
     case 'MERGE_CART': {
       let localStorageCart = window.localStorage.getItem('cart');
       localStorageCart = localStorageCart ? JSON.parse(localStorageCart) : {};
-      const products = [];
+
       if (store.getState().user.loggedIn) {
         if (localStorageCart.products && localStorageCart.products.length) {
           return next({

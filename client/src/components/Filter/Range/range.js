@@ -33,13 +33,15 @@ const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
   const changePrice = (price) => {
     setValue(price);
     combineInputs(price);
-  }
+  };
+
   const combineInputs = (price) => {
     getFilterProducts({
       ...filterResults,
       price
     });
-  }
+  };
+
   const handleRangeChange = (event, price) => {
     setValue(price);
     getFilterProducts({
@@ -53,29 +55,29 @@ const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
     if (inputValue > max) {
       inputValue = 0
     }
-    changePrice([inputValue === '' ? '' : Number(Math.abs(inputValue)), filterResults.price[1]])
+    changePrice([inputValue === '' ? '' : Number(Math.abs(Math.floor(inputValue))), filterResults.price[1]])
   };
 
   const handleInputMax = (event) => {
-    let inputValue = event.target.value
+    let inputValue = event.target.value;
     if (inputValue > max) {
       inputValue = max
     }
-    changePrice([filterResults.price[0], inputValue === '' ? '' : Number(Math.abs(inputValue))]);
+    changePrice([filterResults.price[0], inputValue === '' ? '' : Number(Math.abs(Math.floor(inputValue)))]);
   };
 
   const handleBlurMin = () => {
     if (filterResults.price[0] === '') {
-      const minPrice = 0
+      const minPrice = 0;
       changePrice([minPrice, filterResults.price[1]]);
     }
-  }
+  };
 
   const handleBlurMax = () => {
     if (filterResults.price[1] === '') {
       changePrice([filterResults.price[0], max]);
     }
-  }
+  };
 
   const error = 'Warning! Your first value should be lower than the second!';
 
@@ -93,7 +95,8 @@ const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
         'aria-labelledby': 'range-slider',
       }}
     />
-  )
+  );
+
   return (
     <>
       <CustomSlider
@@ -110,15 +113,15 @@ const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
       </div>
     </>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   filterResults: state.filterReducer.filterResults
-})
+});
 
 const mapDispatchToProps = {
   getFilterProducts
-}
+};
 
 RangeSlider.propTypes = {
   max: PropTypes.number,

@@ -59,7 +59,7 @@ const HeaderIcons = () => {
     setOpen(false);
   };
 
-  function handleListKeyDown (event) {
+  function handleListKeyDown(event) {
     if (event.key === 'Tab') {
       event.preventDefault();
       setOpen(false);

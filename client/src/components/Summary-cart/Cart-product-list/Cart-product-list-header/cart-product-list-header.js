@@ -11,14 +11,14 @@ export default function CartProductListHeader() {
         Product
       </Grid>
       <Grid item md={4} />
-      <Grid item md={1} className={classes.alignRight}>
+      <Grid item md={1} className={classes.alignFlexible}>
         Price
       </Grid>
-      <Grid item md={2} className={classes.alignCenter}>
+      <Grid item md={3} className={classes.alignFlexible}>
         Q-ty
       </Grid>
-      <Grid item md={2} className={classes.alignRight}>
-        Subtotal
+      <Grid item md={1} className={classes.alignFlexible}>
+        Total
       </Grid>
     </Grid>
   );

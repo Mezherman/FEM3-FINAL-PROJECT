@@ -17,7 +17,7 @@ export default function DeliveryPaymentInfo() {
         <Box className={classes.cardIconWrapper}>
           <RadioCheckboxField name="paymentMethod" value="creditCard" label="Credit card" />
           <Box>
-            <img src="/img/visa.png" alt="visa-card" className={classes.cardIcon} />
+            <img src="/img/visa-card.png" alt="visa-card" className={classes.cardIcon} />
             <img src="/img/mastercard.png" alt="master-card" className={classes.cardIcon} />
             <img src="/img/maestro.png" alt="maestro-card" className={classes.cardIcon} />
           </Box>

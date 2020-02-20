@@ -13,14 +13,14 @@ import useStyles from './_product-list';
 const ProductList = React.memo(({ products = [], productsQuantity = 0, assortment }) => {
   const fadeAnimation = keyframes`${fadeIn}`;
   const AnimationCard = styled.div`
-  animation: 3s ${fadeAnimation};
+  animation: 2s ${fadeAnimation};
 `;
   const classes = useStyles();
   const dispatch = useDispatch();
   const loadMoreProducts = useCallback(() => {
     setTimeout(() => {
       dispatch(filterIncreasePage());
-    }, 2000);
+    }, 2500);
   }, [dispatch]);
 
   const searchedValue = useSelector((state) => state.searchReducer.searchedValue);
@@ -42,12 +42,10 @@ const ProductList = React.memo(({ products = [], productsQuantity = 0, assortmen
 
   const renderProducts = (productsList) => (
     productsList.map((product) => (
-      <AnimationCard key={product._id}>
-        <ProductCard
-          key={product.itemNo}
-          product={product}
-        />
-      </AnimationCard>
+      <ProductCard
+        key={product.itemNo}
+        product={product}
+      />
     ))
   );
   return (

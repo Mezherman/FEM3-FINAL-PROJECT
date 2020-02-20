@@ -4,7 +4,6 @@ import getCategories from '../../services/get-categories';
 import getCustomer from '../../services/customer';
 
 const db = (store) => (next) => async (action) => {
-  // const storeCart = { ...store.getState().cart };
   const { loggedIn, token } = store.getState().user;
   switch (action.type) {
     case 'SET_CATALOG_FROM_DB': {
@@ -23,7 +22,6 @@ const db = (store) => (next) => async (action) => {
   }
 
   if (loggedIn && token) {
-    const { cart } = { ...action.payload };
     switch (action.type) {
       case 'ADD_PRODUCT': {
         const newCart = await ServicesCart.addProductToCart(action.payload.product._id);
@@ -76,10 +74,12 @@ const db = (store) => (next) => async (action) => {
             }
           });
         }
+
         action.payload.cart = {
           products
         }
       }
+
       case 'UPDATE_CART': {
         const newCart = await ServicesCart.updateCart(action.payload.cart);
         if (!newCart) {
