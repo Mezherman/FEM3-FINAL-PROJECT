@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: '0px 0 1px 0px #aaa, 0px 5px 11px #909090',
       cursor: 'pointer',
     },
+    [theme.breakpoints.up('md')]: {
+      maxWidth: '232px',
+    },
     [theme.breakpoints.up('lg')]: {
       maxWidth: '260px',
     }
