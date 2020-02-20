@@ -10,7 +10,7 @@ import Spinner from '../Spinner/spinner';
 
 import useStyles from './_product-list';
 
-const ProductList = React.memo(({ products = [], productsQuantity = 0, assortment }) => {
+const ProductList = React.memo(({ products = [], productsQuantity = 0 }) => {
   const fadeAnimation = keyframes`${fadeIn}`;
   const AnimationCard = styled.div`
   animation: 2s ${fadeAnimation};
@@ -22,23 +22,6 @@ const ProductList = React.memo(({ products = [], productsQuantity = 0, assortmen
       dispatch(filterIncreasePage());
     }, 2500);
   }, [dispatch]);
-
-  const searchedValue = useSelector((state) => state.searchReducer.searchedValue);
-
-  const searchedError = assortment === 'search'
-    ? (
-      <h2>
-        Sorry, we can&#39;t find results for your parameters&nbsp;
-        {searchedValue ? (
-          <>
-            &#34;
-            {searchedValue}
-            &#34;
-          </>
-        ) : searchedValue}
-      </h2>
-    )
-    : <h2>Sorry, we can&#39;t find results for your parameters </h2>
 
   const renderProducts = (productsList) => (
     productsList.map((product) => (
@@ -56,7 +39,7 @@ const ProductList = React.memo(({ products = [], productsQuantity = 0, assortmen
       loader={<Spinner />}
       className={classes.productList}
     >
-      {products.length ? renderProducts(products) : searchedError}
+      {renderProducts(products)}
 
     </InfiniteScroll>
   )
@@ -71,5 +54,4 @@ ProductList.propTypes = {
     PropTypes.number,
   ])).isRequired,
   productsQuantity: PropTypes.number.isRequired,
-  assortment: PropTypes.string.isRequired
 };
