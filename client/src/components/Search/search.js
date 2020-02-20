@@ -24,12 +24,17 @@ const Search = ({ history, searchIsShown }) => {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
+  const searchVal = () => {
+    dispatch(storeSearchedValue(searchInput))
+  };
+
   const renderSearch = (desktop) => {
     if (desktop) {
       return (
         <Grow in={searchIsShown} >
           <div className={classes.search}>
             <SearchIcon
+              onClick={searchVal}
               className={classes.searchIcon}
             />
             {inputBase}
@@ -41,6 +46,7 @@ const Search = ({ history, searchIsShown }) => {
     return (
       <div className={classes.search}>
         <SearchIcon
+          onClick={searchVal}
           className={classes.searchIcon}
         />
         <Collapse in={Boolean(searchIsShown)} >
@@ -56,7 +62,7 @@ const Search = ({ history, searchIsShown }) => {
       type="search"
       value={searchInput}
       onChange={(event) => {
-        setSearchInput(event.target.value)
+        setSearchInput(event.target.value);
       }}
       autoFocus
       classes={{

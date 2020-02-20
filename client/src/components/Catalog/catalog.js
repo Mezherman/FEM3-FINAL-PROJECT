@@ -69,6 +69,7 @@ const Catalog = (props) => {
         : ''}
     </h2>
   );
+
   const handleProductsRequest = async () => {
     let searchedResult = [];
     setSearchError('');
@@ -104,6 +105,10 @@ const Catalog = (props) => {
         }
       });
   };
+
+  useEffect(() => {
+    productsRequested()
+  }, []);
 
   useEffect(() => {
     const request = assortment === 'search' ? 'cooking' : assortment;
@@ -181,12 +186,13 @@ const Catalog = (props) => {
           </Grid>
           <Grid item xs={12} md={8}>
             <Sorting sort={sort} />
-            {searchedError || (
+            {!searchedError && !productsLoading && (
               <ProductList
                 products={products}
                 productsQuantity={productsQuantity}
               />
             )}
+            {searchedError}
           </Grid>
           <Grid item xs={12}>
             {productsToShow && (
