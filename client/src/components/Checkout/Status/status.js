@@ -20,7 +20,7 @@ export default function CheckoutStatus(props) {
         has been successfully placed.
       </h2>
       <p>It is already on its way to you!</p>
-      <img src="/img/car-delivery.png" alt="delivery-car" />
+      <img src="/img/delivery-car.jpg" alt="delivery-car" className={classes.imgDelivery} />
       <p>Thank you for your choice!</p>
     </>
   );
