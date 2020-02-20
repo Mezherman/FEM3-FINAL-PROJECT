@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => createStyles({
   },
 }),);
 
-export default function ProductDetailCollapse({ data }) {
-  const { myCustomParams } = data;
+export default function ProductDetailCollapse({ currentProduct }) {
+  const { myCustomParams } = currentProduct;
   const { productDescription, productHighlights } = myCustomParams;
   const classes = useStyles();
 
@@ -43,24 +43,22 @@ export default function ProductDetailCollapse({ data }) {
         </ul>
       </CollapsingItem>
       <CollapsingItem data={myCustomParams} label="Specifications" >
-        <TableSpecification data={data} />
+        <TableSpecification data={currentProduct} />
       </CollapsingItem>
       <CollapsingItem label="Comments" >
-        <Comment />
+        <Comment currentProduct={currentProduct} />
       </CollapsingItem>
     </List>
   );
 }
 
 ProductDetailCollapse.propTypes = {
-  data: PropTypes.oneOfType([
+  currentProduct: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.string,
     PropTypes.bool,
   ]).isRequired,
   myCustomParams: PropTypes.objectOf(PropTypes.string),
-  // productDescription: PropTypes.arrayOf(PropTypes.string).isRequired,
-  // productHighlights: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 ProductDetailCollapse.defaultProps = {
   myCustomParams: {},
