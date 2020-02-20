@@ -4,7 +4,7 @@ function postNewComment(newComment) {
   return axios
     .post('/api/comments', newComment)
     .then((response) => response)
-    .catch((err) => err.data)
+    .catch((err) => alert(err.data))
 }
 
 export default postNewComment;
