@@ -47,9 +47,7 @@ let SignUp = (props) => {
     setSignUpModal(false);
     setRedirect(true);
   };
-  // const handleOpenSetErrorModal = () => {
-  //   setErrorModal(true);
-  // };
+
   const handleOpenSetErrorModal = (errorAnswer) => {
     setErrorModal(true);
     setErrorText(errorAnswer);
@@ -67,7 +65,9 @@ let SignUp = (props) => {
   };
 
   const birthDayFunc = (birthdayDay, birthdayMonth, birthdayYear) => {
-    let day, month, year;
+    let day,
+      month,
+      year;
 
     !birthdayDay ? (day = 'XX') : day = birthdayDay;
     !birthdayMonth ? (month = 'XX') : month = birthdayMonth;

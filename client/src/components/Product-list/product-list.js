@@ -19,8 +19,20 @@ export default function ProductList({ products = [], productsQuantity = 0, assor
 
   const searchedValue = useSelector((state) => state.searchReducer.searchedValue);
 
-  const test = assortment === 'Search' ? <h2>Sorry, we can&#39;t find results for your parameters {searchedValue} </h2> :
-    <h2>Sorry, we can&#39;t find results for your parameters </h2>
+  const searchedError = assortment === 'search'
+    ? (
+      <h2>
+        Sorry, we can&#39;t find results for your parameters&nbsp;
+        {searchedValue ? (
+          <>
+            &#34;
+            {searchedValue}
+            &#34;
+          </>
+        ) : searchedValue}
+      </h2>
+    )
+    : <h2>Sorry, we can&#39;t find results for your parameters </h2>
 
   const renderProducts = (productsList) => (
     productsList.map((product) => (
@@ -39,7 +51,7 @@ export default function ProductList({ products = [], productsQuantity = 0, assor
       loader={<Spinner />}
       className={classes.productList}
     >
-      {products.length ? renderProducts(products) : test}
+      {products.length ? renderProducts(products) : searchedError}
 
     </InfiniteScroll>
   )

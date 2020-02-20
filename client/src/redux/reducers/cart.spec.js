@@ -16,7 +16,7 @@ describe('cart reducer', () => {
   it('REMOVE_PRODUCT_SUCCESS', () => {
     const action = {
       type: t.REMOVE_PRODUCT_SUCCESS,
-      payload: {a: 1}
+      payload: { a: 1 }
     }
     expect(cart(initialState, action)).toEqual({
       ...initialState,

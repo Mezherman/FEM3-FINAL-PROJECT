@@ -10,7 +10,6 @@ import ProductPage from '../components/Product-page/product-page'
 import NoMatch from '../components/No-match/no-match'
 import CartPage from '../pages/cart/cart'
 import RoutesName from '../routes-list';
-// import AboutUsPage from '../pages/about-us/about-us';
 import ContactsPage from '../pages/contacts/contacts';
 import SignUpPage from '../pages/sign-up/sign-up'
 import DeliveryPage from '../pages/delivery/delivery';
@@ -22,7 +21,6 @@ import OrdersPage from '../pages/orders/orders';
 import ForbiddenPage from '../pages/forbidden/forbidden'
 import AdminHome from '../components/Admin/Home/home'
 import Login from '../components/Login/login';
-import PaymentForm from '../components/Payment-form/payment-form';
 
 export default function Routes() {
   const { loggedIn, customer } = useSelector((state) => state.user);
@@ -110,7 +108,6 @@ export default function Routes() {
       <Route path={RoutesName.aboutUs} component={AboutUsPage} />
       <Route path={RoutesName.delivery} component={DeliveryPage} />
       <Route path={RoutesName.contacts} component={ContactsPage} />
-      {/*<Route path={RoutesName.payment} component={PaymentForm} />*/}
       <AdminRoute
         exact
         path={RoutesName.adminHome}

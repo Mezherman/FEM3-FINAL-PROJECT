@@ -67,7 +67,7 @@ const SignUpFooter = () => {
         use your data:
       </Typography>
       <Grid item xs={12}>
-        <Field name="agreement" component={renderCheckboxField}/>
+        <Field name="agreement" component={renderCheckboxField} />
       </Grid>
       <Button type="submit" variant="contained" color="primary" className={classes.submit}>
         Become a myWMF Club member now
@@ -93,5 +93,11 @@ SignUpFooter.propTypes = {
   name: PropTypes.string,
   meta: PropTypes.object
 };
+
+SignUpFooter.defaultProps = {
+  input: '',
+  name: '',
+  meta: {}
+}
 
 export default SignUpFooter;

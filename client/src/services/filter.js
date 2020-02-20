@@ -23,7 +23,6 @@ function getBrands() {
 }
 
 const parseToFilterValue = (itemNoArr, filterResults, sort = '', pages, allCategories, catalogLocation) => {
-
   const defaultSort = {
     quantity: -1,
     itemNo: 1

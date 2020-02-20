@@ -102,13 +102,6 @@ export default function(values) {
   ) {
     errors.birthdayYear = 'Invalid year';
   }
-  // if(values.birthdayDay || values. birthdayYear || values.birthdayMonth) {
-  //   if (values.birthdayDay === "undefined" || values. birthdayYear === "undefined" || values.birthdayMonth === "undefined") {
-  //     errors.birthdayDay = "Error";
-  //     errors.birthdayYear = "Error";
-  //     errors.birthdayMonth = "Error";
-  //   }
-  // }
   if (
     !values.agreement
   ) {
