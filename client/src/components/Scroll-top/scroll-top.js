@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
   scroll_btn: {
     padding: theme.spacing(1),
-    borderRadius: '50%',
+    borderRadius: theme.spacing(1),
     minWidth: 55,
     border: '1px solid white',
   }

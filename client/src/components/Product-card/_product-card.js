@@ -4,16 +4,17 @@ const useStyles = makeStyles((theme) => ({
   wrapper: {
     display: 'flex',
     justifyContent: 'center',
-    // maxWidth: '260px',
   },
   card: {
     width: '100%',
     paddingBottom: '20px',
-    // margin: '0 auto',
     '&:hover': {
       zIndex: '1',
       boxShadow: '0px 0 1px 0px #aaa, 0px 5px 11px #909090',
       cursor: 'pointer',
+    },
+    [theme.breakpoints.up('md')]: {
+      maxWidth: '232px',
     },
     [theme.breakpoints.up('lg')]: {
       maxWidth: '260px',
@@ -44,12 +45,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     height: '80px',
     paddingBottom: '20px',
-    // overflow: 'hidden',
     color: theme.palette.text.primary,
     fontWeight: '300',
     fontSize: '18px',
-    // textOverflow: 'ellipsis',
-    // whiteSpace: 'nowrap',
     textDecoration: 'none',
   },
   priceBox: {
@@ -64,7 +62,6 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary,
     fontWeight: '400',
     fontSize: '20px',
-    // text-align: right;
     textDecoration: 'line-through',
     verticalAlign: 'bottom',
   },

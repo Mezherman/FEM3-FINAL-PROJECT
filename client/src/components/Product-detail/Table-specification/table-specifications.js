@@ -63,7 +63,6 @@ export default function TableSpecifications({ data }) {
     createData('Capacity (in l)', capacity),
     createData('Care', care),
   ];
-  // console.log(sizes);
   return (
     <>
       {sizes ? (

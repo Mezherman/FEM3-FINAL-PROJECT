@@ -62,7 +62,6 @@ function MainSlider ({ fetchSlides }) {
             autoplayInterval={2000}
             wrapAround
             slidesToShow={1}
-            // dragging
             renderBottomCenterControls={
               ({
                 currentSlide, goToSlide, slideCount, slidesToScroll, slidesToShow, cellAlign
