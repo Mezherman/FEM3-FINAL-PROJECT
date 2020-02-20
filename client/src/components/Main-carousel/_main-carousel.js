@@ -144,6 +144,15 @@ const useStylesMainCarousel = makeStyles((theme) => ({
     cursor: 'pointer',
     opacity: 1,
   },
+  displayCarousel: {
+    display: 'none',
+    [theme.breakpoints.up('lg')]: {
+      display: 'block',
+    }
+  },
+  linkContainer: {
+    overflow: 'scroll',
+  },
 
 }));
 
