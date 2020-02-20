@@ -20,7 +20,7 @@ const ProductList = React.memo(({ products = [], productsQuantity = 0, assortmen
   const loadMoreProducts = useCallback(() => {
     setTimeout(() => {
       dispatch(filterIncreasePage());
-    }, 2000);
+    }, 2500);
   }, [dispatch]);
 
   const searchedValue = useSelector((state) => state.searchReducer.searchedValue);
@@ -42,12 +42,10 @@ const ProductList = React.memo(({ products = [], productsQuantity = 0, assortmen
 
   const renderProducts = (productsList) => (
     productsList.map((product) => (
-      <AnimationCard key={product._id}>
-        <ProductCard
-          key={product.itemNo}
-          product={product}
-        />
-      </AnimationCard>
+      <ProductCard
+        key={product.itemNo}
+        product={product}
+      />
     ))
   );
   return (
