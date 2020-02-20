@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 
 import {
   Modal,
@@ -46,3 +47,12 @@ const ModalResponse = ({
 };
 
 export default ModalResponse;
+
+ModalResponse.propTypes = {
+  openModal: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  inModal: PropTypes.bool.isRequired,
+  classModal: PropTypes.bool.isRequired,
+  value: PropTypes.string.isRequired,
+  submitClass: PropTypes.bool.isRequired
+};

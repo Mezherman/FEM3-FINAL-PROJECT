@@ -41,9 +41,9 @@ DialogModal.propTypes = {
   onCloseDialogWithStatus: PropTypes.func.isRequired,
   isOpen: PropTypes.bool,
   message: PropTypes.string,
-}
+};
 
 DialogModal.defaultProps = {
   isOpen: false,
   message: 'Delete product from shopping cart?'
-}
+};

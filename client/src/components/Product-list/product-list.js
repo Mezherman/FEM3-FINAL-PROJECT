@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -10,7 +10,7 @@ import Spinner from '../Spinner/spinner';
 
 import useStyles from './_product-list';
 
-const ProductList = React.memo(({ products = [], productsQuantity = 0 }) => {
+const ProductList = React.memo(({ products = [], productsQuantity = 0, assortment }) => {
   const fadeAnimation = keyframes`${fadeIn}`;
   const AnimationCard = styled.div`
   animation: 3s ${fadeAnimation};
@@ -22,6 +22,23 @@ const ProductList = React.memo(({ products = [], productsQuantity = 0 }) => {
       dispatch(filterIncreasePage());
     }, 2000);
   }, [dispatch]);
+
+  const searchedValue = useSelector((state) => state.searchReducer.searchedValue);
+
+  const searchedError = assortment === 'search'
+    ? (
+      <h2>
+        Sorry, we can&#39;t find results for your parameters&nbsp;
+        {searchedValue ? (
+          <>
+            &#34;
+            {searchedValue}
+            &#34;
+          </>
+        ) : searchedValue}
+      </h2>
+    )
+    : <h2>Sorry, we can&#39;t find results for your parameters </h2>
 
   const renderProducts = (productsList) => (
     productsList.map((product) => (
@@ -41,10 +58,11 @@ const ProductList = React.memo(({ products = [], productsQuantity = 0 }) => {
       loader={<Spinner />}
       className={classes.productList}
     >
-      {renderProducts(products)}
+      {products.length ? renderProducts(products) : searchedError}
+
     </InfiniteScroll>
   )
-})
+});
 
 export default ProductList;
 
@@ -54,5 +72,6 @@ ProductList.propTypes = {
     PropTypes.array,
     PropTypes.number,
   ])).isRequired,
-  productsQuantity: PropTypes.number.isRequired
-}
+  productsQuantity: PropTypes.number.isRequired,
+  assortment: PropTypes.string.isRequired
+};

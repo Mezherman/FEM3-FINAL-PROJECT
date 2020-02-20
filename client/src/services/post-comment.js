@@ -3,11 +3,8 @@ import axios from 'axios';
 function postNewComment(newComment) {
   return axios
     .post('/api/comments', newComment)
-    .then((response) => {
-      console.log(response);
-      return response
-    })
-    .catch((err) => alert(err.response.data));
+    .then((response) => response)
+    .catch((err) => alert(err.data))
 }
 
 export default postNewComment;
