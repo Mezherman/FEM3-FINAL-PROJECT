@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'capitalize',
   },
   leftArrow: {
-   top: '40%',
+    top: '40%',
   },
 }));
 

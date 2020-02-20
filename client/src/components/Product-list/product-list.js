@@ -25,7 +25,7 @@ const ProductList = React.memo(({ products = [], productsQuantity = 0 }) => {
 
   const renderProducts = (productsList) => (
     productsList.map((product) => (
-      <AnimationCard>
+      <AnimationCard key={product._id}>
         <ProductCard
           key={product.itemNo}
           product={product}
