@@ -1,4 +1,3 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 
 const useHeaderStyles = makeStyles((theme) => ({
@@ -15,7 +14,6 @@ const useHeaderStyles = makeStyles((theme) => ({
   underline: {
     borderBottom: `1px solid ${theme.palette.background.primary}`
   }
-
 }));
 
 export default useHeaderStyles;

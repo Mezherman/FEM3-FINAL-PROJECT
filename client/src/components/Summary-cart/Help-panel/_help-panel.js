@@ -1,15 +1,11 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   root: {
     boxShadow: 'none',
-    // marginTop: '15px',
   },
   heading: {
     padding: '0',
-    // fontSize: theme.typography.pxToRem(15),
-    // fontWeight: theme.typography.fontWeightRegular,
   },
   bold: {
     fontWeight: 'bold'
@@ -21,5 +17,6 @@ const useStyles = makeStyles((theme) => ({
       padding: '5px 0',
     }
   }
-}));
+});
+
 export default useStyles;

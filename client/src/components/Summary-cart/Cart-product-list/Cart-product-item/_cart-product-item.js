@@ -1,4 +1,3 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
       cursor: 'pointer'
     }
   }
-
 }));
 
 export default useStyles;

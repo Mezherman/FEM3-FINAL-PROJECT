@@ -16,6 +16,7 @@ const Sorting = (props) => {
   const {
     filterSort, sort
   } = props;
+
   const classes = useStyles();
   const inputLabel = useRef(null);
 
@@ -31,7 +32,7 @@ const Sorting = (props) => {
     const type = event.target.value;
 
     const splitting = type.split('-');
-    if (splitting.length == 1) {
+    if (splitting.length === 1) {
       filterSort({
         sortName: splitting[0],
         sortValue: 1
@@ -61,7 +62,7 @@ const Sorting = (props) => {
             className: classes.input
           }}
         >
-          <option value="" />
+          <option value="">&nbsp;</option>
           <option value="currentPrice">Price: low to high</option>
           <option value="-currentPrice">Price: high to low</option>
           <option value="-previousPrice">Sale items first</option>
@@ -78,7 +79,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Sorting.propTypes = {
-  sort: PropTypes.objectOf(PropTypes.string).isRequired,
+  sort: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
   filterSort: PropTypes.func.isRequired,
 };
 
