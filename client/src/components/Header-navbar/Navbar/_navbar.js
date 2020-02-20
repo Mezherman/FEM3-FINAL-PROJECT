@@ -1,18 +1,8 @@
 import { createStyles, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => createStyles({
-
-  // drawer: {
-  //   [theme.breakpoints.up('xs')]: {
-  //     width: '80%',
-  //     flexShrink: 0,
-  //   },
-  // },
   drawerPaper: {
-    width: '80%',
-  },
-  icon: {
-    marginRight: '10px'
+    width: '82%',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -70,9 +60,6 @@ const useStyles = makeStyles((theme) => createStyles({
     color: 'red',
     fontWeight: '500',
   },
-  // '.MuiDrawer-paper': {
-  //   width: '80%'
-  // },
 }));
 
 export default useStyles
