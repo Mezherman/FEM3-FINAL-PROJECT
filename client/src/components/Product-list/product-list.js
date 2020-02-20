@@ -13,7 +13,7 @@ import useStyles from './_product-list';
 const ProductList = React.memo(({ products = [], productsQuantity = 0, assortment }) => {
   const fadeAnimation = keyframes`${fadeIn}`;
   const AnimationCard = styled.div`
-  animation: 3s ${fadeAnimation};
+  animation: 2s ${fadeAnimation};
 `;
   const classes = useStyles();
   const dispatch = useDispatch();
