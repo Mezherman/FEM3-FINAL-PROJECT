@@ -168,7 +168,6 @@ const Comment = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  currentProduct: state.currentProduct.currentProduct,
   commentsList: state.commentsReducer.commentsList,
   productId: state.commentsReducer.productId,
   userLoggedIn: state.user.loggedIn
