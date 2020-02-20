@@ -55,4 +55,4 @@ ModalResponse.propTypes = {
   classModal: PropTypes.bool.isRequired,
   value: PropTypes.string.isRequired,
   submitClass: PropTypes.bool.isRequired
-}
+};

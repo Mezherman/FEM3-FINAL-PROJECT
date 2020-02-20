@@ -72,8 +72,6 @@ const Sorting = (props) => {
   )
 };
 
-const mapStateToProps = (state) => ({});
-
 const mapDispatchToProps = (dispatch) => ({
   filterSort: (sortValue) => dispatch(filterSort(sortValue)),
 });
@@ -83,4 +81,4 @@ Sorting.propTypes = {
   filterSort: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sorting);
+export default connect(null, mapDispatchToProps)(Sorting);

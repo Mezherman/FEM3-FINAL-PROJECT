@@ -17,7 +17,7 @@ const renderRadioGroup = ({ input, name, classes, gender, setGender, ...rest }) 
       setGender(event.target.value);
     }}
   />
-)
+);
 
 export default renderRadioGroup;
 
@@ -31,4 +31,4 @@ renderRadioGroup.propTypes = {
 
 renderRadioGroup.defaultProps = {
   name: ''
-}
+};

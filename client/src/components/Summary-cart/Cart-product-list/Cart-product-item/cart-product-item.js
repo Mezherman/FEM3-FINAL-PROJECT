@@ -16,18 +16,21 @@ export default function CartProductItem({ product, onSetProductQuantity, onRemov
   const subTotalProduct = currentProduct.currentPrice * cartQuantity;
 
   const [isDialogOpen, setDialogOpen] = useState(false);
+
   const handleDialogOpen = () => {
     setDialogOpen(true);
-  }
+  };
+
   const onCloseDialogWithStatus = (status) => {
     if (status) {
       onRemoveProduct(currentProduct._id);
     }
     setDialogOpen(false);
-  }
+  };
+
   const setQty = (qty) => {
     onSetProductQuantity(currentProduct._id, qty)
-  }
+  };
 
   const productImage = (
     <Link to={`${RoutesName.products}/${currentProduct.itemNo}`}>
@@ -122,4 +125,4 @@ CartProductItem.propTypes = {
   ).isRequired,
   onSetProductQuantity: PropTypes.func.isRequired,
   onRemoveProduct: PropTypes.func.isRequired
-}
+};
