@@ -7,20 +7,21 @@ import Grid from '@material-ui/core/Grid';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { Box } from '@material-ui/core';
-import './carousel-react.scss';
+import './Product-detail-carousel/carousel-react.scss';
 import StopIcon from '@material-ui/icons/Stop';
 
 import ProductDetailCollapse from './Product-detail-collapse/product-detail-collapse';
 import AddToCart from '../Add-to-cart/add-to-cart';
-import ProductDetailCarousel from './carousel-react'
-import FeatureItem from './feature-item';
+import ProductDetailCarousel from './Product-detail-carousel/product-detail-carousel'
+import FeatureItem from './Feature-item/feature-item';
 import ProductDetailTab from './Product-detail-tab/product-detail-tab';
 
-import useStyles from './_product-detail';
 import AddToFavoriteBtn from '../Add-to-favorites/Add-to-favorite-btn';
 import IncreaseBlock from '../Increase-block/increase-block';
 import { addProductToCart } from '../../redux/actions/CartActions';
 import AddToCartButton from '../Add-to-cart-button/add-to-cart-button';
+
+import useStyles from './_product-detail';
 
 function ProductDetail({ loggedIn, product, favorites, actionAddProductToCart }) {
   const {
@@ -255,7 +256,8 @@ ProductDetail.propTypes = {
       PropTypes.number,
       PropTypes.object
     ])
-  )
-    .isRequired,
-  actionAddProductToCart: PropTypes.func,
+  ).isRequired,
+  loggedIn: PropTypes.bool.isRequired,
+  favorites: PropTypes.arrayOf(PropTypes.object).isRequired,
+  actionAddProductToCart: PropTypes.func.isRequired,
 };

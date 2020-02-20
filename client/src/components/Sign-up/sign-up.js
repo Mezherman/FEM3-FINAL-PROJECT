@@ -36,7 +36,6 @@ let SignUp = (props) => {
     email: '',
     password: '',
     telephone: '',
-    birthdate: ''
   };
 
   const handleOpenSignUpModal = () => {
@@ -47,9 +46,7 @@ let SignUp = (props) => {
     setSignUpModal(false);
     setRedirect(true);
   };
-  // const handleOpenSetErrorModal = () => {
-  //   setErrorModal(true);
-  // };
+
   const handleOpenSetErrorModal = (errorAnswer) => {
     setErrorModal(true);
     setErrorText(errorAnswer);
@@ -66,26 +63,10 @@ let SignUp = (props) => {
     return null
   };
 
-  const birthDayFunc = (birthdayDay, birthdayMonth, birthdayYear) => {
-    let day, month, year;
-
-    !birthdayDay ? (day = 'XX') : day = birthdayDay;
-    !birthdayMonth ? (month = 'XX') : month = birthdayMonth;
-    !birthdayYear ? (year = 'XXXX') : year = birthdayYear;
-
-    (day.length === 1) && (day = `0${day}`);
-    (month.length === 1) && (month = `0${month}`);
-
-    return `${day}.${month}.${year}`;
-  };
-
   const submitNewUser = (values) => {
-    const { birthdayDay, birthdayMonth, birthdayYear } = values;
-
     const newUser = {
       ...initialState,
-      ...values,
-      birthdate: birthDayFunc(birthdayDay, birthdayMonth, birthdayYear)
+      ...values
     };
 
     postNewUser(newUser, handleOpenSignUpModal, handleOpenSetErrorModal);

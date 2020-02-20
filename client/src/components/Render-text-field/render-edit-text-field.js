@@ -1,17 +1,20 @@
-import { FormLabel, TextField } from '@material-ui/core';
 import React from 'react';
+import PropTypes from 'prop-types';
+import { FormLabel, TextField } from '@material-ui/core';
+
 import useStyles from '../Sign-up/Sign-up-form/_sign-up-form';
 
-const RenderEditTextField = ({
-  placeholder,
-  label,
-  name,
-  type,
-  defaultValue,
-  meta: { touched, error },
-  input: { value, onBlur, onChange, onFocus },
-}) => {
+const RenderEditTextField = (props) => {
   const classes = useStyles();
+  const {
+    placeholder,
+    label,
+    type,
+    defaultValue,
+    meta: { touched, error },
+    input: { name, value, onBlur, onChange, onFocus },
+  } = props;
+
   return (
     <TextField
       type={type}
@@ -33,3 +36,16 @@ const RenderEditTextField = ({
 };
 
 export default RenderEditTextField;
+
+RenderEditTextField.propTypes = {
+  input: PropTypes.oneOfType([PropTypes.object, PropTypes.func, PropTypes.string]).isRequired,
+  label: PropTypes.string.isRequired,
+  meta: PropTypes.oneOfType([PropTypes.object, PropTypes.bool, PropTypes.string]).isRequired,
+  placeholder: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  defaultValue: PropTypes.string.isRequired
+};
+
+RenderEditTextField.defaultProps = {
+  placeholder: ''
+};

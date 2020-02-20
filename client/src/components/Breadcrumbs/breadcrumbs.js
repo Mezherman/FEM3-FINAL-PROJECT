@@ -9,10 +9,9 @@ import BreadcrumbsSearch from './breadcrumbs-search';
 
 import useStyles from './_breadcrumbs';
 
-export default function ProductBreadcrumbs({ assortment }) {
+export default function ProductBreadcrumbs({ assortment, product }) {
   const classes = useStyles();
   const { catalog } = useSelector((state) => state.categoriesReducer);
-  const { products } = useSelector((state) => state.productsReducer);
   const { allCategories, mainCategories } = catalog;
 
   let level = '';
@@ -29,9 +28,10 @@ export default function ProductBreadcrumbs({ assortment }) {
   let category = '';
   let subCategory = '';
   let search = false;
+
   switch (level) {
     case 'item': {
-      const subCategoryId = products[0].categories;
+      const subCategoryId = product.categories;
       subCategory = allCategories.find((category) => category.id === subCategoryId);
       category = mainCategories.find((category) => category.id === subCategory.parentId);
       break;
@@ -80,5 +80,10 @@ export default function ProductBreadcrumbs({ assortment }) {
 }
 
 ProductBreadcrumbs.propTypes = {
-  assortment: PropTypes.string.isRequired
+  assortment: PropTypes.string.isRequired,
+  product: PropTypes.oneOfType([PropTypes.object])
+};
+
+ProductBreadcrumbs.defaultProps = {
+  product: {}
 };

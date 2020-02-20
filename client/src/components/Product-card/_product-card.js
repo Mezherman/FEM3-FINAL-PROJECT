@@ -1,9 +1,13 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
+  wrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    // maxWidth: '260px',
+  },
   card: {
-    maxWidth: '230px',
-    margin: '0 auto',
+    width: '100%',
     paddingBottom: '20px',
     // margin: '0 auto',
     '&:hover': {
@@ -20,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
   iconWrapper: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     fontWeight: '300',
   },
