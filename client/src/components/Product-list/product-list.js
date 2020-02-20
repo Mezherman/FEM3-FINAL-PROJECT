@@ -20,17 +20,15 @@ const ProductList = React.memo(({ products = [], productsQuantity = 0 }) => {
   const loadMoreProducts = useCallback(() => {
     setTimeout(() => {
       dispatch(filterIncreasePage());
-    }, 2000);
+    }, 2500);
   }, [dispatch]);
 
   const renderProducts = (productsList) => (
     productsList.map((product) => (
-      <AnimationCard>
-        <ProductCard
-          key={product.itemNo}
-          product={product}
-        />
-      </AnimationCard>
+      <ProductCard
+        key={product.itemNo}
+        product={product}
+      />
     ))
   );
   return (
