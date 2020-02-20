@@ -1,4 +1,3 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -15,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
   link: {
     color: theme.palette.secondary.main,
     textDecoration: 'none',
-    // lineHeight: '1rem',
     fontSize: '1rem',
     fontWeight: 'bold',
     '&:hover': {

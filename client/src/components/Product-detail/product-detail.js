@@ -214,8 +214,8 @@ function ProductDetail({ loggedIn, product, favorites, actionAddProductToCart })
           >
             Product details
           </h3>
-          {isDesktop && <ProductDetailTab data={product} />}
-          {!isDesktop && <ProductDetailCollapse data={product} />}
+          {isDesktop && <ProductDetailTab currentProduct={product} />}
+          {!isDesktop && <ProductDetailCollapse currentProduct={product} />}
           {!isTablet && <Divider />}
         </Grid>
       </Grid>

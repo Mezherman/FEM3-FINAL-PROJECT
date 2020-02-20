@@ -20,8 +20,6 @@ export default function CartProductListHeader() {
       <Grid item md={2} className={classes.alignRight}>
         Subtotal
       </Grid>
-      {/*<Grid item md={1} />*/}
     </Grid>
-
   );
 }
