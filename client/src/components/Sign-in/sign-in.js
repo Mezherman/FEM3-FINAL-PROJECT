@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { Avatar, Typography, Container } from '@material-ui/core';
+import { Avatar, Typography, Container, IconButton } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import CloseIcon from '@material-ui/icons/Close';
 import useStylesSingIn from './_sign-in';
 import postLoginData from '../../services/post-login-data';
 import { loadAllDataAfterLogin } from '../../redux/actions/load-all-data';
@@ -48,6 +49,9 @@ function SignIn ({ onClose }) {
 
   return (
     <Container maxWidth="xs" className={classes.paper}>
+      <IconButton onClick={onClose} className={classes.closeBtn}>
+        <CloseIcon />
+      </IconButton>
       <Avatar className={classes.avatar} component="div"><LockOutlinedIcon /></Avatar>
       <Typography component="h1" variant="h5">Sign In</Typography>
       <Typography className={classes.errorText} component="h3" variant="inherit">{errorMessage}</Typography>
