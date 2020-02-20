@@ -16,7 +16,7 @@ export default function ImgGrid({ src, animationType }) {
       <ScrollAnimation
         className={classes.categoriesImg}
         animateIn={animationType}
-        duration={1}
+
         style={addBackgroundImg(src)}
         animateOnce
       />

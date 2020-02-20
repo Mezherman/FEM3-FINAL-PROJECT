@@ -27,7 +27,7 @@ function Category (props) {
 
   const description = (animationType) => (
     <Grid item sm={12} md={6} lg={3} container direction="column" className={descriptionClassess}>
-      <ScrollAnimation animateIn={animationType} duration={1} animateOnce>
+      <ScrollAnimation animateIn={animationType} animateOnce>
         <Typography variant="h3" className={classes.categoriesTitle}>
           {data.name ?? '' }
         </Typography>

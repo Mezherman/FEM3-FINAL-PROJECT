@@ -71,9 +71,7 @@ const Catalog = (props) => {
   );
   const handleProductsRequest = async () => {
     let searchedResult = [];
-    if (searchedError) {
-      setSearchError('');
-    }
+    setSearchError('');
     if (assortment === 'search' && searchedValue) {
       await getSearchedProducts(searchedValue)
         .then((products) => {
