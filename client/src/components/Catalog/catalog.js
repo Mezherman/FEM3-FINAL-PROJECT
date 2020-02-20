@@ -78,7 +78,6 @@ const Catalog = (props) => {
       allCategories,
       assortment
     );
-
     getInfinityFilteredProducts(valToFilter)
       .then((newProducts) => {
         if (filterPages.startPage > 1) {
@@ -90,7 +89,6 @@ const Catalog = (props) => {
   };
 
   useEffect(() => {
-    productsRequested();
     const request = assortment === 'search' ? 'cooking' : assortment;
     getCategory(request)
       .then((response) => {
@@ -98,9 +96,12 @@ const Catalog = (props) => {
           setTopList(response.topSellers)
         }
       });
+  }, [assortment]);
 
+  useEffect(() => {
+    productsRequested();
     handleProductsRequest();
-  }, [assortment, sort, filterResults, filterPages, searchedValue]);
+  }, [sort, filterResults, filterPages, searchedValue]);
 
   useEffect(() => {
     const cardsToShowString = topList.toString();
