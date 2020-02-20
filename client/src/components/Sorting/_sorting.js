@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '0 auto',
     marginBottom: 10,
     width: 250,
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('lg')]: {
       marginRight: 0
     }
   },

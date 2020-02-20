@@ -48,6 +48,8 @@ const HeaderIcons = () => {
   };
   const handleSearchAway = () => {
     setSearchIsShow(false);
+  };
+  const handleTooltipAway = () => {
     setOpenTooltip(false);
   };
   const handleClose = (event) => {
@@ -72,7 +74,6 @@ const HeaderIcons = () => {
 
   const anchorRef = useRef(null);
 
-  // return focus to the button when we transitioned from !open -> open
   const prevOpen = useRef(open);
   useEffect(() => {
     if (prevOpen.current === true && open === false) {
@@ -88,40 +89,45 @@ const HeaderIcons = () => {
     setSearchIsShow(false);
   }, []);
 
+  const searchClickAway = () => (
+    <ClickAwayListener onClickAway={handleSearchAway}>
+      <Box>
+        {isMobile && searchIsShown && <Search searchIsShown={searchIsShown} />}
+        {isTablet && <Search searchIsShown />}
+        {isDesktop && searchIsShown && <Search searchIsShown={searchIsShown} />}
+        {!isTablet && <HeaderSearchIcon onClick={handleTooltipClose} toggleSearch={toggleSearch} />}
+      </Box>
+    </ClickAwayListener>
+  );
+
   return (
-    <Box className={classes.iconButtonBox} >
-      <ClickAwayListener onClickAway={handleSearchAway} >
-        <Box >
-          {isMobile && searchIsShown && <Search searchIsShown={searchIsShown} />}
-          {isTablet && <Search searchIsShown />}
-          {isDesktop && searchIsShown && <Search searchIsShown={searchIsShown} />}
-          {!isTablet &&
-          <HeaderSearchIcon onClick={handleTooltipClose} toggleSearch={toggleSearch} />}
-        </Box >
-      </ClickAwayListener >
-      <Divider component="div" orientation="vertical" className={classes.dividerStyle} />
-      <FavouritesIcon
-        open={openTooltip}
-        onClick={toggleTooltipOpen}
-        onClose={handleTooltipClose}
-        totalFavoritesQty={totalFavoritesQty}
-      />
-      <Divider component="div" orientation="vertical" className={classes.dividerStyle} />
-      <AccountIcon
-        handleClick={handleClick}
-        open={open}
-        handleClose={handleClose}
-        loggedIn={loggedIn}
-        anchorRef={anchorRef}
-        closeModal={closeModal}
-        handleListKeyDown={handleListKeyDown}
-        handleLogout={handleLogout}
-        handleToggle={handleToggle}
-        modalIsVisible={modalIsVisible}
-      />
-      <Divider component="div" orientation="vertical" className={classes.dividerStyle} />
-      <CartIcon onClick={handleTooltipClose} totalCartQuantity={totalCartQuantity} />
-    </Box >
+    <ClickAwayListener onClickAway={handleTooltipAway}>
+      <Box className={classes.iconButtonBox}>
+        {searchClickAway()}
+        <Divider component="div" orientation="vertical" className={classes.dividerStyle} />
+        <FavouritesIcon
+          open={openTooltip}
+          onClick={toggleTooltipOpen}
+          onClose={handleTooltipClose}
+          totalFavoritesQty={totalFavoritesQty}
+        />
+        <Divider component="div" orientation="vertical" className={classes.dividerStyle} />
+        <AccountIcon
+          handleClick={handleClick}
+          open={open}
+          handleClose={handleClose}
+          loggedIn={loggedIn}
+          anchorRef={anchorRef}
+          closeModal={closeModal}
+          handleListKeyDown={handleListKeyDown}
+          handleLogout={handleLogout}
+          handleToggle={handleToggle}
+          modalIsVisible={modalIsVisible}
+        />
+        <Divider component="div" orientation="vertical" className={classes.dividerStyle} />
+        <CartIcon onClick={handleTooltipClose} totalCartQuantity={totalCartQuantity} />
+      </Box>
+    </ClickAwayListener>
   )
 };
 

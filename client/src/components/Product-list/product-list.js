@@ -10,7 +10,7 @@ import Spinner from '../Spinner/spinner';
 
 import useStyles from './_product-list';
 
-const ProductList = React.memo(({ products = [], productsQuantity = 0, assortment }) => {
+const ProductList = React.memo(({ products = [], productsQuantity = 0 }) => {
   const fadeAnimation = keyframes`${fadeIn}`;
   const AnimationCard = styled.div`
   animation: 2s ${fadeAnimation};
@@ -20,34 +20,15 @@ const ProductList = React.memo(({ products = [], productsQuantity = 0, assortmen
   const loadMoreProducts = useCallback(() => {
     setTimeout(() => {
       dispatch(filterIncreasePage());
-    }, 2000);
+    }, 2500);
   }, [dispatch]);
-
-  const searchedValue = useSelector((state) => state.searchReducer.searchedValue);
-
-  const searchedError = assortment === 'search'
-    ? (
-      <h2>
-        Sorry, we can&#39;t find results for your parameters&nbsp;
-        {searchedValue ? (
-          <>
-            &#34;
-            {searchedValue}
-            &#34;
-          </>
-        ) : searchedValue}
-      </h2>
-    )
-    : <h2>Sorry, we can&#39;t find results for your parameters </h2>
 
   const renderProducts = (productsList) => (
     productsList.map((product) => (
-      <AnimationCard key={product._id}>
-        <ProductCard
-          key={product.itemNo}
-          product={product}
-        />
-      </AnimationCard>
+      <ProductCard
+        key={product.itemNo}
+        product={product}
+      />
     ))
   );
   return (
@@ -58,7 +39,7 @@ const ProductList = React.memo(({ products = [], productsQuantity = 0, assortmen
       loader={<Spinner />}
       className={classes.productList}
     >
-      {products.length ? renderProducts(products) : searchedError}
+      {renderProducts(products)}
 
     </InfiniteScroll>
   )
@@ -73,5 +54,4 @@ ProductList.propTypes = {
     PropTypes.number,
   ])).isRequired,
   productsQuantity: PropTypes.number.isRequired,
-  assortment: PropTypes.string.isRequired
 };

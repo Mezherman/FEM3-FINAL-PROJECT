@@ -30,7 +30,6 @@ function ProductCardCarousel(props) {
   const renderCarousel = () => (
     <>
       <Carousels
-      // autoPlay
         wrapAround
         renderBottomCenterControls={null}
         transitionMode="scroll"

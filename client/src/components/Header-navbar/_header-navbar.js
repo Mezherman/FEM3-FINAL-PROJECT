@@ -2,10 +2,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
   headerMenuWrapper: {
-    // display: 'none',
-    // [theme.breakpoints.up('md')]: {
     display: 'flex',
-    // }
   },
   headerMenuCatalog: {
     display: 'flex'
@@ -33,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
   catalogWrapper: {
     boxShadow: '-1.5px 0 7px 0 #d4d4d4',
     position: 'absolute',
-    // left: '0px',
     top: '45px',
     marginTop: '10px',
     zIndex: 100
@@ -42,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
     listStyleType: 'none',
     padding: 0,
     margin: 0,
-    // height: '160px'
   },
   catalogListItem: {
     display: 'block',
@@ -65,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
     listStyleType: 'none',
     padding: 0,
     margin: 0,
-    // height: '160px'
   },
   subCategoryListItem: {
     display: 'flex',

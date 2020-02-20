@@ -54,9 +54,25 @@ const Catalog = (props) => {
   const [productsToShow, setProductsToShow] = useState([]);
   const [filterIsOpenMobile, setFilterIsOpenMobile] = useState(false);
   const { allCategories } = catalog;
+  const [searchedError, setSearchError] = useState('');
+  const searchErrorMsg = (
+    <h2>
+      Sorry, we can&#39;t find results for your parameters&nbsp;
+      { searchedValue
+        ? (
+          <>
+          &#34;
+            {searchedValue}
+          &#34;
+          </>
+        )
+        : ''}
+    </h2>
+  );
 
   const handleProductsRequest = async () => {
     let searchedResult = [];
+      setSearchError('');
     if (assortment === 'search' && searchedValue) {
       await getSearchedProducts(searchedValue)
         .then((products) => {
@@ -65,9 +81,11 @@ const Catalog = (props) => {
           }
           searchedResult = products.map((product) => product.itemNo);
         });
-      if (!searchedResult.length) return;
+      if (!searchedResult.length) {
+        setSearchError(searchErrorMsg);
+        return;
+      }
     }
-
     const valToFilter = parseToFilterValue(
       searchedResult,
       filterResults,
@@ -80,11 +98,17 @@ const Catalog = (props) => {
       .then((newProducts) => {
         if (filterPages.startPage > 1) {
           moreProductsLoaded(newProducts);
+        } else if (!newProducts.products.length) {
+          setSearchError(searchErrorMsg);
         } else {
           productsLoaded(newProducts);
         }
       });
   };
+
+  useEffect(() => {
+    productsRequested()
+  }, []);
 
   useEffect(() => {
     const request = assortment === 'search' ? 'cooking' : assortment;
@@ -97,7 +121,6 @@ const Catalog = (props) => {
   }, [assortment]);
 
   useEffect(() => {
-    productsRequested();
     handleProductsRequest();
   }, [sort, filterResults, filterPages, searchedValue]);
 
@@ -153,7 +176,6 @@ const Catalog = (props) => {
       </div>
     )
   };
-
   return (
     <>
       <Container maxWidth="xl">
@@ -164,13 +186,13 @@ const Catalog = (props) => {
           </Grid>
           <Grid item xs={12} md={8}>
             <Sorting sort={sort} />
-            {!productsLoading && (
+            {!searchedError && !productsLoading && (
               <ProductList
-                assortment={assortment}
                 products={products}
                 productsQuantity={productsQuantity}
               />
             )}
+            {searchedError}
           </Grid>
           <Grid item xs={12}>
             {productsToShow && (
@@ -202,7 +224,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(Catalog)
 
 Catalog.propTypes = {
-  assortment: PropTypes.string.isRequired,
+  assortment: PropTypes.string,
   searchedValue: PropTypes.string,
   catalog: PropTypes.objectOf(PropTypes.oneOfType([
     PropTypes.string,
@@ -230,5 +252,6 @@ Catalog.propTypes = {
 };
 
 Catalog.defaultProps = {
-  searchedValue: ''
+  searchedValue: '',
+  assortment: ''
 };
