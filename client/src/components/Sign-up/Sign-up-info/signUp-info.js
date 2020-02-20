@@ -8,7 +8,6 @@ export default function SignUpInfo () {
 
   const advantagesList = [
     '€10 welcome bonus*',
-    'Personal birthday gift every year',
     'Invitations to the VIP sale and events',
     'Simple and easy management of your customer data, orders and much more'
   ];

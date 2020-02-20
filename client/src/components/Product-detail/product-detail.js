@@ -16,11 +16,12 @@ import ProductDetailCarousel from './Product-detail-carousel/product-detail-caro
 import FeatureItem from './Feature-item/feature-item';
 import ProductDetailTab from './Product-detail-tab/product-detail-tab';
 
-import useStyles from './_product-detail';
 import AddToFavoriteBtn from '../Add-to-favorites/Add-to-favorite-btn';
 import IncreaseBlock from '../Increase-block/increase-block';
 import { addProductToCart } from '../../redux/actions/CartActions';
 import AddToCartButton from '../Add-to-cart-button/add-to-cart-button';
+
+import useStyles from './_product-detail';
 
 function ProductDetail({ loggedIn, product, favorites, actionAddProductToCart }) {
   const {
@@ -255,7 +256,8 @@ ProductDetail.propTypes = {
       PropTypes.number,
       PropTypes.object
     ])
-  )
-    .isRequired,
-  actionAddProductToCart: PropTypes.func,
+  ).isRequired,
+  loggedIn: PropTypes.bool.isRequired,
+  favorites: PropTypes.arrayOf(PropTypes.object).isRequired,
+  actionAddProductToCart: PropTypes.func.isRequired,
 };
