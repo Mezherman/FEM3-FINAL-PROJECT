@@ -11,14 +11,20 @@ export default function IncreaseBlock({ qty, setQty, maxQty }) {
   const handleChange = (event) => {
     if (event.target.value === '') {
       setQty('');
-    } else if (event.target.value >= 99) {
-      setQty(99);
     } else if (event.target.value >= maxQty) {
       setQty(maxQty);
     } else if (event.target.value === '0') {
       setQty(1);
+    } else if (event.target.value.length > 2) {
+      setQty(Number(Math.floor(event.target.value)));
     } else {
       setQty(Number(Math.abs(event.target.value)))
+    }
+  };
+
+  const handleBlurMin = () => {
+    if (qty === '') {
+      setQty(1);
     }
   };
 
@@ -38,7 +44,7 @@ export default function IncreaseBlock({ qty, setQty, maxQty }) {
         <Input
           className={classes.input}
           value={qty}
-          // margin="dense"
+          onBlur={handleBlurMin}
           onChange={handleChange}
           inputProps={{
             min: 1,
