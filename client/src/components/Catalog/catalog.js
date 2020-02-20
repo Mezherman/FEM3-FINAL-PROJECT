@@ -97,7 +97,6 @@ const Catalog = (props) => {
   }, [assortment]);
 
   useEffect(() => {
-    productsRequested();
     handleProductsRequest();
   }, [sort, filterResults, filterPages, searchedValue]);
 
@@ -153,7 +152,6 @@ const Catalog = (props) => {
       </div>
     )
   };
-
   return (
     <>
       <Container maxWidth="xl">
@@ -164,13 +162,10 @@ const Catalog = (props) => {
           </Grid>
           <Grid item xs={12} md={8}>
             <Sorting sort={sort} />
-            {!productsLoading && (
-              <ProductList
-                assortment={assortment}
-                products={products}
-                productsQuantity={productsQuantity}
-              />
-            )}
+            <ProductList
+              products={products}
+              productsQuantity={productsQuantity}
+            />
           </Grid>
           <Grid item xs={12}>
             {productsToShow && (

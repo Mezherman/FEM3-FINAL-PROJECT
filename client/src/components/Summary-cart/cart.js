@@ -17,7 +17,8 @@ function Cart() {
   const actions = useMemo(
     () => bindActionCreators(cartActions, dispatch),
     [dispatch]
-  )
+  );
+
   const bottomBlock = (
     <>
       <HelpPanel />
@@ -27,13 +28,13 @@ function Cart() {
 
   let mainContainer = (
     <Grid container spacing={4} alignItems="flex-start" className={classes.root}>
-      <Grid item container sm={9} xs={12}>
+      <Grid item container md={9} xs={12}>
         <CartProductList products={cart.products} actions={actions} />
         <Grid item xs={12}>
           {bottomBlock}
         </Grid>
       </Grid>
-      <Grid item sm={3} xs={12} className={`${classes.summary} ${classes.sticky}`}>
+      <Grid item md={3} xs={12} className={`${classes.summary} ${classes.sticky}`}>
         <Summary totalCartPrice={cart.totalCartPrice} />
       </Grid>
     </Grid>
