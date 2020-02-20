@@ -62,7 +62,7 @@ const ProductList = React.memo(({ products = [], productsQuantity = 0, assortmen
 
     </InfiniteScroll>
   )
-})
+});
 
 export default ProductList;
 
@@ -72,5 +72,6 @@ ProductList.propTypes = {
     PropTypes.array,
     PropTypes.number,
   ])).isRequired,
-  productsQuantity: PropTypes.number.isRequired
-}
+  productsQuantity: PropTypes.number.isRequired,
+  assortment: PropTypes.string.isRequired
+};
