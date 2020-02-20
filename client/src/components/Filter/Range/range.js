@@ -30,10 +30,16 @@ const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
 
   const [value, setValue] = useState([filterResults.price[0], filterResults.price[1]]);
 
-  useEffect(() => {
-    combineInputs()
-  }, [value])
-
+  const changePrice = (price) => {
+    setValue(price);
+    combineInputs(price);
+  }
+  const combineInputs = (price) => {
+    getFilterProducts({
+      ...filterResults,
+      price
+    });
+  }
   const handleRangeChange = (event, price) => {
     setValue(price);
     getFilterProducts({
@@ -47,7 +53,7 @@ const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
     if (inputValue > max) {
       inputValue = 0
     }
-    setValue([inputValue === '' ? '' : Number(Math.abs(inputValue)), filterResults.price[1]]);
+    changePrice([inputValue === '' ? '' : Number(Math.abs(inputValue)), filterResults.price[1]])
   };
 
   const handleInputMax = (event) => {
@@ -55,26 +61,19 @@ const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
     if (inputValue > max) {
       inputValue = max
     }
-    setValue([filterResults.price[0], inputValue === '' ? '' : Number(Math.abs(inputValue))]);
+    changePrice([filterResults.price[0], inputValue === '' ? '' : Number(Math.abs(inputValue))]);
   };
-
-  const combineInputs = () => {
-    getFilterProducts({
-      ...filterResults,
-      price: value
-    });
-  }
 
   const handleBlurMin = () => {
     if (filterResults.price[0] === '') {
       const minPrice = 0
-      setValue([minPrice, filterResults.price[1]])
+      changePrice([minPrice, filterResults.price[1]]);
     }
   }
 
   const handleBlurMax = () => {
     if (filterResults.price[1] === '') {
-      setValue([filterResults.price[0], max])
+      changePrice([filterResults.price[0], max]);
     }
   }
 
@@ -95,7 +94,6 @@ const RangeSlider = ({ getFilterProducts, filterResults, max }) => {
       }}
     />
   )
-
   return (
     <>
       <CustomSlider
