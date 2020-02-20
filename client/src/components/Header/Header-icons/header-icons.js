@@ -48,6 +48,8 @@ const HeaderIcons = () => {
   };
   const handleSearchAway = () => {
     setSearchIsShow(false);
+  };
+  const handleTooltipAway = () => {
     setOpenTooltip(false);
   };
   const handleClose = (event) => {
@@ -88,13 +90,21 @@ const HeaderIcons = () => {
     setSearchIsShow(false);
   }, []);
 
-  return (
+  const searchClickAway = () => (
     <ClickAwayListener onClickAway={handleSearchAway}>
-      <Box className={classes.iconButtonBox}>
+      <Box>
         {isMobile && searchIsShown && <Search searchIsShown={searchIsShown} />}
         {isTablet && <Search searchIsShown />}
         {isDesktop && searchIsShown && <Search searchIsShown={searchIsShown} />}
         {!isTablet && <HeaderSearchIcon onClick={handleTooltipClose} toggleSearch={toggleSearch} />}
+      </Box>
+    </ClickAwayListener>
+  );
+
+  return (
+    <ClickAwayListener onClickAway={handleTooltipAway}>
+      <Box className={classes.iconButtonBox}>
+        {searchClickAway()}
         <Divider component="div" orientation="vertical" className={classes.dividerStyle} />
         <FavouritesIcon
           open={openTooltip}
