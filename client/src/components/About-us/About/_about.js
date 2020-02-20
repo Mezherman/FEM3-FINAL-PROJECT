@@ -5,8 +5,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: `url(${process.env.PUBLIC_URL}/img/wmf_about.jpg)`,
     backgroundAttachment: 'fixed',
     backgroundRepeat: 'no-repeat',
-    // backgroundSize: 'cover',
-    // width: '100%'
   },
   container: {
     position: 'relative',

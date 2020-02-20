@@ -286,7 +286,6 @@ export default function NavBar({ toggleCatalog, hideCatalog, children, drawer, t
   );
 
   return (
-    // mobile
     <>
       {!isDesktop && (
         <>

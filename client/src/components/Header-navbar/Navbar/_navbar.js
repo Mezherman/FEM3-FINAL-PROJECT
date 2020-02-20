@@ -13,13 +13,11 @@ const useStyles = makeStyles((theme) => createStyles({
   nestedMenuItem: {
     display: 'flex',
     justifyContent: 'space-between',
-    // padding: '10px',
   },
   root: {
     textTransform: 'uppercase',
     color: theme.palette.text.primary,
     '& li > a': {
-      // fontSize: '14px',
       textDecoration: 'none',
       textTransform: 'uppercase',
       color: theme.palette.text.primary,
